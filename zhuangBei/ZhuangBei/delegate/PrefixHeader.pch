@@ -1,0 +1,33 @@
+//
+//  PrefixHeader.pch
+//  ZhuangBei
+//
+//  Created by aa on 2020/4/22.
+//  Copyright © 2020 aa. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "MainSingleton.h"
+#import "Masonry.h"
+
+#define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT    [UIScreen mainScreen].bounds.size.height
+
+#define kWidthFlot(flotNum) flotNum * (SCREEN_WIDTH/375.f)
+#define kHegitFlot(flotNum) flotNum * (SCREEN_HEIGHT/667.f)
+
+#define KstatusBarHeight [UIApplication sharedApplication].statusBarFrame.size.height
+
+
+#define kFont(flotNum)  [UIFont systemFontOfSize:flotNum]
+
+//单例
+#define kMainSingleton [MainSingleton defaultSingleton]
+
+//程序主颜色
+#define kNavColor [kMainSingleton colorWithHexString:@"#7857e1" alpha:1]
+
+
+#endif /* PrefixHeader_pch */

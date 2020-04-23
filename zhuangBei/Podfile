@@ -1,0 +1,13 @@
+
+platform :ios, '13.4'
+
+target 'ZhuangBei' do
+
+source 'https://github.com/CocoaPods/Specs.git'
+
+pod 'PPNetworkHelper',:git => 'https://github.com/jkpang/PPNetworkHelper.git'
+
+pod "Masonry"
+
+end   
+
