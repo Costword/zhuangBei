@@ -7,77 +7,67 @@
 //
 
 #import "zDengluController.h"
-#import "LoginTextField.h"
-#import "zDengluRequst.h"
+#import "loginCard.h"
+#import "zZhuCeController.h"
+#import "zZhaoHuiController.h"
 
 @interface zDengluController ()
 
-@property(strong,nonatomic)LoginTextField * accountField;
-
-@property(strong,nonatomic)LoginTextField * passWordField;
+@property(strong,nonatomic)loginCard * loginView;
 
 @end
 
 @implementation zDengluController
 
-
-
--(LoginTextField*)accountField
+-(loginCard*)loginView
 {
-    if (!_accountField) {
-        _accountField = [[LoginTextField alloc]init];
-        _accountField.icon = [UIImage imageNamed:@"login_icon_shouji"];
-        _accountField.keyboardType = UIKeyboardTypePhonePad;
-        _accountField.maxLength = 11;
-        _accountField.myPlaceHolder = @"请输入手机号";
+    if (!_loginView) {
+        __weak typeof(self)weakSelf = self;
+        _loginView = [[loginCard alloc]init];
+        
+        _loginView.eventBack = ^(NSInteger btnTag) {
+            if (btnTag ==4) {
+                //忘记密码
+                zZhaoHuiController * zhaoHuiVC = [[zZhaoHuiController alloc]init];
+                zhaoHuiVC.title = @"找回密码";
+                [weakSelf.navigationController pushViewController:zhaoHuiVC animated:YES];
+                return;
+            }
+            if (btnTag ==5) {
+                //注册
+                zZhuCeController * zhuceVC = [[zZhuCeController alloc]init];
+                zhuceVC.title = @"用户注册";
+                [weakSelf.navigationController pushViewController:zhuceVC animated:YES];
+                return;
+            }
+        };
     }
-    return _accountField;
-}
-
--(LoginTextField*)passWordField
-{
-    if (!_passWordField) {
-        _passWordField = [[LoginTextField alloc]init];
-        _passWordField.icon = [UIImage imageNamed:@"login_icon_shouji"];
-        _passWordField.keyboardType = UIKeyboardTypePhonePad;
-        _passWordField.maxLength = 12;
-        _passWordField.secureTextEntry = YES;
-        _passWordField.myPlaceHolder = @"请输入密码";
-    }
-    return _passWordField;
+    return _loginView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor orangeColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    [self.view addSubview:self.accountField];
-    [self.view addSubview:self.passWordField];
+    [self.view addSubview:self.loginView];
     
-    [zDengluRequst getLoginWithParameters:@{} success:^(id  _Nonnull response) {
-        
-    } failure:^(NSError * _Nonnull error) {
-        
-    }];
+    
+//    [zDengluRequst getLoginWithParameters:@{} success:^(id  _Nonnull response) {
+//        
+//    } failure:^(NSError * _Nonnull error) {
+//        
+//    }];
 }
 
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self.accountField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.view.mas_centerY).offset(-kWidthFlot(30));
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(SCREEN_WIDTH-100),kWidthFlot(40)));
-    }];
     
-    [self.passWordField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.accountField.mas_bottom).offset(kWidthFlot(20));
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(SCREEN_WIDTH-100),kWidthFlot(40)));
+    [self.loginView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
 }
-
 
 
 @end

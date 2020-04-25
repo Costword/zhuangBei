@@ -14,6 +14,8 @@
 
 @property(strong, nonatomic)UIButton *btnClear;
 
+@property(strong, nonatomic)UIView *lineView;
+
 @end
 
 @implementation LoginTextField
@@ -24,17 +26,20 @@
     if (self) {
         _iconView = [[UIImageView alloc]init];
         _btnClear = [[UIButton alloc]init];
+        _lineView = [[UIView alloc]init];
+        _lineView.backgroundColor = [UIColor blackColor];
         [_btnClear setImage:[UIImage imageNamed:@"login_btn_shanchu"] forState:UIControlStateNormal];
         [self addSubview:_iconView];
         [self addSubview:_btnClear];
+        [self addSubview:self.lineView];
         
-        self.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWidthFlot(36), 0)];
-        self.rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWidthFlot(12), 0)];
+        self.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, kWidthFlot(50), 0)];
+        self.rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, kWidthFlot(12), 0)];
         [self setLeftViewMode:(UITextFieldViewModeAlways)];
         [self setRightViewMode:(UITextFieldViewModeAlways)];
-        self.layer.borderColor = [kMainSingleton colorWithHexString:@"#D1D4D8" alpha:1].CGColor;
-        self.layer.borderWidth = 1;
-        self.layer.cornerRadius = kWidthFlot(4);
+//        self.layer.borderColor = [kMainSingleton colorWithHexString:@"#D1D4D8" alpha:1].CGColor;
+//        self.layer.borderWidth = 1;
+//        self.layer.cornerRadius = kWidthFlot(4);
         
         [_btnClear addTarget:self action:@selector(actionClear:) forControlEvents:(UIControlEventTouchUpInside)];
         
@@ -55,6 +60,12 @@
     [_btnClear mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self).offset(-kWidthFlot(12));
         make.centerY.mas_equalTo(self);
+    }];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.iconView.mas_right).offset(0);
+        make.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(1);
     }];
 }
 

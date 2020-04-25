@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001ECA6A2453B6F300727379 /* loginCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA692453B6F300727379 /* loginCard.m */; };
+		001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA6D2453C43600727379 /* zZhuCeController.m */; };
+		001ECA712453C49500727379 /* zZhaoHuiController.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA702453C49500727379 /* zZhaoHuiController.m */; };
+		001ECA752453CCB700727379 /* zHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA742453CCB700727379 /* zHud.m */; };
+		001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA772453DA3200727379 /* phoneNumCheck.m */; };
 		003A932D2450866D0001F615 /* LoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 003A932C2450866D0001F615 /* LoginTextField.m */; };
 		003A9330245089540001F615 /* UITextField+maxLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 003A932F245089540001F615 /* UITextField+maxLength.m */; };
 		009FB5E5244E89C700133974 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB5E4244E89C700133974 /* ViewController.m */; };
@@ -64,6 +69,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		001ECA682453B6F300727379 /* loginCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginCard.h; sourceTree = "<group>"; };
+		001ECA692453B6F300727379 /* loginCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginCard.m; sourceTree = "<group>"; };
+		001ECA6C2453C43600727379 /* zZhuCeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zZhuCeController.h; sourceTree = "<group>"; };
+		001ECA6D2453C43600727379 /* zZhuCeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zZhuCeController.m; sourceTree = "<group>"; };
+		001ECA6F2453C49500727379 /* zZhaoHuiController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zZhaoHuiController.h; sourceTree = "<group>"; };
+		001ECA702453C49500727379 /* zZhaoHuiController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zZhaoHuiController.m; sourceTree = "<group>"; };
+		001ECA732453CCB700727379 /* zHud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zHud.h; sourceTree = "<group>"; };
+		001ECA742453CCB700727379 /* zHud.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zHud.m; sourceTree = "<group>"; };
+		001ECA762453DA3200727379 /* phoneNumCheck.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = phoneNumCheck.h; sourceTree = "<group>"; };
+		001ECA772453DA3200727379 /* phoneNumCheck.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = phoneNumCheck.m; sourceTree = "<group>"; };
 		003A932B2450866D0001F615 /* LoginTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginTextField.h; sourceTree = "<group>"; };
 		003A932C2450866D0001F615 /* LoginTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginTextField.m; sourceTree = "<group>"; };
 		003A932E245089540001F615 /* UITextField+maxLength.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+maxLength.h"; sourceTree = "<group>"; };
@@ -169,6 +184,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		001ECA672453B6F300727379 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				001ECA682453B6F300727379 /* loginCard.h */,
+				001ECA692453B6F300727379 /* loginCard.m */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		001ECA6B2453B70B00727379 /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		003A932A245086110001F615 /* category */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +207,10 @@
 				003A932C2450866D0001F615 /* LoginTextField.m */,
 				003A932E245089540001F615 /* UITextField+maxLength.h */,
 				003A932F245089540001F615 /* UITextField+maxLength.m */,
+				001ECA732453CCB700727379 /* zHud.h */,
+				001ECA742453CCB700727379 /* zHud.m */,
+				001ECA762453DA3200727379 /* phoneNumCheck.h */,
+				001ECA772453DA3200727379 /* phoneNumCheck.m */,
 			);
 			path = category;
 			sourceTree = "<group>";
@@ -295,10 +330,10 @@
 		009FB63F244FEB7700133974 /* zDenglu */ = {
 			isa = PBXGroup;
 			children = (
+				001ECA6B2453B70B00727379 /* models */,
+				001ECA672453B6F300727379 /* views */,
 				009FB658244FF36300133974 /* requset */,
 				009FB645244FEC3400133974 /* controllers */,
-				009FB647244FEC3400133974 /* models */,
-				009FB646244FEC3400133974 /* views */,
 			);
 			path = zDenglu;
 			sourceTree = "<group>";
@@ -348,22 +383,12 @@
 			children = (
 				009FB667245007ED00133974 /* zDengluController.h */,
 				009FB668245007ED00133974 /* zDengluController.m */,
+				001ECA6C2453C43600727379 /* zZhuCeController.h */,
+				001ECA6D2453C43600727379 /* zZhuCeController.m */,
+				001ECA6F2453C49500727379 /* zZhaoHuiController.h */,
+				001ECA702453C49500727379 /* zZhaoHuiController.m */,
 			);
 			path = controllers;
-			sourceTree = "<group>";
-		};
-		009FB646244FEC3400133974 /* views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = views;
-			sourceTree = "<group>";
-		};
-		009FB647244FEC3400133974 /* models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = models;
 			sourceTree = "<group>";
 		};
 		009FB648244FEC4200133974 /* models */ = {
@@ -699,14 +724,18 @@
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				009FB61A244FE8C200133974 /* AppDelegate.m in Sources */,
 				009FB639244FE8DF00133974 /* UIView+TouchAreaInsets.m in Sources */,
+				001ECA712453C49500727379 /* zZhaoHuiController.m in Sources */,
 				009FB6722450094C00133974 /* zShouyeController.m in Sources */,
+				001ECA752453CCB700727379 /* zHud.m in Sources */,
 				009FB68224500D7800133974 /* NSString+Size.m in Sources */,
 				009FB5E5244E89C700133974 /* ViewController.m in Sources */,
 				009FB63C244FE8DF00133974 /* UITabBarItem+Extension.m in Sources */,
 				009FB68B2450428000133974 /* zNothingView.m in Sources */,
 				009FB635244FE8DF00133974 /* MainTabBarController.m in Sources */,
+				001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */,
 				003A932D2450866D0001F615 /* LoginTextField.m in Sources */,
 				009FB6882450425900133974 /* zNoContentView.m in Sources */,
+				001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */,
 				009FB636244FE8DF00133974 /* FUTabBar.m in Sources */,
 				009FB68024500D7800133974 /* UIView+Frame.m in Sources */,
 				009FB619244FE8C200133974 /* SceneDelegate.m in Sources */,
@@ -721,6 +750,7 @@
 				009FB63E244FE8DF00133974 /* NSString+size.m in Sources */,
 				009FB63D244FE8DF00133974 /* FUTabBarController.m in Sources */,
 				009FB6752450095C00133974 /* zWodeController.m in Sources */,
+				001ECA6A2453B6F300727379 /* loginCard.m in Sources */,
 				009FB638244FE8DF00133974 /* FUBadgeButton.m in Sources */,
 				003A9330245089540001F615 /* UITextField+maxLength.m in Sources */,
 				009FB666244FF64D00133974 /* zInterfacedConst.m in Sources */,

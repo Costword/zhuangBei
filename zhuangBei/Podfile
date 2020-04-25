@@ -9,5 +9,7 @@ pod 'PPNetworkHelper',:git => 'https://github.com/jkpang/PPNetworkHelper.git'
 
 pod "Masonry"
 
+pod 'MBProgressHUD'
+
 end   
 

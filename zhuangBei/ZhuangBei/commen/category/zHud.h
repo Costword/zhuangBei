@@ -12,6 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface zHud : NSObject
 
++(zHud*)shareInstance;
+
+-(void)showMessage:(NSString*)message;
+
+-(void)show;
+
+-(void)hild;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -20,14 +20,14 @@
     UINavigationBar *bar = [UINavigationBar appearance];
 
     //设置导航条背景颜色
-    [bar setBarTintColor:[UIColor brownColor]];
-    [bar setBackgroundColor:[UIColor brownColor]];
+    [bar setBarTintColor:[UIColor whiteColor]];
+    [bar setBackgroundColor:[UIColor whiteColor]];
     [bar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     //设置标题字体属性
     NSDictionary *titleTextAttributes = @{
                                           NSFontAttributeName : [UIFont systemFontOfSize:18],
-                                          NSForegroundColorAttributeName : [UIColor whiteColor]
+                                          NSForegroundColorAttributeName : [UIColor blackColor]
                                           };
     [bar setTitleTextAttributes:titleTextAttributes];
     

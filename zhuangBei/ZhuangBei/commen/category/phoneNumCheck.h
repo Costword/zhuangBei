@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface phoneNumCheck : NSObject
 
++ (BOOL) validateMobile:(NSString *)mobile;
+
 @end
 
 NS_ASSUME_NONNULL_END

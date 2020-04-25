@@ -11,6 +11,7 @@
 
 #import "MainSingleton.h"
 #import "Masonry.h"
+#import "zHud.h"
 
 #define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT    [UIScreen mainScreen].bounds.size.height
