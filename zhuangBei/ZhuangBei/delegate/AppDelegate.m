@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "MainTabBarController.h"
+#import "MainNavController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    if (@available(iOS 13.0, *)) {
+                
+        
+    } else
+    {
+        self.window = [[UIWindow alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT)];
+        MainTabBarController * rootVC  = [[MainTabBarController alloc]init];
+        MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
+        rootNav.navigationBar.hidden = YES;
+        self.window.rootViewController = rootNav;
+        [self.window makeKeyAndVisible];
+    }
     return YES;
 }
 
