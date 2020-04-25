@@ -15,9 +15,7 @@
 		003A932D2450866D0001F615 /* LoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 003A932C2450866D0001F615 /* LoginTextField.m */; };
 		003A9330245089540001F615 /* UITextField+maxLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 003A932F245089540001F615 /* UITextField+maxLength.m */; };
 		009FB5E5244E89C700133974 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB5E4244E89C700133974 /* ViewController.m */; };
-		009FB5E8244E89C700133974 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 009FB5E6244E89C700133974 /* Main.storyboard */; };
 		009FB5EA244E89CD00133974 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 009FB5E9244E89CD00133974 /* Assets.xcassets */; };
-		009FB5ED244E89CD00133974 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 009FB5EB244E89CD00133974 /* LaunchScreen.storyboard */; };
 		009FB5F0244E89CD00133974 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB5EF244E89CD00133974 /* main.m */; };
 		009FB5FA244E89CE00133974 /* ZhuangBeiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB5F9244E89CE00133974 /* ZhuangBeiTests.m */; };
 		009FB605244E89CE00133974 /* ZhuangBeiUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB604244E89CE00133974 /* ZhuangBeiUITests.m */; };
@@ -49,6 +47,7 @@
 		009FB6882450425900133974 /* zNoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB6872450425900133974 /* zNoContentView.m */; };
 		009FB68B2450428000133974 /* zNothingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB68A2450428000133974 /* zNothingView.m */; };
 		6BE41E3FCD0C213AB1550073 /* libPods-ZhuangBei.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */; };
+		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,9 +85,7 @@
 		009FB5DA244E89C700133974 /* ZhuangBei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhuangBei.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		009FB5E3244E89C700133974 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		009FB5E4244E89C700133974 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		009FB5E7244E89C700133974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		009FB5E9244E89CD00133974 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		009FB5EC244E89CD00133974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		009FB5EE244E89CD00133974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		009FB5EF244E89CD00133974 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		009FB5F5244E89CE00133974 /* ZhuangBeiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZhuangBeiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +151,7 @@
 		009FB6892450428000133974 /* zNothingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zNothingView.h; sourceTree = "<group>"; };
 		009FB68A2450428000133974 /* zNothingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zNothingView.m; sourceTree = "<group>"; };
 		759737390EA2ABFD7BEC457D /* Pods-ZhuangBei.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhuangBei.debug.xcconfig"; path = "Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei.debug.xcconfig"; sourceTree = "<group>"; };
+		89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95998143212FCD9D90EA6CD4 /* Pods-ZhuangBei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhuangBei.release.xcconfig"; path = "Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei.release.xcconfig"; sourceTree = "<group>"; };
 		B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZhuangBei.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -240,16 +238,10 @@
 		009FB5DC244E89C700133974 /* ZhuangBei */ = {
 			isa = PBXGroup;
 			children = (
+				89A9382924542A06001C77A8 /* Other */,
 				009FB654244FEC9900133974 /* commen */,
-				009FB5E9244E89CD00133974 /* Assets.xcassets */,
 				009FB613244FE8C200133974 /* delegate */,
 				009FB61B244FE8DE00133974 /* Home */,
-				009FB5EE244E89CD00133974 /* Info.plist */,
-				009FB5EB244E89CD00133974 /* LaunchScreen.storyboard */,
-				009FB5EF244E89CD00133974 /* main.m */,
-				009FB5E6244E89C700133974 /* Main.storyboard */,
-				009FB5E3244E89C700133974 /* ViewController.h */,
-				009FB5E4244E89C700133974 /* ViewController.m */,
 				009FB63F244FEB7700133974 /* zDenglu */,
 				009FB640244FEB7700133974 /* zHuoyuan */,
 				009FB641244FEB7800133974 /* zJiaoliu */,
@@ -282,7 +274,6 @@
 			children = (
 				009FB614244FE8C200133974 /* AppDelegate.h */,
 				009FB616244FE8C200133974 /* AppDelegate.m */,
-				009FB617244FE8C200133974 /* PrefixHeader.pch */,
 				009FB618244FE8C200133974 /* SceneDelegate.h */,
 				009FB615244FE8C200133974 /* SceneDelegate.m */,
 			);
@@ -556,6 +547,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		89A9382924542A06001C77A8 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				009FB5EE244E89CD00133974 /* Info.plist */,
+				89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */,
+				009FB617244FE8C200133974 /* PrefixHeader.pch */,
+				009FB5EF244E89CD00133974 /* main.m */,
+				009FB5E3244E89C700133974 /* ViewController.h */,
+				009FB5E4244E89C700133974 /* ViewController.m */,
+				009FB5E9244E89CD00133974 /* Assets.xcassets */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		F717A43D4ED9D0BFAF898114 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -669,9 +674,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				009FB5ED244E89CD00133974 /* LaunchScreen.storyboard in Resources */,
+				89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */,
 				009FB5EA244E89CD00133974 /* Assets.xcassets in Resources */,
-				009FB5E8244E89C700133974 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,25 +795,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		009FB5E6244E89C700133974 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				009FB5E7244E89C700133974 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		009FB5EB244E89CD00133974 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				009FB5EC244E89CD00133974 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		009FB607244E89CE00133974 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -861,7 +846,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -913,7 +898,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -927,17 +912,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GH34ZCT6NW;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/delegate/PrefixHeader.pch";
-				INFOPLIST_FILE = ZhuangBei/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
+				INFOPLIST_FILE = ZhuangBei/Other/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sliderView.ZhuangBei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -947,17 +933,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GH34ZCT6NW;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/delegate/PrefixHeader.pch";
-				INFOPLIST_FILE = ZhuangBei/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
+				INFOPLIST_FILE = ZhuangBei/Other/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sliderView.ZhuangBei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
