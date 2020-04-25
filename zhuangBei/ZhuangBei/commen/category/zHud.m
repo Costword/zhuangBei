@@ -29,7 +29,6 @@
 -(UIWindow *)mainWindow
 {
     UIApplication *app = [UIApplication sharedApplication];
-    
     return [app keyWindow];
     
 }
