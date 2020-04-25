@@ -12,6 +12,7 @@
 		001ECA712453C49500727379 /* zZhaoHuiController.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA702453C49500727379 /* zZhaoHuiController.m */; };
 		001ECA752453CCB700727379 /* zHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA742453CCB700727379 /* zHud.m */; };
 		001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA772453DA3200727379 /* phoneNumCheck.m */; };
+		001ECA7B2454449000727379 /* zhuCeCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA7A2454449000727379 /* zhuCeCard.m */; };
 		003A932D2450866D0001F615 /* LoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 003A932C2450866D0001F615 /* LoginTextField.m */; };
 		003A9330245089540001F615 /* UITextField+maxLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 003A932F245089540001F615 /* UITextField+maxLength.m */; };
 		009FB5E5244E89C700133974 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB5E4244E89C700133974 /* ViewController.m */; };
@@ -78,6 +79,8 @@
 		001ECA742453CCB700727379 /* zHud.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zHud.m; sourceTree = "<group>"; };
 		001ECA762453DA3200727379 /* phoneNumCheck.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = phoneNumCheck.h; sourceTree = "<group>"; };
 		001ECA772453DA3200727379 /* phoneNumCheck.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = phoneNumCheck.m; sourceTree = "<group>"; };
+		001ECA792454449000727379 /* zhuCeCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zhuCeCard.h; sourceTree = "<group>"; };
+		001ECA7A2454449000727379 /* zhuCeCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhuCeCard.m; sourceTree = "<group>"; };
 		003A932B2450866D0001F615 /* LoginTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginTextField.h; sourceTree = "<group>"; };
 		003A932C2450866D0001F615 /* LoginTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginTextField.m; sourceTree = "<group>"; };
 		003A932E245089540001F615 /* UITextField+maxLength.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+maxLength.h"; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 			children = (
 				001ECA682453B6F300727379 /* loginCard.h */,
 				001ECA692453B6F300727379 /* loginCard.m */,
+				001ECA792454449000727379 /* zhuCeCard.h */,
+				001ECA7A2454449000727379 /* zhuCeCard.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -739,6 +744,7 @@
 				001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */,
 				003A932D2450866D0001F615 /* LoginTextField.m in Sources */,
 				009FB6882450425900133974 /* zNoContentView.m in Sources */,
+				001ECA7B2454449000727379 /* zhuCeCard.m in Sources */,
 				001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */,
 				009FB636244FE8DF00133974 /* FUTabBar.m in Sources */,
 				009FB68024500D7800133974 /* UIView+Frame.m in Sources */,
