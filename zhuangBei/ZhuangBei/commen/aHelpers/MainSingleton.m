@@ -20,7 +20,7 @@
 }
 
 #pragma mark - 是否为空
-BOOL stringIsNotEmpty (NSString * str)
++ (BOOL)stringIsNotEmpty:(NSString *)str
 {
     if (str == nil || str == NULL)
     {
@@ -37,13 +37,13 @@ BOOL stringIsNotEmpty (NSString * str)
     return NO;
 }
 
-BOOL stringIsEmpty (NSString * str)
++ (BOOL)stringIsEmpty:(NSString *)str
 {
-    return ! stringIsNotEmpty(str);
+    return ! [MainSingleton stringIsNotEmpty:str];
 }
 
 #pragma mark - 计算时间间隔
-- (NSString *) intervalFromLastDate: (NSString *) dateString1 toTheDate:(NSString *) dateString2
++ (NSString *) intervalFromLastDate: (NSString *) dateString1 toTheDate:(NSString *) dateString2
 {
     NSDateFormatter *date=[[NSDateFormatter alloc] init];
     [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -60,7 +60,7 @@ BOOL stringIsEmpty (NSString * str)
 }
 
 #pragma mark - 获取时间
-- (NSString *) getTime
++ (NSString *) getTime
 {
     NSDateFormatter *formater = [[ NSDateFormatter alloc] init];
     NSDate *curDate = [NSDate date];
@@ -69,7 +69,7 @@ BOOL stringIsEmpty (NSString * str)
     return curTime;
 }
 
-- (NSString *) getDay
++ (NSString *) getDay
 {
     NSDateFormatter *formater = [[ NSDateFormatter alloc] init];
     NSDate *curDate = [NSDate date];
@@ -79,7 +79,7 @@ BOOL stringIsEmpty (NSString * str)
 }
 
 #pragma mark - 时间转换
-- (NSString *) dateToString:(NSDate *)date
++ (NSString *) dateToString:(NSDate *)date
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -88,7 +88,7 @@ BOOL stringIsEmpty (NSString * str)
     return dateString;
 }
 
-- (NSDate *) stringToDate:(NSString *)dateStr
++ (NSDate *) stringToDate:(NSString *)dateStr
 {
     // Convert string to date object
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -98,7 +98,7 @@ BOOL stringIsEmpty (NSString * str)
     return date;
 }
 
-- (NSString *) timeToString:(time_t)time
++ (NSString *) timeToString:(time_t)time
 {
     NSDate *today = [NSDate date];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
@@ -117,7 +117,7 @@ BOOL stringIsEmpty (NSString * str)
 }
 
 #pragma mark - 颜色转换
-- (UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha
++ (UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha
 {
     //删除字符串中的空格
     NSString *cString = [[color stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];

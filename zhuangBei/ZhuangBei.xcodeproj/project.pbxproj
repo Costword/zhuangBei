@@ -48,6 +48,7 @@
 		009FB6882450425900133974 /* zNoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB6872450425900133974 /* zNoContentView.m */; };
 		009FB68B2450428000133974 /* zNothingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB68A2450428000133974 /* zNothingView.m */; };
 		6BE41E3FCD0C213AB1550073 /* libPods-ZhuangBei.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */; };
+		89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 89487BEA24544E4B00D4FA67 /* Foundation+Log.m */; };
 		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -154,6 +155,7 @@
 		009FB6892450428000133974 /* zNothingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zNothingView.h; sourceTree = "<group>"; };
 		009FB68A2450428000133974 /* zNothingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zNothingView.m; sourceTree = "<group>"; };
 		759737390EA2ABFD7BEC457D /* Pods-ZhuangBei.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhuangBei.debug.xcconfig"; path = "Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei.debug.xcconfig"; sourceTree = "<group>"; };
+		89487BEA24544E4B00D4FA67 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95998143212FCD9D90EA6CD4 /* Pods-ZhuangBei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhuangBei.release.xcconfig"; path = "Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei.release.xcconfig"; sourceTree = "<group>"; };
 		B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZhuangBei.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -482,6 +484,8 @@
 		009FB654244FEC9900133974 /* commen */ = {
 			isa = PBXGroup;
 			children = (
+				89487BE824544E4000D4FA67 /* Tools */,
+				89487BE724544E1500D4FA67 /* Thrid */,
 				003A932A245086110001F615 /* category */,
 				009FB6832450422400133974 /* controllers */,
 				009FB6842450422500133974 /* url */,
@@ -550,6 +554,37 @@
 				B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		89487BE724544E1500D4FA67 /* Thrid */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Thrid;
+			sourceTree = "<group>";
+		};
+		89487BE824544E4000D4FA67 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				89487BEC24544F4A00D4FA67 /* Confi */,
+				89487BE924544E4B00D4FA67 /* Log */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		89487BE924544E4B00D4FA67 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				89487BEA24544E4B00D4FA67 /* Foundation+Log.m */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		89487BEC24544F4A00D4FA67 /* Confi */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Confi;
 			sourceTree = "<group>";
 		};
 		89A9382924542A06001C77A8 /* Other */ = {
@@ -762,6 +797,7 @@
 				009FB6752450095C00133974 /* zWodeController.m in Sources */,
 				001ECA6A2453B6F300727379 /* loginCard.m in Sources */,
 				009FB638244FE8DF00133974 /* FUBadgeButton.m in Sources */,
+				89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */,
 				003A9330245089540001F615 /* UITextField+maxLength.m in Sources */,
 				009FB666244FF64D00133974 /* zInterfacedConst.m in Sources */,
 				009FB637244FE8DF00133974 /* UIImage+Extension.m in Sources */,
