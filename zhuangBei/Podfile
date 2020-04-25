@@ -1,15 +1,14 @@
-
-platform :ios, '13.4'
+#source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
 
 target 'ZhuangBei' do
-
-source 'https://github.com/CocoaPods/Specs.git'
-
-pod 'PPNetworkHelper',:git => 'https://github.com/jkpang/PPNetworkHelper.git'
-
-pod "Masonry"
-
-pod 'MBProgressHUD'
-
+  pod 'PPNetworkHelper',:git => 'https://github.com/jkpang/PPNetworkHelper.git'
+  pod "Masonry"
+  pod 'MBProgressHUD'
+  pod 'YYKit'
+  pod 'SDWebImage'
+  pod 'MJRefresh'
+  pod 'IQKeyboardManager'
 end   
 

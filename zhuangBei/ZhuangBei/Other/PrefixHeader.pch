@@ -25,10 +25,103 @@
 #define kFont(flotNum)  [UIFont systemFontOfSize:flotNum]
 
 //单例
-#define kMainSingleton [MainSingleton defaultSingleton]
+#define kMainSingleton MainSingleton
+
 
 //程序主颜色
 #define kNavColor [kMainSingleton colorWithHexString:@"#7857e1" alpha:1]
+
+
+/**
+ * 系统偏好设置单例
+ */
+#define SYSTEM_USERDEFAULTS                                             [NSUserDefaults standardUserDefaults]
+
+/**
+ * 系统通知中心
+ */
+#define SYSTEM_NOTIFICATIONCENTER                                       [NSNotificationCenter defaultCenter]
+
+/**
+ * 打印Log宏
+ */
+#ifdef DEBUG
+
+#define LWLog( s, ... ) printf("class: <%p %s:(%d) > method: %s \n%s\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(s), ##__VA_ARGS__] UTF8String] );
+
+#else
+
+# define LWLog(...);
+
+#endif
+
+
+/**
+ 创建网络请求参数para字典
+ */
+#define PARA_CREART \
+NSMutableDictionary* para = [NSMutableDictionary dictionary];\
+
+#define PARA_SET(value,key) \
+[para setValue:value forKey:key];
+
+/**
+ 保存数据（value,key）
+ */
+#define  USERDEFAULTS_SET(value,key)\
+[SYSTEM_USERDEFAULTS setObject:value forKey:key];
+
+/**
+ 获取本地信息
+ */
+#define  USERDEFAULTS_GET(key) [SYSTEM_USERDEFAULTS objectForKey:key]
+
+/**
+ 移除本地保存信息
+ */
+#define  USERDEFAULTS_RE(key)  [SYSTEM_USERDEFAULTS removeObjectForKey:key]
+
+/**
+ ----发送通知----
+ */
+#define POST_NOTI(key,obj) [SYSTEM_NOTIFICATIONCENTER postNotificationName:key object:obj];
+#define ADD_NOTI(selectorName,key) [SYSTEM_NOTIFICATIONCENTER addObserver:self selector:@selector(selectorName) name:key object:nil];
+#define REMOVIE_NOTI(key) [SYSTEM_NOTIFICATIONCENTER removeObserver:self name:key object:nil];
+
+/**
+ 获取本地图片
+ */
+#define  IMAGENAME(name) [UIImage imageNamed:name]
+
+/**
+ * 获取APP版本
+ */
+#define APPVERSION                                                          ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
+
+/**
+ * 弱化指针
+ */
+#define WEAKSELF(type)                                                      __weak typeof(type) weak##type = type;
+
+/**
+ *  RGBA
+ */
+#define RGB(r,g,b)  [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1.0f]
+
+/**
+ *  RGBA
+ */
+#define RGBA(R, G, B, A) [UIColor colorWithRed:R / 255.0 green:G / 255.0 blue:B / 255.0 alpha:A]
+
+/**
+ 判断是否为空
+ */
+#define DataCheckMacro(var)   (var && var != NULL && ![var isEqual:[NSNull null]])
+/**
+ 取值 如果为nil/<null> 则返回 ""
+ */
+#define LWDATA(var) DataCheckMacro(var) ? var : @""
+
 
 
 #endif /* PrefixHeader_pch */
