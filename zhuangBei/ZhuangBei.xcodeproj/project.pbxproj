@@ -50,6 +50,11 @@
 		6BE41E3FCD0C213AB1550073 /* libPods-ZhuangBei.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */; };
 		89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 89487BEA24544E4B00D4FA67 /* Foundation+Log.m */; };
 		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
+		89F5B7D9245594580040F7B1 /* LWHuoYuanListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7D8245594580040F7B1 /* LWHuoYuanListCollectionViewCell.m */; };
+		89F5B7DC2455955E0040F7B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */; };
+		89F5B7DF245596DD0040F7B1 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7DE245596DD0040F7B1 /* UIView+Extension.m */; };
+		89F5B7E2245599530040F7B1 /* LWHuoYuanItemsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7E1245599530040F7B1 /* LWHuoYuanItemsListViewController.m */; };
+		89F5B7E524559B390040F7B1 /* LWHuoYuanItemListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7E424559B390040F7B1 /* LWHuoYuanItemListCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +162,16 @@
 		759737390EA2ABFD7BEC457D /* Pods-ZhuangBei.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhuangBei.debug.xcconfig"; path = "Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei.debug.xcconfig"; sourceTree = "<group>"; };
 		89487BEA24544E4B00D4FA67 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89F5B7D7245594580040F7B1 /* LWHuoYuanListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanListCollectionViewCell.h; sourceTree = "<group>"; };
+		89F5B7D8245594580040F7B1 /* LWHuoYuanListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanListCollectionViewCell.m; sourceTree = "<group>"; };
+		89F5B7DA2455955D0040F7B1 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
+		89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
+		89F5B7DD245596DD0040F7B1 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		89F5B7DE245596DD0040F7B1 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		89F5B7E0245599530040F7B1 /* LWHuoYuanItemsListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanItemsListViewController.h; sourceTree = "<group>"; };
+		89F5B7E1245599530040F7B1 /* LWHuoYuanItemsListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanItemsListViewController.m; sourceTree = "<group>"; };
+		89F5B7E324559B390040F7B1 /* LWHuoYuanItemListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanItemListCollectionViewCell.h; sourceTree = "<group>"; };
+		89F5B7E424559B390040F7B1 /* LWHuoYuanItemListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanItemListCollectionViewCell.m; sourceTree = "<group>"; };
 		95998143212FCD9D90EA6CD4 /* Pods-ZhuangBei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhuangBei.release.xcconfig"; path = "Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei.release.xcconfig"; sourceTree = "<group>"; };
 		B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZhuangBei.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -208,6 +223,10 @@
 		003A932A245086110001F615 /* category */ = {
 			isa = PBXGroup;
 			children = (
+				89F5B7DD245596DD0040F7B1 /* UIView+Extension.h */,
+				89F5B7DE245596DD0040F7B1 /* UIView+Extension.m */,
+				89F5B7DA2455955D0040F7B1 /* UIViewAdditions.h */,
+				89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */,
 				003A932B2450866D0001F615 /* LoginTextField.h */,
 				003A932C2450866D0001F615 /* LoginTextField.m */,
 				003A932E245089540001F615 /* UITextField+maxLength.h */,
@@ -401,6 +420,12 @@
 			children = (
 				009FB66A2450091D00133974 /* zHyController.h */,
 				009FB66B2450091D00133974 /* zHyController.m */,
+				89F5B7D7245594580040F7B1 /* LWHuoYuanListCollectionViewCell.h */,
+				89F5B7D8245594580040F7B1 /* LWHuoYuanListCollectionViewCell.m */,
+				89F5B7E0245599530040F7B1 /* LWHuoYuanItemsListViewController.h */,
+				89F5B7E1245599530040F7B1 /* LWHuoYuanItemsListViewController.m */,
+				89F5B7E324559B390040F7B1 /* LWHuoYuanItemListCollectionViewCell.h */,
+				89F5B7E424559B390040F7B1 /* LWHuoYuanItemListCollectionViewCell.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -673,6 +698,7 @@
 		009FB5D2244E89C700133974 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = LW;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = aa;
 				TargetAttributes = {
@@ -775,6 +801,8 @@
 				009FB5E5244E89C700133974 /* ViewController.m in Sources */,
 				009FB63C244FE8DF00133974 /* UITabBarItem+Extension.m in Sources */,
 				009FB68B2450428000133974 /* zNothingView.m in Sources */,
+				89F5B7E2245599530040F7B1 /* LWHuoYuanItemsListViewController.m in Sources */,
+				89F5B7E524559B390040F7B1 /* LWHuoYuanItemListCollectionViewCell.m in Sources */,
 				009FB635244FE8DF00133974 /* MainTabBarController.m in Sources */,
 				001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */,
 				003A932D2450866D0001F615 /* LoginTextField.m in Sources */,
@@ -785,11 +813,13 @@
 				009FB68024500D7800133974 /* UIView+Frame.m in Sources */,
 				009FB619244FE8C200133974 /* SceneDelegate.m in Sources */,
 				009FB63B244FE8DF00133974 /* FUTabBarButton.m in Sources */,
+				89F5B7DF245596DD0040F7B1 /* UIView+Extension.m in Sources */,
 				009FB5F0244E89CD00133974 /* main.m in Sources */,
 				009FB657244FECC500133974 /* baseViewController.m in Sources */,
 				009FB634244FE8DF00133974 /* MainNavController.m in Sources */,
 				009FB669245007ED00133974 /* zDengluController.m in Sources */,
 				009FB67F24500D7800133974 /* NSDictionary+NSNull.m in Sources */,
+				89F5B7D9245594580040F7B1 /* LWHuoYuanListCollectionViewCell.m in Sources */,
 				009FB66C2450091D00133974 /* zHyController.m in Sources */,
 				009FB66F2450093A00133974 /* zJiaoliuController.m in Sources */,
 				009FB63E244FE8DF00133974 /* NSString+size.m in Sources */,
@@ -800,6 +830,7 @@
 				89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */,
 				003A9330245089540001F615 /* UITextField+maxLength.m in Sources */,
 				009FB666244FF64D00133974 /* zInterfacedConst.m in Sources */,
+				89F5B7DC2455955E0040F7B1 /* UIViewAdditions.m in Sources */,
 				009FB637244FE8DF00133974 /* UIImage+Extension.m in Sources */,
 				009FB68124500D7800133974 /* MainSingleton.m in Sources */,
 				009FB63A244FE8DF00133974 /* UIView+FU_Animation.m in Sources */,

@@ -33,7 +33,7 @@
     if (self.navigationController.childViewControllers.count==1) {
         self.navigationItem.leftBarButtonItem = nil;
     }
-    
+    self.view.backgroundColor = UIColor.whiteColor;
     
 }
 
