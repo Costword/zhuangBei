@@ -6,7 +6,6 @@ target 'ZhuangBei' do
   pod 'PPNetworkHelper',:git => 'https://github.com/jkpang/PPNetworkHelper.git'
   pod "Masonry"
   pod 'MBProgressHUD'
-  pod 'YYKit'
   pod 'SDWebImage'
   pod 'MJRefresh'
   pod 'IQKeyboardManager'
