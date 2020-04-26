@@ -128,7 +128,7 @@
         _getCheckNumButton = [[UIButton alloc]init];
         _getCheckNumButton.titleLabel.font = kFont(14);
         [_getCheckNumButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _getCheckNumButton.tag = 1;
+        _getCheckNumButton.tag = 2;
         [_getCheckNumButton setTitle:@"获取" forState:UIControlStateNormal];
         [_getCheckNumButton setBackgroundColor:[UIColor blueColor]];
         [_getCheckNumButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -228,7 +228,45 @@
 
 -(void)buttonClick:(UIButton*)button
 {
+    if (button.tag == 1) {
+        //眼睛
+    }
     
+    if (button.tag == 2) {
+        //验证码
+        [self daojishi];
+    }
+}
+
+
+-(void)daojishi
+{
+    __block NSInteger second = 60;
+       //(1)创建一个队列
+       dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+       //(2)创建一个定时器模拟事件源
+       dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, quene);
+       //(3)设置定时间隔
+       dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+       //(4)设置定时器响应回调
+       dispatch_source_set_event_handler(timer, ^{
+           dispatch_async(dispatch_get_main_queue(), ^{
+               if (second == 0) {
+                   self.getCheckNumButton.userInteractionEnabled = YES;
+                   [self.getCheckNumButton setTitle:[NSString stringWithFormat:@"获取"] forState:UIControlStateNormal];
+                   second = 60;
+                   //(6)取消定时器
+                   dispatch_cancel(timer);
+               } else {
+                   self.getCheckNumButton.userInteractionEnabled = NO;
+                   [self.getCheckNumButton setTitle:[NSString stringWithFormat:@"%ldS",second] forState:UIControlStateNormal];
+                   second--;
+               }
+           });
+       });
+       //(5)启动定时器
+       dispatch_resume(timer);
+
 }
 
 

@@ -621,6 +621,7 @@
 				009FB5D6244E89C700133974 /* Sources */,
 				009FB5D7244E89C700133974 /* Frameworks */,
 				009FB5D8244E89C700133974 /* Resources */,
+				1D1DBF5290250EC9D0493CDB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -736,6 +737,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1D1DBF5290250EC9D0493CDB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		ECFB8FF3F69C6346AA493651 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
