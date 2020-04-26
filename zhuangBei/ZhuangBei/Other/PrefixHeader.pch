@@ -12,6 +12,11 @@
 #import "MainSingleton.h"
 #import "Masonry.h"
 #import "zHud.h"
+#import "UIViewAdditions.h"
+#import "UIView+Extension.h"
+
+
+
 
 #define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT    [UIScreen mainScreen].bounds.size.height
@@ -122,6 +127,17 @@ NSMutableDictionary* para = [NSMutableDictionary dictionary];\
  */
 #define LWDATA(var) DataCheckMacro(var) ? var : @""
 
+/**
+ 背景色
+ */
+#define BASECOLOR_BLACKGROUD RGB(240,241,242)
 
+/**
+ 默认文字黑色
+ */
+#define BASECOLOR_TEXTCOLOR UIColor.blackColor
+
+//分割线颜色
+#define kSeparatorColor   RGB(211,211,211)
 
 #endif /* PrefixHeader_pch */

@@ -1,22 +1,21 @@
 //
-//  zHyController.m
+//  LWHuoYuanItemsListViewController.m
 //  ZhuangBei
 //
-//  Created by aa on 2020/4/22.
+//  Created by LWQ on 2020/4/26.
 //  Copyright © 2020 aa. All rights reserved.
 //
 
-#import "zHyController.h"
-#import "LWHuoYuanListCollectionViewCell.h"
 #import "LWHuoYuanItemsListViewController.h"
+#import "LWHuoYuanItemListCollectionViewCell.h"
 
-@interface zHyController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface LWHuoYuanItemsListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView * collectView;
 @property (nonatomic, strong) NSMutableArray * listDatasMutableArray;
 
 @end
 
-@implementation zHyController
+@implementation LWHuoYuanItemsListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,7 +33,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    LWHuoYuanListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LWHuoYuanListCollectionViewCell" forIndexPath:indexPath];
+    LWHuoYuanItemListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LWHuoYuanItemListCollectionViewCell" forIndexPath:indexPath];
     cell.descL.text = self.listDatasMutableArray[indexPath.row];
     return cell;
 }
@@ -70,7 +69,7 @@
         _collectView.backgroundColor = UIColor.whiteColor;
         _collectView.delegate = self;
         _collectView.dataSource = self;
-        [_collectView registerClass:[LWHuoYuanListCollectionViewCell class] forCellWithReuseIdentifier:@"LWHuoYuanListCollectionViewCell"];
+        [_collectView registerClass:[LWHuoYuanItemListCollectionViewCell class] forCellWithReuseIdentifier:@"LWHuoYuanItemListCollectionViewCell"];
     }
     return _collectView;
 }
@@ -80,7 +79,7 @@
     if (!_listDatasMutableArray) {
         _listDatasMutableArray = [[NSMutableArray alloc] init];
 #warning +++++++++++testdatas
-        [self.listDatasMutableArray addObjectsFromArray:@[@"特巡警装备/软件",@"警保装备/软件",@"刑侦装备/软件",@"禁毒装备/软件",@"交警装备/软件",@"监所装备/软件",@"法制装备/软件"]];
+        [self.listDatasMutableArray addObjectsFromArray:@[@"智慧警保管理软件",@"公安专用奖励品",@"特种柜体",@"暖警装备",]];
     }
     return _listDatasMutableArray;
 }
