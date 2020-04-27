@@ -9,6 +9,7 @@
 #import "zJiaoliuController.h"
 #import "LWSwitchBarView.h"
 #import "LWJiaoLiuGroupCollectionReusableView.H"
+#import "LWJiaoLiuContatcsListTableViewCell.h"
 
 @interface zJiaoliuController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) LWSwitchBarView * switchBarView;
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) UITableView * contatcsTableView;
 @property (nonatomic, strong) UIScrollView * mainScrollView;
 
+@property (nonatomic, assign) BOOL  isShow;
 @end
 
 @implementation zJiaoliuController
@@ -36,13 +38,19 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (_switchBarView) {
+        [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH*self.switchBarView.currentIndex, 1) animated:NO];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    _isShow = YES;
     [self confiUI];
 }
-
 
 - (void)confiUI
 {
@@ -54,15 +62,14 @@
     [self.view addSubview:self.switchBarView];
     [self.switchBarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view.mas_top).mas_offset(10);
-        make.height.mas_offset(40);
+        make.height.mas_offset(36);
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.left.mas_equalTo(self.view.mas_left).mas_offset(60);
         make.right.mas_equalTo(self.view.mas_right).mas_offset(-60);
     }];
     
     UIButton *searchBtn = [UIButton new];
-    //    [searchBtn setImage:IMAGENAME(@"") forState:UIControlStateNormal];
-    searchBtn.backgroundColor = UIColor.redColor;
+    [searchBtn setImage:IMAGENAME(@"icon_search") forState:UIControlStateNormal];
     [searchBtn addTarget:self action:@selector(clickSearchBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:searchBtn];
     [searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,7 +83,6 @@
     [self.mainScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.bottom.left.mas_equalTo(self.view);
         make.top.mas_equalTo(self.switchBarView.mas_bottom).mas_offset(10);
-        make.height.mas_offset(self.view.height - 60 );
     }];
 }
 
@@ -84,18 +90,67 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *indentifier = @"cell1";
     if (tableView == _contatcsTableView) {
-        indentifier = @"cell2";
+        LWJiaoLiuContatcsListTableViewCell * cell =  [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuContatcsListTableViewCell" forIndexPath:indexPath];
+        NSDictionary *dic = _listDatas_Contatcs[indexPath.section];
+        NSArray *values = dic.allValues.lastObject;
+        cell.nameL.text = values[indexPath.row];
+        return cell;
+    }else{
+        LWJiaoLiuMessageListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuMessageListTableViewCell" forIndexPath:indexPath];
+        cell.nameL.text = @"系统消息";
+        return cell;
     }
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
-    cell.textLabel.text = indentifier;
-    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    if (tableView == _contatcsTableView) {
+        NSDictionary *dic = _listDatas_Contatcs[section];
+        NSArray *values = dic.allValues.lastObject ;
+        return _isShow ? values.count : 0;
+    }
+    return  1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if (tableView == _contatcsTableView) {
+        return _listDatas_Contatcs.count;
+    }
+    return 1;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if(tableView == _contatcsTableView){
+        LWJiaoLiuContatcsSeactionView *seactionview = [[LWJiaoLiuContatcsSeactionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+        seactionview.leftL.text = @"默认";
+        WEAKSELF(self)
+        seactionview.block = ^(BOOL isShow) {
+            weakself.isShow = isShow;
+            [weakself.contatcsTableView reloadData];
+            LWLog(@"--------------%ld--------------%ld",isShow,(long)section);
+            WEAKSELF(self)
+            [UIView animateWithDuration:0.25 animations:^{
+                seactionview.rightBtn.imageView.transform = seactionview.rightBtn.selected ? CGAffineTransformMakeRotation(M_PI):CGAffineTransformIdentity;
+            }];
+            
+        };
+        seactionview.rightBtn.selected = _isShow;
+        return seactionview;
+    }
+    return [UIView new];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return _contatcsTableView == tableView ? 40:0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
 }
 
 #pragma mark ------UICollectionViewDelegate----------
@@ -111,11 +166,14 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    LWJiaoLiuGroupCollectionReusableView *seactionView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"LWJiaoLiuGroupCollectionReusableView" forIndexPath:indexPath];
-    NSDictionary *dic = self.listDatas_Group[indexPath.section];
-    NSString *key = dic.allKeys.lastObject;
-    seactionView.titleL.text = key;
-    return seactionView;
+    if ([kind isEqualToString:@"UICollectionElementKindSectionHeader"]) {
+        LWJiaoLiuGroupCollectionReusableView *seactionView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"LWJiaoLiuGroupCollectionReusableView" forIndexPath:indexPath];
+        NSDictionary *dic = self.listDatas_Group[indexPath.section];
+        NSString *key = dic.allKeys.lastObject;
+        seactionView.titleL.text = key;
+        return seactionView;
+    }
+    return nil;
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -135,6 +193,8 @@
     
 }
 
+
+#pragma mark ---------------lazy-------------------
 - (UICollectionView *)collectView
 {
     if (!_collectView) {
@@ -152,6 +212,7 @@
         _collectView.dataSource = self;
         [_collectView registerClass:[LWJiaoLiuGroupCollectionCell class] forCellWithReuseIdentifier:@"LWJiaoLiuGroupCollectionCell"];
         [_collectView registerClass:[LWJiaoLiuGroupCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"LWJiaoLiuGroupCollectionReusableView"];
+        _collectView.backgroundColor = UIColor.whiteColor;
     }
     return _collectView;
 }
@@ -159,12 +220,12 @@
 - (UITableView *)messageTableView
 {
     if (!_messageTableView) {
-        _messageTableView = [[UITableView alloc] init];
+        _messageTableView = [[UITableView alloc] initWithFrame:CGRectZero style:(UITableViewStyleGrouped)];
         _messageTableView.delegate = self;
         _messageTableView.dataSource = self;
         _messageTableView.rowHeight = 50;
-        [_messageTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell1"];
-        _mainScrollView.backgroundColor = UIColor.whiteColor;
+        [_messageTableView registerClass:[LWJiaoLiuMessageListTableViewCell class] forCellReuseIdentifier:@"LWJiaoLiuMessageListTableViewCell"];
+        _messageTableView.backgroundColor = UIColor.whiteColor;
     }
     return _messageTableView;
 }
@@ -172,12 +233,12 @@
 - (UITableView *)contatcsTableView
 {
     if (!_contatcsTableView) {
-        _contatcsTableView = [[UITableView alloc] init];
+        _contatcsTableView = [[UITableView alloc] initWithFrame:CGRectZero style:(UITableViewStyleGrouped)];
         _contatcsTableView.delegate = self;
         _contatcsTableView.dataSource = self;
         _contatcsTableView.rowHeight = 50;
-        [_contatcsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell2"];
-        _contatcsTableView.backgroundColor = UIColor.brownColor;
+        [_contatcsTableView registerClass:[LWJiaoLiuContatcsListTableViewCell class] forCellReuseIdentifier:@"LWJiaoLiuContatcsListTableViewCell"];
+        _contatcsTableView.backgroundColor = UIColor.whiteColor;
     }
     return _contatcsTableView;
 }
@@ -186,20 +247,19 @@
 {
     if (!_mainScrollView) {
         _mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, SCREEN_WIDTH, self.view.height-60)];
-        _mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH*3, self.view.height-60);
-        _mainScrollView.backgroundColor = UIColor.blueColor;
+        _mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH*3, 1000);
+        _mainScrollView.backgroundColor = UIColor.whiteColor;
         NSArray *sub = @[self.messageTableView,self.contatcsTableView,self.collectView];
         [_mainScrollView addSubviews:sub];
         for (int i = 0; i< sub.count; i++) {
             [sub[i] mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.bottom.mas_equalTo(_mainScrollView);
                 make.width.mas_offset(SCREEN_WIDTH);
-                make.height.mas_offset(self.view.height - 60);
+                make.height.mas_offset(self.view.height - 60 - TABBAR_HIEGHT-NAVIGATOR_HEIGHT);
                 make.left.mas_equalTo(_mainScrollView.mas_left).mas_offset(SCREEN_WIDTH*i);
             }];
         }
-//        _messageTableView.pagingEnabled = YES;
-        _mainScrollView.showsHorizontalScrollIndicator = YES;
+        _mainScrollView.scrollEnabled = NO;
     }
     return _mainScrollView;
 }
@@ -213,15 +273,14 @@
             @{@"技术交流":@[@"特巡警装备",@"警保装备",@"刑侦准备",
                         @"禁毒装备",@"交警装备",@"监所装备",@"法制装备"],},
             @{@"地区交流群":@[@"东北地区",@"西北地区",@"华东地区",@"华中地区",
-                         @"东南地区",@"西南地区",@"华北地区",@"华南地区"],
-              @"超级会员群":@[],
-              @"顾问群":@[@"杨建顾问群",],
-            },
-            
+                         @"东南地区",@"西南地区",@"华北地区",@"华南地区"],},
+            @{@"超级会员群":@[],},
+            @{@"顾问群":@[@"杨建顾问群",],},
         ]];
-        _listDatas_Message = [[NSMutableArray alloc] init];
-        _listDatas_Contatcs = [[NSMutableArray alloc] init];
+        _listDatas_Message = [[NSMutableArray alloc] initWithArray:@[]];
+        _listDatas_Contatcs = [[NSMutableArray alloc] initWithArray:@[@{@"默认":@[@"北京真和王宁宁-销售-主管",@"北京真和JoannChen-全公司-商务"]}]];
     }
     return _listDatas_Group;
 }
+
 @end

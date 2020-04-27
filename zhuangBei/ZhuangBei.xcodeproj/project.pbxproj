@@ -64,6 +64,7 @@
 		89216982245686E2007C6615 /* LWJiaoLiuGroupCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89216981245686E2007C6615 /* LWJiaoLiuGroupCollectionView.m */; };
 		89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89216984245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m */; };
 		8921698824569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921698724569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m */; };
+		8921698B2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921698A2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m */; };
 		89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 89487BEA24544E4B00D4FA67 /* Foundation+Log.m */; };
 		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
 		89F5B7DC2455955E0040F7B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */; };
@@ -208,6 +209,8 @@
 		89216984245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJiaoLiuMessageTableViewCell.m; sourceTree = "<group>"; };
 		8921698624569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWJiaoLiuGroupCollectionReusableView.h; sourceTree = "<group>"; };
 		8921698724569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJiaoLiuGroupCollectionReusableView.m; sourceTree = "<group>"; };
+		892169892456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWJiaoLiuContatcsListTableViewCell.h; sourceTree = "<group>"; };
+		8921698A2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJiaoLiuContatcsListTableViewCell.m; sourceTree = "<group>"; };
 		89487BEA24544E4B00D4FA67 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89F5B7DA2455955D0040F7B1 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
@@ -666,6 +669,8 @@
 				89216984245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m */,
 				8921698624569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.h */,
 				8921698724569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m */,
+				892169892456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.h */,
+				8921698A2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -944,6 +949,7 @@
 				00CA47792455BAEB006A2885 /* AnswerCell.m in Sources */,
 				009FB63E244FE8DF00133974 /* NSString+size.m in Sources */,
 				009FB63D244FE8DF00133974 /* FUTabBarController.m in Sources */,
+				8921698B2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m in Sources */,
 				00CA47712455B9DD006A2885 /* AnswerModel.m in Sources */,
 				009FB6752450095C00133974 /* zWodeController.m in Sources */,
 				001ECA6A2453B6F300727379 /* zLoginCard.m in Sources */,

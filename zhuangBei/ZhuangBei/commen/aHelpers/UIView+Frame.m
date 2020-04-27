@@ -8,13 +8,13 @@
 
 #import "UIView+Frame.h"
 
-CGPoint CGRectGetCenter(CGRect rect)
-{
-    CGPoint pt;
-    pt.x = CGRectGetMidX(rect);
-    pt.y = CGRectGetMidY(rect);
-    return pt;
-}
+//CGPoint CGRectGetCenter(CGRect rect)
+//{
+//    CGPoint pt;
+//    pt.x = CGRectGetMidX(rect);
+//    pt.y = CGRectGetMidY(rect);
+//    return pt;
+//}
 
 CGRect CGRectMoveToCenter(CGRect rect, CGPoint center)
 {

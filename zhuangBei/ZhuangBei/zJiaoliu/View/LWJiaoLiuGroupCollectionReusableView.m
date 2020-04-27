@@ -24,7 +24,7 @@
         [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.mas_left).mas_offset(10);
             make.width.mas_offset(2);
-            make.height.mas_offset(30);
+            make.height.mas_offset(20);
             make.centerY.mas_equalTo(self.mas_centerY);
         }];
         [_titleL mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -62,11 +62,11 @@
     for (int i = 0; i< _itemsDataList.count; i++) {
         UIButton *itembtn = [UIButton new];
         [itembtn setTitle:_itemsDataList[i] forState:UIControlStateNormal];
-        [itembtn setTitleColor:UIColor.redColor forState:UIControlStateSelected];
+        [itembtn setTitleColor:UIColor.whiteColor forState:UIControlStateSelected];
         [itembtn setTitleColor:UIColor.grayColor forState:UIControlStateNormal];
-//        [itembtn setBackgroundImage:[[UIImage new] ex_imageWithColor:UIColor.whiteColor] forState:UIControlStateNormal];
-//        [itembtn setBackgroundImage:[[UIImage new] ex_imageWithColor:UIColor.redColor] forState:UIControlStateSelected];
-        [itembtn setBoundWidth:0 cornerRadius:15];
+        [itembtn setBackgroundImage:[UIImage imageWithColor:UIColor.whiteColor] forState:UIControlStateNormal];
+        [itembtn setBackgroundImage:[UIImage imageWithColor:UIColor.blueColor] forState:UIControlStateSelected];
+        [itembtn setBoundWidth:0 cornerRadius:18];
         itembtn.tag = i;
         [itembtn addTarget:self action:@selector(clickBtnItem:) forControlEvents:UIControlEventTouchUpInside];
         itembtn.selected = i == 0;
@@ -75,16 +75,16 @@
     _itembtns = itembtns;
     
     [self addSubviews:itembtns];
-    [itembtns mas_distributeViewsAlongAxis:(MASAxisTypeHorizontal) withFixedSpacing:10 leadSpacing:10 tailSpacing:10];
+    [itembtns mas_distributeViewsAlongAxis:(MASAxisTypeHorizontal) withFixedSpacing:10 leadSpacing:0 tailSpacing:0];
     [itembtns mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.mas_top).mas_offset(5);
-        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-5);
-        make.width.greaterThanOrEqualTo(@(60*_itemsDataList.count)).priorityHigh();
+        make.top.mas_equalTo(self.mas_top).mas_offset(0);
+        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-0);
+        make.width.greaterThanOrEqualTo(@(70*_itemsDataList.count)).priorityHigh();
     }];
     //    [self setBoundWidth:1 cornerRadius:20 boardColor:UIColor.grayColor];
     //    [self ex_addSingleShadowWithColor];
     
-    self.layer.cornerRadius=20;
+    self.layer.cornerRadius=18;
     self.layer.shadowColor=[UIColor blackColor].CGColor;
     self.layer.shadowOffset=CGSizeMake(0, 0);
     self.layer.shadowOpacity=0.2;
