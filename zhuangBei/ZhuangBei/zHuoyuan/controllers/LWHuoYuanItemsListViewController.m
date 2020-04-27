@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = _titleStr;
     [self confiUI];
 }
 
@@ -50,9 +50,9 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    LWHuoYuanItemsListViewController *itemslist = [LWHuoYuanItemsListViewController new];
-    itemslist.titleStr = self.listDatasMutableArray[indexPath.row];
-    [self.navigationController pushViewController:itemslist animated:YES];
+//    LWHuoYuanItemsListViewController *itemslist = [LWHuoYuanItemsListViewController new];
+//    itemslist.titleStr = self.listDatasMutableArray[indexPath.row];
+//    [self.navigationController pushViewController:itemslist animated:YES];
 }
 
 - (UICollectionView *)collectView

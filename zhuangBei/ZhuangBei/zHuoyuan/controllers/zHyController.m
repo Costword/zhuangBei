@@ -18,6 +18,11 @@
 
 @implementation zHyController
 
+- (void)clickSearchBtn:(UIButton *)sender
+{
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -30,6 +35,13 @@
     [self.collectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
     }];
+    UIButton *seachBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [seachBtn setImage:IMAGENAME(@"") forState:UIControlStateNormal];
+    [seachBtn addTarget:self action:@selector(clickSearchBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:seachBtn];
+    seachBtn.backgroundColor = UIColor.redColor;
+    seachBtn.frame = CGRectMake(0, 0, 30, 30);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:seachBtn];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

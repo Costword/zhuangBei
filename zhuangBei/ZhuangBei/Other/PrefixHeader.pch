@@ -14,7 +14,7 @@
 #import "zHud.h"
 #import "UIViewAdditions.h"
 #import "UIView+Extension.h"
-
+#import "UIImage+Extension.h"
 
 
 
