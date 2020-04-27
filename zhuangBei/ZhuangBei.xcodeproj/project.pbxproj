@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		001ECA6A2453B6F300727379 /* loginCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA692453B6F300727379 /* loginCard.m */; };
+		001ECA6A2453B6F300727379 /* zLoginCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA692453B6F300727379 /* zLoginCard.m */; };
 		001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA6D2453C43600727379 /* zZhuCeController.m */; };
 		001ECA712453C49500727379 /* zZhaoHuiController.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA702453C49500727379 /* zZhaoHuiController.m */; };
 		001ECA752453CCB700727379 /* zHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA742453CCB700727379 /* zHud.m */; };
 		001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA772453DA3200727379 /* phoneNumCheck.m */; };
 		001ECA7B2454449000727379 /* zhuCeCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA7A2454449000727379 /* zhuCeCard.m */; };
+		00372AED2456842F00E51931 /* PPNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 00372AE92456842F00E51931 /* PPNetworkHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		00372AEE2456842F00E51931 /* PPNetworkCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 00372AEC2456842F00E51931 /* PPNetworkCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		003A932D2450866D0001F615 /* LoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 003A932C2450866D0001F615 /* LoginTextField.m */; };
 		003A9330245089540001F615 /* UITextField+maxLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 003A932F245089540001F615 /* UITextField+maxLength.m */; };
 		009FB5E5244E89C700133974 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB5E4244E89C700133974 /* ViewController.m */; };
@@ -47,6 +49,13 @@
 		009FB68224500D7800133974 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB67E24500D7800133974 /* NSString+Size.m */; };
 		009FB6882450425900133974 /* zNoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB6872450425900133974 /* zNoContentView.m */; };
 		009FB68B2450428000133974 /* zNothingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB68A2450428000133974 /* zNothingView.m */; };
+		00CA47672455B91E006A2885 /* zQuestionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA47662455B91E006A2885 /* zQuestionController.m */; };
+		00CA47702455B9DD006A2885 /* QuestionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA476E2455B9DD006A2885 /* QuestionModel.m */; };
+		00CA47712455B9DD006A2885 /* AnswerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA476F2455B9DD006A2885 /* AnswerModel.m */; };
+		00CA47782455BAEB006A2885 /* choseBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA47732455BAEB006A2885 /* choseBaseView.m */; };
+		00CA47792455BAEB006A2885 /* AnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA47752455BAEB006A2885 /* AnswerCell.m */; };
+		00CA477A2455BAEB006A2885 /* QuestionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA47772455BAEB006A2885 /* QuestionHeaderView.m */; };
+		00CA47802455C839006A2885 /* QuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA477E2455C839006A2885 /* QuestionTableViewCell.m */; };
 		6BE41E3FCD0C213AB1550073 /* libPods-ZhuangBei.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */; };
 		8921697524566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921697124566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m */; };
 		8921697624566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921697224566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m */; };
@@ -80,8 +89,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		001ECA682453B6F300727379 /* loginCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginCard.h; sourceTree = "<group>"; };
-		001ECA692453B6F300727379 /* loginCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginCard.m; sourceTree = "<group>"; };
+		001ECA682453B6F300727379 /* zLoginCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zLoginCard.h; sourceTree = "<group>"; };
+		001ECA692453B6F300727379 /* zLoginCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zLoginCard.m; sourceTree = "<group>"; };
 		001ECA6C2453C43600727379 /* zZhuCeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zZhuCeController.h; sourceTree = "<group>"; };
 		001ECA6D2453C43600727379 /* zZhuCeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zZhuCeController.m; sourceTree = "<group>"; };
 		001ECA6F2453C49500727379 /* zZhaoHuiController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zZhaoHuiController.h; sourceTree = "<group>"; };
@@ -92,6 +101,12 @@
 		001ECA772453DA3200727379 /* phoneNumCheck.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = phoneNumCheck.m; sourceTree = "<group>"; };
 		001ECA792454449000727379 /* zhuCeCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zhuCeCard.h; sourceTree = "<group>"; };
 		001ECA7A2454449000727379 /* zhuCeCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhuCeCard.m; sourceTree = "<group>"; };
+		00372AE92456842F00E51931 /* PPNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPNetworkHelper.m; sourceTree = "<group>"; };
+		00372AEA2456842F00E51931 /* PPNetworkCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPNetworkCache.h; sourceTree = "<group>"; };
+		00372AEB2456842F00E51931 /* PPNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPNetworkHelper.h; sourceTree = "<group>"; };
+		00372AEC2456842F00E51931 /* PPNetworkCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPNetworkCache.m; sourceTree = "<group>"; };
+		00372AEF2456856100E51931 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		00372AF02456857500E51931 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		003A932B2450866D0001F615 /* LoginTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginTextField.h; sourceTree = "<group>"; };
 		003A932C2450866D0001F615 /* LoginTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginTextField.m; sourceTree = "<group>"; };
 		003A932E245089540001F615 /* UITextField+maxLength.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+maxLength.h"; sourceTree = "<group>"; };
@@ -164,6 +179,20 @@
 		009FB6872450425900133974 /* zNoContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zNoContentView.m; sourceTree = "<group>"; };
 		009FB6892450428000133974 /* zNothingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zNothingView.h; sourceTree = "<group>"; };
 		009FB68A2450428000133974 /* zNothingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zNothingView.m; sourceTree = "<group>"; };
+		00CA47652455B91D006A2885 /* zQuestionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zQuestionController.h; sourceTree = "<group>"; };
+		00CA47662455B91E006A2885 /* zQuestionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zQuestionController.m; sourceTree = "<group>"; };
+		00CA476C2455B9DD006A2885 /* QuestionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionModel.h; sourceTree = "<group>"; };
+		00CA476D2455B9DD006A2885 /* AnswerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerModel.h; sourceTree = "<group>"; };
+		00CA476E2455B9DD006A2885 /* QuestionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionModel.m; sourceTree = "<group>"; };
+		00CA476F2455B9DD006A2885 /* AnswerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerModel.m; sourceTree = "<group>"; };
+		00CA47722455BAEB006A2885 /* AnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCell.h; sourceTree = "<group>"; };
+		00CA47732455BAEB006A2885 /* choseBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = choseBaseView.m; sourceTree = "<group>"; };
+		00CA47742455BAEB006A2885 /* QuestionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionHeaderView.h; sourceTree = "<group>"; };
+		00CA47752455BAEB006A2885 /* AnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerCell.m; sourceTree = "<group>"; };
+		00CA47762455BAEB006A2885 /* choseBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = choseBaseView.h; sourceTree = "<group>"; };
+		00CA47772455BAEB006A2885 /* QuestionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionHeaderView.m; sourceTree = "<group>"; };
+		00CA477E2455C839006A2885 /* QuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTableViewCell.m; sourceTree = "<group>"; };
+		00CA477F2455C839006A2885 /* QuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTableViewCell.h; sourceTree = "<group>"; };
 		759737390EA2ABFD7BEC457D /* Pods-ZhuangBei.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhuangBei.debug.xcconfig"; path = "Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei.debug.xcconfig"; sourceTree = "<group>"; };
 		8921697124566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanListCollectionViewCell.m; sourceTree = "<group>"; };
 		8921697224566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanItemListCollectionViewCell.m; sourceTree = "<group>"; };
@@ -220,19 +249,31 @@
 		001ECA672453B6F300727379 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				001ECA682453B6F300727379 /* loginCard.h */,
-				001ECA692453B6F300727379 /* loginCard.m */,
+				00CA47722455BAEB006A2885 /* AnswerCell.h */,
+				00CA47752455BAEB006A2885 /* AnswerCell.m */,
+				00CA477F2455C839006A2885 /* QuestionTableViewCell.h */,
+				00CA477E2455C839006A2885 /* QuestionTableViewCell.m */,
+				00CA47762455BAEB006A2885 /* choseBaseView.h */,
+				00CA47732455BAEB006A2885 /* choseBaseView.m */,
+				00CA47742455BAEB006A2885 /* QuestionHeaderView.h */,
+				00CA47772455BAEB006A2885 /* QuestionHeaderView.m */,
 				001ECA792454449000727379 /* zhuCeCard.h */,
 				001ECA7A2454449000727379 /* zhuCeCard.m */,
+				001ECA682453B6F300727379 /* zLoginCard.h */,
+				001ECA692453B6F300727379 /* zLoginCard.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
 		};
-		001ECA6B2453B70B00727379 /* models */ = {
+		00372AE82456842F00E51931 /* PPNetworkHelper */ = {
 			isa = PBXGroup;
 			children = (
+				00372AEA2456842F00E51931 /* PPNetworkCache.h */,
+				00372AEC2456842F00E51931 /* PPNetworkCache.m */,
+				00372AEB2456842F00E51931 /* PPNetworkHelper.h */,
+				00372AE92456842F00E51931 /* PPNetworkHelper.m */,
 			);
-			path = models;
+			path = PPNetworkHelper;
 			sourceTree = "<group>";
 		};
 		003A932A245086110001F615 /* category */ = {
@@ -364,7 +405,7 @@
 		009FB63F244FEB7700133974 /* zDenglu */ = {
 			isa = PBXGroup;
 			children = (
-				001ECA6B2453B70B00727379 /* models */,
+				00CA476B2455B9DD006A2885 /* model */,
 				001ECA672453B6F300727379 /* views */,
 				009FB658244FF36300133974 /* requset */,
 				009FB645244FEC3400133974 /* controllers */,
@@ -421,6 +462,8 @@
 				001ECA6D2453C43600727379 /* zZhuCeController.m */,
 				001ECA6F2453C49500727379 /* zZhaoHuiController.h */,
 				001ECA702453C49500727379 /* zZhaoHuiController.m */,
+				00CA47652455B91D006A2885 /* zQuestionController.h */,
+				00CA47662455B91E006A2885 /* zQuestionController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -566,9 +609,22 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		00CA476B2455B9DD006A2885 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				00CA476D2455B9DD006A2885 /* AnswerModel.h */,
+				00CA476F2455B9DD006A2885 /* AnswerModel.m */,
+				00CA476C2455B9DD006A2885 /* QuestionModel.h */,
+				00CA476E2455B9DD006A2885 /* QuestionModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		732C49DD66576D0DB40FA460 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00372AF02456857500E51931 /* libsqlite3.0.tbd */,
+				00372AEF2456856100E51931 /* libsqlite3.tbd */,
 				B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */,
 			);
 			name = Frameworks;
@@ -617,6 +673,7 @@
 		89487BE724544E1500D4FA67 /* Thrid */ = {
 			isa = PBXGroup;
 			children = (
+				00372AE82456842F00E51931 /* PPNetworkHelper */,
 			);
 			path = Thrid;
 			sourceTree = "<group>";
@@ -849,7 +906,9 @@
 				009FB639244FE8DF00133974 /* UIView+TouchAreaInsets.m in Sources */,
 				001ECA712453C49500727379 /* zZhaoHuiController.m in Sources */,
 				009FB6722450094C00133974 /* zShouyeController.m in Sources */,
+				00372AEE2456842F00E51931 /* PPNetworkCache.m in Sources */,
 				001ECA752453CCB700727379 /* zHud.m in Sources */,
+				00CA47672455B91E006A2885 /* zQuestionController.m in Sources */,
 				009FB68224500D7800133974 /* NSString+Size.m in Sources */,
 				8921697524566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m in Sources */,
 				009FB5E5244E89C700133974 /* ViewController.m in Sources */,
@@ -860,9 +919,11 @@
 				009FB635244FE8DF00133974 /* MainTabBarController.m in Sources */,
 				8921697E24567278007C6615 /* UIImage+Extension.m in Sources */,
 				001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */,
+				00CA47802455C839006A2885 /* QuestionTableViewCell.m in Sources */,
 				003A932D2450866D0001F615 /* LoginTextField.m in Sources */,
 				009FB6882450425900133974 /* zNoContentView.m in Sources */,
 				001ECA7B2454449000727379 /* zhuCeCard.m in Sources */,
+				00372AED2456842F00E51931 /* PPNetworkHelper.m in Sources */,
 				001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */,
 				009FB636244FE8DF00133974 /* FUTabBar.m in Sources */,
 				009FB68024500D7800133974 /* UIView+Frame.m in Sources */,
@@ -870,17 +931,22 @@
 				009FB619244FE8C200133974 /* SceneDelegate.m in Sources */,
 				009FB63B244FE8DF00133974 /* FUTabBarButton.m in Sources */,
 				89F5B7DF245596DD0040F7B1 /* UIView+Extension.m in Sources */,
+				00CA477A2455BAEB006A2885 /* QuestionHeaderView.m in Sources */,
 				009FB5F0244E89CD00133974 /* main.m in Sources */,
 				009FB657244FECC500133974 /* baseViewController.m in Sources */,
 				009FB634244FE8DF00133974 /* MainNavController.m in Sources */,
 				009FB669245007ED00133974 /* zDengluController.m in Sources */,
+				00CA47702455B9DD006A2885 /* QuestionModel.m in Sources */,
 				009FB67F24500D7800133974 /* NSDictionary+NSNull.m in Sources */,
 				009FB66C2450091D00133974 /* zHyController.m in Sources */,
 				009FB66F2450093A00133974 /* zJiaoliuController.m in Sources */,
+				00CA47782455BAEB006A2885 /* choseBaseView.m in Sources */,
+				00CA47792455BAEB006A2885 /* AnswerCell.m in Sources */,
 				009FB63E244FE8DF00133974 /* NSString+size.m in Sources */,
 				009FB63D244FE8DF00133974 /* FUTabBarController.m in Sources */,
+				00CA47712455B9DD006A2885 /* AnswerModel.m in Sources */,
 				009FB6752450095C00133974 /* zWodeController.m in Sources */,
-				001ECA6A2453B6F300727379 /* loginCard.m in Sources */,
+				001ECA6A2453B6F300727379 /* zLoginCard.m in Sources */,
 				009FB638244FE8DF00133974 /* FUBadgeButton.m in Sources */,
 				89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */,
 				003A9330245089540001F615 /* UITextField+maxLength.m in Sources */,
