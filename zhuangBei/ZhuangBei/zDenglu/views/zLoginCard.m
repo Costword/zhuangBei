@@ -10,7 +10,7 @@
 #import "LoginTextField.h"
 #import "zDengluRequst.h"
 #import "phoneNumCheck.h"
-
+#import "zUserInfo.h"
 
 @interface zLoginCard ()
 
@@ -60,7 +60,7 @@
     if (!_passWordField) {
         _passWordField = [[LoginTextField alloc]init];
         _passWordField.icon = [UIImage imageNamed:@"zpass_word"];
-        _passWordField.keyboardType = UIKeyboardTypePhonePad;
+        _passWordField.keyboardType = UIKeyboardTypeDefault;
         _passWordField.maxLength = 12;
         _passWordField.secureTextEntry = YES;
         _passWordField.myPlaceHolder = @"请输入密码";
@@ -75,6 +75,8 @@
         _showPasswordBtn.titleLabel.font = kFont(14);
         [_showPasswordBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _showPasswordBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [_showPasswordBtn setImage:[UIImage imageNamed:@"chose_normal"] forState:UIControlStateNormal];
+        [_showPasswordBtn setImage:[UIImage imageNamed:@"chose_select"] forState:UIControlStateSelected];
         [_showPasswordBtn setTitle:@"显示密码" forState:UIControlStateNormal];
         _showPasswordBtn.tag = 1;
         [_showPasswordBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -89,6 +91,8 @@
         _remmberPasswordBtn.titleLabel.font = kFont(14);
         _remmberPasswordBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_remmberPasswordBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_remmberPasswordBtn setImage:[UIImage imageNamed:@"chose_normal"] forState:UIControlStateNormal];
+        [_remmberPasswordBtn setImage:[UIImage imageNamed:@"chose_select"] forState:UIControlStateSelected];
         [_remmberPasswordBtn setTitle:@"记住密码" forState:UIControlStateNormal];
         _remmberPasswordBtn.tag = 2;
         [_remmberPasswordBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -215,33 +219,39 @@
     }];
 }
 
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self.showPasswordBtn setNeedsLayout];
+    [self.showPasswordBtn layoutIfNeeded];
+    [self.showPasswordBtn setIconInLeftWithSpacing:5];
+    
+    [self.remmberPasswordBtn setNeedsLayout];
+    [self.remmberPasswordBtn layoutIfNeeded];
+    [self.remmberPasswordBtn setIconInLeftWithSpacing:5];
+}
 
 -(void)buttonClick:(UIButton*)button
 {
     if (button.tag==1) {
         //显示密码
         self.showPasswordBtn.selected = !button.selected;
-        [self.passWordField setSecureTextEntry:button.selected];
+        [self.passWordField setSecureTextEntry:!self.showPasswordBtn.selected];
         return;
     }
     if (button.tag==2) {
         //记住密码
+        self.remmberPasswordBtn.selected = !button.selected;
         return;
     }
     if (button.tag==3) {
         //登录
         BOOL rightNum = [phoneNumCheck validateMobile:self.accountField.text];
         if (rightNum) {
-            if (self.accountField.text>0) {
-                //校验账号密码
-                [[zHud shareInstance]show];
-                
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [[zHud shareInstance]hild];
-                    if (self.eventBack) {
-                        self.eventBack(3);
-                    }
-                });
+            if (self.passWordField.text.length>0) {
+                if (self.logInBack) {
+                    self.logInBack(self.accountField.text,self.passWordField.text,self.remmberPasswordBtn.selected);
+                }
             }
         }else
         {
@@ -251,9 +261,10 @@
     }
     if (button.tag==4) {
         //忘记密码
-        if (self.eventBack) {
-            self.eventBack(4);
-        }
+//        if (self.eventBack) {
+//            self.eventBack(4);
+//        }
+        [[zHud shareInstance]showMessage:@"修改密码开发中"];
         return;
     }
     if (button.tag==5) {

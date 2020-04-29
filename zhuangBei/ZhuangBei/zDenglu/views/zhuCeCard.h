@@ -10,7 +10,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^getMessageCode)(NSString * phoneNum);
+
+typedef void(^zhuceTapBack)(NSMutableDictionary * userDic);
+
+typedef void(^backToLogin)(void);
+
 @interface zhuCeCard : UIView
+
+@property(copy,nonatomic)getMessageCode getMessageCodeTapBack;
+
+@property(copy,nonatomic)zhuceTapBack zhuceBack;
+
+@property(copy,nonatomic)backToLogin backLogin;
+
+
 
 @end
 

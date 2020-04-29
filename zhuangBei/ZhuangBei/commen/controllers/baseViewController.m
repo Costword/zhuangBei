@@ -110,7 +110,7 @@
             NSLog(@"请求到的数据是：%@",text);
             [self RequsetSuccessWithData:responseObject AndUrl:url];
         } failure:^(NSError *error) {
-            [self RequsetFileWithUrl:url];
+            [self RequsetFileWithUrl:url WithError:error];
         }];
         
     }
@@ -122,7 +122,7 @@
            NSLog(@"无缓存请求到的数据是：%@",text);
             [self RequsetSuccessWithData:responseObject AndUrl:url];
         } failure:^(NSError *error) {
-            [self RequsetFileWithUrl:url];
+            [self RequsetFileWithUrl:url WithError:error];
         }];
     }
 }
@@ -134,7 +134,7 @@
         NSLog(@"请求到的数据是：%@",text);
         [self RequsetSuccessWithData:responseObject AndUrl:url];
     } failure:^(NSError *error) {
-        [self RequsetFileWithUrl:url];
+        [self RequsetFileWithUrl:url WithError:error];
     }];
 }
 
@@ -151,7 +151,7 @@
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
--(void)RequsetFileWithUrl:(NSString*)url
+-(void)RequsetFileWithUrl:(NSString*)url WithError:(NSError*)err
 {
     
 }

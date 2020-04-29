@@ -13,8 +13,9 @@
 #import "QuestionModel.h"
 #import "AnswerModel.h"
 
-static NSString * que = @"que";
-static NSString * ans = @"ans";
+static NSString * quekey = @"questionId";
+static NSString * ansList = @"optionList";
+static NSString * anskey = @"optionId";
 
 @interface zQuestionController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)NSArray * queastionArray;
@@ -98,8 +99,7 @@ static NSString * ans = @"ans";
 {
     if (!_ansDic) {
         _ansDic = [NSMutableDictionary dictionary];
-        [_ansDic setObject:@"" forKey:que];
-        [_ansDic setObject:@"" forKey:ans];
+        [_ansDic setObject:@"" forKey:quekey];
     }
     return _ansDic;
 }
@@ -122,24 +122,8 @@ static NSString * ans = @"ans";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.queastionArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSDictionary * dic = self.queastionArray[idx];
-        QuestionModel * model = [QuestionModel mj_objectWithKeyValues:dic];
-        model.QuestionIndex = idx;
-        NSArray * answer = model.answers;
-        
-        NSMutableArray * answersModelArray = [NSMutableArray array];
-        [answer enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger jdx, BOOL * _Nonnull stop) {
-            NSDictionary * ansDic = [answer objectAtIndex:jdx];
-            AnswerModel * answerModel = [AnswerModel mj_objectWithKeyValues:ansDic];
-            answerModel.QuestionIndex = model.QuestionIndex;
-            answerModel.AnswerIndex = jdx;
-            [answersModelArray addObject:answerModel];
-        }];
-        model.answers = answersModelArray;
-        [self.QuestionModelArray addObject:model];
-    }];
+    NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kQuestion];
+    [self getData:NO url:url withParam:@{}];
     
     [self.view addSubview:self.questionTableView];
     [self updateViewConstraintsForView];
@@ -164,42 +148,61 @@ static NSString * ans = @"ans";
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     QuestionModel * question =  self.QuestionModelArray[section];
-    return question.answers.count;
+    return question.optionList.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AnswerCell * answerCell = [AnswerCell creatTableViewCellWithTableView:tableView AndIndexPath:indexPath];
     QuestionModel * question =  self.QuestionModelArray[indexPath.section];
-    answerCell.answerModel = question.answers[indexPath.row];
+    answerCell.answerModel = question.optionList[indexPath.row];
     __weak typeof(self)weakSelf = self;
     answerCell.upDataSelectAnswerBack = ^(AnswerModel * _Nonnull ansModel) {
         
         QuestionModel * Mquestion =  weakSelf.QuestionModelArray[ansModel.QuestionIndex];
-        AnswerModel * Model = Mquestion.answers[ansModel.AnswerIndex];
+        AnswerModel * Model = Mquestion.optionList[ansModel.AnswerIndex];
+        [weakSelf.ansDic setObject:@(Mquestion.questionId) forKey:quekey];
+        NSMutableArray * ansArr = [NSMutableArray array];
+        NSMutableDictionary * ansDic = [NSMutableDictionary dictionary];
+        [ansDic setObject:@(Model.optionId) forKey:anskey];
+        [ansArr addObject:ansDic];
+        [weakSelf.ansDic setObject:ansArr forKey:ansList];
+    
+        //判断答案数组中是否有此选项，如果有，不做处理，没有则添加
         
-        [weakSelf.ansDic setObject:@(Model.AnswerIndex) forKey:ans];
-        [weakSelf.ansDic setObject:@(Model.QuestionIndex) forKey:que];
-        
-        if ([weakSelf.AnswerArray containsObject:weakSelf.ansDic]) {
-            Model.ISCHOSE = NO;
-            
-//            NSMutableArray *arr = [NSMutableArray array];
-//             NSDictionary *dic1 = weakSelf.ansDic;
-//            NSMutableDictionary *dic11 = [[NSMutableDictionary alloc] initWithDictionary:dic1];
-//            [arr addObject:dic1];
-//             [arr addObject:dic11];
-//              NSDictionary *dic2 = @{@"one":@12};
-//              NSMutableDictionary *dic22 = [[NSMutableDictionary alloc] initWithDictionary:dic2];
-//                BOOL bexist = [arr containsObject:dic2];  // 返回YES
-//                bexist = [arr containsObject:dic22];    //返回YES
-            
-            [weakSelf.AnswerArray removeObject:weakSelf.ansDic];
-        }else
-        {
-            Model.ISCHOSE = YES;
-            [weakSelf.AnswerArray addObject:weakSelf.ansDic];
+        for (NSDictionary * dic in self.AnswerArray) {
+            NSString * questionId = dic[quekey];
+            if ([questionId integerValue] == Mquestion.questionId) {
+                
+                NSArray * ansA = dic[ansList];
+                for (NSDictionary * ans in ansA) {
+                    NSString * optionId = ans[anskey];
+                    if ([optionId integerValue] == Model.optionId) {
+                        //如果已经选中了
+                        Model.ISCHOSE = YES;
+                    }else
+                    {
+                        //未选中 先清零 再设置选中状态
+                        [Mquestion.optionList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            AnswerModel * ansmodel = Mquestion.optionList[idx];
+                            ansmodel.ISCHOSE = NO;
+                        }];
+                        Model.ISCHOSE = YES;
+                    }
+                }
+            }
         }
+        
+//        [weakSelf.ansDic setObject:@(Model.QuestionIndex) forKey:que];
+        
+//        if ([weakSelf.AnswerArray containsObject:weakSelf.ansDic]) {
+//            Model.ISCHOSE = NO;
+//            [weakSelf.AnswerArray removeObject:weakSelf.ansDic];
+//        }else
+//        {
+//            Model.ISCHOSE = YES;
+//            [weakSelf.AnswerArray addObject:weakSelf.ansDic];
+//        }
         NSIndexPath * selceIndex = [NSIndexPath indexPathForRow:Model.AnswerIndex inSection:Model.QuestionIndex];
         [weakSelf.questionTableView reloadRowsAtIndexPaths:@[selceIndex] withRowAnimation:UITableViewRowAnimationNone];
     };
@@ -218,5 +221,44 @@ static NSString * ans = @"ans";
 {
     return 1;
 }
+
+-(void)RequsetFileWithUrl:(NSString*)url WithError:(NSError*)err
+{
+    if ([url containsString:kQuestion]) {
+        [[zHud shareInstance]showMessage:@"获取试卷失败"];
+        return;
+    }
+}
+
+-(void)RequsetSuccessWithData:(id)data AndUrl:(NSString*)url
+{
+    if ([url containsString:kQuestion]) {
+        NSDictionary * dic = data;
+        NSLog(@"获取试卷成功%@",dic);
+        [[zHud shareInstance]showMessage:@"获取试卷成功"];
+        
+        NSArray * questionArray = dic[@"data"][@"questionList"][@"danxt"];
+        
+        [questionArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary * dic = questionArray[idx];
+            QuestionModel * model = [QuestionModel mj_objectWithKeyValues:dic];
+            model.QuestionIndex = idx;
+            NSArray * answer = model.optionList;
+            
+            NSMutableArray * answersModelArray = [NSMutableArray array];
+            [answer enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger jdx, BOOL * _Nonnull stop) {
+                NSDictionary * ansDic = [answer objectAtIndex:jdx];
+                AnswerModel * answerModel = [AnswerModel mj_objectWithKeyValues:ansDic];
+                answerModel.QuestionIndex = model.QuestionIndex;
+                answerModel.AnswerIndex = jdx;
+                [answersModelArray addObject:answerModel];
+            }];
+            model.optionList = answersModelArray;
+            [self.QuestionModelArray addObject:model];
+        }];
+        [self.questionTableView reloadData];
+    }
+}
+
 
 @end

@@ -11,9 +11,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QuestionModel : NSObject
 
-@property(assign,nonatomic)NSInteger type;
-@property(copy,nonatomic)NSString * name;//问题描述
-@property(strong,nonatomic)NSArray * answers;
+@property(copy,nonatomic)NSString * questionName;//问题描述
+@property(copy,nonatomic)NSString * questionType;//问题分类 danxt
+@property(copy,nonatomic)NSString * createDate;
+@property(copy,nonatomic)NSString * activeState;
+@property(assign,nonatomic)NSInteger questionId;
+@property(strong,nonatomic)NSArray * optionList;//选项
 
 @property(assign,nonatomic)NSInteger QuestionIndex;
 @end
