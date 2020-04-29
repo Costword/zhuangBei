@@ -67,15 +67,15 @@
 
 -(void)setQuestionModel:(QuestionModel *)questionModel
 {
-    if (questionModel.type == 1) {
+    if ([questionModel.questionType isEqualToString:@"danxt"]) {
 //        单选题
-        [self.typeBtn setTitle:@"1" forState:UIControlStateNormal];
+        [self.typeBtn setTitle:@"单选题" forState:UIControlStateNormal];
     }else
     {
 //        多选题
         [self.typeBtn setTitle:@"2" forState:UIControlStateNormal];
     }
-    [self setQuestionLabelTextWith:questionModel.name];
+    [self setQuestionLabelTextWith:questionModel.questionName];
     
     [self updateConstraintsForView];
 }

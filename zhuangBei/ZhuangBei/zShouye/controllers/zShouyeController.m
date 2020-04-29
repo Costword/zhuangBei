@@ -10,6 +10,7 @@
 #import "zDengluRequst.h"
 #import "zInterfacedConst.h"
 #import "zDengluController.h"
+#import "zQuestionController.h"
 
 @interface zShouyeController ()
 
@@ -36,14 +37,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.button];
-//    [zDengluRequst getLoginWithParameters:@{} success:^(id  _Nonnull response) {
-//        NSLog(@"请求成功%@",response);
-//    } failure:^(NSError * _Nonnull error) {
-//        NSLog(@"请求失败%@",error);
-//    }];
-
-    NSString *url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kLogin];
-    [self postDataWithUrl:url WithParam:@{}];
 }
 
 -(void)viewDidLayoutSubviews
@@ -59,7 +52,7 @@
 
 -(void)gotoLogInVC
 {
-    zDengluController * dlVC = [[zDengluController alloc]init];
+    zQuestionController * dlVC = [[zQuestionController alloc]init];
     dlVC.title = @"登陆";
     [self.navigationController pushViewController:dlVC animated:YES];
 }

@@ -22,6 +22,7 @@ PODS:
   - SDWebImage (5.7.3):
     - SDWebImage/Core (= 5.7.3)
   - SDWebImage/Core (5.7.3)
+  - TYAttributedLabel (2.6.6)
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
   - YYKit/no-arc (1.0.9)
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - SDWebImage
+  - TYAttributedLabel (~> 2.6.2)
   - YYKit
 
 SPEC REPOS:
@@ -45,6 +47,7 @@ SPEC REPOS:
     - MJExtension
     - MJRefresh
     - SDWebImage
+    - TYAttributedLabel
     - YYKit
 
 SPEC CHECKSUMS:
@@ -55,8 +58,9 @@ SPEC CHECKSUMS:
   MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
   MJRefresh: 3153c59a363159092c08b2177ec3a7d09f90bfaf
   SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
+  TYAttributedLabel: cb8fc910d97eb5224936d4f692a78e042af691b2
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: e2f0802444ae558b9dd34f06ca31afc6bbeb517b
+PODFILE CHECKSUM: 1ed1afeb5c3abc07a020220449ed862aacc98339
 
 COCOAPODS: 1.9.1
