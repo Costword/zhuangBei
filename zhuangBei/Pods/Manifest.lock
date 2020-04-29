@@ -15,10 +15,13 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - IQKeyboardManager (6.5.5)
+  - LEEAlert (1.3.6)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - MJExtension (3.2.1)
   - MJRefresh (3.4.1)
+  - SDCycleScrollView (1.80):
+    - SDWebImage (>= 5.0.0)
   - SDWebImage (5.7.3):
     - SDWebImage/Core (= 5.7.3)
   - SDWebImage/Core (5.7.3)
@@ -30,10 +33,12 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - IQKeyboardManager
+  - LEEAlert
   - Masonry
   - MBProgressHUD
   - MJExtension
   - MJRefresh
+  - SDCycleScrollView (>= 1.80)
   - SDWebImage
   - TYAttributedLabel (~> 2.6.2)
   - YYKit
@@ -42,10 +47,12 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - IQKeyboardManager
+    - LEEAlert
     - Masonry
     - MBProgressHUD
     - MJExtension
     - MJRefresh
+    - SDCycleScrollView
     - SDWebImage
     - TYAttributedLabel
     - YYKit
@@ -53,14 +60,16 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
+  LEEAlert: b92b3648fcb2107511472a87c43818c1fc38afd9
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
   MJRefresh: 3153c59a363159092c08b2177ec3a7d09f90bfaf
+  SDCycleScrollView: b3c9a5ed840c771c4938978174c7c9d9feefeb96
   SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
   TYAttributedLabel: cb8fc910d97eb5224936d4f692a78e042af691b2
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 1ed1afeb5c3abc07a020220449ed862aacc98339
+PODFILE CHECKSUM: f3cdb68b93fca38266821833e2c10fcb4040d6a6
 
 COCOAPODS: 1.9.1

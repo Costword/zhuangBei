@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "zNoContentView.h"
 #import "zNothingView.h"
-
+#import "zNetWorkManger.h"
 
 @interface baseViewController ()
 
@@ -91,56 +91,24 @@
 
 #pragma  mark - 获取数据请求示例 GET请求自动缓存与无缓存
 #pragma  mark - 这里的请求只是一个演示, 在真实的项目中建议不要这样做, 具体做法可以参照PPHTTPRequestLayer文件夹的例子
-- (void)getData:(BOOL)isOn url:(NSString *)url withParam:(id)para
+- (void)getDataurl:(NSString *)url withParam:(id)para
 {
-    
-//    NSDictionary *para = @{ @"a":@"list", @"c":@"data",@"client":@"iphone",@"page":@"0",@"per":@"10", @"type":@"29"};
-    // 自动缓存
-    [PPNetworkHelper setValue:@"application/json,multipart/form-data" forHTTPHeaderField:@"Content-Type"];
-    NSLog(@"当前请求的URL:%@\n参数:%@:",url,para);
-    
-    if(isOn)
-    {
-        //有缓存的情况
-        [PPNetworkHelper GET:url parameters:para responseCache:^(id responseCache) {
-            // 1.先加载缓存数据
-            NSString *  text = [self jsonToString:responseCache];
-            NSLog(@"缓存数据是：%@",text);
-            [self RequsetSuccessWithData:responseCache AndUrl:url];
-        } success:^(id responseObject) {
-            // 2.再请求网络数据
-            NSString *  text  = [self jsonToString:responseObject];
-            NSLog(@"请求到的数据是：%@",text);
-            [self RequsetSuccessWithData:responseObject AndUrl:url];
-        } failure:^(NSError *error) {
-            [self RequsetFileWithUrl:url WithError:error];
-        }];
-        
-    }
-    // 无缓存
-    else
-    {
-        [PPNetworkHelper GET:url parameters:para success:^(id responseObject) {
-           NSString *  text  = [self jsonToString:responseObject];
-           NSLog(@"无缓存请求到的数据是：%@",text);
-            [self RequsetSuccessWithData:responseObject AndUrl:url];
-        } failure:^(NSError *error) {
-            [self RequsetFileWithUrl:url WithError:error];
-        }];
-    }
+    [zNetWorkManger GETworkWithUrl:url WithParamer:para Success:^(id  _Nonnull responseObject) {
+        NSString *  text  = [self jsonToString:responseObject];
+        NSLog(@"请求到的数据是：%@",text);
+    } Failure:^(NSError * _Nonnull error) {
+        [self RequsetFileWithUrl:url WithError:error];
+    }];
 }
 
 -(void)postDataWithUrl:(NSString*)url WithParam:(id)param
 {
     NSLog(@"当前请求的URL:%@\n参数:%@",url,param);
-//      [headersetValue:@"multipart/form-data" forKey:@"Content-Type"];
-    [PPNetworkHelper setValue:@"application/json; charset=utf-8;multipart/form-data" forHTTPHeaderField:@"Content-Type"];
-    
-    [PPNetworkHelper POST:url parameters:param success:^(id responseObject) {
+
+    [zNetWorkManger POSTworkWithUrl:url WithParamer:param Success:^(id  _Nonnull responseObject) {
         NSString *  text  = [self jsonToString:responseObject];
         NSLog(@"请求到的数据是：%@",text);
-        [self RequsetSuccessWithData:responseObject AndUrl:url];
-    } failure:^(NSError *error) {
+    } Failure:^(NSError * _Nonnull error) {
         [self RequsetFileWithUrl:url WithError:error];
     }];
 }

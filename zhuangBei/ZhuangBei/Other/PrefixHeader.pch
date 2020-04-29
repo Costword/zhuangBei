@@ -21,6 +21,7 @@
 #import "NSArray+JSON.h"
 #import "NSDictionary+JSON.h"
 #import "MJRefresh.h"
+#import "LEEAlert.h"
 
 #define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT    [UIScreen mainScreen].bounds.size.height

@@ -54,7 +54,7 @@
 -(void)gotoLogInVC
 {
 //    zZhuCeController
-    zZhuCeController * dlVC = [[zZhuCeController alloc]init];
+    zDengluController * dlVC = [[zDengluController alloc]init];
     dlVC.title = @"登陆";
     [self.navigationController pushViewController:dlVC animated:YES];
 }

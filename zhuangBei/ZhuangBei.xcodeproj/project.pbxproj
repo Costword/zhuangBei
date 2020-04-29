@@ -63,6 +63,7 @@
 		00CA47792455BAEB006A2885 /* AnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA47752455BAEB006A2885 /* AnswerCell.m */; };
 		00CA477A2455BAEB006A2885 /* QuestionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA47772455BAEB006A2885 /* QuestionHeaderView.m */; };
 		00CA47802455C839006A2885 /* QuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA477E2455C839006A2885 /* QuestionTableViewCell.m */; };
+		00D6E2DD2459A6D200B6E327 /* zNetWorkManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D6E2DC2459A6D200B6E327 /* zNetWorkManger.m */; };
 		6BE41E3FCD0C213AB1550073 /* libPods-ZhuangBei.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */; };
 		8921697524566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921697124566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m */; };
 		8921697624566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921697224566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m */; };
@@ -224,6 +225,8 @@
 		00CA47772455BAEB006A2885 /* QuestionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionHeaderView.m; sourceTree = "<group>"; };
 		00CA477E2455C839006A2885 /* QuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTableViewCell.m; sourceTree = "<group>"; };
 		00CA477F2455C839006A2885 /* QuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTableViewCell.h; sourceTree = "<group>"; };
+		00D6E2DB2459A6D200B6E327 /* zNetWorkManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zNetWorkManger.h; sourceTree = "<group>"; };
+		00D6E2DC2459A6D200B6E327 /* zNetWorkManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zNetWorkManger.m; sourceTree = "<group>"; };
 		759737390EA2ABFD7BEC457D /* Pods-ZhuangBei.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhuangBei.debug.xcconfig"; path = "Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei.debug.xcconfig"; sourceTree = "<group>"; };
 		8921697124566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanListCollectionViewCell.m; sourceTree = "<group>"; };
 		8921697224566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanItemListCollectionViewCell.m; sourceTree = "<group>"; };
@@ -617,6 +620,7 @@
 		009FB654244FEC9900133974 /* commen */ = {
 			isa = PBXGroup;
 			children = (
+				00D6E2DA2459A6B700B6E327 /* network */,
 				8921697824567045007C6615 /* Component */,
 				89487BE824544E4000D4FA67 /* Tools */,
 				89487BE724544E1500D4FA67 /* Thrid */,
@@ -694,6 +698,16 @@
 			);
 			path = model;
 			sourceTree = "<group>";
+		};
+		00D6E2DA2459A6B700B6E327 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				00D6E2DB2459A6D200B6E327 /* zNetWorkManger.h */,
+				00D6E2DC2459A6D200B6E327 /* zNetWorkManger.m */,
+			);
+			name = network;
+			path = ZhuangBei/network;
+			sourceTree = SOURCE_ROOT;
 		};
 		732C49DD66576D0DB40FA460 /* Frameworks */ = {
 			isa = PBXGroup;
@@ -1055,6 +1069,7 @@
 				89F5B7DC2455955E0040F7B1 /* UIViewAdditions.m in Sources */,
 				00926BB7245706E30052B827 /* UIButton+HQCustomIcon.m in Sources */,
 				009FB637244FE8DF00133974 /* UIImage+Extension.m in Sources */,
+				00D6E2DD2459A6D200B6E327 /* zNetWorkManger.m in Sources */,
 				009FB68124500D7800133974 /* MainSingleton.m in Sources */,
 				89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */,
 				009FB63A244FE8DF00133974 /* UIView+FU_Animation.m in Sources */,
