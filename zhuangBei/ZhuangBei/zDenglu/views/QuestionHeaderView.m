@@ -75,7 +75,10 @@
 //        多选题
         [self.typeBtn setTitle:@"2" forState:UIControlStateNormal];
     }
-    [self setQuestionLabelTextWith:questionModel.questionName];
+    
+    NSString * question = [NSString stringWithFormat:@"%@:%@",questionModel.questionName,questionModel.questionId];
+    
+    [self setQuestionLabelTextWith:question];
     
     [self updateConstraintsForView];
 }

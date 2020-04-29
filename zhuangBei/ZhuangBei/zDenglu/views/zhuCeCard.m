@@ -395,11 +395,15 @@
             [[zHud shareInstance]showMessage:@"验证码不可为空"];
             return;
         }
-        [self.userDic setObject:self.accountField.text forKey:@"nickName"];
-        [self.userDic setObject:self.nameField.text forKey:@"username"];
+        [self.userDic setObject:self.nameField.text forKey:@"nickName"];
+        [self.userDic setObject:self.accountField.text forKey:@"username"];
         [self.userDic setObject:self.passWordField.text forKey:@"password"];
+//        [self.userDic setObject:self.passWordField.text forKey:@"passwordToo"];
         [self.userDic setObject:self.checkField.text forKey:@"verificationCode"];
         [self.userDic setObject:self.inviteField.text forKey:@"invatationCode"];
+//        [self.userDic setObject:@"" forKey:@"qyuserId"];
+//        [self.userDic setObject:@"on" forKey:@"agreement"];
+
         if (self.aggreBtn.selected) {
             if (self.zhuceBack) {
                 self.zhuceBack(self.userDic);

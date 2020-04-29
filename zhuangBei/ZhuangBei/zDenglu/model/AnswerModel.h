@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(copy,nonatomic)NSString * isAnswer;//
 @property(copy,nonatomic)NSString * optionName;//选项名
-@property(assign,nonatomic)NSInteger optionId;
-@property(assign,nonatomic)NSInteger questionId;
-@property(assign,nonatomic)NSInteger optionNum;
+@property(copy,nonatomic)NSString * optionId;
+@property(copy,nonatomic)NSString * questionId;
+@property(assign,nonatomic)NSInteger  optionNum;
 @property(copy,nonatomic)NSString * createDate;//创建日期
 
 @property(assign,nonatomic)NSInteger QuestionIndex;

@@ -20,6 +20,9 @@
 		00372B0D2456A54B00E51931 /* zUserInfoCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 00372B092456A54B00E51931 /* zUserInfoCard.m */; };
 		003A932D2450866D0001F615 /* LoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 003A932C2450866D0001F615 /* LoginTextField.m */; };
 		003A9330245089540001F615 /* UITextField+maxLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 003A932F245089540001F615 /* UITextField+maxLength.m */; };
+		0087184B2459585C003F8CD3 /* QuestionFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0087184A2459585C003F8CD3 /* QuestionFootView.m */; };
+		00871851245960B2003F8CD3 /* NSDictionary+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 0087184F245960B2003F8CD3 /* NSDictionary+JSON.m */; };
+		00871852245960B2003F8CD3 /* NSArray+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 00871850245960B2003F8CD3 /* NSArray+JSON.m */; };
 		00926BB7245706E30052B827 /* UIButton+HQCustomIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 00926BB6245706E30052B827 /* UIButton+HQCustomIcon.m */; };
 		009FB5E5244E89C700133974 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB5E4244E89C700133974 /* ViewController.m */; };
 		009FB5EA244E89CD00133974 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 009FB5E9244E89CD00133974 /* Assets.xcassets */; };
@@ -122,6 +125,12 @@
 		003A932C2450866D0001F615 /* LoginTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginTextField.m; sourceTree = "<group>"; };
 		003A932E245089540001F615 /* UITextField+maxLength.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+maxLength.h"; sourceTree = "<group>"; };
 		003A932F245089540001F615 /* UITextField+maxLength.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+maxLength.m"; sourceTree = "<group>"; };
+		008718492459585C003F8CD3 /* QuestionFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuestionFootView.h; sourceTree = "<group>"; };
+		0087184A2459585C003F8CD3 /* QuestionFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuestionFootView.m; sourceTree = "<group>"; };
+		0087184D245960B2003F8CD3 /* NSDictionary+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JSON.h"; sourceTree = "<group>"; };
+		0087184E245960B2003F8CD3 /* NSArray+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+JSON.h"; sourceTree = "<group>"; };
+		0087184F245960B2003F8CD3 /* NSDictionary+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JSON.m"; sourceTree = "<group>"; };
+		00871850245960B2003F8CD3 /* NSArray+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+JSON.m"; sourceTree = "<group>"; };
 		00926BB5245706E30052B827 /* UIButton+HQCustomIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HQCustomIcon.h"; sourceTree = "<group>"; };
 		00926BB6245706E30052B827 /* UIButton+HQCustomIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HQCustomIcon.m"; sourceTree = "<group>"; };
 		009FB5DA244E89C700133974 /* ZhuangBei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhuangBei.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,6 +279,8 @@
 				00CA477E2455C839006A2885 /* QuestionTableViewCell.m */,
 				00CA47742455BAEB006A2885 /* QuestionHeaderView.h */,
 				00CA47772455BAEB006A2885 /* QuestionHeaderView.m */,
+				008718492459585C003F8CD3 /* QuestionFootView.h */,
+				0087184A2459585C003F8CD3 /* QuestionFootView.m */,
 				001ECA792454449000727379 /* zhuCeCard.h */,
 				001ECA7A2454449000727379 /* zhuCeCard.m */,
 				001ECA682453B6F300727379 /* zLoginCard.h */,
@@ -305,6 +316,7 @@
 		003A932A245086110001F615 /* category */ = {
 			isa = PBXGroup;
 			children = (
+				0087184C245960B2003F8CD3 /* json */,
 				00926BB5245706E30052B827 /* UIButton+HQCustomIcon.h */,
 				00926BB6245706E30052B827 /* UIButton+HQCustomIcon.m */,
 				8921697C24567278007C6615 /* UIImage+Extension.h */,
@@ -323,6 +335,17 @@
 				001ECA772453DA3200727379 /* phoneNumCheck.m */,
 			);
 			path = category;
+			sourceTree = "<group>";
+		};
+		0087184C245960B2003F8CD3 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				0087184E245960B2003F8CD3 /* NSArray+JSON.h */,
+				00871850245960B2003F8CD3 /* NSArray+JSON.m */,
+				0087184D245960B2003F8CD3 /* NSDictionary+JSON.h */,
+				0087184F245960B2003F8CD3 /* NSDictionary+JSON.m */,
+			);
+			path = json;
 			sourceTree = "<group>";
 		};
 		009FB5D1244E89C700133974 = {
@@ -926,6 +949,7 @@
 				00372AEE2456842F00E51931 /* PPNetworkCache.m in Sources */,
 				001ECA752453CCB700727379 /* zHud.m in Sources */,
 				00CA47672455B91E006A2885 /* zQuestionController.m in Sources */,
+				00871851245960B2003F8CD3 /* NSDictionary+JSON.m in Sources */,
 				009FB68224500D7800133974 /* NSString+Size.m in Sources */,
 				8921697524566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m in Sources */,
 				009FB5E5244E89C700133974 /* ViewController.m in Sources */,
@@ -936,9 +960,11 @@
 				009FB635244FE8DF00133974 /* MainTabBarController.m in Sources */,
 				8921697E24567278007C6615 /* UIImage+Extension.m in Sources */,
 				001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */,
+				00871852245960B2003F8CD3 /* NSArray+JSON.m in Sources */,
 				00CA47802455C839006A2885 /* QuestionTableViewCell.m in Sources */,
 				003A932D2450866D0001F615 /* LoginTextField.m in Sources */,
 				009FB6882450425900133974 /* zNoContentView.m in Sources */,
+				0087184B2459585C003F8CD3 /* QuestionFootView.m in Sources */,
 				001ECA7B2454449000727379 /* zhuCeCard.m in Sources */,
 				00372AED2456842F00E51931 /* PPNetworkHelper.m in Sources */,
 				001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */,

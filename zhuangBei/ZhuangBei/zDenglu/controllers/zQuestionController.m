@@ -12,72 +12,25 @@
 #import "MJExtension.h"
 #import "QuestionModel.h"
 #import "AnswerModel.h"
+#import "QuestionFootView.h"
 
 static NSString * quekey = @"questionId";
 static NSString * ansList = @"optionList";
 static NSString * anskey = @"optionId";
+static NSString * recordId = @"recordId";
 
 @interface zQuestionController ()<UITableViewDelegate,UITableViewDataSource>
-@property(strong,nonatomic)NSArray * queastionArray;
-@property(strong,nonatomic)NSMutableArray * QuestionModelArray;
-
 @property(strong,nonatomic)UITableView * questionTableView;
+@property(strong,nonatomic)QuestionFootView * footView;
+
+@property(strong,nonatomic)NSMutableArray * QuestionModelArray;
 @property(strong,nonatomic)NSMutableArray * AnswerArray;//存放答案的数组
+@property(strong,nonatomic)NSMutableArray * AnsQuestionIDArray;//用于答案数组判断是否已有本问题答案
 @property(strong,nonatomic)NSMutableDictionary * ansDic;//答案字典
+@property(strong,nonatomic)NSString * recordId;//考试记录id
 @end
 
 @implementation zQuestionController
-
--(NSArray*)queastionArray
-{
-    if (!_queastionArray) {
-        NSArray * questionArray = @[
-        @{
-            @"type":@"1",
-            @"name":@"我是一个单选题你怎么看",
-            @"answers":
-        @[@{
-            @"chose":@"A",
-            @"answer":@"完全赞同，"
-        },
-          @{ @"chose":@"B",
-             @"answer":@"从理性的角度来看问题 你是一道单选题我的答案很长很长需要换行，换行换行换行换行话呐喊的那段难打"
-          },
-          @{ @"chose":@"C",
-             @"answer":@"不容辩驳"
-          },
-          @{ @"chose":@"D",
-             @"answer":@"你说是，那就是吧"
-          }]},
-        @{
-              @"type":@"2",
-              @"name":@"我是一道单选题，无论你觉得哪个答案是正确的都可以选择，我们会根据你所选择的正确答案的选项契合度打分，选错一项得分清零，请谨慎选择，祝你好运",
-              @"answers":
-          @[@{
-              @"chose":@"A",
-              @"answer":@"完全赞同"
-          },
-            @{ @"chose":@"B",
-               @"answer":@"无论你觉得哪个答案是正确的都可以选择，我们会根据你所选择的正确答案的选项契合度打分，选错一项得分清零，请谨慎选择，祝你好运"
-            },
-            @{ @"chose":@"C",
-               @"answer":@"不容辩驳"
-            },
-            @{ @"chose":@"D",
-               @"answer":@"你说是，那就是吧"
-            },
-            @{ @"chose":@"E",
-               @"answer":@"有一说一，确实"
-            },
-            @{ @"chose":@"F",
-               @"answer":@"我就是来凑个热闹，你是什么我才不关心呢"
-            }]}
-          ];
-        _queastionArray = questionArray;
-    }
-    return _queastionArray;
-}
-
 
 -(NSMutableArray*)QuestionModelArray
 {
@@ -85,6 +38,13 @@ static NSString * anskey = @"optionId";
         _QuestionModelArray = [NSMutableArray array];
     }
     return _QuestionModelArray;
+}
+-(NSMutableArray*)AnsQuestionIDArray
+{
+    if (!_AnsQuestionIDArray) {
+        _AnsQuestionIDArray = [NSMutableArray array];
+    }
+    return _AnsQuestionIDArray;
 }
 
 -(NSMutableArray*)AnswerArray
@@ -120,14 +80,36 @@ static NSString * anskey = @"optionId";
     }
     return _questionTableView;
 }
+
+-(QuestionFootView*)footView
+{
+    if (!_footView) {
+        __weak typeof(self)weakSelf = self;
+        _footView = [[QuestionFootView alloc]init];
+        _footView.addAnswerBack = ^{
+            if (weakSelf.AnswerArray.count>0) {
+                NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kAnswer];
+                
+                NSDictionary * dic = @{@"questionList":weakSelf.AnswerArray};
+                NSString * json = [dic jsonString];
+//                [weakSelf getData:NO url:url withParam:];
+                [weakSelf postDataWithUrl:url WithParam:json];
+            }
+        };
+    }
+    return _footView;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view addSubview:self.questionTableView];
+    [self.view addSubview:self.footView];
+    [self updateViewConstraintsForView];
+    [self getQuestions];
+}
+
+-(void)getQuestions{
     NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kQuestion];
     [self getData:NO url:url withParam:@{}];
-    
-    [self.view addSubview:self.questionTableView];
-    [self updateViewConstraintsForView];
-    
 }
 
 -(void)updateViewConstraintsForView
@@ -135,7 +117,13 @@ static NSString * anskey = @"optionId";
     [self.questionTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(0);
         make.top.mas_equalTo(self.mas_topLayoutGuideTop);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop).offset(-kWidthFlot(50));
+    }];
+    
+    [self.footView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.mas_equalTo(0);
         make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop);
+        make.height.mas_equalTo(kWidthFlot(50));
     }];
 }
 
@@ -161,50 +149,77 @@ static NSString * anskey = @"optionId";
         
         QuestionModel * Mquestion =  weakSelf.QuestionModelArray[ansModel.QuestionIndex];
         AnswerModel * Model = Mquestion.optionList[ansModel.AnswerIndex];
-        [weakSelf.ansDic setObject:@(Mquestion.questionId) forKey:quekey];
+        [weakSelf.ansDic setObject:Mquestion.questionId forKey:quekey];
+        [weakSelf.ansDic setObject:weakSelf.recordId forKey:recordId];
         NSMutableArray * ansArr = [NSMutableArray array];
         NSMutableDictionary * ansDic = [NSMutableDictionary dictionary];
-        [ansDic setObject:@(Model.optionId) forKey:anskey];
+        [ansDic setObject:Model.optionId forKey:anskey];
         [ansArr addObject:ansDic];
         [weakSelf.ansDic setObject:ansArr forKey:ansList];
     
         //判断答案数组中是否有此选项，如果有，不做处理，没有则添加
+        //根据 questionId 进行判断
+        //如果答案数组中有questionId 更改当前id下的答案
+        //如果答案数组中无questionId 添加当前答案到数组中
+        //
         
-        for (NSDictionary * dic in self.AnswerArray) {
-            NSString * questionId = dic[quekey];
-            if ([questionId integerValue] == Mquestion.questionId) {
-                
-                NSArray * ansA = dic[ansList];
-                for (NSDictionary * ans in ansA) {
-                    NSString * optionId = ans[anskey];
-                    if ([optionId integerValue] == Model.optionId) {
-                        //如果已经选中了
-                        Model.ISCHOSE = YES;
-                    }else
-                    {
-                        //未选中 先清零 再设置选中状态
-                        [Mquestion.optionList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                            AnswerModel * ansmodel = Mquestion.optionList[idx];
-                            ansmodel.ISCHOSE = NO;
-                        }];
-                        Model.ISCHOSE = YES;
+        NSMutableArray * newAnswerArray = [NSMutableArray array];
+        [newAnswerArray addObjectsFromArray:self.AnswerArray];
+        //两个数组，防止遍历报错
+        if (weakSelf.AnswerArray.count>0) {
+            for (NSDictionary * dic in weakSelf.AnswerArray) {
+                NSString * questionId = dic[quekey];
+                //如果有此问题的答案
+//                NSLog(@"%@--%@--%@",questionId,Mquestion.questionId,weakSelf.AnsQuestionIDArray);
+                if ([weakSelf.AnsQuestionIDArray containsObject:Mquestion.questionId]) {
+                    if ([questionId isEqualToString:Mquestion.questionId]) {
+                        //如果有此问题答案，更改 先移除 后添加
+                        [newAnswerArray removeObject:dic];
+                        NSArray * ansA = dic[ansList];
+                        for (NSDictionary * ans in ansA) {
+                            NSString * optionId = ans[anskey];
+                            if ([optionId isEqualToString:Model.optionId]) {
+                                //如果已经选中了
+                                Model.ISCHOSE = YES;
+                                [newAnswerArray addObject:weakSelf.ansDic];
+                            }else
+                            {
+                                //未选中 先清零 再设置选中状态
+                                [Mquestion.optionList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                    AnswerModel * ansmodel = Mquestion.optionList[idx];
+                                    ansmodel.ISCHOSE = NO;
+                                }];
+                                Model.ISCHOSE = YES;
+                                [newAnswerArray addObject:weakSelf.ansDic];
+                                //清空当前缓存
+                                weakSelf.ansDic = nil;
+                            }
+                        }
                     }
                 }
+                else
+                {
+                 //如果没有当前此问题答案，添加
+                    [weakSelf.AnsQuestionIDArray addObject:Mquestion.questionId];
+                    Model.ISCHOSE = YES;
+                    [newAnswerArray addObject:weakSelf.ansDic];
+                    //清空当前缓存
+                    weakSelf.ansDic = nil;
+                }
             }
+            weakSelf.AnswerArray = newAnswerArray;
+        }else
+        {
+            //添加到答案数组
+            [weakSelf.AnsQuestionIDArray addObject:Mquestion.questionId];
+            Model.ISCHOSE = YES;
+            [weakSelf.AnswerArray addObject:weakSelf.ansDic];
+            //清空当前缓存
+            weakSelf.ansDic = nil;
         }
+        NSLog(@"当前的答案数组是%@",weakSelf.AnswerArray);
+        [weakSelf.questionTableView reloadSection:Model.QuestionIndex withRowAnimation:UITableViewRowAnimationNone];
         
-//        [weakSelf.ansDic setObject:@(Model.QuestionIndex) forKey:que];
-        
-//        if ([weakSelf.AnswerArray containsObject:weakSelf.ansDic]) {
-//            Model.ISCHOSE = NO;
-//            [weakSelf.AnswerArray removeObject:weakSelf.ansDic];
-//        }else
-//        {
-//            Model.ISCHOSE = YES;
-//            [weakSelf.AnswerArray addObject:weakSelf.ansDic];
-//        }
-        NSIndexPath * selceIndex = [NSIndexPath indexPathForRow:Model.AnswerIndex inSection:Model.QuestionIndex];
-        [weakSelf.questionTableView reloadRowsAtIndexPaths:@[selceIndex] withRowAnimation:UITableViewRowAnimationNone];
     };
     return answerCell;
 }
@@ -228,6 +243,10 @@ static NSString * anskey = @"optionId";
         [[zHud shareInstance]showMessage:@"获取试卷失败"];
         return;
     }
+    if ([url containsString:kAnswer]) {
+        [[zHud shareInstance]showMessage:@"答题失败请重新作答"];
+        return;
+    }
 }
 
 -(void)RequsetSuccessWithData:(id)data AndUrl:(NSString*)url
@@ -236,15 +255,18 @@ static NSString * anskey = @"optionId";
         NSDictionary * dic = data;
         NSLog(@"获取试卷成功%@",dic);
         [[zHud shareInstance]showMessage:@"获取试卷成功"];
-        
+        [self.QuestionModelArray removeAllObjects];
+        [self.AnswerArray removeAllObjects];
+        [self.AnsQuestionIDArray removeAllObjects];
+        NSDictionary * cache = dic[@"data"][@"questionnaireCache"];
+        NSString * recordid = cache[@"recordId"];
+        self.recordId = recordid;
         NSArray * questionArray = dic[@"data"][@"questionList"][@"danxt"];
-        
         [questionArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSDictionary * dic = questionArray[idx];
             QuestionModel * model = [QuestionModel mj_objectWithKeyValues:dic];
             model.QuestionIndex = idx;
             NSArray * answer = model.optionList;
-            
             NSMutableArray * answersModelArray = [NSMutableArray array];
             [answer enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger jdx, BOOL * _Nonnull stop) {
                 NSDictionary * ansDic = [answer objectAtIndex:jdx];
@@ -257,6 +279,13 @@ static NSString * anskey = @"optionId";
             [self.QuestionModelArray addObject:model];
         }];
         [self.questionTableView reloadData];
+    }
+    
+    if ([url containsString:kAnswer])
+    {
+        NSDictionary * dic = data;
+        NSLog(@"答题通过%@",dic);
+        [[zHud shareInstance]showMessage:@"答题通过"];
     }
 }
 

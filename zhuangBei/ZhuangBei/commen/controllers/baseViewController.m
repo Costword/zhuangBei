@@ -91,11 +91,14 @@
 
 #pragma  mark - 获取数据请求示例 GET请求自动缓存与无缓存
 #pragma  mark - 这里的请求只是一个演示, 在真实的项目中建议不要这样做, 具体做法可以参照PPHTTPRequestLayer文件夹的例子
-- (void)getData:(BOOL)isOn url:(NSString *)url withParam:(NSDictionary*)para
+- (void)getData:(BOOL)isOn url:(NSString *)url withParam:(id)para
 {
     
 //    NSDictionary *para = @{ @"a":@"list", @"c":@"data",@"client":@"iphone",@"page":@"0",@"per":@"10", @"type":@"29"};
     // 自动缓存
+    [PPNetworkHelper setValue:@"application/json,multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+    NSLog(@"当前请求的URL:%@\n参数:%@:",url,para);
+    
     if(isOn)
     {
         //有缓存的情况
@@ -127,8 +130,12 @@
     }
 }
 
--(void)postDataWithUrl:(NSString*)url WithParam:(NSDictionary*)param
+-(void)postDataWithUrl:(NSString*)url WithParam:(id)param
 {
+    NSLog(@"当前请求的URL:%@\n参数:%@",url,param);
+//      [headersetValue:@"multipart/form-data" forKey:@"Content-Type"];
+    [PPNetworkHelper setValue:@"application/json; charset=utf-8;multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+    
     [PPNetworkHelper POST:url parameters:param success:^(id responseObject) {
         NSString *  text  = [self jsonToString:responseObject];
         NSLog(@"请求到的数据是：%@",text);

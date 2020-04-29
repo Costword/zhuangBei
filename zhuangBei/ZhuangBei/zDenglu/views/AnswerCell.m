@@ -80,7 +80,7 @@
     if (_answerModel.ISCHOSE) {
         self.choseBtn.selected = YES;
     }
-    NSString * answerString = [NSString stringWithFormat:@"%ld.%@",answerModel.optionNum,answerModel.optionName];
+    NSString * answerString = [NSString stringWithFormat:@"%ld.%@ :%@",answerModel.optionNum,answerModel.optionName,answerModel.optionId];
     [self setAnswerLabelTextWith:answerString];
     [self updateConstraintsForView];
 }

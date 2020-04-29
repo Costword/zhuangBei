@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(copy,nonatomic)NSString * questionType;//问题分类 danxt
 @property(copy,nonatomic)NSString * createDate;
 @property(copy,nonatomic)NSString * activeState;
-@property(assign,nonatomic)NSInteger questionId;
+@property(copy,nonatomic)NSString * questionId;
 @property(strong,nonatomic)NSArray * optionList;//选项
 
 @property(assign,nonatomic)NSInteger QuestionIndex;

@@ -9,6 +9,7 @@
 #import "zZhuCeController.h"
 #import "zhuCeCard.h"
 #import "zQuestionController.h"
+#import <AFNetworking.h>
 
 @interface zZhuCeController ()
 
@@ -26,13 +27,48 @@
         _zhuceView = [[zhuCeCard alloc]init];
         _zhuceView.getMessageCodeTapBack = ^(NSString * _Nonnull phoneNum) {
             NSString *url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kSendVerificationCode];
-            [weakSelf getData:NO url:url withParam:@{@"phone":phoneNum}];
+//            [weakSelf postDataWithUrl:url WithParam:@{@"phone":phoneNum}];
+            
+                //初始化一个AFHTTPSessionManager
+                AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+                //设置请求体数据为json类型
+                manager.requestSerializer = [AFJSONRequestSerializer serializer];
+                //设置响应体数据为json类型
+                manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                //请求体，参数（NSDictionary 类型）
+                NSDictionary *parameters = @{@"phone":phoneNum};
+                [manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+                } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                    NSLog(@"%@",responseObject);
+                    
+                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                    
+                    
+                }];
         };
         _zhuceView.zhuceBack = ^(NSMutableDictionary * _Nonnull userDic) {
             
             NSLog(@"注册信息:%@",userDic);
             NSString *url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kRegister];
-            [weakSelf getData:NO url:url withParam:userDic];
+            NSString * josn = [userDic jsonString];
+//            [weakSelf postDataWithUrl:url WithParam:josn];
+            //初始化一个AFHTTPSessionManager
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            //设置请求体数据为json类型
+            manager.requestSerializer = [AFJSONRequestSerializer serializer];
+            //设置响应体数据为json类型
+            manager.responseSerializer = [AFJSONResponseSerializer serializer];
+            //请求体，参数（NSDictionary 类型）
+            NSDictionary *parameters = userDic;
+            [manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSLog(@"%@",responseObject);
+                
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                
+                
+            }];
+
             
         };
         _zhuceView.backLogin = ^{
@@ -86,8 +122,8 @@
         NSLog(@"注册成功%@",dic);
         [[zHud shareInstance]showMessage:@"注册成功"];
         
-        zQuestionController * quesionVC = [[zQuestionController alloc]init];
-        [self.navigationController pushViewController:quesionVC animated:YES];
+//        zQuestionController * quesionVC = [[zQuestionController alloc]init];
+//        [self.navigationController pushViewController:quesionVC animated:YES];
         return;
     }
 }

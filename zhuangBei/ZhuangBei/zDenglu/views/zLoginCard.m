@@ -36,7 +36,7 @@
         _baseView = [[UIView alloc]init];
         _baseView.backgroundColor = [UIColor whiteColor];
         _baseView.layer.cornerRadius = kWidthFlot(5);
-        _baseView.layer.borderColor = [UIColor blackColor].CGColor;
+        _baseView.layer.borderColor = [UIColor whiteColor].CGColor;
         _baseView.layer.borderWidth = 1;
         _baseView.clipsToBounds = YES;
     }
@@ -229,6 +229,16 @@
     [self.remmberPasswordBtn setNeedsLayout];
     [self.remmberPasswordBtn layoutIfNeeded];
     [self.remmberPasswordBtn setIconInLeftWithSpacing:5];
+    
+    [_baseView setNeedsLayout];
+    [_baseView layoutIfNeeded];
+    UIBezierPath *shadowPath = [UIBezierPath
+    bezierPathWithRect:_baseView.bounds];
+    _baseView.layer.masksToBounds = NO;
+    _baseView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _baseView.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
+    _baseView.layer.shadowOpacity = 0.05f;
+    _baseView.layer.shadowPath = shadowPath.CGPath;
 }
 
 -(void)buttonClick:(UIButton*)button

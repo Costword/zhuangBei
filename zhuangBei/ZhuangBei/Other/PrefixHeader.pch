@@ -18,6 +18,8 @@
 #import "TYAttributedLabel.h"
 #import "UIImage+Extension.h"
 #import <YYKit.h>
+#import "NSArray+JSON.h"
+#import "NSDictionary+JSON.h"
 
 
 #define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width

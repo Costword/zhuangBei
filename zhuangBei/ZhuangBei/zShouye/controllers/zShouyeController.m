@@ -11,6 +11,7 @@
 #import "zInterfacedConst.h"
 #import "zDengluController.h"
 #import "zQuestionController.h"
+#import "zZhuCeController.h"
 
 @interface zShouyeController ()
 
@@ -52,7 +53,8 @@
 
 -(void)gotoLogInVC
 {
-    zQuestionController * dlVC = [[zQuestionController alloc]init];
+//    zZhuCeController
+    zZhuCeController * dlVC = [[zZhuCeController alloc]init];
     dlVC.title = @"登陆";
     [self.navigationController pushViewController:dlVC animated:YES];
 }
