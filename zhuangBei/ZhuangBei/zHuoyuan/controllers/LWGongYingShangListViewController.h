@@ -1,8 +1,8 @@
 //
-//  zHyController.h
+//  LWGongYingShangListViewController.h
 //  ZhuangBei
 //
-//  Created by aa on 2020/4/22.
+//  Created by LWQ on 2020/4/29.
 //  Copyright © 2020 aa. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface zHyController : LWHuoYuanBaseViewController
+@interface LWGongYingShangListViewController : LWHuoYuanBaseViewController
 
 @end
 

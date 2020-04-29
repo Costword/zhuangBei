@@ -1,8 +1,8 @@
 //
-//  LWHuoYuanItemsListViewController.h
+//  LWHuoYuanThreeLevelViewController.h
 //  ZhuangBei
 //
-//  Created by LWQ on 2020/4/26.
+//  Created by LWQ on 2020/4/29.
 //  Copyright © 2020 aa. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LWHuoYuanItemsListViewController : LWHuoYuanBaseViewController
+@interface LWHuoYuanThreeLevelViewController : LWHuoYuanBaseViewController
 @property (nonatomic, strong) NSString * titleStr;
 
 @end

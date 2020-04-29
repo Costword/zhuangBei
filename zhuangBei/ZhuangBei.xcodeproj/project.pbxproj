@@ -72,7 +72,16 @@
 		89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89216984245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m */; };
 		8921698824569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921698724569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m */; };
 		8921698B2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921698A2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m */; };
+		893A18EE2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18ED2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m */; };
+		893A18F1245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18F0245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m */; };
+		893A18F424592D1E00D8C36C /* LWGongYingShangListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18F324592D1E00D8C36C /* LWGongYingShangListViewController.m */; };
+		893A18F724592D3E00D8C36C /* LWGongYingShangListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18F624592D3E00D8C36C /* LWGongYingShangListTableViewCell.m */; };
 		89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 89487BEA24544E4B00D4FA67 /* Foundation+Log.m */; };
+		8957D4A124594C230096F1D7 /* LWHuoYuanBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A024594C230096F1D7 /* LWHuoYuanBaseViewController.m */; };
+		8957D4A4245955250096F1D7 /* LWSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A3245955250096F1D7 /* LWSearchViewController.m */; };
+		8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A6245955F50096F1D7 /* LWSeachView.m */; };
+		8957D4AA245975370096F1D7 /* LWHuoYuanDeatilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A9245975370096F1D7 /* LWHuoYuanDeatilViewController.m */; };
+		8957D4AD245975E10096F1D7 /* LWHuoYuanDeatilView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4AC245975E00096F1D7 /* LWHuoYuanDeatilView.m */; };
 		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
 		89F5B7DC2455955E0040F7B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */; };
 		89F5B7DF245596DD0040F7B1 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7DE245596DD0040F7B1 /* UIView+Extension.m */; };
@@ -232,7 +241,25 @@
 		8921698724569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJiaoLiuGroupCollectionReusableView.m; sourceTree = "<group>"; };
 		892169892456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWJiaoLiuContatcsListTableViewCell.h; sourceTree = "<group>"; };
 		8921698A2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJiaoLiuContatcsListTableViewCell.m; sourceTree = "<group>"; };
+		893A18EC2459182800D8C36C /* LWHuoYuanThreeLevelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanThreeLevelViewController.h; sourceTree = "<group>"; };
+		893A18ED2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanThreeLevelViewController.m; sourceTree = "<group>"; };
+		893A18EF245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanThreeLevelListTableViewCell.h; sourceTree = "<group>"; };
+		893A18F0245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanThreeLevelListTableViewCell.m; sourceTree = "<group>"; };
+		893A18F224592D1E00D8C36C /* LWGongYingShangListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWGongYingShangListViewController.h; sourceTree = "<group>"; };
+		893A18F324592D1E00D8C36C /* LWGongYingShangListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWGongYingShangListViewController.m; sourceTree = "<group>"; };
+		893A18F524592D3E00D8C36C /* LWGongYingShangListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWGongYingShangListTableViewCell.h; sourceTree = "<group>"; };
+		893A18F624592D3E00D8C36C /* LWGongYingShangListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWGongYingShangListTableViewCell.m; sourceTree = "<group>"; };
 		89487BEA24544E4B00D4FA67 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		8957D49F24594C230096F1D7 /* LWHuoYuanBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanBaseViewController.h; sourceTree = "<group>"; };
+		8957D4A024594C230096F1D7 /* LWHuoYuanBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanBaseViewController.m; sourceTree = "<group>"; };
+		8957D4A2245955250096F1D7 /* LWSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSearchViewController.h; sourceTree = "<group>"; };
+		8957D4A3245955250096F1D7 /* LWSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWSearchViewController.m; sourceTree = "<group>"; };
+		8957D4A5245955F50096F1D7 /* LWSeachView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSeachView.h; sourceTree = "<group>"; };
+		8957D4A6245955F50096F1D7 /* LWSeachView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWSeachView.m; sourceTree = "<group>"; };
+		8957D4A8245975370096F1D7 /* LWHuoYuanDeatilViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanDeatilViewController.h; sourceTree = "<group>"; };
+		8957D4A9245975370096F1D7 /* LWHuoYuanDeatilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDeatilViewController.m; sourceTree = "<group>"; };
+		8957D4AB245975E00096F1D7 /* LWHuoYuanDeatilView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanDeatilView.h; sourceTree = "<group>"; };
+		8957D4AC245975E00096F1D7 /* LWHuoYuanDeatilView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDeatilView.m; sourceTree = "<group>"; };
 		89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89F5B7DA2455955D0040F7B1 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
 		89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
@@ -525,6 +552,16 @@
 				009FB66B2450091D00133974 /* zHyController.m */,
 				89F5B7E0245599530040F7B1 /* LWHuoYuanItemsListViewController.h */,
 				89F5B7E1245599530040F7B1 /* LWHuoYuanItemsListViewController.m */,
+				893A18EC2459182800D8C36C /* LWHuoYuanThreeLevelViewController.h */,
+				893A18ED2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m */,
+				893A18F224592D1E00D8C36C /* LWGongYingShangListViewController.h */,
+				893A18F324592D1E00D8C36C /* LWGongYingShangListViewController.m */,
+				8957D49F24594C230096F1D7 /* LWHuoYuanBaseViewController.h */,
+				8957D4A024594C230096F1D7 /* LWHuoYuanBaseViewController.m */,
+				8957D4A2245955250096F1D7 /* LWSearchViewController.h */,
+				8957D4A3245955250096F1D7 /* LWSearchViewController.m */,
+				8957D4A8245975370096F1D7 /* LWHuoYuanDeatilViewController.h */,
+				8957D4A9245975370096F1D7 /* LWHuoYuanDeatilViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -675,6 +712,14 @@
 				8921697224566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m */,
 				8921697324566BAA007C6615 /* LWHuoYuanListCollectionViewCell.h */,
 				8921697424566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.h */,
+				893A18EF245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.h */,
+				893A18F0245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m */,
+				893A18F524592D3E00D8C36C /* LWGongYingShangListTableViewCell.h */,
+				893A18F624592D3E00D8C36C /* LWGongYingShangListTableViewCell.m */,
+				8957D4A5245955F50096F1D7 /* LWSeachView.h */,
+				8957D4A6245955F50096F1D7 /* LWSeachView.m */,
+				8957D4AB245975E00096F1D7 /* LWHuoYuanDeatilView.h */,
+				8957D4AC245975E00096F1D7 /* LWHuoYuanDeatilView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -939,6 +984,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				893A18EE2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m in Sources */,
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				89216982245686E2007C6615 /* LWJiaoLiuGroupCollectionView.m in Sources */,
 				8921697B245670AE007C6615 /* LWSwitchBarView.m in Sources */,
@@ -956,6 +1002,7 @@
 				009FB63C244FE8DF00133974 /* UITabBarItem+Extension.m in Sources */,
 				009FB68B2450428000133974 /* zNothingView.m in Sources */,
 				8921697624566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m in Sources */,
+				893A18F424592D1E00D8C36C /* LWGongYingShangListViewController.m in Sources */,
 				89F5B7E2245599530040F7B1 /* LWHuoYuanItemsListViewController.m in Sources */,
 				009FB635244FE8DF00133974 /* MainTabBarController.m in Sources */,
 				8921697E24567278007C6615 /* UIImage+Extension.m in Sources */,
@@ -963,10 +1010,12 @@
 				00871852245960B2003F8CD3 /* NSArray+JSON.m in Sources */,
 				00CA47802455C839006A2885 /* QuestionTableViewCell.m in Sources */,
 				003A932D2450866D0001F615 /* LoginTextField.m in Sources */,
+				893A18F724592D3E00D8C36C /* LWGongYingShangListTableViewCell.m in Sources */,
 				009FB6882450425900133974 /* zNoContentView.m in Sources */,
 				0087184B2459585C003F8CD3 /* QuestionFootView.m in Sources */,
 				001ECA7B2454449000727379 /* zhuCeCard.m in Sources */,
 				00372AED2456842F00E51931 /* PPNetworkHelper.m in Sources */,
+				8957D4AA245975370096F1D7 /* LWHuoYuanDeatilViewController.m in Sources */,
 				001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */,
 				009FB636244FE8DF00133974 /* FUTabBar.m in Sources */,
 				009FB68024500D7800133974 /* UIView+Frame.m in Sources */,
@@ -980,14 +1029,19 @@
 				009FB657244FECC500133974 /* baseViewController.m in Sources */,
 				009FB634244FE8DF00133974 /* MainNavController.m in Sources */,
 				009FB669245007ED00133974 /* zDengluController.m in Sources */,
+				8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */,
 				00CA47702455B9DD006A2885 /* QuestionModel.m in Sources */,
 				00372B0B2456A54B00E51931 /* zInstructionsCard.m in Sources */,
 				009FB67F24500D7800133974 /* NSDictionary+NSNull.m in Sources */,
 				009FB66C2450091D00133974 /* zHyController.m in Sources */,
+				8957D4A4245955250096F1D7 /* LWSearchViewController.m in Sources */,
 				009FB66F2450093A00133974 /* zJiaoliuController.m in Sources */,
 				00CA47792455BAEB006A2885 /* AnswerCell.m in Sources */,
+				893A18F1245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m in Sources */,
+				8957D4A124594C230096F1D7 /* LWHuoYuanBaseViewController.m in Sources */,
 				00372B0D2456A54B00E51931 /* zUserInfoCard.m in Sources */,
 				009FB63E244FE8DF00133974 /* NSString+size.m in Sources */,
+				8957D4AD245975E10096F1D7 /* LWHuoYuanDeatilView.m in Sources */,
 				009FB63D244FE8DF00133974 /* FUTabBarController.m in Sources */,
 				8921698B2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m in Sources */,
 				00CA47712455B9DD006A2885 /* AnswerModel.m in Sources */,

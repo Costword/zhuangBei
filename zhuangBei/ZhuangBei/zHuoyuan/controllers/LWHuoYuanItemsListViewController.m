@@ -8,6 +8,7 @@
 
 #import "LWHuoYuanItemsListViewController.h"
 #import "LWHuoYuanItemListCollectionViewCell.h"
+#import "LWHuoYuanThreeLevelViewController.h"
 
 @interface LWHuoYuanItemsListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView * collectView;
@@ -16,6 +17,14 @@
 @end
 
 @implementation LWHuoYuanItemsListViewController
+
+- (void)requestDatas
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_collectView.mj_header endRefreshing];
+        [_collectView.mj_footer endRefreshing];
+    });
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,9 +59,9 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    LWHuoYuanItemsListViewController *itemslist = [LWHuoYuanItemsListViewController new];
-//    itemslist.titleStr = self.listDatasMutableArray[indexPath.row];
-//    [self.navigationController pushViewController:itemslist animated:YES];
+    LWHuoYuanThreeLevelViewController *itemslist = [LWHuoYuanThreeLevelViewController new];
+    itemslist.titleStr = self.listDatasMutableArray[indexPath.row];
+    [self.navigationController pushViewController:itemslist animated:YES];
 }
 
 - (UICollectionView *)collectView
@@ -70,6 +79,9 @@
         _collectView.delegate = self;
         _collectView.dataSource = self;
         [_collectView registerClass:[LWHuoYuanItemListCollectionViewCell class] forCellWithReuseIdentifier:@"LWHuoYuanItemListCollectionViewCell"];
+        _collectView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
+        _collectView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
+
     }
     return _collectView;
 }

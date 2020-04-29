@@ -12,6 +12,7 @@ target 'ZhuangBei' do
   pod 'MJExtension'
   pod 'YYKit'
   pod 'AFNetworking', '~> 3.0'
+  pod 'SDCycleScrollView','>= 1.80'
   pod 'TYAttributedLabel', '~> 2.6.2'
 end   
 
