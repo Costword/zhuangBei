@@ -18,10 +18,14 @@
 
 @implementation zHyController
 
-- (void)clickSearchBtn:(UIButton *)sender
+- (void)requestDatas
 {
-    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_collectView.mj_header endRefreshing];
+        [_collectView.mj_footer endRefreshing];
+    });
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,13 +39,6 @@
     [self.collectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
     }];
-    UIButton *seachBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [seachBtn setImage:IMAGENAME(@"") forState:UIControlStateNormal];
-    [seachBtn addTarget:self action:@selector(clickSearchBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:seachBtn];
-    seachBtn.backgroundColor = UIColor.redColor;
-    seachBtn.frame = CGRectMake(0, 0, 30, 30);
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:seachBtn];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -83,6 +80,9 @@
         _collectView.delegate = self;
         _collectView.dataSource = self;
         [_collectView registerClass:[LWHuoYuanListCollectionViewCell class] forCellWithReuseIdentifier:@"LWHuoYuanListCollectionViewCell"];
+        _collectView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
+        _collectView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
+
     }
     return _collectView;
 }
