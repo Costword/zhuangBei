@@ -35,6 +35,12 @@
     }
     self.view.backgroundColor = UIColor.whiteColor;
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    if (@available(iOS 11.0, *)) {
+        UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        
+    }
 }
 
 -(zNoContentView*)noContentView
