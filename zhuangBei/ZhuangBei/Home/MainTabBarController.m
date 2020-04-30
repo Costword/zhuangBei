@@ -40,7 +40,7 @@
     
     //交流
     zJiaoliuController*jlVC = [[zJiaoliuController alloc]init];
-    UIViewController *jlNVC = [self setupChildViewController:jlVC navigationController:[MainNavController class] title:@"交流" imageName:@"baoxin_nomal.png" selectedImageName:@"baoxin_select.png" offset:NO];
+    UIViewController *jlNVC = [self setupChildViewController:jlVC navigationController:[MainNavController class] title:@"交流大厅" imageName:@"baoxin_nomal.png" selectedImageName:@"baoxin_select.png" offset:NO];
     
     //我的
     zWodeController*wdVC = [[zWodeController alloc]init];
