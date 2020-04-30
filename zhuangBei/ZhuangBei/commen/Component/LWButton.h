@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LWButton : UIButton
 
-+ (instancetype)lw_lable:(NSString *)title font:(CGFloat)font textColor:(UIColor *)textcolor backColor:(UIColor *)backcolor target:(id)target acction:(SEL)acction;
++ (instancetype)lw_button:(NSString *)title font:(CGFloat)font textColor:(UIColor *)textcolor backColor:(UIColor *)backcolor target:(id)target acction:(SEL)acction;
 
 @end
 

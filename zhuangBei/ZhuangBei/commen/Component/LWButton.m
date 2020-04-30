@@ -10,7 +10,7 @@
 
 @implementation LWButton
 
-+ (instancetype)lw_lable:(NSString *)title font:(CGFloat)font textColor:(UIColor *)textcolor backColor:(UIColor *)backcolor target:(id)target acction:(SEL)acction
++ (instancetype)lw_button:(NSString *)title font:(CGFloat)font textColor:(UIColor *)textcolor backColor:(UIColor *)backcolor target:(id)target acction:(SEL)acction
 {
     LWButton *btn = [[LWButton alloc] init];
     [btn setTitle:title forState:UIControlStateNormal];

@@ -14,6 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LWJiaoLiuContatcsListTableViewCell : UITableViewCell
 @property (nonatomic, strong) UIImageView * icon;
 @property (nonatomic, strong) UILabel * nameL;
+@property (nonatomic, strong) UILabel * descL;
+@property (nonatomic, strong) UILabel * timelL;
+@property (nonatomic, strong) UIButton * leftBtn;
+@property (nonatomic, strong) UIButton * rightBtn;
+- (void)setBottomLine:(NSInteger)tag;
+@property (nonatomic, strong) UIView * line;
 
 @end
 
@@ -32,5 +38,14 @@ typedef void(^clickSeactionBlock)(BOOL isShow);
 @property (nonatomic, strong) UILabel * leftL;
 @property (nonatomic, strong) UIButton * rightBtn;
 @property (nonatomic, copy) clickSeactionBlock block;
+
+@end
+
+// 群消息cell
+@interface LWSystemGroupMessageCell : UITableViewCell
+@property (nonatomic, strong) UILabel * nameL;
+@property (nonatomic, strong) UILabel * timeL;
+@property (nonatomic, strong) UILabel * descL;
+@property (nonatomic, strong) UIButton * seeBtn;
 @end
 NS_ASSUME_NONNULL_END

@@ -386,7 +386,7 @@
         UILabel *titleL = [LWLabel lw_lable:@"售后保障" font:18 textColor:BASECOLOR_TEXTCOLOR];
         UILabel *desL = [LWLabel lw_lable:@"一年保修，终生维修" font:18 textColor:BASECOLOR_TEXTCOLOR];
         titleL.textAlignment = desL.textAlignment = NSTextAlignmentCenter;
-        UIButton *btn = [LWButton lw_lable:@"完成" font:15 textColor:UIColor.whiteColor backColor:[UIColor colorWithRed:63/255.0 green:80/255.0 blue:181/255.0 alpha:1.0] target:self acction:@selector(clickCanshuDeatilViewBtn)];
+        UIButton *btn = [LWButton lw_button:@"完成" font:15 textColor:UIColor.whiteColor backColor:[UIColor colorWithRed:63/255.0 green:80/255.0 blue:181/255.0 alpha:1.0] target:self acction:@selector(clickCanshuDeatilViewBtn)];
         [btn setBoundWidth:0 cornerRadius:6];
         
         [_canshuDeatilView addSubviews:@[titleL,desL,btn]];

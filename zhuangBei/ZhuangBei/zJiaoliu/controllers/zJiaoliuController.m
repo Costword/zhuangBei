@@ -10,6 +10,7 @@
 #import "LWSwitchBarView.h"
 #import "LWJiaoLiuGroupCollectionReusableView.H"
 #import "LWJiaoLiuContatcsListTableViewCell.h"
+#import "LWSystemMessageListViewController.h"
 
 @interface zJiaoliuController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) LWSwitchBarView * switchBarView;
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray * listDatas_Contatcs;
 @property (nonatomic, strong) UITableView * messageTableView;
 @property (nonatomic, strong) UITableView * contatcsTableView;
+@property (nonatomic, strong) UITableView * groupTableView;
 @property (nonatomic, strong) UIScrollView * mainScrollView;
 
 @property (nonatomic, assign) BOOL  isShow;
@@ -32,8 +34,8 @@
     
 }
 
-//点击搜索按钮
-- (void)clickSearchBtn
+//点击新增
+- (void)clickaddBtnBtn
 {
     
 }
@@ -55,29 +57,24 @@
 - (void)confiUI
 {
     WEAKSELF(self)
-    self.switchBarView = [LWSwitchBarView switchBarView:@[@"消息",@"联系人",@"群组"] clickBlock:^(UIButton * _Nonnull btn) {
+    self.switchBarView = [LWSwitchBarView switchBarView:@[@"交流",@"联系人",@"群组",@"消息",] clickBlock:^(UIButton * _Nonnull btn) {
         [weakself clickSwitchBarEvent:btn.tag];
         [weakself.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH*btn.tag, 1) animated:YES];
     }];
     [self.view addSubview:self.switchBarView];
     [self.switchBarView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view.mas_top).mas_offset(10);
+        make.top.mas_equalTo(self.view.mas_top).mas_offset(20);
         make.height.mas_offset(36);
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.left.mas_equalTo(self.view.mas_left).mas_offset(60);
-        make.right.mas_equalTo(self.view.mas_right).mas_offset(-60);
+        make.left.mas_equalTo(self.view.mas_left).mas_offset(20);
+        make.right.mas_equalTo(self.view.mas_right).mas_offset(-20);
     }];
     
-    UIButton *searchBtn = [UIButton new];
-    [searchBtn setImage:IMAGENAME(@"icon_search") forState:UIControlStateNormal];
-    [searchBtn addTarget:self action:@selector(clickSearchBtn) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:searchBtn];
-    [searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.switchBarView.mas_right).mas_offset(10);
-        make.centerY.mas_equalTo(self.switchBarView.mas_centerY);
-        make.width.mas_offset(30);
-        make.height.mas_offset(30);
-    }];
+    UIButton *addBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [addBtn setImage:IMAGENAME(@"icon_search") forState:UIControlStateNormal];
+    [addBtn addTarget:self action:@selector(clickaddBtnBtn) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:addBtn];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
     
     [self.view addSubview:self.mainScrollView];
     [self.mainScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,15 +87,17 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == _contatcsTableView) {
+    if (tableView == _contatcsTableView || tableView == _groupTableView) {
         LWJiaoLiuContatcsListTableViewCell * cell =  [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuContatcsListTableViewCell" forIndexPath:indexPath];
-        NSDictionary *dic = _listDatas_Contatcs[indexPath.section];
-        NSArray *values = dic.allValues.lastObject;
-        cell.nameL.text = values[indexPath.row];
+        //        NSDictionary *dic = _listDatas_Contatcs[indexPath.section];
+        //        NSArray *values = dic.allValues.lastObject;
+        //        cell.nameL.text = values[indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
         LWJiaoLiuMessageListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuMessageListTableViewCell" forIndexPath:indexPath];
         cell.nameL.text = @"系统消息";
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 }
@@ -109,15 +108,20 @@
         NSDictionary *dic = _listDatas_Contatcs[section];
         NSArray *values = dic.allValues.lastObject ;
         return _isShow ? values.count : 0;
+        return 10;
     }
+    if(tableView == _groupTableView){
+        return 10;
+    }
+    
     return  1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (tableView == _contatcsTableView) {
-        return _listDatas_Contatcs.count;
-    }
+    //    if (tableView == _contatcsTableView) {
+    //        return _listDatas_Contatcs.count;
+    //    }
     return 1;
 }
 
@@ -133,7 +137,7 @@
             LWLog(@"--------------%ld--------------%ld",isShow,(long)section);
             WEAKSELF(self)
             [UIView animateWithDuration:0.25 animations:^{
-                seactionview.rightBtn.imageView.transform = seactionview.rightBtn.selected ? CGAffineTransformMakeRotation(M_PI):CGAffineTransformIdentity;
+                seactionview.rightBtn.imageView.transform = weakself.isShow ? CGAffineTransformMakeRotation(M_PI):CGAffineTransformIdentity;
             }];
             
         };
@@ -142,6 +146,7 @@
     }
     return [UIView new];
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -153,6 +158,13 @@
     return 0.01;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == _messageTableView) {
+        LWSystemMessageListViewController *system = [LWSystemMessageListViewController new];
+        [self.navigationController pushViewController:system animated:YES];
+    }
+}
 #pragma mark ------UICollectionViewDelegate----------
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -217,6 +229,7 @@
     return _collectView;
 }
 
+//消息
 - (UITableView *)messageTableView
 {
     if (!_messageTableView) {
@@ -230,26 +243,42 @@
     return _messageTableView;
 }
 
+//联系人
 - (UITableView *)contatcsTableView
 {
     if (!_contatcsTableView) {
         _contatcsTableView = [[UITableView alloc] initWithFrame:CGRectZero style:(UITableViewStyleGrouped)];
         _contatcsTableView.delegate = self;
         _contatcsTableView.dataSource = self;
-        _contatcsTableView.rowHeight = 50;
+        _contatcsTableView.rowHeight = 66;
         [_contatcsTableView registerClass:[LWJiaoLiuContatcsListTableViewCell class] forCellReuseIdentifier:@"LWJiaoLiuContatcsListTableViewCell"];
         _contatcsTableView.backgroundColor = UIColor.whiteColor;
+        _contatcsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _contatcsTableView;
+}
+
+//群组
+- (UITableView *)groupTableView
+{
+    if (!_groupTableView) {
+        _groupTableView = [[UITableView alloc] initWithFrame:CGRectZero];
+        _groupTableView.delegate = self;
+        _groupTableView.dataSource = self;
+        _groupTableView.rowHeight = 66;
+        [_groupTableView registerClass:[LWJiaoLiuContatcsListTableViewCell class] forCellReuseIdentifier:@"LWJiaoLiuContatcsListTableViewCell"];
+        _groupTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    return _groupTableView;
 }
 
 - (UIScrollView *)mainScrollView
 {
     if (!_mainScrollView) {
-        _mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, SCREEN_WIDTH, self.view.height-60)];
-        _mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH*3, 1000);
+        _mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, SCREEN_WIDTH, self.view.height-60-10)];
+        _mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH*4, 1000);
         _mainScrollView.backgroundColor = UIColor.whiteColor;
-        NSArray *sub = @[self.messageTableView,self.contatcsTableView,self.collectView];
+        NSArray *sub = @[self.collectView,self.contatcsTableView,self.groupTableView,self.messageTableView,];
         [_mainScrollView addSubviews:sub];
         for (int i = 0; i< sub.count; i++) {
             [sub[i] mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -178,4 +178,7 @@ NSMutableDictionary* para = [NSMutableDictionary dictionary];\
 // 155
 #define BASECOLOR_GREYCOLOR155 RGB(155,155,155)
 
+// 蓝色
+#define BASECOLOR_BLUECOLOR [UIColor colorWithRed:63/255.0 green:80/255.0 blue:181/255.0 alpha:1.0]
+
 #endif /* PrefixHeader_pch */
