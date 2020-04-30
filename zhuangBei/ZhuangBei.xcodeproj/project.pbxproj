@@ -78,6 +78,9 @@
 		893A18F424592D1E00D8C36C /* LWGongYingShangListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18F324592D1E00D8C36C /* LWGongYingShangListViewController.m */; };
 		893A18F724592D3E00D8C36C /* LWGongYingShangListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18F624592D3E00D8C36C /* LWGongYingShangListTableViewCell.m */; };
 		89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 89487BEA24544E4B00D4FA67 /* Foundation+Log.m */; };
+		894E4112245A7A810028D2B4 /* UIButton+typeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 894E4111245A7A810028D2B4 /* UIButton+typeLayout.m */; };
+		894E4115245A96430028D2B4 /* LWLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 894E4114245A96430028D2B4 /* LWLabel.m */; };
+		894E4118245A97A20028D2B4 /* LWButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 894E4117245A97A20028D2B4 /* LWButton.m */; };
 		8957D4A124594C230096F1D7 /* LWHuoYuanBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A024594C230096F1D7 /* LWHuoYuanBaseViewController.m */; };
 		8957D4A4245955250096F1D7 /* LWSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A3245955250096F1D7 /* LWSearchViewController.m */; };
 		8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A6245955F50096F1D7 /* LWSeachView.m */; };
@@ -253,6 +256,12 @@
 		893A18F524592D3E00D8C36C /* LWGongYingShangListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWGongYingShangListTableViewCell.h; sourceTree = "<group>"; };
 		893A18F624592D3E00D8C36C /* LWGongYingShangListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWGongYingShangListTableViewCell.m; sourceTree = "<group>"; };
 		89487BEA24544E4B00D4FA67 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		894E4110245A7A810028D2B4 /* UIButton+typeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+typeLayout.h"; sourceTree = "<group>"; };
+		894E4111245A7A810028D2B4 /* UIButton+typeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+typeLayout.m"; sourceTree = "<group>"; };
+		894E4113245A96430028D2B4 /* LWLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWLabel.h; sourceTree = "<group>"; };
+		894E4114245A96430028D2B4 /* LWLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWLabel.m; sourceTree = "<group>"; };
+		894E4116245A97A20028D2B4 /* LWButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWButton.h; sourceTree = "<group>"; };
+		894E4117245A97A20028D2B4 /* LWButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWButton.m; sourceTree = "<group>"; };
 		8957D49F24594C230096F1D7 /* LWHuoYuanBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanBaseViewController.h; sourceTree = "<group>"; };
 		8957D4A024594C230096F1D7 /* LWHuoYuanBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanBaseViewController.m; sourceTree = "<group>"; };
 		8957D4A2245955250096F1D7 /* LWSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSearchViewController.h; sourceTree = "<group>"; };
@@ -346,6 +355,8 @@
 		003A932A245086110001F615 /* category */ = {
 			isa = PBXGroup;
 			children = (
+				894E4110245A7A810028D2B4 /* UIButton+typeLayout.h */,
+				894E4111245A7A810028D2B4 /* UIButton+typeLayout.m */,
 				0087184C245960B2003F8CD3 /* json */,
 				00926BB5245706E30052B827 /* UIButton+HQCustomIcon.h */,
 				00926BB6245706E30052B827 /* UIButton+HQCustomIcon.m */,
@@ -750,6 +761,10 @@
 			children = (
 				89216979245670AE007C6615 /* LWSwitchBarView.h */,
 				8921697A245670AE007C6615 /* LWSwitchBarView.m */,
+				894E4113245A96430028D2B4 /* LWLabel.h */,
+				894E4114245A96430028D2B4 /* LWLabel.m */,
+				894E4116245A97A20028D2B4 /* LWButton.h */,
+				894E4117245A97A20028D2B4 /* LWButton.m */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1002,6 +1017,7 @@
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				89216982245686E2007C6615 /* LWJiaoLiuGroupCollectionView.m in Sources */,
 				8921697B245670AE007C6615 /* LWSwitchBarView.m in Sources */,
+				894E4118245A97A20028D2B4 /* LWButton.m in Sources */,
 				009FB61A244FE8C200133974 /* AppDelegate.m in Sources */,
 				009FB639244FE8DF00133974 /* UIView+TouchAreaInsets.m in Sources */,
 				001ECA712453C49500727379 /* zZhaoHuiController.m in Sources */,
@@ -1031,6 +1047,7 @@
 				00372AED2456842F00E51931 /* PPNetworkHelper.m in Sources */,
 				8957D4AA245975370096F1D7 /* LWHuoYuanDeatilViewController.m in Sources */,
 				001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */,
+				894E4112245A7A810028D2B4 /* UIButton+typeLayout.m in Sources */,
 				009FB636244FE8DF00133974 /* FUTabBar.m in Sources */,
 				009FB68024500D7800133974 /* UIView+Frame.m in Sources */,
 				8921698824569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m in Sources */,
@@ -1043,6 +1060,7 @@
 				009FB657244FECC500133974 /* baseViewController.m in Sources */,
 				009FB634244FE8DF00133974 /* MainNavController.m in Sources */,
 				009FB669245007ED00133974 /* zDengluController.m in Sources */,
+				894E4115245A96430028D2B4 /* LWLabel.m in Sources */,
 				8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */,
 				00CA47702455B9DD006A2885 /* QuestionModel.m in Sources */,
 				00372B0B2456A54B00E51931 /* zInstructionsCard.m in Sources */,

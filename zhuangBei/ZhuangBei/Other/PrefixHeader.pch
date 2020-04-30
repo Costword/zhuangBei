@@ -22,6 +22,11 @@
 #import "NSDictionary+JSON.h"
 #import "MJRefresh.h"
 #import "LEEAlert.h"
+#import "UIButton+typeLayout.h"
+#import "NSString+Size.h"
+
+#import "LWLabel.h"
+#import "LWButton.h"
 
 #define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT    [UIScreen mainScreen].bounds.size.height
@@ -162,9 +167,15 @@ NSMutableDictionary* para = [NSMutableDictionary dictionary];\
 /**
  默认文字黑色
  */
-#define BASECOLOR_TEXTCOLOR UIColor.blackColor
+#define BASECOLOR_TEXTCOLOR RGB(74,74,74)
 
 //分割线颜色
 #define kSeparatorColor   RGB(211,211,211)
+
+// 描边颜色
+#define BASECOLOR_BOARD RGB(221,221,221)
+
+// 155
+#define BASECOLOR_GREYCOLOR155 RGB(155,155,155)
 
 #endif /* PrefixHeader_pch */
