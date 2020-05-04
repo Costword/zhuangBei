@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(copy, nonatomic)NSString *myPlaceHolder;
 
+@property(strong,nonatomic)UIButton * show;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,7 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^categoryItemTapBack)(NSInteger type);
+
 @interface zCategoryCard : UIView
+
+@property(copy,nonatomic)categoryItemTapBack categoryTapBack;
 
 @end
 

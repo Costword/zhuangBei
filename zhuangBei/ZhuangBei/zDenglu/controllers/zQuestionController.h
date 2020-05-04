@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface zQuestionController : baseViewController
 
+@property(strong,nonatomic)NSDictionary * userDic;
+
 @end
 
 NS_ASSUME_NONNULL_END

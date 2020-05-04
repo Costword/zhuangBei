@@ -22,7 +22,11 @@
 #import "NSDictionary+JSON.h"
 #import "MJRefresh.h"
 #import "LEEAlert.h"
+#import "cookiesTool.h"
+#import "zUserInfo.h"
+#import "MJExtension.h"
 
+#define kLoginUserInfo @"loginUserInfo"
 #define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT    [UIScreen mainScreen].bounds.size.height
 

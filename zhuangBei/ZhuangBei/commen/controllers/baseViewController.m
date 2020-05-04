@@ -96,6 +96,7 @@
     [zNetWorkManger GETworkWithUrl:url WithParamer:para Success:^(id  _Nonnull responseObject) {
         NSString *  text  = [self jsonToString:responseObject];
         NSLog(@"请求到的数据是：%@",text);
+        [self RequsetSuccessWithData:responseObject AndUrl:url];
     } Failure:^(NSError * _Nonnull error) {
         [self RequsetFileWithUrl:url WithError:error];
     }];
@@ -107,6 +108,7 @@
 
     [zNetWorkManger POSTworkWithUrl:url WithParamer:param Success:^(id  _Nonnull responseObject) {
         NSString *  text  = [self jsonToString:responseObject];
+        [self RequsetSuccessWithData:responseObject AndUrl:url];
         NSLog(@"请求到的数据是：%@",text);
     } Failure:^(NSError * _Nonnull error) {
         [self RequsetFileWithUrl:url WithError:error];
@@ -147,7 +149,7 @@
             case PPNetworkStatusUnknown:
                 // 无网络
             case PPNetworkStatusNotReachable:
-                NSLog(@"无网络,加载缓存数据");
+                [[zHud shareInstance]showMessage:@"当前网络未连接"];
                 break;
                 // 手机网络
             case PPNetworkStatusReachableViaWWAN:

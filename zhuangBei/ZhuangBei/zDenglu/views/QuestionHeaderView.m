@@ -73,10 +73,10 @@
     }else
     {
 //        多选题
-        [self.typeBtn setTitle:@"2" forState:UIControlStateNormal];
+//        [self.typeBtn setTitle:@"多选题" forState:UIControlStateNormal];
     }
-    
-    NSString * question = [NSString stringWithFormat:@"%@:%@",questionModel.questionName,questionModel.questionId];
+//    :%@,questionModel.questionId
+    NSString * question = [NSString stringWithFormat:@"%@",questionModel.questionName];
     
     [self setQuestionLabelTextWith:question];
     

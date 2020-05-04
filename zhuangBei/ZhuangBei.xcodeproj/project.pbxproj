@@ -13,6 +13,7 @@
 		001ECA752453CCB700727379 /* zHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA742453CCB700727379 /* zHud.m */; };
 		001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA772453DA3200727379 /* phoneNumCheck.m */; };
 		001ECA7B2454449000727379 /* zhuCeCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA7A2454449000727379 /* zhuCeCard.m */; };
+		002A6180245B0199009A53AA /* cookiesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 002A617F245B0199009A53AA /* cookiesTool.m */; };
 		00372AED2456842F00E51931 /* PPNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 00372AE92456842F00E51931 /* PPNetworkHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00372AEE2456842F00E51931 /* PPNetworkCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 00372AEC2456842F00E51931 /* PPNetworkCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00372B0B2456A54B00E51931 /* zInstructionsCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 00372B052456A54B00E51931 /* zInstructionsCard.m */; };
@@ -20,9 +21,23 @@
 		00372B0D2456A54B00E51931 /* zUserInfoCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 00372B092456A54B00E51931 /* zUserInfoCard.m */; };
 		003A932D2450866D0001F615 /* LoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 003A932C2450866D0001F615 /* LoginTextField.m */; };
 		003A9330245089540001F615 /* UITextField+maxLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 003A932F245089540001F615 /* UITextField+maxLength.m */; };
+		003FEABC245BFB0D00E8D61E /* zSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003FEABB245BFB0D00E8D61E /* zSettingViewController.m */; };
+		003FEABF245BFB8500E8D61E /* zSettingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 003FEABE245BFB8500E8D61E /* zSettingCellView.m */; };
+		003FEAC2245C198A00E8D61E /* zUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 003FEAC1245C198A00E8D61E /* zUserModel.m */; };
 		0087184B2459585C003F8CD3 /* QuestionFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0087184A2459585C003F8CD3 /* QuestionFootView.m */; };
 		00871851245960B2003F8CD3 /* NSDictionary+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 0087184F245960B2003F8CD3 /* NSDictionary+JSON.m */; };
 		00871852245960B2003F8CD3 /* NSArray+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 00871850245960B2003F8CD3 /* NSArray+JSON.m */; };
+		0091FCE0245E59EE0046691F /* zPersonalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0091FCDF245E59EE0046691F /* zPersonalCell.m */; };
+		0091FCE3245E66600046691F /* zcityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0091FCE2245E66600046691F /* zcityCell.m */; };
+		0091FCE6245E681B0046691F /* zCityCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0091FCE5245E681B0046691F /* zCityCollectionCell.m */; };
+		0091FCE9245E68950046691F /* UICollectionViewLeftAlignedLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0091FCE7245E68950046691F /* UICollectionViewLeftAlignedLayout.m */; };
+		0091FCEC245E6AC60046691F /* zCityEditFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0091FCEB245E6AC60046691F /* zCityEditFooter.m */; };
+		0091FCEF245EAE870046691F /* zPersonalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0091FCEE245EAE870046691F /* zPersonalController.m */; };
+		0091FCF3245EB2920046691F /* zPersonalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0091FCF2245EB2920046691F /* zPersonalModel.m */; };
+		0091FCF7245EBD870046691F /* handWritingListLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0091FCF6245EBD860046691F /* handWritingListLayout.m */; };
+		0091FCFA245EC1700046691F /* zPersonalHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0091FCF9245EC1700046691F /* zPersonalHeader.m */; };
+		0091FCFD245ECBDE0046691F /* editTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0091FCFC245ECBDE0046691F /* editTextField.m */; };
+		0091FD00245EE1520046691F /* zUserDescController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0091FCFF245EE1520046691F /* zUserDescController.m */; };
 		00926BB7245706E30052B827 /* UIButton+HQCustomIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 00926BB6245706E30052B827 /* UIButton+HQCustomIcon.m */; };
 		009FB5E5244E89C700133974 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FB5E4244E89C700133974 /* ViewController.m */; };
 		009FB5EA244E89CD00133974 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 009FB5E9244E89CD00133974 /* Assets.xcassets */; };
@@ -119,6 +134,8 @@
 		001ECA772453DA3200727379 /* phoneNumCheck.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = phoneNumCheck.m; sourceTree = "<group>"; };
 		001ECA792454449000727379 /* zhuCeCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zhuCeCard.h; sourceTree = "<group>"; };
 		001ECA7A2454449000727379 /* zhuCeCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhuCeCard.m; sourceTree = "<group>"; };
+		002A617E245B0199009A53AA /* cookiesTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cookiesTool.h; sourceTree = "<group>"; };
+		002A617F245B0199009A53AA /* cookiesTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cookiesTool.m; sourceTree = "<group>"; };
 		00372AE92456842F00E51931 /* PPNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPNetworkHelper.m; sourceTree = "<group>"; };
 		00372AEA2456842F00E51931 /* PPNetworkCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPNetworkCache.h; sourceTree = "<group>"; };
 		00372AEB2456842F00E51931 /* PPNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPNetworkHelper.h; sourceTree = "<group>"; };
@@ -135,12 +152,40 @@
 		003A932C2450866D0001F615 /* LoginTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginTextField.m; sourceTree = "<group>"; };
 		003A932E245089540001F615 /* UITextField+maxLength.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+maxLength.h"; sourceTree = "<group>"; };
 		003A932F245089540001F615 /* UITextField+maxLength.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+maxLength.m"; sourceTree = "<group>"; };
+		003FEABA245BFB0D00E8D61E /* zSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zSettingViewController.h; sourceTree = "<group>"; };
+		003FEABB245BFB0D00E8D61E /* zSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zSettingViewController.m; sourceTree = "<group>"; };
+		003FEABD245BFB8500E8D61E /* zSettingCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zSettingCellView.h; sourceTree = "<group>"; };
+		003FEABE245BFB8500E8D61E /* zSettingCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zSettingCellView.m; sourceTree = "<group>"; };
+		003FEAC0245C198A00E8D61E /* zUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zUserModel.h; sourceTree = "<group>"; };
+		003FEAC1245C198A00E8D61E /* zUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zUserModel.m; sourceTree = "<group>"; };
 		008718492459585C003F8CD3 /* QuestionFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuestionFootView.h; sourceTree = "<group>"; };
 		0087184A2459585C003F8CD3 /* QuestionFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuestionFootView.m; sourceTree = "<group>"; };
 		0087184D245960B2003F8CD3 /* NSDictionary+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JSON.h"; sourceTree = "<group>"; };
 		0087184E245960B2003F8CD3 /* NSArray+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+JSON.h"; sourceTree = "<group>"; };
 		0087184F245960B2003F8CD3 /* NSDictionary+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JSON.m"; sourceTree = "<group>"; };
 		00871850245960B2003F8CD3 /* NSArray+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+JSON.m"; sourceTree = "<group>"; };
+		0091FCDE245E59EE0046691F /* zPersonalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zPersonalCell.h; sourceTree = "<group>"; };
+		0091FCDF245E59EE0046691F /* zPersonalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zPersonalCell.m; sourceTree = "<group>"; };
+		0091FCE1245E66600046691F /* zcityCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zcityCell.h; sourceTree = "<group>"; };
+		0091FCE2245E66600046691F /* zcityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zcityCell.m; sourceTree = "<group>"; };
+		0091FCE4245E681B0046691F /* zCityCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zCityCollectionCell.h; sourceTree = "<group>"; };
+		0091FCE5245E681B0046691F /* zCityCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zCityCollectionCell.m; sourceTree = "<group>"; };
+		0091FCE7245E68950046691F /* UICollectionViewLeftAlignedLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewLeftAlignedLayout.m; sourceTree = "<group>"; };
+		0091FCE8245E68950046691F /* UICollectionViewLeftAlignedLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLeftAlignedLayout.h; sourceTree = "<group>"; };
+		0091FCEA245E6AC60046691F /* zCityEditFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCityEditFooter.h; sourceTree = "<group>"; };
+		0091FCEB245E6AC60046691F /* zCityEditFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zCityEditFooter.m; sourceTree = "<group>"; };
+		0091FCED245EAE870046691F /* zPersonalController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zPersonalController.h; sourceTree = "<group>"; };
+		0091FCEE245EAE870046691F /* zPersonalController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zPersonalController.m; sourceTree = "<group>"; };
+		0091FCF1245EB2920046691F /* zPersonalModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zPersonalModel.h; sourceTree = "<group>"; };
+		0091FCF2245EB2920046691F /* zPersonalModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zPersonalModel.m; sourceTree = "<group>"; };
+		0091FCF5245EBD860046691F /* handWritingListLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = handWritingListLayout.h; sourceTree = "<group>"; };
+		0091FCF6245EBD860046691F /* handWritingListLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = handWritingListLayout.m; sourceTree = "<group>"; };
+		0091FCF8245EC1700046691F /* zPersonalHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zPersonalHeader.h; sourceTree = "<group>"; };
+		0091FCF9245EC1700046691F /* zPersonalHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zPersonalHeader.m; sourceTree = "<group>"; };
+		0091FCFB245ECBDE0046691F /* editTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = editTextField.h; sourceTree = "<group>"; };
+		0091FCFC245ECBDE0046691F /* editTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = editTextField.m; sourceTree = "<group>"; };
+		0091FCFE245EE1520046691F /* zUserDescController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zUserDescController.h; sourceTree = "<group>"; };
+		0091FCFF245EE1520046691F /* zUserDescController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zUserDescController.m; sourceTree = "<group>"; };
 		00926BB5245706E30052B827 /* UIButton+HQCustomIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HQCustomIcon.h"; sourceTree = "<group>"; };
 		00926BB6245706E30052B827 /* UIButton+HQCustomIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HQCustomIcon.m"; sourceTree = "<group>"; };
 		009FB5DA244E89C700133974 /* ZhuangBei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhuangBei.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -319,6 +364,16 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		002A617D245B014A009A53AA /* cookies */ = {
+			isa = PBXGroup;
+			children = (
+				002A617E245B0199009A53AA /* cookiesTool.h */,
+				002A617F245B0199009A53AA /* cookiesTool.m */,
+			);
+			name = cookies;
+			path = ZhuangBei/commen/cookies;
+			sourceTree = SOURCE_ROOT;
+		};
 		00372AE82456842F00E51931 /* PPNetworkHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +394,18 @@
 				00372B052456A54B00E51931 /* zInstructionsCard.m */,
 				00372B062456A54B00E51931 /* zUserInfoCard.h */,
 				00372B092456A54B00E51931 /* zUserInfoCard.m */,
+				003FEABD245BFB8500E8D61E /* zSettingCellView.h */,
+				003FEABE245BFB8500E8D61E /* zSettingCellView.m */,
+				0091FCDE245E59EE0046691F /* zPersonalCell.h */,
+				0091FCDF245E59EE0046691F /* zPersonalCell.m */,
+				0091FCE1245E66600046691F /* zcityCell.h */,
+				0091FCE2245E66600046691F /* zcityCell.m */,
+				0091FCE4245E681B0046691F /* zCityCollectionCell.h */,
+				0091FCE5245E681B0046691F /* zCityCollectionCell.m */,
+				0091FCF8245EC1700046691F /* zPersonalHeader.h */,
+				0091FCF9245EC1700046691F /* zPersonalHeader.m */,
+				0091FCEA245E6AC60046691F /* zCityEditFooter.h */,
+				0091FCEB245E6AC60046691F /* zCityEditFooter.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -347,6 +414,8 @@
 			isa = PBXGroup;
 			children = (
 				0087184C245960B2003F8CD3 /* json */,
+				0091FCE8245E68950046691F /* UICollectionViewLeftAlignedLayout.h */,
+				0091FCE7245E68950046691F /* UICollectionViewLeftAlignedLayout.m */,
 				00926BB5245706E30052B827 /* UIButton+HQCustomIcon.h */,
 				00926BB6245706E30052B827 /* UIButton+HQCustomIcon.m */,
 				8921697C24567278007C6615 /* UIImage+Extension.h */,
@@ -357,6 +426,8 @@
 				89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */,
 				003A932B2450866D0001F615 /* LoginTextField.h */,
 				003A932C2450866D0001F615 /* LoginTextField.m */,
+				0091FCFB245ECBDE0046691F /* editTextField.h */,
+				0091FCFC245ECBDE0046691F /* editTextField.m */,
 				003A932E245089540001F615 /* UITextField+maxLength.h */,
 				003A932F245089540001F615 /* UITextField+maxLength.m */,
 				001ECA732453CCB700727379 /* zHud.h */,
@@ -376,6 +447,24 @@
 				0087184F245960B2003F8CD3 /* NSDictionary+JSON.m */,
 			);
 			path = json;
+			sourceTree = "<group>";
+		};
+		0091FCF0245EB27E0046691F /* models */ = {
+			isa = PBXGroup;
+			children = (
+				0091FCF1245EB2920046691F /* zPersonalModel.h */,
+				0091FCF2245EB2920046691F /* zPersonalModel.m */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		0091FCF4245EBD860046691F /* layout */ = {
+			isa = PBXGroup;
+			children = (
+				0091FCF5245EBD860046691F /* handWritingListLayout.h */,
+				0091FCF6245EBD860046691F /* handWritingListLayout.m */,
+			);
+			path = layout;
 			sourceTree = "<group>";
 		};
 		009FB5D1244E89C700133974 = {
@@ -527,6 +616,8 @@
 		009FB644244FEBA400133974 /* zWode */ = {
 			isa = PBXGroup;
 			children = (
+				0091FCF4245EBD860046691F /* layout */,
+				0091FCF0245EB27E0046691F /* models */,
 				00372B042456A54B00E51931 /* views */,
 				009FB651244FEC6300133974 /* controllers */,
 			);
@@ -613,6 +704,12 @@
 			children = (
 				009FB6732450095C00133974 /* zWodeController.h */,
 				009FB6742450095C00133974 /* zWodeController.m */,
+				003FEABA245BFB0D00E8D61E /* zSettingViewController.h */,
+				003FEABB245BFB0D00E8D61E /* zSettingViewController.m */,
+				0091FCED245EAE870046691F /* zPersonalController.h */,
+				0091FCEE245EAE870046691F /* zPersonalController.m */,
+				0091FCFE245EE1520046691F /* zUserDescController.h */,
+				0091FCFF245EE1520046691F /* zUserDescController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -693,6 +790,8 @@
 				00CA476F2455B9DD006A2885 /* AnswerModel.m */,
 				00CA476C2455B9DD006A2885 /* QuestionModel.h */,
 				00CA476E2455B9DD006A2885 /* QuestionModel.m */,
+				003FEAC0245C198A00E8D61E /* zUserModel.h */,
+				003FEAC1245C198A00E8D61E /* zUserModel.m */,
 				00B26CEE24580A390099FFD5 /* zUserInfo.h */,
 				00B26CEF24580A390099FFD5 /* zUserInfo.m */,
 			);
@@ -780,6 +879,7 @@
 		89487BE824544E4000D4FA67 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				002A617D245B014A009A53AA /* cookies */,
 				89487BEC24544F4A00D4FA67 /* Confi */,
 				89487BE924544E4B00D4FA67 /* Log */,
 			);
@@ -999,9 +1099,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				893A18EE2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m in Sources */,
+				0091FCF7245EBD870046691F /* handWritingListLayout.m in Sources */,
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				89216982245686E2007C6615 /* LWJiaoLiuGroupCollectionView.m in Sources */,
 				8921697B245670AE007C6615 /* LWSwitchBarView.m in Sources */,
+				0091FCE6245E681B0046691F /* zCityCollectionCell.m in Sources */,
 				009FB61A244FE8C200133974 /* AppDelegate.m in Sources */,
 				009FB639244FE8DF00133974 /* UIView+TouchAreaInsets.m in Sources */,
 				001ECA712453C49500727379 /* zZhaoHuiController.m in Sources */,
@@ -1010,10 +1112,13 @@
 				001ECA752453CCB700727379 /* zHud.m in Sources */,
 				00CA47672455B91E006A2885 /* zQuestionController.m in Sources */,
 				00871851245960B2003F8CD3 /* NSDictionary+JSON.m in Sources */,
+				0091FCFD245ECBDE0046691F /* editTextField.m in Sources */,
 				009FB68224500D7800133974 /* NSString+Size.m in Sources */,
 				8921697524566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m in Sources */,
+				0091FCE9245E68950046691F /* UICollectionViewLeftAlignedLayout.m in Sources */,
 				009FB5E5244E89C700133974 /* ViewController.m in Sources */,
 				009FB63C244FE8DF00133974 /* UITabBarItem+Extension.m in Sources */,
+				0091FCFA245EC1700046691F /* zPersonalHeader.m in Sources */,
 				009FB68B2450428000133974 /* zNothingView.m in Sources */,
 				8921697624566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m in Sources */,
 				893A18F424592D1E00D8C36C /* LWGongYingShangListViewController.m in Sources */,
@@ -1022,8 +1127,10 @@
 				8921697E24567278007C6615 /* UIImage+Extension.m in Sources */,
 				001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */,
 				00871852245960B2003F8CD3 /* NSArray+JSON.m in Sources */,
+				0091FCE0245E59EE0046691F /* zPersonalCell.m in Sources */,
 				00CA47802455C839006A2885 /* QuestionTableViewCell.m in Sources */,
 				003A932D2450866D0001F615 /* LoginTextField.m in Sources */,
+				003FEABF245BFB8500E8D61E /* zSettingCellView.m in Sources */,
 				893A18F724592D3E00D8C36C /* LWGongYingShangListTableViewCell.m in Sources */,
 				009FB6882450425900133974 /* zNoContentView.m in Sources */,
 				0087184B2459585C003F8CD3 /* QuestionFootView.m in Sources */,
@@ -1046,32 +1153,40 @@
 				8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */,
 				00CA47702455B9DD006A2885 /* QuestionModel.m in Sources */,
 				00372B0B2456A54B00E51931 /* zInstructionsCard.m in Sources */,
+				003FEABC245BFB0D00E8D61E /* zSettingViewController.m in Sources */,
 				009FB67F24500D7800133974 /* NSDictionary+NSNull.m in Sources */,
 				009FB66C2450091D00133974 /* zHyController.m in Sources */,
 				8957D4A4245955250096F1D7 /* LWSearchViewController.m in Sources */,
 				009FB66F2450093A00133974 /* zJiaoliuController.m in Sources */,
 				00CA47792455BAEB006A2885 /* AnswerCell.m in Sources */,
 				893A18F1245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m in Sources */,
+				0091FD00245EE1520046691F /* zUserDescController.m in Sources */,
 				8957D4A124594C230096F1D7 /* LWHuoYuanBaseViewController.m in Sources */,
 				00372B0D2456A54B00E51931 /* zUserInfoCard.m in Sources */,
 				009FB63E244FE8DF00133974 /* NSString+size.m in Sources */,
+				003FEAC2245C198A00E8D61E /* zUserModel.m in Sources */,
 				8957D4AD245975E10096F1D7 /* LWHuoYuanDeatilView.m in Sources */,
 				009FB63D244FE8DF00133974 /* FUTabBarController.m in Sources */,
 				8921698B2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m in Sources */,
 				00CA47712455B9DD006A2885 /* AnswerModel.m in Sources */,
 				009FB6752450095C00133974 /* zWodeController.m in Sources */,
+				0091FCEC245E6AC60046691F /* zCityEditFooter.m in Sources */,
 				00B26CF024580A390099FFD5 /* zUserInfo.m in Sources */,
+				002A6180245B0199009A53AA /* cookiesTool.m in Sources */,
 				001ECA6A2453B6F300727379 /* zLoginCard.m in Sources */,
 				009FB638244FE8DF00133974 /* FUBadgeButton.m in Sources */,
 				89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */,
 				003A9330245089540001F615 /* UITextField+maxLength.m in Sources */,
 				009FB666244FF64D00133974 /* zInterfacedConst.m in Sources */,
 				89F5B7DC2455955E0040F7B1 /* UIViewAdditions.m in Sources */,
+				0091FCE3245E66600046691F /* zcityCell.m in Sources */,
 				00926BB7245706E30052B827 /* UIButton+HQCustomIcon.m in Sources */,
 				009FB637244FE8DF00133974 /* UIImage+Extension.m in Sources */,
+				0091FCF3245EB2920046691F /* zPersonalModel.m in Sources */,
 				00D6E2DD2459A6D200B6E327 /* zNetWorkManger.m in Sources */,
 				009FB68124500D7800133974 /* MainSingleton.m in Sources */,
 				89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */,
+				0091FCEF245EAE870046691F /* zPersonalController.m in Sources */,
 				009FB63A244FE8DF00133974 /* UIView+FU_Animation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1224,7 +1339,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K2YCGMC4SW;
+				DEVELOPMENT_TEAM = Z47LFKNX8D;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
 				INFOPLIST_FILE = ZhuangBei/Other/Info.plist;
@@ -1245,7 +1360,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K2YCGMC4SW;
+				DEVELOPMENT_TEAM = Z47LFKNX8D;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
 				INFOPLIST_FILE = ZhuangBei/Other/Info.plist;

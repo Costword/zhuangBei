@@ -39,6 +39,21 @@ NSString *const kSendVerificationCode = @"sys/user/sendVerificationCode";
 
 NSString *const kRegister = @"sys/user/userRegister";
 
+/**pass注册 (注册通过后调用此接口)
+ > **username**  (String)    *用户名*    |   必填
+
+ > **password**  (String)    *密码*  |   必填
+
+ > **verificationCode**  (String)    *验证码*    |   必填
+
+ > **invatationCode**    (String)    *邀请码*
+
+ > **refreeId**  (int)   *邀请人ID*
+
+ > **nickName**  (String)    *真实姓名*  |   必填
+ */
+
+NSString *const kPassRegister = @"sys/user/userRegister?isPassed=1";
 /**
  注册答题
  无

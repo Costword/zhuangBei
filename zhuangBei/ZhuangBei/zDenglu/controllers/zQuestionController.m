@@ -90,10 +90,10 @@ static NSString * recordId = @"recordId";
             if (weakSelf.AnswerArray.count>0) {
                 NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kAnswer];
                 
-                NSDictionary * dic = @{@"questionList":weakSelf.AnswerArray};
-                NSString * json = [dic jsonString];
-//                [weakSelf getData:NO url:url withParam:];
-                [weakSelf postDataWithUrl:url WithParam:json];
+                //                NSDictionary * dic = @{@"questionList":weakSelf.AnswerArray};
+                //                NSString * json = [weakSelf.AnswerArray jsonString];
+                //                [weakSelf getData:NO url:url withParam:];
+                [weakSelf postDataWithUrl:url WithParam:weakSelf.AnswerArray];
             }
         };
     }
@@ -107,10 +107,21 @@ static NSString * recordId = @"recordId";
     [self getQuestions];
 }
 
+
+//获取题目
 -(void)getQuestions{
     NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kQuestion];
-    [self getData:NO url:url withParam:@{}];
+    [self getDataurl:url withParam:@{}];
 }
+
+//答题成功后再次请求通过注册接口
+
+-(void)sendPassRegister
+{
+    NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kPassRegister];
+    [self postDataWithUrl:url WithParam:self.userDic];
+}
+
 
 -(void)updateViewConstraintsForView
 {
@@ -156,7 +167,7 @@ static NSString * recordId = @"recordId";
         [ansDic setObject:Model.optionId forKey:anskey];
         [ansArr addObject:ansDic];
         [weakSelf.ansDic setObject:ansArr forKey:ansList];
-    
+        
         //判断答案数组中是否有此选项，如果有，不做处理，没有则添加
         //根据 questionId 进行判断
         //如果答案数组中有questionId 更改当前id下的答案
@@ -170,7 +181,7 @@ static NSString * recordId = @"recordId";
             for (NSDictionary * dic in weakSelf.AnswerArray) {
                 NSString * questionId = dic[quekey];
                 //如果有此问题的答案
-//                NSLog(@"%@--%@--%@",questionId,Mquestion.questionId,weakSelf.AnsQuestionIDArray);
+                //                NSLog(@"%@--%@--%@",questionId,Mquestion.questionId,weakSelf.AnsQuestionIDArray);
                 if ([weakSelf.AnsQuestionIDArray containsObject:Mquestion.questionId]) {
                     if ([questionId isEqualToString:Mquestion.questionId]) {
                         //如果有此问题答案，更改 先移除 后添加
@@ -199,7 +210,7 @@ static NSString * recordId = @"recordId";
                 }
                 else
                 {
-                 //如果没有当前此问题答案，添加
+                    //如果没有当前此问题答案，添加
                     [weakSelf.AnsQuestionIDArray addObject:Mquestion.questionId];
                     Model.ISCHOSE = YES;
                     [newAnswerArray addObject:weakSelf.ansDic];
@@ -244,7 +255,7 @@ static NSString * recordId = @"recordId";
         return;
     }
     if ([url containsString:kAnswer]) {
-        [[zHud shareInstance]showMessage:@"答题失败请重新作答"];
+        
         return;
     }
 }
@@ -253,8 +264,8 @@ static NSString * recordId = @"recordId";
 {
     if ([url containsString:kQuestion]) {
         NSDictionary * dic = data;
-        NSLog(@"获取试卷成功%@",dic);
-        [[zHud shareInstance]showMessage:@"获取试卷成功"];
+        //        NSLog(@"获取试卷成功%@",dic);
+        //        [[zHud shareInstance]showMessage:@"获取试卷成功"];
         [self.QuestionModelArray removeAllObjects];
         [self.AnswerArray removeAllObjects];
         [self.AnsQuestionIDArray removeAllObjects];
@@ -284,8 +295,43 @@ static NSString * recordId = @"recordId";
     if ([url containsString:kAnswer])
     {
         NSDictionary * dic = data;
-        NSLog(@"答题通过%@",dic);
-        [[zHud shareInstance]showMessage:@"答题通过"];
+        NSDictionary * data = dic[@"data"];
+        NSString *  isPassed = data[@"isPassed"];
+        if ([isPassed integerValue]==1) {
+            //答题通过进入 再次调用通过注册接口
+            [self sendPassRegister];
+        }else
+        {
+            [[zHud shareInstance]showMessage:@"答题失败请重新作答"];
+            [LEEAlert alert].config
+            .LeeTitle(@"温馨提示")
+            .LeeContent(@"回答错误\n请重新作答")
+            .LeeCancelAction(@"取消", ^{
+                // 点击事件Block
+                [self.navigationController popViewControllerAnimated:YES];
+                [[zHud shareInstance]showMessage:@"注册失败"];
+            })
+            .LeeAction(@"确认", ^{
+                // 点击事件Block
+                [self getQuestions];
+            })
+            .LeeShow();
+        }
+    }
+    if ([url containsString:kPassRegister]) {
+        NSDictionary * dic = data;
+        NSString * msg = dic[@"msg"];
+//        NSString * code = dic[@"code"];
+        NSString * type = dic[@"data"][@"type"];
+        if (type!=nil && [type integerValue] == 0) {
+            //注册成功 进入首页
+            [[zHud shareInstance]showMessage:@"注册成功"];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            return;
+        }else
+        {
+            [[zHud shareInstance]showMessage:msg];
+        }
     }
 }
 

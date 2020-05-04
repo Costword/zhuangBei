@@ -24,6 +24,9 @@ UIKIT_EXTERN NSString *const kSendVerificationCode;
 /** 注册*/
 UIKIT_EXTERN NSString *const kRegister;
 
+/** 通过答题后注册*/
+UIKIT_EXTERN NSString *const kPassRegister;
+
 /** 注册答题*/
 UIKIT_EXTERN NSString *const kQuestion;
 

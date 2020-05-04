@@ -10,8 +10,8 @@
 #import "LoginTextField.h"
 #import "phoneNumCheck.h"
 
-#define  heightMargin 50
-#define  leftMargin 20
+#define  heightMargin 45
+#define  leftMargin 25
 
 @interface zhuCeCard ()
 
@@ -21,7 +21,7 @@
 
 @property(strong,nonatomic)LoginTextField * nameField;
 @property(strong,nonatomic)LoginTextField * accountField;
-@property(strong,nonatomic)LoginTextField * passWordField;
+@property(strong,nonatomic)LoginTextField * passwordField;
 @property(strong,nonatomic)LoginTextField * checkField;
 @property(strong,nonatomic)LoginTextField * inviteField;
 
@@ -39,6 +39,7 @@
 @end
 
 @implementation zhuCeCard
+
 
 -(NSMutableDictionary*)userDic
 {
@@ -88,17 +89,17 @@
     return _accountField;
 }
 
--(LoginTextField*)passWordField
+-(LoginTextField*)passwordField
 {
-    if (!_passWordField) {
-        _passWordField = [[LoginTextField alloc]init];
-        _passWordField.icon = [UIImage imageNamed:@"blank"];
-        _passWordField.keyboardType = UIKeyboardTypeDefault;
-        _passWordField.maxLength = 12;
-        _passWordField.secureTextEntry = YES;
-        _passWordField.myPlaceHolder = @"请输入密码";
+    if (!_passwordField) {
+        _passwordField = [[LoginTextField alloc]init];
+        _passwordField.icon = [UIImage imageNamed:@"blank"];
+        _passwordField.keyboardType = UIKeyboardTypeDefault;
+        _passwordField.maxLength = 12;
+        [_passwordField setSecureTextEntry:YES];
+        _passwordField.myPlaceHolder = @"请输入密码";
     }
-    return _passWordField;
+    return _passwordField;
 }
 
 
@@ -146,7 +147,7 @@
         [_getCheckNumButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _getCheckNumButton.tag = 2;
         [_getCheckNumButton setTitle:@"获取" forState:UIControlStateNormal];
-        [_getCheckNumButton setBackgroundColor:[UIColor blueColor]];
+        [_getCheckNumButton setBackgroundColor:[kMainSingleton colorWithHexString:@"#3F50B5" alpha:1]];
         [_getCheckNumButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _getCheckNumButton;
@@ -172,8 +173,8 @@
         _loginBtn = [[UIButton alloc]init];
         _loginBtn.titleLabel.font = kFont(20);
         [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
-        _loginBtn.backgroundColor = [UIColor blueColor];
+        [_loginBtn setTitle:@"注册" forState:UIControlStateNormal];
+        _loginBtn.backgroundColor = [kMainSingleton colorWithHexString:@"#3F50B5" alpha:1];
         _loginBtn.layer.cornerRadius = kWidthFlot(20);
         _loginBtn.clipsToBounds = YES;
         _loginBtn.tag = 4;
@@ -188,19 +189,20 @@
     if (!_userKnow) {
         _userKnow = [[UILabel alloc]initWithFrame:CGRectMake(0,0,kWidthFlot(100),kWidthFlot(40))];
         _userKnow.userInteractionEnabled = YES;
-        NSString * labelStr = @"我同意  用户注册协议";
-        NSString * book = @"  用户注册协议";
-        CGAffineTransform matrix =CGAffineTransformMake(1, 0, tanf(10 * (CGFloat)M_PI / 180), 1, 0, 0);//设置反射。倾斜角度。
-
-        UIFontDescriptor *desc = [ UIFontDescriptor fontDescriptorWithName :[UIFont systemFontOfSize:kWidthFlot(16)].fontName matrix :matrix];//取得系统字符并设置反射。
+        _userKnow.font = kFont(12);
+        NSString * labelStr = @"我同意《用户注册协议》";
+        NSString * book = @"《用户注册协议》";
+//        CGAffineTransform matrix =CGAffineTransformMake(1, 0, tanf(10 * (CGFloat)M_PI / 180), 1, 0, 0);//设置反射。倾斜角度。
+//
+//        UIFontDescriptor *desc = [ UIFontDescriptor fontDescriptorWithName :[UIFont systemFontOfSize:kWidthFlot(16)].fontName matrix :matrix];//取得系统字符并设置反射。
         
         NSMutableAttributedString *attribut = [[NSMutableAttributedString alloc]initWithString:labelStr];
         //目的是想改变 ‘/’前面的字体的属性，所以找到目标的range
-        NSRange range = [labelStr rangeOfString:@" "];
+        NSRange range = [labelStr rangeOfString:@"《"];
         NSRange pointRange = NSMakeRange(range.location,book.length);
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-        dic[NSFontAttributeName] = [UIFont fontWithDescriptor:desc size:kWidthFlot(16)];
-        dic[NSForegroundColorAttributeName] = [UIColor blueColor];
+        dic[NSFontAttributeName] = kFont(12);
+        dic[NSForegroundColorAttributeName] = [kMainSingleton colorWithHexString:@"#3F50B5" alpha:1];
         //赋值
         [attribut addAttributes:dic range:pointRange];
         
@@ -216,8 +218,9 @@
 -(TYAttributedLabel*)gotoLoginLabel
 {
     if (!_gotoLoginLabel) {
-        _gotoLoginLabel = [[TYAttributedLabel alloc]initWithFrame:CGRectMake(0,0,kWidthFlot(100),kWidthFlot(40))];
+        _gotoLoginLabel = [[TYAttributedLabel alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH,kWidthFlot(40))];
         _gotoLoginLabel.userInteractionEnabled = YES;
+        _gotoLoginLabel.numberOfLines = 1;
         NSString * labelStr = @"已有账号！立即去登录";
         NSString * num = @"去登录";
          TYTextContainer *textStorage = [self creatTextContainerWithCurrentStr:num totalStr:labelStr];
@@ -246,7 +249,7 @@
         
         [self addSubview:self.nameField];
         [self addSubview:self.accountField];
-        [self addSubview:self.passWordField];
+        [self addSubview:self.passwordField];
         [self addSubview:self.checkField];
         [self addSubview:self.inviteField];
         
@@ -268,7 +271,7 @@
     for (int i = 0; i<self.labelArray.count; i++) {
         UILabel * nameLabel = self.labelArray[i];
         
-        CGFloat top = leftMargin + heightMargin * i;
+        CGFloat top = leftMargin + (heightMargin + leftMargin)* i;
         [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(top);
             make.left.mas_equalTo(leftMargin);
@@ -277,34 +280,34 @@
     }
     
     [self.nameField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftMargin + heightMargin * 0);
+        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 0);
         make.left.mas_equalTo(kWidthFlot(80));
         make.right.mas_equalTo(-leftMargin);
         make.height.mas_equalTo(40);
     }];
     [self.accountField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftMargin + heightMargin * 1);
+        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 1);
         make.left.mas_equalTo(kWidthFlot(80));
         make.right.mas_equalTo(-leftMargin);
         make.height.mas_equalTo(40);
     }];
 
-    [self.passWordField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftMargin + heightMargin * 2);
+    [self.passwordField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 2);
         make.left.mas_equalTo(kWidthFlot(80));
         make.right.mas_equalTo(-(leftMargin + 40));
         make.height.mas_equalTo(40);
     }];
     
     [self.eyesButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.passWordField.mas_centerY);
+        make.centerY.mas_equalTo(self.passwordField.mas_centerY);
         make.right.mas_equalTo(-leftMargin);
         make.width.mas_equalTo(40);
         make.height.mas_equalTo(30);
     }];
 
     [self.checkField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftMargin + heightMargin * 3);
+        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 3);
         make.left.mas_equalTo(kWidthFlot(80));
         make.right.mas_equalTo(-(leftMargin + 80));
         make.height.mas_equalTo(40);
@@ -318,7 +321,7 @@
     }];
 
     [self.inviteField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftMargin + heightMargin * 4);
+        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 4);
         make.left.mas_equalTo(kWidthFlot(80));
         make.right.mas_equalTo(-leftMargin);
         make.height.mas_equalTo(40);
@@ -331,22 +334,22 @@
     }];
     [self.aggreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.inviteField.mas_bottom).offset(10);
-        make.right.mas_equalTo(self.userKnow.mas_left).offset(-5);
+        make.right.mas_equalTo(self.userKnow.mas_left).offset(-1);
         make.height.mas_equalTo(kWidthFlot(30));
         make.width.mas_equalTo(kWidthFlot(30));
     }];
     
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.aggreBtn.mas_bottom).offset(kWidthFlot(20));
-        make.left.mas_equalTo(kWidthFlot(20));
-        make.right.mas_equalTo(-kWidthFlot(20));
-        make.height.mas_equalTo(kWidthFlot(40));
+        make.top.mas_equalTo(self.aggreBtn.mas_bottom).offset(kWidthFlot(60));
+        make.centerX.mas_equalTo(self.mas_centerX);
+        make.width.mas_equalTo(kWidthFlot(285));
+        make.height.mas_equalTo(kWidthFlot(45));
     }];
     
     [self.gotoLoginLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.loginBtn.mas_bottom).offset(kWidthFlot(20));
-        make.left.mas_equalTo(kWidthFlot(100));
-        make.right.mas_equalTo(-kWidthFlot(100));
+        make.left.mas_equalTo(kWidthFlot(0));
+        make.right.mas_equalTo(-kWidthFlot(0));
         make.height.mas_equalTo(kWidthFlot(40));
     }];
 }
@@ -356,7 +359,7 @@
     if (button.tag == 1) {
         //眼睛
         self.eyesButton.selected = !button.selected;
-        self.passWordField.secureTextEntry = !self.eyesButton.selected;
+        [self.passwordField setSecureTextEntry:!self.eyesButton.selected];
         return;
     }
     if (button.tag == 2) {
@@ -387,7 +390,7 @@
             [[zHud shareInstance]showMessage:@"手机号不可为空"];
             return;
         }
-        if (self.passWordField.text.length==0) {
+        if (self.passwordField.text.length==0) {
             [[zHud shareInstance]showMessage:@"密码不可为空"];
             return;
         }
@@ -395,15 +398,13 @@
             [[zHud shareInstance]showMessage:@"验证码不可为空"];
             return;
         }
+        
+        NSString * password = self.passwordField.text;
         [self.userDic setObject:self.nameField.text forKey:@"nickName"];
         [self.userDic setObject:self.accountField.text forKey:@"username"];
-        [self.userDic setObject:self.passWordField.text forKey:@"password"];
-//        [self.userDic setObject:self.passWordField.text forKey:@"passwordToo"];
+        [self.userDic setObject:password forKey:@"password"];
         [self.userDic setObject:self.checkField.text forKey:@"verificationCode"];
         [self.userDic setObject:self.inviteField.text forKey:@"invatationCode"];
-//        [self.userDic setObject:@"" forKey:@"qyuserId"];
-//        [self.userDic setObject:@"on" forKey:@"agreement"];
-
         if (self.aggreBtn.selected) {
             if (self.zhuceBack) {
                 self.zhuceBack(self.userDic);
@@ -458,8 +459,8 @@
     //取出需要变色的字
     TYTextStorage *textheader = [[TYTextStorage alloc]init];
     textheader.range = [text rangeOfString:currentStr];
-    textheader.textColor = [UIColor redColor];
-    textheader.font = [UIFont fontWithName:@"TamilSangamMN" size:kWidthFlot(16)];
+    textheader.textColor = [kMainSingleton colorWithHexString:@"#D0021B" alpha:1];
+    textheader.font = [UIFont fontWithName:@"TamilSangamMN" size:kWidthFlot(18)];
     [textContainer addTextStorage:textheader];
 
     //取出剩余的字
@@ -467,10 +468,10 @@
     textStorage.range = [text rangeOfString:string];
     textStorage.textColor = [UIColor blackColor];
 //    TamilSangamMN-Bold
-    textStorage.font = [UIFont fontWithName:@"TamilSangamMN" size:kWidthFlot(14)];
+    textStorage.font = [UIFont fontWithName:@"TamilSangamMN" size:kWidthFlot(16)];
     [textContainer addTextStorage:textStorage];
     textContainer.linesSpacing = 5;
-    textContainer = [textContainer createTextContainerWithTextWidth:kWidthFlot(100)];
+    textContainer = [textContainer createTextContainerWithTextWidth:kWidthFlot(300)];
     return textContainer;
 }
 

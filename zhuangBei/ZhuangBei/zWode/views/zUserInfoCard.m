@@ -10,6 +10,8 @@
 
 @interface zUserInfoCard ()
 
+@property(strong,nonatomic)UIView * baseView;
+
 @property(strong,nonatomic)UIButton * headerImageBtn;//头像
 
 @property(strong,nonatomic)UIButton * nameBtn;//名字
@@ -22,9 +24,31 @@
 
 @property(strong,nonatomic)TYAttributedLabel * myBusinessLabel;//我的邀请
 
+@property(strong,nonatomic)UIView * lineView;
 @end
 
 @implementation zUserInfoCard
+
+-(UIView*)baseView
+{
+    if (!_baseView) {
+        _baseView = [[UIView alloc]init];
+        _baseView.backgroundColor = [UIColor whiteColor];
+        _baseView.layer.cornerRadius = 15;
+        _baseView.layer.borderColor = [UIColor whiteColor].CGColor;
+        _baseView.layer.borderWidth = 1;
+        _baseView.clipsToBounds = YES;
+    }
+    return _baseView;
+}
+-(UIView*)lineView
+{
+    if (!_lineView) {
+        _lineView = [[UIView alloc]init];
+        _lineView.backgroundColor = [kMainSingleton colorWithHexString:@"#9B9B9B" alpha:1];
+    }
+    return _lineView;
+}
 
 -(UIButton*)headerImageBtn
 {
@@ -69,7 +93,8 @@
 {
     if (!_myInviteLabel) {
         _myInviteLabel = [[TYAttributedLabel alloc]initWithFrame:CGRectMake(0,0,kWidthFlot(100),kWidthFlot(40))];
-        _myInviteLabel.userInteractionEnabled = YES;
+        _myInviteLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//        _myInviteLabel.font = kFont(14);
         NSString * labelStr = @"我的邀请人 \n 0";
         NSString * num = @"0";
          TYTextContainer *textStorage = [self creatTextContainerWithCurrentStr:num totalStr:labelStr];
@@ -85,7 +110,7 @@
 {
     if (!_myFollowLabel) {
         _myFollowLabel = [[TYAttributedLabel alloc]initWithFrame:CGRectMake(0,0,kWidthFlot(100),kWidthFlot(40))];
-        _myFollowLabel.userInteractionEnabled = YES;
+        _myFollowLabel.translatesAutoresizingMaskIntoConstraints = NO;
         NSString * labelStr = @"我关注的货源 \n 0";
         NSString * num = @"0";
          TYTextContainer *textStorage = [self creatTextContainerWithCurrentStr:num totalStr:labelStr];
@@ -101,7 +126,7 @@
 {
     if (!_myBusinessLabel) {
         _myBusinessLabel = [[TYAttributedLabel alloc]initWithFrame:CGRectMake(0,0,kWidthFlot(100),kWidthFlot(40))];
-        _myBusinessLabel.userInteractionEnabled = YES;
+        _myBusinessLabel.translatesAutoresizingMaskIntoConstraints = NO;
         NSString * labelStr = @"我的经销商 \n 0";
         NSString * num = @"0";
          TYTextContainer *textStorage = [self creatTextContainerWithCurrentStr:num totalStr:labelStr];
@@ -118,13 +143,14 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        
-        [self addSubview:self.headerImageBtn];
-        [self addSubview:self.nameBtn];
-        [self addSubview:self.levelBtn];
-        [self addSubview:self.myInviteLabel];
-        [self addSubview:self.myFollowLabel];
-        [self addSubview:self.myBusinessLabel];
+        [self addSubview:self.baseView];
+        [self.baseView addSubview:self.headerImageBtn];
+        [self.baseView addSubview:self.nameBtn];
+        [self.baseView addSubview:self.levelBtn];
+        [self.baseView addSubview:self.myInviteLabel];
+        [self.baseView addSubview:self.myFollowLabel];
+        [self.baseView addSubview:self.myBusinessLabel];
+        [self.baseView addSubview:self.lineView];
         [self updateConstraintsForView];
     }
     return self;
@@ -132,6 +158,10 @@
 
 -(void)updateConstraintsForView
 {
+    [self.baseView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+    
     [self.headerImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kWidthFlot(20));
         make.top.mas_equalTo(kWidthFlot(10));
@@ -155,22 +185,28 @@
     [self.myInviteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kWidthFlot(10));
         make.top.mas_equalTo(self.headerImageBtn.mas_bottom).offset(kWidthFlot(10));
-        make.width.mas_equalTo(kWidthFlot(100));
-        make.height.mas_equalTo(kWidthFlot(40));
+        make.width.mas_equalTo(kWidthFlot(120));
+        make.height.mas_equalTo(kWidthFlot(50));
     }];
     [self.myFollowLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.mas_centerX);
         make.top.mas_equalTo(self.headerImageBtn.mas_bottom).offset(kWidthFlot(10));
-        make.width.mas_equalTo(kWidthFlot(100));
-        make.height.mas_equalTo(kWidthFlot(40));
+        make.width.mas_equalTo(kWidthFlot(120));
+        make.height.mas_equalTo(kWidthFlot(50));
     }];
     [self.myBusinessLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-10);
         make.top.mas_equalTo(self.headerImageBtn.mas_bottom).offset(kWidthFlot(10));
-        make.width.mas_equalTo(kWidthFlot(100));
-        make.height.mas_equalTo(kWidthFlot(40));
+        make.width.mas_equalTo(kWidthFlot(120));
+        make.height.mas_equalTo(kWidthFlot(50));
     }];
     
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(kWidthFlot(40));
+        make.right.mas_equalTo(-kWidthFlot(40));
+        make.bottom.mas_equalTo(-kWidthFlot(20));
+        make.height.mas_equalTo(kWidthFlot(0.5));
+    }];
 }
 
 -(void)layoutSubviews
@@ -178,6 +214,16 @@
     [super layoutSubviews];
     [self.myInviteLabel setNeedsLayout];
     [self.myInviteLabel layoutIfNeeded];
+    
+    [_baseView setNeedsLayout];
+    [_baseView layoutIfNeeded];
+    UIBezierPath *shadowPath = [UIBezierPath
+    bezierPathWithRect:_baseView.bounds];
+    _baseView.layer.masksToBounds = NO;
+    _baseView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _baseView.layer.shadowOffset = CGSizeMake(0.0f, 5.0f);
+    _baseView.layer.shadowOpacity = 0.1f;
+    _baseView.layer.shadowPath = shadowPath.CGPath;
 }
 
 
@@ -206,7 +252,7 @@
 
 -(void)updateTYTLabel:(TYAttributedLabel*)label
 {
-    label.backgroundColor = [UIColor lightGrayColor];
+    label.backgroundColor = [UIColor clearColor];
     // 水平对齐方式
     label.textAlignment = kCTTextAlignmentCenter;
     // 垂直对齐方式
@@ -214,7 +260,7 @@
     // 文字间隙
     label.characterSpacing = 2;
     // 文本行间隙
-    label.linesSpacing = 2;
+    label.linesSpacing = 10;
 }
 
 //初始化文字信息 设置颜色及点击事件
@@ -237,7 +283,7 @@
     TYTextStorage *textStorage = [[TYTextStorage alloc]init];
     textStorage.range = [text rangeOfString:string];
     textStorage.textColor = [UIColor blackColor];
-    textStorage.font = [UIFont fontWithName:@"TamilSangamMN-Bold" size:kWidthFlot(14)];
+    textStorage.font = [UIFont fontWithName:@"TamilSangamMN-Bold" size:kWidthFlot(10)];
     [textContainer addTextStorage:textStorage];
     textContainer.linesSpacing = 5;
     textContainer = [textContainer createTextContainerWithTextWidth:kWidthFlot(100)];

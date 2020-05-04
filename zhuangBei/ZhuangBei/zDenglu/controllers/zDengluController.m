@@ -7,18 +7,30 @@
 //
 
 #import "zDengluController.h"
+#import "AppDelegate.h"
 #import "zLoginCard.h"
 #import "zZhuCeController.h"
 #import "zZhaoHuiController.h"
 #import "zQuestionController.h"
 #import "zUserInfo.h"
+#import "MainTabBarController.h"
+#import "MainNavController.h"
+
 @interface zDengluController ()
 
 @property(strong,nonatomic)zLoginCard * loginView;
 
+@property(strong,nonatomic)NSDictionary * loginParam;
+
 @end
 
 @implementation zDengluController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
 
 -(zLoginCard*)loginView
 {
@@ -46,7 +58,9 @@
             }
           //登陆
             NSDictionary * loginParam =@{@"username":phone,@"password":passWord};
+            weakSelf.loginParam = loginParam;
             NSString *url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kLogin];
+            
             [weakSelf postDataWithUrl:url WithParam:loginParam];
         };
     }
@@ -55,12 +69,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     [self.view addSubview:self.loginView];
-    
-   
 }
 
 -(void)viewDidLayoutSubviews
@@ -72,11 +81,21 @@
     }];
 }
 
+-(void)changeRootVC
+{
+    MainTabBarController * rootVC  = [[MainTabBarController alloc]init];
+    MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
+    rootNav.navigationBar.hidden = YES;
+     UIApplication *app = [UIApplication sharedApplication];
+    [app keyWindow].rootViewController = rootNav;
+}
+
 
 -(void)RequsetFileWithUrl:(NSString*)url WithError:(NSError*)err
 {
     if ([url containsString:kLogin]) {
-        [[zHud shareInstance]showMessage:@"登陆失败"];
+        [[zHud shareInstance]showMessage:@"登陆失败，无法连接服务器"];
+        [self changeRootVC];
     }
 }
 
@@ -85,7 +104,22 @@
     if ([url containsString:kLogin]) {
         NSDictionary * dic = data;
         NSLog(@"登陆成功:%@",dic);
-        [[zHud shareInstance]showMessage:@"登陆成功"];
+        NSString * code = dic[@"code"];
+        NSDictionary * dataDic = dic[@"data"];
+        NSString * msg = dic[@"msg"];
+        if ([code integerValue] == 500) {
+            [[zHud shareInstance]showMessage:msg];
+        }else
+        {
+            [[zHud shareInstance]showMessage:@"登陆成功"];
+            [zUserInfo shareInstance].userAccount = self.loginParam[@"username"];
+            [zUserInfo shareInstance].userPassWord = self.loginParam[@"password"];
+            
+            zUserModel * model = [zUserModel mj_objectWithKeyValues:dataDic];
+            [zUserInfo shareInstance].userInfo = model;
+            [[zUserInfo shareInstance]saveUserInfo];
+            [self changeRootVC];
+        }
     }
 }
 

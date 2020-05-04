@@ -12,6 +12,7 @@
 #import "zDengluController.h"
 #import "zQuestionController.h"
 #import "zZhuCeController.h"
+#import "zUserModel.h"
 
 @interface zShouyeController ()
 
@@ -28,7 +29,7 @@
         _button = [[UIButton alloc]init];
         _button.titleLabel.font = kFont(16);
         [_button setBackgroundColor:[UIColor blackColor]];
-        [_button setTitle:@"登陆" forState:UIControlStateNormal];
+        [_button setTitle:@"个人信息" forState:UIControlStateNormal];
         [_button setTitleColor: [kMainSingleton colorWithHexString:@"#FFFFFF" alpha:1] forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(gotoLogInVC) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -53,10 +54,26 @@
 
 -(void)gotoLogInVC
 {
-//    zZhuCeController
-    zDengluController * dlVC = [[zDengluController alloc]init];
-    dlVC.title = @"登陆";
-    [self.navigationController pushViewController:dlVC animated:YES];
+    zUserModel * model = [zUserInfo shareInstance].userInfo;
+    NSDictionary * userInfo = [model mj_keyValues];
+    
+    NSString * userInfojson = [userInfo jsonString];
+    
+    NSString * content = [NSString stringWithFormat:@"您的信息\n%@",userInfojson];
+    [LEEAlert alert].config
+    .LeeTitle(@"温馨提示")
+    .LeeContent(content)
+    .LeeCancelAction(@"取消", ^{
+        // 点击事件Block
+    })
+    .LeeAction(@"确认", ^{
+        // 点击事件Block
+    })
+    .LeeShow();
+    
+//    zDengluController * dlVC = [[zDengluController alloc]init];
+//    dlVC.title = @"登陆";
+//    [self.navigationController pushViewController:dlVC animated:YES];
 }
 
 @end

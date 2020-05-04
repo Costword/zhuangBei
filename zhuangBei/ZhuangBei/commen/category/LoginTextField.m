@@ -84,7 +84,7 @@
 #pragma mark - getter and setter
 - (void)setMyPlaceHolder:(NSString *)myPlaceHolder {
     _myPlaceHolder = myPlaceHolder;    
-    NSMutableAttributedString *placeholderString = [[NSMutableAttributedString alloc] initWithString:myPlaceHolder attributes:@{NSForegroundColorAttributeName : [kMainSingleton colorWithHexString:@"#c9c9c9" alpha:1], NSFontAttributeName: kFont(16)}];
+    NSMutableAttributedString *placeholderString = [[NSMutableAttributedString alloc] initWithString:myPlaceHolder attributes:@{NSForegroundColorAttributeName : [kMainSingleton colorWithHexString:@"#9B9B9B" alpha:1], NSFontAttributeName: kFont(16)}];
     self.attributedPlaceholder = placeholderString;
 }
 
@@ -92,6 +92,8 @@
     _icon = icon;
     _iconView.image = icon;
 }
+
+
 
 
 @end

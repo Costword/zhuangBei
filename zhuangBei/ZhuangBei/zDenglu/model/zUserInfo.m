@@ -7,10 +7,11 @@
 //
 
 #import "zUserInfo.h"
-#import <objc/runtime.h>
 
+static NSString * UserDefaultRemmberAccount = @"UserDefaultRemmberAccount";
 static NSString * UserDefaultPassword = @"UserDefaultPassword";
 static NSString * UserDefaultPhoneNum = @"UserDefaultPhoneNum";
+static NSString * UserDefaultInfo = @"userInfo.archiver";
 
 @implementation zUserInfo
 
@@ -27,52 +28,24 @@ static NSString * UserDefaultPhoneNum = @"UserDefaultPhoneNum";
 -(instancetype)init
 {
     if (self = [super init]) {
-        NSUserDefaults * accountDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *phonenum = [accountDefaults objectForKey:UserDefaultPhoneNum];
-        NSString *password = [accountDefaults objectForKey:UserDefaultPassword];
+//        NSUserDefaults * accountDefaults = [NSUserDefaults standardUserDefaults];
+//        NSString *phonenum = [accountDefaults objectForKey:UserDefaultPhoneNum];
+//        NSString *password = [accountDefaults objectForKey:UserDefaultPassword];
+//        NSString *remmber = [accountDefaults objectForKey:UserDefaultRemmberAccount];
         
-        self.userAccount = phonenum;
-        self.userPassWord = password;
+        NSString * temp  = NSTemporaryDirectory();
+        NSString * filePath = [temp stringByAppendingPathComponent:UserDefaultInfo];
+        zUserModel *userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+        self.remmberAccount = userInfo.remmberPassword;
+        self.userAccount = userInfo.username;
+        self.userPassWord = userInfo.userPassWord;
+        self.userInfo = userInfo;
     }
     return self;
 }
 
 
-//归档时调用
--(void)encodeWithCoder:(NSCoder *)coder
-{
-    unsigned int count = 0;
-    Ivar * ivars = class_copyIvarList([self class], &count);
-    for (int i = 0; i < count; i++) {
-        Ivar ivar = ivars[i];
-        const char * name = ivar_getName(ivar);
-        NSString * key = [NSString stringWithUTF8String:name];
-        //kvc 获取属性的值
-        id value = [self valueForKey:key];
-        //归档!!
-        [coder encodeObject:value forKey:key];
-    }
-    free(ivars);
-}
 
-
-- (nullable instancetype)initWithCoder:(nonnull NSCoder *)coder {
-    if (self = [super init]) {
-        unsigned int count = 0;
-        Ivar * ivars = class_copyIvarList([self class], &count);
-        for (int i = 0; i < count; i++) {
-            Ivar ivar = ivars[i];
-            const char * name = ivar_getName(ivar);
-            NSString * key = [NSString stringWithUTF8String:name];
-            //解档
-            id value = [coder decodeObjectForKey:key];
-            //设置到属性上面  kvc
-            [self setValue:value forKey:key];
-        }
-        free(ivars);
-    }
-    return self;
-}
 
 -(void)setUserAccount:(NSString *)userAccount
 {
@@ -86,19 +59,39 @@ static NSString * UserDefaultPhoneNum = @"UserDefaultPhoneNum";
 }
 
 -(void)deleate{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults removeObjectForKey:UserDefaultPassword];
-    [userDefaults removeObjectForKey:UserDefaultPhoneNum];
-    [userDefaults synchronize];//修改立即同步
+    self.userInfo = [[zUserModel alloc]init];
+    self.userInfo.remmberPassword = self.remmberAccount;
+    if ([self.remmberAccount isEqualToString:@"1"]) {
+        self.userInfo.username = self.userAccount;
+        self.userInfo.userPassWord = self.userPassWord;
+    }else
+    {
+        //删除账号密码
+    }
+    NSString * temp  = NSTemporaryDirectory();
+    NSString * filePath = [temp stringByAppendingPathComponent:UserDefaultInfo];
+    [NSKeyedArchiver archiveRootObject:self.userInfo toFile:filePath];
+    
 }
 
 -(void)saveUserInfo
 {
     if (_userPassWord.length>0 && _userAccount.length>0) {
         NSLog(@"储存 账号:%@ \n密码:%@",_userAccount,_userPassWord);
-        NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
-        [accountDefaults setObject:_userAccount forKey:UserDefaultPassword];
-        [accountDefaults setObject:_userPassWord forKey:UserDefaultPhoneNum];
+//        NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
+//        [accountDefaults setObject:self.remmberAccount forKey:UserDefaultRemmberAccount];
+//        if ([self.remmberAccount isEqualToString:@"1"]) {
+//            [accountDefaults setObject:self.userAccount forKey:UserDefaultPassword];
+//            [accountDefaults setObject:self.userPassWord forKey:UserDefaultPhoneNum];
+//        }else
+//        {
+//
+//        }
+        self.userInfo.userPassWord = self.userPassWord;
+        self.userInfo.remmberPassword = self.remmberAccount;
+        NSString * temp  = NSTemporaryDirectory();
+        NSString * filePath = [temp stringByAppendingPathComponent:UserDefaultInfo];
+        [NSKeyedArchiver archiveRootObject:self.userInfo toFile:filePath];
     }else
     {
         NSLog(@"账号或密码为空");

@@ -9,6 +9,7 @@
 #import "SceneDelegate.h"
 #import "MainNavController.h"
 #import "MainTabBarController.h"
+#import "zDengluController.h"
 
 @interface SceneDelegate ()
 
@@ -19,20 +20,30 @@
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions  API_AVAILABLE(ios(13.0)) API_AVAILABLE(ios(13.0)) API_AVAILABLE(ios(13.0)){
     if (scene) {
-        
         self.window = [[UIWindow alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT)];
         self.window.backgroundColor = [UIColor whiteColor];
-        MainTabBarController * rootVC  = [[MainTabBarController alloc]init];
-        MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
-        rootNav.navigationBar.hidden = YES;
         if (@available(iOS 13.0, *)) {
             self.window.windowScene = (UIWindowScene*)scene;
         } else {
-            // Fallback on earlier versions
-            //注释
+            
         }
-        self.window.rootViewController = rootNav;
-        [self.window makeKeyAndVisible];
+//        NSHTTPCookie * cookie = [cookiesTool cookieWithName:kLoginUserInfo];
+        NSString * token =  [zUserInfo shareInstance].userInfo.token;
+        if (token.length>0) {
+            MainTabBarController * rootVC  = [[MainTabBarController alloc]init];
+            MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
+            rootNav.navigationBar.hidden = YES;
+            self.window.rootViewController = rootNav;
+            [self.window makeKeyAndVisible];
+        }else
+        {
+            zDengluController * rootVC  = [[zDengluController alloc]init];
+            MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
+            rootNav.navigationBar.hidden = YES;
+            self.window.rootViewController = rootNav;
+            [self.window makeKeyAndVisible];
+        }
+        
     }
 }
 

@@ -15,10 +15,17 @@
 
 @property(strong,nonatomic)zhuCeCard * zhuceView;
 
+@property(strong,nonatomic)NSDictionary * userDic;
+
 @end
 
 @implementation zZhuCeController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
 
 -(zhuCeCard*)zhuceView
 {
@@ -30,9 +37,9 @@
             [weakSelf postDataWithUrl:url WithParam:@{@"phone":phoneNum}];
         };
         _zhuceView.zhuceBack = ^(NSMutableDictionary * _Nonnull userDic) {
-            NSLog(@"注册信息:%@",userDic);
+//            NSLog(@"注册信息:%@",userDic);
+            weakSelf.userDic = userDic;
             NSString *url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kRegister];
-//            NSString * josn = [userDic jsonString];
             [weakSelf postDataWithUrl:url WithParam:userDic];
         };
         _zhuceView.backLogin = ^{
@@ -84,28 +91,34 @@
     if ([url containsString:kRegister]) {
         NSDictionary * dic = data;
         NSLog(@"注册成功%@",dic);
-        NSString * type = dic[@"type"];
+        NSString * type = dic[@"data"][@"type"];
+        NSString * msg =dic[@"msg"];
         if ([type integerValue] == 0) {
             //注册成功 进入首页
             [[zHud shareInstance]showMessage:@"注册成功"];
+            [self.navigationController popViewControllerAnimated:YES];
             return;
         }
         if ([type integerValue] == 1) {
             //注册失败
+            [[zHud shareInstance]showMessage:msg];
             return;
         }
         if ([type integerValue] == 2) {
             //需要答题
-            [LEEAlert actionsheet].config
+            [LEEAlert alert].config
             .LeeTitle(@"温馨提示")
             .LeeContent(@"您没有邀请码\n即将进入答题环节")
-            .LeeAction(@"确认", ^{
-                
-                // 点击事件Block
-            })
             .LeeCancelAction(@"取消", ^{
-                
                 // 点击事件Block
+                [self.navigationController popViewControllerAnimated:YES];
+                [[zHud shareInstance]showMessage:@"注册失败"];
+            })
+            .LeeAction(@"确认", ^{
+                // 点击事件Block
+            zQuestionController * quesionVC = [[zQuestionController alloc]init];
+                quesionVC.userDic = self.userDic;
+            [self.navigationController pushViewController:quesionVC animated:YES];
             })
             .LeeShow();
             return;
@@ -114,10 +127,6 @@
             //需要确定邀请人是否为xxx
             return;
         }
-        
-        
-//        zQuestionController * quesionVC = [[zQuestionController alloc]init];
-//        [self.navigationController pushViewController:quesionVC animated:YES];
         return;
     }
 }
