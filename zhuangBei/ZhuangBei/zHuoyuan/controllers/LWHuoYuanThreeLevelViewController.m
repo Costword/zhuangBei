@@ -65,7 +65,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 200;
+        _tableView.rowHeight = 210;
         [_tableView registerClass:[LWHuoYuanThreeLevelListTableViewCell class] forCellReuseIdentifier:@"LWHuoYuanThreeLevelListTableViewCell"];
         _tableView.backgroundColor = UIColor.whiteColor;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

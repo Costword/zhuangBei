@@ -93,12 +93,17 @@
 		893A18F424592D1E00D8C36C /* LWGongYingShangListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18F324592D1E00D8C36C /* LWGongYingShangListViewController.m */; };
 		893A18F724592D3E00D8C36C /* LWGongYingShangListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18F624592D3E00D8C36C /* LWGongYingShangListTableViewCell.m */; };
 		89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 89487BEA24544E4B00D4FA67 /* Foundation+Log.m */; };
+		894E4112245A7A810028D2B4 /* UIButton+typeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 894E4111245A7A810028D2B4 /* UIButton+typeLayout.m */; };
+		894E4115245A96430028D2B4 /* LWLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 894E4114245A96430028D2B4 /* LWLabel.m */; };
+		894E4118245A97A20028D2B4 /* LWButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 894E4117245A97A20028D2B4 /* LWButton.m */; };
 		8957D4A124594C230096F1D7 /* LWHuoYuanBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A024594C230096F1D7 /* LWHuoYuanBaseViewController.m */; };
 		8957D4A4245955250096F1D7 /* LWSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A3245955250096F1D7 /* LWSearchViewController.m */; };
 		8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A6245955F50096F1D7 /* LWSeachView.m */; };
 		8957D4AA245975370096F1D7 /* LWHuoYuanDeatilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A9245975370096F1D7 /* LWHuoYuanDeatilViewController.m */; };
 		8957D4AD245975E10096F1D7 /* LWHuoYuanDeatilView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4AC245975E00096F1D7 /* LWHuoYuanDeatilView.m */; };
 		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
+		89D36E0C245AB1C800A6C014 /* LWSystemMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D36E0B245AB1C800A6C014 /* LWSystemMessageListViewController.m */; };
+		89D36E0F245AB93F00A6C014 /* HYTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D36E0E245AB93F00A6C014 /* HYTopBarView.m */; };
 		89F5B7DC2455955E0040F7B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */; };
 		89F5B7DF245596DD0040F7B1 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7DE245596DD0040F7B1 /* UIView+Extension.m */; };
 		89F5B7E2245599530040F7B1 /* LWHuoYuanItemsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7E1245599530040F7B1 /* LWHuoYuanItemsListViewController.m */; };
@@ -298,6 +303,12 @@
 		893A18F524592D3E00D8C36C /* LWGongYingShangListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWGongYingShangListTableViewCell.h; sourceTree = "<group>"; };
 		893A18F624592D3E00D8C36C /* LWGongYingShangListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWGongYingShangListTableViewCell.m; sourceTree = "<group>"; };
 		89487BEA24544E4B00D4FA67 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		894E4110245A7A810028D2B4 /* UIButton+typeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+typeLayout.h"; sourceTree = "<group>"; };
+		894E4111245A7A810028D2B4 /* UIButton+typeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+typeLayout.m"; sourceTree = "<group>"; };
+		894E4113245A96430028D2B4 /* LWLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWLabel.h; sourceTree = "<group>"; };
+		894E4114245A96430028D2B4 /* LWLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWLabel.m; sourceTree = "<group>"; };
+		894E4116245A97A20028D2B4 /* LWButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWButton.h; sourceTree = "<group>"; };
+		894E4117245A97A20028D2B4 /* LWButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWButton.m; sourceTree = "<group>"; };
 		8957D49F24594C230096F1D7 /* LWHuoYuanBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanBaseViewController.h; sourceTree = "<group>"; };
 		8957D4A024594C230096F1D7 /* LWHuoYuanBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanBaseViewController.m; sourceTree = "<group>"; };
 		8957D4A2245955250096F1D7 /* LWSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSearchViewController.h; sourceTree = "<group>"; };
@@ -309,6 +320,10 @@
 		8957D4AB245975E00096F1D7 /* LWHuoYuanDeatilView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanDeatilView.h; sourceTree = "<group>"; };
 		8957D4AC245975E00096F1D7 /* LWHuoYuanDeatilView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDeatilView.m; sourceTree = "<group>"; };
 		89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89D36E0A245AB1C800A6C014 /* LWSystemMessageListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSystemMessageListViewController.h; sourceTree = "<group>"; };
+		89D36E0B245AB1C800A6C014 /* LWSystemMessageListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWSystemMessageListViewController.m; sourceTree = "<group>"; };
+		89D36E0D245AB93F00A6C014 /* HYTopBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYTopBarView.h; sourceTree = "<group>"; };
+		89D36E0E245AB93F00A6C014 /* HYTopBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYTopBarView.m; sourceTree = "<group>"; };
 		89F5B7DA2455955D0040F7B1 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
 		89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 		89F5B7DD245596DD0040F7B1 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -413,6 +428,8 @@
 		003A932A245086110001F615 /* category */ = {
 			isa = PBXGroup;
 			children = (
+				894E4110245A7A810028D2B4 /* UIButton+typeLayout.h */,
+				894E4111245A7A810028D2B4 /* UIButton+typeLayout.m */,
 				0087184C245960B2003F8CD3 /* json */,
 				0091FCE8245E68950046691F /* UICollectionViewLeftAlignedLayout.h */,
 				0091FCE7245E68950046691F /* UICollectionViewLeftAlignedLayout.m */,
@@ -665,6 +682,8 @@
 			children = (
 				009FB66D2450093A00133974 /* zJiaoliuController.h */,
 				009FB66E2450093A00133974 /* zJiaoliuController.m */,
+				89D36E0A245AB1C800A6C014 /* LWSystemMessageListViewController.h */,
+				89D36E0B245AB1C800A6C014 /* LWSystemMessageListViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -847,8 +866,14 @@
 		8921697824567045007C6615 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				89D36E0D245AB93F00A6C014 /* HYTopBarView.h */,
+				89D36E0E245AB93F00A6C014 /* HYTopBarView.m */,
 				89216979245670AE007C6615 /* LWSwitchBarView.h */,
 				8921697A245670AE007C6615 /* LWSwitchBarView.m */,
+				894E4113245A96430028D2B4 /* LWLabel.h */,
+				894E4114245A96430028D2B4 /* LWLabel.m */,
+				894E4116245A97A20028D2B4 /* LWButton.h */,
+				894E4117245A97A20028D2B4 /* LWButton.m */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1104,6 +1129,7 @@
 				89216982245686E2007C6615 /* LWJiaoLiuGroupCollectionView.m in Sources */,
 				8921697B245670AE007C6615 /* LWSwitchBarView.m in Sources */,
 				0091FCE6245E681B0046691F /* zCityCollectionCell.m in Sources */,
+				894E4118245A97A20028D2B4 /* LWButton.m in Sources */,
 				009FB61A244FE8C200133974 /* AppDelegate.m in Sources */,
 				009FB639244FE8DF00133974 /* UIView+TouchAreaInsets.m in Sources */,
 				001ECA712453C49500727379 /* zZhaoHuiController.m in Sources */,
@@ -1113,6 +1139,7 @@
 				00CA47672455B91E006A2885 /* zQuestionController.m in Sources */,
 				00871851245960B2003F8CD3 /* NSDictionary+JSON.m in Sources */,
 				0091FCFD245ECBDE0046691F /* editTextField.m in Sources */,
+				89D36E0F245AB93F00A6C014 /* HYTopBarView.m in Sources */,
 				009FB68224500D7800133974 /* NSString+Size.m in Sources */,
 				8921697524566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m in Sources */,
 				0091FCE9245E68950046691F /* UICollectionViewLeftAlignedLayout.m in Sources */,
@@ -1132,12 +1159,14 @@
 				003A932D2450866D0001F615 /* LoginTextField.m in Sources */,
 				003FEABF245BFB8500E8D61E /* zSettingCellView.m in Sources */,
 				893A18F724592D3E00D8C36C /* LWGongYingShangListTableViewCell.m in Sources */,
+				89D36E0C245AB1C800A6C014 /* LWSystemMessageListViewController.m in Sources */,
 				009FB6882450425900133974 /* zNoContentView.m in Sources */,
 				0087184B2459585C003F8CD3 /* QuestionFootView.m in Sources */,
 				001ECA7B2454449000727379 /* zhuCeCard.m in Sources */,
 				00372AED2456842F00E51931 /* PPNetworkHelper.m in Sources */,
 				8957D4AA245975370096F1D7 /* LWHuoYuanDeatilViewController.m in Sources */,
 				001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */,
+				894E4112245A7A810028D2B4 /* UIButton+typeLayout.m in Sources */,
 				009FB636244FE8DF00133974 /* FUTabBar.m in Sources */,
 				009FB68024500D7800133974 /* UIView+Frame.m in Sources */,
 				8921698824569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m in Sources */,
@@ -1150,6 +1179,7 @@
 				009FB657244FECC500133974 /* baseViewController.m in Sources */,
 				009FB634244FE8DF00133974 /* MainNavController.m in Sources */,
 				009FB669245007ED00133974 /* zDengluController.m in Sources */,
+				894E4115245A96430028D2B4 /* LWLabel.m in Sources */,
 				8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */,
 				00CA47702455B9DD006A2885 /* QuestionModel.m in Sources */,
 				00372B0B2456A54B00E51931 /* zInstructionsCard.m in Sources */,
