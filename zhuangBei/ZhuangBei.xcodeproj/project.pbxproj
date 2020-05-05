@@ -24,6 +24,8 @@
 		003FEABC245BFB0D00E8D61E /* zSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003FEABB245BFB0D00E8D61E /* zSettingViewController.m */; };
 		003FEABF245BFB8500E8D61E /* zSettingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 003FEABE245BFB8500E8D61E /* zSettingCellView.m */; };
 		003FEAC2245C198A00E8D61E /* zUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 003FEAC1245C198A00E8D61E /* zUserModel.m */; };
+		0065DF16245FADBF008D3D98 /* zInviteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0065DF15245FADBF008D3D98 /* zInviteController.m */; };
+		0065DF19245FB7A9008D3D98 /* zCallBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0065DF18245FB7A9008D3D98 /* zCallBackController.m */; };
 		0087184B2459585C003F8CD3 /* QuestionFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0087184A2459585C003F8CD3 /* QuestionFootView.m */; };
 		00871851245960B2003F8CD3 /* NSDictionary+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 0087184F245960B2003F8CD3 /* NSDictionary+JSON.m */; };
 		00871852245960B2003F8CD3 /* NSArray+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 00871850245960B2003F8CD3 /* NSArray+JSON.m */; };
@@ -163,6 +165,10 @@
 		003FEABE245BFB8500E8D61E /* zSettingCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zSettingCellView.m; sourceTree = "<group>"; };
 		003FEAC0245C198A00E8D61E /* zUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zUserModel.h; sourceTree = "<group>"; };
 		003FEAC1245C198A00E8D61E /* zUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zUserModel.m; sourceTree = "<group>"; };
+		0065DF14245FADBF008D3D98 /* zInviteController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zInviteController.h; sourceTree = "<group>"; };
+		0065DF15245FADBF008D3D98 /* zInviteController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zInviteController.m; sourceTree = "<group>"; };
+		0065DF17245FB7A9008D3D98 /* zCallBackController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCallBackController.h; sourceTree = "<group>"; };
+		0065DF18245FB7A9008D3D98 /* zCallBackController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zCallBackController.m; sourceTree = "<group>"; };
 		008718492459585C003F8CD3 /* QuestionFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuestionFootView.h; sourceTree = "<group>"; };
 		0087184A2459585C003F8CD3 /* QuestionFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuestionFootView.m; sourceTree = "<group>"; };
 		0087184D245960B2003F8CD3 /* NSDictionary+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JSON.h"; sourceTree = "<group>"; };
@@ -729,6 +735,10 @@
 				0091FCEE245EAE870046691F /* zPersonalController.m */,
 				0091FCFE245EE1520046691F /* zUserDescController.h */,
 				0091FCFF245EE1520046691F /* zUserDescController.m */,
+				0065DF14245FADBF008D3D98 /* zInviteController.h */,
+				0065DF15245FADBF008D3D98 /* zInviteController.m */,
+				0065DF17245FB7A9008D3D98 /* zCallBackController.h */,
+				0065DF18245FB7A9008D3D98 /* zCallBackController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1214,10 +1224,12 @@
 				009FB637244FE8DF00133974 /* UIImage+Extension.m in Sources */,
 				0091FCF3245EB2920046691F /* zPersonalModel.m in Sources */,
 				00D6E2DD2459A6D200B6E327 /* zNetWorkManger.m in Sources */,
+				0065DF16245FADBF008D3D98 /* zInviteController.m in Sources */,
 				009FB68124500D7800133974 /* MainSingleton.m in Sources */,
 				89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */,
 				0091FCEF245EAE870046691F /* zPersonalController.m in Sources */,
 				009FB63A244FE8DF00133974 /* UIView+FU_Animation.m in Sources */,
+				0065DF19245FB7A9008D3D98 /* zCallBackController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

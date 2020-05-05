@@ -13,6 +13,8 @@
 #import "zSettingViewController.h"
 #import "zPersonalController.h"
 #import "zUserDescController.h"
+#import "zInviteController.h"
+#import "zCallBackController.h"
 
 @interface zWodeController ()
 
@@ -82,6 +84,16 @@
                 userDesc.title = @"个人信息";
                 [weakSelf.navigationController pushViewController:userDesc animated:YES];
                 return;
+            }
+            if (type == 3) {
+                zInviteController * inviter = [[zInviteController alloc]init];
+                inviter.title = @"邀请好友";
+                [weakSelf.navigationController pushViewController:inviter animated:YES];
+            }
+            if (type == 4) {
+                zCallBackController * zcallBack = [[zCallBackController alloc]init];
+                zcallBack.title = @"意见反馈";
+                [weakSelf.navigationController pushViewController:zcallBack animated:YES];
             }
         };
     }
