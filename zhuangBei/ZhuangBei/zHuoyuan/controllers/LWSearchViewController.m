@@ -10,11 +10,12 @@
 #import "LWSeachView.h"
 #import "LWHuoYuanThreeLevelListTableViewCell.h"
 #import "LWHuoYuanDeatilViewController.h"
-
+#import "PPNetworkHelper.h"
 @interface LWSearchViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray * listDatas;
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) LWSeachView * searchView;
+@property (nonatomic, strong) NSString * searchValue;
 
 @end
 
@@ -22,30 +23,65 @@
 
 - (void)requestDatas
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_tableView.mj_header endRefreshing];
-        [_tableView.mj_footer endRefreshing];
-    });
+    [PPNetworkHelper cancelAllRequest];
+    
+    [ServiceManager requestPostWithUrl:@"app/appzhuangbei/listByQian" Parameters:@{@"searchValue":LWDATA(self.searchValue),@"gysLimit":@"10"} success:^(id  _Nonnull response) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        if ([response[@"code"] integerValue] == 0) {
+            NSDictionary *page = response[@"page"];
+            self.currPage = [page[@"currPage"] integerValue];
+            self.totalPage = [page[@"totalPage"] integerValue];
+            NSArray *list = page[@"list"];
+            if (self.currPage == 1) {
+                [self.listDatas removeAllObjects];
+            }
+            for (NSDictionary *dict in list) {
+                [self.listDatas addObject: [LWHuoYuanThreeLevelModel modelWithDictionary:dict]];
+            }
+            
+            if (self.currPage >= self.totalPage) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                [self.tableView.mj_footer resetNoMoreData];
+            }
+        }
+        if (self.listDatas.count == 0) {
+            self.nothingView.alpha = 1;
+            self.tableView.hidden = YES;
+        }
+        self.tableView.mj_footer.hidden = self.listDatas.count == 0;
+        [self.tableView reloadData];
+    } failure:^(NSError * _Nonnull error) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        if (self.currPage == 1) {
+            [self.tableView.mj_footer setHidden:YES];
+        }
+    }];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-//    self.navigationController.navigationBar.hidden = NO;
+    //    self.navigationController.navigationBar.hidden = NO;
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    self.navigationController.navigationBar.hidden = YES;
+    //    self.navigationController.navigationBar.hidden = YES;
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self ConfiUI];
+    self.tableView.mj_footer.hidden = YES;
 }
 
 - (void)ConfiUI
@@ -56,6 +92,8 @@
             [weakself.navigationController popViewControllerAnimated:YES];
         }else{
             LWLog(@"------------------%@",str);
+            weakself.searchValue = str;
+            [weakself requestDatas];
         }
     }];
     [self.view addSubview:self.searchView];
@@ -77,17 +115,20 @@
 {
     LWHuoYuanThreeLevelListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWHuoYuanThreeLevelListTableViewCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.model  = self.listDatas[indexPath.row];
     return  cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  10;
+    return  self.listDatas.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LWHuoYuanDeatilViewController *vc = [LWHuoYuanDeatilViewController new];
+    LWHuoYuanThreeLevelModel *model = self.listDatas[indexPath.row];
+    vc.modelId = model.zbId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -103,9 +144,16 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
         _tableView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
-
+        
     }
     return _tableView;
 }
 
+- (NSMutableArray *)listDatas
+{
+    if (!_listDatas) {
+        _listDatas = [[NSMutableArray alloc] init];
+    }
+    return _listDatas;
+}
 @end

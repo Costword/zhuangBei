@@ -701,4 +701,5 @@ static CGRect swapWidthAndHeight(CGRect rect)
     
     return resultImage;
 }
+
 @end

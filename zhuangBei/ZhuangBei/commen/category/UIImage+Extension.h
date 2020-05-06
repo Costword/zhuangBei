@@ -159,4 +159,6 @@
 /// @param image 图片
 /// @param maxLength 上线大小
 + (UIImage *)compressImage:(UIImage *)image toByte:(NSUInteger)maxLength;
+
+
 @end
