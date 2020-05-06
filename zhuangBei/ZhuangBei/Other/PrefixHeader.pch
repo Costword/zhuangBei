@@ -29,6 +29,9 @@
 #import "NSString+Size.h"
 #import "LWLabel.h"
 #import "LWButton.h"
+#import "ServiceManager.h"
+#import   "UIImageView+WebCache.h"
+#import "UIImageView+LWImageView.h"
 
 #define kLoginUserInfo @"loginUserInfo"
 #define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width

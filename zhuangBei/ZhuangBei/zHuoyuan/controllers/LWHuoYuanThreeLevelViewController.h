@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LWHuoYuanThreeLevelViewController : LWHuoYuanBaseViewController
 @property (nonatomic, strong) NSString * titleStr;
+@property (nonatomic, strong) NSString * zbTypeId;
 
 @end
 

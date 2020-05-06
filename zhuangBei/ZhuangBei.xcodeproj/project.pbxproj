@@ -103,6 +103,10 @@
 		8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A6245955F50096F1D7 /* LWSeachView.m */; };
 		8957D4AA245975370096F1D7 /* LWHuoYuanDeatilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A9245975370096F1D7 /* LWHuoYuanDeatilViewController.m */; };
 		8957D4AD245975E10096F1D7 /* LWHuoYuanDeatilView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4AC245975E00096F1D7 /* LWHuoYuanDeatilView.m */; };
+		895BD9C52462604600AA5947 /* ServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9C42462604600AA5947 /* ServiceManager.m */; };
+		895BD9C82462661800AA5947 /* LWHuoYuanDaTingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9C72462661800AA5947 /* LWHuoYuanDaTingModel.m */; };
+		895BD9CD24626C4000AA5947 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9CC24626C4000AA5947 /* BaseModel.m */; };
+		895BD9D424629AFC00AA5947 /* UIImageView+LWImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9D324629AFC00AA5947 /* UIImageView+LWImageView.m */; };
 		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
 		89D36E0C245AB1C800A6C014 /* LWSystemMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D36E0B245AB1C800A6C014 /* LWSystemMessageListViewController.m */; };
 		89D36E0F245AB93F00A6C014 /* HYTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D36E0E245AB93F00A6C014 /* HYTopBarView.m */; };
@@ -325,6 +329,14 @@
 		8957D4A9245975370096F1D7 /* LWHuoYuanDeatilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDeatilViewController.m; sourceTree = "<group>"; };
 		8957D4AB245975E00096F1D7 /* LWHuoYuanDeatilView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanDeatilView.h; sourceTree = "<group>"; };
 		8957D4AC245975E00096F1D7 /* LWHuoYuanDeatilView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDeatilView.m; sourceTree = "<group>"; };
+		895BD9C32462604600AA5947 /* ServiceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceManager.h; sourceTree = "<group>"; };
+		895BD9C42462604600AA5947 /* ServiceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceManager.m; sourceTree = "<group>"; };
+		895BD9C62462661800AA5947 /* LWHuoYuanDaTingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanDaTingModel.h; sourceTree = "<group>"; };
+		895BD9C72462661800AA5947 /* LWHuoYuanDaTingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDaTingModel.m; sourceTree = "<group>"; };
+		895BD9CB24626C4000AA5947 /* BaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		895BD9CC24626C4000AA5947 /* BaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		895BD9D224629AFC00AA5947 /* UIImageView+LWImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LWImageView.h"; sourceTree = "<group>"; };
+		895BD9D324629AFC00AA5947 /* UIImageView+LWImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LWImageView.m"; sourceTree = "<group>"; };
 		89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89D36E0A245AB1C800A6C014 /* LWSystemMessageListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSystemMessageListViewController.h; sourceTree = "<group>"; };
 		89D36E0B245AB1C800A6C014 /* LWSystemMessageListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWSystemMessageListViewController.m; sourceTree = "<group>"; };
@@ -457,6 +469,8 @@
 				001ECA742453CCB700727379 /* zHud.m */,
 				001ECA762453DA3200727379 /* phoneNumCheck.h */,
 				001ECA772453DA3200727379 /* phoneNumCheck.m */,
+				895BD9D224629AFC00AA5947 /* UIImageView+LWImageView.h */,
+				895BD9D324629AFC00AA5947 /* UIImageView+LWImageView.m */,
 			);
 			path = category;
 			sourceTree = "<group>";
@@ -746,12 +760,12 @@
 		009FB654244FEC9900133974 /* commen */ = {
 			isa = PBXGroup;
 			children = (
+				895BD9C924626BDE00AA5947 /* baseMoudel */,
 				00D6E2DA2459A6B700B6E327 /* network */,
 				8921697824567045007C6615 /* Component */,
 				89487BE824544E4000D4FA67 /* Tools */,
 				89487BE724544E1500D4FA67 /* Thrid */,
 				003A932A245086110001F615 /* category */,
-				009FB6832450422400133974 /* controllers */,
 				009FB6842450422500133974 /* url */,
 				009FB6852450422500133974 /* views */,
 				009FB67624500D5300133974 /* aHelpers */,
@@ -832,6 +846,8 @@
 			children = (
 				00D6E2DB2459A6D200B6E327 /* zNetWorkManger.h */,
 				00D6E2DC2459A6D200B6E327 /* zNetWorkManger.m */,
+				895BD9C32462604600AA5947 /* ServiceManager.h */,
+				895BD9C42462604600AA5947 /* ServiceManager.m */,
 			);
 			name = network;
 			path = ZhuangBei/network;
@@ -869,6 +885,8 @@
 		8921697724566BB1007C6615 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				895BD9C62462661800AA5947 /* LWHuoYuanDaTingModel.h */,
+				895BD9C72462661800AA5947 /* LWHuoYuanDaTingModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -934,6 +952,24 @@
 			children = (
 			);
 			path = Confi;
+			sourceTree = "<group>";
+		};
+		895BD9C924626BDE00AA5947 /* baseMoudel */ = {
+			isa = PBXGroup;
+			children = (
+				895BD9CA24626C2D00AA5947 /* model */,
+				009FB6832450422400133974 /* controllers */,
+			);
+			path = baseMoudel;
+			sourceTree = "<group>";
+		};
+		895BD9CA24626C2D00AA5947 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				895BD9CB24626C4000AA5947 /* BaseModel.h */,
+				895BD9CC24626C4000AA5947 /* BaseModel.m */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		89A9382924542A06001C77A8 /* Other */ = {
@@ -1138,6 +1174,7 @@
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				89216982245686E2007C6615 /* LWJiaoLiuGroupCollectionView.m in Sources */,
 				8921697B245670AE007C6615 /* LWSwitchBarView.m in Sources */,
+				895BD9C52462604600AA5947 /* ServiceManager.m in Sources */,
 				0091FCE6245E681B0046691F /* zCityCollectionCell.m in Sources */,
 				894E4118245A97A20028D2B4 /* LWButton.m in Sources */,
 				009FB61A244FE8C200133974 /* AppDelegate.m in Sources */,
@@ -1157,6 +1194,7 @@
 				009FB63C244FE8DF00133974 /* UITabBarItem+Extension.m in Sources */,
 				0091FCFA245EC1700046691F /* zPersonalHeader.m in Sources */,
 				009FB68B2450428000133974 /* zNothingView.m in Sources */,
+				895BD9C82462661800AA5947 /* LWHuoYuanDaTingModel.m in Sources */,
 				8921697624566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m in Sources */,
 				893A18F424592D1E00D8C36C /* LWGongYingShangListViewController.m in Sources */,
 				89F5B7E2245599530040F7B1 /* LWHuoYuanItemsListViewController.m in Sources */,
@@ -1203,6 +1241,7 @@
 				0091FD00245EE1520046691F /* zUserDescController.m in Sources */,
 				8957D4A124594C230096F1D7 /* LWHuoYuanBaseViewController.m in Sources */,
 				00372B0D2456A54B00E51931 /* zUserInfoCard.m in Sources */,
+				895BD9D424629AFC00AA5947 /* UIImageView+LWImageView.m in Sources */,
 				009FB63E244FE8DF00133974 /* NSString+size.m in Sources */,
 				003FEAC2245C198A00E8D61E /* zUserModel.m in Sources */,
 				8957D4AD245975E10096F1D7 /* LWHuoYuanDeatilView.m in Sources */,
@@ -1229,6 +1268,7 @@
 				89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */,
 				0091FCEF245EAE870046691F /* zPersonalController.m in Sources */,
 				009FB63A244FE8DF00133974 /* UIView+FU_Animation.m in Sources */,
+				895BD9CD24626C4000AA5947 /* BaseModel.m in Sources */,
 				0065DF19245FB7A9008D3D98 /* zCallBackController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

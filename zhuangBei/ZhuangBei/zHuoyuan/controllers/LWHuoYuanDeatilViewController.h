@@ -11,7 +11,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LWHuoYuanDeatilViewController : baseViewController
-
+//装备型号id
+@property (nonatomic, strong) NSString * modelId;
+//供应商id
+@property (nonatomic, strong) NSString * gongYingShangDm;
+//装备id
+@property (nonatomic, strong) NSString * zhuangBeiDm;
+//装备类型
+@property (nonatomic, strong) NSString * zhuangBeiLx;
+//装备名称
+@property (nonatomic, strong) NSString * zhuangBeiName;
 @end
 
 NS_ASSUME_NONNULL_END

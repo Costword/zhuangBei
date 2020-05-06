@@ -9,28 +9,61 @@
 #import "zHyController.h"
 #import "LWHuoYuanListCollectionViewCell.h"
 #import "LWHuoYuanItemsListViewController.h"
+#import "LWHuoYuanDaTingModel.h"
 
 @interface zHyController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView * collectView;
-@property (nonatomic, strong) NSMutableArray * listDatasMutableArray;
+@property (nonatomic, strong) NSMutableArray<LWHuoYuanDaTingModel *> * listDatasMutableArray;
 
 @end
 
 @implementation zHyController
 
+//货源大厅一级列表
 - (void)requestDatas
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_collectView.mj_header endRefreshing];
-        [_collectView.mj_footer endRefreshing];
-    });
+    [ServiceManager requestPostWithUrl:@"app/appzhuangbeitype/list" Parameters:@{@"parentId":@"1"} success:^(id  _Nonnull response) {
+        [self.collectView.mj_footer setHidden:NO];
+        [self.collectView.mj_header endRefreshing];
+        [self.collectView.mj_footer endRefreshing];
+        
+//        LWLog(@"-------------货源大厅一级列表:%@",response);
+        if ([response[@"code"] integerValue] == 0) {
+            NSDictionary *page = response[@"page"];
+            self.currPage = [page[@"currPage"] integerValue];
+            self.totalPage = [page[@"totalPage"] integerValue];
+            NSArray *list = page[@"list"];
+            if (self.currPage == 1) {
+                [self.listDatasMutableArray removeAllObjects];
+            }
+            for (NSDictionary *dict in list) {
+                [self.listDatasMutableArray addObject: [LWHuoYuanDaTingModel modelWithDictionary:dict]];
+            }
+            
+            if (self.currPage >= self.totalPage) {
+                [self.collectView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                [self.collectView.mj_footer resetNoMoreData];
+            }
+        }
+        self.collectView.mj_footer.hidden = self.listDatasMutableArray.count == 0;
+        [self.collectView reloadData];
+    } failure:^(NSError * _Nonnull error) {
+        [self.collectView.mj_header endRefreshing];
+        [self.collectView.mj_footer endRefreshing];
+        if (self.currPage == 1) {
+            [self.collectView.mj_footer setHidden:YES];
+        }
+    }];
+
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self confiUI];
+    
+    [self requestDatas];
 }
 
 - (void)confiUI
@@ -44,13 +77,10 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LWHuoYuanListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LWHuoYuanListCollectionViewCell" forIndexPath:indexPath];
-    cell.descL.text = self.listDatasMutableArray[indexPath.row];
+    LWHuoYuanDaTingModel *model = self.listDatasMutableArray[indexPath.row];
+    cell.descL.text = model.name;
+    [cell.bgImageView z_imageWithImageId:model.imagesId];
     return cell;
-}
-
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -61,7 +91,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LWHuoYuanItemsListViewController *itemslist = [LWHuoYuanItemsListViewController new];
-    itemslist.titleStr = self.listDatasMutableArray[indexPath.row];
+    LWHuoYuanDaTingModel *model = self.listDatasMutableArray[indexPath.row];
+    itemslist.titleStr = model.name;
+    itemslist.parentId = model.customId;
     [self.navigationController pushViewController:itemslist animated:YES];
 }
 
@@ -92,7 +124,7 @@
     if (!_listDatasMutableArray) {
         _listDatasMutableArray = [[NSMutableArray alloc] init];
 #warning +++++++++++testdatas
-        [self.listDatasMutableArray addObjectsFromArray:@[@"特巡警装备/软件",@"警保装备/软件",@"刑侦装备/软件",@"禁毒装备/软件",@"交警装备/软件",@"监所装备/软件",@"法制装备/软件"]];
+//        [self.listDatasMutableArray addObjectsFromArray:@[@"特巡警装备/软件",@"警保装备/软件",@"刑侦装备/软件",@"禁毒装备/软件",@"交警装备/软件",@"监所装备/软件",@"法制装备/软件"]];
     }
     return _listDatasMutableArray;
 }

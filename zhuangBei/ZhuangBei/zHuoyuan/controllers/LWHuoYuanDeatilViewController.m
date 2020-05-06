@@ -15,6 +15,21 @@
 @end
 
 @implementation LWHuoYuanDeatilViewController
+
+- (void)requestDatas
+{
+    [ServiceManager requestPostWithUrl:@"app/appgyszblink/getSourceDetailsByModelId" Parameters:@{@"modelId":LWDATA(self.modelId)} success:^(id  _Nonnull response) {
+        
+        if ([response[@"code"] integerValue] == 0) {
+            
+            
+        }
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+    
+}
+
 - (void)clickBottomBtn:(UIButton *)sender
 {
     NSLog(@"-----------------%ld",sender.tag);
@@ -25,6 +40,7 @@
     // Do any additional setup after loading the view.
     self.title = @"货源详情";
     [self confiUI];
+    [self requestDatas];
 }
 
 - (void)confiUI

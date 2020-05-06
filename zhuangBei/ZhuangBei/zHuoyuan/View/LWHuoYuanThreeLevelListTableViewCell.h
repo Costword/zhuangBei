@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LWHuoYuanDaTingModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^clickItemsBlock)(gysListModel * model);
 @interface LWHuoYuanThreeLevelListTableViewCell : UITableViewCell
 
-
+@property (nonatomic, strong) LWHuoYuanThreeLevelModel * model;
+@property (nonatomic, copy) clickItemsBlock clickItemsBlock;
 
 @end
 

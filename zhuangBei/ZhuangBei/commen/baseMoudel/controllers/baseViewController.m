@@ -9,15 +9,13 @@
 #import "baseViewController.h"
 #import "PPNetworkHelper.h"
 #import "AFNetworking.h"
-#import "zNoContentView.h"
-#import "zNothingView.h"
-#import "zNetWorkManger.h"
+
 
 @interface baseViewController ()
 
-@property(strong,nonatomic)zNoContentView * noContentView;
 
-@property(strong,nonatomic)zNothingView * nothingView;
+
+
 
 @end
 

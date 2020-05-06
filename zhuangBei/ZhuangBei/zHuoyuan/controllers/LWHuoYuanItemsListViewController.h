@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LWHuoYuanItemsListViewController : LWHuoYuanBaseViewController
 @property (nonatomic, strong) NSString * titleStr;
+@property (nonatomic, strong) NSString * parentId;
 
 @end
 
