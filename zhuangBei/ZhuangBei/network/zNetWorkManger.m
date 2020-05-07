@@ -52,13 +52,18 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     //设置响应体数据为json类型
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
+//    AFJSONResponseSerializer *response = [AFJSONResponseSerializer serializer];
+//       response.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html",@"application/x-javascript", nil];
+//    manager.responseSerializer = response;
+    
     //请求体，参数（NSDictionary 类型）
 //    NSDictionary *parameters = param;
     [manager POST:url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
+        NSLog(@"\n*************url:%@,\n para:%@ \n*********responseObject:%@",url,param,responseObject);
         loadSuccess(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        LWLog(@"\n***********请求失败**url:%@,\n para:%@ \n*********error:%@********",url,param,error);
         loadFailure(error);
     }];
 }

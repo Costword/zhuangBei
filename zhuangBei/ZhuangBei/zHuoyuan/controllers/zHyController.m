@@ -22,7 +22,8 @@
 //货源大厅一级列表
 - (void)requestDatas
 {
-    [ServiceManager requestPostWithUrl:@"app/appzhuangbeitype/list" Parameters:@{@"parentId":@"1"} success:^(id  _Nonnull response) {
+    
+    [ServiceManager requestPostWithUrl:@"app/appzhuangbeitype/list" Parameters:@{@"parentId":@"1",@"page":@(self.currPage)} success:^(id  _Nonnull response) {
         [self.collectView.mj_footer setHidden:NO];
         [self.collectView.mj_header endRefreshing];
         [self.collectView.mj_footer endRefreshing];
@@ -46,6 +47,12 @@
                 [self.collectView.mj_footer resetNoMoreData];
             }
         }
+        if (self.listDatasMutableArray.count == 0) {
+            [self.view bringSubviewToFront:self.nothingView];
+        }else{
+            [self.view sendSubviewToBack:self.nothingView];
+        }
+        self.nothingView.alpha = self.listDatasMutableArray.count == 0 ? 1:0;
         self.collectView.mj_footer.hidden = self.listDatasMutableArray.count == 0;
         [self.collectView reloadData];
     } failure:^(NSError * _Nonnull error) {
@@ -57,6 +64,7 @@
     }];
 
 }
+
 
 
 - (void)viewDidLoad {
@@ -112,8 +120,8 @@
         _collectView.delegate = self;
         _collectView.dataSource = self;
         [_collectView registerClass:[LWHuoYuanListCollectionViewCell class] forCellWithReuseIdentifier:@"LWHuoYuanListCollectionViewCell"];
-        _collectView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
-        _collectView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
+        _collectView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
+//        _collectView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
 
     }
     return _collectView;

@@ -21,7 +21,7 @@
 @implementation LWHuoYuanThreeLevelViewController
 - (void)requestDatas
 {
-    [ServiceManager requestPostWithUrl:@"app/appzhuangbei/listByQian" Parameters:@{@"id":LWDATA(self.zbTypeId),@"gysLimit":@"10"} success:^(id  _Nonnull response) {
+    [ServiceManager requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"id":LWDATA(self.zbTypeId),@"gysLimit":@(100)} success:^(id  _Nonnull response) {
         
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -39,16 +39,18 @@
                 [self.listDatas addObject: [LWHuoYuanThreeLevelModel modelWithDictionary:dict]];
             }
             
-            if (self.currPage >= self.totalPage) {
-                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-            }else{
-                [self.tableView.mj_footer resetNoMoreData];
-            }
+//            if (self.currPage >= self.totalPage) {
+//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+//            }else{
+//                [self.tableView.mj_footer resetNoMoreData];
+//            }
         }
         if (self.listDatas.count == 0) {
-            self.nothingView.alpha = 1;
-            self.tableView.hidden = YES;
+            [self.view bringSubviewToFront:self.nothingView];
+        }else{
+            [self.view sendSubviewToBack:self.nothingView];
         }
+        self.nothingView.alpha = self.listDatas.count == 0 ? 1:0;
         self.tableView.mj_footer.hidden = self.listDatas.count == 0;
         [self.tableView reloadData];
     } failure:^(NSError * _Nonnull error) {
@@ -119,8 +121,8 @@
         [_tableView registerClass:[LWHuoYuanThreeLevelListTableViewCell class] forCellReuseIdentifier:@"LWHuoYuanThreeLevelListTableViewCell"];
         _tableView.backgroundColor = UIColor.whiteColor;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
-        _tableView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
+        _tableView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
+//        _tableView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
 
     }
     return _tableView;

@@ -33,7 +33,7 @@
         _descLabel = [[UILabel alloc]init];
         _descLabel.font = kFont(14);
         _descLabel.textColor = [kMainSingleton colorWithHexString:@"#333333" alpha:0.5];
-        _descLabel.text = @"暂无搜索内容";
+        _descLabel.text = @"暂无数据";
         _descLabel.numberOfLines = 1;
     }
     return _descLabel;

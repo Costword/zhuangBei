@@ -34,4 +34,22 @@
      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:seachBtn];
 }
 
+- (void)refreshData
+{
+    self.currPage = 1;
+    [self requestDatas];
+}
+
+- (void)loadMore
+{
+    if (self.currPage < self.totalPage) {
+        ++ self.currPage;
+        [self requestDatas];
+    }
+}
+
+- (void)requestDatas
+{
+    
+}
 @end
