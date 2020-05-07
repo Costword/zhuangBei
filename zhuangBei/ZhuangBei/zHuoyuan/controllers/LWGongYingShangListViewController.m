@@ -11,17 +11,51 @@
 
 @interface LWGongYingShangListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
-
+@property (nonatomic, strong) NSMutableArray * listDatas;
 @end
 
 @implementation LWGongYingShangListViewController
 
 - (void)requestDatas
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_tableView.mj_header endRefreshing];
-        [_tableView.mj_footer endRefreshing];
-    });
+    [ServiceManager requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"Id":LWDATA(self.zbTypeId),@"gysLimit":@(100),@"page":@(self.currPage),@"searchGYSName":@"",@"zbId":LWDATA(self.zbId)} success:^(id  _Nonnull response) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        if ([response[@"code"] integerValue] == 0) {
+            NSDictionary *page = response[@"page"];
+            self.currPage = [page[@"currPage"] integerValue];
+            self.totalPage = [page[@"totalPage"] integerValue];
+            NSArray *list = page[@"list"];
+            if (self.currPage == 1) {
+                [self.listDatas removeAllObjects];
+            }
+//            for (NSDictionary *dict in list) {
+//                [self.listDatas addObject: [LWHuoYuanThreeLevelModel modelWithDictionary:dict]];
+//            }
+            
+//            if (self.currPage >= self.totalPage) {
+//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+//            }else{
+//                [self.tableView.mj_footer resetNoMoreData];
+//            }
+        }
+        if (self.listDatas.count == 0) {
+            [self.view bringSubviewToFront:self.nothingView];
+        }else{
+            [self.view sendSubviewToBack:self.nothingView];
+        }
+        self.nothingView.alpha = self.listDatas.count == 0 ? 1:0;
+        self.tableView.mj_footer.hidden = self.listDatas.count == 0;
+        [self.tableView reloadData];
+    } failure:^(NSError * _Nonnull error) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        if (self.currPage == 1) {
+                   [self.tableView.mj_footer setHidden:YES];
+               }
+    }];
 }
 
 - (void)viewDidLoad {
@@ -29,6 +63,7 @@
     // Do any additional setup after loading the view.
     self.title = @"供应商列表";
     [self confiUI];
+    [self requestDatas];
 }
 
 - (void)confiUI
@@ -70,11 +105,18 @@
         [_tableView registerClass:[LWGongYingShangListTableViewCell class] forCellReuseIdentifier:@"LWGongYingShangListTableViewCell"];
         _tableView.backgroundColor = UIColor.whiteColor;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
-        _tableView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
+        _tableView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
+        _tableView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
 
     }
     return _tableView;
 }
 
+- (NSMutableArray *)listDatas
+{
+    if (!_listDatas) {
+        _listDatas = [[NSMutableArray alloc] init];
+    }
+    return _listDatas;
+}
 @end

@@ -11,6 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LWGongYingShangListViewController : LWHuoYuanBaseViewController
+ //装备id
+@property (nonatomic, strong) NSString * zbId;
+//装备类型id
+@property (nonatomic, strong) NSString * zbTypeId;
 
 @end
 

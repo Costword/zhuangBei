@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LWHuoYuanBaseViewController : baseViewController
 
+- (void)refreshData;
+- (void)requestDatas;
+- (void)loadMore;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -18,7 +18,12 @@
 
 - (void)requestDatas
 {
-    [ServiceManager requestPostWithUrl:@"app/appgyszblink/getSourceDetailsByModelId" Parameters:@{@"modelId":LWDATA(self.modelId)} success:^(id  _Nonnull response) {
+    [ServiceManager requestPostWithUrl:@"app/appgyszblink/getSourceDetailsByModelId" Parameters:@{
+        @"modelId":LWDATA(self.modelId),
+        @"gongYingShangDm":LWDATA(self.gongYingShangDm),
+        @"zhuangBeiDm":LWDATA(self.zhuangBeiDm),
+        @"zhuangBeiLx":LWDATA(self.zhuangBeiLx),
+        @"zhuangBeiName":LWDATA(self.zhuangBeiName)} success:^(id  _Nonnull response) {
         
         if ([response[@"code"] integerValue] == 0) {
             

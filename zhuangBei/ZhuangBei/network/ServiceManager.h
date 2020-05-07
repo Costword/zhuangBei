@@ -27,14 +27,23 @@ typedef void(^RequestFailure)(NSError *error);
 @interface ServiceManager : NSObject
 
 
-+ (NSURLSessionTask *)requestPostWithUrl:(NSString *)url Parameters:(id)parameters success:(RequestSuccess)success failure:(RequestFailure)failure;
++ (void)requestPostWithUrl:(NSString *)url Parameters:(id)parameters success:(RequestSuccess)success failure:(RequestFailure)failure;
 
 
+/// POST  网络请求 内部拼接参数
+/// @param url 地址
+/// @param paraString 参数字典，内部转拼接参数
+/// @param success 成功
+/// @param failure 失败
++ (void)requestPostWithUrl:(NSString *)url paraString:(id)paraString success:(RequestSuccess)success failure:(RequestFailure)failure;
 
 
-#pragma mark - 请求的公共方法
++ (void)requestGetWithUrl:(NSString *)url Parameters:(id)parameters success:(RequestSuccess)success failure:(RequestFailure)failure;
 
-+ (NSURLSessionTask *)requestWithURL:(NSString *)URL parameters:(NSDictionary *)parameter success:(RequestSuccess)success failure:(RequestFailure)failure;
+
+//#pragma mark - 请求的公共方法
+//
+//+ (void)requestWithURL:(NSString *)URL parameters:(NSDictionary *)parameter success:(RequestSuccess)success failure:(RequestFailure)failure;
 
 @end
 

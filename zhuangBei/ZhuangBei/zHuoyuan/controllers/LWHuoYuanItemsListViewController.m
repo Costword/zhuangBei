@@ -45,6 +45,12 @@
                 [self.collectView.mj_footer resetNoMoreData];
             }
         }
+        if (self.listDatasMutableArray.count == 0) {
+            [self.view bringSubviewToFront:self.nothingView];
+        }else{
+            [self.view sendSubviewToBack:self.nothingView];
+        }
+        self.nothingView.alpha = self.listDatasMutableArray.count == 0 ? 1:0;
         self.collectView.mj_footer.hidden = self.listDatasMutableArray.count == 0;
         [self.collectView reloadData];
     } failure:^(NSError * _Nonnull error) {
@@ -109,8 +115,8 @@
         _collectView.delegate = self;
         _collectView.dataSource = self;
         [_collectView registerClass:[LWHuoYuanItemListCollectionViewCell class] forCellWithReuseIdentifier:@"LWHuoYuanItemListCollectionViewCell"];
-        _collectView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
-        _collectView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
+        _collectView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
+//        _collectView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
         
     }
     return _collectView;
