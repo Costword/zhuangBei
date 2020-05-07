@@ -8,7 +8,7 @@
 
 #import "MainTabBarController.h"
 #import "MainNavController.h"
-#import "zShouyeController.h"
+#import "zAshouyeController.h"
 #import "zHyController.h"
 #import "zJiaoliuController.h"
 #import "zWodeController.h"
@@ -30,7 +30,7 @@
 {
     //首页
     
-    zShouyeController *syVC = [[zShouyeController alloc]init];
+    zAshouyeController *syVC = [[zAshouyeController alloc]init];
     UIViewController *syNVC = [self setupChildViewController:syVC navigationController:[MainNavController class] title:@"首页" imageName:@"trends_nomal.png" selectedImageName:@"trends_select.png" offset:NO];
     
     //货源

@@ -106,9 +106,10 @@
         }
         if ([type integerValue] == 2) {
             //需要答题
+            
             [LEEAlert alert].config
             .LeeTitle(@"温馨提示")
-            .LeeContent(@"您没有邀请码\n即将进入答题环节")
+            .LeeContent(msg)
             .LeeCancelAction(@"取消", ^{
                 // 点击事件Block
                 [self.navigationController popViewControllerAnimated:YES];

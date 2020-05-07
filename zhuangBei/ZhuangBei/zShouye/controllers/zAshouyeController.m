@@ -1,29 +1,25 @@
 //
-//  zShouyeController.m
+//  zAshouyeController.m
 //  ZhuangBei
 //
-//  Created by aa on 2020/4/22.
+//  Created by aa on 2020/5/6.
 //  Copyright © 2020 aa. All rights reserved.
 //
 
-#import "zShouyeController.h"
-#import "zInterfacedConst.h"
-#import "zUserModel.h"
+#import "zAshouyeController.h"
 #import "sliderNavMenu.h"
-#import "zGoodsMangerController.h"
-#import "zCompanyController.h"
+#import "zShouyeController.h"
+#import "zHuoYuanMangerController.h"
 
-@interface zShouyeController ()<sliderNavMenuDelegate,UIScrollViewDelegate>
+@interface zAshouyeController ()<sliderNavMenuDelegate,UIScrollViewDelegate>
 
 @property(strong,nonatomic)sliderNavMenu * navigationSliderMenu;
 
 @property(strong,nonatomic)UIScrollView* childScroContentView;
 
-@property(strong,nonatomic)UIButton * button;
-
 @end
 
-@implementation zShouyeController
+@implementation zAshouyeController
 
 -(sliderNavMenu*)navigationSliderMenu
 {
@@ -31,12 +27,12 @@
         _navigationSliderMenu = [[sliderNavMenu alloc]init];
         _navigationSliderMenu.userInteractionEnabled = YES;
         _navigationSliderMenu.havesliderBar = YES;
-        _navigationSliderMenu.padding = kWidthFlot(30);
+        _navigationSliderMenu.padding = kWidthFlot(100);
         _navigationSliderMenu.sliderRoundCorner = 1.5;
         _navigationSliderMenu.normalFontColor = [UIColor colorWithHexString:@"#666666"];
         _navigationSliderMenu.selectFontColor = [UIColor colorWithHexString:@"#333333"];
-        [_navigationSliderMenu setSourceArray:@[@"货物管理",@"经销商管理"]];
-        _navigationSliderMenu.sliderType = menuAligenLeft;
+        [_navigationSliderMenu setSourceArray:@[@"控制台",@"合作伙伴"]];
+        _navigationSliderMenu.sliderType = menuAligenCenter;
         _navigationSliderMenu.delegate = self;
     }
     return _navigationSliderMenu;
@@ -59,18 +55,6 @@
     return _childScroContentView;
 }
 
--(UIButton*)button
-{
-    if (!_button) {
-        _button = [[UIButton alloc]init];
-        _button.titleLabel.font = kFont(16);
-        [_button setBackgroundColor:[UIColor blackColor]];
-        [_button setTitle:@"个人信息" forState:UIControlStateNormal];
-        [_button setTitleColor: [kMainSingleton colorWithHexString:@"#FFFFFF" alpha:1] forState:UIControlStateNormal];
-        [_button addTarget:self action:@selector(gotoLogInVC) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _button;;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -84,12 +68,13 @@
 
 -(void)setupChildViewControllers
 {
-    //货物管理
-    zGoodsMangerController* goodsVC = [[zGoodsMangerController alloc]init];
-    [self addChildViewController:goodsVC];
-    //经销商管理
-    zCompanyController * companyVC = [[zCompanyController alloc]init];
+    //控制台
+    zHuoYuanMangerController * companyVC = [[zHuoYuanMangerController alloc]init];
     [self addChildViewController:companyVC];
+    
+    //合作伙伴
+    zShouyeController* goodsVC = [[zShouyeController alloc]init];
+    [self addChildViewController:goodsVC];
 
 }
 
@@ -141,5 +126,24 @@
     [self.childScroContentView setContentOffset:offset animated:YES];
 }
 
+-(void)gotoLogInVC
+{
+    zUserModel * model = [zUserInfo shareInstance].userInfo;
+    NSDictionary * userInfo = [model mj_keyValues];
+    
+    NSString * userInfojson = [userInfo jsonString];
+    
+    NSString * content = [NSString stringWithFormat:@"您的信息\n%@",userInfojson];
+    [LEEAlert alert].config
+    .LeeTitle(@"温馨提示")
+    .LeeContent(content)
+    .LeeCancelAction(@"取消", ^{
+        // 点击事件Block
+    })
+    .LeeAction(@"确认", ^{
+        // 点击事件Block
+    })
+    .LeeShow();
+}
 
 @end
