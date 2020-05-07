@@ -32,6 +32,22 @@
 +(void)POSTworkWithUrl:(NSString*)url WithParamer:(id)param Success:(HttpRequestSuccess)loadSuccess Failure:(HttpRequestFailed)loadFailure
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    AFHTTPRequestSerializer *requestSerializer =  [AFJSONRequestSerializer serializer];
+//    NSDictionary *headerFieldValueDictionary = @{@"version":@"1.0"};
+//    if (headerFieldValueDictionary != nil) {
+//        for (NSString *httpHeaderField in headerFieldValueDictionary.allKeys) {
+//            NSString *value = headerFieldValueDictionary[httpHeaderField];
+//            [requestSerializer setValue:value forHTTPHeaderField:httpHeaderField];
+//        }
+//    }
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", nil];
+//    manager.requestSerializer = requestSerializer;
+    AFSecurityPolicy *securityPolicy = [[AFSecurityPolicy alloc] init];
+    [securityPolicy setAllowInvalidCertificates:YES];
+    [manager setSecurityPolicy:securityPolicy];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+//    [PPNetworkHelper setValue:@"9" forHTTPHeaderField:@"fromType"];
     //设置请求体数据为json类型
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     //设置响应体数据为json类型

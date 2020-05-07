@@ -33,15 +33,16 @@
     
     self.mainImageView.frame = superViewBounds;
     self.coverView.frame = superViewBounds;
-    self.indexLabel.frame = CGRectMake(0, 10, superViewBounds.size.width, 20);
+    self.indexLabel.frame = CGRectMake(0, superViewBounds.size.height-30, superViewBounds.size.width, 30);
 }
 
 - (UILabel *)indexLabel {
     if (_indexLabel == nil) {
         _indexLabel = [[UILabel alloc] init];
-        _indexLabel.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.6];
+        _indexLabel.backgroundColor = [kMainSingleton colorWithHexString:@"#DDDDDD" alpha:0.6];
         _indexLabel.font = [UIFont systemFontOfSize:16.0];
         _indexLabel.textColor = [UIColor whiteColor];
+        _indexLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _indexLabel;
 }
