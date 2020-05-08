@@ -8,7 +8,8 @@
 
 #import "LWGongYingShangListViewController.h"
 #import "LWGongYingShangListTableViewCell.h"
-
+#import "LWHuoYuanDaTingModel.h"
+#import "LWHuoYuanDeatilViewController.h"
 @interface LWGongYingShangListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray * listDatas;
@@ -31,9 +32,9 @@
             if (self.currPage == 1) {
                 [self.listDatas removeAllObjects];
             }
-//            for (NSDictionary *dict in list) {
-//                [self.listDatas addObject: [LWHuoYuanThreeLevelModel modelWithDictionary:dict]];
-//            }
+            for (NSDictionary *dict in list) {
+                [self.listDatas addObject: [LWHuoYuanThreeLevelModel modelWithDictionary:dict]];
+            }
             
 //            if (self.currPage >= self.totalPage) {
 //                [self.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -80,17 +81,27 @@
 {
     LWGongYingShangListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWGongYingShangListTableViewCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    LWHuoYuanThreeLevelModel *model = self.listDatas.firstObject;
+    cell.model = model.gysList[indexPath.row];
     return  cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  10;
+    LWHuoYuanThreeLevelModel *model = self.listDatas.firstObject;
+    return  model.gysList.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LWGongYingShangListViewController *vc = [LWGongYingShangListViewController new];
+    LWHuoYuanThreeLevelModel *model = self.listDatas.firstObject;
+    gysListModel * gysmodel = model.gysList[indexPath.row];
+    LWHuoYuanDeatilViewController *vc = [LWHuoYuanDeatilViewController new];
+    vc.modelId = model.zblxId;
+    vc.gongYingShangDm = gysmodel.customId;
+    vc.zhuangBeiDm = model.zbId;
+    vc.zhuangBeiLx = model.zblxName;
+    vc.zhuangBeiName = model.zbName;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

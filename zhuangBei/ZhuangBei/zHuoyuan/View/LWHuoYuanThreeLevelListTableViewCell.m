@@ -31,20 +31,18 @@
     _goodsNameL.text = model.zbName;
     _goodsDescL.text = [NSString stringWithFormat:@"%@>%@",model.zblxPName,model.zblxName];
     NSMutableArray *items = [[NSMutableArray alloc] init];
-//    NSMutableArray *itemsModelArr= [[NSMutableArray alloc] init];
+    //    NSMutableArray *itemsModelArr= [[NSMutableArray alloc] init];
     for (gysListModel *itemmodel in model.gysList) {
         if(!itemmodel.companyNameSecond || !itemmodel.companyNameFirst) break;
         if (items.count >= 4)  break;
         [items addObject:[NSString stringWithFormat:@"%@%@",itemmodel.companyNameFirst,itemmodel.companyNameSecond]];
-//        [itemsModelArr addObject:itemmodel];
+        //        [itemsModelArr addObject:itemmodel];
     }
     [self.itemsBgView removeAllSubviews];
-    
+    self.itemsBgView.userInteractionEnabled = YES;
     NSMutableArray *lables = [NSMutableArray array];
     for (int i = 0; i<items.count; i++) {
-        UIView *itemview = [self lineView:items[i]];
-        [itemview ex_addTapAction:self selector:@selector(clickItemsView:)];
-        itemview.tag = i;
+        UIView *itemview = [self lineView:items[i] tag:i];
         [self.itemsBgView addSubview:itemview];
         [itemview mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.left.mas_equalTo(self.itemsBgView);
@@ -52,7 +50,10 @@
                 make.top.mas_equalTo(self.itemsBgView.mas_top).mas_offset(0);
             }else{
                 UIView *lastview = lables.lastObject;
-                make.top.mas_equalTo(lastview.mas_bottom).mas_offset(5);
+                make.top.mas_equalTo(lastview.mas_bottom).mas_offset(6);
+            }
+            if (items.count - 1 == i) {
+                make.bottom.mas_equalTo(self.itemsBgView.mas_bottom);
             }
         }];
         [lables addObject:itemview];
@@ -73,7 +74,7 @@
     _goodsIv = [UIImageView new];
     _goodsNameL = [UILabel new];
     _goodsDescL = [UILabel new];
-    
+
     
     UIImageView *moreBg = [UIImageView new];
     UIButton *morebtn = [UIButton new];
@@ -89,19 +90,20 @@
     morebtn.titleLabel.font = kFont(14);
     [self.contentView addSubviews:@[_goodsIv,_goodsNameL,_goodsDescL,moreBg,morebtn]];
     [_goodsIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_offset(100);
-        make.height.mas_offset(100);
-        make.left.top.mas_equalTo(self.contentView).mas_offset(15);
+        make.width.mas_offset(110);
+        make.height.mas_offset(110);
+        make.top.mas_equalTo(self.contentView).mas_offset(20);
+        make.left.mas_equalTo(self.contentView.mas_left).mas_offset(15);
     }];
     [_goodsNameL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(_goodsIv.mas_left);
         make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
-        make.top.mas_equalTo(_goodsIv.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(_goodsIv.mas_bottom).mas_offset(20);
     }];
     [_goodsDescL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(_goodsIv.mas_left);
         make.right.mas_equalTo(_goodsNameL.mas_right);
-        make.top.mas_equalTo(_goodsNameL.mas_bottom).mas_offset(8);
+        make.top.mas_equalTo(_goodsNameL.mas_bottom).mas_offset(10);
     }];
     
     [moreBg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -126,16 +128,16 @@
     [self.goodsIv setBoundWidth:0.5 cornerRadius:0 boardColor:UIColor.grayColor];
     
     self.itemsBgView = [UIView new];
+    self.itemsBgView.userInteractionEnabled = YES;
     [self.contentView addSubview:self.itemsBgView];
     [self.itemsBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(_goodsIv.mas_right).mas_offset(20);
         make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
         make.top.mas_equalTo(moreBg.mas_bottom).mas_offset(0);
     }];
-    
 }
 
-- (UIView *)lineView:(NSString *)text
+- (UIView *)lineView:(NSString *)text tag:(NSInteger)tag
 {
     UIView *bg = [UIView new];
     UIView *des1 = [UIView new];
@@ -160,6 +162,8 @@
     }];
     UILabel *lable = [LWLabel lw_lable:@"" font:13 textColor:BASECOLOR_TEXTCOLOR];
     [bg addSubview:lable];
+    lable.tag = tag;
+//    lable.backgroundColor = UIColor.redColor;
     lable.text = text;
     [lable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(des2.mas_right).mas_offset(10);
@@ -167,6 +171,17 @@
         make.right.mas_equalTo(bg.mas_right);
         make.top.bottom.mas_equalTo(bg);
     }];
+    [bg ex_addTapAction:self selector:@selector(clickItemsView:)];
+//    bg.userInteractionEnabled = YES;
+//    UIButton *markBtn = [UIButton new];
+//    markBtn.backgroundColor = UIColor.redColor;
+//    [markBtn addTarget:self action:@selector(clickItemsView:) forControlEvents:UIControlEventTouchUpInside];
+//    markBtn.tag = tag;
+//    [bg addSubview:markBtn];
+//    [markBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.mas_equalTo(bg);
+//        make.height.mas_offset(30);
+//    }];
     return bg;
 }
 @end

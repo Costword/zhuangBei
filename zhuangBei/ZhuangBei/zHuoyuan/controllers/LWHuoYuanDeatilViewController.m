@@ -18,7 +18,7 @@
 
 - (void)requestDatas
 {
-    [ServiceManager requestPostWithUrl:@"app/appgyszblink/getSourceDetailsByModelId" Parameters:@{
+    [ServiceManager requestPostWithUrl:@"app/appgyszblink/getSourceDetailsByModelId" paraString:@{
         @"modelId":LWDATA(self.modelId),
         @"gongYingShangDm":LWDATA(self.gongYingShangDm),
         @"zhuangBeiDm":LWDATA(self.zhuangBeiDm),

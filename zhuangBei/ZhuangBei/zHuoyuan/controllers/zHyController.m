@@ -23,7 +23,7 @@
 - (void)requestDatas
 {
     
-    [ServiceManager requestPostWithUrl:@"app/appzhuangbeitype/list" Parameters:@{@"parentId":@"1",@"page":@(self.currPage)} success:^(id  _Nonnull response) {
+    [ServiceManager requestPostWithUrl:@"app/appzhuangbeitype/list" paraString :@{@"parentId":@"1",@"page":@(self.currPage)} success:^(id  _Nonnull response) {
         [self.collectView.mj_footer setHidden:NO];
         [self.collectView.mj_header endRefreshing];
         [self.collectView.mj_footer endRefreshing];

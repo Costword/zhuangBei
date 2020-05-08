@@ -44,7 +44,7 @@
         }
     }
     LWLog(@"*********urlstring:%@***********",urlstring);
-    [zNetWorkManger POSTworkWithUrl:urlstring WithParamer:@{} Success:success Failure:failure];
+    [zNetWorkManger POSTworkWithUrl:[urlstring stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] WithParamer:@{} Success:success Failure:failure];
 }
 
 

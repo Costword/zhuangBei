@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LWHuoYuanDaTingModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LWGongYingShangListTableViewCell : UITableViewCell
+@property (nonatomic, strong) gysListModel * model;
 
 @end
 
