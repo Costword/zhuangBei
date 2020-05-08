@@ -84,7 +84,7 @@
     
     [self.navigationSliderMenu mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(0);
+        make.top.mas_equalTo(KstatusBarHeight);
         make.height.mas_equalTo(44);
     }];
 }

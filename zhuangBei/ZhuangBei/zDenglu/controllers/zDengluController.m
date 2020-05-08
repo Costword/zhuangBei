@@ -118,6 +118,11 @@
             zUserModel * model = [zUserModel mj_objectWithKeyValues:dataDic];
             [zUserInfo shareInstance].userInfo = model;
             [[zUserInfo shareInstance]saveUserInfo];
+            
+            NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:url]];
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUserDefaultsCookie];
+            
             [self changeRootVC];
         }
     }

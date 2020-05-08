@@ -9,13 +9,9 @@
 #import "baseViewController.h"
 #import "PPNetworkHelper.h"
 #import "AFNetworking.h"
-
+#import "ServiceManager.h"
 
 @interface baseViewController ()
-
-
-
-
 
 @end
 
@@ -104,6 +100,14 @@
 {
     NSLog(@"当前请求的URL:%@\n参数:%@",url,param);
 
+//    [ServiceManager requestPostWithUrl:url Parameters:param success:^(id  _Nonnull response) {
+//        NSString *  text  = [self jsonToString:response];
+//        [self RequsetSuccessWithData:response AndUrl:url];
+//        NSLog(@"请求到的数据是：%@",text);
+//    } failure:^(NSError * _Nonnull error) {
+//        [self RequsetFileWithUrl:url WithError:error];
+//    }];
+    
     [zNetWorkManger POSTworkWithUrl:url WithParamer:param Success:^(id  _Nonnull responseObject) {
         NSString *  text  = [self jsonToString:responseObject];
         [self RequsetSuccessWithData:responseObject AndUrl:url];

@@ -9,6 +9,7 @@
 #import "zHuoYuanScrollHeader.h"
 #import "NewPagedFlowView.h"
 #import "PGIndexBannerSubiew.h"
+#import "PGCustomBannerView.h"
 
 @interface zHuoYuanScrollHeader ()<NewPagedFlowViewDelegate, NewPagedFlowViewDataSource>
 
@@ -30,6 +31,15 @@
 @end
 
 @implementation zHuoYuanScrollHeader
+
+//-(UILabel*)indicateLabel
+//{
+//    if (!_indicateLabel) {
+//        _indicateLabel = [[UILabel alloc]init];
+//        _indicateLabel.font = 
+//    }
+//    return _indicateLabel;
+//}
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -56,9 +66,9 @@
     pageFlowView.isOpenAutoScroll = YES;
     
     //初始化pageControl
-    UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, pageFlowView.frame.size.height - 24, SCREEN_WIDTH, 8)];
-    pageFlowView.pageControl = pageControl;
-    [pageFlowView addSubview:pageControl];
+//    UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, pageFlowView.frame.size.height - 24, SCREEN_WIDTH, 8)];
+//    pageFlowView.pageControl = pageControl;
+//    [pageFlowView addSubview:pageControl];
     [pageFlowView reloadData];
     [self addSubview:pageFlowView];
     
@@ -90,14 +100,14 @@
 #pragma mark --NewPagedFlowView Delegate
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
     
-    NSLog(@"点击了第%ld张图",(long)subIndex + 1);
+//    NSLog(@"点击了第%ld张图",(long)subIndex + 1);
     
     self.indicateLabel.text = [NSString stringWithFormat:@"点击了第%ld张图",(long)subIndex + 1];
 }
 
 - (void)didScrollToPage:(NSInteger)pageNumber inFlowView:(NewPagedFlowView *)flowView {
     
-    NSLog(@"CustomViewController 滚动到了第%ld页",pageNumber);
+//    NSLog(@"CustomViewController 滚动到了第%ld页",pageNumber);
 }
 
 #warning 假设产品需求左右中间页显示大小为 Width - 50, (Width - 50) * 9 / 16
@@ -113,11 +123,12 @@
 
 - (PGIndexBannerSubiew *)flowView:(NewPagedFlowView *)flowView cellForPageAtIndex:(NSInteger)index{
     
-    PGIndexBannerSubiew *bannerView = (PGIndexBannerSubiew *)[flowView dequeueReusableCell];
+    PGCustomBannerView *bannerView = (PGCustomBannerView *)[flowView dequeueReusableCell];
     if (!bannerView) {
-        bannerView = [[PGIndexBannerSubiew alloc] init];
+        bannerView = [[PGCustomBannerView alloc] init];
         bannerView.layer.cornerRadius = 4;
         bannerView.layer.masksToBounds = YES;
+        bannerView.indexLabel.text = [NSString stringWithFormat:@"%ld / %ld",index+1,self.imageArray.count];
     }
     
     //在这里下载网络图片

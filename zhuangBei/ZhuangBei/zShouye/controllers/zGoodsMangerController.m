@@ -8,7 +8,7 @@
 
 #import "zGoodsMangerController.h"
 #import "zShouYeLeftMenu.h"
-#import "zLeftMenuCell.h"
+#import "zHuoYuanListCell.h"
 
 @interface zGoodsMangerController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -36,7 +36,7 @@
 {
     if (!_menuTableView) {
         _menuTableView  = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        _menuTableView.backgroundColor = [UIColor clearColor];
+        _menuTableView.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
         _menuTableView.delegate = self;
         _menuTableView.dataSource = self;
         _menuTableView.allowsSelection = NO;
@@ -83,8 +83,18 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    zLeftMenuCell * cell = [zLeftMenuCell instanceWithTableView:tableView AndIndexPath:indexPath];
+    zHuoYuanListCell * cell = [zHuoYuanListCell instanceWithTableView:tableView AndIndexPath:indexPath];
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 1;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

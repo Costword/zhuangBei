@@ -25,6 +25,12 @@
 
 @implementation zShouyeController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
 -(sliderNavMenu*)navigationSliderMenu
 {
     if (!_navigationSliderMenu) {

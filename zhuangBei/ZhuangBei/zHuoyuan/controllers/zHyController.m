@@ -10,6 +10,8 @@
 #import "LWHuoYuanListCollectionViewCell.h"
 #import "LWHuoYuanItemsListViewController.h"
 #import "LWHuoYuanDaTingModel.h"
+#import "zNetWorkManger.h"
+
 
 @interface zHyController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView * collectView;
@@ -22,8 +24,7 @@
 //货源大厅一级列表
 - (void)requestDatas
 {
-    
-    [ServiceManager requestPostWithUrl:@"app/appzhuangbeitype/list" paraString :@{@"parentId":@"1",@"page":@(self.currPage)} success:^(id  _Nonnull response) {
+    [ServiceManager requestPostWithUrl:@"app/appzhuangbeitype/list" Parameters:@{@"parentId":@"1",@"page":@(self.currPage)} success:^(id  _Nonnull response) {
         [self.collectView.mj_footer setHidden:NO];
         [self.collectView.mj_header endRefreshing];
         [self.collectView.mj_footer endRefreshing];

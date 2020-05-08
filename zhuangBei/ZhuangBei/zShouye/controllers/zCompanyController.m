@@ -8,7 +8,7 @@
 
 #import "zCompanyController.h"
 #import "zShouYeLeftMenu.h"
-#import "zLeftMenuCell.h"
+#import "zHuoYuanListCell.h"
 
 @interface zCompanyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -83,7 +83,7 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    zLeftMenuCell * cell = [zLeftMenuCell instanceWithTableView:tableView AndIndexPath:indexPath];
+    zHuoYuanListCell * cell = [zHuoYuanListCell instanceWithTableView:tableView AndIndexPath:indexPath];
     return cell;
 }
 
@@ -91,5 +91,16 @@
 {
     
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 1;
+}
+
 
 @end

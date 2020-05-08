@@ -34,6 +34,9 @@
 		00558BDA2461000500550FBC /* zCompanyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BD92461000500550FBC /* zCompanyController.m */; };
 		00558BDD24610CA700550FBC /* zShouYeLeftMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BDC24610CA700550FBC /* zShouYeLeftMenu.m */; };
 		00558BE024614D6E00550FBC /* zLeftMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BDF24614D6E00550FBC /* zLeftMenuCell.m */; };
+		005ECE73246431DF00D90341 /* zLeftMenuHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 005ECE72246431DF00D90341 /* zLeftMenuHeader.m */; };
+		005ECE762464357800D90341 /* zHuoYuanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 005ECE752464357800D90341 /* zHuoYuanModel.m */; };
+		005ECE7924644E0A00D90341 /* zHuoYuanListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 005ECE7824644E0A00D90341 /* zHuoYuanListCell.m */; };
 		0065DF16245FADBF008D3D98 /* zInviteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0065DF15245FADBF008D3D98 /* zInviteController.m */; };
 		0065DF19245FB7A9008D3D98 /* zCallBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0065DF18245FB7A9008D3D98 /* zCallBackController.m */; };
 		0087184B2459585C003F8CD3 /* QuestionFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0087184A2459585C003F8CD3 /* QuestionFootView.m */; };
@@ -200,6 +203,12 @@
 		00558BDC24610CA700550FBC /* zShouYeLeftMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zShouYeLeftMenu.m; sourceTree = "<group>"; };
 		00558BDE24614D6E00550FBC /* zLeftMenuCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zLeftMenuCell.h; sourceTree = "<group>"; };
 		00558BDF24614D6E00550FBC /* zLeftMenuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zLeftMenuCell.m; sourceTree = "<group>"; };
+		005ECE71246431DF00D90341 /* zLeftMenuHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zLeftMenuHeader.h; sourceTree = "<group>"; };
+		005ECE72246431DF00D90341 /* zLeftMenuHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zLeftMenuHeader.m; sourceTree = "<group>"; };
+		005ECE742464357800D90341 /* zHuoYuanModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = zHuoYuanModel.h; path = ZhuangBei/zShouye/views/zHuoYuanModel.h; sourceTree = SOURCE_ROOT; };
+		005ECE752464357800D90341 /* zHuoYuanModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = zHuoYuanModel.m; path = ZhuangBei/zShouye/views/zHuoYuanModel.m; sourceTree = SOURCE_ROOT; };
+		005ECE7724644E0A00D90341 /* zHuoYuanListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zHuoYuanListCell.h; sourceTree = "<group>"; };
+		005ECE7824644E0A00D90341 /* zHuoYuanListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zHuoYuanListCell.m; sourceTree = "<group>"; };
 		0065DF14245FADBF008D3D98 /* zInviteController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zInviteController.h; sourceTree = "<group>"; };
 		0065DF15245FADBF008D3D98 /* zInviteController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zInviteController.m; sourceTree = "<group>"; };
 		0065DF17245FB7A9008D3D98 /* zCallBackController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCallBackController.h; sourceTree = "<group>"; };
@@ -786,6 +795,10 @@
 				00558BDC24610CA700550FBC /* zShouYeLeftMenu.m */,
 				00558BDE24614D6E00550FBC /* zLeftMenuCell.h */,
 				00558BDF24614D6E00550FBC /* zLeftMenuCell.m */,
+				005ECE71246431DF00D90341 /* zLeftMenuHeader.h */,
+				005ECE72246431DF00D90341 /* zLeftMenuHeader.m */,
+				005ECE7724644E0A00D90341 /* zHuoYuanListCell.h */,
+				005ECE7824644E0A00D90341 /* zHuoYuanListCell.m */,
 				00159E1A2463F745005DE17B /* zHuoYuanScrollHeader.h */,
 				00159E1B2463F745005DE17B /* zHuoYuanScrollHeader.m */,
 				00159E252464039B005DE17B /* PGCustomBannerView.h */,
@@ -797,6 +810,8 @@
 		009FB650244FEC5B00133974 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				005ECE742464357800D90341 /* zHuoYuanModel.h */,
+				005ECE752464357800D90341 /* zHuoYuanModel.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -1310,6 +1325,7 @@
 				00372B0D2456A54B00E51931 /* zUserInfoCard.m in Sources */,
 				00159E232463FDF8005DE17B /* NewPagedFlowView.m in Sources */,
 				895BD9D424629AFC00AA5947 /* UIImageView+LWImageView.m in Sources */,
+				005ECE73246431DF00D90341 /* zLeftMenuHeader.m in Sources */,
 				009FB63E244FE8DF00133974 /* NSString+size.m in Sources */,
 				003FEAC2245C198A00E8D61E /* zUserModel.m in Sources */,
 				8957D4AD245975E10096F1D7 /* LWHuoYuanDeatilView.m in Sources */,
@@ -1333,11 +1349,13 @@
 				00159E262464039B005DE17B /* PGCustomBannerView.m in Sources */,
 				009FB637244FE8DF00133974 /* UIImage+Extension.m in Sources */,
 				00159E192463BF58005DE17B /* zHuoYuanMangerController.m in Sources */,
+				005ECE762464357800D90341 /* zHuoYuanModel.m in Sources */,
 				0091FCF3245EB2920046691F /* zPersonalModel.m in Sources */,
 				00D6E2DD2459A6D200B6E327 /* zNetWorkManger.m in Sources */,
 				0065DF16245FADBF008D3D98 /* zInviteController.m in Sources */,
 				00159E222463FDF8005DE17B /* PGIndexBannerSubiew.m in Sources */,
 				009FB68124500D7800133974 /* MainSingleton.m in Sources */,
+				005ECE7924644E0A00D90341 /* zHuoYuanListCell.m in Sources */,
 				89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */,
 				00159E1C2463F745005DE17B /* zHuoYuanScrollHeader.m in Sources */,
 				0091FCEF245EAE870046691F /* zPersonalController.m in Sources */,
