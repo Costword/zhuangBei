@@ -47,7 +47,7 @@
         [itemview mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.left.mas_equalTo(self.itemsBgView);
             if (lables.count == 0) {
-                make.top.mas_equalTo(self.itemsBgView.mas_top).mas_offset(0);
+                make.top.mas_equalTo(self.itemsBgView.mas_top).mas_offset(8);
             }else{
                 UIView *lastview = lables.lastObject;
                 make.top.mas_equalTo(lastview.mas_bottom).mas_offset(6);
@@ -160,10 +160,9 @@
         //        make.right.mas_equalTo(bg.mas_right);
         make.centerY.mas_equalTo(bg.mas_centerY);
     }];
-    UILabel *lable = [LWLabel lw_lable:@"" font:13 textColor:BASECOLOR_TEXTCOLOR];
+    UILabel *lable = [LWLabel lw_lable:@"" font:14 textColor:BASECOLOR_TEXTCOLOR];
     [bg addSubview:lable];
-    lable.tag = tag;
-//    lable.backgroundColor = UIColor.redColor;
+    bg.tag = tag;
     lable.text = text;
     [lable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(des2.mas_right).mas_offset(10);
@@ -172,16 +171,6 @@
         make.top.bottom.mas_equalTo(bg);
     }];
     [bg ex_addTapAction:self selector:@selector(clickItemsView:)];
-//    bg.userInteractionEnabled = YES;
-//    UIButton *markBtn = [UIButton new];
-//    markBtn.backgroundColor = UIColor.redColor;
-//    [markBtn addTarget:self action:@selector(clickItemsView:) forControlEvents:UIControlEventTouchUpInside];
-//    markBtn.tag = tag;
-//    [bg addSubview:markBtn];
-//    [markBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.mas_equalTo(bg);
-//        make.height.mas_offset(30);
-//    }];
     return bg;
 }
 @end
