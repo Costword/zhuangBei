@@ -100,14 +100,14 @@
 #pragma mark --NewPagedFlowView Delegate
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
     
-    NSLog(@"点击了第%ld张图",(long)subIndex + 1);
+//    NSLog(@"点击了第%ld张图",(long)subIndex + 1);
     
     self.indicateLabel.text = [NSString stringWithFormat:@"点击了第%ld张图",(long)subIndex + 1];
 }
 
 - (void)didScrollToPage:(NSInteger)pageNumber inFlowView:(NewPagedFlowView *)flowView {
     
-    NSLog(@"CustomViewController 滚动到了第%ld页",pageNumber);
+//    NSLog(@"CustomViewController 滚动到了第%ld页",pageNumber);
 }
 
 #warning 假设产品需求左右中间页显示大小为 Width - 50, (Width - 50) * 9 / 16

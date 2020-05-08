@@ -10,9 +10,13 @@
 #import "zHuoYuanModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^leftMenuHeaderTapBack)(zHuoYuanModel * hymodel);
+
 @interface zLeftMenuHeader : UIView
 
 @property(strong,nonatomic)zHuoYuanModel * hyModel;
+
+@property(copy,nonatomic)leftMenuHeaderTapBack menuHeaerTapBack;
 
 @end
 

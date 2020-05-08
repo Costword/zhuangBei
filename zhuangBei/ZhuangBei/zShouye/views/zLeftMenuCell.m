@@ -10,7 +10,7 @@
 
 @interface zLeftMenuCell ()
 
-@property(strong,nonatomic)UILabel * nameLabel;
+@property(strong,nonatomic)UIButton * arrowButton;
 
 @end
 
@@ -24,22 +24,23 @@
     return cell;
 }
 
--(UILabel*)nameLabel
+-(UIButton*)arrowButton
 {
-    if (!_nameLabel) {
-        _nameLabel = [[UILabel alloc]init];
-        _nameLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
-        _nameLabel.font = kFont(18);
-        _nameLabel.text = @"经销商";
-        _nameLabel.numberOfLines = 0;
+    if (!_arrowButton) {
+        _arrowButton = [[UIButton alloc]init];
+        [_arrowButton setImage:[UIImage imageNamed:@"leftMenu_arrowDown"] forState:UIControlStateNormal];
+        [_arrowButton setImage:[UIImage imageNamed:@"leftMenu_arrowLeft"] forState:UIControlStateNormal];
+        _arrowButton.titleLabel.font = [UIFont systemFontOfSize:kWidthFlot(12)];
+        [_arrowButton setTitleColor:[UIColor colorWithHexString:@"#4A4A4A"] forState:UIControlStateNormal];
     }
-    return _nameLabel;
+    return _arrowButton;
 }
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self.contentView addSubview:self.nameLabel];
+        self.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:self.arrowButton];
         [self updateConstraintsForView];
     }
     return self;
@@ -47,19 +48,17 @@
 
 -(void)updateConstraintsForView
 {
-    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(kWidthFlot(10));
+    [self.arrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(kWidthFlot(5));
         make.left.mas_equalTo(kWidthFlot(20));
-        make.height.mas_equalTo(kWidthFlot(25));
-        make.bottom.mas_equalTo(-kWidthFlot(10));
+        make.height.mas_equalTo(kWidthFlot(20));
+        make.bottom.mas_equalTo(-kWidthFlot(5));
     }];
 }
 
-
-
--(void)setPersoamModel:(zPersonalModel *)persoamModel
+-(void)setName:(NSString *)name
 {
-
+    [self.arrowButton setTitle:name forState:UIControlStateNormal];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

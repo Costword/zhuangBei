@@ -22,9 +22,11 @@
     if (!_arrowButton) {
         _arrowButton = [[UIButton alloc]init];
         [_arrowButton setImage:[UIImage imageNamed:@"leftMenu_arrowDown"] forState:UIControlStateNormal];
-        [_arrowButton setImage:[UIImage imageNamed:@"leftMenu_arrowLeft"] forState:UIControlStateNormal];
+        [_arrowButton setImage:[UIImage imageNamed:@"leftMenu_arrowLeft"] forState:UIControlStateSelected];
         _arrowButton.titleLabel.font = [UIFont systemFontOfSize:kWidthFlot(12)];
         [_arrowButton setTitleColor:[UIColor colorWithHexString:@"#4A4A4A"] forState:UIControlStateNormal];
+        _arrowButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [_arrowButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _arrowButton;
 }
@@ -34,6 +36,7 @@
     if (self = [super initWithFrame:frame]) {
         
         [self addSubview:self.arrowButton];
+        [self updateConstraintsForView];
     }
     return self;
 }
@@ -63,5 +66,10 @@
 }
 
 
-
+-(void)buttonClick:(UIButton*)button
+{
+    if (self.menuHeaerTapBack) {
+        self.menuHeaerTapBack(_hyModel);
+    }
+}
 @end
