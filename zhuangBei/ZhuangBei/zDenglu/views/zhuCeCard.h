@@ -16,6 +16,8 @@ typedef void(^zhuceTapBack)(NSMutableDictionary * userDic);
 
 typedef void(^backToLogin)(void);
 
+typedef void(^getXieYiTapBack)(NSInteger type);
+
 @interface zhuCeCard : UIView
 
 @property(copy,nonatomic)getMessageCode getMessageCodeTapBack;
@@ -24,7 +26,7 @@ typedef void(^backToLogin)(void);
 
 @property(copy,nonatomic)backToLogin backLogin;
 
-
+@property(copy,nonatomic)getXieYiTapBack xieyiBack;
 
 @end
 

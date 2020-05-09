@@ -39,7 +39,7 @@
         _menuTableView.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
         _menuTableView.delegate = self;
         _menuTableView.dataSource = self;
-        _menuTableView.allowsSelection = NO;
+        _menuTableView.allowsSelection = YES;
         _menuTableView.estimatedRowHeight = kWidthFlot(44);
         _menuTableView.estimatedSectionHeaderHeight = 2;
         _menuTableView.estimatedSectionFooterHeight = 2;

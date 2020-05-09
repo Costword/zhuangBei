@@ -10,6 +10,7 @@
 #import "zhuCeCard.h"
 #import "zQuestionController.h"
 #import <AFNetworking.h>
+#import "zXieYiController.h"
 
 @interface zZhuCeController ()
 
@@ -44,6 +45,13 @@
         };
         _zhuceView.backLogin = ^{
             [weakSelf.navigationController popViewControllerAnimated:YES];
+        };
+        
+        _zhuceView.xieyiBack = ^(NSInteger type) {
+            zXieYiController * xyVC = [[zXieYiController alloc]init];
+            xyVC.type = type;
+            xyVC.title = @"注册协议";
+            [weakSelf.navigationController pushViewController:xyVC animated:YES];
         };
     }
     return _zhuceView;
@@ -119,6 +127,7 @@
                 // 点击事件Block
             zQuestionController * quesionVC = [[zQuestionController alloc]init];
                 quesionVC.userDic = self.userDic;
+                quesionVC.title = @"测试答题";
             [self.navigationController pushViewController:quesionVC animated:YES];
             })
             .LeeShow();

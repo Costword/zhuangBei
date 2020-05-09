@@ -74,8 +74,9 @@ static NSString * recordId = @"recordId";
         _questionTableView.estimatedRowHeight = 100;
         _questionTableView.showsVerticalScrollIndicator = NO;
         _questionTableView.rowHeight = UITableViewAutomaticDimension;
-        _questionTableView.estimatedSectionHeaderHeight = 1;
-        _questionTableView.estimatedSectionFooterHeight = 1;
+        _questionTableView.sectionHeaderHeight =UITableViewAutomaticDimension;
+        _questionTableView.estimatedSectionHeaderHeight = 2;
+        _questionTableView.estimatedSectionFooterHeight = 2;
         _questionTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _questionTableView;

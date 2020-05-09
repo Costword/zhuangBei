@@ -1,25 +1,25 @@
 //
-//  zLeftMenuCell.m
+//  zjxsMenuCell.m
 //  ZhuangBei
 //
-//  Created by aa on 2020/5/5.
+//  Created by aa on 2020/5/8.
 //  Copyright © 2020 aa. All rights reserved.
 //
 
-#import "zLeftMenuCell.h"
+#import "zjxsMenuCell.h"
 
-@interface zLeftMenuCell ()
+@interface zjxsMenuCell ()
 
 @property(strong,nonatomic)UIButton * arrowButton;
 
 @end
 
-@implementation zLeftMenuCell
+@implementation zjxsMenuCell
 
-+(zLeftMenuCell*)instanceWithTableView:(UITableView*)tableView AndIndexPath:(NSIndexPath*)indexPath
++(zjxsMenuCell*)instanceWithTableView:(UITableView*)tableView AndIndexPath:(NSIndexPath*)indexPath
 {
-    static NSString * cellID = @"zLeftMenuCell";
-    zLeftMenuCell * cell = [[zLeftMenuCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    static NSString * cellID = @"zjxsMenuCell";
+    zjxsMenuCell * cell = [[zjxsMenuCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -28,10 +28,12 @@
 {
     if (!_arrowButton) {
         _arrowButton = [[UIButton alloc]init];
-        [_arrowButton setImage:[UIImage imageNamed:@"leftMenu_arrowDown"] forState:UIControlStateNormal];
-        [_arrowButton setImage:[UIImage imageNamed:@"leftMenu_arrowLeft"] forState:UIControlStateNormal];
+        _arrowButton.userInteractionEnabled = NO;
+        [_arrowButton setImage:[UIImage imageNamed:@"chose_normal"] forState:UIControlStateNormal];
+        [_arrowButton setImage:[UIImage imageNamed:@"chose_select"] forState:UIControlStateSelected];
         _arrowButton.titleLabel.font = [UIFont systemFontOfSize:kWidthFlot(12)];
         [_arrowButton setTitleColor:[UIColor colorWithHexString:@"#4A4A4A"] forState:UIControlStateNormal];
+//        [_arrowButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _arrowButton;
 }
@@ -51,16 +53,24 @@
     [self.arrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(kWidthFlot(5));
         make.left.mas_equalTo(kWidthFlot(20));
-        make.right.mas_equalTo(-kWidthFlot(10));
         make.height.mas_equalTo(kWidthFlot(20));
         make.bottom.mas_equalTo(-kWidthFlot(5));
     }];
 }
 
--(void)setName:(NSString *)name
+-(void)setModel:(zHuoYuanModel *)model
 {
-    [self.arrowButton setTitle:name forState:UIControlStateNormal];
+    _model = model;
+    self.arrowButton.selected = model.select;
+    [self.arrowButton setTitle:model.name forState:UIControlStateNormal];
 }
+
+//-(void)buttonClick:(UIButton*)button
+//{
+//    if (self.selectTapBack) {
+//        self.selectTapBack(_model);
+//    }
+//}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

@@ -82,7 +82,7 @@
         for (int i = 0; i<self.titleArray.count; i++) {
             UIButton * button = [[UIButton alloc]init];
             button.tag = i;
-            button.titleLabel.font = kFont(16);
+            button.titleLabel.font = kFont(kWidthFlot(14));
             NSString * name = self.titleArray[i][@"name"];
             [button setTitle:name forState:UIControlStateNormal];
             [button setImage:[UIImage imageNamed:@"wode_category"] forState:UIControlStateNormal];

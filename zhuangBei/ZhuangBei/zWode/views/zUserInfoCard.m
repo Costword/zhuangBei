@@ -92,11 +92,12 @@
 -(TYAttributedLabel*)myInviteLabel
 {
     if (!_myInviteLabel) {
-        _myInviteLabel = [[TYAttributedLabel alloc]initWithFrame:CGRectMake(0,0,kWidthFlot(100),kWidthFlot(40))];
-        _myInviteLabel.translatesAutoresizingMaskIntoConstraints = NO;
-//        _myInviteLabel.font = kFont(14);
+        _myInviteLabel = [[TYAttributedLabel alloc]initWithFrame:CGRectMake(0,0,kWidthFlot(100),kWidthFlot(20))];
+        _myInviteLabel.translatesAutoresizingMaskIntoConstraints = YES;
+//        _myInviteLabel.font = kFont(10);
         NSString * labelStr = @"我的邀请人 \n 0";
         NSString * num = @"0";
+//        [_myInviteLabel setText:labelStr];
          TYTextContainer *textStorage = [self creatTextContainerWithCurrentStr:num totalStr:labelStr];
         _myInviteLabel.textContainer = textStorage;
         [self updateTYTLabel:_myInviteLabel];
@@ -109,13 +110,14 @@
 -(TYAttributedLabel*)myFollowLabel
 {
     if (!_myFollowLabel) {
-        _myFollowLabel = [[TYAttributedLabel alloc]initWithFrame:CGRectMake(0,0,kWidthFlot(100),kWidthFlot(40))];
-        _myFollowLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _myFollowLabel = [[TYAttributedLabel alloc]initWithFrame:CGRectMake(0,0,kWidthFlot(100),kWidthFlot(20))];
+        _myFollowLabel.translatesAutoresizingMaskIntoConstraints = YES;
         NSString * labelStr = @"我关注的货源 \n 0";
         NSString * num = @"0";
          TYTextContainer *textStorage = [self creatTextContainerWithCurrentStr:num totalStr:labelStr];
         _myFollowLabel.textContainer = textStorage;
         [self updateTYTLabel:_myFollowLabel];
+        
         UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick)];
         [_myFollowLabel addGestureRecognizer:labelTapGestureRecognizer];
     }
@@ -125,8 +127,8 @@
 -(TYAttributedLabel*)myBusinessLabel
 {
     if (!_myBusinessLabel) {
-        _myBusinessLabel = [[TYAttributedLabel alloc]initWithFrame:CGRectMake(0,0,kWidthFlot(100),kWidthFlot(40))];
-        _myBusinessLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _myBusinessLabel = [[TYAttributedLabel alloc]initWithFrame:CGRectMake(0,0,kWidthFlot(100),kWidthFlot(20))];
+        _myBusinessLabel.translatesAutoresizingMaskIntoConstraints = YES;
         NSString * labelStr = @"我的经销商 \n 0";
         NSString * num = @"0";
          TYTextContainer *textStorage = [self creatTextContainerWithCurrentStr:num totalStr:labelStr];
@@ -258,7 +260,7 @@
     // 垂直对齐方式
     label.verticalAlignment = TYVerticalAlignmentCenter;
     // 文字间隙
-    label.characterSpacing = 2;
+    label.characterSpacing = 1;
     // 文本行间隙
     label.linesSpacing = 10;
 }
@@ -268,7 +270,7 @@
 {
     TYTextContainer *textContainer = [[TYTextContainer alloc]init];
 //    张九龄
-    NSString * string = [currentStr substringFromIndex:currentStr.length];
+    NSString * string = [total substringToIndex:(total.length- currentStr.length)];
     NSString * text = total;
     textContainer.text = text;
     
@@ -276,15 +278,18 @@
     TYTextStorage *textheader = [[TYTextStorage alloc]init];
     textheader.range = [text rangeOfString:currentStr];
     textheader.textColor = [UIColor blackColor];
-    textheader.font = [UIFont fontWithName:@"TamilSangamMN-Bold" size:kWidthFlot(18)];
+    textheader.font = kFont(kWidthFlot(14));
     [textContainer addTextStorage:textheader];
 
     //取出剩余的字
     TYTextStorage *textStorage = [[TYTextStorage alloc]init];
     textStorage.range = [text rangeOfString:string];
     textStorage.textColor = [UIColor blackColor];
-    textStorage.font = [UIFont fontWithName:@"TamilSangamMN-Bold" size:kWidthFlot(10)];
+    textStorage.font =kFont(kWidthFlot(12));
+    
+//    [UIFont fontWithName:@"TamilSangamMN" size:kWidthFlot(10)];
     [textContainer addTextStorage:textStorage];
+    
     textContainer.linesSpacing = 5;
     textContainer = [textContainer createTextContainerWithTextWidth:kWidthFlot(100)];
     return textContainer;

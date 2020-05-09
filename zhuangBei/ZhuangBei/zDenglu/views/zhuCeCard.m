@@ -13,7 +13,11 @@
 #define  heightMargin 45
 #define  leftMargin 25
 
-@interface zhuCeCard ()
+#define NUM @"0123456789"
+#define ALPHA @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+#define ALPHANUM @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+
+@interface zhuCeCard ()<UITextFieldDelegate>
 
 @property(strong,nonatomic)NSArray * labelTitleArray;
 
@@ -93,8 +97,9 @@
 {
     if (!_passwordField) {
         _passwordField = [[LoginTextField alloc]init];
+        _passwordField.delegate = self;
         _passwordField.icon = [UIImage imageNamed:@"blank"];
-        _passwordField.keyboardType = UIKeyboardTypeDefault;
+        _passwordField.keyboardType = UIKeyboardTypeASCIICapable;
         _passwordField.maxLength = 12;
         [_passwordField setSecureTextEntry:YES];
         _passwordField.myPlaceHolder = @"请输入密码";
@@ -340,14 +345,14 @@
     }];
     
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.aggreBtn.mas_bottom).offset(kWidthFlot(60));
+        make.top.mas_equalTo(self.aggreBtn.mas_bottom).offset(kWidthFlot(40));
         make.centerX.mas_equalTo(self.mas_centerX);
         make.width.mas_equalTo(kWidthFlot(285));
         make.height.mas_equalTo(kWidthFlot(45));
     }];
     
     [self.gotoLoginLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.loginBtn.mas_bottom).offset(kWidthFlot(20));
+        make.bottom.mas_equalTo(-kWidthFlot(20));
         make.left.mas_equalTo(kWidthFlot(0));
         make.right.mas_equalTo(-kWidthFlot(0));
         make.height.mas_equalTo(kWidthFlot(40));
@@ -390,8 +395,8 @@
             [[zHud shareInstance]showMessage:@"手机号不可为空"];
             return;
         }
-        if (self.passwordField.text.length==0) {
-            [[zHud shareInstance]showMessage:@"密码不可为空"];
+        if (self.passwordField.text.length<6) {
+            [[zHud shareInstance]showMessage:@"请输入至少6位数密码"];
             return;
         }
         if (self.checkField.text.length==0) {
@@ -490,7 +495,9 @@
 
 -(void)labelClick
 {
-    [[zHud shareInstance]showMessage:@"用户注册协议"];
+    if (self.xieyiBack) {
+        self.xieyiBack(1);
+    }
 }
 
 -(void)goLoginVC
@@ -498,6 +505,13 @@
     if (self.backLogin) {
         self.backLogin();
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ALPHANUM] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
 }
 
 @end

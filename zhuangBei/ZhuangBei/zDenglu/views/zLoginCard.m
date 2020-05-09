@@ -95,7 +95,7 @@
 {
     if (!_showPasswordBtn) {
         _showPasswordBtn = [[UIButton alloc]init];
-        _showPasswordBtn.titleLabel.font = kFont(16);
+        _showPasswordBtn.titleLabel.font = kFont(14);
         [_showPasswordBtn setTitleColor:[kMainSingleton colorWithHexString:@"#4A4A4A" alpha:1] forState:UIControlStateNormal];
         _showPasswordBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_showPasswordBtn setImage:[UIImage imageNamed:@"chose_normal"] forState:UIControlStateNormal];
@@ -111,7 +111,7 @@
 {
     if (!_remmberPasswordBtn) {
         _remmberPasswordBtn = [[UIButton alloc]init];
-        _remmberPasswordBtn.titleLabel.font = kFont(16);
+        _remmberPasswordBtn.titleLabel.font = kFont(14);
         _remmberPasswordBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_remmberPasswordBtn setTitleColor:[kMainSingleton colorWithHexString:@"#4A4A4A" alpha:1] forState:UIControlStateNormal];
         [_remmberPasswordBtn setImage:[UIImage imageNamed:@"chose_normal"] forState:UIControlStateNormal];
@@ -266,11 +266,11 @@
     [super layoutSubviews];
     [self.showPasswordBtn setNeedsLayout];
     [self.showPasswordBtn layoutIfNeeded];
-    [self.showPasswordBtn setIconInLeftWithSpacing:5];
+    [self.showPasswordBtn setIconInLeftWithSpacing:2];
     
     [self.remmberPasswordBtn setNeedsLayout];
     [self.remmberPasswordBtn layoutIfNeeded];
-    [self.remmberPasswordBtn setIconInLeftWithSpacing:5];
+    [self.remmberPasswordBtn setIconInLeftWithSpacing:2];
  
     //背景图下方切圆角
     [self.imageBaseView setNeedsLayout];
@@ -323,6 +323,9 @@
                 if (self.logInBack) {
                     self.logInBack(self.accountField.text,self.passWordField.text,self.remmberPasswordBtn.selected);
                 }
+            }else
+            {
+                [[zHud shareInstance]showMessage:@"请输入密码"];
             }
         }else
         {

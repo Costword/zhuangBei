@@ -21,6 +21,12 @@
 
 @implementation zAshouyeController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
 -(sliderNavMenu*)navigationSliderMenu
 {
     if (!_navigationSliderMenu) {
@@ -41,8 +47,8 @@
 -(UIScrollView *)childScroContentView{
     if (!_childScroContentView) {
         CGRect frame = self.view.bounds;
-        frame.size.height = SCREEN_HEIGHT - 44;
-        frame.origin.y = 44;
+        frame.size.height = SCREEN_HEIGHT -(44+KstatusBarHeight);
+        frame.origin.y = 44+KstatusBarHeight;
         _childScroContentView = [[UIScrollView alloc]initWithFrame:frame];
         _childScroContentView.delegate = self;
         _childScroContentView.contentSize = CGSizeMake(SCREEN_WIDTH *self.childViewControllers.count,0);

@@ -87,6 +87,7 @@
 #pragma  mark - 这里的请求只是一个演示, 在真实的项目中建议不要这样做, 具体做法可以参照PPHTTPRequestLayer文件夹的例子
 - (void)getDataurl:(NSString *)url withParam:(id)para
 {
+    
     [zNetWorkManger GETworkWithUrl:url WithParamer:para Success:^(id  _Nonnull responseObject) {
         NSString *  text  = [self jsonToString:responseObject];
         NSLog(@"请求到的数据是：%@",text);

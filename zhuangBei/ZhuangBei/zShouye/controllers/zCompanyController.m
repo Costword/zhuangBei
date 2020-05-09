@@ -7,24 +7,25 @@
 //
 
 #import "zCompanyController.h"
-#import "zShouYeLeftMenu.h"
+#import "zJxsLeftMenu.h"
 #import "zHuoYuanListCell.h"
+#import "zCompanyDetailController.h"
 
 @interface zCompanyController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(strong,nonatomic)UITableView * menuTableView;
 
-@property(strong,nonatomic)zShouYeLeftMenu * leftMenu;
+@property(strong,nonatomic)zJxsLeftMenu * leftMenu;
 
 @end
 
 @implementation zCompanyController
 
--(zShouYeLeftMenu*)leftMenu
+-(zJxsLeftMenu*)leftMenu
 {
     if (!_leftMenu) {
         __weak typeof(self)weakSelf = self;
-        _leftMenu = [[zShouYeLeftMenu alloc]init];
+        _leftMenu = [[zJxsLeftMenu alloc]init];
         _leftMenu.menutapBack = ^(NSInteger index) {
             [weakSelf.menuTableView reloadData];
         };
@@ -39,7 +40,7 @@
         _menuTableView.backgroundColor = [UIColor clearColor];
         _menuTableView.delegate = self;
         _menuTableView.dataSource = self;
-        _menuTableView.allowsSelection = NO;
+        _menuTableView.allowsSelection = YES;
         _menuTableView.estimatedRowHeight = kWidthFlot(44);
         _menuTableView.estimatedSectionHeaderHeight = 2;
         _menuTableView.estimatedSectionFooterHeight = 2;
@@ -89,7 +90,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    zCompanyDetailController * companyDetailVC = [[zCompanyDetailController alloc]init];
+    companyDetailVC.title = @"公司详情";
+    [self.navigationController pushViewController:companyDetailVC animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

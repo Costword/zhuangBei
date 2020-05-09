@@ -12,6 +12,8 @@
 
 +(void)GETworkWithUrl:(NSString*)url WithParamer:(id)param Success:(HttpRequestSuccess)loadSuccess Failure:(HttpRequestFailed)loadFailure
 {
+    [[zHud shareInstance]show];
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置请求体数据为json类型
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -22,15 +24,18 @@
     [manager GET:url parameters:param progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [[zHud shareInstance]hild];
         NSLog(@"%@",responseObject);
         loadSuccess(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [[zHud shareInstance]hild];
         loadFailure(error);
     }];
 }
 
 +(void)POSTworkWithUrl:(NSString*)url WithParamer:(id)param Success:(HttpRequestSuccess)loadSuccess Failure:(HttpRequestFailed)loadFailure
 {
+    [[zHud shareInstance]show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置请求体数据为json类型
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -49,9 +54,11 @@
     
     [manager POST:url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [[zHud shareInstance]hild];
         NSLog(@"\n*************url:%@,\n para:%@ \n*********responseObject:%@",url,param,responseObject); 
         loadSuccess(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [[zHud shareInstance]hild];
         LWLog(@"\n***********请求失败**url:%@,\n para:%@ \n*********error:%@********",url,param,error);
         loadFailure(error);
     }];
