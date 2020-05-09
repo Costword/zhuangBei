@@ -61,16 +61,28 @@
             make.height.mas_offset(34);
         }];
         [tfbg setBoundWidth:0 cornerRadius:17 boardColor:UIColor.grayColor];
+        _tf = tf;
+        tf.returnKeyType = UIReturnKeySearch;//变为搜索按钮
+        [tf becomeFirstResponder];
     }
     return self;
 }
+//搜索虚拟键盘响应
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    [self.tf resignFirstResponder];
     if (self.block) {
-        self.block(2, str);
+        self.block(2, textField.text);
     }
-    return YES;
+      return YES;
 }
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+//{
+//    NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
+////    if (self.block) {
+////        self.block(2, str);
+////    }
+//    return YES;
+//}
 @end

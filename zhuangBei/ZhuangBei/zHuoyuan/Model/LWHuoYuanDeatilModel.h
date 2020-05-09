@@ -45,6 +45,20 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (nonatomic, strong) NSString * ossDownloadSrc;
 //主键
 @property (nonatomic, strong) NSString * tuPianDm;
+@end
+
+//产品介绍
+@interface productIntroductionModel : BaseModel
+@property (nonatomic, strong) NSString * jianJieNr;
+
+@end
+
+//参数列表
+@interface productParameterListModel : BaseModel
+//参数名称
+@property (nonatomic, strong) NSString * canShuMc;
+//参数值
+@property (nonatomic, strong) NSString * canShuZhi;
 
 @end
 
@@ -57,6 +71,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) supplierModel * supplier;
 @property (nonatomic, strong) NSArray<modelListModel *> * modelList;
 @property (nonatomic, strong) NSArray<productPictureListModel *> * productPictureList;
+@property (nonatomic, strong) productIntroductionModel * productIntroduction;
+@property (nonatomic, strong) NSArray<productParameterListModel *> * productParameterList;
 
 @end
 
