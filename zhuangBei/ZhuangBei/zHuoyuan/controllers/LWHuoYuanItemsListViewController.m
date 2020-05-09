@@ -21,7 +21,7 @@
 
 - (void)requestDatas
 {
-    [ServiceManager requestPostWithUrl:@"app/appzhuangbeitype/list" Parameters:@{@"parentId":LWDATA(self.parentId),@"limit":@"100"} success:^(id  _Nonnull response) {
+    [ServiceManager requestPostWithUrl:@"app/appzhuangbeitype/list" paraString:@{@"parentId":LWDATA(self.parentId),@"limit":@"100"} success:^(id  _Nonnull response) {
         
         [self.collectView.mj_header endRefreshing];
         [self.collectView.mj_footer endRefreshing];

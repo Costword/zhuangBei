@@ -24,11 +24,10 @@
 //货源大厅一级列表
 - (void)requestDatas
 {
-
-    [ServiceManager requestPostWithUrl:@"app/appzhuangbeitype/list" Parameters:@{@"parentId":@"1",@"page":@(self.currPage)} success:^(id  _Nonnull response) {
-        [self.collectView.mj_footer setHidden:NO];
+    [ServiceManager requestPostWithUrl:@"app/appzhuangbeitype/list" Parameters:@{@"parentId":@"1"} success:^(id  _Nonnull response) {
+//        [self.collectView.mj_footer setHidden:NO];
         [self.collectView.mj_header endRefreshing];
-        [self.collectView.mj_footer endRefreshing];
+//        [self.collectView.mj_footer endRefreshing];
         
 //        LWLog(@"-------------货源大厅一级列表:%@",response);
         if ([response[@"code"] integerValue] == 0) {
@@ -103,7 +102,7 @@
     LWHuoYuanItemsListViewController *itemslist = [LWHuoYuanItemsListViewController new];
     LWHuoYuanDaTingModel *model = self.listDatasMutableArray[indexPath.row];
     itemslist.titleStr = model.name;
-    itemslist.parentId = model.customId;
+    itemslist.parentId = model.parentId;
     [self.navigationController pushViewController:itemslist animated:YES];
 }
 

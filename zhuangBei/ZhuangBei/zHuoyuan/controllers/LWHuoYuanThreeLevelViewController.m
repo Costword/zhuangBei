@@ -106,9 +106,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    LWHuoYuanThreeLevelModel *model = self.listDatas[indexPath.row];
     LWGongYingShangListViewController *vc = [LWGongYingShangListViewController new];
+    vc.zbTypeId = model.zblxId;
+    vc.zbId = model.zbId;
     [self.navigationController pushViewController:vc animated:YES];
-    
 }
 
 - (UITableView *)tableView
@@ -117,7 +119,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 210;
+        _tableView.rowHeight = 240;
         [_tableView registerClass:[LWHuoYuanThreeLevelListTableViewCell class] forCellReuseIdentifier:@"LWHuoYuanThreeLevelListTableViewCell"];
         _tableView.backgroundColor = UIColor.whiteColor;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

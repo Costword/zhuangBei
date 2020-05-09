@@ -7,10 +7,11 @@
 //
 
 #import "LWHuoYuanDeatilView.h"
-
+#import "UICollectionViewLeftAlignedLayout.h"
 #import "SDCycleScrollView.h"
+#import "zCityCollectionCell.h"
 
-@interface LWHuoYuanDeatilView ()<SDCycleScrollViewDelegate>
+@interface LWHuoYuanDeatilView ()<SDCycleScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UIScrollView * scrollView;
 @property (nonatomic, strong) UILabel * nameL;
 @property (nonatomic, strong) UILabel * companL;
@@ -37,9 +38,31 @@
 @property (nonatomic, strong) UIView * canshuDeatilView;
 @property (nonatomic, strong) UILabel * canshuDeatilView_titleL;
 @property (nonatomic, strong) UILabel * canshuDeatilView_descL;
+@property (nonatomic, strong) UIView * xhItemsView;
+@property (nonatomic, strong) UICollectionView * cityCollectView;
+@property (nonatomic, strong) SDCycleScrollView *sdcview;
+
 @end
 
 @implementation LWHuoYuanDeatilView
+
+
+- (void)setModel:(LWHuoYuanDeatilModel *)model
+{
+    _model = model;
+    _nameL.text = _model.productInformation.zbName;
+    _companL.text = _model.supplier.name;
+    _proveL.text = _model.supplier.companyNameFirst;
+    _addressL.text = _model.productInformation.productSourceName;
+    _productNickL.text = _model.productInformation.zbBieMing;
+    
+    [self.cityCollectView reloadData];
+    if (_model.productPictureList.count == 0) {
+        _sdcview.imageURLStringsGroup = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588222683633&di=0337ab9e9f7deb643986cd7fd901290a&imgtype=0&src=http%3A%2F%2Fimg10.itiexue.net%2F1639%2F16390450.jpg",];
+    }else{
+//        NSString *url = [NSString stringWithFormat:@"%@app/appfujian/download?attID=%@",kApiPrefix,imageId];
+    }
+}
 
 - (void)clickCanItems:(UITapGestureRecognizer *)tap
 {
@@ -76,9 +99,6 @@
     
     _scrollView = [UIScrollView new];
     
-    
-    
-    
     _nameL = [LWLabel lw_lable:@"防弹插板" font:21 textColor:BASECOLOR_GREYCOLOR155];;
     _companL = [LWLabel lw_lable:@"后台输入的公司名称" font:16 textColor:BASECOLOR_GREYCOLOR155];;
     _proveL = [LWLabel lw_lable:@"后台输入的所在省份" font:16 textColor:BASECOLOR_GREYCOLOR155];
@@ -88,7 +108,6 @@
     UILabel *nickL = [LWLabel lw_lable:@"产品别称" font:18 textColor:BASECOLOR_TEXTCOLOR];
     UILabel *xinghaoL = [LWLabel lw_lable:@"产品型号" font:18 textColor:BASECOLOR_TEXTCOLOR];
     
-    
     _nameL.textAlignment = NSTextAlignmentCenter;
     
     [self addSubview:self.scrollView];
@@ -96,7 +115,7 @@
         make.edges.mas_equalTo(self);
         make.width.mas_offset(SCREEN_WIDTH);
     }];
-    [_scrollView addSubviews:@[self.lunboView,_nameL,_productNickL,_xinghaoL,self.canshuView,xinghaoL,nickL]];
+    [_scrollView addSubviews:@[self.lunboView,_nameL,_productNickL,self.xhItemsView,self.canshuView,xinghaoL,nickL]];
     
     
     [self.scrollView addSubview:self.infor_topview];
@@ -131,14 +150,14 @@
         make.left.right.mas_equalTo(_nameL);
         make.top.mas_equalTo(_productNickL.mas_bottom).mas_offset(15);
     }];
-    [_xinghaoL mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(_nameL);
+    [_xhItemsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(_nameL);
         make.top.mas_equalTo(xinghaoL.mas_bottom).mas_offset(10);
-        make.height.mas_offset(25);
+//        make.height.mas_offset(25);
     }];
     [self.canshuView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(_nameL);
-        make.top.mas_equalTo(_xinghaoL.mas_bottom).mas_offset(10);
+        make.top.mas_equalTo(_xhItemsView.mas_bottom).mas_offset(10);
         make.bottom.mas_equalTo(_scrollView.mas_bottom).mas_offset(-20);
     }];
     
@@ -282,9 +301,10 @@
 {
     if (!_lunboView) {
         _lunboView = [[UIView alloc] init];
-        SDCycleScrollView *sdcview = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150) delegate:self placeholderImage:IMAGENAME(@"")];
-        sdcview.imageURLStringsGroup = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588222683633&di=0337ab9e9f7deb643986cd7fd901290a&imgtype=0&src=http%3A%2F%2Fimg10.itiexue.net%2F1639%2F16390450.jpg",
-                                         @"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=179383074,1972838511&fm=26&gp=0.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588222683626&di=1f5ad07a32278031e3dd2c4d7a6fe33a&imgtype=0&src=http%3A%2F%2Fimgsa.baidu.com%2Fbaike%2Fpic%2Fitem%2F3c6d55fbb2fb43167ae9586c29a4462309f7d335.jpg"];
+        SDCycleScrollView *sdcview = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150) delegate:self placeholderImage:IMAGENAME(@"testicon")];
+        _sdcview = sdcview;
+//        sdcview.imageURLStringsGroup = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588222683633&di=0337ab9e9f7deb643986cd7fd901290a&imgtype=0&src=http%3A%2F%2Fimg10.itiexue.net%2F1639%2F16390450.jpg",
+//                                         @"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=179383074,1972838511&fm=26&gp=0.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588222683626&di=1f5ad07a32278031e3dd2c4d7a6fe33a&imgtype=0&src=http%3A%2F%2Fimgsa.baidu.com%2Fbaike%2Fpic%2Fitem%2F3c6d55fbb2fb43167ae9586c29a4462309f7d335.jpg"];
         sdcview.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
         sdcview.pageDotColor = UIColor.blackColor;
         sdcview.currentPageDotColor = UIColor.grayColor;
@@ -410,6 +430,77 @@
         _canshuDeatilView_descL = desL;
     }
     return _canshuDeatilView;
+}
+
+- (UIView *)xhItemsView
+{
+    if (!_xhItemsView) {
+        _xhItemsView = [[UIView alloc] init];
+        [_xhItemsView addSubview:self.cityCollectView];
+        [self.cityCollectView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(_xhItemsView);
+           }];
+    }
+    return _xhItemsView;
+}
+
+
+-(UICollectionView*)cityCollectView
+{
+    if (!_cityCollectView) {
+        UICollectionViewLeftAlignedLayout * layout = [[UICollectionViewLeftAlignedLayout alloc]init];
+        layout.sectionInset = UIEdgeInsetsMake(10,0, 10,0);
+        layout.minimumLineSpacing = kWidthFlot(10);
+        layout.minimumInteritemSpacing = kWidthFlot(10);
+        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        _cityCollectView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        _cityCollectView.showsVerticalScrollIndicator = NO;
+        _cityCollectView.backgroundColor = [UIColor clearColor];
+        _cityCollectView.delegate = self;
+        _cityCollectView.dataSource = self;
+        _cityCollectView.scrollEnabled = NO;
+        [_cityCollectView registerClass:[zCityCollectionCell class] forCellWithReuseIdentifier:@"zCityCollectionCell"];
+        _cityCollectView.delegate = self;
+        _cityCollectView.dataSource = self;
+    }
+    return _cityCollectView;
+}
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.model.modelList.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    zCityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"zCityCollectionCell" forIndexPath:indexPath];
+    cell.backColor = [UIColor colorWithHexString:@"#EFEFEF"];
+    modelListModel * model = self.model.modelList[indexPath.item];
+    cell.souceString = model.model;
+    return cell;
+}
+
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    modelListModel * model = self.model.modelList[indexPath.item];
+    return [self stringSize:model.model];
+}
+
+- (CGSize)stringSize:(NSString *)string {
+    if (string.length == 0) return CGSizeZero;
+    UIFont * font = [UIFont systemFontOfSize:17];
+    CGFloat yOffset = 3.0f;
+    CGFloat width = self.bounds.size.width - 20;
+    CGSize contentSize = [string boundingRectWithSize:CGSizeMake(width,MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
+    CGSize size = CGSizeMake(MIN(contentSize.width + 20,width) , MAX(22, contentSize.height + 2 * yOffset + 1));
+    return size;
+}
+
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    modelListModel * model = self.model.modelList[indexPath.item];
+    NSLog(@"%@",model.model);
 }
 
 @end

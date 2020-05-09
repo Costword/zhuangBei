@@ -31,6 +31,12 @@ NS_ASSUME_NONNULL_BEGIN
 //企业名称第三个字段
 @property (nonatomic, strong) NSString * companyNameThird;
 
+@property (nonatomic, strong) NSString * faRen;
+@property (nonatomic, strong) NSString * phone;
+@property (nonatomic, strong) NSString * gongSiUrl;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSString * imagesId;
+@property (nonatomic, strong) NSString * gongSiJj;
 
 @end
 

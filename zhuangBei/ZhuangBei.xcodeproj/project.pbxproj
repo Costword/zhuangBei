@@ -135,6 +135,7 @@
 		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
 		89D36E0C245AB1C800A6C014 /* LWSystemMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D36E0B245AB1C800A6C014 /* LWSystemMessageListViewController.m */; };
 		89D36E0F245AB93F00A6C014 /* HYTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D36E0E245AB93F00A6C014 /* HYTopBarView.m */; };
+		89D51C6E246503EA00ABA70D /* LWHuoYuanDeatilModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D51C6D246503EA00ABA70D /* LWHuoYuanDeatilModel.m */; };
 		89F5B7DC2455955E0040F7B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */; };
 		89F5B7DF245596DD0040F7B1 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7DE245596DD0040F7B1 /* UIView+Extension.m */; };
 		89F5B7E2245599530040F7B1 /* LWHuoYuanItemsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7E1245599530040F7B1 /* LWHuoYuanItemsListViewController.m */; };
@@ -420,6 +421,8 @@
 		89D36E0B245AB1C800A6C014 /* LWSystemMessageListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWSystemMessageListViewController.m; sourceTree = "<group>"; };
 		89D36E0D245AB93F00A6C014 /* HYTopBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYTopBarView.h; sourceTree = "<group>"; };
 		89D36E0E245AB93F00A6C014 /* HYTopBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYTopBarView.m; sourceTree = "<group>"; };
+		89D51C6C246503EA00ABA70D /* LWHuoYuanDeatilModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanDeatilModel.h; sourceTree = "<group>"; };
+		89D51C6D246503EA00ABA70D /* LWHuoYuanDeatilModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDeatilModel.m; sourceTree = "<group>"; };
 		89F5B7DA2455955D0040F7B1 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
 		89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 		89F5B7DD245596DD0040F7B1 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -1033,6 +1036,8 @@
 			children = (
 				895BD9C62462661800AA5947 /* LWHuoYuanDaTingModel.h */,
 				895BD9C72462661800AA5947 /* LWHuoYuanDaTingModel.m */,
+				89D51C6C246503EA00ABA70D /* LWHuoYuanDeatilModel.h */,
+				89D51C6D246503EA00ABA70D /* LWHuoYuanDeatilModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1428,6 +1433,7 @@
 				00926BB7245706E30052B827 /* UIButton+HQCustomIcon.m in Sources */,
 				00159E262464039B005DE17B /* PGCustomBannerView.m in Sources */,
 				009FB637244FE8DF00133974 /* UIImage+Extension.m in Sources */,
+				89D51C6E246503EA00ABA70D /* LWHuoYuanDeatilModel.m in Sources */,
 				00159E192463BF58005DE17B /* zHuoYuanMangerController.m in Sources */,
 				005ECE762464357800D90341 /* zHuoYuanModel.m in Sources */,
 				0091FCF3245EB2920046691F /* zPersonalModel.m in Sources */,

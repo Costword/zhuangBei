@@ -8,17 +8,20 @@
 
 #import "LWHuoYuanDeatilViewController.h"
 #import "LWHuoYuanDeatilView.h"
+#import "LWHuoYuanDeatilModel.h"
 
 @interface LWHuoYuanDeatilViewController ()
 @property (nonatomic, strong) LWHuoYuanDeatilView * mainView;
-
+@property (nonatomic, strong) LWHuoYuanDeatilModel * datasModel;
+@property (nonatomic, strong) UIButton * leftBtn;
+@property (nonatomic, strong) UIButton * rightBtn;
 @end
 
 @implementation LWHuoYuanDeatilViewController
 
 - (void)requestDatas
 {
-    [ServiceManager requestPostWithUrl:@"app/appgyszblink/getSourceDetailsByModelId" Parameters:@{
+    [ServiceManager requestPostWithUrl:@"app/appgyszblink/getSourceDetailsByModelId" paraString:@{
         @"modelId":LWDATA(self.modelId),
         @"gongYingShangDm":LWDATA(self.gongYingShangDm),
         @"zhuangBeiDm":LWDATA(self.zhuangBeiDm),
@@ -26,13 +29,47 @@
         @"zhuangBeiName":LWDATA(self.zhuangBeiName)} success:^(id  _Nonnull response) {
         
         if ([response[@"code"] integerValue] == 0) {
-            
-            
+            self.datasModel = [LWHuoYuanDeatilModel modelWithDictionary:response[@"data"]];
+            [self handlerDatas];
+        }else{
+            [self.view bringSubviewToFront:self.nothingView];
+            self.nothingView.alpha = 1;
         }
     } failure:^(NSError * _Nonnull error) {
         
     }];
     
+}
+
+- (void)handlerDatas
+{
+    self.mainView.model = self.datasModel;
+    
+    if (self.datasModel.isFollow == 3){
+        //        [self.leftBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        //              make.left.mas_equalTo(self.view.mas_left);
+        //              make.right.mas_equalTo(_rightBtn.mas_left).mas_offset(-0);
+        //              make.height.mas_offset(54);
+        //              make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(0);
+        //          }];
+        [_rightBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(_leftBtn.mas_right).mas_offset(0);
+            make.right.mas_equalTo(self.view.mas_right).mas_offset(-0);
+            make.width.mas_offset(0);
+        }];
+    }else{
+        
+        [_rightBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(_leftBtn.mas_right).mas_offset(0);
+            make.right.mas_equalTo(self.view.mas_right).mas_offset(-0);
+            make.width.height.bottom.mas_equalTo(_leftBtn);
+        }];
+        if (self.datasModel.isFollow == 1) {
+            [self.rightBtn setTitle:@"取消关注" forState:UIControlStateNormal];
+        }else if (self.datasModel.isFollow == 2){
+            [self.rightBtn setTitle:@"关注货源" forState:UIControlStateNormal];
+        }
+    }
 }
 
 - (void)clickBottomBtn:(UIButton *)sender
@@ -64,7 +101,8 @@
     [rightbtn layoutButtonWithEdgeInsetsStyle:(HLButtonEdgeInsetsStyleLeft) imageTitleSpace:10];
     [leftbtn setTitleColor:UIColor.orangeColor forState:UIControlStateNormal];
     [rightbtn setTitleColor:UIColor.orangeColor forState:UIControlStateNormal];
-    
+    _leftBtn = leftbtn;
+    _rightBtn = rightbtn;
     [self.view addSubviews:@[leftbtn,rightbtn]];
     [leftbtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view.mas_left);

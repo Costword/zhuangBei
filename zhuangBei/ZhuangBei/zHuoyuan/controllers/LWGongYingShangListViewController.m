@@ -8,10 +8,13 @@
 
 #import "LWGongYingShangListViewController.h"
 #import "LWGongYingShangListTableViewCell.h"
-
+#import "LWHuoYuanDaTingModel.h"
+#import "LWHuoYuanDeatilViewController.h"
 @interface LWGongYingShangListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
-@property (nonatomic, strong) NSMutableArray * listDatas;
+//@property (nonatomic, strong) NSMutableArray * listDatas;
+@property (nonatomic, strong) LWHuoYuanThreeLevelModel * datasModel;
+
 @end
 
 @implementation LWGongYingShangListViewController
@@ -28,26 +31,32 @@
             self.currPage = [page[@"currPage"] integerValue];
             self.totalPage = [page[@"totalPage"] integerValue];
             NSArray *list = page[@"list"];
+//            if (self.currPage == 1) {
+//                [self.listDatas removeAllObjects];
+//            }
             if (self.currPage == 1) {
-                [self.listDatas removeAllObjects];
+                self.datasModel = [LWHuoYuanThreeLevelModel modelWithDictionary:list[0]];
+            }else{
+                NSMutableArray *tem = [[NSMutableArray alloc] initWithArray:self.datasModel.gysList];
+                LWHuoYuanThreeLevelModel *model = [LWHuoYuanThreeLevelModel modelWithDictionary:list[0]];
+                [tem addObjectsFromArray:model.gysList];
+                self.datasModel.gysList = tem;
             }
-//            for (NSDictionary *dict in list) {
-//                [self.listDatas addObject: [LWHuoYuanThreeLevelModel modelWithDictionary:dict]];
-//            }
             
-//            if (self.currPage >= self.totalPage) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }else{
-//                [self.tableView.mj_footer resetNoMoreData];
-//            }
+            if (self.currPage >= self.totalPage) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                [self.tableView.mj_footer resetNoMoreData];
+            }
         }
-        if (self.listDatas.count == 0) {
+        NSArray *gys = self.datasModel.gysList;
+        if (gys.count == 0) {
             [self.view bringSubviewToFront:self.nothingView];
         }else{
             [self.view sendSubviewToBack:self.nothingView];
         }
-        self.nothingView.alpha = self.listDatas.count == 0 ? 1:0;
-        self.tableView.mj_footer.hidden = self.listDatas.count == 0;
+        self.nothingView.alpha = gys.count == 0 ? 1:0;
+        self.tableView.mj_footer.hidden = gys.count == 0;
         [self.tableView reloadData];
     } failure:^(NSError * _Nonnull error) {
         [self.tableView.mj_header endRefreshing];
@@ -80,17 +89,24 @@
 {
     LWGongYingShangListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWGongYingShangListTableViewCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.model = self.datasModel.gysList[indexPath.row];
     return  cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  10;
+    return  self.datasModel.gysList.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LWGongYingShangListViewController *vc = [LWGongYingShangListViewController new];
+    gysListModel * gysmodel = self.datasModel.gysList[indexPath.row];
+    LWHuoYuanDeatilViewController *vc = [LWHuoYuanDeatilViewController new];
+//    vc.modelId = self.datasModel.zblxId;
+    vc.gongYingShangDm = gysmodel.customId;
+    vc.zhuangBeiDm = self.datasModel.zbId;
+    vc.zhuangBeiLx = self.datasModel.zblxId;
+    vc.zhuangBeiName = self.datasModel.zbName;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -112,11 +128,11 @@
     return _tableView;
 }
 
-- (NSMutableArray *)listDatas
-{
-    if (!_listDatas) {
-        _listDatas = [[NSMutableArray alloc] init];
-    }
-    return _listDatas;
-}
+//- (NSMutableArray *)listDatas
+//{
+//    if (!_listDatas) {
+//        _listDatas = [[NSMutableArray alloc] init];
+//    }
+//    return _listDatas;
+//}
 @end
