@@ -95,7 +95,7 @@
 {
     if ([url containsString:kLogin]) {
         [[zHud shareInstance]showMessage:@"登陆失败，无法连接服务器"];
-        [self changeRootVC];
+//        [self changeRootVC];
     }
 }
 
