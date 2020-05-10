@@ -24,7 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.currPage = 1;
     
     // Do any additional setup after loading the view.
     UIButton *seachBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];

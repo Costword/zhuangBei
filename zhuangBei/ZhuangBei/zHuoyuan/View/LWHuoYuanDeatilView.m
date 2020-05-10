@@ -10,7 +10,7 @@
 #import "UICollectionViewLeftAlignedLayout.h"
 #import "SDCycleScrollView.h"
 #import "zCityCollectionCell.h"
-
+#import <WebKit/WebKit.h>
 @interface LWHuoYuanDeatilView ()<SDCycleScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UIScrollView * scrollView;
 @property (nonatomic, strong) UILabel * nameL;
@@ -26,13 +26,17 @@
 @property (nonatomic, strong) UIView * lunboView;
 @property (nonatomic, strong) UIView * infor_topview;
 
-@property (nonatomic, strong) UILabel * chanpincailiaoL;
-@property (nonatomic, strong) UILabel * fanghucailiaoL;
-@property (nonatomic, strong) UILabel * fanghumianjiL;
-@property (nonatomic, strong) UILabel * guigeL;
-@property (nonatomic, strong) UILabel * guigedescL;
-@property (nonatomic, strong) UILabel * zhixingbiaozhunL;
+//@property (nonatomic, strong) UILabel * chanpincailiaoL;
+//@property (nonatomic, strong) UILabel * fanghucailiaoL;
+//@property (nonatomic, strong) UILabel * fanghumianjiL;
+//@property (nonatomic, strong) UILabel * guigeL;
+//@property (nonatomic, strong) UILabel * guigedescL;
+//@property (nonatomic, strong) UILabel * zhixingbiaozhunL;
 @property (nonatomic, strong) UIView * chanpinJieSaoView;
+//@property (nonatomic, strong) WKWebView * productJieSaoL;
+@property (nonatomic, strong) LWLabel * productJieSaoL;
+@property (nonatomic, strong) UILabel * productJiesao_titleL;
+@property (nonatomic, assign) CGFloat  contentHeight_webview;
 
 @property (nonatomic, strong) UIView * maskView;
 @property (nonatomic, strong) UIView * canshuDeatilView;
@@ -41,6 +45,8 @@
 @property (nonatomic, strong) UIView * xhItemsView;
 @property (nonatomic, strong) UICollectionView * cityCollectView;
 @property (nonatomic, strong) SDCycleScrollView *sdcview;
+@property (nonatomic, strong) UIView * paramItemsBgView;
+
 
 @end
 
@@ -56,13 +62,77 @@
     _addressL.text = _model.productInformation.productSourceName;
     _productNickL.text = _model.productInformation.zbBieMing;
     
+    //    产品类型
     [self.cityCollectView reloadData];
+    
+    //    图片
     if (_model.productPictureList.count == 0) {
         _sdcview.imageURLStringsGroup = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588222683633&di=0337ab9e9f7deb643986cd7fd901290a&imgtype=0&src=http%3A%2F%2Fimg10.itiexue.net%2F1639%2F16390450.jpg",];
     }else{
-//        NSString *url = [NSString stringWithFormat:@"%@app/appfujian/download?attID=%@",kApiPrefix,imageId];
+        NSMutableArray *imageids = [[NSMutableArray alloc] init];
+        for (productPictureListModel *picmodel in _model.productPictureList) {
+            NSString *url = [NSString stringWithFormat:@"%@app/appfujian/download?attID=%@",kApiPrefix,picmodel.tuPianDm];
+            [imageids addObject:url];
+        }
+        _sdcview.imageURLStringsGroup = imageids;
     }
+    
+    
+    //    核心参数
+    [self.paramItemsBgView removeAllSubviews];
+    for (int i = 0; i < _model.productParameterList.count; i++) {
+        productParameterListModel *parammodel = _model.productParameterList[i];
+        UIView *item =  [self createCanshuItem:parammodel.canShuMc tag:i];
+        [self.paramItemsBgView addSubview:item];
+        [item mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.left.mas_equalTo(_paramItemsBgView);
+            make.height.mas_offset(40);
+            if (i == 0) {
+                make.top.mas_equalTo(_paramItemsBgView.mas_top).mas_offset(0);
+            }else{
+                UIView *lastview = self.paramItemsBgView.subviews[self.paramItemsBgView.subviews.count - 2];
+                make.top.mas_equalTo(lastview.mas_bottom).mas_offset(5);
+            }
+            if (i == _model.productParameterList.count - 1) {
+                make.bottom.mas_equalTo(_paramItemsBgView.mas_bottom).mas_offset(-5);
+            }
+        }];
+    }
+    if (_model.productIntroduction.jianJieNr) {
+        NSString* htmlString = _model.productIntroduction.jianJieNr;
+          NSMutableAttributedString * attrStr  = [[NSMutableAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        
+          NSString *temstr = attrStr.string;
+          while ([temstr hasSuffix:@"\n"]) {
+              if ([temstr isEqualToString:@"\n"]) {
+                  temstr = @"";
+                  break;
+              }
+              temstr = [temstr substringToIndex:temstr.length - 2];
+          }
+          NSMutableAttributedString *atter = [[NSMutableAttributedString alloc] initWithString:temstr];
+          NSMutableParagraphStyle *paragraphStyle                 = [[NSMutableParagraphStyle alloc] init];
+          [paragraphStyle setLineSpacing:5];
+          [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, attrStr.length)];
+          _productJieSaoL.attributedText = atter;
+    }
+    
+    [_productJieSaoL mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(_productJiesao_titleL);
+        make.top.mas_equalTo(_productJiesao_titleL.mas_bottom).mas_offset(5);
+        make.bottom.mas_equalTo(_chanpinJieSaoView.mas_bottom).mas_offset(-10);
+    }];
+//    [_productJieSaoL loadHTMLString:_model.productIntroduction.jianJieNr baseURL:nil];
+    
+//    更新约束
+    [self.cityCollectView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_offset(self.cityCollectView.collectionViewLayout.collectionViewContentSize.height).priorityHigh();
+    }];
+    [self.xhItemsView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_offset(self.cityCollectView.collectionViewLayout.collectionViewContentSize.height);
+    }];
 }
+
 
 - (void)clickCanItems:(UITapGestureRecognizer *)tap
 {
@@ -70,6 +140,7 @@
     _maskView = [UIView new];
     _maskView.backgroundColor = UIColor.blackColor;
     _maskView.alpha = 0.3;
+    self.canshuDeatilView.alpha = 1;
     [_maskView ex_addTapAction:self selector:@selector(clickCanshuDeatilViewBtn)];
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     [window addSubviews:@[_maskView,self.canshuDeatilView,]];
@@ -81,6 +152,12 @@
         make.right.mas_equalTo(window.mas_right).mas_offset(-0);
         make.bottom.mas_equalTo(window.mas_bottom).mas_offset(0);
     }];
+    
+    //    参数详情赋值
+    productParameterListModel *parammodel = _model.productParameterList[tap.view.tag];
+    _canshuDeatilView_titleL.text = parammodel.canShuMc;
+    _canshuDeatilView_descL.text = parammodel.canShuZhi;
+    
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -99,12 +176,12 @@
     
     _scrollView = [UIScrollView new];
     
-    _nameL = [LWLabel lw_lable:@"防弹插板" font:21 textColor:BASECOLOR_GREYCOLOR155];;
-    _companL = [LWLabel lw_lable:@"后台输入的公司名称" font:16 textColor:BASECOLOR_GREYCOLOR155];;
-    _proveL = [LWLabel lw_lable:@"后台输入的所在省份" font:16 textColor:BASECOLOR_GREYCOLOR155];
-    _addressL = [LWLabel lw_lable:@"后台输入的供应来源" font:16 textColor:BASECOLOR_GREYCOLOR155];
-    _productNickL = [LWLabel lw_lable:@"  暂无  " font:16 textColor:UIColor.grayColor backColor:BASECOLOR_GREYCOLOR155];
-    _xinghaoL = [LWLabel lw_lable:@"  FDB3F-GD03型  " font:16 textColor:RGB(63, 80, 181)];
+    _nameL = [LWLabel lw_lable:@"" font:21 textColor:BASECOLOR_GREYCOLOR155];;
+    _companL = [LWLabel lw_lable:@"" font:16 textColor:BASECOLOR_GREYCOLOR155];;
+    _proveL = [LWLabel lw_lable:@"" font:16 textColor:BASECOLOR_GREYCOLOR155];
+    _addressL = [LWLabel lw_lable:@"" font:16 textColor:BASECOLOR_GREYCOLOR155];
+    _productNickL = [LWLabel lw_lable:@"" font:16 textColor:[UIColor colorWithRed:155/255.0 green:155/255.0 blue:155/255.0 alpha:1.0] backColor:[UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1.0]];
+    _xinghaoL = [LWLabel lw_lable:@"" font:16 textColor:RGB(63, 80, 181)];
     UILabel *nickL = [LWLabel lw_lable:@"产品别称" font:18 textColor:BASECOLOR_TEXTCOLOR];
     UILabel *xinghaoL = [LWLabel lw_lable:@"产品型号" font:18 textColor:BASECOLOR_TEXTCOLOR];
     
@@ -153,7 +230,7 @@
     [_xhItemsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(_nameL);
         make.top.mas_equalTo(xinghaoL.mas_bottom).mas_offset(10);
-//        make.height.mas_offset(25);
+        make.height.mas_offset(10);
     }];
     [self.canshuView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(_nameL);
@@ -232,36 +309,24 @@
         _canshuView = [[UIView alloc] init];
         UILabel *titleL = [LWLabel lw_lable:@"核心参数" font:18 textColor:BASECOLOR_TEXTCOLOR];
         titleL.textAlignment = NSTextAlignmentCenter;
-        UIView *guigeview = [self createCanshuItem:@"规格保证" tag:1];
-        UIView *shouhouview = [self createCanshuItem:@"售后保障" tag:2];
-        UIView *caozuoview = [self createCanshuItem:@"操作手册" tag:3];
-        [_canshuView addSubviews:@[titleL,guigeview,shouhouview,caozuoview,self.chanpinJieSaoView]];
+        UIView *paramItemsBgView = [UIView new];
+        [_canshuView addSubviews:@[titleL,paramItemsBgView,self.chanpinJieSaoView]];
         
         [titleL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(_canshuView.mas_left).mas_offset(0);
             make.right.mas_equalTo(_canshuView.mas_right).mas_offset(-0);
             make.top.mas_equalTo(_canshuView.mas_top).mas_offset(10);
         }];
-        [guigeview mas_makeConstraints:^(MASConstraintMaker *make) {
+        [paramItemsBgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(titleL);
             make.top.mas_equalTo(titleL.mas_bottom).mas_offset(10);
-            make.height.mas_offset(40);
-        }];
-        [shouhouview mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(titleL);
-            make.top.mas_equalTo(guigeview.mas_bottom).mas_offset(10);
-            make.height.mas_equalTo(guigeview.mas_height);
-        }];
-        [caozuoview mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(titleL);
-            make.top.mas_equalTo(shouhouview.mas_bottom).mas_offset(5);
-            make.height.mas_equalTo(guigeview.mas_height);
         }];
         [self.chanpinJieSaoView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(titleL);
-            make.top.mas_equalTo(caozuoview.mas_bottom).mas_offset(10);
+            make.top.mas_equalTo(paramItemsBgView.mas_bottom).mas_offset(10);
             make.bottom.mas_equalTo(_canshuView.mas_bottom).mas_offset(-10);
         }];
+        _paramItemsBgView = paramItemsBgView;
     }
     return _canshuView;
 }
@@ -303,8 +368,7 @@
         _lunboView = [[UIView alloc] init];
         SDCycleScrollView *sdcview = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150) delegate:self placeholderImage:IMAGENAME(@"testicon")];
         _sdcview = sdcview;
-//        sdcview.imageURLStringsGroup = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588222683633&di=0337ab9e9f7deb643986cd7fd901290a&imgtype=0&src=http%3A%2F%2Fimg10.itiexue.net%2F1639%2F16390450.jpg",
-//                                         @"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=179383074,1972838511&fm=26&gp=0.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588222683626&di=1f5ad07a32278031e3dd2c4d7a6fe33a&imgtype=0&src=http%3A%2F%2Fimgsa.baidu.com%2Fbaike%2Fpic%2Fitem%2F3c6d55fbb2fb43167ae9586c29a4462309f7d335.jpg"];
+      
         sdcview.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
         sdcview.pageDotColor = UIColor.blackColor;
         sdcview.currentPageDotColor = UIColor.grayColor;
@@ -329,71 +393,59 @@
 {
     if (!_chanpinJieSaoView) {
         _chanpinJieSaoView = [[UIView alloc] init];
+        
         UILabel *titleL = [UILabel new];
-        _chanpincailiaoL = [UILabel new];
-        _fanghucailiaoL = [UILabel new];
-        _fanghumianjiL = [UILabel new];
-        _guigeL = [UILabel new];
-        _guigedescL = [UILabel new];
-        _zhixingbiaozhunL = [UILabel new];
-        
+        _productJieSaoL = [LWLabel lw_lable:@"" font:13 textColor:BASECOLOR_TEXTCOLOR];
+//        _productJieSaoL = [[WKWebView alloc] init];
+        _productJieSaoL.numberOfLines = 0;
         titleL.text = @"产品介绍";
-        _chanpincailiaoL.text = @"产品材料：PE";
-        _fanghucailiaoL.text = @"防护材料：以高性能聚乙烯纤维，防弹陶瓷，防弹钢板等材料复合成型。";
-        _fanghumianjiL.text = @"防护面积：0.07平方";
-        _guigeL.text = @"规       格：250mm*300mm";
-        _guigedescL.text = @"其他星座和面积可根据用户需求制作";
-        _zhixingbiaozhunL.text = @"执行标准：产品已通过公安部特种警用装备质量监督检测中心检验，各项要求符合《A141-2010》、《NIJ101.06》中有关要求";
-        
-        _zhixingbiaozhunL.numberOfLines = 0;
-        _fanghucailiaoL.numberOfLines = _chanpincailiaoL.numberOfLines = _fanghucailiaoL.numberOfLines = _guigeL.numberOfLines = _guigedescL.numberOfLines  = 0;
-        _fanghucailiaoL.font = _fanghucailiaoL.font = _fanghumianjiL.font = _guigedescL.font = _guigeL.font = _zhixingbiaozhunL.font = _chanpincailiaoL.font = kFont(12);
+        _productJiesao_titleL = titleL;
         titleL.font = kFont(16);
-        NSString *tem = @"防护面积";
-        CGSize size = [tem limitSize:CGSizeMake(SCREEN_WIDTH - 40, 20) font:kFont(12)];
-        [_chanpinJieSaoView addSubviews:@[titleL,_chanpincailiaoL,_fanghucailiaoL,_fanghumianjiL,_guigeL,_guigedescL,_zhixingbiaozhunL]];
+        [_chanpinJieSaoView addSubviews:@[_productJieSaoL,titleL]];
         [titleL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.mas_equalTo(_chanpinJieSaoView).mas_offset(10);
             make.right.mas_equalTo(_chanpinJieSaoView.mas_right).mas_offset(-10);
         }];
-        [_chanpincailiaoL mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_productJieSaoL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(titleL);
             make.top.mas_equalTo(titleL.mas_bottom).mas_offset(5);
-        }];
-        [_fanghucailiaoL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(titleL);
-            make.top.mas_equalTo(_chanpincailiaoL.mas_bottom).mas_offset(5);
-        }];
-        [_fanghumianjiL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(titleL);
-            make.top.mas_equalTo(_fanghucailiaoL.mas_bottom).mas_offset(5);
-        }];
-        [_guigeL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(titleL);
-            
-            make.top.mas_equalTo(_fanghumianjiL.mas_bottom).mas_offset(5);
-        }];
-        [_guigedescL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(titleL);
-            make.left.mas_equalTo(titleL.mas_left).mas_offset(size.width+5);
-            make.top.mas_equalTo(_guigeL.mas_bottom).mas_offset(5);
-        }];
-        [_zhixingbiaozhunL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(titleL);
-            make.top.mas_equalTo(_guigedescL.mas_bottom).mas_offset(5);
+            make.height.mas_offset(1);
             make.bottom.mas_equalTo(_chanpinJieSaoView.mas_bottom).mas_offset(-10);
         }];
+
         [_chanpinJieSaoView setBoundWidth:0.5 cornerRadius:6 boardColor:BASECOLOR_BOARD];
+        //添加观察者
+//        [_productJieSaoL.scrollView addObserver:self forKeyPath:@"contentSize"
+//                                      options:NSKeyValueObservingOptionNew context:nil];
     }
     return _chanpinJieSaoView;
 }
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+//                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+//                       context:(void *)context{
+//    //由于图片在实时加载，监听到内容高度变化，需要实时刷新您的控件展示高度
+//    if([keyPath isEqualToString:@"contentSize"]) {
+//        //直接使用scrollView.contentSize.height来刷新cell高度，不再使用JS获取
+//        CGFloat height = self.productJieSaoL.scrollView.contentSize.height;
+//        //定义一个属性保存高度，当上一次的高度等于这次的高度时就不要刷新cell了，不然cell会一直刷新
+//        if (self.contentHeight_webview == height) {
+//            return ;
+//        }
+//        [_productJieSaoL mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.height.mas_offset(height);
+//        }];
+//        self.contentHeight_webview = height;
+//    }
+//}
 
 - (void)clickCanshuDeatilViewBtn
 {
-    [_maskView removeFromSuperview];
-    [_canshuDeatilView removeFromSuperview];
-    _maskView = nil;
-    _canshuDeatilView = nil;
+    _maskView.alpha = 0;
+    _canshuDeatilView.alpha = 0;
+//    [_maskView removeFromSuperview];
+//    [_canshuDeatilView removeFromSuperview];
+//    _maskView = nil;
+//    _canshuDeatilView = nil;
 }
 
 //参数详情
@@ -403,12 +455,11 @@
         _canshuDeatilView = [[UIView  alloc] init];
         _canshuDeatilView.backgroundColor = UIColor.whiteColor;
         
-        UILabel *titleL = [LWLabel lw_lable:@"售后保障" font:18 textColor:BASECOLOR_TEXTCOLOR];
-        UILabel *desL = [LWLabel lw_lable:@"一年保修，终生维修" font:18 textColor:BASECOLOR_TEXTCOLOR];
+        UILabel *titleL = [LWLabel lw_lable:@"" font:18 textColor:BASECOLOR_TEXTCOLOR];
+        UILabel *desL = [LWLabel lw_lable:@"" font:18 textColor:BASECOLOR_TEXTCOLOR];
         titleL.textAlignment = desL.textAlignment = NSTextAlignmentCenter;
         UIButton *btn = [LWButton lw_button:@"完成" font:15 textColor:UIColor.whiteColor backColor:[UIColor colorWithRed:63/255.0 green:80/255.0 blue:181/255.0 alpha:1.0] target:self acction:@selector(clickCanshuDeatilViewBtn)];
         [btn setBoundWidth:0 cornerRadius:6];
-        
         [_canshuDeatilView addSubviews:@[titleL,desL,btn]];
         [titleL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(_canshuDeatilView.mas_left).mas_offset(0);
@@ -439,7 +490,8 @@
         [_xhItemsView addSubview:self.cityCollectView];
         [self.cityCollectView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(_xhItemsView);
-           }];
+            make.height.mas_offset(self.cityCollectView.collectionViewLayout.collectionViewContentSize.height).priorityHigh();
+        }];
     }
     return _xhItemsView;
 }
@@ -467,7 +519,8 @@
 }
 
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
     return self.model.modelList.count;
 }
 
@@ -476,6 +529,7 @@
     cell.backColor = [UIColor colorWithHexString:@"#EFEFEF"];
     modelListModel * model = self.model.modelList[indexPath.item];
     cell.souceString = model.model;
+    cell.select = [model.customId isEqualToString:_currentModelId];
     return cell;
 }
 
@@ -501,6 +555,11 @@
 {
     modelListModel * model = self.model.modelList[indexPath.item];
     NSLog(@"%@",model.model);
+    self.currentModelId = model.customId;
+    //    [self.cityCollectView reloadData];
+    if (self.block) {
+        self.block(model.customId);
+    }
 }
 
 @end

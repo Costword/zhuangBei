@@ -16,6 +16,21 @@
 
 @implementation zCityCollectionCell
 
+- (void)setSelect:(BOOL)select
+{
+    _select = select;
+    
+    if (select) {
+        [self.contentView setBoundWidth:1 cornerRadius:0 boardColor:RGB(63, 80, 181)];
+        self.textlabel.textColor = [UIColor colorWithRed:63/255.0 green:80/255.0 blue:181/255.0 alpha:1];
+        self.textlabel.backgroundColor = [UIColor colorWithRed:205/255.0 green:210/255.0 blue:230/255.0 alpha:1];
+    }else{
+        [self.contentView setBoundWidth:1 cornerRadius:0 boardColor:UIColor.whiteColor];
+        self.textlabel.textColor = [UIColor colorWithHexString:@"#333333"];
+        self.textlabel.backgroundColor = [UIColor colorWithHexString:@"#F4F4F4"];
+        [self.contentView setBoundWidth:1 cornerRadius:0 boardColor:[UIColor colorWithHexString:@"#F4F4F4"]];
+    }
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

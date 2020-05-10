@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(strong,nonatomic)UIColor * backColor;//背景色
 
+@property (nonatomic, assign) BOOL  select;
 
 
 @end

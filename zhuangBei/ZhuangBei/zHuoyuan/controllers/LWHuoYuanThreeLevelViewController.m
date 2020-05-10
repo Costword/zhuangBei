@@ -89,10 +89,9 @@
     cell.clickItemsBlock = ^(gysListModel * _Nonnull itemmodel) {
         LWHuoYuanDeatilViewController *vc = [LWHuoYuanDeatilViewController new];
         LWHuoYuanThreeLevelModel *model = self.listDatas[indexPath.row];
-        vc.modelId = model.zblxId;
         vc.gongYingShangDm = itemmodel.customId;
         vc.zhuangBeiDm = model.zbId;
-        vc.zhuangBeiLx = model.zblxName;
+        vc.zhuangBeiLx = model.zblxId;
         vc.zhuangBeiName = model.zbName;
         [weakself.navigationController pushViewController:vc animated:YES];
     };
@@ -119,7 +118,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 240;
+        _tableView.rowHeight = 230;
         [_tableView registerClass:[LWHuoYuanThreeLevelListTableViewCell class] forCellReuseIdentifier:@"LWHuoYuanThreeLevelListTableViewCell"];
         _tableView.backgroundColor = UIColor.whiteColor;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

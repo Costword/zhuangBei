@@ -32,6 +32,7 @@
 #import "ServiceManager.h"
 #import   "UIImageView+WebCache.h"
 #import "UIImageView+LWImageView.h"
+#import "zInterfacedConst.h"
 
 #define kLoginUserInfo @"loginUserInfo"
 #define kUserDefaultsCookie @"kUserDefaultsCookie"

@@ -57,6 +57,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.currPage = 1;
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.nothingView];
     [self.view addSubview:self.noContentView];

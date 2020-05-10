@@ -28,12 +28,15 @@
         @"zhuangBeiLx":LWDATA(self.zhuangBeiLx),
         @"zhuangBeiName":LWDATA(self.zhuangBeiName)} success:^(id  _Nonnull response) {
         
+        if (!_mainView) {
+            [self confiUI];
+        }
+        self.datasModel = [LWHuoYuanDeatilModel modelWithDictionary:response[@"data"]];
+        [self handlerDatas];
         if ([response[@"code"] integerValue] == 0) {
-            self.datasModel = [LWHuoYuanDeatilModel modelWithDictionary:response[@"data"]];
-            [self handlerDatas];
         }else{
-            [self.view bringSubviewToFront:self.nothingView];
-            self.nothingView.alpha = 1;
+
+            [[zHud shareInstance] showMessage:LWDATA(response[@"msg"])];
         }
     } failure:^(NSError * _Nonnull error) {
         
@@ -43,7 +46,12 @@
 
 - (void)handlerDatas
 {
+    if(!self.modelId){
+        modelListModel *modelmodel = self.datasModel.modelList.firstObject;
+        self.modelId = modelmodel.customId;
+    }
     self.mainView.model = self.datasModel;
+    self.mainView.currentModelId = self.modelId;
     
     if (self.datasModel.isFollow == 3){
         //        [self.leftBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -81,7 +89,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"货源详情";
-    [self confiUI];
+//    [self confiUI];
     [self requestDatas];
 }
 
@@ -89,7 +97,11 @@
 {
     self.mainView = [LWHuoYuanDeatilView new];
     [self.view addSubview:self.mainView];
-    
+    WEAKSELF(self);
+    self.mainView.block = ^(NSString * _Nonnull modelid) {
+        weakself.modelId = modelid;
+        [weakself requestDatas];
+    };
     
     UIButton *leftbtn = [UIButton new];
     UIButton *rightbtn = [UIButton new];

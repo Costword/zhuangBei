@@ -24,7 +24,13 @@
 
 @end
 
+@implementation productIntroductionModel
 
+@end
+
+@implementation productParameterListModel
+
+@end
 
 @implementation LWHuoYuanDeatilModel
 
@@ -35,6 +41,8 @@
              @"supplier":supplierModel.class,
              @"modelList":modelListModel.class,
              @"productPictureList":productPictureListModel.class,
+             @"productIntroduction":productIntroductionModel.class,
+             @"productParameterList":productParameterListModel.class,
     };
 }
 @end

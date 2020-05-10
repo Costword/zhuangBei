@@ -11,6 +11,8 @@
 #import "LWHuoYuanThreeLevelListTableViewCell.h"
 #import "LWHuoYuanDeatilViewController.h"
 #import "PPNetworkHelper.h"
+#import "LWGongYingShangListViewController.h"
+
 @interface LWSearchViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray * listDatas;
 @property (nonatomic, strong) UITableView * tableView;
@@ -23,9 +25,10 @@
 
 - (void)requestDatas
 {
+    [[zHud shareInstance] hild];
     [PPNetworkHelper cancelAllRequest];
     
-    [ServiceManager requestPostWithUrl:@"app/appzhuangbei/listByQian" Parameters:@{@"searchValue":LWDATA(self.searchValue),@"gysLimit":@"10"} success:^(id  _Nonnull response) {
+    [ServiceManager requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"searchValue":LWDATA(self.searchValue),@"gysLimit":@"10"} success:^(id  _Nonnull response) {
         
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -50,7 +53,10 @@
         }
         if (self.listDatas.count == 0) {
             self.nothingView.alpha = 1;
-            self.tableView.hidden = YES;
+            [self.view bringSubviewToFront:self.nothingView];
+        }else{
+            self.nothingView.alpha = 0;
+            [self.view sendSubviewToBack:self.nothingView];
         }
         self.tableView.mj_footer.hidden = self.listDatas.count == 0;
         [self.tableView reloadData];
@@ -116,6 +122,16 @@
     LWHuoYuanThreeLevelListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWHuoYuanThreeLevelListTableViewCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.model  = self.listDatas[indexPath.row];
+    WEAKSELF(self)
+    cell.clickItemsBlock = ^(gysListModel * _Nonnull itemmodel) {
+        LWHuoYuanDeatilViewController *vc = [LWHuoYuanDeatilViewController new];
+        LWHuoYuanThreeLevelModel *model = self.listDatas[indexPath.row];
+        vc.gongYingShangDm = itemmodel.customId;
+        vc.zhuangBeiDm = model.zbId;
+        vc.zhuangBeiLx = model.zblxId;
+        vc.zhuangBeiName = model.zbName;
+        [weakself.navigationController pushViewController:vc animated:YES];
+    };
     return  cell;
 }
 
@@ -126,9 +142,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LWHuoYuanDeatilViewController *vc = [LWHuoYuanDeatilViewController new];
     LWHuoYuanThreeLevelModel *model = self.listDatas[indexPath.row];
-    vc.modelId = model.zbId;
+    LWGongYingShangListViewController *vc = [LWGongYingShangListViewController new];
+    vc.zbTypeId = model.zblxId;
+    vc.zbId = model.zbId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -138,7 +155,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 210;
+        _tableView.rowHeight = 230;
         [_tableView registerClass:[LWHuoYuanThreeLevelListTableViewCell class] forCellReuseIdentifier:@"LWHuoYuanThreeLevelListTableViewCell"];
         _tableView.backgroundColor = UIColor.whiteColor;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
