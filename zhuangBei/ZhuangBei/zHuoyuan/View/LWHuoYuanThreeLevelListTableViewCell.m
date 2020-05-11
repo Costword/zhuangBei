@@ -13,18 +13,31 @@
 @property (nonatomic, strong) UILabel * goodsNameL;
 @property (nonatomic, strong) UILabel * goodsDescL;
 @property (nonatomic, strong) UIView * itemsBgView;
-
+@property (nonatomic, strong) UIScrollView * scrollView;
+@property (nonatomic, strong) UIView * rightContextView;
+@property (nonatomic, assign) CGFloat  lastOffsetX;
 @end
 @implementation LWHuoYuanThreeLevelListTableViewCell
 
 - (void)clickItemsView:(UITapGestureRecognizer *)tap
 {
+    if(tap.view.tag == 100){
+        if(self.clickItemsBlock){
+            self.clickItemsBlock(nil);
+        }
+        return;
+    }
     gysListModel *model = _model.gysList[tap.view.tag];
     if(self.clickItemsBlock){
         self.clickItemsBlock(model);
     }
 }
-
+- (void)clickMoreBtn
+{
+    if(self.clickItemsBlock){
+               self.clickItemsBlock(nil);
+           }
+}
 - (void)setModel:(LWHuoYuanThreeLevelModel *)model
 {
     _model = model;
@@ -68,18 +81,86 @@
     }
     return self;
 }
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    
+    CGFloat maxX = 90;
+    CGPoint offest = scrollView.contentOffset;
+    if (offest.x< 40) {
+        [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+        self.isEditing = NO;
+    }else {
+        [scrollView setContentOffset:CGPointMake(maxX, 0) animated:NO];
+        self.isEditing = YES;
+    }
+//        if (_lastOffsetX > offest.x) {
+//        [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+//        _lastOffsetX = 0;
+//        return;
+//    }
+//    if (_lastOffsetX < offest.x && offest.x >= 40) {
+//        [scrollView setContentOffset:CGPointMake(maxX, 0) animated:NO];
+//        self.isEditing = YES;
+//    }
+//    if ( 0 <= offest.x && offest.x <= 90) {
+//        _lastOffsetX = offest.x;
+//    }
+}
+
+-(void)setIsEditing:(BOOL)isEditing
+{
+    if (!isEditing) {
+          [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+      }
+    if (_isEditing != isEditing) {
+        _isEditing = isEditing;
+        if (self.editBlock) {
+            self.editBlock(_isEditing);
+        }
+    }
+}
 
 - (void)confiCellUI
 {
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-20, 230)];
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    _scrollView.delegate = self;
+    [self.contentView addSubview:_scrollView];
+    [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.contentView);
+        make.width.mas_offset(SCREEN_WIDTH-20);
+    }];
+    _scrollView.backgroundColor = UIColor.whiteColor;
     _goodsIv = [UIImageView new];
     _goodsNameL = [UILabel new];
     _goodsDescL = [UILabel new];
-
+    
+    UIView *leftContextView = [UIView new];
+    leftContextView.backgroundColor = UIColor.whiteColor;
+    [_scrollView addSubview:self.rightContextView];
+    [_scrollView addSubview:leftContextView];
+    [leftContextView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.left.mas_equalTo(_scrollView);
+        make.width.mas_offset(SCREEN_WIDTH-20);
+        make.height.mas_offset(210);
+    }];
+    [self.rightContextView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.right.mas_equalTo(_scrollView);
+        make.left.mas_equalTo(leftContextView.mas_right).mas_offset(-10);
+        make.width.mas_offset(100);
+        make.height.mas_offset(210);
+    }];
+    
     
     UIImageView *moreBg = [UIImageView new];
     UIButton *morebtn = [UIButton new];
     [morebtn setTitle:@"查看全部" forState:UIControlStateNormal];
     [morebtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [morebtn addTarget:self action:@selector(clickMoreBtn) forControlEvents:UIControlEventTouchUpInside];
     _goodsIv.image = IMAGENAME(@"testicon");
     _goodsNameL.text = @"防弹插板";
     _goodsNameL.font = kFont(16);
@@ -88,16 +169,16 @@
     _goodsDescL.textColor = UIColor.grayColor;
     morebtn.backgroundColor = UIColor.blueColor;
     morebtn.titleLabel.font = kFont(14);
-    [self.contentView addSubviews:@[_goodsIv,_goodsNameL,_goodsDescL,moreBg,morebtn]];
+    [leftContextView addSubviews:@[_goodsIv,_goodsNameL,_goodsDescL,moreBg,morebtn]];
     [_goodsIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_offset(110);
         make.height.mas_offset(110);
-        make.top.mas_equalTo(self.contentView).mas_offset(20);
-        make.left.mas_equalTo(self.contentView.mas_left).mas_offset(15);
+        make.top.mas_equalTo(leftContextView).mas_offset(20);
+        make.left.mas_equalTo(leftContextView.mas_left).mas_offset(15);
     }];
     [_goodsNameL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(_goodsIv.mas_left);
-        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+        make.right.mas_equalTo(leftContextView.mas_right).mas_offset(-10);
         make.top.mas_equalTo(_goodsIv.mas_bottom).mas_offset(20);
     }];
     [_goodsDescL mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -109,8 +190,8 @@
     [moreBg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_offset(100);
         make.height.mas_offset(30);
-        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-0);
-        make.top.mas_equalTo(self.contentView.mas_top).mas_offset(0);
+        make.right.mas_equalTo(leftContextView.mas_right).mas_offset(-0);
+        make.top.mas_equalTo(leftContextView.mas_top).mas_offset(5);
     }];
     [morebtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_offset(100);
@@ -123,18 +204,23 @@
         make.left.top.mas_equalTo(self).mas_offset(10);
         make.bottom.mas_equalTo(self).mas_offset(-10);
         make.right.mas_equalTo(self).mas_offset(-10);
+        make.width.mas_offset(SCREEN_WIDTH-20);
     }];
-    [self.contentView setBoundWidth:1 cornerRadius:10 boardColor:UIColor.grayColor];
-    [self.goodsIv setBoundWidth:0.5 cornerRadius:0 boardColor:UIColor.grayColor];
+    [leftContextView setBoundWidth:1 cornerRadius:10 boardColor:BASECOLOR_BOARD];
+    [self.contentView setBoundWidth:1 cornerRadius:10 boardColor:BASECOLOR_BOARD];
+    [self.goodsIv setBoundWidth:0.5 cornerRadius:0 boardColor:BASECOLOR_BOARD];
+    [self.scrollView setBoundWidth:1 cornerRadius:10 boardColor:BASECOLOR_BOARD];
     
     self.itemsBgView = [UIView new];
     self.itemsBgView.userInteractionEnabled = YES;
-    [self.contentView addSubview:self.itemsBgView];
+    [leftContextView addSubview:self.itemsBgView];
     [self.itemsBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(_goodsIv.mas_right).mas_offset(20);
-        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+        make.right.mas_equalTo(leftContextView.mas_right).mas_offset(-10);
         make.top.mas_equalTo(moreBg.mas_bottom).mas_offset(0);
     }];
+    self.contentView.tag = 100;
+    [self.contentView ex_addTapAction:self selector:@selector(clickItemsView:)];
 }
 
 - (UIView *)lineView:(NSString *)text tag:(NSInteger)tag
@@ -172,5 +258,22 @@
     }];
     [bg ex_addTapAction:self selector:@selector(clickItemsView:)];
     return bg;
+}
+
+- (UIView *)rightContextView
+{
+    if (!_rightContextView) {
+        _rightContextView = [[UIView alloc] init];
+        UILabel *alll = [LWLabel lw_lable:@"查看全部" font:16 textColor:BASECOLOR_TEXTCOLOR];
+        [_rightContextView addSubview:alll];
+        [alll mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.top.bottom.mas_equalTo(_rightContextView);
+            make.left.mas_equalTo(_rightContextView.mas_left).mas_offset(10);
+        }];
+        alll.textAlignment = NSTextAlignmentCenter;
+        _rightContextView.tag = 100;
+        [_rightContextView ex_addTapAction:self selector:@selector(clickItemsView:)];
+    }
+    return _rightContextView;
 }
 @end

@@ -12,10 +12,11 @@
 #import "LWHuoYuanDeatilViewController.h"
 #import "PPNetworkHelper.h"
 #import "LWGongYingShangListViewController.h"
+#import "LWThreeLevelTableView.h"
 
 @interface LWSearchViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray * listDatas;
-@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) LWThreeLevelTableView * tableView;
 @property (nonatomic, strong) LWSeachView * searchView;
 @property (nonatomic, strong) NSString * searchValue;
 
@@ -28,7 +29,7 @@
     [[zHud shareInstance] hild];
     [PPNetworkHelper cancelAllRequest];
     
-    [ServiceManager requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"searchValue":LWDATA(self.searchValue),@"gysLimit":@"10"} success:^(id  _Nonnull response) {
+    [self requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"searchValue":LWDATA(self.searchValue),@"gysLimit":@"1000"} success:^(id  _Nonnull response) {
         
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -59,6 +60,7 @@
             [self.view sendSubviewToBack:self.nothingView];
         }
         self.tableView.mj_footer.hidden = self.listDatas.count == 0;
+        self.tableView.listDatas = self.listDatas;
         [self.tableView reloadData];
     } failure:^(NSError * _Nonnull error) {
         [self.tableView.mj_header endRefreshing];
@@ -67,7 +69,12 @@
             [self.tableView.mj_footer setHidden:YES];
         }
     }];
-    
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.tableView endTableViewCellEdit];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -115,53 +122,11 @@
     }];
 }
 
-#pragma mark ------UITableViewDelegate----------
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    LWHuoYuanThreeLevelListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWHuoYuanThreeLevelListTableViewCell" forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.model  = self.listDatas[indexPath.row];
-    WEAKSELF(self)
-    cell.clickItemsBlock = ^(gysListModel * _Nonnull itemmodel) {
-        LWHuoYuanDeatilViewController *vc = [LWHuoYuanDeatilViewController new];
-        LWHuoYuanThreeLevelModel *model = self.listDatas[indexPath.row];
-        vc.gongYingShangDm = itemmodel.customId;
-        vc.zhuangBeiDm = model.zbId;
-        vc.zhuangBeiLx = model.zblxId;
-        vc.zhuangBeiName = model.zbName;
-        [weakself.navigationController pushViewController:vc animated:YES];
-    };
-    return  cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return  self.listDatas.count;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    LWHuoYuanThreeLevelModel *model = self.listDatas[indexPath.row];
-    LWGongYingShangListViewController *vc = [LWGongYingShangListViewController new];
-    vc.zbTypeId = model.zblxId;
-    vc.zbId = model.zbId;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (UITableView *)tableView
+- (LWThreeLevelTableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.rowHeight = 230;
-        [_tableView registerClass:[LWHuoYuanThreeLevelListTableViewCell class] forCellReuseIdentifier:@"LWHuoYuanThreeLevelListTableViewCell"];
-        _tableView.backgroundColor = UIColor.whiteColor;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
-        _tableView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
-        
+        _tableView = [[LWThreeLevelTableView alloc] initWithFrame:CGRectZero];
+        _tableView.sourceVc = self;
     }
     return _tableView;
 }

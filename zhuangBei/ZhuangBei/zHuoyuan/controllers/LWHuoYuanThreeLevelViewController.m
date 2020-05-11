@@ -11,22 +11,24 @@
 #import "LWGongYingShangListViewController.h"
 #import "LWHuoYuanDaTingModel.h"
 #import "LWHuoYuanDeatilViewController.h"
+#import "LWThreeLevelTableView.h"
 
-@interface LWHuoYuanThreeLevelViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface LWHuoYuanThreeLevelViewController ()
 @property (nonatomic, strong) NSMutableArray<LWHuoYuanThreeLevelModel *> * listDatas;
-@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) LWThreeLevelTableView * tableView;
+//@property (nonatomic, assign) NSInteger  lastEditingIndex;
 @end
 
 // 货源大厅三级页面
 @implementation LWHuoYuanThreeLevelViewController
 - (void)requestDatas
 {
-    [ServiceManager requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"id":LWDATA(self.zbTypeId),@"gysLimit":@(100)} success:^(id  _Nonnull response) {
+    [self requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"id":LWDATA(self.zbTypeId),@"gysLimit":@(100)} success:^(id  _Nonnull response) {
         
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         
-//        LWLog(@"-------------货源大厅三级列表:%@",response);
+        //        LWLog(@"-------------货源大厅三级列表:%@",response);
         if ([response[@"code"] integerValue] == 0) {
             NSDictionary *page = response[@"page"];
             self.currPage = [page[@"currPage"] integerValue];
@@ -39,11 +41,11 @@
                 [self.listDatas addObject: [LWHuoYuanThreeLevelModel modelWithDictionary:dict]];
             }
             
-//            if (self.currPage >= self.totalPage) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }else{
-//                [self.tableView.mj_footer resetNoMoreData];
-//            }
+            //            if (self.currPage >= self.totalPage) {
+            //                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            //            }else{
+            //                [self.tableView.mj_footer resetNoMoreData];
+            //            }
         }
         if (self.listDatas.count == 0) {
             [self.view bringSubviewToFront:self.nothingView];
@@ -52,14 +54,21 @@
         }
         self.nothingView.alpha = self.listDatas.count == 0 ? 1:0;
         self.tableView.mj_footer.hidden = self.listDatas.count == 0;
+        self.tableView.listDatas = self.listDatas;
         [self.tableView reloadData];
     } failure:^(NSError * _Nonnull error) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         if (self.currPage == 1) {
-                   [self.tableView.mj_footer setHidden:YES];
-               }
+            [self.tableView.mj_footer setHidden:YES];
+        }
     }];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.tableView endTableViewCellEdit];
 }
 
 - (void)viewDidLoad {
@@ -78,53 +87,11 @@
     }];
 }
 
-#pragma mark ------UITableViewDelegate----------
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    LWHuoYuanThreeLevelListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWHuoYuanThreeLevelListTableViewCell" forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.model  = self.listDatas[indexPath.row];
-    WEAKSELF(self)
-    cell.clickItemsBlock = ^(gysListModel * _Nonnull itemmodel) {
-        LWHuoYuanDeatilViewController *vc = [LWHuoYuanDeatilViewController new];
-        LWHuoYuanThreeLevelModel *model = self.listDatas[indexPath.row];
-        vc.gongYingShangDm = itemmodel.customId;
-        vc.zhuangBeiDm = model.zbId;
-        vc.zhuangBeiLx = model.zblxId;
-        vc.zhuangBeiName = model.zbName;
-        [weakself.navigationController pushViewController:vc animated:YES];
-    };
-    return  cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return  self.listDatas.count;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    LWHuoYuanThreeLevelModel *model = self.listDatas[indexPath.row];
-    LWGongYingShangListViewController *vc = [LWGongYingShangListViewController new];
-    vc.zbTypeId = model.zblxId;
-    vc.zbId = model.zbId;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (UITableView *)tableView
+- (LWThreeLevelTableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.rowHeight = 230;
-        [_tableView registerClass:[LWHuoYuanThreeLevelListTableViewCell class] forCellReuseIdentifier:@"LWHuoYuanThreeLevelListTableViewCell"];
-        _tableView.backgroundColor = UIColor.whiteColor;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
-//        _tableView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
-
+        _tableView = [[LWThreeLevelTableView alloc] initWithFrame:CGRectZero];
+        _tableView.sourceVc = self;    
     }
     return _tableView;
 }

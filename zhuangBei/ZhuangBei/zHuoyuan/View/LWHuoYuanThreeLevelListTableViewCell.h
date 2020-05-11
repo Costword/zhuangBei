@@ -9,14 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "LWHuoYuanDaTingModel.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
+typedef void(^changeEditStatusBlock)(BOOL editing);
 typedef void(^clickItemsBlock)(gysListModel * model);
-@interface LWHuoYuanThreeLevelListTableViewCell : UITableViewCell
+@interface LWHuoYuanThreeLevelListTableViewCell : UITableViewCell<UIScrollViewDelegate>
 
 @property (nonatomic, strong) LWHuoYuanThreeLevelModel * model;
 @property (nonatomic, copy) clickItemsBlock clickItemsBlock;
+@property (nonatomic, copy) changeEditStatusBlock editBlock;
+
+// -1 没有
+@property (nonatomic, assign) BOOL isEditing;
 
 @end
 
-NS_ASSUME_NONNULL_END

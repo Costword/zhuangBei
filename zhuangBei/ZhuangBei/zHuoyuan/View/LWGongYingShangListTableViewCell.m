@@ -60,6 +60,7 @@
     _desL.numberOfLines = 0;
     startL.text = @"星级:  ";
     _logo.image = IMAGENAME(@"testicon3");
+    [_logo setBoundWidth:0 cornerRadius:35];
     
     CGFloat margin_l = 15;
     CGFloat margin_t = 15;

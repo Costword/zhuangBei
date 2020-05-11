@@ -23,7 +23,7 @@
     UIBarButtonItem * leftBarButtonItem =   [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"return_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(actionBackClick)];
     self.navigationItem.leftBarButtonItem =leftBarButtonItem;
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor blackColor];
-//    NSLog(@"%@",self.navigationController.childViewControllers);
+    //    NSLog(@"%@",self.navigationController.childViewControllers);
     if (self.navigationController.childViewControllers.count==1) {
         self.navigationItem.leftBarButtonItem = nil;
     }
@@ -101,14 +101,14 @@
 -(void)postDataWithUrl:(NSString*)url WithParam:(id)param
 {
     NSLog(@"当前请求的URL:%@\n参数:%@",url,param);
-
-//    [ServiceManager requestPostWithUrl:url Parameters:param success:^(id  _Nonnull response) {
-//        NSString *  text  = [self jsonToString:response];
-//        [self RequsetSuccessWithData:response AndUrl:url];
-//        NSLog(@"请求到的数据是：%@",text);
-//    } failure:^(NSError * _Nonnull error) {
-//        [self RequsetFileWithUrl:url WithError:error];
-//    }];
+    
+    //    [ServiceManager requestPostWithUrl:url Parameters:param success:^(id  _Nonnull response) {
+    //        NSString *  text  = [self jsonToString:response];
+    //        [self RequsetSuccessWithData:response AndUrl:url];
+    //        NSLog(@"请求到的数据是：%@",text);
+    //    } failure:^(NSError * _Nonnull error) {
+    //        [self RequsetFileWithUrl:url WithError:error];
+    //    }];
     
     [zNetWorkManger POSTworkWithUrl:url WithParamer:param Success:^(id  _Nonnull responseObject) {
         NSString *  text  = [self jsonToString:responseObject];
@@ -166,5 +166,39 @@
 }
 
 
+- (void)requestPostWithUrl:(NSString *)url Parameters:(id)parameters success:(RequestSuccess)success failure:(RequestFailure)failure;
+{
+    [ServiceManager requestPostWithUrl:url Parameters:parameters success:^(id  _Nonnull response) {
+        if (self.noContentView.alpha == 1) {
+            self.noContentView.alpha = 0;
+            [self.view sendSubviewToBack:self.noContentView];
+        }
+        success(response);
+    } failure:^(NSError * _Nonnull error) {
+        [self.view bringSubviewToFront:self.noContentView];
+        self.noContentView.alpha = 1;
+        failure(error);
+    }];
+}
 
+
+/// POST  网络请求 内部拼接参数
+/// @param url 地址
+/// @param paraString 参数字典，内部转拼接参数
+/// @param success 成功
+/// @param failure 失败
+- (void)requestPostWithUrl:(NSString *)url paraString:(id)paraString success:(RequestSuccess)success failure:(RequestFailure)failure;
+{
+    [ServiceManager requestPostWithUrl:url paraString:paraString success:^(id  _Nonnull response) {
+        if (self.noContentView.alpha == 1) {
+            self.noContentView.alpha = 0;
+            [self.view sendSubviewToBack:self.noContentView];
+        }
+        success(response);
+    } failure:^(NSError * _Nonnull error) {
+        [self.view bringSubviewToFront:self.noContentView];
+        self.noContentView.alpha = 1;
+        failure(error);
+    }];
+}
 @end

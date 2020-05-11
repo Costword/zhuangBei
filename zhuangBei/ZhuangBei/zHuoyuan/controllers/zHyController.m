@@ -24,7 +24,7 @@
 //货源大厅一级列表
 - (void)requestDatas
 {
-    [ServiceManager requestPostWithUrl:@"app/appzhuangbeitype/list" paraString:@{@"parentId":@"1"} success:^(id  _Nonnull response) {
+    [self requestPostWithUrl:@"app/appzhuangbeitype/list" paraString:@{@"parentId":@"1"} success:^(id  _Nonnull response) {
 //        [self.collectView.mj_footer setHidden:NO];
         [self.collectView.mj_header endRefreshing];
 //        [self.collectView.mj_footer endRefreshing];
