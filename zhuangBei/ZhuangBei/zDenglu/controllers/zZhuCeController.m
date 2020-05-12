@@ -83,7 +83,7 @@
         return;
     }
     if ([url containsString:kRegister]) {
-        [[zHud shareInstance]showMessage:@"注册失败"];
+        [[zHud shareInstance]showMessage:@"注册失败,请检查网络"];
         return;
     }
     
@@ -135,6 +135,8 @@
         }
         if ([type integerValue] == 3) {
             //需要确定邀请人是否为xxx
+            [[zHud shareInstance]showMessage:@"注册成功,需确定邀请人"];
+            [self.navigationController popViewControllerAnimated:YES];
             return;
         }
         return;

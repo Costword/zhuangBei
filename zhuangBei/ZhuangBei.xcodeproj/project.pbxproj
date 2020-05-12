@@ -98,6 +98,7 @@
 		00B0A5F024654FB20041C234 /* zCompanyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A5EF24654FB20041C234 /* zCompanyDetailCell.m */; };
 		00B0A5F324654FC60041C234 /* zGoodsDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A5F224654FC60041C234 /* zGoodsDetailCell.m */; };
 		00B26CF024580A390099FFD5 /* zUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B26CEF24580A390099FFD5 /* zUserInfo.m */; };
+		00C9524C2469040B00C24472 /* KKPaddingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C9524A2469040A00C24472 /* KKPaddingLabel.m */; };
 		00CA47672455B91E006A2885 /* zQuestionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA47662455B91E006A2885 /* zQuestionController.m */; };
 		00CA47702455B9DD006A2885 /* QuestionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA476E2455B9DD006A2885 /* QuestionModel.m */; };
 		00CA47712455B9DD006A2885 /* AnswerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA476F2455B9DD006A2885 /* AnswerModel.m */; };
@@ -352,6 +353,8 @@
 		00B0A5F224654FC60041C234 /* zGoodsDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zGoodsDetailCell.m; sourceTree = "<group>"; };
 		00B26CEE24580A390099FFD5 /* zUserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zUserInfo.h; sourceTree = "<group>"; };
 		00B26CEF24580A390099FFD5 /* zUserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zUserInfo.m; sourceTree = "<group>"; };
+		00C9524A2469040A00C24472 /* KKPaddingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKPaddingLabel.m; sourceTree = "<group>"; };
+		00C9524B2469040A00C24472 /* KKPaddingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKPaddingLabel.h; sourceTree = "<group>"; };
 		00CA47652455B91D006A2885 /* zQuestionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zQuestionController.h; sourceTree = "<group>"; };
 		00CA47662455B91E006A2885 /* zQuestionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zQuestionController.m; sourceTree = "<group>"; };
 		00CA476C2455B9DD006A2885 /* QuestionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionModel.h; sourceTree = "<group>"; };
@@ -981,6 +984,15 @@
 			path = BAWKWebView;
 			sourceTree = "<group>";
 		};
+		00C952492469040A00C24472 /* KKPaddingLabel */ = {
+			isa = PBXGroup;
+			children = (
+				00C9524B2469040A00C24472 /* KKPaddingLabel.h */,
+				00C9524A2469040A00C24472 /* KKPaddingLabel.m */,
+			);
+			path = KKPaddingLabel;
+			sourceTree = "<group>";
+		};
 		00CA476B2455B9DD006A2885 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1081,6 +1093,7 @@
 		89487BE724544E1500D4FA67 /* Thrid */ = {
 			isa = PBXGroup;
 			children = (
+				00C952492469040A00C24472 /* KKPaddingLabel */,
 				00B0A5D2246500840041C234 /* BAWKWebView */,
 				00372AE82456842F00E51931 /* PPNetworkHelper */,
 			);
@@ -1441,6 +1454,7 @@
 				0091FCEC245E6AC60046691F /* zCityEditFooter.m in Sources */,
 				00B26CF024580A390099FFD5 /* zUserInfo.m in Sources */,
 				002A6180245B0199009A53AA /* cookiesTool.m in Sources */,
+				00C9524C2469040B00C24472 /* KKPaddingLabel.m in Sources */,
 				001ECA6A2453B6F300727379 /* zLoginCard.m in Sources */,
 				009FB638244FE8DF00133974 /* FUBadgeButton.m in Sources */,
 				89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */,

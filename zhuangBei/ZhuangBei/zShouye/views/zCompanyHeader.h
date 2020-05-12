@@ -10,7 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^headerSliderMenuBack)(NSInteger index);
+
 @interface zCompanyHeader : UIView
+
+@property(copy,nonatomic)headerSliderMenuBack headerSlideBack;
 
 @end
 

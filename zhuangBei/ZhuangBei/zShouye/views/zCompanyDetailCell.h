@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(zCompanyDetailCell*)instanceWithTableView:(UITableView*)tableView AndIndexPath:(NSIndexPath*)indexPath;
 
+@property(strong,nonatomic)NSArray * typesArray;
+
 @end
 
 NS_ASSUME_NONNULL_END

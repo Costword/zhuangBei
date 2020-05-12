@@ -9,7 +9,6 @@
 #import "zcityCell.h"
 #import "editTextField.h"
 #import "zCityCollectionCell.h"
-//#import "handWritingListLayout.h"
 #import "UICollectionViewLeftAlignedLayout.h"
 
 @interface zcityCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate>
