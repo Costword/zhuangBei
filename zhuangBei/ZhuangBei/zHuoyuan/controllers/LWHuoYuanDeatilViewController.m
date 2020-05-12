@@ -21,7 +21,7 @@
 
 - (void)requestDatas
 {
-    [ServiceManager requestPostWithUrl:@"app/appgyszblink/getSourceDetailsByModelId" paraString:@{
+    [self requestPostWithUrl:@"app/appgyszblink/getSourceDetailsByModelId" paraString:@{
         @"modelId":LWDATA(self.modelId),
         @"gongYingShangDm":LWDATA(self.gongYingShangDm),
         @"zhuangBeiDm":LWDATA(self.zhuangBeiDm),
@@ -35,7 +35,6 @@
         [self handlerDatas];
         if ([response[@"code"] integerValue] == 0) {
         }else{
-
             [[zHud shareInstance] showMessage:LWDATA(response[@"msg"])];
         }
     } failure:^(NSError * _Nonnull error) {
@@ -89,7 +88,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"货源详情";
-//    [self confiUI];
+    //    [self confiUI];
     [self requestDatas];
 }
 

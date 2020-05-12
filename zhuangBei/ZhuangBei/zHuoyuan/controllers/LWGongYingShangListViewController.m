@@ -12,7 +12,6 @@
 #import "LWHuoYuanDeatilViewController.h"
 @interface LWGongYingShangListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
-//@property (nonatomic, strong) NSMutableArray * listDatas;
 @property (nonatomic, strong) LWHuoYuanThreeLevelModel * datasModel;
 
 @end
@@ -21,7 +20,7 @@
 
 - (void)requestDatas
 {
-    [ServiceManager requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"Id":LWDATA(self.zbTypeId),@"gysLimit":@(100),@"page":@(self.currPage),@"searchGYSName":@"",@"zbId":LWDATA(self.zbId)} success:^(id  _Nonnull response) {
+    [self requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"Id":LWDATA(self.zbTypeId),@"gysLimit":@(100),@"page":@(self.currPage),@"searchGYSName":@"",@"zbId":LWDATA(self.zbId)} success:^(id  _Nonnull response) {
         
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

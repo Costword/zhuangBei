@@ -12,6 +12,16 @@
 #import "zNothingView.h"
 #import "zNetWorkManger.h"
 NS_ASSUME_NONNULL_BEGIN
+/**
+ 请求成功的block
+ @param response 响应体数据
+ */
+
+typedef void(^RequestSuccess)(id response);
+/**
+ 请求失败的block
+ */
+typedef void(^RequestFailure)(NSError *error);
 
 @interface baseViewController : UIViewController
 
@@ -28,6 +38,14 @@ NS_ASSUME_NONNULL_BEGIN
 //
 //-(void)RequsetFileWithUrl:(NSString*)url WithError:(NSError*)err;
 
+- (void)requestPostWithUrl:(NSString *)url Parameters:(id)parameters success:(RequestSuccess)success failure:(RequestFailure)failure;
+
+/// POST  网络请求 内部拼接参数
+/// @param url 地址
+/// @param paraString 参数字典，内部转拼接参数
+/// @param success 成功
+/// @param failure 失败
+- (void)requestPostWithUrl:(NSString *)url paraString:(id)paraString success:(RequestSuccess)success failure:(RequestFailure)failure;
 @end
 
 NS_ASSUME_NONNULL_END
