@@ -73,6 +73,133 @@ NSString *const kQuestion = @"app/questionnaireexamrecord/loadRegisterQuestion";
 NSString *const kAnswer = @"app/questionnaireexamrecord/submitExamForRegister";
 
 
+/**
+ 合作伙伴
+ *经销商管理
+ *code = 2
+ *typeIds = 2  未知
+ *limit = 20 分页
+ *page = 1 第一页
+ *searchData= HTTP/1.1
+ Authorization: login_token_f86c7994-376b-4dce-b1b0-eba703108356     ?token?
+ */
+NSString *const kbusinessMan = @"app/appgongys/followGsList";
+
+/**
+ 个人中心
+ *GET
+ *返回
+ {
+     "code": 0,
+     "msg": "success",
+     "data": {
+         "inviteNumber": 0, //我的邀请人
+         "productNumber": 0,//我关注的货源
+         "providerNumber": 0//我的经销商
+     }
+ }
+ */
+NSString *const kpersonal = @"sys/user/findInviteProductProviderOfNumber";
+
+/**
+ 个人中心 - 查询学历
+ *GET
+ *返回
+ {
+     "code": 0,
+     "msg": "success",
+     "data": {
+         "inviteNumber": 0, //我的邀请人
+         "productNumber": 0,//我关注的货源
+         "providerNumber": 0//我的经销商
+     }
+ }
+ */
+NSString *const kgetStudyRank = @"sys/user/findInviteProductProviderOfNumber";
+ 
+/**
+ 个人中心 - 查询学历
+ *POST
+ *返回
+ {
+     "code": 0,
+     "msg": "success",
+     "list": {
+         "userId": 744,
+         "userBh": null,
+         "userDm": 685,
+         "userName": "Wa",
+         "minsummary": null,
+         "birth": null,
+         "isShowBirth": 0,
+         "jobYear": null,
+         "isShowJobYear": 0,
+         "nativePlace": null,
+         "headSet": null,
+         "mobile": "15516562513",
+         "isShowMobile": 0,
+         "email": null,
+         "jobName": null,
+         "wordShow": null,
+         "sex": null,
+         "education": null,
+         "isShowEducation": 0,
+         "nation": null,
+         "provinceId": null,
+         "provinceName": null,
+         "cityId": null,
+         "cityName": null,
+         "marriagestatus": null,
+         "politicalstatus": null,
+         "height": null,
+         "weight": null,
+         "portrait": 3379,
+         "chaungJianRq": "2020-04-30 08:00:00",
+         "chuangJianR": null,
+         "xiuGaiRq": null,
+         "xiuGaiR": null,
+         "suoShuGs": null,
+         "suoShuGsName": null,
+         "suoShuGsCompanyType": null,
+         "suoShuGsCreditCodeState": null,
+         "status": null,
+         "post": null,
+         "jobId": null,
+         "rankDm": null,
+         "buMen": null,
+         "quanXianDm": null,
+         "quanXianMc": null,
+         "shiFouGly": 0,
+         "followStatus": null,
+         "district": null,
+         "districtIdList": null,
+         "quJson": null,
+         "xmJson": null,
+         "jyJson": null,
+         "gzJson": null,
+         "userName2": null,
+         "email2": null,
+         "mobile2": null,
+         "jobName2": null,
+         "companyType": null,
+         "companyNameFirst": null,
+         "companyNameSecond": null,
+         "companyNameThird": null,
+         "regLocation": null
+     },
+     "provinceList": [{
+         "id": 10000,
+         "name": "全国",
+         "parentId": 1,
+         "createDate": "2020-03-23 14:42:21",
+         "checked": false
+     }]
+ }
+ */
+NSString *const kgetUserInfo = @"app/appqyuser/qyinfo";
+
+
+    
 
 /**
  登录

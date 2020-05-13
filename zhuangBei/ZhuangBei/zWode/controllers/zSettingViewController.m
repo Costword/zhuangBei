@@ -108,7 +108,8 @@
 {
     if (!_fuwuButton) {
         _fuwuButton = [[UIButton alloc]init];
-        _fuwuButton.titleLabel.font = kFont(14);
+        CGFloat fontsize = kWidthFlot(14);
+        _fuwuButton.titleLabel.font = kFont(fontsize);
         [_fuwuButton setTitleColor:[UIColor colorWithHexString:@"#3F50B5"] forState:UIControlStateNormal];
         [_fuwuButton setTitle:@"《服务协议》" forState:UIControlStateNormal];
         _fuwuButton.clipsToBounds = YES;
@@ -121,7 +122,8 @@
 {
     if (!_yinsiButton) {
         _yinsiButton = [[UIButton alloc]init];
-        _yinsiButton.titleLabel.font = kFont(14);
+        CGFloat fontsize = kWidthFlot(14);
+        _yinsiButton.titleLabel.font = kFont(fontsize);
         [_yinsiButton setTitleColor:[UIColor colorWithHexString:@"#3F50B5"] forState:UIControlStateNormal];
         [_yinsiButton setTitle:@"《隐私政策》" forState:UIControlStateNormal];
         _yinsiButton.clipsToBounds = YES;
