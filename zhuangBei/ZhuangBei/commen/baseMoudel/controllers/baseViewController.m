@@ -201,4 +201,9 @@
         failure(error);
     }];
 }
+
+- (void)requestDatas
+{
+// 子类重写
+}
 @end

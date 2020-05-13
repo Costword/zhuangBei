@@ -45,6 +45,20 @@ typedef void(^RequestFailure)(NSError *error);
 //
 //+ (void)requestWithURL:(NSString *)URL parameters:(NSDictionary *)parameter success:(RequestSuccess)success failure:(RequestFailure)failure;
 
+
+/**
+ *  异步POST请求:以body方式,支持数组
+ *
+ *  @param url     请求的url
+ *  @param body    body数据
+ *  @param success 成功回调
+ *  @param failure 失败回调
+ */
++ (void)requestPostWithUrl:(NSString *)url
+               body:(id)body
+            success:(RequestSuccess)success
+            failure:(RequestFailure)failure;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,11 +11,13 @@
 #import "LWJiaoLiuGroupCollectionReusableView.H"
 #import "LWJiaoLiuContatcsListTableViewCell.h"
 #import "LWSystemMessageListViewController.h"
+#import "LWJiaoLiuModel.h"
+#import "MessageGroupViewController.h"
 
 @interface zJiaoliuController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) LWSwitchBarView * switchBarView;
 @property (nonatomic, strong) UICollectionView * collectView;
-@property (nonatomic, strong) NSMutableArray * listDatas_Group;
+@property (nonatomic, strong) NSMutableArray<LWJiaoLiuModel *> * listDatas_Group;//交流
 @property (nonatomic, strong) NSMutableArray * listDatas_Message;
 @property (nonatomic, strong) NSMutableArray * listDatas_Contatcs;
 @property (nonatomic, strong) UITableView * messageTableView;
@@ -27,6 +29,21 @@
 @end
 
 @implementation zJiaoliuController
+
+- (void)requestDatas
+{
+    [self requestPostWithUrl:@"app/imgroupclassify/findListByTypeId" paraString:@{@"typeId":@"1,2,4"} success:^(id  _Nonnull response) {
+        NSArray *data = response[@"data"];
+        if (data&&data.count > 0) {
+            for (NSDictionary*dict  in data) {
+                [self.listDatas_Group addObject:[LWJiaoLiuModel modelWithDictionary: dict]];
+            }
+        }
+        [self.collectView reloadData];
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
 
 // 切换switch标签
 - (void)clickSwitchBarEvent:(NSInteger)tag
@@ -52,6 +69,7 @@
     // Do any additional setup after loading the view.
     _isShow = YES;
     [self confiUI];
+    [self requestDatas];
 }
 
 - (void)confiUI
@@ -170,9 +188,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LWJiaoLiuGroupCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LWJiaoLiuGroupCollectionCell" forIndexPath:indexPath];
-    NSDictionary *dic = self.listDatas_Group[indexPath.section];
-    NSArray *values = dic.allValues.lastObject;
-    cell.nameL.text = values[indexPath.row];
+    LWJiaoLiuModel *model = self.listDatas_Group[indexPath.section];
+    cell.nameL.text = model.imGroupList[indexPath.row].groupName;
     return cell;
 }
 
@@ -180,9 +197,8 @@
 {
     if ([kind isEqualToString:@"UICollectionElementKindSectionHeader"]) {
         LWJiaoLiuGroupCollectionReusableView *seactionView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"LWJiaoLiuGroupCollectionReusableView" forIndexPath:indexPath];
-        NSDictionary *dic = self.listDatas_Group[indexPath.section];
-        NSString *key = dic.allKeys.lastObject;
-        seactionView.titleL.text = key;
+        LWJiaoLiuModel *model = self.listDatas_Group[indexPath.section];
+        seactionView.titleL.text = model.name;
         return seactionView;
     }
     return nil;
@@ -195,14 +211,18 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSDictionary *dic = self.listDatas_Group[section];
-    NSArray *values = dic.allValues.lastObject;
-    return values.count;
+    LWJiaoLiuModel *model = self.listDatas_Group[section];
+    return model.imGroupList.count;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    LWJiaoLiuModel *listmodel = self.listDatas_Group[indexPath.section];
+    imGroupListModel *groupmodel =  listmodel.imGroupList[indexPath.row];
+    MessageGroupViewController *messageGroupVC = [MessageGroupViewController new];
+    messageGroupVC.m_Group_ID = groupmodel.customId;
+    messageGroupVC.m_Group_Name = groupmodel.groupName;
+    [self.navigationController pushViewController:messageGroupVC animated:YES];
 }
 
 
@@ -213,7 +233,7 @@
         UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
         flowlayout.minimumLineSpacing = 10;
         flowlayout.minimumInteritemSpacing = 10;
-        flowlayout.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 60);
+        flowlayout.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 30);
         flowlayout.sectionInset = UIEdgeInsetsMake(10, 15, 10, 15);
         flowlayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         CGFloat item_w = (SCREEN_WIDTH-50)/2;
@@ -225,6 +245,7 @@
         [_collectView registerClass:[LWJiaoLiuGroupCollectionCell class] forCellWithReuseIdentifier:@"LWJiaoLiuGroupCollectionCell"];
         [_collectView registerClass:[LWJiaoLiuGroupCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"LWJiaoLiuGroupCollectionReusableView"];
         _collectView.backgroundColor = UIColor.whiteColor;
+//        _collectView.mj_header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
     }
     return _collectView;
 }
@@ -296,16 +317,17 @@
 - (NSMutableArray *)listDatas_Group
 {
     if (!_listDatas_Group) {
-        _listDatas_Group = [[NSMutableArray alloc] initWithArray:@[
-            @{@"联盟总群":@[@"平台总群",@"新产品申报",@"爆款申请",@"投诉建议"],},
-            @{@"联盟直播":@[@"品牌直播",@"培训直播",@"论坛直播"],},
-            @{@"技术交流":@[@"特巡警装备",@"警保装备",@"刑侦准备",
-                        @"禁毒装备",@"交警装备",@"监所装备",@"法制装备"],},
-            @{@"地区交流群":@[@"东北地区",@"西北地区",@"华东地区",@"华中地区",
-                         @"东南地区",@"西南地区",@"华北地区",@"华南地区"],},
-            @{@"超级会员群":@[],},
-            @{@"顾问群":@[@"杨建顾问群",],},
-        ]];
+        _listDatas_Group = [[NSMutableArray alloc] init];
+//                            WithArray:@[
+//            @{@"联盟总群":@[@"平台总群",@"新产品申报",@"爆款申请",@"投诉建议"],},
+//            @{@"联盟直播":@[@"品牌直播",@"培训直播",@"论坛直播"],},
+//            @{@"技术交流":@[@"特巡警装备",@"警保装备",@"刑侦准备",
+//                        @"禁毒装备",@"交警装备",@"监所装备",@"法制装备"],},
+//            @{@"地区交流群":@[@"东北地区",@"西北地区",@"华东地区",@"华中地区",
+//                         @"东南地区",@"西南地区",@"华北地区",@"华南地区"],},
+//            @{@"超级会员群":@[],},
+//            @{@"顾问群":@[@"杨建顾问群",],},
+//        ]];
         _listDatas_Message = [[NSMutableArray alloc] initWithArray:@[]];
         _listDatas_Contatcs = [[NSMutableArray alloc] initWithArray:@[@{@"默认":@[@"北京真和王宁宁-销售-主管",@"北京真和JoannChen-全公司-商务"]}]];
     }

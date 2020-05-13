@@ -10,6 +10,7 @@
 #import "MainTabBarController.h"
 #import "MainNavController.h"
 #import "zDengluController.h"
+#import "LWClientManager.h"
 @interface AppDelegate ()
 
 @end
@@ -45,6 +46,11 @@
             [self.window makeKeyAndVisible];
         }
     }
+    
+    
+//    配置
+    [[LWClientManager share] installConfigure];
+    
     return YES;
 }
 
