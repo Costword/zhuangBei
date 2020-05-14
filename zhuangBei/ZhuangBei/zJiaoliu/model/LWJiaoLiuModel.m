@@ -8,15 +8,39 @@
 
 #import "LWJiaoLiuModel.h"
 
-@implementation imGroupListModel
 
+@implementation friendItemModel
+
+@end
+
+
+@implementation friendListModel
+// 声明自定义类参数类型
++ (NSDictionary *)modelContainerPropertyGenericClass
+{
+    return @{@"list":friendItemModel.class,
+    };
+}
+@end
+
+
+@implementation imGroupListModel
+// 声明自定义类参数类型
++ (NSDictionary *)modelCustomPropertyMapper
+{
+    return @{@"groupName":@"groupname",
+             @"customId":@"id"};
+}
 @end
 
 @implementation LWJiaoLiuModel
 // 声明自定义类参数类型
 + (NSDictionary *)modelContainerPropertyGenericClass
 {
-    return @{@"imGroupList":imGroupListModel.class};
+    return @{@"group":imGroupListModel.class,
+             @"friend":friendListModel.class,
+             @"imGroupList":imGroupListModel.class,
+    };
 }
 
 @end

@@ -17,38 +17,62 @@
 @interface zJiaoliuController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) LWSwitchBarView * switchBarView;
 @property (nonatomic, strong) UICollectionView * collectView;
-@property (nonatomic, strong) NSMutableArray<LWJiaoLiuModel *> * listDatas_Group;//交流
+@property (nonatomic, strong) NSMutableArray<imGroupListModel *> * listDatas_Group;//群组
+@property (nonatomic, strong) NSMutableArray<LWJiaoLiuModel *> * listDatas_JiaoLiu;//交流
 @property (nonatomic, strong) NSMutableArray * listDatas_Message;
-@property (nonatomic, strong) NSMutableArray * listDatas_Contatcs;
+@property (nonatomic, strong) NSMutableArray<friendListModel *> * listDatas_Contatcs;
 @property (nonatomic, strong) UITableView * messageTableView;
 @property (nonatomic, strong) UITableView * contatcsTableView;
 @property (nonatomic, strong) UITableView * groupTableView;
 @property (nonatomic, strong) UIScrollView * mainScrollView;
 
-@property (nonatomic, assign) BOOL  isShow;
 @end
 
 @implementation zJiaoliuController
-
-- (void)requestDatas
+//交流
+- (void)requestJiaoLiuDatas
 {
     [self requestPostWithUrl:@"app/imgroupclassify/findListByTypeId" paraString:@{@"typeId":@"1,2,4"} success:^(id  _Nonnull response) {
         NSArray *data = response[@"data"];
         if (data&&data.count > 0) {
             for (NSDictionary*dict  in data) {
-                [self.listDatas_Group addObject:[LWJiaoLiuModel modelWithDictionary: dict]];
+                [self.listDatas_JiaoLiu addObject:[LWJiaoLiuModel modelWithDictionary: dict]];
             }
         }
         [self.collectView reloadData];
+        [[zHud shareInstance] hild];
     } failure:^(NSError * _Nonnull error) {
-        
+        [[zHud shareInstance] hild];
+    }];
+}
+//群组、联系人
+- (void)requestDatas
+{
+    [self requestJiaoLiuDatas];
+    
+    [self requestPostWithUrl:@"app/appfriendtype/getFriendTypeAndFriendList" Parameters:@{} success:^(id  _Nonnull response) {
+        NSDictionary *data = response[@"data"];
+
+        NSArray *friend = data[@"friend"];
+        for (NSDictionary*dict  in friend) {
+            [self.listDatas_Contatcs addObject:[friendListModel modelWithDictionary: dict]];
+        }
+        NSArray *group = data[@"group"];
+        for (NSDictionary*dict  in group) {
+            [self.listDatas_Group addObject:[imGroupListModel modelWithDictionary: dict]];
+        }
+        [self.groupTableView reloadData];
+        [self.contatcsTableView reloadData];
+        [[zHud shareInstance] hild];
+    } failure:^(NSError * _Nonnull error) {
+        [[zHud shareInstance] hild];
     }];
 }
 
 // 切换switch标签
 - (void)clickSwitchBarEvent:(NSInteger)tag
 {
-    
+    [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH*tag, 1) animated:YES];
 }
 
 //点击新增
@@ -67,9 +91,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _isShow = YES;
+    
     [self confiUI];
     [self requestDatas];
+    
+    [self.nothingView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view.mas_top).mas_offset(36+40+NAVIGATOR_HEIGHT);
+      }];
+    [self.noContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.nothingView);
+    }];
 }
 
 - (void)confiUI
@@ -77,7 +109,6 @@
     WEAKSELF(self)
     self.switchBarView = [LWSwitchBarView switchBarView:@[@"交流",@"联系人",@"群组",@"消息",] clickBlock:^(UIButton * _Nonnull btn) {
         [weakself clickSwitchBarEvent:btn.tag];
-        [weakself.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH*btn.tag, 1) animated:YES];
     }];
     [self.view addSubview:self.switchBarView];
     [self.switchBarView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -107,9 +138,16 @@
 {
     if (tableView == _contatcsTableView || tableView == _groupTableView) {
         LWJiaoLiuContatcsListTableViewCell * cell =  [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuContatcsListTableViewCell" forIndexPath:indexPath];
-        //        NSDictionary *dic = _listDatas_Contatcs[indexPath.section];
-        //        NSArray *values = dic.allValues.lastObject;
-        //        cell.nameL.text = values[indexPath.row];
+
+        if (tableView == _groupTableView) {
+            imGroupListModel *model = self.listDatas_Group[indexPath.row];
+            cell.nameL.text = model.groupName;
+        }else{
+            friendListModel *listmodel = self.listDatas_Contatcs[indexPath.section];
+            friendItemModel *itemModel = listmodel.list[indexPath.row];
+            cell.nameL.text = itemModel.username;
+        }
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
@@ -123,43 +161,41 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == _contatcsTableView) {
-        NSDictionary *dic = _listDatas_Contatcs[section];
-        NSArray *values = dic.allValues.lastObject ;
-        return _isShow ? values.count : 0;
-        return 10;
+        friendListModel *listmodel = self.listDatas_Contatcs[section];
+        return listmodel.isShow ? listmodel.list.count : 0;
     }
     if(tableView == _groupTableView){
-        return 10;
+        return self.listDatas_Group.count;
     }
-    
     return  1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    //    if (tableView == _contatcsTableView) {
-    //        return _listDatas_Contatcs.count;
-    //    }
+    if (tableView == _contatcsTableView) {
+        return self.listDatas_Contatcs.count;
+    }
     return 1;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if(tableView == _contatcsTableView){
-        LWJiaoLiuContatcsSeactionView *seactionview = [[LWJiaoLiuContatcsSeactionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
-        seactionview.leftL.text = @"默认";
+       __block LWJiaoLiuContatcsSeactionView *seactionview = [[LWJiaoLiuContatcsSeactionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+        friendListModel *listmodel = self.listDatas_Contatcs[section];
+        seactionview.leftL.text = listmodel.groupname;
         WEAKSELF(self)
         seactionview.block = ^(BOOL isShow) {
-            weakself.isShow = isShow;
+//            weakself.isShow = isShow;
+            listmodel.isShow = isShow;
             [weakself.contatcsTableView reloadData];
-            LWLog(@"--------------%ld--------------%ld",isShow,(long)section);
-            WEAKSELF(self)
+//            [weakself.contatcsTableView reloadSection:section withRowAnimation:(UITableViewRowAnimationNone)];
             [UIView animateWithDuration:0.25 animations:^{
-                seactionview.rightBtn.imageView.transform = weakself.isShow ? CGAffineTransformMakeRotation(M_PI):CGAffineTransformIdentity;
+                seactionview.rightBtn.imageView.transform = listmodel.isShow ? CGAffineTransformMakeRotation(M_PI):CGAffineTransformIdentity;
             }];
             
         };
-        seactionview.rightBtn.selected = _isShow;
+        seactionview.rightBtn.selected = listmodel.isShow;
         return seactionview;
     }
     return [UIView new];
@@ -181,6 +217,11 @@
     if (tableView == _messageTableView) {
         LWSystemMessageListViewController *system = [LWSystemMessageListViewController new];
         [self.navigationController pushViewController:system animated:YES];
+    }else if(tableView == _contatcsTableView){
+
+    }else if (tableView == _groupTableView){
+        imGroupListModel *groupmodel = self.listDatas_Group[indexPath.row];
+        [self pushToGroupRoom:groupmodel.customId groupname:groupmodel.groupName];
     }
 }
 #pragma mark ------UICollectionViewDelegate----------
@@ -188,7 +229,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LWJiaoLiuGroupCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LWJiaoLiuGroupCollectionCell" forIndexPath:indexPath];
-    LWJiaoLiuModel *model = self.listDatas_Group[indexPath.section];
+    LWJiaoLiuModel *model = self.listDatas_JiaoLiu[indexPath.section];
     cell.nameL.text = model.imGroupList[indexPath.row].groupName;
     return cell;
 }
@@ -197,7 +238,7 @@
 {
     if ([kind isEqualToString:@"UICollectionElementKindSectionHeader"]) {
         LWJiaoLiuGroupCollectionReusableView *seactionView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"LWJiaoLiuGroupCollectionReusableView" forIndexPath:indexPath];
-        LWJiaoLiuModel *model = self.listDatas_Group[indexPath.section];
+        LWJiaoLiuModel *model = self.listDatas_JiaoLiu[indexPath.section];
         seactionView.titleL.text = model.name;
         return seactionView;
     }
@@ -206,25 +247,33 @@
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return self.listDatas_Group.count;
+    return self.listDatas_JiaoLiu.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    LWJiaoLiuModel *model = self.listDatas_Group[section];
+    LWJiaoLiuModel *model = self.listDatas_JiaoLiu[section];
     return model.imGroupList.count;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    LWJiaoLiuModel *listmodel = self.listDatas_Group[indexPath.section];
+    LWJiaoLiuModel *listmodel = self.listDatas_JiaoLiu[indexPath.section];
     imGroupListModel *groupmodel =  listmodel.imGroupList[indexPath.row];
-    MessageGroupViewController *messageGroupVC = [MessageGroupViewController new];
-    messageGroupVC.m_Group_ID = groupmodel.customId;
-    messageGroupVC.m_Group_Name = groupmodel.groupName;
-    [self.navigationController pushViewController:messageGroupVC animated:YES];
+    [self pushToGroupRoom:groupmodel.customId groupname:groupmodel.groupName];
 }
 
+
+/// 跳转群聊室
+/// @param groupid 群聊id
+/// @param groupname 群聊n名称
+- (void)pushToGroupRoom:(NSString *)groupid groupname:(NSString *)groupname
+{
+    MessageGroupViewController *messageGroupVC = [MessageGroupViewController new];
+    messageGroupVC.m_Group_ID = groupid;
+    messageGroupVC.m_Group_Name = groupname;
+    [self.navigationController pushViewController:messageGroupVC animated:YES];
+}
 
 #pragma mark ---------------lazy-------------------
 - (UICollectionView *)collectView
@@ -318,20 +367,20 @@
 {
     if (!_listDatas_Group) {
         _listDatas_Group = [[NSMutableArray alloc] init];
-//                            WithArray:@[
-//            @{@"联盟总群":@[@"平台总群",@"新产品申报",@"爆款申请",@"投诉建议"],},
-//            @{@"联盟直播":@[@"品牌直播",@"培训直播",@"论坛直播"],},
-//            @{@"技术交流":@[@"特巡警装备",@"警保装备",@"刑侦准备",
-//                        @"禁毒装备",@"交警装备",@"监所装备",@"法制装备"],},
-//            @{@"地区交流群":@[@"东北地区",@"西北地区",@"华东地区",@"华中地区",
-//                         @"东南地区",@"西南地区",@"华北地区",@"华南地区"],},
-//            @{@"超级会员群":@[],},
-//            @{@"顾问群":@[@"杨建顾问群",],},
-//        ]];
+
         _listDatas_Message = [[NSMutableArray alloc] initWithArray:@[]];
-        _listDatas_Contatcs = [[NSMutableArray alloc] initWithArray:@[@{@"默认":@[@"北京真和王宁宁-销售-主管",@"北京真和JoannChen-全公司-商务"]}]];
+        _listDatas_Contatcs = [[NSMutableArray alloc] init];
     }
     return _listDatas_Group;
+}
+
+
+- (NSMutableArray *)listDatas_JiaoLiu
+{
+    if (!_listDatas_JiaoLiu) {
+        _listDatas_JiaoLiu = [[NSMutableArray alloc] init];
+    }
+    return _listDatas_JiaoLiu;
 }
 
 @end

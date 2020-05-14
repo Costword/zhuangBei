@@ -130,6 +130,7 @@
 		89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89216984245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m */; };
 		8921698824569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921698724569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m */; };
 		8921698B2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921698A2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m */; };
+		89298185246CD62600C3DFE0 /* LWServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89298184246CD62600C3DFE0 /* LWServiceModel.m */; };
 		893A18EE2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18ED2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m */; };
 		893A18F1245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18F0245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m */; };
 		893A18F424592D1E00D8C36C /* LWGongYingShangListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18F324592D1E00D8C36C /* LWGongYingShangListViewController.m */; };
@@ -461,6 +462,8 @@
 		8921698724569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJiaoLiuGroupCollectionReusableView.m; sourceTree = "<group>"; };
 		892169892456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWJiaoLiuContatcsListTableViewCell.h; sourceTree = "<group>"; };
 		8921698A2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJiaoLiuContatcsListTableViewCell.m; sourceTree = "<group>"; };
+		89298183246CD62600C3DFE0 /* LWServiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWServiceModel.h; sourceTree = "<group>"; };
+		89298184246CD62600C3DFE0 /* LWServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWServiceModel.m; sourceTree = "<group>"; };
 		893A18EC2459182800D8C36C /* LWHuoYuanThreeLevelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanThreeLevelViewController.h; sourceTree = "<group>"; };
 		893A18ED2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanThreeLevelViewController.m; sourceTree = "<group>"; };
 		893A18EF245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanThreeLevelListTableViewCell.h; sourceTree = "<group>"; };
@@ -1119,6 +1122,8 @@
 				00D6E2DC2459A6D200B6E327 /* zNetWorkManger.m */,
 				895BD9C32462604600AA5947 /* ServiceManager.h */,
 				895BD9C42462604600AA5947 /* ServiceManager.m */,
+				89298183246CD62600C3DFE0 /* LWServiceModel.h */,
+				89298184246CD62600C3DFE0 /* LWServiceModel.m */,
 			);
 			name = network;
 			path = ZhuangBei/network;
@@ -1675,6 +1680,7 @@
 				0091FCFD245ECBDE0046691F /* editTextField.m in Sources */,
 				89D36E0F245AB93F00A6C014 /* HYTopBarView.m in Sources */,
 				009FB68224500D7800133974 /* NSString+Size.m in Sources */,
+				89298185246CD62600C3DFE0 /* LWServiceModel.m in Sources */,
 				8921697524566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m in Sources */,
 				890643C924693C360099508C /* LWJiaoLiuModel.m in Sources */,
 				0091FCE9245E68950046691F /* UICollectionViewLeftAlignedLayout.m in Sources */,
