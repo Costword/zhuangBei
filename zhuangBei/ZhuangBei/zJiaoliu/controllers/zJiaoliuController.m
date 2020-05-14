@@ -13,6 +13,7 @@
 #import "LWSystemMessageListViewController.h"
 #import "LWJiaoLiuModel.h"
 #import "MessageGroupViewController.h"
+#import "ChatRoomViewController.h"
 
 @interface zJiaoliuController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) LWSwitchBarView * switchBarView;
@@ -218,7 +219,10 @@
         LWSystemMessageListViewController *system = [LWSystemMessageListViewController new];
         [self.navigationController pushViewController:system animated:YES];
     }else if(tableView == _contatcsTableView){
-
+        friendListModel *listmodel = self.listDatas_Contatcs[indexPath.section];
+        friendItemModel *itemmodel = listmodel.list[indexPath.row];
+         ChatRoomViewController *vc= [ChatRoomViewController chatRoomViewControllerWithRoomId:itemmodel.customId roomName:itemmodel.username roomType:(LWChatRoomTypeOneTOne) extend:nil];
+        [self.navigationController pushViewController:vc animated:YES];
     }else if (tableView == _groupTableView){
         imGroupListModel *groupmodel = self.listDatas_Group[indexPath.row];
         [self pushToGroupRoom:groupmodel.customId groupname:groupmodel.groupName];
@@ -269,10 +273,7 @@
 /// @param groupname 群聊n名称
 - (void)pushToGroupRoom:(NSString *)groupid groupname:(NSString *)groupname
 {
-    MessageGroupViewController *messageGroupVC = [MessageGroupViewController new];
-    messageGroupVC.m_Group_ID = groupid;
-    messageGroupVC.m_Group_Name = groupname;
-    [self.navigationController pushViewController:messageGroupVC animated:YES];
+    [self.navigationController pushViewController:[MessageGroupViewController chatRoomViewControllerWithRoomId:groupid roomName:groupname roomType:(LWChatRoomTypeGroup) extend:nil] animated:YES];
 }
 
 #pragma mark ---------------lazy-------------------

@@ -124,13 +124,8 @@
     selectItem = indexPath.row;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    MessageGroupViewController *receive = [[MessageGroupViewController alloc] init];
-    receive.USER_TYPE = @"GROUP_ID";
     IFGroupItem* item = [_listArr objectAtIndex:selectItem];
-    receive.m_Group_ID = item.groupId;
-    receive.m_Group_Name = item.groupName;
-    receive.creatorID = item.creatorId;
-    [self.navigationController pushViewController:receive animated:YES];
+    [self.navigationController pushViewController:[MessageGroupViewController chatRoomViewControllerWithRoomId:item.groupId roomName:item.groupName roomType:(LWChatRoomTypeGroup) extend:nil] animated:YES];
 }
 
 

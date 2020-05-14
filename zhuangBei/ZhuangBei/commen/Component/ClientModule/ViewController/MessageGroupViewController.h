@@ -9,13 +9,12 @@
 #import <UIKit/UIKit.h>
 
 
-#import "IFBaseVC.h"
+#import "LWChatListBaseViewController.h"
 
-@interface MessageGroupViewController : IFBaseVC<UITableViewDataSource,UITableViewDelegate, UITextViewDelegate>
+@interface MessageGroupViewController : LWChatListBaseViewController
 
 @property NSString *USER_TYPE;
-@property NSString *m_Group_Name;
-@property NSString *m_Group_ID;
+//@property NSString *m_Group_Name;
 
 @property (nonatomic, copy) NSString *creatorID; //创建群者id
 

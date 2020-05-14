@@ -78,6 +78,24 @@
     }
     return self;
 }
+- (void)updateForVerifiCell;
+{
+    _descL.hidden = _timelL.hidden = NO;
+    [_nameL mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(_icon.mas_right).mas_offset(10);
+        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+        make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(-10);
+    }];
+    [_descL mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(_nameL.mas_left);
+        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+        make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(15);
+    }];
+    [_timelL mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+        make.centerY.mas_equalTo(_nameL.mas_centerY);
+    }];
+}
 
 - (void)setBottomLine:(NSInteger)tag;
 {

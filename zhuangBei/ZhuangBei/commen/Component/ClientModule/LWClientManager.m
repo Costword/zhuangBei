@@ -11,6 +11,7 @@
 #import "XHLoginManager.h"
 #import "XHGroupManager.h"
 #import "AppConfig.h"
+#import "LWClientHeader.h"
 
 static NSString * const VOIP_SERVER_URL = @"testrtc.bdmgxq.cn:10086";
 static NSString * const IM_SERVER_URL = @"testrtc.bdmgxq.cn:19903";
@@ -18,6 +19,8 @@ static NSString * const CHATROOM_SERVER_URL = @"testrtc.bdmgxq.cn:19906";
 static NSString * const LIVE_VDN_SERVER_URL = @"testrtc.bdmgxq.cn:19928";
 static NSString * const LIVE_SRC_SERVER_URL = @"testrtc.bdmgxq.cn:19931";
 static NSString * const LIVE_PROXY_SERVER_URL = @"testrtc.bdmgxq.cn:19932";
+static NSString *const sendmsg_oto_url =  @"app/appfriendmessage/save";
+static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 @interface LWClientManager()<XHLoginManagerDelegate>
 @property (nonatomic, strong) XHCustomConfig *config;
@@ -39,7 +42,6 @@ static NSString * const LIVE_PROXY_SERVER_URL = @"testrtc.bdmgxq.cn:19932";
 
 - (void)installConfigure
 {
-    AppConfig *appConfig = [AppConfig appConfigForLocal:IFServiceTypePrivate];
     self.config.serverType =  SERVER_TYPE_CUSTOM;;
     self.config.imServerURL = IM_SERVER_URL;
     self.config.chatRoomServerURL = CHATROOM_SERVER_URL;
@@ -123,7 +125,7 @@ static NSString * const LIVE_PROXY_SERVER_URL = @"testrtc.bdmgxq.cn:19932";
         return;
     }
     NSString *nowtime = [self currentdateInterval];
-    [ServiceManager requestPostWithUrl:@"app/appgroupmessage/save" body:[self getGroupParamString:@{@"content":LWDATA(msg),@"groupId":LWDATA(groupId),@"userId":LWDATA(userid),@"sendTime":LWDATA(nowtime)}] success:^(id  _Nonnull response) {
+    [ServiceManager requestPostWithUrl:sendmsg_group_url body:[self getGroupParamString:@{@"content":LWDATA(msg),@"groupId":LWDATA(groupId),@"userId":LWDATA(userid),@"sendTime":LWDATA(nowtime)}] success:^(id  _Nonnull response) {
         success(response);
     } failure:^(NSError * _Nonnull error) {
         failure(error);
@@ -133,10 +135,10 @@ static NSString * const LIVE_PROXY_SERVER_URL = @"testrtc.bdmgxq.cn:19932";
 
 /// 向后台发送一对一聊天消息
 /// @param msg 消息内容
-/// @param groupId <#groupId description#>
-/// @param success <#success description#>
-/// @param failure <#failure description#>
-- (void)sendMsgOneToOne:(NSString *)msg groupId:(NSString *)groupId success:(RequestSuccess)success failure:(RequestFailure)failure
+/// @param roomId  id
+/// @param success
+/// @param failure
+- (void)sendMsgOneToOne:(NSString *)msg roomId:(NSString *)roomId success:(RequestSuccess)success failure:(RequestFailure)failure
 {
     NSString *userid = [zUserInfo shareInstance].userInfo.userId;
     if (!userid) {
@@ -144,7 +146,7 @@ static NSString * const LIVE_PROXY_SERVER_URL = @"testrtc.bdmgxq.cn:19932";
         return;
     }
     NSString *nowtime = [self currentdateInterval];
-    [ServiceManager requestPostWithUrl:@"app/appgroupmessage/save" Parameters:[self getGroupParamString:@{@"content":LWDATA(msg),@"groupId":LWDATA(groupId),@"userId":LWDATA(userid),@"sendTime":LWDATA(nowtime)}] success:^(id  _Nonnull response) {
+    [ServiceManager requestPostWithUrl:sendmsg_oto_url body:[self gettotoParamString:@{@"content":LWDATA(msg),@"toUserId":LWDATA(roomId)}] success:^(id  _Nonnull response) {
         success(response);
     } failure:^(NSError * _Nonnull error) {
         failure(error);
@@ -168,6 +170,18 @@ static NSString * const LIVE_PROXY_SERVER_URL = @"testrtc.bdmgxq.cn:19932";
     NSString *string = [NSString stringWithFormat:@"{\"groupId\":\"%@\",\"content\":\"%@\",\"sendTime\":%.0f,\"userId\":%.0f}",param[@"groupId"],param[@"content"],[param[@"sendTime"] floatValue],[param[@"userId"] floatValue]];
     return string;
 }
+
+/// 处理i一对一里消息的参数格式
+/// @param param 参数字典
+- (NSString *)gettotoParamString:(NSDictionary *)param
+{
+    NSString *string = [NSString stringWithFormat:@"{\"toUserId\":\"%@\",\"content\":\"%@\"}",param[@"toUserId"],param[@"content"]];
+    return string;
+}
+
+
+
+
 
 @end
 /*

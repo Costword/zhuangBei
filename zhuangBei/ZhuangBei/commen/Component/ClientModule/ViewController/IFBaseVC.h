@@ -10,9 +10,11 @@
 
 #import "XHClient.h"
 #import "baseViewController.h"
+#import "IFChatView.h"
 
 @interface IFBaseVC : baseViewController
 @property (nonatomic, assign) CGFloat areaHeight;
+
 + (instancetype)instanceFromNib;
 - (void)setNavigationBarColor:(UIColor *)color;
 
@@ -25,6 +27,7 @@
 - (void)setRightButtonText:(NSString * )text;
 - (void)setRightButtonImage:(NSString * )image;
 - (void)rightButtonClicked:(UIButton *)button;
+
 
 
 @end

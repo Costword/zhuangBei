@@ -44,6 +44,13 @@ typedef void(^RequestFailure)(NSError *error);
 /// @param failure 失败
 - (void)sendGroupMsg:(NSString *)msg groupId:(NSString *)groupId success:(RequestSuccess)success failure:(RequestFailure)failure;
 
+/// 向后台发送一对一聊天消息
+/// @param msg 消息内容
+/// @param roomId  id
+/// @param success
+/// @param failure
+- (void)sendMsgOneToOne:(NSString *)msg roomId:(NSString *)roomId success:(RequestSuccess)success failure:(RequestFailure)failure;
+
 @end
 
 NS_ASSUME_NONNULL_END

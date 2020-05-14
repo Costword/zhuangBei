@@ -15,5 +15,10 @@
 #import "AppConfig.h"
 #import "UIView+ILGKit.h"
 #import "LWClientManager.h"
+#import "ShowMsgElem.h"
+#import "IFChatCell.h"
+#import "XHClient.h"
+#import "LWTool.h"
+
 
 #endif /* LWClientHeader_h */

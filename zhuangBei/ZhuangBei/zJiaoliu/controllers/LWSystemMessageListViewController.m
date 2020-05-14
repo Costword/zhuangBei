@@ -9,7 +9,7 @@
 #import "LWSystemMessageListViewController.h"
 #import "LWJiaoLiuContatcsListTableViewCell.h"
 #import "HYTopBarView.h"
-
+#import "LWSystemListModel.h"
 
 @interface LWSystemMessageListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -17,16 +17,38 @@
 @property (nonatomic, strong) UITableView * groupTableView;
 @property (nonatomic, strong) HYTopBarView * topBarView;
 @property (nonatomic, strong) UIScrollView * mainScrollView;
+@property (nonatomic, strong) NSMutableArray<LWSystemListModel *> * listdatas_verifi;
 
 @end
 
 @implementation LWSystemMessageListViewController
+
+- (void)requestDatas
+{
+    [self requestPostWithUrl:@"app/appfriendapply/msgList" Parameters:@{@"page":@(self.currPage)} success:^(id  _Nonnull response) {
+        NSDictionary *data = response[@"data"];
+        self.currPage = [data[@"currPage"] integerValue];
+        self.totalPage = [data[@"totalPage"] integerValue];
+        NSArray *list = data[@"list"];
+        for (NSDictionary *dic in list) {
+            [self.listdatas_verifi addObject:[LWSystemListModel modelWithDictionary:dic]];
+        }
+        [self.friendVerifiTableView reloadData];
+        if (self.listdatas_verifi.count == 0) {
+            [[zHud shareInstance] showMessage:@"暂无数据"];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.title = @"系统消息";
     [self confiUI];
+    [self requestDatas];
 }
 
 - (void)confiUI
@@ -63,8 +85,16 @@
     }else{
         LWJiaoLiuContatcsListTableViewCell * cell =  [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuContatcsListTableViewCell" forIndexPath:indexPath];
         [cell setBottomLine:1];
-        cell.descL.text = @"申请添加你为好友";
+        [cell updateForVerifiCell];
+        LWSystemListModel *model = self.listdatas_verifi[indexPath.row];
+        cell.descL.text = model.content;
+        cell.nameL.text = model.user.username;
+        cell.timelL.text = model.time;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (model.status == 1) {
+            cell.leftBtn.hidden = YES;
+            [cell.rightBtn setTitle:@"已同意" forState:UIControlStateNormal];
+        }
         return cell;
     }
     
@@ -72,9 +102,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //    if (tableView == _contatcsTableView || tableView == _groupTableView) {
-    //        return 10;
-    //    }
+        if (tableView == self.friendVerifiTableView) {
+            return self.listdatas_verifi.count;
+        }
     
     return  10;
 }
@@ -136,5 +166,12 @@
         _groupTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _groupTableView;
+}
+- (NSMutableArray *)listdatas_verifi
+{
+    if (!_listdatas_verifi) {
+        _listdatas_verifi = [[NSMutableArray alloc] init];
+    }
+    return _listdatas_verifi;
 }
 @end

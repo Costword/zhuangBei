@@ -60,8 +60,8 @@
                     
                 } else {
                     MessageGroupViewController *receive = [[MessageGroupViewController alloc] init];
-                    receive.m_Group_Name = name;
-                    receive.m_Group_ID = groupID;
+                    receive.roomName = name;
+                    receive.roomId = groupID;
                     receive.creatorID = [IMUserInfo shareInstance].userID;
                     
                     NSMutableArray *vcArr = weakSelf.navigationController.viewControllers.mutableCopy;

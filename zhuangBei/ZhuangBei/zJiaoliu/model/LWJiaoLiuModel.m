@@ -28,7 +28,7 @@
 // 声明自定义类参数类型
 + (NSDictionary *)modelCustomPropertyMapper
 {
-    return @{@"groupName":@"groupname",
+    return @{@"groupName":@[@"groupname",@"groupName"],
              @"customId":@"id"};
 }
 @end

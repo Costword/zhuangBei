@@ -33,6 +33,8 @@
     [self setupDefaultUI];
     
     self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+   
+    
 }
 
 

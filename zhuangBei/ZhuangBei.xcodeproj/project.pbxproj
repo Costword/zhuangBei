@@ -131,6 +131,9 @@
 		8921698824569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921698724569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m */; };
 		8921698B2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921698A2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m */; };
 		89298185246CD62600C3DFE0 /* LWServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89298184246CD62600C3DFE0 /* LWServiceModel.m */; };
+		89298189246D04EE00C3DFE0 /* ChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89298187246D04EE00C3DFE0 /* ChatRoomViewController.m */; };
+		8929818C246D092B00C3DFE0 /* LWChatListBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8929818B246D092B00C3DFE0 /* LWChatListBaseViewController.m */; };
+		8929818F246D5EBA00C3DFE0 /* LWSystemListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8929818E246D5EBA00C3DFE0 /* LWSystemListModel.m */; };
 		893A18EE2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18ED2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m */; };
 		893A18F1245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18F0245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m */; };
 		893A18F424592D1E00D8C36C /* LWGongYingShangListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893A18F324592D1E00D8C36C /* LWGongYingShangListViewController.m */; };
@@ -464,6 +467,12 @@
 		8921698A2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJiaoLiuContatcsListTableViewCell.m; sourceTree = "<group>"; };
 		89298183246CD62600C3DFE0 /* LWServiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWServiceModel.h; sourceTree = "<group>"; };
 		89298184246CD62600C3DFE0 /* LWServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWServiceModel.m; sourceTree = "<group>"; };
+		89298187246D04EE00C3DFE0 /* ChatRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatRoomViewController.m; sourceTree = "<group>"; };
+		89298188246D04EE00C3DFE0 /* ChatRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatRoomViewController.h; sourceTree = "<group>"; };
+		8929818A246D092B00C3DFE0 /* LWChatListBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWChatListBaseViewController.h; sourceTree = "<group>"; };
+		8929818B246D092B00C3DFE0 /* LWChatListBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWChatListBaseViewController.m; sourceTree = "<group>"; };
+		8929818D246D5EBA00C3DFE0 /* LWSystemListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSystemListModel.h; sourceTree = "<group>"; };
+		8929818E246D5EBA00C3DFE0 /* LWSystemListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWSystemListModel.m; sourceTree = "<group>"; };
 		893A18EC2459182800D8C36C /* LWHuoYuanThreeLevelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanThreeLevelViewController.h; sourceTree = "<group>"; };
 		893A18ED2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanThreeLevelViewController.m; sourceTree = "<group>"; };
 		893A18EF245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanThreeLevelListTableViewCell.h; sourceTree = "<group>"; };
@@ -1148,6 +1157,8 @@
 			children = (
 				890643C724693C360099508C /* LWJiaoLiuModel.h */,
 				890643C824693C360099508C /* LWJiaoLiuModel.m */,
+				8929818D246D5EBA00C3DFE0 /* LWSystemListModel.h */,
+				8929818E246D5EBA00C3DFE0 /* LWSystemListModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1180,18 +1191,10 @@
 			path = IFYunSDK;
 			sourceTree = "<group>";
 		};
-		890643EA246955A80099508C /* ClientManager */ = {
-			isa = PBXGroup;
-			children = (
-				890643EB246955DA0099508C /* LWClientManager.h */,
-				890643EC246955DA0099508C /* LWClientManager.m */,
-			);
-			path = ClientManager;
-			sourceTree = "<group>";
-		};
 		890643EE24695AE90099508C /* ClientModule */ = {
 			isa = PBXGroup;
 			children = (
+				89298186246D04D700C3DFE0 /* ChatRoom */,
 				89C9DD9B246A4252005341CE /* ILGImagePicker */,
 				89C9DD7D246A3775005341CE /* config */,
 				89C9DD69246A3423005341CE /* catergate */,
@@ -1199,6 +1202,8 @@
 				890643F024695B270099508C /* View */,
 				890643EF24695B180099508C /* ViewController */,
 				89C9DD6D246A348D005341CE /* LWClientHeader.h */,
+				890643EB246955DA0099508C /* LWClientManager.h */,
+				890643EC246955DA0099508C /* LWClientManager.m */,
 			);
 			path = ClientModule;
 			sourceTree = "<group>";
@@ -1218,6 +1223,8 @@
 				890643F524695B5D0099508C /* IFBaseVC.m */,
 				890643F124695B330099508C /* MessageGroupViewController.h */,
 				890643F224695B330099508C /* MessageGroupViewController.m */,
+				8929818A246D092B00C3DFE0 /* LWChatListBaseViewController.h */,
+				8929818B246D092B00C3DFE0 /* LWChatListBaseViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1308,6 +1315,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		89298186246D04D700C3DFE0 /* ChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				89298188246D04EE00C3DFE0 /* ChatRoomViewController.h */,
+				89298187246D04EE00C3DFE0 /* ChatRoomViewController.m */,
+			);
+			path = ChatRoom;
+			sourceTree = "<group>";
+		};
 		89487BE724544E1500D4FA67 /* Thrid */ = {
 			isa = PBXGroup;
 			children = (
@@ -1323,7 +1339,6 @@
 			isa = PBXGroup;
 			children = (
 				896DA51E246BD056001ED8C1 /* lwtool */,
-				890643EA246955A80099508C /* ClientManager */,
 				002A617D245B014A009A53AA /* cookies */,
 				89487BEC24544F4A00D4FA67 /* Confi */,
 				89487BE924544E4B00D4FA67 /* Log */,
@@ -1739,6 +1754,7 @@
 				89C9DDA1246A4252005341CE /* ILGImagePicker.m in Sources */,
 				89C9DD92246A4086005341CE /* IFCreateSessionView.m in Sources */,
 				009FB634244FE8DF00133974 /* MainNavController.m in Sources */,
+				8929818C246D092B00C3DFE0 /* LWChatListBaseViewController.m in Sources */,
 				896DA521246BD077001ED8C1 /* LWTool.m in Sources */,
 				89C9DD80246A378C005341CE /* AppConfig.m in Sources */,
 				009FB669245007ED00133974 /* zDengluController.m in Sources */,
@@ -1759,6 +1775,7 @@
 				0091FD00245EE1520046691F /* zUserDescController.m in Sources */,
 				8957D4A124594C230096F1D7 /* LWHuoYuanBaseViewController.m in Sources */,
 				00372B0D2456A54B00E51931 /* zUserInfoCard.m in Sources */,
+				8929818F246D5EBA00C3DFE0 /* LWSystemListModel.m in Sources */,
 				00159E232463FDF8005DE17B /* NewPagedFlowView.m in Sources */,
 				895BD9D424629AFC00AA5947 /* UIImageView+LWImageView.m in Sources */,
 				005ECE73246431DF00D90341 /* zLeftMenuHeader.m in Sources */,
@@ -1802,6 +1819,7 @@
 				00159E1C2463F745005DE17B /* zHuoYuanScrollHeader.m in Sources */,
 				0091FCEF245EAE870046691F /* zPersonalController.m in Sources */,
 				009FB63A244FE8DF00133974 /* UIView+FU_Animation.m in Sources */,
+				89298189246D04EE00C3DFE0 /* ChatRoomViewController.m in Sources */,
 				895BD9CD24626C4000AA5947 /* BaseModel.m in Sources */,
 				0065DF19245FB7A9008D3D98 /* zCallBackController.m in Sources */,
 			);
