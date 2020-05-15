@@ -152,7 +152,35 @@
 		895BD9CD24626C4000AA5947 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9CC24626C4000AA5947 /* BaseModel.m */; };
 		895BD9D424629AFC00AA5947 /* UIImageView+LWImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9D324629AFC00AA5947 /* UIImageView+LWImageView.m */; };
 		896DA521246BD077001ED8C1 /* LWTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 896DA520246BD077001ED8C1 /* LWTool.m */; };
+		89A26F68246E3F9D008EFB01 /* InnerStickersInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A26F5A246E3F9D008EFB01 /* InnerStickersInfo.plist */; };
+		89A26F69246E3F9D008EFB01 /* PPStickerDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F5C246E3F9D008EFB01 /* PPStickerDataManager.m */; };
+		89A26F6A246E3F9D008EFB01 /* PPEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F5D246E3F9D008EFB01 /* PPEmoji.m */; };
+		89A26F6B246E3F9D008EFB01 /* PPSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F5E246E3F9D008EFB01 /* PPSticker.m */; };
+		89A26F6C246E3F9D008EFB01 /* Sticker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 89A26F60246E3F9D008EFB01 /* Sticker.bundle */; };
+		89A26F6D246E3F9D008EFB01 /* PPEmojiPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F61246E3F9D008EFB01 /* PPEmojiPreviewView.m */; };
+		89A26F6E246E3F9D008EFB01 /* PPStickerPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F62246E3F9D008EFB01 /* PPStickerPageView.m */; };
+		89A26F6F246E3F9D008EFB01 /* PPStickerTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F63246E3F9D008EFB01 /* PPStickerTextView.m */; };
+		89A26F70246E3F9D008EFB01 /* PPStickerKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F64246E3F9D008EFB01 /* PPStickerKeyboard.m */; };
+		89A26F86246E4001008EFB01 /* PPQueuingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F72246E4000008EFB01 /* PPQueuingScrollView.m */; };
+		89A26F87246E4001008EFB01 /* NSAttributedString+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F73246E4000008EFB01 /* NSAttributedString+PPAddition.m */; };
+		89A26F88246E4001008EFB01 /* UIScreen+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F76246E4000008EFB01 /* UIScreen+PPAddition.m */; };
+		89A26F89246E4001008EFB01 /* UIScrollView+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F77246E4000008EFB01 /* UIScrollView+PPAddition.m */; };
+		89A26F8A246E4001008EFB01 /* UIColor+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F78246E4000008EFB01 /* UIColor+PPAddition.m */; };
+		89A26F8B246E4001008EFB01 /* PPTextBackedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F79246E4000008EFB01 /* PPTextBackedString.m */; };
+		89A26F8C246E4001008EFB01 /* NSString+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F7D246E4000008EFB01 /* NSString+PPAddition.m */; };
+		89A26F8D246E4001008EFB01 /* PPSlideLineButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F7E246E4000008EFB01 /* PPSlideLineButton.m */; };
+		89A26F8E246E4001008EFB01 /* UIButton+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F83246E4000008EFB01 /* UIButton+PPAddition.m */; };
+		89A26F91246E4101008EFB01 /* PPStickerInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F8F246E4100008EFB01 /* PPStickerInputView.m */; };
 		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
+		89C112DA246E8599007EAABB /* LWJiaoLiuAddAlearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112D9246E8599007EAABB /* LWJiaoLiuAddAlearView.m */; };
+		89C112DD246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112DC246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m */; };
+		89C112E0246E93AA007EAABB /* LWAddFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112DF246E93AA007EAABB /* LWAddFriendTableViewCell.m */; };
+		89C112E3246E9894007EAABB /* LWAddFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112E2246E9894007EAABB /* LWAddFriendModel.m */; };
+		89C112E6246E9FB5007EAABB /* LWAddFriendDeatilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112E5246E9FB5007EAABB /* LWAddFriendDeatilViewController.m */; };
+		89C112E9246E9FE7007EAABB /* LWAddGroupDeatilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112E8246E9FE7007EAABB /* LWAddGroupDeatilViewController.m */; };
+		89C112EC246EA293007EAABB /* LWUserGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112EB246EA293007EAABB /* LWUserGroupModel.m */; };
+		89C112EF246EA3BE007EAABB /* LWUserGroupManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112EE246EA3BE007EAABB /* LWUserGroupManagerViewController.m */; };
+		89C112F2246EA485007EAABB /* LWUserGroupManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112F1246EA485007EAABB /* LWUserGroupManagerTableViewCell.m */; };
 		89C9DD6C246A343C005341CE /* UIView+ILGKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9DD6A246A343C005341CE /* UIView+ILGKit.m */; };
 		89C9DD73246A3538005341CE /* IFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9DD72246A3537005341CE /* IFBaseView.m */; };
 		89C9DD76246A3564005341CE /* IMUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9DD75246A3564005341CE /* IMUserInfo.m */; };
@@ -508,7 +536,63 @@
 		895BD9D324629AFC00AA5947 /* UIImageView+LWImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LWImageView.m"; sourceTree = "<group>"; };
 		896DA51F246BD077001ED8C1 /* LWTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWTool.h; sourceTree = "<group>"; };
 		896DA520246BD077001ED8C1 /* LWTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWTool.m; sourceTree = "<group>"; };
+		89A26F58246E3F9D008EFB01 /* PPStickerTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerTextView.h; sourceTree = "<group>"; };
+		89A26F59246E3F9D008EFB01 /* PPStickerPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerPageView.h; sourceTree = "<group>"; };
+		89A26F5A246E3F9D008EFB01 /* InnerStickersInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InnerStickersInfo.plist; sourceTree = "<group>"; };
+		89A26F5B246E3F9D008EFB01 /* PPEmojiPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPEmojiPreviewView.h; sourceTree = "<group>"; };
+		89A26F5C246E3F9D008EFB01 /* PPStickerDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPStickerDataManager.m; sourceTree = "<group>"; };
+		89A26F5D246E3F9D008EFB01 /* PPEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPEmoji.m; sourceTree = "<group>"; };
+		89A26F5E246E3F9D008EFB01 /* PPSticker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPSticker.m; sourceTree = "<group>"; };
+		89A26F5F246E3F9D008EFB01 /* PPStickerKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerKeyboard.h; sourceTree = "<group>"; };
+		89A26F60246E3F9D008EFB01 /* Sticker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Sticker.bundle; sourceTree = "<group>"; };
+		89A26F61246E3F9D008EFB01 /* PPEmojiPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPEmojiPreviewView.m; sourceTree = "<group>"; };
+		89A26F62246E3F9D008EFB01 /* PPStickerPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPStickerPageView.m; sourceTree = "<group>"; };
+		89A26F63246E3F9D008EFB01 /* PPStickerTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPStickerTextView.m; sourceTree = "<group>"; };
+		89A26F64246E3F9D008EFB01 /* PPStickerKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPStickerKeyboard.m; sourceTree = "<group>"; };
+		89A26F65246E3F9D008EFB01 /* PPSticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPSticker.h; sourceTree = "<group>"; };
+		89A26F66246E3F9D008EFB01 /* PPEmoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPEmoji.h; sourceTree = "<group>"; };
+		89A26F67246E3F9D008EFB01 /* PPStickerDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerDataManager.h; sourceTree = "<group>"; };
+		89A26F72246E4000008EFB01 /* PPQueuingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPQueuingScrollView.m; sourceTree = "<group>"; };
+		89A26F73246E4000008EFB01 /* NSAttributedString+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+PPAddition.m"; sourceTree = "<group>"; };
+		89A26F74246E4000008EFB01 /* PPSlideLineButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPSlideLineButton.h; sourceTree = "<group>"; };
+		89A26F75246E4000008EFB01 /* NSString+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PPAddition.h"; sourceTree = "<group>"; };
+		89A26F76246E4000008EFB01 /* UIScreen+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+PPAddition.m"; sourceTree = "<group>"; };
+		89A26F77246E4000008EFB01 /* UIScrollView+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+PPAddition.m"; sourceTree = "<group>"; };
+		89A26F78246E4000008EFB01 /* UIColor+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PPAddition.m"; sourceTree = "<group>"; };
+		89A26F79246E4000008EFB01 /* PPTextBackedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPTextBackedString.m; sourceTree = "<group>"; };
+		89A26F7A246E4000008EFB01 /* UIButton+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+PPAddition.h"; sourceTree = "<group>"; };
+		89A26F7B246E4000008EFB01 /* PPQueuingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPQueuingScrollView.h; sourceTree = "<group>"; };
+		89A26F7C246E4000008EFB01 /* PPReusablePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPReusablePage.h; sourceTree = "<group>"; };
+		89A26F7D246E4000008EFB01 /* NSString+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PPAddition.m"; sourceTree = "<group>"; };
+		89A26F7E246E4000008EFB01 /* PPSlideLineButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPSlideLineButton.m; sourceTree = "<group>"; };
+		89A26F7F246E4000008EFB01 /* NSAttributedString+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+PPAddition.h"; sourceTree = "<group>"; };
+		89A26F80246E4000008EFB01 /* UIScrollView+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+PPAddition.h"; sourceTree = "<group>"; };
+		89A26F81246E4000008EFB01 /* UIScreen+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+PPAddition.h"; sourceTree = "<group>"; };
+		89A26F82246E4000008EFB01 /* PPUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPUtil.h; sourceTree = "<group>"; };
+		89A26F83246E4000008EFB01 /* UIButton+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PPAddition.m"; sourceTree = "<group>"; };
+		89A26F84246E4000008EFB01 /* PPTextBackedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPTextBackedString.h; sourceTree = "<group>"; };
+		89A26F85246E4001008EFB01 /* UIColor+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PPAddition.h"; sourceTree = "<group>"; };
+		89A26F8F246E4100008EFB01 /* PPStickerInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPStickerInputView.m; sourceTree = "<group>"; };
+		89A26F90246E4101008EFB01 /* PPStickerInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerInputView.h; sourceTree = "<group>"; };
 		89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89C112D8246E8599007EAABB /* LWJiaoLiuAddAlearView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWJiaoLiuAddAlearView.h; sourceTree = "<group>"; };
+		89C112D9246E8599007EAABB /* LWJiaoLiuAddAlearView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJiaoLiuAddAlearView.m; sourceTree = "<group>"; };
+		89C112DB246E8CB7007EAABB /* LWAddFriendOrGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddFriendOrGroupViewController.h; sourceTree = "<group>"; };
+		89C112DC246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAddFriendOrGroupViewController.m; sourceTree = "<group>"; };
+		89C112DE246E93AA007EAABB /* LWAddFriendTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddFriendTableViewCell.h; sourceTree = "<group>"; };
+		89C112DF246E93AA007EAABB /* LWAddFriendTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAddFriendTableViewCell.m; sourceTree = "<group>"; };
+		89C112E1246E9894007EAABB /* LWAddFriendModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddFriendModel.h; sourceTree = "<group>"; };
+		89C112E2246E9894007EAABB /* LWAddFriendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAddFriendModel.m; sourceTree = "<group>"; };
+		89C112E4246E9FB5007EAABB /* LWAddFriendDeatilViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddFriendDeatilViewController.h; sourceTree = "<group>"; };
+		89C112E5246E9FB5007EAABB /* LWAddFriendDeatilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAddFriendDeatilViewController.m; sourceTree = "<group>"; };
+		89C112E7246E9FE7007EAABB /* LWAddGroupDeatilViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddGroupDeatilViewController.h; sourceTree = "<group>"; };
+		89C112E8246E9FE7007EAABB /* LWAddGroupDeatilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAddGroupDeatilViewController.m; sourceTree = "<group>"; };
+		89C112EA246EA293007EAABB /* LWUserGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWUserGroupModel.h; sourceTree = "<group>"; };
+		89C112EB246EA293007EAABB /* LWUserGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWUserGroupModel.m; sourceTree = "<group>"; };
+		89C112ED246EA3BE007EAABB /* LWUserGroupManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWUserGroupManagerViewController.h; sourceTree = "<group>"; };
+		89C112EE246EA3BE007EAABB /* LWUserGroupManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWUserGroupManagerViewController.m; sourceTree = "<group>"; };
+		89C112F0246EA485007EAABB /* LWUserGroupManagerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWUserGroupManagerTableViewCell.h; sourceTree = "<group>"; };
+		89C112F1246EA485007EAABB /* LWUserGroupManagerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWUserGroupManagerTableViewCell.m; sourceTree = "<group>"; };
 		89C9DD6A246A343C005341CE /* UIView+ILGKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ILGKit.m"; sourceTree = "<group>"; };
 		89C9DD6B246A343C005341CE /* UIView+ILGKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ILGKit.h"; sourceTree = "<group>"; };
 		89C9DD6D246A348D005341CE /* LWClientHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWClientHeader.h; sourceTree = "<group>"; };
@@ -930,6 +1014,14 @@
 				009FB66E2450093A00133974 /* zJiaoliuController.m */,
 				89D36E0A245AB1C800A6C014 /* LWSystemMessageListViewController.h */,
 				89D36E0B245AB1C800A6C014 /* LWSystemMessageListViewController.m */,
+				89C112DB246E8CB7007EAABB /* LWAddFriendOrGroupViewController.h */,
+				89C112DC246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m */,
+				89C112E4246E9FB5007EAABB /* LWAddFriendDeatilViewController.h */,
+				89C112E5246E9FB5007EAABB /* LWAddFriendDeatilViewController.m */,
+				89C112E7246E9FE7007EAABB /* LWAddGroupDeatilViewController.h */,
+				89C112E8246E9FE7007EAABB /* LWAddGroupDeatilViewController.m */,
+				89C112ED246EA3BE007EAABB /* LWUserGroupManagerViewController.h */,
+				89C112EE246EA3BE007EAABB /* LWUserGroupManagerViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1016,6 +1108,7 @@
 		009FB654244FEC9900133974 /* commen */ = {
 			isa = PBXGroup;
 			children = (
+				890643EE24695AE90099508C /* ClientModule */,
 				895BD9C924626BDE00AA5947 /* baseMoudel */,
 				00D6E2DA2459A6B700B6E327 /* network */,
 				8921697824567045007C6615 /* Component */,
@@ -1159,6 +1252,10 @@
 				890643C824693C360099508C /* LWJiaoLiuModel.m */,
 				8929818D246D5EBA00C3DFE0 /* LWSystemListModel.h */,
 				8929818E246D5EBA00C3DFE0 /* LWSystemListModel.m */,
+				89C112E1246E9894007EAABB /* LWAddFriendModel.h */,
+				89C112E2246E9894007EAABB /* LWAddFriendModel.m */,
+				89C112EA246EA293007EAABB /* LWUserGroupModel.h */,
+				89C112EB246EA293007EAABB /* LWUserGroupModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1194,6 +1291,7 @@
 		890643EE24695AE90099508C /* ClientModule */ = {
 			isa = PBXGroup;
 			children = (
+				89A26F57246E3F9D008EFB01 /* Keyboard */,
 				89298186246D04D700C3DFE0 /* ChatRoom */,
 				89C9DD9B246A4252005341CE /* ILGImagePicker */,
 				89C9DD7D246A3775005341CE /* config */,
@@ -1295,7 +1393,6 @@
 			isa = PBXGroup;
 			children = (
 				89C9DD81246A37C7005341CE /* Views */,
-				890643EE24695AE90099508C /* ClientModule */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1311,6 +1408,12 @@
 				8921698724569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m */,
 				892169892456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.h */,
 				8921698A2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m */,
+				89C112D8246E8599007EAABB /* LWJiaoLiuAddAlearView.h */,
+				89C112D9246E8599007EAABB /* LWJiaoLiuAddAlearView.m */,
+				89C112DE246E93AA007EAABB /* LWAddFriendTableViewCell.h */,
+				89C112DF246E93AA007EAABB /* LWAddFriendTableViewCell.m */,
+				89C112F0246EA485007EAABB /* LWUserGroupManagerTableViewCell.h */,
+				89C112F1246EA485007EAABB /* LWUserGroupManagerTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1387,6 +1490,59 @@
 				896DA520246BD077001ED8C1 /* LWTool.m */,
 			);
 			path = lwtool;
+			sourceTree = "<group>";
+		};
+		89A26F57246E3F9D008EFB01 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				89A26F90246E4101008EFB01 /* PPStickerInputView.h */,
+				89A26F8F246E4100008EFB01 /* PPStickerInputView.m */,
+				89A26F71246E4000008EFB01 /* Util */,
+				89A26F58246E3F9D008EFB01 /* PPStickerTextView.h */,
+				89A26F63246E3F9D008EFB01 /* PPStickerTextView.m */,
+				89A26F5A246E3F9D008EFB01 /* InnerStickersInfo.plist */,
+				89A26F5B246E3F9D008EFB01 /* PPEmojiPreviewView.h */,
+				89A26F5D246E3F9D008EFB01 /* PPEmoji.m */,
+				89A26F5E246E3F9D008EFB01 /* PPSticker.m */,
+				89A26F5F246E3F9D008EFB01 /* PPStickerKeyboard.h */,
+				89A26F60246E3F9D008EFB01 /* Sticker.bundle */,
+				89A26F61246E3F9D008EFB01 /* PPEmojiPreviewView.m */,
+				89A26F59246E3F9D008EFB01 /* PPStickerPageView.h */,
+				89A26F62246E3F9D008EFB01 /* PPStickerPageView.m */,
+				89A26F64246E3F9D008EFB01 /* PPStickerKeyboard.m */,
+				89A26F65246E3F9D008EFB01 /* PPSticker.h */,
+				89A26F66246E3F9D008EFB01 /* PPEmoji.h */,
+				89A26F67246E3F9D008EFB01 /* PPStickerDataManager.h */,
+				89A26F5C246E3F9D008EFB01 /* PPStickerDataManager.m */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		89A26F71246E4000008EFB01 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				89A26F72246E4000008EFB01 /* PPQueuingScrollView.m */,
+				89A26F73246E4000008EFB01 /* NSAttributedString+PPAddition.m */,
+				89A26F74246E4000008EFB01 /* PPSlideLineButton.h */,
+				89A26F75246E4000008EFB01 /* NSString+PPAddition.h */,
+				89A26F76246E4000008EFB01 /* UIScreen+PPAddition.m */,
+				89A26F77246E4000008EFB01 /* UIScrollView+PPAddition.m */,
+				89A26F78246E4000008EFB01 /* UIColor+PPAddition.m */,
+				89A26F79246E4000008EFB01 /* PPTextBackedString.m */,
+				89A26F7A246E4000008EFB01 /* UIButton+PPAddition.h */,
+				89A26F7B246E4000008EFB01 /* PPQueuingScrollView.h */,
+				89A26F7C246E4000008EFB01 /* PPReusablePage.h */,
+				89A26F7D246E4000008EFB01 /* NSString+PPAddition.m */,
+				89A26F7E246E4000008EFB01 /* PPSlideLineButton.m */,
+				89A26F7F246E4000008EFB01 /* NSAttributedString+PPAddition.h */,
+				89A26F80246E4000008EFB01 /* UIScrollView+PPAddition.h */,
+				89A26F81246E4000008EFB01 /* UIScreen+PPAddition.h */,
+				89A26F82246E4000008EFB01 /* PPUtil.h */,
+				89A26F83246E4000008EFB01 /* UIButton+PPAddition.m */,
+				89A26F84246E4000008EFB01 /* PPTextBackedString.h */,
+				89A26F85246E4001008EFB01 /* UIColor+PPAddition.h */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		89A9382924542A06001C77A8 /* Other */ = {
@@ -1596,7 +1752,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */,
+				89A26F68246E3F9D008EFB01 /* InnerStickersInfo.plist in Resources */,
 				009FB5EA244E89CD00133974 /* Assets.xcassets in Resources */,
+				89A26F6C246E3F9D008EFB01 /* Sticker.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1670,9 +1828,12 @@
 				0091FCF7245EBD870046691F /* handWritingListLayout.m in Sources */,
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				890643FD24695C370099508C /* MessageGroupSettingViewController.m in Sources */,
+				89A26F8D246E4001008EFB01 /* PPSlideLineButton.m in Sources */,
 				890643ED246955DA0099508C /* LWClientManager.m in Sources */,
+				89A26F8A246E4001008EFB01 /* UIColor+PPAddition.m in Sources */,
 				89216982245686E2007C6615 /* LWJiaoLiuGroupCollectionView.m in Sources */,
 				8921697B245670AE007C6615 /* LWSwitchBarView.m in Sources */,
+				89C112E0246E93AA007EAABB /* LWAddFriendTableViewCell.m in Sources */,
 				890643FA24695BFA0099508C /* ShowMsgElem.m in Sources */,
 				895BD9C52462604600AA5947 /* ServiceManager.m in Sources */,
 				00B0A5EA24653E3F0041C234 /* zCompanyDetailController.m in Sources */,
@@ -1682,10 +1843,13 @@
 				8906440024695C7A0099508C /* InterfaceUrls.m in Sources */,
 				89C9DD79246A35FC005341CE /* IFChatCell.m in Sources */,
 				89C9DD8E246A4050005341CE /* IFCreateBaseVC.m in Sources */,
+				89A26F8C246E4001008EFB01 /* NSString+PPAddition.m in Sources */,
 				89C9DD88246A4003005341CE /* MessageGroupListViewController.m in Sources */,
 				890643C624690A030099508C /* LWThreeLevelTableView.m in Sources */,
 				009FB639244FE8DF00133974 /* UIView+TouchAreaInsets.m in Sources */,
 				001ECA712453C49500727379 /* zZhaoHuiController.m in Sources */,
+				89A26F89246E4001008EFB01 /* UIScrollView+PPAddition.m in Sources */,
+				89C112F2246EA485007EAABB /* LWUserGroupManagerTableViewCell.m in Sources */,
 				009FB6722450094C00133974 /* zShouyeController.m in Sources */,
 				89C9DD76246A3564005341CE /* IMUserInfo.m in Sources */,
 				00372AEE2456842F00E51931 /* PPNetworkCache.m in Sources */,
@@ -1704,6 +1868,7 @@
 				89C9DD99246A40CE005341CE /* IFListViewCell.m in Sources */,
 				00B0A5D1246500180041C234 /* zXieYiController.m in Sources */,
 				0091FCFA245EC1700046691F /* zPersonalHeader.m in Sources */,
+				89A26F87246E4001008EFB01 /* NSAttributedString+PPAddition.m in Sources */,
 				00B0A5E7246520D10041C234 /* zJxsLeftMenu.m in Sources */,
 				009FB68B2450428000133974 /* zNothingView.m in Sources */,
 				895BD9C82462661800AA5947 /* LWHuoYuanDaTingModel.m in Sources */,
@@ -1713,6 +1878,7 @@
 				89F5B7E2245599530040F7B1 /* LWHuoYuanItemsListViewController.m in Sources */,
 				009FB635244FE8DF00133974 /* MainTabBarController.m in Sources */,
 				00558BDD24610CA700550FBC /* zShouYeLeftMenu.m in Sources */,
+				89A26F6A246E3F9D008EFB01 /* PPEmoji.m in Sources */,
 				8921697E24567278007C6615 /* UIImage+Extension.m in Sources */,
 				89D2578224669C0900CB3910 /* LWBaseLabel.m in Sources */,
 				001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */,
@@ -1720,16 +1886,19 @@
 				0091FCE0245E59EE0046691F /* zPersonalCell.m in Sources */,
 				00CA47802455C839006A2885 /* QuestionTableViewCell.m in Sources */,
 				003A932D2450866D0001F615 /* LoginTextField.m in Sources */,
+				89A26F91246E4101008EFB01 /* PPStickerInputView.m in Sources */,
 				003FEABF245BFB8500E8D61E /* zSettingCellView.m in Sources */,
 				893A18F724592D3E00D8C36C /* LWGongYingShangListTableViewCell.m in Sources */,
 				89C9DD8B246A4024005341CE /* MessageGroupCreateViewController.m in Sources */,
 				890643F324695B330099508C /* MessageGroupViewController.m in Sources */,
 				89D36E0C245AB1C800A6C014 /* LWSystemMessageListViewController.m in Sources */,
+				89A26F6F246E3F9D008EFB01 /* PPStickerTextView.m in Sources */,
 				009FB6882450425900133974 /* zNoContentView.m in Sources */,
 				0087184B2459585C003F8CD3 /* QuestionFootView.m in Sources */,
 				89C9DD6C246A343C005341CE /* UIView+ILGKit.m in Sources */,
 				00558BD42460FF4200550FBC /* sliderNavMenu.m in Sources */,
 				001ECA7B2454449000727379 /* zhuCeCard.m in Sources */,
+				89C112EC246EA293007EAABB /* LWUserGroupModel.m in Sources */,
 				00372AED2456842F00E51931 /* PPNetworkHelper.m in Sources */,
 				8957D4AA245975370096F1D7 /* LWHuoYuanDeatilViewController.m in Sources */,
 				001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */,
@@ -1741,11 +1910,13 @@
 				89D2578524669C4900CB3910 /* LWBaseLabelAttributeStringModel.m in Sources */,
 				009FB619244FE8C200133974 /* SceneDelegate.m in Sources */,
 				00B0A5E1246500840041C234 /* WKWebView+BAJavaScriptAlert.m in Sources */,
+				89C112DD246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m in Sources */,
 				89C9DD7C246A36EC005341CE /* UIView+Toast.m in Sources */,
 				009FB63B244FE8DF00133974 /* FUTabBarButton.m in Sources */,
 				8906440324695C9B0099508C /* IFGroupMemberCell.m in Sources */,
 				89F5B7DF245596DD0040F7B1 /* UIView+Extension.m in Sources */,
 				00B0A5ED24653F0F0041C234 /* zCompanyHeader.m in Sources */,
+				89A26F8E246E4001008EFB01 /* UIButton+PPAddition.m in Sources */,
 				00372B0C2456A54B00E51931 /* zCategoryCard.m in Sources */,
 				00CA477A2455BAEB006A2885 /* QuestionHeaderView.m in Sources */,
 				009FB5F0244E89CD00133974 /* main.m in Sources */,
@@ -1757,28 +1928,34 @@
 				8929818C246D092B00C3DFE0 /* LWChatListBaseViewController.m in Sources */,
 				896DA521246BD077001ED8C1 /* LWTool.m in Sources */,
 				89C9DD80246A378C005341CE /* AppConfig.m in Sources */,
+				89A26F70246E3F9D008EFB01 /* PPStickerKeyboard.m in Sources */,
 				009FB669245007ED00133974 /* zDengluController.m in Sources */,
 				894E4115245A96430028D2B4 /* LWLabel.m in Sources */,
 				8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */,
 				00CA47702455B9DD006A2885 /* QuestionModel.m in Sources */,
+				89A26F86246E4001008EFB01 /* PPQueuingScrollView.m in Sources */,
 				00558BDA2461000500550FBC /* zCompanyController.m in Sources */,
 				00372B0B2456A54B00E51931 /* zInstructionsCard.m in Sources */,
 				003FEABC245BFB0D00E8D61E /* zSettingViewController.m in Sources */,
 				89C9DDA0246A4252005341CE /* ILGImageCropViewController.m in Sources */,
 				009FB67F24500D7800133974 /* NSDictionary+NSNull.m in Sources */,
+				89C112DA246E8599007EAABB /* LWJiaoLiuAddAlearView.m in Sources */,
 				009FB66C2450091D00133974 /* zHyController.m in Sources */,
+				89C112E3246E9894007EAABB /* LWAddFriendModel.m in Sources */,
 				8957D4A4245955250096F1D7 /* LWSearchViewController.m in Sources */,
 				009FB66F2450093A00133974 /* zJiaoliuController.m in Sources */,
 				00B0A5F024654FB20041C234 /* zCompanyDetailCell.m in Sources */,
 				00CA47792455BAEB006A2885 /* AnswerCell.m in Sources */,
 				893A18F1245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m in Sources */,
 				0091FD00245EE1520046691F /* zUserDescController.m in Sources */,
+				89A26F6E246E3F9D008EFB01 /* PPStickerPageView.m in Sources */,
 				8957D4A124594C230096F1D7 /* LWHuoYuanBaseViewController.m in Sources */,
 				00372B0D2456A54B00E51931 /* zUserInfoCard.m in Sources */,
 				8929818F246D5EBA00C3DFE0 /* LWSystemListModel.m in Sources */,
 				00159E232463FDF8005DE17B /* NewPagedFlowView.m in Sources */,
 				895BD9D424629AFC00AA5947 /* UIImageView+LWImageView.m in Sources */,
 				005ECE73246431DF00D90341 /* zLeftMenuHeader.m in Sources */,
+				89A26F6D246E3F9D008EFB01 /* PPEmojiPreviewView.m in Sources */,
 				009FB63E244FE8DF00133974 /* NSString+size.m in Sources */,
 				003FEAC2245C198A00E8D61E /* zUserModel.m in Sources */,
 				8957D4AD245975E10096F1D7 /* LWHuoYuanDeatilView.m in Sources */,
@@ -1789,10 +1966,13 @@
 				009FB6752450095C00133974 /* zWodeController.m in Sources */,
 				00558BD72460FFE000550FBC /* zGoodsMangerController.m in Sources */,
 				0091FCEC245E6AC60046691F /* zCityEditFooter.m in Sources */,
+				89C112E6246E9FB5007EAABB /* LWAddFriendDeatilViewController.m in Sources */,
 				00B26CF024580A390099FFD5 /* zUserInfo.m in Sources */,
 				89C9DD73246A3538005341CE /* IFBaseView.m in Sources */,
+				89A26F8B246E4001008EFB01 /* PPTextBackedString.m in Sources */,
 				89C9DD98246A40CE005341CE /* IFListView.m in Sources */,
 				002A6180245B0199009A53AA /* cookiesTool.m in Sources */,
+				89A26F6B246E3F9D008EFB01 /* PPSticker.m in Sources */,
 				00C9524C2469040B00C24472 /* KKPaddingLabel.m in Sources */,
 				001ECA6A2453B6F300727379 /* zLoginCard.m in Sources */,
 				009FB638244FE8DF00133974 /* FUBadgeButton.m in Sources */,
@@ -1814,13 +1994,17 @@
 				0065DF16245FADBF008D3D98 /* zInviteController.m in Sources */,
 				00159E222463FDF8005DE17B /* PGIndexBannerSubiew.m in Sources */,
 				009FB68124500D7800133974 /* MainSingleton.m in Sources */,
+				89A26F88246E4001008EFB01 /* UIScreen+PPAddition.m in Sources */,
 				005ECE7924644E0A00D90341 /* zHuoYuanListCell.m in Sources */,
 				89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */,
 				00159E1C2463F745005DE17B /* zHuoYuanScrollHeader.m in Sources */,
 				0091FCEF245EAE870046691F /* zPersonalController.m in Sources */,
+				89A26F69246E3F9D008EFB01 /* PPStickerDataManager.m in Sources */,
 				009FB63A244FE8DF00133974 /* UIView+FU_Animation.m in Sources */,
 				89298189246D04EE00C3DFE0 /* ChatRoomViewController.m in Sources */,
 				895BD9CD24626C4000AA5947 /* BaseModel.m in Sources */,
+				89C112E9246E9FE7007EAABB /* LWAddGroupDeatilViewController.m in Sources */,
+				89C112EF246EA3BE007EAABB /* LWUserGroupManagerViewController.m in Sources */,
 				0065DF19245FB7A9008D3D98 /* zCallBackController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

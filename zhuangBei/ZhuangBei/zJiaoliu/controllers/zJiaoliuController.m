@@ -14,6 +14,9 @@
 #import "LWJiaoLiuModel.h"
 #import "MessageGroupViewController.h"
 #import "ChatRoomViewController.h"
+#import "LWJiaoLiuAddAlearView.h"
+#import "LWAddFriendOrGroupViewController.h"
+#import "LWUserGroupManagerViewController.h"
 
 @interface zJiaoliuController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) LWSwitchBarView * switchBarView;
@@ -26,6 +29,7 @@
 @property (nonatomic, strong) UITableView * contatcsTableView;
 @property (nonatomic, strong) UITableView * groupTableView;
 @property (nonatomic, strong) UIScrollView * mainScrollView;
+@property (nonatomic, strong) LWJiaoLiuAddAlearView * alearView;
 
 @end
 
@@ -46,6 +50,7 @@
         [[zHud shareInstance] hild];
     }];
 }
+
 //群组、联系人
 - (void)requestDatas
 {
@@ -79,7 +84,15 @@
 //点击新增
 - (void)clickaddBtnBtn
 {
-    
+    [self.alearView showView];
+    WEAKSELF(self)
+    self.alearView.block = ^(NSInteger index) {
+        if (index == 1) {
+            [weakself.navigationController pushViewController:[LWAddFriendOrGroupViewController new] animated:YES];
+        }else if (index == 2){
+            [weakself.navigationController pushViewController:[LWUserGroupManagerViewController new] animated:YES];
+        }
+    };
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -383,5 +396,11 @@
     }
     return _listDatas_JiaoLiu;
 }
-
+- (LWJiaoLiuAddAlearView *)alearView
+{
+    if (!_alearView) {
+        _alearView = [[LWJiaoLiuAddAlearView alloc] init];
+    }
+    return _alearView;
+}
 @end

@@ -91,9 +91,11 @@
         cell.nameL.text = model.user.username;
         cell.timelL.text = model.time;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.leftBtn.hidden = model.status != 0;
         if (model.status == 1) {
-            cell.leftBtn.hidden = YES;
             [cell.rightBtn setTitle:@"已同意" forState:UIControlStateNormal];
+        }else if (model.status == 2){
+            [cell.rightBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
         }
         return cell;
     }

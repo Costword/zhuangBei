@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) userModel * user;
 @property (nonatomic, strong) NSString * uid;
 @property (nonatomic, strong) NSString * from;
+//0等待验证  1同意 2拒绝
 @property (nonatomic, assign) NSInteger  status;
 
 @end
