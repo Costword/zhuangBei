@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton * rightBtn;
 - (void)setBottomLine:(NSInteger)tag;
 @property (nonatomic, strong) UIView * line;
+- (void)updateForVerifiCell;
 
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import "zUserInfo.h"
+#import "LWClientManager.h"
 
 static NSString * UserDefaultRemmberAccount = @"UserDefaultRemmberAccount";
 static NSString * UserDefaultPassword = @"UserDefaultPassword";
@@ -92,6 +93,9 @@ static NSString * UserDefaultInfo = @"userInfo.archiver";
         NSString * temp  = NSTemporaryDirectory();
         NSString * filePath = [temp stringByAppendingPathComponent:UserDefaultInfo];
         [NSKeyedArchiver archiveRootObject:self.userInfo toFile:filePath];
+        
+        [[LWClientManager share] configureUserId];
+        
     }else
     {
         NSLog(@"账号或密码为空");

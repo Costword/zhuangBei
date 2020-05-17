@@ -45,7 +45,7 @@
 
 +(void)POSTworkWithUrl:(NSString*)url WithParamer:(id)param Success:(HttpRequestSuccess)loadSuccess Failure:(HttpRequestFailed)loadFailure
 {
-    [[zHud shareInstance]show];
+//    [[zHud shareInstance]show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置请求体数据为json类型
     manager.requestSerializer = [AFJSONRequestSerializer serializer];

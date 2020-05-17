@@ -10,6 +10,8 @@
 #import "MainTabBarController.h"
 #import "MainNavController.h"
 #import "zDengluController.h"
+#import "LWClientManager.h"
+#import "IQKeyboardManager.h"
 @interface AppDelegate ()
 
 @end
@@ -45,6 +47,13 @@
             [self.window makeKeyAndVisible];
         }
     }
+    
+    
+//    配置
+    [[LWClientManager share] installConfigure];
+    
+    [IQKeyboardManager sharedManager].enable = YES;
+    
     return YES;
 }
 

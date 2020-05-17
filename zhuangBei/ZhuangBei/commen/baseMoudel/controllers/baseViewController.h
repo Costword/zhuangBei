@@ -46,6 +46,9 @@ typedef void(^RequestFailure)(NSError *error);
 /// @param success 成功
 /// @param failure 失败
 - (void)requestPostWithUrl:(NSString *)url paraString:(id)paraString success:(RequestSuccess)success failure:(RequestFailure)failure;
+
+- (void)requestDatas;
+
 @end
 
 NS_ASSUME_NONNULL_END

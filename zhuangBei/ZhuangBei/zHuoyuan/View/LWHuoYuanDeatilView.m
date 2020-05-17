@@ -67,7 +67,7 @@
     
     //    图片
     if (_model.productPictureList.count == 0) {
-        _sdcview.imageURLStringsGroup = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588222683633&di=0337ab9e9f7deb643986cd7fd901290a&imgtype=0&src=http%3A%2F%2Fimg10.itiexue.net%2F1639%2F16390450.jpg",];
+//        _sdcview.imageURLStringsGroup = @[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588222683633&di=0337ab9e9f7deb643986cd7fd901290a&imgtype=0&src=http%3A%2F%2Fimg10.itiexue.net%2F1639%2F16390450.jpg",];
     }else{
         NSMutableArray *imageids = [[NSMutableArray alloc] init];
         for (productPictureListModel *picmodel in _model.productPictureList) {

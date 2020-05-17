@@ -10,8 +10,11 @@
 #import "PPNetworkHelper.h"
 #import "AFNetworking.h"
 #import "ServiceManager.h"
-
+#import "LWServiceModel.h"
 @interface baseViewController ()
+//网络请求失败的数据
+@property (nonatomic, strong) LWServiceModel * failRequestModel;
+@property (nonatomic, strong) NSMutableArray<LWServiceModel *> * requestFailMutableArray;
 
 @end
 
@@ -63,6 +66,10 @@
     [self.view addSubview:self.nothingView];
     [self.view addSubview:self.noContentView];
     [self monitorNetworkStatus];
+    WEAKSELF(self)
+    self.noContentView.retryTapBack = ^{
+        [weakself reloadFialRequest];
+    };
 }
 
 -(void)viewDidLayoutSubviews
@@ -72,10 +79,10 @@
     
     
     [self.nothingView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsZero);
+        make.edges.mas_equalTo(self.view);
     }];
     [self.noContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsZero);
+        make.edges.mas_equalTo(self.view);
     }];
 }
 
@@ -115,8 +122,15 @@
         NSString *  text  = [self jsonToString:responseObject];
         [self RequsetSuccessWithData:responseObject AndUrl:url];
         NSLog(@"请求到的数据是：%@",text);
+        [self removeFailRequest:url];
     } Failure:^(NSError * _Nonnull error) {
         [self RequsetFileWithUrl:url WithError:error];
+        WEAKSELF(self)
+        [self addFialRequest:url param:param paramType:(RequestParamTypeDict) success:^(id  _Nonnull response) {
+            [weakself RequsetSuccessWithData:response AndUrl:url];
+        } fail:^(NSError * _Nonnull error) {
+            [weakself RequsetFileWithUrl:url WithError:error];
+        }];
     }];
 }
 
@@ -196,10 +210,73 @@
             [self.view sendSubviewToBack:self.noContentView];
         }
         success(response);
+        [self removeFailRequest:url];
     } failure:^(NSError * _Nonnull error) {
         [self.view bringSubviewToFront:self.noContentView];
         self.noContentView.alpha = 1;
+        [self addFialRequest:url param:paraString paramType:(RequestParamTypeString) success:success fail:failure];
         failure(error);
     }];
+}
+
+- (void)requestDatas
+{
+// 子类重写
+}
+
+
+/**
+ 重新请求失败的接口
+ */
+- (void)reloadFialRequest
+{
+    for (LWServiceModel *model in self.requestFailMutableArray) {
+        if (model.paramType == RequestParamTypeDict) {
+            [self  requestPostWithUrl:model.url Parameters:model.param success:model.success failure:model.fail];
+        }else if (model.paramType == RequestParamTypeString){
+            [self  requestPostWithUrl:model.url paraString:model.param success:model.success failure:model.fail];
+        }
+    }
+}
+
+/// 移除请求失败的缓存
+/// @param url 以urlb未准，暂时不对参数进行判断
+- (void)removeFailRequest:(NSString *)url
+{
+    [self.requestFailMutableArray enumerateObjectsUsingBlock:^(LWServiceModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([url isEqualToString:obj.url]) {
+            [self.requestFailMutableArray removeObject:obj];
+            *stop = YES;
+        }
+    }];
+}
+
+
+/// 保存请求失败的数据，
+/// @param url url
+/// @param param 参数字典
+/// @param paramType 请求类型
+/// @param success 回调
+/// @param fail 回调
+- (void)addFialRequest:(NSString *)url param:(NSDictionary *)param paramType:(RequestParamType)paramType success:(RequestSuccess)success fail:(RequestFailure)fail
+{
+    __block BOOL ishave = NO;
+    [self.requestFailMutableArray enumerateObjectsUsingBlock:^(LWServiceModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([url isEqualToString:obj.url]) {
+            ishave = YES;
+            *stop = YES;
+        }
+    }];
+    if(!ishave){
+        [self.requestFailMutableArray addObject: [LWServiceModel modelWithurl:url param:param paramType:paramType success:success fail:fail]];
+    }
+}
+
+- (NSMutableArray *)requestFailMutableArray
+{
+    if (!_requestFailMutableArray) {
+        _requestFailMutableArray = [[NSMutableArray alloc] init];
+    }
+    return _requestFailMutableArray;
 }
 @end

@@ -10,7 +10,7 @@
 #import "sliderNavMenu.h"
 #import "zShouyeController.h"
 #import "zHuoYuanMangerController.h"
-
+#import "LWClientManager.h"
 @interface zAshouyeController ()<sliderNavMenuDelegate,UIScrollViewDelegate>
 
 @property(strong,nonatomic)sliderNavMenu * navigationSliderMenu;
@@ -72,6 +72,7 @@
     CGPoint offset = self.childScroContentView.contentOffset;
     offset.x = 0;
     [self.childScroContentView setContentOffset:offset animated:YES];
+    [[LWClientManager share] userLogin];
 }
 
 -(void)setupChildViewControllers
@@ -152,6 +153,8 @@
         // 点击事件Block
     })
     .LeeShow();
+    
+    [[LWClientManager share] userLogin];
 }
 
 @end

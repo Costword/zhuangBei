@@ -21,8 +21,8 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         _icon = [UIImageView new];
-        _icon.image = IMAGENAME(@"testicon1");
-        _nameL = [LWLabel lw_lable:@"admin" font:18 textColor:BASECOLOR_TEXTCOLOR];
+        _icon.image = IMAGENAME(@"testtouxiang");
+        _nameL = [LWLabel lw_lable:@"admin" font:15 textColor:BASECOLOR_TEXTCOLOR];
         _descL = [LWLabel lw_lable:@"在么？这个问题在么解决？" font:12 textColor:BASECOLOR_GREYCOLOR155];
         _timelL = [LWLabel lw_lable:@"2020/04/22  18:20" font:12 textColor:BASECOLOR_TEXTCOLOR];
         UIView *line = [UIView new];
@@ -32,31 +32,33 @@
         [self.contentView addSubviews:@[_icon,_nameL,_timelL,_descL,line,_leftBtn,_rightBtn]];
         [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.contentView.mas_left).mas_offset(10);
-            make.width.mas_offset(60);
-            make.height.mas_offset(60);
+            make.width.mas_offset(40);
+            make.height.mas_offset(40);
             make.centerY.mas_equalTo(self.mas_centerY);
         }];
         [_nameL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(_icon.mas_right).mas_offset(10);
-            make.right.mas_equalTo(_timelL.mas_left).mas_offset(-10);
-            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(-10);
-        }];
-        [_descL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(_nameL.mas_left);
             make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
-            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(15);
+            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(-0);
         }];
-        [_timelL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
-            make.centerY.mas_equalTo(_nameL.mas_centerY);
-        }];
+//        [_descL mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(_nameL.mas_left);
+//            make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+//            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(15);
+//        }];
+//        [_timelL mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+//            make.centerY.mas_equalTo(_nameL.mas_centerY);
+//        }];
+        _descL.hidden = _timelL.hidden = YES;
+        
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(_icon.mas_right).mas_offset(10);
+            make.left.mas_equalTo(self.contentView.mas_left).mas_offset(0);
             make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-0);
-            make.height.mas_offset(1);
+            make.height.mas_offset(0.5);
             make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(0);
         }];
-        [_icon setBoundWidth:0 cornerRadius:15];
+        [_icon setBoundWidth:0 cornerRadius:20];
         [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
             make.centerY.mas_equalTo(_descL.mas_centerY);
@@ -75,6 +77,24 @@
         [_rightBtn setBoundWidth:0 cornerRadius:4];
     }
     return self;
+}
+- (void)updateForVerifiCell;
+{
+    _descL.hidden = _timelL.hidden = NO;
+    [_nameL mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(_icon.mas_right).mas_offset(10);
+        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+        make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(-10);
+    }];
+    [_descL mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(_nameL.mas_left);
+        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+        make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(15);
+    }];
+    [_timelL mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+        make.centerY.mas_equalTo(_nameL.mas_centerY);
+    }];
 }
 
 - (void)setBottomLine:(NSInteger)tag;
@@ -141,7 +161,9 @@
         _rightBtn = [UIButton new];
         [_rightBtn setImage:IMAGENAME(@"icon_pull") forState:UIControlStateNormal];
         [_rightBtn addTarget:self action:@selector(clickPullBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubviews:@[_leftIcon,_leftL,_rightBtn]];
+        UIView *line = [UIView new];
+               line.backgroundColor = BASECOLOR_BOARD;
+        [self addSubviews:@[_leftIcon,_leftL,_rightBtn,line]];
         [_leftIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.mas_left).mas_offset(10);
             make.width.mas_offset(30);
@@ -158,6 +180,12 @@
             make.width.mas_offset(40);
             make.height.mas_offset(40);
             make.centerY.mas_equalTo(self.mas_centerY);
+        }];
+        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.mas_left).mas_offset(0);
+            make.right.mas_equalTo(self.mas_right).mas_offset(-0);
+            make.height.mas_offset(0.5);
+            make.bottom.mas_equalTo(self.mas_bottom).mas_offset(0);
         }];
     }
     return self;
