@@ -16,7 +16,7 @@ NSString *const kApiPrefix = @"http://39.101.166.209/app/";
 NSString *const kApiPrefix = @"http://test.110zhuangbei.com:8105/app/";
 #elif ProductSever
 /** 接口前缀-生产服务器*/
-NSString *const kApiPrefix = @"https://www.guoziyun.com/";
+NSString *const kApiPrefix = @"http://110zhuangbei.com/app/";
 #endif
 
 /**获取验证码
@@ -99,26 +99,59 @@ NSString *const kbusinessMan = @"app/appgongys/followGsList";
      }
  }
  */
-NSString *const kpersonal = @"sys/user/findInviteProductProviderOfNumber";
+NSString *const kpersonalBusiness = @"sys/user/findInviteProductProviderOfNumber";
 
 /**
- 个人中心 - 查询学历
- *GET
- *返回
- {
-     "code": 0,
-     "msg": "success",
-     "data": {
-         "inviteNumber": 0, //我的邀请人
-         "productNumber": 0,//我关注的货源
-         "providerNumber": 0//我的经销商
-     }
- }
+ * 获取我的邀请人列表
  */
-NSString *const kgetStudyRank = @"sys/user/findInviteProductProviderOfNumber";
+NSString * const kuserGetInvitelList = @"app/appqyuser/inviteMemberList?limit=999&page=1";
+
+/**
+ 个人中心 - 查询学历，职位，部门，企业类型，工作年限等
+ *GET
+ *type = [@"sex",@"rank"]
+ const val mIsNo = "isNo"           //是否
+ const val mIsAgree = "shiFouTy"    //是否同意
+ const val mIsDefault = "isDefault" //是否为默认分组
+ const val mParamsType = "canShuLx" //参数类型
+ const val mAgreement = "agreement" //协议
+
+ const val mExamType = "examType"         //试卷类型
+ const val mQuestionType = "questionType" //试题类型
+ const val mOptionType = "select_option"  //单选题选项
+
+ const val mSex = "sex"               //性别
+ const val mDuty = "rank"             //职务：总经理、财务、商务
+ const val mPost = "post"             //岗位
+ const val mDepartment = "section"    //部门
+ const val mRank = "zhiji"            //职级：一级、二级
+ const val mNation = "nation"         //民族
+ const val mProvince = "province"     //省份
+ const val mEducation = "education"   //学历
+ const val mYearOfWork = "jobYear"    //工作年限
+ const val mMarriageStatus = "marriagestatus" //婚姻状态
+ const val mPoliticsStatus = "politicalstatus"//政治面貌
+
+ const val mLevel = "level"       //会员等级
+ const val mLevelNum = "levelNum" //Vip人数
+
+ const val mActivityType = "huoDongZt"    //活动状态
+ const val mNoticeWayType = "tongZhiFs"   //通知方式
+ const val mProductSource = "productSource"//产品来源
+ const val mGroupType = "groupTypeId"     //群组分组类型
+ const val mTaskType = "taskType"         //任务类型
+ const val mTaskStateType = "taskState"   //任务状态
+ const val mCompanyType = "companyType"   //企业类型
+ const val mNoticeType = "gongGaoLx"      //公告类型
+ const val mPoliceType = "policeClassification" //警钟
+ *返回
+ {"code":0,"msg":"success","data":{"sex":[{"id":1,"name":"性别","type":"sex","code":"0","value":"女","orderNum":0,"remark":null,"delFlag":0,"gysList":null},{"id":2,"name":"性别","type":"sex","code":"1","value":"男","orderNum":1,"remark":null,"delFlag":0,"gysList":null}]}
+ }
+  */
+NSString *const kgetStudyRank = @"sys/dict/findDictMapByType";
  
 /**
- 个人中心 - 查询学历
+ 个人中心 - 查询城市列表
  *POST
  *返回
  {
@@ -199,7 +232,117 @@ NSString *const kgetStudyRank = @"sys/user/findInviteProductProviderOfNumber";
 NSString *const kgetUserInfo = @"app/appqyuser/qyinfo";
 
 
-    
+/**
+ *提交用户资料
+ *参数
+ *{
+     "birth": "",
+     "buMen": "1",
+     "companyNameFirst": "北京",
+     "companyNameSecond": "真核",
+     "companyNameThird": "科技有限公司",
+     "district": "110000",  //城市邮编
+     "email": "",
+     "isShowBirth": 0,  //是否展示生日
+     "isShowEducation": 0, //是否展示学历
+     "isShowJobYear": 0,  //是否展示工作年限
+     "isShowMobile": 0,  //是否展示手机
+     "mobile": "15516562514",
+     "portrait": "3379",
+     "post": "8",
+     "regLocation": "110000",// 城市
+     "sex": "1", //性别男
+     "shiFouGly": 0,
+     "userDm": 692,
+     "userId": 751,
+     "userName": "哇"
+ }
+ * {
+     "birth": "1991-05-12",1
+     "buMen": "2",1
+     "district": "110000,120000,130000",1
+     "education": "1",1
+     "email": "",1
+     "isShowBirth": 0,1
+     "isShowEducation": 0,1
+     "isShowJobYear": 0,1
+     "isShowMobile": 0,1
+     "jobYear": "1",1
+     "mobile": "15516562514",1
+     "nativePlace": "410000",1
+     "portrait": "3379",1
+     "post": "7",1
+     "regLocation": "110000",1
+     "sex": "1",1
+     "shiFouGly": 0,1
+     "suoShuGs": "617",1
+     "suoShuGsName": "北京真核科技有限公司",1
+     "userDm": 692,1
+     "userId": 751,1
+     "userName": "哇"1
+ }
+ * {
+     jobYear = 1;1
+     post = 1;1
+     mobile = 18526061162;1
+     companyType = 0;0
+     isShowBirth = 0;1
+     userId = 597;1
+     sex = 0;1
+     regLocation = 120000;1
+     suoShuGs = 0;1
+     email = 11;1
+     district = 120000,130000,110000;1
+     userDm = 532;1
+     userName = 王阿宁62;1
+     birth = 2020-5-15;1
+     isShowEducation = 0;1
+     isShowJobYear = 0;1
+     suoShuGsName = 天津1162科技有限公司;1
+     buMen = 1;1
+     nativePlace = 110000;1
+     shiFouGly = 0;1
+     isShowMobile = 0;1
+     education = 6;1
+     portrait = 6162;1
+ }
+ *  * 返回
+ * {
+     "code": 0,
+     "msg": "success"
+ }
+ */
+
+/**
+ * 查询企业是否认证
+ * 已认证的企业，公司名称、企业类型、所在部门、所属职务、管辖地不可修改
+ * POST
+ */
+
+NSString *const kupUserInfo = @"app/appqyuser/update";
+
+/**
+ *上传公司名称获取公司id
+ *POST
+ *参数
+ *name =  "公司名"
+ */
+NSString *const kgetCompanyID = @"app/appgongys/findOneByName";
+
+/**
+ *修改个人简介
+ *POST
+ *参数
+ *{
+     "userId": 751,
+     "userDm": 692,
+     "minsummary": "语句号"
+ }
+ */
+NSString *const changePersonalMin = @"app/appqyuser/update";
+
+
+
 
 /**
  登录

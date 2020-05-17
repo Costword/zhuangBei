@@ -256,7 +256,7 @@ static NSString * recordId = @"recordId";
         return;
     }
     if ([url containsString:kAnswer]) {
-        
+        [[zHud shareInstance]showMessage:@"请求超时"];
         return;
     }
 }

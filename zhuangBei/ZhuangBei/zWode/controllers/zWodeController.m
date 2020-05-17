@@ -15,6 +15,12 @@
 #import "zUserDescController.h"
 #import "zInviteController.h"
 #import "zCallBackController.h"
+#import "zListTypeModel.h"
+#import "zEducationRankTypeInfo.h"
+#import "zUserInvitelController.h"
+#import "zUserGoodsController.h"
+#import "zBusinessController.h"
+#import "zUserDetailController.h"
 
 @interface zWodeController ()
 
@@ -32,6 +38,12 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kgetUserInfo];
+    [self postDataWithUrl:url WithParam:nil];
+    
+    NSString * getBusinessUrl = [NSString stringWithFormat:@"%@%@",kApiPrefix,kpersonalBusiness];
+    [self postDataWithUrl:getBusinessUrl WithParam:nil];
 }
 -(UIImageView*)imageBaseView
 {
@@ -56,7 +68,34 @@
 -(zUserInfoCard*)userinfoCard
 {
     if (!_userinfoCard) {
+        __weak typeof(self)weakSelf = self;
         _userinfoCard = [[zUserInfoCard alloc]init];
+        _userinfoCard.userCardTapBack = ^(NSInteger type) {
+            if (type == 1) {
+                zUserInvitelController * yaoqing = [[zUserInvitelController alloc]init];
+                yaoqing.title = @"我邀请的人";
+                [weakSelf.navigationController pushViewController:yaoqing animated:YES];
+                return;
+            }
+            if (type == 2) {
+                zUserGoodsController * yaoqing = [[zUserGoodsController alloc]init];
+                yaoqing.title = @"我关注的货源";
+                [weakSelf.navigationController pushViewController:yaoqing animated:YES];
+                return;
+            }
+            if (type == 3) {
+                zBusinessController * yaoqing = [[zBusinessController alloc]init];
+                yaoqing.title = @"我的经销商";
+                [weakSelf.navigationController pushViewController:yaoqing animated:YES];
+                return;
+            }
+            if (type == 4) {
+                zUserDetailController * yaoqing = [[zUserDetailController alloc]init];
+                yaoqing.title = @"个人信息";
+                [weakSelf.navigationController pushViewController:yaoqing animated:YES];
+                return;
+            }
+        };
     }
     return _userinfoCard;
 }
@@ -107,9 +146,9 @@
     [self.view addSubview:self.userinfoCard];
     [self.view addSubview:self.instructionCard];
     [self.view addSubview:self.categoryCard];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.userinfoCard.myNumbers = @"100";
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//    });
 }
 
 -(void)viewDidLayoutSubviews
@@ -160,5 +199,65 @@
     setting.title = @"设置";
     [self.navigationController pushViewController:setting animated:YES];
 }
+
+-(void)RequsetFileWithUrl:(NSString*)url WithError:(NSError*)err
+{
+    if ([url containsString:kgetUserInfo]) {
+        [[zHud shareInstance]showMessage:@"获取用户信息失败"];
+        return;
+    }
+}
+
+-(void)RequsetSuccessWithData:(id)data AndUrl:(NSString*)url
+{
+    if ([url containsString:kgetUserInfo]) {
+        NSDictionary * dic = data;
+//        NSLog(@"验证码成功%@",dic);
+        NSString * msg = dic[@"msg"];
+        NSString * code = dic[@"code"];
+        
+        if ([code integerValue] == 0) {
+            //请求成功
+            NSArray * citys = dic[@"provinceList"];
+            NSMutableArray * cityArray = [NSMutableArray array];
+            [citys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSDictionary * dic = citys[idx];
+                zListTypeModel * typeModel = [zListTypeModel mj_objectWithKeyValues:dic];
+                typeModel.select = NO;
+                [cityArray addObject:typeModel];
+            }];
+            NSDictionary * userInfoDic = dic[@"list"];
+
+            zUserCenterModel * userModel = [zUserCenterModel mj_objectWithKeyValues:userInfoDic];
+            [zEducationRankTypeInfo shareInstance].citys = cityArray;
+            [zEducationRankTypeInfo shareInstance].userInfoModel = userModel;
+            self.userinfoCard.userCenterModel = userModel;
+        }else
+        {
+            [[zHud shareInstance]showMessage:msg];
+        }
+        
+    }
+    
+    if ([url containsString:kpersonalBusiness]) {
+        NSDictionary * dic = data;
+        NSString * msg = dic[@"msg"];
+        NSString * code = dic[@"code"];
+        if ([code integerValue] == 0) {
+            
+            NSString * inviteNumber = dic[@"data"][@"inviteNumber"];
+            NSString * goodsNumber = dic[@"data"][@"productNumber"];
+            NSString * businessNumber = dic[@"data"][@"providerNumber"];
+            
+             self.userinfoCard.myNumbers = [NSString stringWithFormat:@"%@",inviteNumber];
+            
+            self.userinfoCard.mygoodsNumbers = [NSString stringWithFormat:@"%@",goodsNumber];
+            
+            self.userinfoCard.mybusinessNumbers = [NSString stringWithFormat:@"%@",businessNumber];
+            
+        }
+    }
+}
+
 
 @end

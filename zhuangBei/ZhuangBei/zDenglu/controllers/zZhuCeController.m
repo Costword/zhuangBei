@@ -76,6 +76,12 @@
     }];
 }
 
+-(void)sendPassRegister:(NSInteger)type
+{
+    NSString * url = [NSString stringWithFormat:@"%@%@?isSure=%ld",kApiPrefix,kRegister,(long)type];
+    [self postDataWithUrl:url WithParam:self.userDic];
+}
+
 -(void)RequsetFileWithUrl:(NSString*)url WithError:(NSError*)err
 {
     if ([url containsString:kSendVerificationCode]) {
@@ -86,7 +92,6 @@
         [[zHud shareInstance]showMessage:@"注册失败,请检查网络"];
         return;
     }
-    
 }
 
 -(void)RequsetSuccessWithData:(id)data AndUrl:(NSString*)url
@@ -120,7 +125,6 @@
             .LeeContent(msg)
             .LeeCancelAction(@"取消", ^{
                 // 点击事件Block
-                [self.navigationController popViewControllerAnimated:YES];
                 [[zHud shareInstance]showMessage:@"注册失败"];
             })
             .LeeAction(@"确认", ^{
@@ -135,8 +139,19 @@
         }
         if ([type integerValue] == 3) {
             //需要确定邀请人是否为xxx
-            [[zHud shareInstance]showMessage:@"注册成功,需确定邀请人"];
-            [self.navigationController popViewControllerAnimated:YES];
+//            [[zHud shareInstance]showMessage:@"注册成功,需确定邀请人"];
+            [LEEAlert alert].config
+            .LeeTitle(@"温馨提示")
+            .LeeContent(msg)
+            .LeeCancelAction(@"取消", ^{
+                [[zHud shareInstance] showMessage:@"请重新输入邀请码"];
+            })
+            .LeeAction(@"确认", ^{
+                // 点击事件Block
+                [self sendPassRegister:1];
+//                [self.navigationController popViewControllerAnimated:YES];
+            })
+            .LeeShow();
             return;
         }
         return;

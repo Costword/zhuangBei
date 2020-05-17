@@ -22,6 +22,7 @@
 {
     if (!_iconImageView) {
         _iconImageView = [[UIImageView alloc]init];
+        _iconImageView.contentMode = UIViewContentModeScaleAspectFill;
         [_iconImageView setImage:[UIImage imageNamed:@"z_nothing"]];
     }
     return _iconImageView;

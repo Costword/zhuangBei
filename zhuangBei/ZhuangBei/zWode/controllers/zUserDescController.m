@@ -8,6 +8,7 @@
 
 #import "zUserDescController.h"
 #import <UITextView+WZB.h>
+#import "zEducationRankTypeInfo.h"
 
 @interface zUserDescController ()<UITextViewDelegate>
 
@@ -19,6 +20,8 @@
 
 @property(strong,nonatomic)UIButton * editButton;
 
+@property(strong,nonatomic)NSMutableDictionary * mianParam;
+
 @end
 
 @implementation zUserDescController
@@ -29,6 +32,16 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
+-(NSMutableDictionary*)mianParam
+{
+    if (!_mianParam) {
+        _mianParam = [NSMutableDictionary dictionary];
+        
+        [_mianParam setObject:@([zEducationRankTypeInfo shareInstance].userInfoModel.userId) forKey:@"userId"];
+        [_mianParam setObject:@([zEducationRankTypeInfo shareInstance].userInfoModel.userDm) forKey:@"userDm"];
+    }
+    return _mianParam;
+}
 
 -(UIButton*)imageHeader
 {
@@ -91,6 +104,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if ([zEducationRankTypeInfo shareInstance].userInfoModel.minsummary.length>0) {
+        self.descTextView.text = [zEducationRankTypeInfo shareInstance].userInfoModel.minsummary;
+    }
     [self.view addSubview:self.imageHeader];
     [self.view addSubview:self.nameLabel];
     [self.view addSubview:self.descTextView];
@@ -133,12 +149,43 @@
 -(void)buttonClick:(UIButton*)button
 {
     if (self.descTextView.text.length>0) {
-        [[zHud shareInstance] showMessage:self.descTextView.text];
+        
+        [self.mianParam setObject:self.descTextView.text forKey:@"minsummary"];
+        
+        NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,changePersonalMin];
+        [self postDataWithUrl:url WithParam:self.mianParam];
     }else
     {
         [[zHud shareInstance] showMessage:@"请填写个人简介"];
     }
     
 }
+
+-(void)RequsetFileWithUrl:(NSString*)url WithError:(NSError*)err
+{
+    if ([url containsString:changePersonalMin]) {
+        
+        if (err.code == -1001) {
+            [[zHud shareInstance] showMessage:@"无法连接服务器"];
+        }
+    }
+
+}
+
+
+
+-(void)RequsetSuccessWithData:(id)data AndUrl:(NSString*)url
+{
+    if ([url containsString:changePersonalMin]) {
+        NSDictionary * dic = data[@"data"];
+        NSString * code = data[@"code"];
+        if ([code integerValue] == 0) {
+            [[zHud shareInstance] showMessage:@"编辑成功"];
+        }
+        NSLog(@"公司认证信息%@",dic);
+    }
+}
+
+
 
 @end

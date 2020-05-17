@@ -51,6 +51,7 @@
     if (!_nothingView) {
         _nothingView = [[zNothingView alloc]init];
         _nothingView.alpha = 0;
+        _nothingView.userInteractionEnabled = NO;
     }
     return _nothingView;
 }

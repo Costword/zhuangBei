@@ -71,7 +71,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self confiUI];
-    
+    __weak typeof(self)weakSelf  = self;
+    self.noContentView.retryTapBack = ^{
+        [weakSelf  requestDatas];
+    };
     [self requestDatas];
 }
 

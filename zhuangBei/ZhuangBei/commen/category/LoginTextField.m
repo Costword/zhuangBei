@@ -24,6 +24,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        self.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         _iconView = [[UIImageView alloc]init];
         _btnClear = [[UIButton alloc]init];
         _lineView = [[UIView alloc]init];
