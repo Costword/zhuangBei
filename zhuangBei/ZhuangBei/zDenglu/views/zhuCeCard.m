@@ -113,7 +113,7 @@
     if (!_checkField) {
         _checkField = [[LoginTextField alloc]init];
         _checkField.icon = [UIImage imageNamed:@"blank"];
-        _checkField.keyboardType = UIKeyboardTypeDefault;
+        _checkField.keyboardType = UIKeyboardTypeASCIICapable;
         _checkField.maxLength = 11;
         _checkField.myPlaceHolder = @"请输入验证码";
     }
@@ -125,7 +125,7 @@
     if (!_inviteField) {
         _inviteField = [[LoginTextField alloc]init];
         _inviteField.icon = [UIImage imageNamed:@"blank"];
-        _inviteField.keyboardType = UIKeyboardTypeDefault;
+        _inviteField.keyboardType = UIKeyboardTypeASCIICapable;
         _inviteField.maxLength = 11;
         _inviteField.myPlaceHolder = @"请输入邀请码（选填）";
     }

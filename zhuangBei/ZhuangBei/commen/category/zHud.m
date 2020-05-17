@@ -37,19 +37,26 @@
     self.hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     self.hud.mode = MBProgressHUDModeText;
     self.hud.label.text = message;
-    [self.hud hideAnimated:YES afterDelay:2.f];
+    [self.hud hideAnimated:YES afterDelay:1.f];
 }
 
 -(void)show{
-     UIView * view = [self mainWindow];
-     self.hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-     self.hud.mode = MBProgressHUDModeIndeterminate;
-     self.hud.label.text = @"";
+//     UIView * view = [self mainWindow];
+//     self.hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+//     self.hud.mode = MBProgressHUDModeIndeterminate;
+//     self.hud.label.text = @"";
+    UIView * view = [self mainWindow];
+    MBProgressHUD * hudView = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    [hudView showAnimated:YES];
 }
 
 -(void)hild{
     
-    [self.hud hideAnimated:YES];
+//    [self.hud hideAnimated:YES];
+    UIView * view = [self mainWindow];
+//    MBProgressHUD * hudView = [MBProgressHUD showHUDAddedTo:view animated:YES];
+//    [hudView showAnimated:YES];
+    [MBProgressHUD hideHUDForView:view animated:YES];
 }
 
 

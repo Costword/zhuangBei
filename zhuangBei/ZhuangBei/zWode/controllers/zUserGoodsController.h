@@ -1,8 +1,8 @@
 //
-//  zXieYiController.h
+//  zUserGoodsController.h
 //  ZhuangBei
 //
-//  Created by aa on 2020/5/8.
+//  Created by aa on 2020/5/16.
 //  Copyright © 2020 aa. All rights reserved.
 //
 
@@ -10,10 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface zXieYiController : baseViewController
-
-@property(assign,nonatomic)NSInteger  type;
-
+@interface zUserGoodsController : baseViewController
 
 @end
 

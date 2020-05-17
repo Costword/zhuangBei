@@ -10,6 +10,8 @@
 
 @interface editTextField ()
 
+@property(strong,nonatomic)UIButton * coverButton;
+
 @property(strong, nonatomic)UIImageView *iconView;
 
 @property(strong, nonatomic)UIButton * show;
@@ -24,7 +26,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        self.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
+        CGFloat fontSize = kWidthFlot(16);
+        self.font = kFont(fontSize);
         _iconView = [[UIImageView alloc]init];
+        _coverButton = [[UIButton alloc]init];
+        _coverButton.hidden = YES;
+        [_coverButton addTarget:self action:@selector(coverButtonClick) forControlEvents:UIControlEventTouchUpInside];
         _show = [[UIButton alloc]init];
         [_show setImage:[UIImage imageNamed:@"eye_close"] forState:UIControlStateNormal];
         [_show setImage:[UIImage imageNamed:@"eye_open"] forState:UIControlStateSelected];
@@ -38,6 +47,7 @@
         
         [_show addTarget:self action:@selector(actionClear:) forControlEvents:(UIControlEventTouchUpInside)];
         [self addTarget:self action:@selector(actionChange:) forControlEvents:(UIControlEventEditingChanged)];
+        [self addSubview:_coverButton];
     }
     return self;
 }
@@ -60,6 +70,9 @@
         make.bottom.mas_equalTo(0);
         make.height.mas_equalTo(1);
     }];
+    [self.coverButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0,0, kWidthFlot(30)));
+    }];
 }
 
 -(void)layoutSubviews
@@ -76,14 +89,26 @@
 
 - (void)actionClear:(UIButton*)sender {
     _show.selected = !sender.selected;
-    [self setSecureTextEntry:!_show.selected];
+    
+    if (self.eyesTapBack) {
+        
+        if (_show.selected) {
+            self.eyesTapBack(1);
+        }else
+        {
+            self.eyesTapBack(0);
+        }
+        
+    }
+//    [self setSecureTextEntry:!_show.selected];
 }
 
 
 #pragma mark - getter and setter
 - (void)setMyPlaceHolder:(NSString *)myPlaceHolder {
     _myPlaceHolder = myPlaceHolder;
-    NSMutableAttributedString *placeholderString = [[NSMutableAttributedString alloc] initWithString:myPlaceHolder attributes:@{NSForegroundColorAttributeName : [kMainSingleton colorWithHexString:@"#9B9B9B" alpha:1], NSFontAttributeName: kFont(16)}];
+    CGFloat fontSize = kWidthFlot(16);
+    NSMutableAttributedString *placeholderString = [[NSMutableAttributedString alloc] initWithString:myPlaceHolder attributes:@{NSForegroundColorAttributeName : [kMainSingleton colorWithHexString:@"#9B9B9B" alpha:1], NSFontAttributeName: kFont(fontSize)}];
     self.attributedPlaceholder = placeholderString;
 }
 
@@ -97,6 +122,7 @@
     _canShow = canShow;
     if (_canShow) {
         self.show.hidden = NO;
+        
     }else
     {
         self.show.hidden = YES;
@@ -104,4 +130,30 @@
     }
     [self updateConstraintsForView];
 }
+
+-(void)setShow:(BOOL)Show
+{
+    self.show.selected = Show;
+}
+
+-(void)setCanTap:(BOOL)canTap
+{
+    if (canTap) {
+        self.coverButton.hidden = NO;
+        self.show.userInteractionEnabled = YES;
+    }else
+    {
+        self.coverButton.hidden = YES;
+        self.show.userInteractionEnabled = NO;
+    }
+}
+
+-(void)coverButtonClick
+{
+    if (self.tapBack) {
+        self.tapBack();
+    }
+}
+
+
 @end

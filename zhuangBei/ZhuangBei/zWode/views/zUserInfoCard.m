@@ -54,9 +54,11 @@
 {
     if (!_headerImageBtn) {
         _headerImageBtn = [[UIButton alloc]init];
+        _headerImageBtn.tag = 1;
         _headerImageBtn.layer.cornerRadius = kWidthFlot(50);
         _headerImageBtn.clipsToBounds = YES;
         [_headerImageBtn setBackgroundImage:[UIImage imageNamed:@"testicon"] forState:UIControlStateNormal];
+        [_headerImageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _headerImageBtn;
 }
@@ -118,7 +120,7 @@
         _myFollowLabel.textContainer = textStorage;
         [self updateTYTLabel:_myFollowLabel];
         
-        UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick)];
+        UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(label2Click)];
         [_myFollowLabel addGestureRecognizer:labelTapGestureRecognizer];
     }
     return _myFollowLabel;
@@ -134,7 +136,7 @@
          TYTextContainer *textStorage = [self creatTextContainerWithCurrentStr:num totalStr:labelStr];
         _myBusinessLabel.textContainer = textStorage;
         [self updateTYTLabel:_myBusinessLabel];
-        UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick)];
+        UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(label3Click)];
         [_myBusinessLabel addGestureRecognizer:labelTapGestureRecognizer];
     }
     return _myBusinessLabel;
@@ -231,6 +233,33 @@
 
 -(void)labelClick{
     NSLog(@"点击邀请人");
+    
+    if (self.userCardTapBack) {
+        self.userCardTapBack(1);
+    }
+}
+
+-(void)label2Click{
+    NSLog(@"点击邀请人");
+    
+    if (self.userCardTapBack) {
+        self.userCardTapBack(2);
+    }
+}
+
+-(void)label3Click{
+    NSLog(@"点击邀请人");
+    
+    if (self.userCardTapBack) {
+        self.userCardTapBack(3);
+    }
+}
+
+-(void)buttonClick:(UIButton*)button
+{
+    if (self.userCardTapBack) {
+        self.userCardTapBack(4);
+    }
 }
 
 -(void)setMyNumbers:(NSString *)myNumbers
@@ -240,16 +269,31 @@
      TYTextContainer *textStorage = [self creatTextContainerWithCurrentStr:num totalStr:labelStr];
     _myInviteLabel.textContainer = textStorage;
     [self updateTYTLabel:_myInviteLabel];
-    
-    NSString * followStr = [NSString stringWithFormat:@"我关注的货源 \n %@",myNumbers];
-     TYTextContainer * follwtextStorage = [self creatTextContainerWithCurrentStr:myNumbers totalStr:followStr];
+
+}
+
+-(void)setMygoodsNumbers:(NSString *)mygoodsNumbers
+{
+    NSString * followStr = [NSString stringWithFormat:@"我关注的货源 \n %@",mygoodsNumbers];
+     TYTextContainer * follwtextStorage = [self creatTextContainerWithCurrentStr:mygoodsNumbers totalStr:followStr];
     _myFollowLabel.textContainer = follwtextStorage;
     [self updateTYTLabel:_myFollowLabel];
-    
-    NSString * businessStr = [NSString stringWithFormat:@"我的经销商 \n %@",myNumbers];
-     TYTextContainer *businesstextStorage = [self creatTextContainerWithCurrentStr:myNumbers totalStr:businessStr];
-    _myBusinessLabel.textContainer = businesstextStorage;
-    [self updateTYTLabel:_myBusinessLabel];
+}
+
+-(void)setMybusinessNumbers:(NSString *)mybusinessNumbers
+{
+    NSString * businessStr = [NSString stringWithFormat:@"我的经销商 \n %@",mybusinessNumbers];
+        TYTextContainer *businesstextStorage = [self creatTextContainerWithCurrentStr:mybusinessNumbers totalStr:businessStr];
+       _myBusinessLabel.textContainer = businesstextStorage;
+       [self updateTYTLabel:_myBusinessLabel];
+}
+
+-(void)setUserCenterModel:(zUserCenterModel *)userCenterModel
+{
+    [self.nameBtn setTitle:userCenterModel.userName forState:UIControlStateNormal];
+    if (userCenterModel.rankDm != nil) {
+        [self.levelBtn setTitle:userCenterModel.rankDm forState:UIControlStateNormal];
+    }
 }
 
 -(void)updateTYTLabel:(TYAttributedLabel*)label

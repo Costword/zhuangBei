@@ -24,6 +24,7 @@
 {
     if (!_iconImageView) {
         _iconImageView = [[UIImageView alloc]init];
+        _iconImageView.contentMode = UIViewContentModeScaleAspectFill;
         [_iconImageView setImage:[UIImage imageNamed:@"z_noContent"]];
     }
     return _iconImageView;
@@ -91,6 +92,13 @@
 
 
 -(void)retryButtonClick{
+    
+    [[zHud shareInstance]show];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[zHud shareInstance]hild];
+    });
+    
     if (self.retryTapBack) {
         self.retryTapBack();
     }

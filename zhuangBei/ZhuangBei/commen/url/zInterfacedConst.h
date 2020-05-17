@@ -35,6 +35,31 @@ UIKIT_EXTERN NSString *const kAnswer;
 
 /** 登录*/
 UIKIT_EXTERN NSString *const kLogin;
+
+
+
+/** 获取用户信息*/
+UIKIT_EXTERN NSString *const kgetUserInfo;
+
+/** 获取邀请人 货源 经销商人数*/
+UIKIT_EXTERN NSString *const kpersonalBusiness;
+
+/** 获取邀请人列表*/
+UIKIT_EXTERN NSString * const kuserGetInvitelList;
+
+/** 职务，性别，学历等字典表*/
+UIKIT_EXTERN NSString *const kgetStudyRank;
+
+/**提交用户资料*/
+UIKIT_EXTERN NSString *const kupUserInfo;
+
+/**验证公司是否审核*/
+UIKIT_EXTERN NSString *const kgetCompanyID;
+
+
+/**修改个人简介*/
+UIKIT_EXTERN NSString *const changePersonalMin;
+
 /** 平台会员退出*/
 UIKIT_EXTERN NSString *const kExit;
 

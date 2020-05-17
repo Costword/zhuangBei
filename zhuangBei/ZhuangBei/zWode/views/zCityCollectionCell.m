@@ -41,7 +41,7 @@
         self.textlabel.numberOfLines = 0;
         [self.contentView addSubview:self.textlabel];
         self.textlabel.textAlignment = NSTextAlignmentCenter;
-        self.textlabel.textColor = [UIColor colorWithHexString:@"#333333"];
+        self.textlabel.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
         self.textlabel.backgroundColor = [UIColor colorWithHexString:@"#F4F4F4"];
         [self.textlabel layoutIfNeeded];
     }
@@ -89,4 +89,24 @@
 {
     self.textlabel.backgroundColor = backColor;
 }
+
+-(void)setModel:(zListTypeModel *)model
+{
+    self.textlabel.text = model.name;
+    
+    if (model.select) {
+        
+        self.textlabel.textColor = [UIColor colorWithHexString:@"#3F50B5"];
+        self.textlabel.backgroundColor = [UIColor colorWithHexString:@"#F4F4F4"];
+        self.textlabel.layer.borderWidth = 1;
+        self.textlabel.layer.borderColor = [UIColor colorWithHexString:@"#3F50B5"].CGColor;
+    }else
+    {
+        self.textlabel.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
+        self.textlabel.backgroundColor = [UIColor colorWithHexString:@"#F4F4F4"];
+        self.textlabel.layer.borderWidth = 1;
+        self.textlabel.layer.borderColor = [UIColor colorWithHexString:@"#9B9B9B"].CGColor;
+    }
+}
+
 @end
