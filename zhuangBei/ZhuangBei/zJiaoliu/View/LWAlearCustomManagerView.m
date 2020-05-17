@@ -13,8 +13,6 @@
 
 @property (nonatomic, strong) UIView * bgview;
 
-@property (nonatomic, strong) UIView * mainView;
-
 @end
 
 @implementation LWAlearCustomManagerView
@@ -74,10 +72,15 @@
 @implementation LWAddNewUserGroupView
 
 - (IBAction)clickCancleBtn:(id)sender {
-    
+    if (self.block) {
+        self.block(1);
+    }
 }
 
 - (IBAction)clickSure:(id)sender {
+    if (self.block) {
+        self.block(2);
+    }
 }
 
 @end

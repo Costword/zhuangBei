@@ -94,9 +94,16 @@
 // 增加新的分组
 - (void)addNewGroup
 {
-//    LWAddNewUserGLWAlearCustomManagerView *alearmanager
     
-    
+   __block LWAddNewUserGroupView *temview = [[NSBundle mainBundle] loadNibNamed:@"LWAddNewUserGroupView" owner:self options:nil].firstObject;
+    _alearmanager = [LWAlearCustomManagerView showAlearView:temview];
+    WEAKSELF(self)
+    temview.block = ^(NSInteger tag) {
+         [weakself.alearmanager dimiss];
+        if (tag == 2) {
+           LWLog(@"------------%@",((LWAddNewUserGroupView *)(weakself.alearmanager.mainView)).tf.text);
+        }
+    };
     [self requestAddNewGroup];
 }
 
@@ -121,7 +128,10 @@
     }];
     
     [self requestDatas];
-    
+    self.noContentView.retryTapBack = ^{
+//          [weakself reloadFialRequest];
+        [self addNewGroup];
+      };
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

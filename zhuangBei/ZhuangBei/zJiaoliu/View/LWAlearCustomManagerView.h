@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LWAlearCustomManagerView : UIView
 
+@property (nonatomic, strong) UIView * mainView;
+
 + (instancetype)showAlearView:(UIView *)mainview;
 
 - (void)dimiss;
@@ -19,11 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+typedef void(^clikBtnBlock)(NSInteger tag);
+
 @interface LWAddNewUserGroupView : UIView
 
 @property (weak, nonatomic) IBOutlet UITextField *tf;
 
 @property (weak, nonatomic) IBOutlet UIButton *isDeflutBtn;
-
+@property (nonatomic, copy) clikBtnBlock block;
 @end
 NS_ASSUME_NONNULL_END
