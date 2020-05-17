@@ -17,7 +17,8 @@
 @property (nonatomic, strong) UITableView * tableview;
 @property (nonatomic, strong) NSMutableArray<LWUserGroupModel *> * listDatas;
 @property (nonatomic, strong) UIView * seactionView;
-@property (nonatomic, strong) LWAlearCustomManagerView *alearmanager;
+@property (nonatomic, strong) LWAddNewUserGroupView *addNewView;
+@property (nonatomic, strong) LWAlearCustomManagerView * alearmanager;
 
 @end
 
@@ -49,10 +50,14 @@
 }
 
 //新增
-- (void)requestAddNewGroup
+- (void)requestAddNewGroup:(NSString *)name isDefault:(BOOL)isDefault
 {
+    if (![name isNotBlank]) {
+        [[zHud shareInstance] showMessage:@"名称不能为空!"];
+        return;
+    }
     NSString *url = @"app/appfriendtype/save";
-    NSDictionary *para = @{@"typeName":@"33",@"isDefault":@"2"};
+    NSDictionary *para = @{@"typeName":LWDATA(name),@"isDefault":isDefault?@"1":@"2"};
     [ServiceManager requestPostWithUrl:url body:[LWTool dictoryToString:para] success:^(id  _Nonnull response) {
         NSInteger code =[response[@"code"] integerValue];
         if (code == 0) {
@@ -62,6 +67,7 @@
         
     }];
 }
+
 //删除
 - (void)requestDelete:(NSString *)groupid
 {
@@ -76,10 +82,15 @@
     }];
 }
 
-- (void)requestEditInfor:(NSString *)groupid
+//编辑
+- (void)requestEditInfor:(NSString *)groupid groupname:(NSString *)groupname isDefault:(BOOL)isDefault
 {
+    if (![groupname isNotBlank]) {
+        [[zHud shareInstance] showMessage:@"名称不能为空!"];
+        return;
+    }
     NSString *url = @"app/appfriendtype/update";
-    NSDictionary *para = @{@"id":LWDATA(groupid),@"typeName":@"呵呵333444444",@"isDefault":@"2"};
+    NSDictionary *para = @{@"id":LWDATA(groupid),@"typeName":LWDATA(groupname),@"isDefault":isDefault?@"1":@"2"};
     [ServiceManager requestPostWithUrl:url body:[LWTool dictoryToString:para] success:^(id  _Nonnull response) {
         NSInteger code =[response[@"code"] integerValue];
         if (code == 0) {
@@ -94,17 +105,10 @@
 // 增加新的分组
 - (void)addNewGroup
 {
-    
-   __block LWAddNewUserGroupView *temview = [[NSBundle mainBundle] loadNibNamed:@"LWAddNewUserGroupView" owner:self options:nil].firstObject;
-    _alearmanager = [LWAlearCustomManagerView showAlearView:temview];
     WEAKSELF(self)
-    temview.block = ^(NSInteger tag) {
-         [weakself.alearmanager dimiss];
-        if (tag == 2) {
-           LWLog(@"------------%@",((LWAddNewUserGroupView *)(weakself.alearmanager.mainView)).tf.text);
-        }
-    };
-    [self requestAddNewGroup];
+    _alearmanager = [LWAlearCustomManagerView showAddNewUserGroupView:^(NSString * text,BOOL isselect) {
+        [weakself requestAddNewGroup:text isDefault: isselect];
+    }];
 }
 
 - (void)clickCellBtn:(UIButton *)sender
@@ -114,7 +118,11 @@
     if ([sender.titleLabel.text isEqualToString:@"删除"]) {
         [self requestDelete:model.customId];
     }else if([sender.titleLabel.text isEqualToString:@"修改"]){
-        [self requestEditInfor:model.customId];
+        WEAKSELF(self)
+        _alearmanager = [LWAlearCustomManagerView showAddNewUserGroupView:^(NSString * text,BOOL isselect) {
+            [weakself requestEditInfor:model.customId groupname:text isDefault:isselect];
+        }];
+        
     }
 }
 
@@ -128,10 +136,7 @@
     }];
     
     [self requestDatas];
-    self.noContentView.retryTapBack = ^{
-//          [weakself reloadFialRequest];
-        [self addNewGroup];
-      };
+    
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -147,6 +152,7 @@
     cell.deleteBtn.tag = cell.editBtn.tag = indexPath.row;
     [cell.deleteBtn addTarget:self action:@selector(clickCellBtn:) forControlEvents:UIControlEventTouchUpInside];
     [cell.editBtn addTarget:self action:@selector(clickCellBtn:) forControlEvents:UIControlEventTouchUpInside];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -154,10 +160,12 @@
 {
     return self.listDatas.count;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 80;
 }
+
 - (UITableView *)tableview
 {
     if (!_tableview) {
@@ -203,4 +211,5 @@
     }
     return _seactionView;
 }
+
 @end
