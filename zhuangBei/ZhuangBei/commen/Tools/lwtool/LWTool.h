@@ -22,6 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param dic 字典
 + (NSString *)dictoryToString:(NSDictionary *)dic;
 
+
+/// 字典转json字符串
+/// @param dict 字典
++ (NSString *)dictoryToJsonString:(NSDictionary *)dict;
+
 @end
 
 NS_ASSUME_NONNULL_END

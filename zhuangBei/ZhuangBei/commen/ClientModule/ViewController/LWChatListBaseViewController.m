@@ -14,7 +14,7 @@ NSString *const getlist_group_url  = @"app/appgroupmessage/getGroupMsgList";
 NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 
 
-@interface LWChatListBaseViewController ()<IFChatViewDelegate, XHChatManagerDelegate, XHGroupManagerDelegate,UITableViewDataSource,UITableViewDelegate, UITextViewDelegate,UIScrollViewDelegate>
+@interface LWChatListBaseViewController ()<IFChatViewDelegate, UITableViewDataSource,UITableViewDelegate, UITextViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) NSMutableArray<ShowMsgElem *> *totalDatasArray;
 @property (nonatomic, strong) NSString *m_Group_ID;
 @property (nonatomic, assign) LWChatRoomType  roomType;
@@ -125,8 +125,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 
 #pragma mark IFChatViewDelegate
 - (void)chatViewDidSendText:(NSString *)text {
-//    if (!self.dispatch_group) {
-//    }
+    //    if (!self.dispatch_group) {
+    //    }
     self.dispatch_group = dispatch_group_create();
     
     [self requsetSendMsgService:text];
@@ -160,7 +160,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         msgModel.rowHeight = [IFChatCell caculateTextHeightWithMaxWidth:self.chatView.tableView.width - [IFChatCell reserveWithForCell] text:msgModel.content];
         [self.totalDatasArray addObject:msgModel];
         [self.showDatasArray removeAllObjects];
-//        [self.showDatasArray addObjectsFromArray: [self.totalDatasArray subarrayWithRange:NSMakeRange(self.totalDatasArray.count - 100, 100)]];
+        //        [self.showDatasArray addObjectsFromArray: [self.totalDatasArray subarrayWithRange:NSMakeRange(self.totalDatasArray.count - 100, 100)]];
         [self getNeetShowDatas];
         [self.chatView.tableView reloadData];
         [self scrollTableToFoot:NO];
@@ -168,41 +168,41 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 }
 
 
-#pragma mark ----------- XHGroupManagerDelegate -----------
-- (void)group:(NSString*)groupID didMembersNumberUpdeted:(NSInteger)membersNumber {
-    self.title = [NSString stringWithFormat:@"%@(%d人在线)", self.roomName, (int)membersNumber];
-}
+#pragma mark ----------- XHGroupManagerDelegate 通知-----------
 
-- (void)groupUserKicked:(NSString*)groupID {
-    [UIView ilg_makeToast:@"您已被管理员剔除"];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)groupDidDeleted:(NSString*)groupID {
-    [UIView ilg_makeToast:@"此群已被删除"];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)groupMessagesDidReceive:(NSString *)aMessage fromID:(NSString *)fromID groupID:(NSString *)groupID{
-    NSDictionary *dict = [LWTool stringToDictory:aMessage];
+- (void)receiveNewChatGroupMsg:(NSNotification *)noti
+{
+    NSDictionary *msgdic = noti.object;
+    NSDictionary *dict = [LWTool stringToDictory:msgdic[@"msg"]];
     ShowMsgElem *model = [ShowMsgElem modelWithDictionary:dict[@"mid"]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self showTrace:model];
     });
 }
 
-
-
-#pragma mark ----------- XHChatManagerDelegate -------------
-
-- (void)chatMessageDidReceived:(NSString *)message fromID:(NSString *)uid;
+- (void)deleUserGroupChat
 {
-    NSDictionary *dict = [LWTool stringToDictory:message];
+    [UIView ilg_makeToast:@"您已被管理员剔除"];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)deleGroupChat
+{
+    [UIView ilg_makeToast:@"此群已被删除"];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark ----------- XHChatManagerDelegate 通知-------------
+- (void)receiveNewChatMsg:(NSNotification *)noti
+{
+    NSDictionary *msgdic = noti.object;
+    NSDictionary *dict = [LWTool stringToDictory:msgdic[@"msg"]];
     ShowMsgElem *model = [ShowMsgElem modelWithDictionary:dict];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self showTrace:model];
     });
 }
+
 
 + (instancetype)chatRoomViewControllerWithRoomId:(NSString *)roomId roomName:(NSString *)roomName roomType:(LWChatRoomType )roomType extend:(id)extend;
 {
@@ -212,6 +212,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     vc.roomType = roomType;
     return vc;
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -229,13 +230,14 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     self.totalDatasArray = [NSMutableArray array];
     self.m_Group_ID = self.roomId;
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatMessageDidReceive:) name:@"IMChatMsgReceiveNotif" object:nil];
+    ADD_NOTI(receiveNewChatMsg:, NEW_MSG_CHAT_NOTI_KEY);
+    ADD_NOTI(receiveNewChatGroupMsg:, NEW_MSG_GROPU_NOTI_KEY);
+    ADD_NOTI(deleGroupChat, DELE_GROPU_CHAT_NOTI_KEY);
+    ADD_NOTI(deleUserGroupChat, DELE_USER_GROPU_CHAT_NOTI_KEY);
     
     if (_roomType == LWChatRoomTypeGroup) {
-        [[XHClient sharedClient].groupManager addDelegate:self];
         [self requestGroupCanSendmsg];
     }else if (_roomType == LWChatRoomTypeOneTOne){
-        [[XHClient sharedClient].chatManager addDelegate:self];
     }
     
     self.title = self.roomName;
@@ -265,14 +267,14 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (void)addNotiObserver
 {
     //注册键盘出现的通知
-      [[NSNotificationCenter defaultCenter] addObserver:self
-                                               selector:@selector(keyboardWillShow:)
-                                                   name:UIKeyboardWillShowNotification object:nil];
-      //注册键盘消失的通知
-      [[NSNotificationCenter defaultCenter] addObserver:self
-                                               selector:@selector(keyboardWillHide:)
-                                                   name:UIKeyboardWillHideNotification object:nil];
-      
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    //注册键盘消失的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
 }
 
 ///键盘显示事件
@@ -353,10 +355,10 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     cell.titleLabel.text = getNewShowMsgElem.username;
     cell.subTitleLabel.text = getNewShowMsgElem.time;
     NSMutableAttributedString *attributedMessage = [[NSMutableAttributedString alloc] initWithString:getNewShowMsgElem.content attributes:@{ NSFontAttributeName: kFont(15), NSForegroundColorAttributeName: UIColor.whiteColor }];
-     [PPStickerDataManager.sharedInstance replaceEmojiForAttributedString:attributedMessage font:kFont(15)];
-//    cell.contentLabel.adjustsFontSizeToFitWidth = true;
+    [PPStickerDataManager.sharedInstance replaceEmojiForAttributedString:attributedMessage font:kFont(15)];
+    //    cell.contentLabel.adjustsFontSizeToFitWidth = true;
     cell.contentLabel.attributedText = attributedMessage;
-//    cell.contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    //    cell.contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     cell.contentLabel.numberOfLines = 0;
     return cell;
 }

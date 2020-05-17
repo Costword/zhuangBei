@@ -16,7 +16,7 @@
 
 + (void)requestPostWithUrl:(NSString *)url Parameters:(id)parameters success:(RequestSuccess)success failure:(RequestFailure)failure{
     NSString *urlstring = [NSString stringWithFormat:@"%@%@",kApiPrefix,url];
-//    [self requestWithURL:urlstring parameters:parameters success:success failure:failure];
+    //    [self requestWithURL:urlstring parameters:parameters success:success failure:failure];
     [zNetWorkManger POSTworkWithUrl:urlstring WithParamer:parameters Success:success Failure:failure];
 }
 
@@ -39,7 +39,7 @@
             [tem appendFormat:@"%@=%@&",key,paraString[key]];
         }
         if ([tem hasSuffix:@"&"]) {
-          tem = [NSMutableString stringWithString:[tem substringToIndex:tem.length - 1]];
+            tem = [NSMutableString stringWithString:[tem substringToIndex:tem.length - 1]];
         }
         if(keys.count > 0){
             urlstring = [NSString stringWithFormat:@"%@?%@",urlstring,tem];
@@ -53,17 +53,16 @@
 
 + (void)requestGetWithUrl:(NSString *)url Parameters:(id)parameters success:(RequestSuccess)success failure:(RequestFailure)failure{
     NSString *urlstring = [NSString stringWithFormat:@"%@%@",kApiPrefix,url];
-//    [self requestWithURL:urlstring parameters:parameters success:success failure:failure];
+    //    [self requestWithURL:urlstring parameters:parameters success:success failure:failure];
     [zNetWorkManger  GETworkWithUrl:urlstring WithParamer:parameters Success:success Failure:failure];
 }
 
 
 /**
- *  异步POST请求:以body方式,支持数组
+ *  异步POST请求:以body方式,字符串、字典
  *
  *  @param url     请求的url
- *  @param body    body数据
- *  @param show    是否显示HUD
+ *  @param body    body数据 字符串、字典
  *  @param success 成功回调
  *  @param failure 失败回调
  */
@@ -73,12 +72,12 @@
                    failure:(RequestFailure)failure
 {
     
-//    if (show) {
-        [[zHud shareInstance] show];
-//    }
+    //    if (show) {
+    [[zHud shareInstance] show];
+    //    }
     NSString *requestUrl = [NSString stringWithFormat:@"%@%@", kApiPrefix, url];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-
+    
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:requestUrl parameters:nil error:nil];
     request.timeoutInterval= 20;
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -90,41 +89,49 @@
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
         }
     }
-   
+    
     // 设置body
     if ([body isKindOfClass:[NSString class]]) {
-//        NSString *bodystring = [LWTool dictoryToString:body];
-//        bodystring = @""
         LWLog(@"-----------body字符串:%@",body);
         NSData *bodydata = [body dataUsingEncoding:NSUTF8StringEncoding];
         [request setHTTPBody:bodydata];
         [request setValue:[NSString stringWithFormat:@"%lu",bodydata.length] forHTTPHeaderField:@"Content-Length"];
-//        [request setValue:@"application/x-www-form-urlencoded charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    }else if([body isKindOfClass:[NSDictionary class]]){
+        NSString *bodystr = [LWTool dictoryToJsonString:body];
+        LWLog(@"-----------body字符串:%@",body);
+        NSData *bodydata = [bodystr dataUsingEncoding:NSUTF8StringEncoding];
+        [request setHTTPBody:bodydata];
+//        [request setValue:[NSString stringWithFormat:@"%lu",bodydata.length] forHTTPHeaderField:@"Content-Length"];
     }
-
+    
     AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
     responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
-                                                                      @"text/html",
-                                                                      @"text/json",
-                                                                      @"text/javascript",
-                                                                      @"text/plain",
-                                                                      nil];
+                                                 @"text/html",
+                                                 @"text/json",
+                                                 @"text/javascript",
+                                                 @"text/plain",
+                                                 nil];
     manager.responseSerializer = responseSerializer;
-
+    
     [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-
+        
         if (!error) {
-//            if (show) {
-                [[zHud shareInstance] hild];
-//            }
+            //            if (show) {
+            [[zHud shareInstance] hild];
+            //            }
             
             NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:responseObject options:(NSJSONReadingMutableContainers) error:nil];
             LWLog(@"***************success:%@",dic);
             success(dic);
         } else {
+            [[zHud shareInstance] hild];
             failure(error);
             LWLog(@"request error = %@",error);
         }
     }] resume];
 }
+
+
+
+
 @end

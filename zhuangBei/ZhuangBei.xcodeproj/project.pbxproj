@@ -201,6 +201,8 @@
 		89D36E0C245AB1C800A6C014 /* LWSystemMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D36E0B245AB1C800A6C014 /* LWSystemMessageListViewController.m */; };
 		89D36E0F245AB93F00A6C014 /* HYTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D36E0E245AB93F00A6C014 /* HYTopBarView.m */; };
 		89D51C6E246503EA00ABA70D /* LWHuoYuanDeatilModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D51C6D246503EA00ABA70D /* LWHuoYuanDeatilModel.m */; };
+		89DF44D42470C66C002CAE83 /* LWAlearCustomManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF44D32470C66C002CAE83 /* LWAlearCustomManagerView.m */; };
+		89DF44D92470E433002CAE83 /* LWAddNewUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89DF44D82470E433002CAE83 /* LWAddNewUserGroupView.xib */; };
 		89F5B7DC2455955E0040F7B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */; };
 		89F5B7DF245596DD0040F7B1 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7DE245596DD0040F7B1 /* UIView+Extension.m */; };
 		89F5B7E2245599530040F7B1 /* LWHuoYuanItemsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7E1245599530040F7B1 /* LWHuoYuanItemsListViewController.m */; };
@@ -634,6 +636,9 @@
 		89D36E0E245AB93F00A6C014 /* HYTopBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYTopBarView.m; sourceTree = "<group>"; };
 		89D51C6C246503EA00ABA70D /* LWHuoYuanDeatilModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanDeatilModel.h; sourceTree = "<group>"; };
 		89D51C6D246503EA00ABA70D /* LWHuoYuanDeatilModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDeatilModel.m; sourceTree = "<group>"; };
+		89DF44D22470C66C002CAE83 /* LWAlearCustomManagerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAlearCustomManagerView.h; sourceTree = "<group>"; };
+		89DF44D32470C66C002CAE83 /* LWAlearCustomManagerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAlearCustomManagerView.m; sourceTree = "<group>"; };
+		89DF44D82470E433002CAE83 /* LWAddNewUserGroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LWAddNewUserGroupView.xib; sourceTree = "<group>"; };
 		89F5B7DA2455955D0040F7B1 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
 		89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 		89F5B7DD245596DD0040F7B1 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -1414,6 +1419,9 @@
 				89C112DF246E93AA007EAABB /* LWAddFriendTableViewCell.m */,
 				89C112F0246EA485007EAABB /* LWUserGroupManagerTableViewCell.h */,
 				89C112F1246EA485007EAABB /* LWUserGroupManagerTableViewCell.m */,
+				89DF44D22470C66C002CAE83 /* LWAlearCustomManagerView.h */,
+				89DF44D32470C66C002CAE83 /* LWAlearCustomManagerView.m */,
+				89DF44D82470E433002CAE83 /* LWAddNewUserGroupView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1755,6 +1763,7 @@
 				89A26F68246E3F9D008EFB01 /* InnerStickersInfo.plist in Resources */,
 				009FB5EA244E89CD00133974 /* Assets.xcassets in Resources */,
 				89A26F6C246E3F9D008EFB01 /* Sticker.bundle in Resources */,
+				89DF44D92470E433002CAE83 /* LWAddNewUserGroupView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1835,6 +1844,7 @@
 				8921697B245670AE007C6615 /* LWSwitchBarView.m in Sources */,
 				89C112E0246E93AA007EAABB /* LWAddFriendTableViewCell.m in Sources */,
 				890643FA24695BFA0099508C /* ShowMsgElem.m in Sources */,
+				89DF44D42470C66C002CAE83 /* LWAlearCustomManagerView.m in Sources */,
 				895BD9C52462604600AA5947 /* ServiceManager.m in Sources */,
 				00B0A5EA24653E3F0041C234 /* zCompanyDetailController.m in Sources */,
 				0091FCE6245E681B0046691F /* zCityCollectionCell.m in Sources */,

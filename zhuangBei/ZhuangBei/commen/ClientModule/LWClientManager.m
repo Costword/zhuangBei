@@ -22,7 +22,7 @@ static NSString * const LIVE_PROXY_SERVER_URL = @"testrtc.bdmgxq.cn:19932";
 static NSString *const sendmsg_oto_url =  @"app/appfriendmessage/save";
 static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
-@interface LWClientManager()<XHLoginManagerDelegate>
+@interface LWClientManager()<XHLoginManagerDelegate,XHChatManagerDelegate, XHGroupManagerDelegate>
 @property (nonatomic, strong) XHCustomConfig *config;
 
 @end
@@ -36,6 +36,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     dispatch_once(&onceToken, ^{
         manager = [[LWClientManager alloc] init];
         manager.config = [[XHCustomConfig alloc] init];
+        [[XHClient sharedClient].groupManager addDelegate:manager];
+        [[XHClient sharedClient].chatManager addDelegate:manager];
     });
     return manager;
 }
@@ -84,6 +86,39 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 }
 
 
+#pragma mark ----------- XHGroupManagerDelegate -----------
+
+- (void)group:(NSString*)groupID didMembersNumberUpdeted:(NSInteger)membersNumber {
+//    self.title = [NSString stringWithFormat:@"%@(%d人在线)", self.roomName, (int)membersNumber];
+}
+
+- (void)groupUserKicked:(NSString*)groupID {
+    POST_NOTI(DELE_USER_GROPU_CHAT_NOTI_KEY, nil);
+}
+
+- (void)groupDidDeleted:(NSString*)groupID {
+    POST_NOTI(DELE_GROPU_CHAT_NOTI_KEY, nil);
+}
+
+- (void)groupMessagesDidReceive:(NSString *)aMessage fromID:(NSString *)fromID groupID:(NSString *)groupID{
+    
+    POST_NOTI(NEW_MSG_GROPU_NOTI_KEY, (@{@"msg":aMessage,@"fromid":fromID,@"groupID":groupID}));
+}
+
+
+
+#pragma mark ----------- XHChatManagerDelegate -------------
+
+- (void)chatMessageDidReceived:(NSString *)message fromID:(NSString *)uid;
+{
+//    NSDictionary *dict = [LWTool stringToDictory:message];
+//    ShowMsgElem *model = [ShowMsgElem modelWithDictionary:dict];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self showTrace:model];
+//    });
+    
+    POST_NOTI(NEW_MSG_CHAT_NOTI_KEY, (@{@"msg":message,@"fromid":uid}));
+}
 
 #pragma mark -------------------XHLoginManagerDelegate--------------
 /**

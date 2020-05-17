@@ -11,10 +11,13 @@
 #import "LWUserGroupManagerTableViewCell.h"
 #import "LWUserGroupModel.h"
 #import "LWTool.h"
+#import "LWAlearCustomManagerView.h"
+
 @interface LWUserGroupManagerViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableview;
 @property (nonatomic, strong) NSMutableArray<LWUserGroupModel *> * listDatas;
 @property (nonatomic, strong) UIView * seactionView;
+@property (nonatomic, strong) LWAlearCustomManagerView *alearmanager;
 
 @end
 
@@ -91,6 +94,9 @@
 // 增加新的分组
 - (void)addNewGroup
 {
+//    LWAddNewUserGLWAlearCustomManagerView *alearmanager
+    
+    
     [self requestAddNewGroup];
 }
 

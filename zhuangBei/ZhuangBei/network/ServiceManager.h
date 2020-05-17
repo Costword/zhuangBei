@@ -47,13 +47,13 @@ typedef void(^RequestFailure)(NSError *error);
 
 
 /**
- *  异步POST请求:以body方式,支持数组
- *
- *  @param url     请求的url
- *  @param body    body数据
- *  @param success 成功回调
- *  @param failure 失败回调
- */
+*  异步POST请求:以body方式,字符串、字典
+*
+*  @param url     请求的url
+*  @param body    body数据 字符串、字典
+*  @param success 成功回调
+*  @param failure 失败回调
+*/
 + (void)requestPostWithUrl:(NSString *)url
                body:(id)body
             success:(RequestSuccess)success
