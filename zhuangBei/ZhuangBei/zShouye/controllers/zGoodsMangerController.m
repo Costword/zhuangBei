@@ -31,9 +31,11 @@
 {
     if (!_listParmas) {
         _listParmas = [NSMutableDictionary dictionary];
+//        code=3&lastNode=&limit=20&zbid=21&page=1
         [_listParmas setObject:@(3) forKey:@"code"];
-        [_listParmas setObject:@(20) forKey:@"limt"];
+        [_listParmas setObject:@(20) forKey:@"limit"];
         [_listParmas setObject:@(1) forKey:@"page"];
+        [_listParmas setObject:@"" forKey:@"lastNode"];
         [_listParmas setObject:@"" forKey:@"zbid"];
     }
     return _listParmas;
@@ -50,6 +52,9 @@
         _leftMenu.menuSelectBack = ^(zGoodsMenuModel *goodsModel) {
             weakSelf.listParmas = nil;
             [weakSelf.listParmas setObject:@(goodsModel.typeId) forKey:@"zbid"];
+            if (goodsModel.lastNode != nil) {
+                [weakSelf.listParmas setObject:goodsModel.lastNode forKey:@"lastNode"];
+            }
             [weakSelf loadList];
         };
     }
@@ -110,9 +115,15 @@
 
 -(void)loadList
 {
-    NSString * listurl = [NSString stringWithFormat:@"%@%@",kApiPrefix,kGoodsMangerList];
+//    NSString * listurl = [NSString stringWithFormat:@"%@%@",kApiPrefix,];
     
-    [self postDataWithUrl:listurl WithParam:self.listParmas];
+    [self requestPostWithUrl:kGoodsMangerList paraString:self.listParmas success:^(id  _Nonnull response) {
+        [[zHud shareInstance]hild];
+    } failure:^(NSError * _Nonnull error) {
+        [[zHud shareInstance]hild];
+    }];
+    
+//    [self postDataWithUrl:listurl WithParam:self.listParmas];
     [[zHud shareInstance]show];
 }
 
