@@ -30,6 +30,8 @@ typedef void(^RequestFailure)(NSError *error);
 
 @property(strong,nonatomic)zNothingView * nothingView;
 @property(strong,nonatomic)zNoContentView * noContentView;
+
+
 - (void)getDataurl:(NSString *)url withParam:(id)para;
 
 -(void)postDataWithUrl:(NSString*)url WithParam:(id)param;

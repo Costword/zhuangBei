@@ -23,18 +23,23 @@
 
 - (void)dimiss
 {
-    _bgview.alpha = 0;
-    _mainView.alpha = 0;
+    [_bgview removeFromSuperview];
+    [_mainView removeAllSubviews];
+    [_mainView removeFromSuperview];
+    _tableview = nil;
+    _bgview = nil;
+    _mainView = nil;
 }
 
 - (void)showView
 {
-    if (!_bgview||!_mainView||!_tableview) {
+//    if (!_bgview||!_mainView||!_tableview) {
         [self createUI];
-    }else{
-        _bgview.alpha = 0.3;
-        _mainView.alpha = 1;
-    }
+//    }else{
+//        _bgview.alpha = 0.3;
+//        _mainView.alpha = 1;
+//    }
+    
 }
 
 - (void)createUI
@@ -48,6 +53,7 @@
     _mainView.backgroundColor = UIColor.whiteColor;
     
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    window.backgroundColor = UIColor.redColor;
     [window addSubview:_bgview];
     [window addSubview:_mainView];
     
@@ -79,7 +85,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        [self showView];
+        
     }
     return self;
 }
