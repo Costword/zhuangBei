@@ -39,7 +39,7 @@
     NSString *url = @"sys/user/findUserByUserNameList";
     if (_selectIndex == 1) {
         param = @{@"groupName":LWDATA(self.tf.text),@"limit":@"20",@"page":@(self.currPage)};
-        [self requestPostWithUrl:@"app/appgroup/findGroupByGroupNameList" para:param paraType:(LWRequestParamTypeString) success:^(id  _Nonnull response) {
+        [self requestPostWithUrl:@"app/appgroup/findGroupByGroupNameList" para:param paraType:(LWRequestParamTypeDict) success:^(id  _Nonnull response) {
             [self handlerDatas:response];
          } failure:^(NSError * _Nonnull error) {
              
