@@ -22,7 +22,6 @@
 {
     [self requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"Id":LWDATA(self.zbTypeId),@"gysLimit":@(100),@"page":@(self.currPage),@"searchGYSName":@"",@"zbId":LWDATA(self.zbId)} success:^(id  _Nonnull response) {
         
-        [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         
         if ([response[@"code"] integerValue] == 0) {
@@ -30,9 +29,6 @@
             self.currPage = [page[@"currPage"] integerValue];
             self.totalPage = [page[@"totalPage"] integerValue];
             NSArray *list = page[@"list"];
-//            if (self.currPage == 1) {
-//                [self.listDatas removeAllObjects];
-//            }
             if (self.currPage == 1) {
                 self.datasModel = [LWHuoYuanThreeLevelModel modelWithDictionary:list[0]];
             }else{
@@ -57,6 +53,7 @@
         self.nothingView.alpha = gys.count == 0 ? 1:0;
         self.tableView.mj_footer.hidden = gys.count == 0;
         [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
     } failure:^(NSError * _Nonnull error) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

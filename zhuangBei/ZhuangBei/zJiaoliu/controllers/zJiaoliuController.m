@@ -17,6 +17,7 @@
 #import "LWJiaoLiuAddAlearView.h"
 #import "LWAddFriendOrGroupViewController.h"
 #import "LWUserGroupManagerViewController.h"
+#import "LWAddNewChatGroupViewController.h"
 
 @interface zJiaoliuController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) LWSwitchBarView * switchBarView;
@@ -34,6 +35,24 @@
 @end
 
 @implementation zJiaoliuController
+
+//是否有创建群聊权限
+- (void)verifiAccountIsAdmin
+{
+    [self requestPostWithUrl:@"sys/user/isAdmin" para:@{} paraType:(LWRequestParamTypeDict) success:^(id  _Nonnull response) {
+        if ([response[@"code"] intValue] == 0) {
+            NSInteger isAdmin = [response[@"isAdmin"] intValue];
+            if (isAdmin == 1) {
+                [self.navigationController pushViewController:[LWAddNewChatGroupViewController new] animated:YES];
+            }else{
+                [zHud showMessage:@"该账号没有创建群聊权限"];
+            }
+        }
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
 //交流
 - (void)requestJiaoLiuDatas
 {
@@ -91,6 +110,8 @@
             [weakself.navigationController pushViewController:[LWAddFriendOrGroupViewController new] animated:YES];
         }else if (index == 2){
             [weakself.navigationController pushViewController:[LWUserGroupManagerViewController new] animated:YES];
+        }else if (index == 0){
+            [weakself verifiAccountIsAdmin];
         }
     };
 }
@@ -135,7 +156,7 @@
     }];
     
     UIButton *addBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [addBtn setImage:IMAGENAME(@"icon_search") forState:UIControlStateNormal];
+    [addBtn setImage:IMAGENAME(@"addnewicon") forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(clickaddBtnBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
@@ -199,15 +220,16 @@
        __block LWJiaoLiuContatcsSeactionView *seactionview = [[LWJiaoLiuContatcsSeactionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
         friendListModel *listmodel = self.listDatas_Contatcs[section];
         seactionview.leftL.text = listmodel.groupname;
+//        seactionview.rightBtn.sel
         WEAKSELF(self)
         seactionview.block = ^(BOOL isShow) {
 //            weakself.isShow = isShow;
             listmodel.isShow = isShow;
             [weakself.contatcsTableView reloadData];
 //            [weakself.contatcsTableView reloadSection:section withRowAnimation:(UITableViewRowAnimationNone)];
-            [UIView animateWithDuration:0.25 animations:^{
-                seactionview.rightBtn.imageView.transform = listmodel.isShow ? CGAffineTransformMakeRotation(M_PI):CGAffineTransformIdentity;
-            }];
+//            [UIView animateWithDuration:0.25 animations:^{
+//                seactionview.rightBtn.imageView.transform = listmodel.isShow ? CGAffineTransformMakeRotation(M_PI):CGAffineTransformIdentity;
+//            }];
             
         };
         seactionview.rightBtn.selected = listmodel.isShow;
@@ -249,6 +271,7 @@
     LWJiaoLiuGroupCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LWJiaoLiuGroupCollectionCell" forIndexPath:indexPath];
     LWJiaoLiuModel *model = self.listDatas_JiaoLiu[indexPath.section];
     cell.nameL.text = model.imGroupList[indexPath.row].groupName;
+    [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kApiPrefix,model.avatar]] placeholderImage:IMAGENAME(@"jiaoliulisticon")];
     return cell;
 }
 

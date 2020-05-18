@@ -24,6 +24,11 @@ typedef NS_ENUM(NSUInteger, LWChatRoomType) {
 
 - (void)scrollTableToFoot:(BOOL)animated;
 
+/// 创建聊天室，群聊、单聊
+/// @param roomId 房间ID
+/// @param roomName 房间名字
+/// @param roomType 聊天类型
+/// @param extend 扩展字段
 + (instancetype)chatRoomViewControllerWithRoomId:(NSString *)roomId roomName:(NSString *)roomName roomType:(LWChatRoomType)roomType extend:(id)extend;
 
 @end

@@ -21,17 +21,37 @@
         UIImageView *imageview = [UIImageView new];
         imageview.backgroundColor = UIColor.redColor;
         [self addSubview:imageview];
-        [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.mas_left).mas_offset(10);
+        
+        
+        
+        UIView *des1 = [UIView new];
+        UIView *des2 = [UIView new];
+        des1.backgroundColor = UIColor.blueColor;
+        des2.backgroundColor = UIColor.blueColor;
+        des2.alpha = 0.3;
+        [self addSubviews:@[des2,des1]];
+        [des1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_offset(2);
             make.height.mas_offset(20);
+            make.left.mas_equalTo(self).mas_offset(10);
             make.centerY.mas_equalTo(self.mas_centerY);
         }];
+        [des2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_offset(1);
+            make.height.mas_offset(20);
+            //        make.top.bottom.mas_equalTo(bg);
+            make.left.mas_equalTo(des1.mas_right).mas_offset(2);
+            //        make.right.mas_equalTo(bg.mas_right);
+            make.centerY.mas_equalTo(self.mas_centerY);
+        }];
+        
         [_titleL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(imageview.mas_right).mas_offset(10);
+            make.left.mas_equalTo(des2.mas_right).mas_offset(10);
             make.right.mas_equalTo(self.mas_right).mas_offset(-10);
             make.centerY.mas_equalTo(self.mas_centerY);
         }];
+        
+        
     }
     return self;
 }
