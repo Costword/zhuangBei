@@ -79,7 +79,7 @@
     }else
     {
         zCompanyDetailCell * cell = [zCompanyDetailCell instanceWithTableView:tableView AndIndexPath:indexPath];
-        cell.backgroundColor = [UIColor greenColor];
+        cell.backgroundColor = [UIColor whiteColor];
         return cell;
     }
     

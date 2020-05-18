@@ -56,6 +56,13 @@ UIKIT_EXTERN NSString *const kupUserInfo;
 /**验证公司是否审核*/
 UIKIT_EXTERN NSString *const kgetCompanyID;
 
+/** 获取货源管理列表*/
+UIKIT_EXTERN NSString *const kGoodsMangerMenu;
+
+/** 获取货源管理列表*/
+UIKIT_EXTERN NSString *const kGoodsMangerList;
+
+
 
 /**修改个人简介*/
 UIKIT_EXTERN NSString *const changePersonalMin;

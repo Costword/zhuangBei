@@ -31,24 +31,29 @@
     //首页
     
     zAshouyeController *syVC = [[zAshouyeController alloc]init];
-    UIViewController *syNVC = [self setupChildViewController:syVC navigationController:[MainNavController class] title:@"首页" imageName:@"trends_nomal.png" selectedImageName:@"trends_select.png" offset:NO];
+    UIViewController *syNVC = [self setupChildViewController:syVC navigationController:[MainNavController class] title:@"首页" imageName:@"huoyuan_kefu.png" selectedImageName:@"huoyuan_kefu.png" offset:NO];
     
     //货源
     zHyController *hyVC = [[zHyController alloc]init];
    
-    UIViewController *hyNVC = [self setupChildViewController:hyVC navigationController:[MainNavController class] title:@"货源" imageName:@"callingCard_nomal.png" selectedImageName:@"callingCard_select.png" offset:NO];
+    UIViewController *hyNVC = [self setupChildViewController:hyVC navigationController:[MainNavController class] title:@"货源" imageName:@"huoyuan_kefu.png" selectedImageName:@"huoyuan_kefu.png" offset:NO];
     
     //交流
     zJiaoliuController*jlVC = [[zJiaoliuController alloc]init];
-    UIViewController *jlNVC = [self setupChildViewController:jlVC navigationController:[MainNavController class] title:@"交流大厅" imageName:@"baoxin_nomal.png" selectedImageName:@"baoxin_select.png" offset:NO];
+    UIViewController *jlNVC = [self setupChildViewController:jlVC navigationController:[MainNavController class] title:@"交流大厅" imageName:@"huoyuan_kefu.png" selectedImageName:@"huoyuan_kefu.png" offset:NO];
+    jlNVC.tabBarItem.badgeValue = @"88";
     
     //我的
     zWodeController*wdVC = [[zWodeController alloc]init];
     
-    UIViewController *wodeNVC = [self setupChildViewController:wdVC navigationController:[MainNavController class] title:@"我的" imageName:@"mine_nomal.png" selectedImageName:@"mine_select.png" offset:NO];
+    UIViewController *wodeNVC = [self setupChildViewController:wdVC navigationController:[MainNavController class] title:@"我的" imageName:@"huoyuan_kefu.png" selectedImageName:@"huoyuan_kefu.png" offset:NO];
     
     //添加的是导航控制器
     self.viewControllers = @[syNVC, hyNVC, jlNVC, wodeNVC];
+    
+
+
+    
     //添加动画
 //    self.selectAnimation = TabBarSelectAnimationScale;
     
@@ -62,6 +67,14 @@
 //        [weakSelf presentViewController:searchNVC animated:YES completion:nil];
 //    }];
     
+    
+}
+
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+//    NSLog(@"%@",self.tabBarItem.badgeValue);
     
 }
 

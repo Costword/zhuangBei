@@ -53,10 +53,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor greenColor];
-    self.leftMenu.menuArray = @[@"1",@"2",@"3",@"4"];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.leftMenu];
     [self.view addSubview:self.menuTableView];
+    
+    self.nothingView.alpha = 1;
+    [self.view bringSubviewToFront:self.nothingView];
 }
 
 -(void)viewDidLayoutSubviews
@@ -74,6 +76,12 @@
        make.top.mas_equalTo(0);
        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
        make.right.mas_equalTo(0);
+    }];
+    [self.nothingView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.leftMenu.mas_right).offset(0);
+        make.top.mas_equalTo(0);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+        make.right.mas_equalTo(0);
     }];
 }
 

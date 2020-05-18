@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "zHuoYuanModel.h"
+#import "zGoodsMenuModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^leftMenuHeaderTapBack)(zHuoYuanModel * hymodel);
+typedef void(^leftMenuHeaderTapBack)(zGoodsMenuModel * hymodel);
 
 @interface zLeftMenuHeader : UIView
 
-@property(strong,nonatomic)zHuoYuanModel * hyModel;
+@property(strong,nonatomic)zGoodsMenuModel * hyModel;
 
 @property(copy,nonatomic)leftMenuHeaderTapBack menuHeaerTapBack;
 

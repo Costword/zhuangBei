@@ -14,6 +14,7 @@
 #import "zQuestionController.h"
 #import "zUserInfo.h"
 #import "MainTabBarController.h"
+#import "ZFTabBarViewController.h"
 #import "MainNavController.h"
 
 @interface zDengluController ()
@@ -83,7 +84,7 @@
 
 -(void)changeRootVC
 {
-    MainTabBarController * rootVC  = [[MainTabBarController alloc]init];
+    ZFTabBarViewController * rootVC  = [[ZFTabBarViewController alloc]init];
     MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
     rootNav.navigationBar.hidden = YES;
      UIApplication *app = [UIApplication sharedApplication];

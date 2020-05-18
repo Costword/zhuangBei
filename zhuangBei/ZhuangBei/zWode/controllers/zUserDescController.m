@@ -49,7 +49,7 @@
         _imageHeader = [[UIButton alloc]init];
         _imageHeader.layer.cornerRadius = kWidthFlot(2);
         _imageHeader.clipsToBounds = YES;
-        [_imageHeader setBackgroundImage:[UIImage imageNamed:@"testicon"] forState:UIControlStateNormal];
+        [_imageHeader setBackgroundImage:[UIImage imageNamed:@"wode_defoutHeader"] forState:UIControlStateNormal];
     }
     return _imageHeader;
 }
@@ -60,7 +60,7 @@
         _nameLabel.titleLabel.font = kFont(20);
         _nameLabel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [_nameLabel setTitleColor:[UIColor colorWithHexString:@"#4A4A4A"] forState:UIControlStateNormal];
-        [_nameLabel setTitle:@"阿秀" forState:UIControlStateNormal];
+        [_nameLabel setTitle:[zEducationRankTypeInfo shareInstance].userInfoModel.userName forState:UIControlStateNormal];
         _nameLabel.clipsToBounds = YES;
         _nameLabel.tag = 1;
     }

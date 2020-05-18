@@ -100,6 +100,7 @@
     if (_switchBarView) {
         [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH*self.switchBarView.currentIndex, 1) animated:NO];
     }
+    self.tabBarItem.badgeValue = @"28";
 }
 
 - (void)viewDidLoad {

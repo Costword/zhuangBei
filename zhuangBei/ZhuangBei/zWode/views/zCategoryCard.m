@@ -38,16 +38,22 @@
         _titleArray = @[
             @{
                 @"name":@"基本信息",
+                @"image":@"wode_jiben",
             },@{
                 @"name":@"个人信息",
+                @"image":@"wode_personal",
             },@{
                 @"name":@"联系人",
+                @"image":@"wode_lianxiren",
             },@{
                 @"name":@"邀请好友",
+                @"image":@"wode_yaoqing",
             },@{
                 @"name":@"意见反馈",
+                @"image":@"wode_fankui",
             },@{
                 @"name":@"联系客服",
+                @"image":@"wode_kefu",
             }
         ];
     }
@@ -84,8 +90,9 @@
             button.tag = i;
             button.titleLabel.font = kFont(kWidthFlot(14));
             NSString * name = self.titleArray[i][@"name"];
+            NSString * image = self.titleArray[i][@"image"];
             [button setTitle:name forState:UIControlStateNormal];
-            [button setImage:[UIImage imageNamed:@"wode_category"] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
             [button setTitleColor:[UIColor colorWithHexString:@"4A4A4A"] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(buttonCLick:) forControlEvents:UIControlEventTouchUpInside];
             [self.baseView addSubview:button];

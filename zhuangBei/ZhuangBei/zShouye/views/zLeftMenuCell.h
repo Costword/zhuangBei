@@ -7,17 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "zPersonalModel.h"
+#import "zGoodsMenuModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef void(^menuSelectBack)(zGoodsMenuModel * goodsModel);
 
 @interface zLeftMenuCell : UITableViewCell
 
 +(zLeftMenuCell*)instanceWithTableView:(UITableView*)tableView AndIndexPath:(NSIndexPath*)indexPath;
 
-@property(strong,nonatomic)zPersonalModel * persoamModel;
+@property(strong,nonatomic)zGoodsMenuModel * goodsModel;
 
-@property(strong,nonatomic)NSString * name ;
+@property(copy,nonatomic)menuSelectBack menuSelectBack;
 
 @end
 

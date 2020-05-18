@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "zGoodsMenuModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^menuTapBack)(NSInteger index);
+
+typedef void(^menuSelectBack)(zGoodsMenuModel * goodsModel);
 
 @interface zShouYeLeftMenu : UIView
 
@@ -18,6 +21,8 @@ typedef void(^menuTapBack)(NSInteger index);
 @property(strong,nonatomic)NSArray * menuArray;
 
 @property(copy,nonatomic)menuTapBack menutapBack;
+
+@property(copy,nonatomic)menuSelectBack menuSelectBack;
 
 @end
 

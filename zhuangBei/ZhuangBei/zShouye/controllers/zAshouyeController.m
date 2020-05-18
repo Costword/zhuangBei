@@ -26,20 +26,22 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
-    
+//    self.tabBarItem.badgeValue = @"28";
 }
 
 -(sliderNavMenu*)navigationSliderMenu
 {
     if (!_navigationSliderMenu) {
         _navigationSliderMenu = [[sliderNavMenu alloc]init];
+        _navigationSliderMenu.alpha = 0;
         _navigationSliderMenu.userInteractionEnabled = YES;
         _navigationSliderMenu.havesliderBar = YES;
-        _navigationSliderMenu.padding = kWidthFlot(100);
+        _navigationSliderMenu.padding = kWidthFlot(30);
         _navigationSliderMenu.sliderRoundCorner = 1.5;
         _navigationSliderMenu.normalFontColor = [UIColor colorWithHexString:@"#666666"];
         _navigationSliderMenu.selectFontColor = [UIColor colorWithHexString:@"#333333"];
-        [_navigationSliderMenu setSourceArray:@[@"控制台",@"合作伙伴"]];
+//        @"控制台"
+        [_navigationSliderMenu setSourceArray:@[@"合作伙伴"]];
         _navigationSliderMenu.sliderType = menuAligenCenter;
         _navigationSliderMenu.delegate = self;
     }
@@ -49,13 +51,15 @@
 -(UIScrollView *)childScroContentView{
     if (!_childScroContentView) {
         CGRect frame = self.view.bounds;
-        frame.size.height = SCREEN_HEIGHT -(44+KstatusBarHeight);
-        frame.origin.y = 44+KstatusBarHeight;
+//        44+
+        frame.size.height = SCREEN_HEIGHT -(KstatusBarHeight);
+//        44+
+        frame.origin.y = KstatusBarHeight;
         _childScroContentView = [[UIScrollView alloc]initWithFrame:frame];
         _childScroContentView.delegate = self;
         _childScroContentView.contentSize = CGSizeMake(SCREEN_WIDTH *self.childViewControllers.count,0);
         _childScroContentView.pagingEnabled = YES;
-        _childScroContentView.backgroundColor = [UIColor greenColor];
+        _childScroContentView.backgroundColor = [UIColor whiteColor];
         _childScroContentView.showsHorizontalScrollIndicator = NO;
         [self.view insertSubview:_childScroContentView atIndex:0];
         [self scrollViewDidEndScrollingAnimation:_childScroContentView];
@@ -78,8 +82,8 @@
 -(void)setupChildViewControllers
 {
     //控制台
-    zHuoYuanMangerController * companyVC = [[zHuoYuanMangerController alloc]init];
-    [self addChildViewController:companyVC];
+//    zHuoYuanMangerController * companyVC = [[zHuoYuanMangerController alloc]init];
+//    [self addChildViewController:companyVC];
     
     //合作伙伴
     zShouyeController* goodsVC = [[zShouyeController alloc]init];

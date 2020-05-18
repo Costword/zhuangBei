@@ -7,6 +7,7 @@
 //
 
 #import "zInviteController.h"
+#import "zEducationRankTypeInfo.h"
 
 @interface zInviteController ()
 
@@ -53,7 +54,7 @@
         _inviteNumBtn = [[UIButton alloc]init];
         _inviteNumBtn.titleLabel.font = kFont(48);
         [_inviteNumBtn setTitleColor:[UIColor colorWithHexString:@"#3F50B5"] forState:UIControlStateNormal];
-        [_inviteNumBtn setTitle:@"520512" forState:UIControlStateNormal];
+        [_inviteNumBtn setTitle:[zUserInfo shareInstance].userInfo.invatationCode forState:UIControlStateNormal];
         _inviteNumBtn.clipsToBounds = YES;
         _inviteNumBtn.tag = 1;
         [_inviteNumBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];

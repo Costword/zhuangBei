@@ -78,15 +78,17 @@
                 return;
             }
             if (type == 2) {
-                zUserGoodsController * yaoqing = [[zUserGoodsController alloc]init];
-                yaoqing.title = @"我关注的货源";
-                [weakSelf.navigationController pushViewController:yaoqing animated:YES];
+                [[zHud shareInstance]showMessage:@"功能开发中"];
+//                zUserGoodsController * yaoqing = [[zUserGoodsController alloc]init];
+//                yaoqing.title = @"我关注的货源";
+//                [weakSelf.navigationController pushViewController:yaoqing animated:YES];
                 return;
             }
             if (type == 3) {
-                zBusinessController * yaoqing = [[zBusinessController alloc]init];
-                yaoqing.title = @"我的经销商";
-                [weakSelf.navigationController pushViewController:yaoqing animated:YES];
+                [[zHud shareInstance]showMessage:@"功能开发中"];
+//                zBusinessController * yaoqing = [[zBusinessController alloc]init];
+//                yaoqing.title = @"我的经销商";
+//                [weakSelf.navigationController pushViewController:yaoqing animated:YES];
                 return;
             }
             if (type == 4) {
