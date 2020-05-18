@@ -15,6 +15,9 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - IQKeyboardManager (6.5.5)
+  - JCore (2.2.5)
+  - JShare (1.8.1):
+    - JCore (< 3.0.0, >= 1.2.0)
   - LEEAlert (1.3.6)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
@@ -34,6 +37,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - IQKeyboardManager
+  - JShare
   - LEEAlert
   - Masonry
   - MBProgressHUD
@@ -49,6 +53,8 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - IQKeyboardManager
+    - JCore
+    - JShare
     - LEEAlert
     - Masonry
     - MBProgressHUD
@@ -63,6 +69,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
+  JCore: d75c0306dc99875d323d23e5a063b3a3ef22335a
+  JShare: d19013ffb1a095de31b20236fe08e9c74064cfe5
   LEEAlert: b92b3648fcb2107511472a87c43818c1fc38afd9
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
@@ -74,6 +82,6 @@ SPEC CHECKSUMS:
   UITextView-WZB: aa7306ec35ad35d325f8e608366ecd5ac8c8eed9
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 63da6aacc55f95c0f4ec76cc94b5c30a2379ed6d
+PODFILE CHECKSUM: c23031b1c7c21c085adaf66f075c0d7e63816bf1
 
 COCOAPODS: 1.9.1
