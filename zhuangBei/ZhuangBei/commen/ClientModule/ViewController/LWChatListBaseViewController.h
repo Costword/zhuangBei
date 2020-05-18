@@ -8,7 +8,7 @@
 
 #import "IFBaseVC.h"
 #import "LWClientHeader.h"
-NS_ASSUME_NONNULL_BEGIN
+
 
 typedef NS_ENUM(NSUInteger, LWChatRoomType) {
     LWChatRoomTypeOneTOne,  //一对一
@@ -28,4 +28,3 @@ typedef NS_ENUM(NSUInteger, LWChatRoomType) {
 
 @end
 
-NS_ASSUME_NONNULL_END

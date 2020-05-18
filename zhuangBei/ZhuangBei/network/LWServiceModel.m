@@ -15,7 +15,7 @@
 /// @param param 参数
 /// @param paramType 请求类型
 + (instancetype)modelWithurl:(NSString *)url
-                       param:(NSDictionary *)param
+                       param:(id)param
                    paramType:(RequestParamType)paramType
                      success:(RequestSuccess)success
                         fail:(RequestFailure)fail;

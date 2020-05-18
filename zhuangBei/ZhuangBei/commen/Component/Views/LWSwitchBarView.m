@@ -65,7 +65,8 @@
         [itembtn setTitleColor:UIColor.whiteColor forState:UIControlStateSelected];
         [itembtn setTitleColor:UIColor.grayColor forState:UIControlStateNormal];
         [itembtn setBackgroundImage:[UIImage imageWithColor:UIColor.whiteColor] forState:UIControlStateNormal];
-        [itembtn setBackgroundImage:[UIImage imageWithColor:UIColor.blueColor] forState:UIControlStateSelected];
+        [itembtn setBackgroundImage:[UIImage imageWithColor:UIColor.whiteColor] forState:UIControlStateHighlighted];
+        [itembtn setBackgroundImage:[UIImage imageWithColor:BASECOLOR_BLUECOLOR] forState:UIControlStateSelected];
         [itembtn setBoundWidth:0 cornerRadius:18];
         itembtn.tag = i;
         [itembtn addTarget:self action:@selector(clickBtnItem:) forControlEvents:UIControlEventTouchUpInside];

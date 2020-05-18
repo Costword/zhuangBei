@@ -27,6 +27,7 @@
 // http://test.110zhuangbei.com:8105/app/app/appfriendtype/update 修改   {"id":624,"typeName":"呵呵","isDefault":2}
 //http://test.110zhuangbei.com:8105/app/app/appfriendtype/delete
 //http://test.110zhuangbei.com:8105/app/app/appfriendtype/list
+
 -(void)requestDatas
 {
     NSString *url = @"app/appfriendtype/list";

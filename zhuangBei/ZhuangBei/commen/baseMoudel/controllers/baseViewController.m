@@ -219,9 +219,62 @@
     }];
 }
 
+
+/**
+ *  异步POST请求:以body方式,字符串、字典
+ *
+ *  @param url     请求的url
+ *  @param body    body数据 字符串、字典
+ *  @param success 成功回调
+ *  @param failure 失败回调
+ */
+- (void)requestPostWithUrl:(NSString *)url
+                      body:(id)body
+                   success:(RequestSuccess)success
+                   failure:(RequestFailure)failure
+{
+    [ServiceManager requestPostWithUrl:url body:body success:^(id  _Nonnull response) {
+        if (self.noContentView.alpha == 1) {
+            self.noContentView.alpha = 0;
+            [self.view sendSubviewToBack:self.noContentView];
+        }
+        success(response);
+        [self removeFailRequest:url];
+    } failure:^(NSError * _Nonnull error) {
+        [self.view bringSubviewToFront:self.noContentView];
+        self.noContentView.alpha = 1;
+        [self addFialRequest:url param:body paramType:(RequestParamTypeBody) success:success fail:failure];
+        failure(error);
+    }];
+}
+
+
+/// post网络请求
+/// @param url url
+/// @param para 参数 字符串。字段，
+/// @param paratype 参数上传方式
+/// @param success 成功
+/// @param failure 失败
+- (void)requestPostWithUrl:(NSString *)url para:(id)para paraType:(LWRequestParamType)paratype success:(RequestSuccess)success failure:(RequestFailure)failure;
+{
+    switch (paratype) {
+        case LWRequestParamTypeBody:
+            [self requestPostWithUrl:url body:para success:success failure:failure];
+            break;
+        case LWRequestParamTypeDict:
+            [self requestPostWithUrl:url Parameters:para success:success failure:failure];
+            break;
+        case LWRequestParamTypeString:
+            [self requestPostWithUrl:url paraString:para success:success failure:failure];
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)requestDatas
 {
-// 子类重写
+    // 子类重写
 }
 
 
@@ -235,6 +288,8 @@
             [self  requestPostWithUrl:model.url Parameters:model.param success:model.success failure:model.fail];
         }else if (model.paramType == RequestParamTypeString){
             [self  requestPostWithUrl:model.url paraString:model.param success:model.success failure:model.fail];
+        }else if (model.paramType == RequestParamTypeBody){
+            [self requestPostWithUrl:model.url body:model.param success:model.success failure:model.fail];
         }
     }
 }
@@ -258,7 +313,7 @@
 /// @param paramType 请求类型
 /// @param success 回调
 /// @param fail 回调
-- (void)addFialRequest:(NSString *)url param:(NSDictionary *)param paramType:(RequestParamType)paramType success:(RequestSuccess)success fail:(RequestFailure)fail
+- (void)addFialRequest:(NSString *)url param:(id)param paramType:(RequestParamType)paramType success:(RequestSuccess)success fail:(RequestFailure)fail
 {
     __block BOOL ishave = NO;
     [self.requestFailMutableArray enumerateObjectsUsingBlock:^(LWServiceModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

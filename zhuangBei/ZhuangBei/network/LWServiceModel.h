@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, RequestParamType) {
     RequestParamTypeDict,       //字典方式
     RequestParamTypeString,     //字符串拼接方式
+    RequestParamTypeBody,           // body
 };
 
 /**
@@ -28,18 +29,20 @@ typedef void(^RequestFailure)(NSError *error);
 
 @interface LWServiceModel : NSObject
 
-@property (nonatomic, strong) NSDictionary * param;
+@property (nonatomic, strong) id param;
 @property (nonatomic, strong) NSString * url;
 @property (nonatomic, assign) RequestParamType  paramType;
 @property (nonatomic, copy) RequestSuccess success;
 @property (nonatomic, copy) RequestFailure fail;
+//@property (nonatomic, strong) id bodyparam;
+
 
 /// 初始化快捷方式
 /// @param url 请求失败的url
 /// @param param 参数
 /// @param paramType 请求类型
 + (instancetype)modelWithurl:(NSString *)url
-                       param:(NSDictionary *)param
+                       param:(id)param
                    paramType:(RequestParamType)paramType
                      success:(RequestSuccess)success
                         fail:(RequestFailure)fail;

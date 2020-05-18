@@ -74,7 +74,7 @@ const static int subTitleFontNum = 16;
     UIImageView *textBGIV = [[UIImageView alloc] init];
     _textBGIV = textBGIV;
     if (_layoutType == IFChatCellStyleRight || _layoutType == IFChatCellStyleLeft) {
-        textBGIV.backgroundColor = [UIColor colorWithHexString:@"FF9A50"];
+        textBGIV.backgroundColor =  BASECOLOR_BLUECOLOR;
     }
     
     UILabel *label = [[UILabel alloc] init];

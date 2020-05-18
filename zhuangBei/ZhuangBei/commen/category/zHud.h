@@ -20,6 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)hild;
 
++ (void)showMessage:(NSString*)message;
++(void)hild;
++(void)show;
+
 @end
 
 NS_ASSUME_NONNULL_END

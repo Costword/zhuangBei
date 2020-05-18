@@ -31,8 +31,8 @@
     }else{
         [_icon z_imageWithImageId:model.appBackgroundImage];
         _nameL.text = model.groupName;
-        _emailL.text = [NSString stringWithFormat:@"创建人：%@",LWDATA(model.userName)];
-        _phoneL.text = [NSString stringWithFormat:@"创建时间：%@",LWDATA(model.buildTime)];
+        _emailL.text = [NSString stringWithFormat:@"创建时间：%@",LWDATA(model.buildTime)];
+        _phoneL.text = [NSString stringWithFormat:@"创建人：%@",LWDATA(model.userName)];
         _descL.text = [NSString stringWithFormat:@"个性签名：%@",model.groupdescription?LWDATA(model.groupdescription):@"暂无"];
     }
     

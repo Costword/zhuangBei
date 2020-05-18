@@ -60,7 +60,7 @@
     _companL.text = _model.supplier.name;
     _proveL.text = _model.supplier.companyNameFirst;
     _addressL.text = _model.productInformation.productSourceName;
-    _productNickL.text = _model.productInformation.zbBieMing ? _model.productInformation.zbBieMing : @"暂无";
+    _productNickL.text = [_model.productInformation.zbBieMing isNotBlank] ? _model.productInformation.zbBieMing : @"暂无";
     
     //    产品类型
     [self.cityCollectView reloadData];

@@ -32,6 +32,7 @@
     return [app keyWindow];
     
 }
+
 -(void)showMessage:(NSString*)message{
     UIView * view = [self mainWindow];
     self.hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
@@ -60,5 +61,16 @@
 }
 
 
++(void)show
+{
+    [[zHud shareInstance] show];
+}
++(void)hild
+{
+    [[zHud shareInstance] hild];
+}
++ (void)showMessage:(NSString*)message{
+    [[zHud shareInstance] showMessage:message];
+}
 
 @end

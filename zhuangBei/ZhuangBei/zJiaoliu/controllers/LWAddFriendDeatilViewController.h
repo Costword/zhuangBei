@@ -7,10 +7,12 @@
 //
 
 #import "baseViewController.h"
+#import "LWAddFriendModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LWAddFriendDeatilViewController : baseViewController
+@property (nonatomic, strong) LWAddFriendModel * friendModel;
 
 @end
 

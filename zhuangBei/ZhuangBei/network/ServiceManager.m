@@ -16,7 +16,6 @@
 
 + (void)requestPostWithUrl:(NSString *)url Parameters:(id)parameters success:(RequestSuccess)success failure:(RequestFailure)failure{
     NSString *urlstring = [NSString stringWithFormat:@"%@%@",kApiPrefix,url];
-    //    [self requestWithURL:urlstring parameters:parameters success:success failure:failure];
     [zNetWorkManger POSTworkWithUrl:urlstring WithParamer:parameters Success:success Failure:failure];
 }
 
@@ -101,7 +100,7 @@
         LWLog(@"-----------body字符串:%@",body);
         NSData *bodydata = [bodystr dataUsingEncoding:NSUTF8StringEncoding];
         [request setHTTPBody:bodydata];
-//        [request setValue:[NSString stringWithFormat:@"%lu",bodydata.length] forHTTPHeaderField:@"Content-Length"];
+        [request setValue:[NSString stringWithFormat:@"%lu",bodydata.length] forHTTPHeaderField:@"Content-Length"];
     }
     
     AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];

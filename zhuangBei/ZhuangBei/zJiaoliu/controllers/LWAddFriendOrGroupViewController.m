@@ -35,30 +35,47 @@
         [[zHud shareInstance] showMessage:(_selectIndex == 0)?@"好友姓名不能为空":@"群组名称不能为空"];
         return;
     }
-    NSDictionary *param = @{@"nickName":LWDATA(self.tf.text),@"limit":@"100",@"page":@(self.currPage)};
+    NSDictionary *param = @{@"nickName":LWDATA(self.tf.text),@"limit":@"200",@"page":@(self.currPage)};
     NSString *url = @"sys/user/findUserByUserNameList";
     if (_selectIndex == 1) {
-        url = @"app/appgroup/findGroupByGroupNameList";
-        param = @{@"groupName":LWDATA(self.tf.text),@"limit":@"100",@"page":@(self.currPage)};
+//        url = @"app/appgroup/findGroupByGroupNameList";
+        param = @{@"groupName":LWDATA(self.tf.text),@"limit":@"200",@"page":@(self.currPage)};
+//        [self requestPostWithUrl:url Parameters:param success:^(id  _Nonnull response) {
+//
+//        } failure:^(NSError * _Nonnull error) {
+//
+//        }];
+        [self requestPostWithUrl:@"app/appgroup/findGroupByGroupNameList" para:param paraType:(LWRequestParamTypeDict) success:^(id  _Nonnull response) {
+            [self handlerDatas:response];
+         } failure:^(NSError * _Nonnull error) {
+             
+         }];
+    }else{
+        [self requestPostWithUrl:url paraString:param success:^(id  _Nonnull response) {
+            [self handlerDatas:response];
+        } failure:^(NSError * _Nonnull error) {
+            
+        }];
     }
-    [self requestPostWithUrl:url paraString:param success:^(id  _Nonnull response) {
-        NSDictionary *page = response[@"page"];
-        self.currPage = [page[@"currPage"] intValue];
-        self.totalPage = [page[@"totalPage"] intValue];
-        NSArray *list = page[@"list"];
-        if (self.currPage == 1) {
-            [self.listDatas removeAllObjects];
-        }
-        for (NSDictionary *dict in list) {
-            LWAddFriendModel *model = [LWAddFriendModel modelWithDictionary:dict];
-            model.cellType = self.selectIndex + 1;
-            [self.listDatas addObject:model];
-        }
-        [self.tableView reloadData];
-    } failure:^(NSError * _Nonnull error) {
-        
-    }];
 }
+
+- (void)handlerDatas:(id)response
+{
+    NSDictionary *page = response[@"page"];
+    self.currPage = [page[@"currPage"] intValue];
+    self.totalPage = [page[@"totalPage"] intValue];
+    NSArray *list = page[@"list"];
+    if (self.currPage == 1) {
+        [self.listDatas removeAllObjects];
+    }
+    for (NSDictionary *dict in list) {
+        LWAddFriendModel *model = [LWAddFriendModel modelWithDictionary:dict];
+        model.cellType = self.selectIndex + 1;
+        [self.listDatas addObject:model];
+    }
+    [self.tableView reloadData];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -153,6 +170,7 @@
     LWAddFriendModel *model = self.listDatas[indexPath.row];
     if (model.cellType == 1) {
         LWAddFriendDeatilViewController *vc = [LWAddFriendDeatilViewController new];
+        vc.friendModel = self.listDatas[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         LWAddGroupDeatilViewController *vc = [LWAddGroupDeatilViewController new];
@@ -182,4 +200,5 @@
     }
     return _listDatas;
 }
+
 @end

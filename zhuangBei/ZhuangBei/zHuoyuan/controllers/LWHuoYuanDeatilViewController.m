@@ -9,15 +9,63 @@
 #import "LWHuoYuanDeatilViewController.h"
 #import "LWHuoYuanDeatilView.h"
 #import "LWHuoYuanDeatilModel.h"
+#import "ChatRoomViewController.h"
 
 @interface LWHuoYuanDeatilViewController ()
 @property (nonatomic, strong) LWHuoYuanDeatilView * mainView;
 @property (nonatomic, strong) LWHuoYuanDeatilModel * datasModel;
 @property (nonatomic, strong) UIButton * leftBtn;
 @property (nonatomic, strong) UIButton * rightBtn;
+@property (nonatomic, assign) BOOL  isCollect;
+
 @end
 
 @implementation LWHuoYuanDeatilViewController
+
+// 联系客服
+- (void)requestKeFu
+{
+    [self requestPostWithUrl:@"app/appqyuser/findCompanyAdmin" para:@{@"gysId":LWDATA(_gongYingShangDm)} paraType:(LWRequestParamTypeString) success:^(id  _Nonnull response) {
+        if ([response[@"code"] intValue] == 1) {
+            NSString *touserid = [NSString stringWithFormat:@"%@",LWDATA(response[@"data"][@"userDm"])];
+            NSString *username = LWDATA(response[@"data"][@"userName"]);
+            ChatRoomViewController *chatvc = [ChatRoomViewController chatRoomViewControllerWithRoomId:touserid roomName:username roomType:(LWChatRoomTypeOneTOne) extend:nil];
+            [self.navigationController pushViewController:chatvc animated:YES];
+        }else{
+            [zHud showMessage:response[@"msg"]];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
+//查询收藏状态
+- (void)requestCollectStatus
+{
+    [self requestPostWithUrl:@"app/appgongys/followStatus" para:@{@"gysId":LWDATA(_gongYingShangDm),@"zbId":LWDATA(_zhuangBeiDm)} paraType:(LWRequestParamTypeString) success:^(id  _Nonnull response) {
+        if([response[@"code"] intValue] == 0){
+            NSInteger data = [response[@"data"] intValue];
+            self.isCollect = (data == 1);
+        }
+        if (self.isCollect) {
+            [self.rightBtn setTitle:@"取消关注" forState:UIControlStateNormal];
+        }else{
+            [self.rightBtn setTitle:@"关注成我的货源" forState:UIControlStateNormal];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
+- (void)requestCollect
+{
+    [self requestPostWithUrl:@"app/appgongys/saveUserGys" para:@{@"zblxId":LWDATA(_zhuangBeiLx),@"id":LWDATA(_gongYingShangDm),@"zbId":LWDATA(_zhuangBeiDm)} paraType:(LWRequestParamTypeDict) success:^(id  _Nonnull response) {
+        [self requestCollectStatus];
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+    
+}
 
 - (void)requestDatas
 {
@@ -53,12 +101,6 @@
     self.mainView.currentModelId = self.modelId;
     
     if (self.datasModel.isFollow == 3){
-        //        [self.leftBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        //              make.left.mas_equalTo(self.view.mas_left);
-        //              make.right.mas_equalTo(_rightBtn.mas_left).mas_offset(-0);
-        //              make.height.mas_offset(54);
-        //              make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(0);
-        //          }];
         [_rightBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(_leftBtn.mas_right).mas_offset(0);
             make.right.mas_equalTo(self.view.mas_right).mas_offset(-0);
@@ -74,14 +116,14 @@
         if (self.datasModel.isFollow == 1) {
             [self.rightBtn setTitle:@"取消关注" forState:UIControlStateNormal];
         }else if (self.datasModel.isFollow == 2){
-            [self.rightBtn setTitle:@"关注货源" forState:UIControlStateNormal];
+            [self.rightBtn setTitle:@"关注成我的货源" forState:UIControlStateNormal];
         }
     }
 }
 
 - (void)clickBottomBtn:(UIButton *)sender
 {
-    NSLog(@"-----------------%ld",sender.tag);
+    [self requestKeFu];
 }
 
 - (void)viewDidLoad {
@@ -90,6 +132,8 @@
     self.title = @"货源详情";
     //    [self confiUI];
     [self requestDatas];
+    
+//    [self requestCollectStatus];
 }
 
 - (void)confiUI
@@ -112,6 +156,7 @@
     [rightbtn layoutButtonWithEdgeInsetsStyle:(HLButtonEdgeInsetsStyleLeft) imageTitleSpace:10];
     [leftbtn setTitleColor:UIColor.orangeColor forState:UIControlStateNormal];
     [rightbtn setTitleColor:UIColor.orangeColor forState:UIControlStateNormal];
+    [rightbtn addTarget:self action:@selector(requestCollect) forControlEvents:UIControlEventTouchUpInside];
     _leftBtn = leftbtn;
     _rightBtn = rightbtn;
     [self.view addSubviews:@[leftbtn,rightbtn]];
