@@ -46,7 +46,7 @@
     NSMutableArray *items = [[NSMutableArray alloc] init];
     //    NSMutableArray *itemsModelArr= [[NSMutableArray alloc] init];
     for (gysListModel *itemmodel in model.gysList) {
-        if(!itemmodel.companyNameSecond || !itemmodel.companyNameFirst) break;
+//        if(!itemmodel.companyNameSecond || !itemmodel.companyNameFirst) break;
         if (items.count >= 4)  break;
         [items addObject:[NSString stringWithFormat:@"%@%@",itemmodel.companyNameFirst,itemmodel.companyNameSecond]];
         //        [itemsModelArr addObject:itemmodel];
@@ -157,6 +157,7 @@
     
     
     UIImageView *moreBg = [UIImageView new];
+    moreBg.image = IMAGENAME(@"morebgicon");
     UIButton *morebtn = [UIButton new];
     [morebtn setTitle:@"查看全部" forState:UIControlStateNormal];
     [morebtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
@@ -167,7 +168,7 @@
     _goodsDescL.text = @"特巡装备/软件>特警单警防护";
     _goodsDescL.font = kFont(13);
     _goodsDescL.textColor = UIColor.grayColor;
-    morebtn.backgroundColor = UIColor.blueColor;
+    morebtn.backgroundColor = UIColor.clearColor;
     morebtn.titleLabel.font = kFont(14);
     [leftContextView addSubviews:@[_goodsIv,_goodsNameL,_goodsDescL,moreBg,morebtn]];
     [_goodsIv mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -208,7 +209,7 @@
     }];
     [leftContextView setBoundWidth:1 cornerRadius:10 boardColor:BASECOLOR_BOARD];
     [self.contentView setBoundWidth:1 cornerRadius:10 boardColor:BASECOLOR_BOARD];
-    [self.goodsIv setBoundWidth:0.5 cornerRadius:0 boardColor:BASECOLOR_BOARD];
+//    [self.goodsIv setBoundWidth:0.5 cornerRadius:0 boardColor:BASECOLOR_BOARD];
     [self.scrollView setBoundWidth:1 cornerRadius:10 boardColor:BASECOLOR_BOARD];
     
     self.itemsBgView = [UIView new];
@@ -239,10 +240,10 @@
         make.centerY.mas_equalTo(bg.mas_centerY);
     }];
     [des2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_offset(2);
+        make.width.mas_offset(1);
         make.height.mas_offset(20);
         //        make.top.bottom.mas_equalTo(bg);
-        make.left.mas_equalTo(des1.mas_right).mas_offset(5);
+        make.left.mas_equalTo(des1.mas_right).mas_offset(2);
         //        make.right.mas_equalTo(bg.mas_right);
         make.centerY.mas_equalTo(bg.mas_centerY);
     }];

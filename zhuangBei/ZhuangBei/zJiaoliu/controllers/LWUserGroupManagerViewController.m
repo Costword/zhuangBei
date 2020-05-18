@@ -194,7 +194,7 @@
         _seactionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80)];
         _seactionView.backgroundColor = UIColor.whiteColor;
         UIImageView *icon = [UIImageView new];
-        icon.image = IMAGENAME(@"testtouxiang");
+        icon.image = IMAGENAME(@"addnewusergropu");
         
         UILabel *lable = [LWLabel lw_lable:@"添加分组" font:18 textColor:BASECOLOR_TEXTCOLOR];
         [_seactionView addSubviews:@[icon,lable]];

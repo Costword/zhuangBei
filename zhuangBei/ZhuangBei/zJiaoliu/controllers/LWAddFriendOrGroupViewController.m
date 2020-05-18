@@ -35,16 +35,10 @@
         [[zHud shareInstance] showMessage:(_selectIndex == 0)?@"好友姓名不能为空":@"群组名称不能为空"];
         return;
     }
-    NSDictionary *param = @{@"nickName":LWDATA(self.tf.text),@"limit":@"200",@"page":@(self.currPage)};
+    NSDictionary *param = @{@"nickName":LWDATA(self.tf.text),@"limit":@"20",@"page":@(self.currPage)};
     NSString *url = @"sys/user/findUserByUserNameList";
     if (_selectIndex == 1) {
-//        url = @"app/appgroup/findGroupByGroupNameList";
-        param = @{@"groupName":LWDATA(self.tf.text),@"limit":@"200",@"page":@(self.currPage)};
-//        [self requestPostWithUrl:url Parameters:param success:^(id  _Nonnull response) {
-//
-//        } failure:^(NSError * _Nonnull error) {
-//
-//        }];
+        param = @{@"groupName":LWDATA(self.tf.text),@"limit":@"20",@"page":@(self.currPage)};
         [self requestPostWithUrl:@"app/appgroup/findGroupByGroupNameList" para:param paraType:(LWRequestParamTypeDict) success:^(id  _Nonnull response) {
             [self handlerDatas:response];
          } failure:^(NSError * _Nonnull error) {

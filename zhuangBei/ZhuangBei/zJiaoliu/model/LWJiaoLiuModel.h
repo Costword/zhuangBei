@@ -34,7 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 //id
 @property (nonatomic, strong) NSArray<friendItemModel *> * list;
 @property (nonatomic, assign) BOOL  isShow;
-
 @end
 
 
@@ -43,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * userId;
 @property (nonatomic, strong) NSArray<imGroupListModel *> * imGroupList;
 @property (nonatomic, strong) NSArray<imGroupListModel *> * group;
+@property (nonatomic, strong) NSString * avatar;
+
 //@property (nonatomic, strong) NSArray<friendListModel *> * friend;
 @end
 

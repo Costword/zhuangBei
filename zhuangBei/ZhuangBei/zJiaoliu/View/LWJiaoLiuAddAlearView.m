@@ -62,40 +62,31 @@
     }];
     [_mainView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_offset(200);
-        make.height.mas_offset(150);
+        make.height.mas_offset(55*3);
         make.right.mas_equalTo(window.mas_right).mas_offset(-0);
         make.top.mas_equalTo(window.mas_top).mas_offset(NAVIGATOR_HEIGHT);
     }];
     
-    self.datas = @[@{@"icon":@"",@"name":@"创建群聊"},
-                   @{@"icon":@"",@"name":@"添加好友/群"},
-                   @{@"icon":@"",@"name":@"好友分组管理"},];
+    self.datas = @[@{@"icon":@"addnewchat",@"name":@"创建群聊"},
+                   @{@"icon":@"addnewicon",@"name":@"添加好友/群"},
+                   @{@"icon":@"friendmanager",@"name":@"好友分组管理"},];
     _tableview = [[UITableView alloc] init];
     _tableview.delegate = self;
     _tableview.dataSource = self;
-    _tableview.rowHeight = 50;
+    _tableview.rowHeight = 55;
     [_mainView addSubview:_tableview];
     [_tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(_mainView);
     }];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        
-        
-    }
-    return self;
-}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"cell"];
-//        cell.imageView.image = IMAGENAME(@"testtouxiang");
+        cell.imageView.image = IMAGENAME(@"icon");
         cell.textLabel.text = self.datas[indexPath.row][@"name"];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

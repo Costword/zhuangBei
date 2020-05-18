@@ -147,7 +147,7 @@
         _friendVerifiTableView = [[UITableView alloc] init];
         _friendVerifiTableView.delegate = self;
         _friendVerifiTableView.dataSource = self;
-        _friendVerifiTableView.rowHeight = 76;
+        _friendVerifiTableView.rowHeight = 90;
         [_friendVerifiTableView registerClass:[LWJiaoLiuContatcsListTableViewCell class] forCellReuseIdentifier:@"LWJiaoLiuContatcsListTableViewCell"];
         _friendVerifiTableView.backgroundColor = UIColor.whiteColor;
         _friendVerifiTableView.separatorStyle = UITableViewCellSeparatorStyleNone;

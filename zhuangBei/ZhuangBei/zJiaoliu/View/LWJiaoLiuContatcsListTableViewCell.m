@@ -32,8 +32,7 @@
         [self.contentView addSubviews:@[_icon,_nameL,_timelL,_descL,line,_leftBtn,_rightBtn]];
         [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.contentView.mas_left).mas_offset(10);
-            make.width.mas_offset(40);
-            make.height.mas_offset(40);
+            make.height.width.mas_offset(50);
             make.centerY.mas_equalTo(self.mas_centerY);
         }];
         [_nameL mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -58,18 +57,19 @@
             make.height.mas_offset(0.5);
             make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(0);
         }];
-        [_icon setBoundWidth:0 cornerRadius:20];
+        [_icon setBoundWidth:0 cornerRadius:25];
         [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
-            make.centerY.mas_equalTo(_descL.mas_centerY);
+//            make.centerY.mas_equalTo(_descL.mas_centerY);
+            make.top.mas_equalTo(_timelL.mas_bottom).mas_offset(10);
             make.width.mas_offset(60);
-            make.height.mas_offset(20);
+            make.height.mas_offset(30);
         }];
         [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(_rightBtn.mas_left).mas_offset(-10);
-            make.centerY.mas_equalTo(_descL.mas_centerY);
+            make.centerY.mas_equalTo(_rightBtn.mas_centerY);
             make.width.mas_offset(60);
-            make.height.mas_offset(20);
+            make.height.mas_offset(30);
         }];
         _leftBtn.hidden = _rightBtn.hidden = YES;
         _line = line;
@@ -156,10 +156,11 @@
     self = [super initWithFrame:frame];
     if (self) {
         _leftIcon = [UIImageView new];
-        _leftIcon.image = IMAGENAME(@"testicon2");
+        _leftIcon.image = IMAGENAME(@"jiaoliufenzu");
         _leftL = [UILabel new];
         _rightBtn = [UIButton new];
-        [_rightBtn setImage:IMAGENAME(@"icon_pull") forState:UIControlStateNormal];
+        [_rightBtn setImage:IMAGENAME(@"pull_on") forState:UIControlStateNormal];
+        [_rightBtn setImage:IMAGENAME(@"pull_down") forState:UIControlStateSelected];
         [_rightBtn addTarget:self action:@selector(clickPullBtn:) forControlEvents:UIControlEventTouchUpInside];
         UIView *line = [UIView new];
                line.backgroundColor = BASECOLOR_BOARD;

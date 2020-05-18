@@ -171,6 +171,8 @@
 		895BD9CD24626C4000AA5947 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9CC24626C4000AA5947 /* BaseModel.m */; };
 		895BD9D424629AFC00AA5947 /* UIImageView+LWImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9D324629AFC00AA5947 /* UIImageView+LWImageView.m */; };
 		896DA521246BD077001ED8C1 /* LWTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 896DA520246BD077001ED8C1 /* LWTool.m */; };
+		89831FCE2472923400C6184E /* LWAddNewChatGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89831FCD2472923400C6184E /* LWAddNewChatGroupViewController.m */; };
+		89831FD12472959200C6184E /* LWAddNewGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89831FD02472959200C6184E /* LWAddNewGroupModel.m */; };
 		89A26F68246E3F9D008EFB01 /* InnerStickersInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A26F5A246E3F9D008EFB01 /* InnerStickersInfo.plist */; };
 		89A26F69246E3F9D008EFB01 /* PPStickerDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F5C246E3F9D008EFB01 /* PPStickerDataManager.m */; };
 		89A26F6A246E3F9D008EFB01 /* PPEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F5D246E3F9D008EFB01 /* PPEmoji.m */; };
@@ -595,6 +597,10 @@
 		895BD9D324629AFC00AA5947 /* UIImageView+LWImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LWImageView.m"; sourceTree = "<group>"; };
 		896DA51F246BD077001ED8C1 /* LWTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWTool.h; sourceTree = "<group>"; };
 		896DA520246BD077001ED8C1 /* LWTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWTool.m; sourceTree = "<group>"; };
+		89831FCC2472923400C6184E /* LWAddNewChatGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddNewChatGroupViewController.h; sourceTree = "<group>"; };
+		89831FCD2472923400C6184E /* LWAddNewChatGroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAddNewChatGroupViewController.m; sourceTree = "<group>"; };
+		89831FCF2472959200C6184E /* LWAddNewGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddNewGroupModel.h; sourceTree = "<group>"; };
+		89831FD02472959200C6184E /* LWAddNewGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAddNewGroupModel.m; sourceTree = "<group>"; };
 		89A26F58246E3F9D008EFB01 /* PPStickerTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerTextView.h; sourceTree = "<group>"; };
 		89A26F59246E3F9D008EFB01 /* PPStickerPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerPageView.h; sourceTree = "<group>"; };
 		89A26F5A246E3F9D008EFB01 /* InnerStickersInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InnerStickersInfo.plist; sourceTree = "<group>"; };
@@ -1119,6 +1125,8 @@
 				89C112E8246E9FE7007EAABB /* LWAddGroupDeatilViewController.m */,
 				89C112ED246EA3BE007EAABB /* LWUserGroupManagerViewController.h */,
 				89C112EE246EA3BE007EAABB /* LWUserGroupManagerViewController.m */,
+				89831FCC2472923400C6184E /* LWAddNewChatGroupViewController.h */,
+				89831FCD2472923400C6184E /* LWAddNewChatGroupViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1387,6 +1395,8 @@
 				89C112E2246E9894007EAABB /* LWAddFriendModel.m */,
 				89C112EA246EA293007EAABB /* LWUserGroupModel.h */,
 				89C112EB246EA293007EAABB /* LWUserGroupModel.m */,
+				89831FCF2472959200C6184E /* LWAddNewGroupModel.h */,
+				89831FD02472959200C6184E /* LWAddNewGroupModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2001,6 +2011,7 @@
 				890643C924693C360099508C /* LWJiaoLiuModel.m in Sources */,
 				0091FCE9245E68950046691F /* UICollectionViewLeftAlignedLayout.m in Sources */,
 				009FB5E5244E89C700133974 /* ViewController.m in Sources */,
+				89831FCE2472923400C6184E /* LWAddNewChatGroupViewController.m in Sources */,
 				008FB021246AEC4000B207CD /* zListTypeModel.m in Sources */,
 				009FB63C244FE8DF00133974 /* UITabBarItem+Extension.m in Sources */,
 				89C9DD99246A40CE005341CE /* IFListViewCell.m in Sources */,
@@ -2153,6 +2164,7 @@
 				005ECE7924644E0A00D90341 /* zHuoYuanListCell.m in Sources */,
 				89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */,
 				00CB202D2471122A00171284 /* ZFBadgeButton.m in Sources */,
+				89831FD12472959200C6184E /* LWAddNewGroupModel.m in Sources */,
 				00159E1C2463F745005DE17B /* zHuoYuanScrollHeader.m in Sources */,
 				0091FCEF245EAE870046691F /* zPersonalController.m in Sources */,
 				89A26F69246E3F9D008EFB01 /* PPStickerDataManager.m in Sources */,
@@ -2313,7 +2325,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -2339,7 +2351,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -2364,7 +2376,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GH34ZCT6NW;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				INFOPLIST_FILE = ZhuangBeiTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2384,7 +2396,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GH34ZCT6NW;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				INFOPLIST_FILE = ZhuangBeiTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2403,7 +2415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GH34ZCT6NW;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				INFOPLIST_FILE = ZhuangBeiUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2421,7 +2433,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GH34ZCT6NW;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				INFOPLIST_FILE = ZhuangBeiUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

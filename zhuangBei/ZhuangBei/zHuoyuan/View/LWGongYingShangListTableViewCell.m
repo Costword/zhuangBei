@@ -24,7 +24,7 @@
 - (void)setModel:(gysListModel *)model
 {
     _model = model;
-    [_logo z_imageWithImageId:model.imagesId placeholderImage:@"testicon3"];
+    [_logo z_imageWithImageId:model.imagesId placeholderImage:@"testicon"];
     _compnayL.text = model.name;
     _farenL.text = [NSString stringWithFormat:@"法人：%@",model.faRen];
     _phoneL.text = [NSString stringWithFormat:@"电话：%@",model.phone];
@@ -59,7 +59,7 @@
     [self.contentView addSubview:_bgview];
     _desL.numberOfLines = 0;
     startL.text = @"星级:  ";
-    _logo.image = IMAGENAME(@"testicon3");
+    _logo.image = IMAGENAME(@"testicon");
     [_logo setBoundWidth:0 cornerRadius:35];
     
     CGFloat margin_l = 15;

@@ -40,7 +40,8 @@
             make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-10);
         }];
         
-        [_bgImageView setBoundWidth:0 cornerRadius:6 boardColor:UIColor.whiteColor];
+        [self.contentView setBoundWidth:1 cornerRadius:10 boardColor:BASECOLOR_BOARD];
+        
     }
     return self;
 }

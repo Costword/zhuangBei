@@ -42,7 +42,7 @@
 //查询收藏状态
 - (void)requestCollectStatus
 {
-    [self requestPostWithUrl:@"app/appgongys/followStatus" para:@{@"gysId":LWDATA(_gongYingShangDm),@"zbId":LWDATA(_zhuangBeiDm)} paraType:(LWRequestParamTypeString) success:^(id  _Nonnull response) {
+    [self requestPostWithUrl:@"app/appgongys/followStatus" para:@{@"gysId":LWDATA(_gongYingShangDm),@"zbId":LWDATA(_zhuangBeiDm),@"zblxId”":LWDATA(_zhuangBeiLx)} paraType:(LWRequestParamTypeString) success:^(id  _Nonnull response) {
         if([response[@"code"] intValue] == 0){
             NSInteger data = [response[@"data"] intValue];
             self.isCollect = (data == 1);
@@ -59,7 +59,11 @@
 
 - (void)requestCollect
 {
-    [self requestPostWithUrl:@"app/appgongys/saveUserGys" para:@{@"zblxId":LWDATA(_zhuangBeiLx),@"id":LWDATA(_gongYingShangDm),@"zbId":LWDATA(_zhuangBeiDm)} paraType:(LWRequestParamTypeDict) success:^(id  _Nonnull response) {
+    NSString *url = @"app/appgongys/saveUserGys";
+    if (self.isCollect) {
+        url = @"app/appgongys/deleteUserGys";
+    }
+    [self requestPostWithUrl:url para:@{@"zblxId":LWDATA(_zhuangBeiLx),@"id":LWDATA(_gongYingShangDm),@"zbId":LWDATA(_zhuangBeiDm)} paraType:(LWRequestParamTypeString) success:^(id  _Nonnull response) {
         [self requestCollectStatus];
     } failure:^(NSError * _Nonnull error) {
         
@@ -150,8 +154,8 @@
     UIButton *rightbtn = [UIButton new];
     [leftbtn setTitle:@"在线咨询" forState:UIControlStateNormal];
     [rightbtn setTitle:@"关注成我的货源" forState:UIControlStateNormal];
-    [leftbtn setImage:IMAGENAME(@"zAccount") forState:UIControlStateNormal];
-    [rightbtn setImage:IMAGENAME(@"zAccount") forState:UIControlStateNormal];
+    [leftbtn setImage:IMAGENAME(@"kefuicon") forState:UIControlStateNormal];
+    [rightbtn setImage:IMAGENAME(@"collecticon") forState:UIControlStateNormal];
     [leftbtn layoutButtonWithEdgeInsetsStyle:(HLButtonEdgeInsetsStyleLeft) imageTitleSpace:10];
     [rightbtn layoutButtonWithEdgeInsetsStyle:(HLButtonEdgeInsetsStyleLeft) imageTitleSpace:10];
     [leftbtn setTitleColor:UIColor.orangeColor forState:UIControlStateNormal];
