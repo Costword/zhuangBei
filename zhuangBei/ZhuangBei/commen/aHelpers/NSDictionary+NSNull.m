@@ -27,4 +27,20 @@
     return obj;
 }
 
++ (NSMutableDictionary *)nullDicToDic:(NSDictionary *)dic{
+    
+    NSMutableDictionary *resultDic = [@{} mutableCopy];
+    if (![dic isKindOfClass:[NSDictionary class]]) {
+        return resultDic;
+    }
+    for (NSString *key in [dic allKeys]) {
+        if ([(id)[dic objectForKey:key] isKindOfClass:[NSNull class]]) {
+            [resultDic setValue:@"" forKey:key];
+        }else{
+            [resultDic setValue:[dic objectForKey:key] forKey:key];
+        }
+    }
+    return resultDic;
+}
+
 @end

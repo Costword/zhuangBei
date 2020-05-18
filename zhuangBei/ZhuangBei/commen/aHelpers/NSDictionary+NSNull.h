@@ -12,4 +12,6 @@
 
 - (id) notNullObjectForKey:(id)key;
 
++ (NSMutableDictionary *)nullDicToDic:(NSDictionary *)dic;
+
 @end

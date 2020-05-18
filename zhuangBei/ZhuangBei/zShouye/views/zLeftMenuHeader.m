@@ -58,10 +58,10 @@
 }
 
 
--(void)setHyModel:(zHuoYuanModel *)hyModel
+-(void)setHyModel:(zGoodsMenuModel *)hyModel
 {
     _hyModel = hyModel;
-    [self.arrowButton setTitle:hyModel.name forState:UIControlStateNormal];
+    [self.arrowButton setTitle:hyModel.title forState:UIControlStateNormal];
     self.arrowButton.selected = hyModel.select;
 }
 

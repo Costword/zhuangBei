@@ -37,7 +37,7 @@
         _navigationSliderMenu.sliderRoundCorner = 1.5;
         _navigationSliderMenu.normalFontColor = [UIColor colorWithHexString:@"#666666"];
         _navigationSliderMenu.selectFontColor = [UIColor colorWithHexString:@"#333333"];
-        [_navigationSliderMenu setSourceArray:@[@"货物管理",@"经销商管理"]];
+        [_navigationSliderMenu setSourceArray:@[@"货源管理",@"经销商管理"]];
         _navigationSliderMenu.sliderType = menuAligenLeft;
         _navigationSliderMenu.delegate = self;
     }
@@ -53,7 +53,7 @@
         _childScroContentView.delegate = self;
         _childScroContentView.contentSize = CGSizeMake(SCREEN_WIDTH *self.childViewControllers.count,0);
         _childScroContentView.pagingEnabled = YES;
-        _childScroContentView.backgroundColor = [UIColor greenColor];
+        _childScroContentView.backgroundColor = [UIColor whiteColor];
         _childScroContentView.showsHorizontalScrollIndicator = NO;
         [self.view insertSubview:_childScroContentView atIndex:0];
         [self scrollViewDidEndScrollingAnimation:_childScroContentView];

@@ -12,6 +12,8 @@
 #import "zDengluController.h"
 #import "LWClientManager.h"
 #import "IQKeyboardManager.h"
+#import "ZFTabBarViewController.h"
+#import "JSHAREService.h"
 @interface AppDelegate ()
 
 @end
@@ -23,6 +25,15 @@
     
     self.window = [[UIWindow alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT)];
     
+    
+//    JSHARELaunchConfig *config = [[JSHARELaunchConfig alloc] init];
+//    config.appKey = JGAPPK;
+//    config.WeChatAppId = weXinAppId;
+//    config.WeChatAppSecret = weiXinSecret;
+//    config.QQAppId = qqAppId;
+//    config.QQAppKey = qqAppKey;
+//    [JSHAREService setupWithConfig:config];
+    
     if (@available(iOS 13.0, *)) {
                 
         
@@ -32,11 +43,12 @@
         NSString * token =  [zUserInfo shareInstance].userInfo.token;
         if (token.length>0) {
             //登录状态 进入首页
-            MainTabBarController * rootVC  = [[MainTabBarController alloc]init];
+            ZFTabBarViewController * rootVC  = [[ZFTabBarViewController alloc]init];
             MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
             rootNav.navigationBar.hidden = YES;
             self.window.rootViewController = rootNav;
             [self.window makeKeyAndVisible];
+            
         }else
         {
             //未登录登录状态 登录

@@ -43,7 +43,7 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        
+        self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.iconImageView];
         [self addSubview:self.descLabel];
     }
@@ -56,7 +56,7 @@
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.mas_centerY).offset(-kWidthFlot(50));
         make.centerX.mas_equalTo(self.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(200), kWidthFlot(200)));
+        make.size.mas_equalTo(CGSizeMake(kWidthFlot(100), kWidthFlot(100)));
     }];
     
     [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {

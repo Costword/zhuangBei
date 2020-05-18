@@ -118,8 +118,14 @@
 		00CA47792455BAEB006A2885 /* AnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA47752455BAEB006A2885 /* AnswerCell.m */; };
 		00CA477A2455BAEB006A2885 /* QuestionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA47772455BAEB006A2885 /* QuestionHeaderView.m */; };
 		00CA47802455C839006A2885 /* QuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CA477E2455C839006A2885 /* QuestionTableViewCell.m */; };
+		00CB202A2471122A00171284 /* ZFTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CB20222471122A00171284 /* ZFTabBarViewController.m */; };
+		00CB202B2471122A00171284 /* ZFTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CB20242471122A00171284 /* ZFTabBar.m */; };
+		00CB202C2471122A00171284 /* ZFTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CB20252471122A00171284 /* ZFTabBarButton.m */; };
+		00CB202D2471122A00171284 /* ZFBadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CB20262471122A00171284 /* ZFBadgeButton.m */; };
+		00CB20302471327200171284 /* zGoodsMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CB202F2471327200171284 /* zGoodsMenuModel.m */; };
 		00D4B5A8246302F900CD4784 /* zAshouyeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D4B5A7246302F900CD4784 /* zAshouyeController.m */; };
 		00D6E2DD2459A6D200B6E327 /* zNetWorkManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D6E2DC2459A6D200B6E327 /* zNetWorkManger.m */; };
+		00E33FAA24715A95005F980A /* zLeftMenuThirdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E33FA924715A95005F980A /* zLeftMenuThirdCell.m */; };
 		6BE41E3FCD0C213AB1550073 /* libPods-ZhuangBei.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */; };
 		890643C624690A030099508C /* LWThreeLevelTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 890643C524690A030099508C /* LWThreeLevelTableView.m */; };
 		890643C924693C360099508C /* LWJiaoLiuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 890643C824693C360099508C /* LWJiaoLiuModel.m */; };
@@ -470,10 +476,22 @@
 		00CA47772455BAEB006A2885 /* QuestionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionHeaderView.m; sourceTree = "<group>"; };
 		00CA477E2455C839006A2885 /* QuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTableViewCell.m; sourceTree = "<group>"; };
 		00CA477F2455C839006A2885 /* QuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTableViewCell.h; sourceTree = "<group>"; };
+		00CB20212471122A00171284 /* ZFTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFTabBarViewController.h; sourceTree = "<group>"; };
+		00CB20222471122A00171284 /* ZFTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFTabBarViewController.m; sourceTree = "<group>"; };
+		00CB20242471122A00171284 /* ZFTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFTabBar.m; sourceTree = "<group>"; };
+		00CB20252471122A00171284 /* ZFTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFTabBarButton.m; sourceTree = "<group>"; };
+		00CB20262471122A00171284 /* ZFBadgeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFBadgeButton.m; sourceTree = "<group>"; };
+		00CB20272471122A00171284 /* ZFTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFTabBar.h; sourceTree = "<group>"; };
+		00CB20282471122A00171284 /* ZFBadgeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBadgeButton.h; sourceTree = "<group>"; };
+		00CB20292471122A00171284 /* ZFTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFTabBarButton.h; sourceTree = "<group>"; };
+		00CB202E2471327200171284 /* zGoodsMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = zGoodsMenuModel.h; path = ZhuangBei/Home/zGoodsMenuModel.h; sourceTree = SOURCE_ROOT; };
+		00CB202F2471327200171284 /* zGoodsMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = zGoodsMenuModel.m; path = ZhuangBei/Home/zGoodsMenuModel.m; sourceTree = SOURCE_ROOT; };
 		00D4B5A6246302F900CD4784 /* zAshouyeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zAshouyeController.h; sourceTree = "<group>"; };
 		00D4B5A7246302F900CD4784 /* zAshouyeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zAshouyeController.m; sourceTree = "<group>"; };
 		00D6E2DB2459A6D200B6E327 /* zNetWorkManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zNetWorkManger.h; sourceTree = "<group>"; };
 		00D6E2DC2459A6D200B6E327 /* zNetWorkManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zNetWorkManger.m; sourceTree = "<group>"; };
+		00E33FA824715A95005F980A /* zLeftMenuThirdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zLeftMenuThirdCell.h; sourceTree = "<group>"; };
+		00E33FA924715A95005F980A /* zLeftMenuThirdCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zLeftMenuThirdCell.m; sourceTree = "<group>"; };
 		759737390EA2ABFD7BEC457D /* Pods-ZhuangBei.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhuangBei.debug.xcconfig"; path = "Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei.debug.xcconfig"; sourceTree = "<group>"; };
 		890643C424690A030099508C /* LWThreeLevelTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWThreeLevelTableView.h; sourceTree = "<group>"; };
 		890643C524690A030099508C /* LWThreeLevelTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWThreeLevelTableView.m; sourceTree = "<group>"; };
@@ -959,6 +977,8 @@
 		009FB61B244FE8DE00133974 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				00CB20202471122A00171284 /* Controller */,
+				00CB20232471122A00171284 /* View */,
 				009FB61F244FE8DE00133974 /* FUTabBarController */,
 				009FB61E244FE8DE00133974 /* MainNavController.h */,
 				009FB61C244FE8DE00133974 /* MainNavController.m */,
@@ -1134,6 +1154,8 @@
 				00B0A5E6246520D10041C234 /* zJxsLeftMenu.m */,
 				00558BDE24614D6E00550FBC /* zLeftMenuCell.h */,
 				00558BDF24614D6E00550FBC /* zLeftMenuCell.m */,
+				00E33FA824715A95005F980A /* zLeftMenuThirdCell.h */,
+				00E33FA924715A95005F980A /* zLeftMenuThirdCell.m */,
 				005ECE71246431DF00D90341 /* zLeftMenuHeader.h */,
 				005ECE72246431DF00D90341 /* zLeftMenuHeader.m */,
 				00B0A5E2246520220041C234 /* zjxsMenuCell.h */,
@@ -1159,6 +1181,8 @@
 			children = (
 				005ECE742464357800D90341 /* zHuoYuanModel.h */,
 				005ECE752464357800D90341 /* zHuoYuanModel.m */,
+				00CB202E2471327200171284 /* zGoodsMenuModel.h */,
+				00CB202F2471327200171284 /* zGoodsMenuModel.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -1300,6 +1324,28 @@
 				00B26CEF24580A390099FFD5 /* zUserInfo.m */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		00CB20202471122A00171284 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				00CB20212471122A00171284 /* ZFTabBarViewController.h */,
+				00CB20222471122A00171284 /* ZFTabBarViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		00CB20232471122A00171284 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				00CB20242471122A00171284 /* ZFTabBar.m */,
+				00CB20252471122A00171284 /* ZFTabBarButton.m */,
+				00CB20262471122A00171284 /* ZFBadgeButton.m */,
+				00CB20272471122A00171284 /* ZFTabBar.h */,
+				00CB20282471122A00171284 /* ZFBadgeButton.h */,
+				00CB20292471122A00171284 /* ZFTabBarButton.h */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		00D6E2DA2459A6B700B6E327 /* network */ = {
@@ -1973,6 +2019,7 @@
 				00558BDD24610CA700550FBC /* zShouYeLeftMenu.m in Sources */,
 				89A26F6A246E3F9D008EFB01 /* PPEmoji.m in Sources */,
 				8921697E24567278007C6615 /* UIImage+Extension.m in Sources */,
+				00CB202A2471122A00171284 /* ZFTabBarViewController.m in Sources */,
 				89D2578224669C0900CB3910 /* LWBaseLabel.m in Sources */,
 				001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */,
 				00871852245960B2003F8CD3 /* NSArray+JSON.m in Sources */,
@@ -1995,6 +2042,7 @@
 				89C112EC246EA293007EAABB /* LWUserGroupModel.m in Sources */,
 				00372AED2456842F00E51931 /* PPNetworkHelper.m in Sources */,
 				8957D4AA245975370096F1D7 /* LWHuoYuanDeatilViewController.m in Sources */,
+				00E33FAA24715A95005F980A /* zLeftMenuThirdCell.m in Sources */,
 				008FB032246BFBA400B207CD /* BLDatePickerView.m in Sources */,
 				001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */,
 				00B0A5DE246500840041C234 /* WKWebView+BAKit.m in Sources */,
@@ -2008,6 +2056,7 @@
 				00B0A5E1246500840041C234 /* WKWebView+BAJavaScriptAlert.m in Sources */,
 				89C112DD246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m in Sources */,
 				89C9DD7C246A36EC005341CE /* UIView+Toast.m in Sources */,
+				00CB202B2471122A00171284 /* ZFTabBar.m in Sources */,
 				009FB63B244FE8DF00133974 /* FUTabBarButton.m in Sources */,
 				8906440324695C9B0099508C /* IFGroupMemberCell.m in Sources */,
 				89F5B7DF245596DD0040F7B1 /* UIView+Extension.m in Sources */,
@@ -2069,6 +2118,7 @@
 				00558BD72460FFE000550FBC /* zGoodsMangerController.m in Sources */,
 				0091FCEC245E6AC60046691F /* zCityEditFooter.m in Sources */,
 				89C112E6246E9FB5007EAABB /* LWAddFriendDeatilViewController.m in Sources */,
+				00CB20302471327200171284 /* zGoodsMenuModel.m in Sources */,
 				00B26CF024580A390099FFD5 /* zUserInfo.m in Sources */,
 				89C9DD73246A3538005341CE /* IFBaseView.m in Sources */,
 				89A26F8B246E4001008EFB01 /* PPTextBackedString.m in Sources */,
@@ -2098,9 +2148,11 @@
 				00159E222463FDF8005DE17B /* PGIndexBannerSubiew.m in Sources */,
 				0036407824701B8600B93431 /* zBusinessController.m in Sources */,
 				009FB68124500D7800133974 /* MainSingleton.m in Sources */,
+				00CB202C2471122A00171284 /* ZFTabBarButton.m in Sources */,
 				89A26F88246E4001008EFB01 /* UIScreen+PPAddition.m in Sources */,
 				005ECE7924644E0A00D90341 /* zHuoYuanListCell.m in Sources */,
 				89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */,
+				00CB202D2471122A00171284 /* ZFBadgeButton.m in Sources */,
 				00159E1C2463F745005DE17B /* zHuoYuanScrollHeader.m in Sources */,
 				0091FCEF245EAE870046691F /* zPersonalController.m in Sources */,
 				89A26F69246E3F9D008EFB01 /* PPStickerDataManager.m in Sources */,
@@ -2261,7 +2313,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K2YCGMC4SW;
+				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -2287,7 +2339,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K2YCGMC4SW;
+				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";

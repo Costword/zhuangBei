@@ -342,7 +342,18 @@ NSString *const kgetCompanyID = @"app/appgongys/findOneByName";
 NSString *const changePersonalMin = @"app/appqyuser/update";
 
 
+/**
+ *货源管理
+ *POST
+ *无参数
+ */
+NSString *const kGoodsMangerMenu = @"app/appzhuangbeitype/getTreeToMyAttentionCompanyNew";
 
+/**
+ *货源管理
+ *code=3&lastNode=&limit=20&zbid=21&page=1
+ */
+NSString *const kGoodsMangerList = @"app/appgyszblink/listzbGys";
 
 /**
  登录

@@ -59,7 +59,7 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        
+        self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.iconImageView];
         [self addSubview:self.descLabel];
         [self addSubview:self.retryButton];

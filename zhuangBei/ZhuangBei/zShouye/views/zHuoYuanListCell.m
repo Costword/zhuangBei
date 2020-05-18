@@ -119,6 +119,7 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:self.baseView];
         [self.baseView addSubview:self.baseImageView];
         [self.baseView addSubview:self.arrowButton];

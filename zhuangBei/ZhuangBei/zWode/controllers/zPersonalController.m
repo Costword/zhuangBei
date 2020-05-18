@@ -14,6 +14,7 @@
 #import "zEducationRankTypeInfo.h"
 #import "zUpLoadUserModel.h"
 #import "zListTypeModel.h"
+#import "NSDictionary+NSNull.h"
 @interface zPersonalController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(strong,nonatomic)UITableView * persoanTableView;
@@ -171,7 +172,28 @@
                 weakSelf.canEdit = NO;
             }else
             {
-                
+                if (weakSelf.upLoadModel.userName.length==0) {
+                    [[zHud shareInstance]showMessage:@"用户名必填"];
+                    return;
+                }
+                if (weakSelf.upLoadModel.sex.length==0) {
+                    [[zHud shareInstance]showMessage:@"性别必填"];
+                    return;
+                }
+                if (weakSelf.upLoadModel.regLocation.length==0) {
+                    [[zHud shareInstance]showMessage:@"公司所在地必填"];
+                    return;
+                }
+                if (weakSelf.upLoadModel.buMen.length==0) {
+                    [[zHud shareInstance]showMessage:@"部门必填"];
+                    return;
+                }
+                if ([weakSelf.upLoadModel.email isEqualToString:@"(null)"]) {
+                    weakSelf.upLoadModel.email = @"";
+                }
+                if ([weakSelf.upLoadModel.birth isEqualToString:@"(null)"]) {
+                    weakSelf.upLoadModel.birth = @"";
+                }
                 NSDictionary * dic = [weakSelf.upLoadModel mj_keyValues];
                 weakSelf.canEdit = NO;
 //                NSLog(@"------%@",dic);
@@ -205,8 +227,9 @@
                 NSLog(@"正确:%@=错误:%@",upDic,dic);
                 
                 NSMutableDictionary * tureDic = [[NSMutableDictionary alloc]initWithDictionary:dic];
+                if (weakSelf.companyId != nil) {
                 [tureDic setObject:weakSelf.companyId forKey:@"suoShuGs"];
-                
+                }
                 NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kupUserInfo];
                 [weakSelf postDataWithUrl:url WithParam:tureDic];
             }
@@ -368,14 +391,21 @@
     }
     if ([url containsString:kupUserInfo]) {
         NSDictionary * dic = data[@"data"];
+         NSString * code = data[@"code"];
+        NSString * msg = data[@"code"];
+        if ([code integerValue] == 500) {
+            [[zHud shareInstance]showMessage:msg];
+        }
         NSLog(@"提交信息%@",dic);
     }
     
     if ([url containsString:kgetCompanyID]) {
-        NSDictionary * dic = data[@"data"];
         NSString * code = data[@"code"];
+        NSDictionary * dic = data[@"data"];
+        NSDictionary * trueDic = [NSDictionary nullDicToDic:dic];
         
-        self.companyId = dic[@"id"];
+        self.companyId = trueDic[@"id"];
+        
         if ([code integerValue] == 0) {
             //验证成功
 //            * 已认证的企业，公司名称、企业类型、所在部门、所属职务、管辖地不可修改

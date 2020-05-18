@@ -37,6 +37,8 @@
 #define kLoginUserInfo @"loginUserInfo"
 #define kUserDefaultsCookie @"kUserDefaultsCookie"
 
+#define JGAPPK  @"341a4b6b8631c852448e6f94"
+
 #define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT    [UIScreen mainScreen].bounds.size.height
 
@@ -51,9 +53,11 @@
 //单例
 #define kMainSingleton MainSingleton
 
-
+#define iOS7 ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0)
+//颜色
+#define ZFColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 //程序主颜色
-#define kNavColor [kMainSingleton colorWithHexString:@"#7857e1" alpha:1]
+#define kNavColor [kMainSingleton colorWithHexString:@"#3F50B5" alpha:1]
 
 /**
  * 状态栏高度

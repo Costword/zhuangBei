@@ -33,7 +33,7 @@
         _imageButton = [[UIButton alloc]init];
         _imageButton.layer.cornerRadius = kWidthFlot(64);
         _imageButton.clipsToBounds = YES;
-        [_imageButton setBackgroundImage:[UIImage imageNamed:@"testicon"] forState:UIControlStateNormal];
+        [_imageButton setBackgroundImage:[UIImage imageNamed:@"wode_defoutHeader"] forState:UIControlStateNormal];
     }
     return _imageButton;
 }

@@ -116,6 +116,8 @@
 {
     if (self.descTextView.text.length>0) {
         [[zHud shareInstance] showMessage:self.descTextView.text];
+        [[zHud shareInstance] showMessage:@"提交建议成功"];
+        self.descTextView.text = @"";
     }else
     {
         [[zHud shareInstance] showMessage:@"请填写宝贵建议"];
