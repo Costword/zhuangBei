@@ -62,7 +62,8 @@ UIKIT_EXTERN NSString *const kGoodsMangerMenu;
 /** 获取货源管理列表*/
 UIKIT_EXTERN NSString *const kGoodsMangerList;
 
-
+/** 查询公司产品*/
+UIKIT_EXTERN NSString *const kGetCompanyGoodsList;
 
 /**修改个人简介*/
 UIKIT_EXTERN NSString *const changePersonalMin;
