@@ -27,6 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
 //0等待验证  1同意 2拒绝
 @property (nonatomic, assign) NSInteger  status;
 
+//----sys---------
+@property (nonatomic, strong) NSString * fromUserId;
+@property (nonatomic, strong) NSString * groupApplyId;
+@property (nonatomic, strong) NSString * fromUserName;
+@property (nonatomic, strong) NSString * fromUserImagesId;
+@property (nonatomic, strong) NSString * toGroupId;
+@property (nonatomic, strong) NSString * toGroupName;
+//@property (nonatomic, strong) NSString * remark;
+@property (nonatomic, strong) NSString * applyTime;
+@property (nonatomic, strong) NSString * readOrNot;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
@@ -62,6 +74,77 @@ NS_ASSUME_NONNULL_END
                  "status": 1
              }
          ]
+     },
+     "pages": 1
+ }
+ */
+
+/*
+ 系统
+ {
+     "code": 0,
+     "msg": "success",
+     "data": {
+         "totalCount": 5,
+         "pageSize": 1,
+         "totalPage": 5,
+         "currPage": 10,
+         "list": [{
+             "groupApplyId": 66,
+             "fromUserId": 696,
+             "fromUserName": "18820002000",
+             "fromUserImagesId": 3379,
+             "toGroupId": 77,
+             "toGroupName": "测试群",
+             "remark": "1 请求入群",
+             "applyTime": "2020-05-15 15:45:43",
+             "status": 0,
+             "readOrNot": 0
+         }, {
+             "groupApplyId": 65,
+             "fromUserId": 435,
+             "fromUserName": "13126596191",
+             "fromUserImagesId": 3379,
+             "toGroupId": 77,
+             "toGroupName": "测试群",
+             "remark": "1 请求入群",
+             "applyTime": "2020-04-28 17:53:07",
+             "status": 1,
+             "readOrNot": 0
+         }, {
+             "groupApplyId": 63,
+             "fromUserId": 525,
+             "fromUserName": "18526061161",
+             "fromUserImagesId": 3379,
+             "toGroupId": 58,
+             "toGroupName": "杨健顾问群",
+             "remark": "1 请求入群",
+             "applyTime": "2020-04-14 18:19:29",
+             "status": 0,
+             "readOrNot": 0
+         }, {
+             "groupApplyId": 64,
+             "fromUserId": 525,
+             "fromUserName": "18526061161",
+             "fromUserImagesId": 3379,
+             "toGroupId": 58,
+             "toGroupName": "杨健顾问群",
+             "remark": "1 请求入群",
+             "applyTime": "2020-04-14 18:19:29",
+             "status": 0,
+             "readOrNot": 0
+         }, {
+             "groupApplyId": 62,
+             "fromUserId": 525,
+             "fromUserName": "18526061161",
+             "fromUserImagesId": 3379,
+             "toGroupId": 58,
+             "toGroupName": "杨健顾问群",
+             "remark": "1 请求入群",
+             "applyTime": "2020-04-14 18:19:27",
+             "status": 0,
+             "readOrNot": 0
+         }]
      },
      "pages": 1
  }

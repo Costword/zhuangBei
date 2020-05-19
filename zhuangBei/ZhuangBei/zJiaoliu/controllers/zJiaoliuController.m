@@ -116,12 +116,14 @@
     };
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     if (_switchBarView) {
         [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH*self.switchBarView.currentIndex, 1) animated:NO];
     }
-    self.tabBarItem.badgeValue = @"28";
+//    self.tabBarItem.badgeValue = @"28";
 }
 
 - (void)viewDidLoad {
@@ -138,6 +140,8 @@
     [self.noContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.nothingView);
     }];
+    
+    ADD_NOTI(requestDatas, @"refreshJiaoLiuListDataKey");
 }
 
 - (void)confiUI

@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^clickBtnBlock)(NSInteger tag);
 //联系人 cell
 @interface LWJiaoLiuContatcsListTableViewCell : UITableViewCell
 @property (nonatomic, strong) UIImageView * icon;
@@ -21,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setBottomLine:(NSInteger)tag;
 @property (nonatomic, strong) UIView * line;
 - (void)updateForVerifiCell;
-
+@property (nonatomic, copy) clickBtnBlock  block;
 @end
 
 // 消息列表 cell

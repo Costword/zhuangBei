@@ -13,7 +13,9 @@
 
 - (void)clickBtn:(UIButton *)sender
 {
-    
+    if (self.block) {
+        self.block(sender.tag);
+    }
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -29,6 +31,8 @@
         line.backgroundColor = BASECOLOR_BOARD;
         _leftBtn = [LWButton lw_button:@"同意" font:14 textColor:UIColor.whiteColor backColor:BASECOLOR_BLUECOLOR target:self acction:@selector(clickBtn:)];
         _rightBtn = [LWButton lw_button:@"拒绝" font:14 textColor:UIColor.whiteColor backColor:BASECOLOR_BLUECOLOR target:self acction:@selector(clickBtn:)];
+        _leftBtn.tag = 1;
+        _rightBtn.tag = 2;
         [self.contentView addSubviews:@[_icon,_nameL,_timelL,_descL,line,_leftBtn,_rightBtn]];
         [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.contentView.mas_left).mas_offset(10);

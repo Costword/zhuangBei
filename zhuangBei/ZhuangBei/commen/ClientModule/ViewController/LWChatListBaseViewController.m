@@ -152,6 +152,9 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 
 - (void)showTrace:(ShowMsgElem *)msgModel
 {
+    if (!msgModel) {
+        return;
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         
         if ([msgModel.userID isEqualToString:[IMUserInfo shareInstance].userID]) {
