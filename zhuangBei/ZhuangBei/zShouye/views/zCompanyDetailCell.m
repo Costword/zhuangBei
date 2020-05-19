@@ -132,6 +132,8 @@
 
 -(void)updateConstraintsForView
 {
+    CGFloat height = kWidthFlot(30);
+    
     [self.BaseView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
@@ -145,85 +147,85 @@
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(top);
         make.width.mas_equalTo(width);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     [self.companyNameContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.companyName.mas_right).offset(top);
         make.top.mas_equalTo(top);
         make.right.mas_equalTo(-right);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     
     [self.companyType mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyName.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     [self.companyTypeContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.companyType.mas_right).offset(top);
         make.top.mas_equalTo(self.companyName.mas_bottom).offset(top);
         make.right.mas_equalTo(-right);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     
     [self.companyFaren mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyType.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     [self.companyFarenContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.companyFaren.mas_right).offset(top);
         make.top.mas_equalTo(self.companyType.mas_bottom).offset(top);
         make.right.mas_equalTo(-right);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     
     [self.companyAddress mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyFaren.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     [self.companyAddressContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.companyAddress.mas_right).offset(top);
         make.top.mas_equalTo(self.companyFaren.mas_bottom).offset(top);
         make.right.mas_equalTo(-right);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     
     [self.companyDate mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyAddress.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     [self.companyDateContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.companyDate.mas_right).offset(top);
         make.top.mas_equalTo(self.companyAddress.mas_bottom).offset(top);
         make.right.mas_equalTo(-right);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     
     [self.companyBusiness mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyDate.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     [self.companyBusinessContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.companyBusiness.mas_right).offset(top);
         make.top.mas_equalTo(self.companyDate.mas_bottom).offset(top);
         make.right.mas_equalTo(-right);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     
     [self.companyEmail mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyBusiness.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     
     
@@ -231,7 +233,7 @@
         make.left.mas_equalTo(self.companyEmail.mas_right).offset(top);
         make.top.mas_equalTo(self.companyBusiness.mas_bottom).offset(top);
         make.right.mas_equalTo(-right);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
 
     
@@ -239,20 +241,20 @@
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyEmail.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     [self.companyWebContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.companyWeb.mas_right).offset(top);
         make.top.mas_equalTo(self.companyEmail.mas_bottom).offset(top);
         make.right.mas_equalTo(-right);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     
     [self.companyDesc mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyWeb.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     [self.companyDescContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
@@ -264,7 +266,7 @@
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyDescContent.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     [self.companyCurrentAddressContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
@@ -276,7 +278,7 @@
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyCurrentAddressContent.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(height);
     }];
     
     [self.cityCollectView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -289,7 +291,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 10;
+    return 0;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -369,6 +371,27 @@
     label.attributedText = attrText;
 }
 
+-(void)setGoosModel:(zGoodsContentModel *)goosModel
+{
+    _goosModel = goosModel;
+    self.companyNameContent.text = goosModel.name;
+    
+    self.companyTypeContent.text = goosModel.companyType;
+    
+    self.companyDateContent.text = goosModel.createDate;
+    
+    self.companyFarenContent.text = goosModel.faRen;
+    
+    self.companyBusinessContent.text = goosModel.phone;
+    
+    self.companyEmailContent.text = goosModel.email;
+    
+    self.companyWebContent.text = goosModel.gongSiUrl;
+    
+    self.companyDescContent.text = goosModel.approveText;
+    
+    self.companyCurrentAddressContent.text = goosModel.regLocation;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

@@ -187,6 +187,15 @@
     [self.arrowButton setTitle:name forState:UIControlStateNormal];
 }
 
+-(void)setModel:(zGoodsContentModel *)model
+{
+    _model = model;
+    self.nameLabel.text = model.name;
+    self.farenLabel.text = [NSString stringWithFormat:@"法人：%@",model.faRen];
+    self.phoneLabel.text = [NSString stringWithFormat:@"电话：%@",model.phone];
+    self.descLabel.text = [NSString stringWithFormat:@"简介："];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

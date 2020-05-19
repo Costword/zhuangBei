@@ -9,6 +9,7 @@
 #import "zCompanyDetailController.h"
 #import "zCompanyDetailCell.h"
 #import "zCompanyHeader.h"
+#import "zCompanyGoodsCell.h"
 
 @interface zCompanyDetailController ()<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView * companyTable;
@@ -58,6 +59,10 @@
     }];
 }
 
+-(void)setGoosModel:(zGoodsContentModel *)goosModel
+{
+    _goosModel = goosModel;
+}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -66,20 +71,29 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if (self.companyType == 0) {
+        return 1;
+    }else
+    {
+        NSArray * array = self.goosModel.zhuangbeiEntityList;
+        return array.count;
+    }
+    
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.companyType == 0) {
         zCompanyDetailCell * cell = [zCompanyDetailCell instanceWithTableView:tableView AndIndexPath:indexPath];
-        cell.backgroundColor = [UIColor redColor];
         cell.typesArray = @[];
+        cell.goosModel = _goosModel;
         return cell;
     }else
     {
-        zCompanyDetailCell * cell = [zCompanyDetailCell instanceWithTableView:tableView AndIndexPath:indexPath];
+        zCompanyGoodsCell * cell = [zCompanyGoodsCell instanceWithTableView:tableView AndIndexPath:indexPath];
         cell.backgroundColor = [UIColor whiteColor];
+        NSDictionary * dic = self.goosModel.zhuangbeiEntityList[indexPath.row];
+        cell.goosDic = dic;
         return cell;
     }
     
@@ -96,6 +110,7 @@
            [self.companyTable reloadRowAtIndexPath:indexpath withRowAnimation:UITableViewRowAnimationNone];
         }];
     };
+    companyHeader.goosModel = _goosModel;
     return companyHeader;
 }
 

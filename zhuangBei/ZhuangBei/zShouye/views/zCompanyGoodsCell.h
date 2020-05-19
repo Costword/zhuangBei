@@ -1,8 +1,8 @@
 //
-//  zCompanyDetailCell.h
+//  zCompanyGoodsCell.h
 //  ZhuangBei
 //
-//  Created by aa on 2020/5/8.
+//  Created by aa on 2020/5/18.
 //  Copyright © 2020 aa. All rights reserved.
 //
 
@@ -10,15 +10,15 @@
 #import "zGoodsContentModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface zCompanyDetailCell : UITableViewCell
+@interface zCompanyGoodsCell : UITableViewCell
 
-+(zCompanyDetailCell*)instanceWithTableView:(UITableView*)tableView AndIndexPath:(NSIndexPath*)indexPath;
++(zCompanyGoodsCell*)instanceWithTableView:(UITableView*)tableView AndIndexPath:(NSIndexPath*)indexPath;
 
 @property(strong,nonatomic)NSArray * typesArray;
 
 @property(strong,nonatomic)zGoodsContentModel * goosModel;
 
-
+@property(strong,nonatomic)NSDictionary * goosDic;
 
 @end
 

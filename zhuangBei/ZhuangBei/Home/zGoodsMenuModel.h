@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(copy,nonatomic)NSString * title;
 
+@property(copy,nonatomic)NSString * lastNode;
+
 @property(assign,nonatomic)NSInteger  typeId;
 
 @property(strong,nonatomic)NSArray * children;

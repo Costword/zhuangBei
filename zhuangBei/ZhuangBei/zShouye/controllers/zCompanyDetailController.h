@@ -7,10 +7,13 @@
 //
 
 #import "baseViewController.h"
+#import "zGoodsContentModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface zCompanyDetailController : baseViewController
+
+@property(strong,nonatomic)zGoodsContentModel * goosModel;
 
 @end
 

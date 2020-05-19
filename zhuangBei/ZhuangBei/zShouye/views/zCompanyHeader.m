@@ -126,6 +126,7 @@
     return self;
 }
 
+
 -(void)updateConstraintsForView
 {
     [self.baseView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -168,6 +169,14 @@
         make.height.mas_equalTo(44);
         make.bottom.mas_equalTo(-kWidthFlot(10));
     }];
+}
+
+-(void)setGoosModel:(zGoodsContentModel *)goosModel
+{
+    _goosModel = goosModel;
+    self.nameLabel.text = _goosModel.name;
+    self.timeLabel.text = [NSString stringWithFormat:@"成立时间:%@",_goosModel.createDate];
+    self.descContentLabel.text = _goosModel.approveText;
 }
 
 -(void)sliderNavMenuSelectIndex:(NSInteger)index
