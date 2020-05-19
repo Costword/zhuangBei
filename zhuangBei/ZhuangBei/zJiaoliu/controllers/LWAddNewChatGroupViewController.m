@@ -46,6 +46,7 @@
     [self requestPostWithUrl:@"app/appgroup/save" para:@{@"groupName":LWDATA(_tf.text),@"classifyId":LWDATA(model.customId)} paraType:(LWRequestParamTypeString) success:^(id  _Nonnull response) {
         if ([response[@"code"] intValue] == 0) {
             [zHud showMessage:@"创建群聊成功!"];
+            POST_NOTI(@"refreshJiaoLiuListDataKey", nil);
             [self.navigationController popViewControllerAnimated:YES];
         }else{
             [zHud showMessage:response[@"msg"]];

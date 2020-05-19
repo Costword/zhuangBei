@@ -53,7 +53,7 @@
     _mainView.backgroundColor = UIColor.whiteColor;
     
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    window.backgroundColor = UIColor.redColor;
+//    window.backgroundColor = UIColor.redColor;
     [window addSubview:_bgview];
     [window addSubview:_mainView];
     
