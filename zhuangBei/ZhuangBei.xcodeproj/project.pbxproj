@@ -33,6 +33,8 @@
 		003FEABC245BFB0D00E8D61E /* zSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003FEABB245BFB0D00E8D61E /* zSettingViewController.m */; };
 		003FEABF245BFB8500E8D61E /* zSettingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 003FEABE245BFB8500E8D61E /* zSettingCellView.m */; };
 		003FEAC2245C198A00E8D61E /* zUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 003FEAC1245C198A00E8D61E /* zUserModel.m */; };
+		004E435C2472B964000A4627 /* zGoodsContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 004E435B2472B964000A4627 /* zGoodsContentModel.m */; };
+		004E435F2472CC04000A4627 /* zCompanyGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 004E435E2472CC04000A4627 /* zCompanyGoodsCell.m */; };
 		00558BD42460FF4200550FBC /* sliderNavMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BD32460FF4200550FBC /* sliderNavMenu.m */; };
 		00558BD72460FFE000550FBC /* zGoodsMangerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BD62460FFE000550FBC /* zGoodsMangerController.m */; };
 		00558BDA2461000500550FBC /* zCompanyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BD92461000500550FBC /* zCompanyController.m */; };
@@ -301,6 +303,10 @@
 		003FEABE245BFB8500E8D61E /* zSettingCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zSettingCellView.m; sourceTree = "<group>"; };
 		003FEAC0245C198A00E8D61E /* zUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zUserModel.h; sourceTree = "<group>"; };
 		003FEAC1245C198A00E8D61E /* zUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zUserModel.m; sourceTree = "<group>"; };
+		004E435A2472B964000A4627 /* zGoodsContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = zGoodsContentModel.h; path = ZhuangBei/zShouye/views/zGoodsContentModel.h; sourceTree = SOURCE_ROOT; };
+		004E435B2472B964000A4627 /* zGoodsContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = zGoodsContentModel.m; path = ZhuangBei/zShouye/views/zGoodsContentModel.m; sourceTree = SOURCE_ROOT; };
+		004E435D2472CC04000A4627 /* zCompanyGoodsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCompanyGoodsCell.h; sourceTree = "<group>"; };
+		004E435E2472CC04000A4627 /* zCompanyGoodsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zCompanyGoodsCell.m; sourceTree = "<group>"; };
 		00558BD22460FF4200550FBC /* sliderNavMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sliderNavMenu.h; sourceTree = "<group>"; };
 		00558BD32460FF4200550FBC /* sliderNavMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sliderNavMenu.m; sourceTree = "<group>"; };
 		00558BD52460FFE000550FBC /* zGoodsMangerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zGoodsMangerController.h; sourceTree = "<group>"; };
@@ -367,7 +373,7 @@
 		009E218C246A763500AD1637 /* SelectedListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectedListView.h; sourceTree = "<group>"; };
 		009E218F246A7EDF00AD1637 /* zTypesModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zTypesModel.h; sourceTree = "<group>"; };
 		009E2190246A7EDF00AD1637 /* zTypesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zTypesModel.m; sourceTree = "<group>"; };
-		009FB5DA244E89C700133974 /* ZhuangBei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhuangBei.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		009FB5DA244E89C700133974 /* 警用行业联盟.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "警用行业联盟.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		009FB5E3244E89C700133974 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		009FB5E4244E89C700133974 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		009FB5E9244E89CD00133974 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -928,7 +934,7 @@
 		009FB5DB244E89C700133974 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				009FB5DA244E89C700133974 /* ZhuangBei.app */,
+				009FB5DA244E89C700133974 /* 警用行业联盟.app */,
 				009FB5F5244E89CE00133974 /* ZhuangBeiTests.xctest */,
 				009FB600244E89CE00133974 /* ZhuangBeiUITests.xctest */,
 			);
@@ -1178,6 +1184,8 @@
 				00B0A5EC24653F0F0041C234 /* zCompanyHeader.m */,
 				00B0A5EE24654FB20041C234 /* zCompanyDetailCell.h */,
 				00B0A5EF24654FB20041C234 /* zCompanyDetailCell.m */,
+				004E435D2472CC04000A4627 /* zCompanyGoodsCell.h */,
+				004E435E2472CC04000A4627 /* zCompanyGoodsCell.m */,
 				00B0A5F124654FC60041C234 /* zGoodsDetailCell.h */,
 				00B0A5F224654FC60041C234 /* zGoodsDetailCell.m */,
 			);
@@ -1191,6 +1199,8 @@
 				005ECE752464357800D90341 /* zHuoYuanModel.m */,
 				00CB202E2471327200171284 /* zGoodsMenuModel.h */,
 				00CB202F2471327200171284 /* zGoodsMenuModel.m */,
+				004E435A2472B964000A4627 /* zGoodsContentModel.h */,
+				004E435B2472B964000A4627 /* zGoodsContentModel.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -1809,7 +1819,7 @@
 			);
 			name = ZhuangBei;
 			productName = ZhuangBei;
-			productReference = 009FB5DA244E89C700133974 /* ZhuangBei.app */;
+			productReference = 009FB5DA244E89C700133974 /* 警用行业联盟.app */;
 			productType = "com.apple.product-type.application";
 		};
 		009FB5F4244E89CE00133974 /* ZhuangBeiTests */ = {
@@ -1975,6 +1985,7 @@
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				890643FD24695C370099508C /* MessageGroupSettingViewController.m in Sources */,
 				89A26F8D246E4001008EFB01 /* PPSlideLineButton.m in Sources */,
+				004E435F2472CC04000A4627 /* zCompanyGoodsCell.m in Sources */,
 				890643ED246955DA0099508C /* LWClientManager.m in Sources */,
 				89A26F8A246E4001008EFB01 /* UIColor+PPAddition.m in Sources */,
 				89216982245686E2007C6615 /* LWJiaoLiuGroupCollectionView.m in Sources */,
@@ -2096,6 +2107,7 @@
 				00558BDA2461000500550FBC /* zCompanyController.m in Sources */,
 				00372B0B2456A54B00E51931 /* zInstructionsCard.m in Sources */,
 				003FEABC245BFB0D00E8D61E /* zSettingViewController.m in Sources */,
+				004E435C2472B964000A4627 /* zGoodsContentModel.m in Sources */,
 				89C9DDA0246A4252005341CE /* ILGImageCropViewController.m in Sources */,
 				009FB67F24500D7800133974 /* NSDictionary+NSNull.m in Sources */,
 				89C112DA246E8599007EAABB /* LWJiaoLiuAddAlearView.m in Sources */,
@@ -2325,7 +2337,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K2YCGMC4SW;
+				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -2340,7 +2352,7 @@
 					"$(PROJECT_DIR)/ZhuangBei/commen/Thrid/IFYunSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sliderView.ZhuangBei;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "警用行业联盟";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2366,7 +2378,7 @@
 					"$(PROJECT_DIR)/ZhuangBei/commen/Thrid/IFYunSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sliderView.ZhuangBei;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "警用行业联盟";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

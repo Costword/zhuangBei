@@ -10,6 +10,9 @@
 #import "zShouYeLeftMenu.h"
 #import "zHuoYuanListCell.h"
 #import "zGoodsMenuModel.h"
+#import "zGoodsContentModel.h"
+#import "zCompanyDetailController.h"
+
 
 @interface zGoodsMangerController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -27,11 +30,17 @@
 
 @implementation zGoodsMangerController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self loadList];
+}
+
 -(NSMutableDictionary*)listParmas
 {
     if (!_listParmas) {
         _listParmas = [NSMutableDictionary dictionary];
-//        code=3&lastNode=&limit=20&zbid=21&page=1
         [_listParmas setObject:@(3) forKey:@"code"];
         [_listParmas setObject:@(20) forKey:@"limit"];
         [_listParmas setObject:@(1) forKey:@"page"];
@@ -39,6 +48,14 @@
         [_listParmas setObject:@"" forKey:@"zbid"];
     }
     return _listParmas;
+}
+
+-(NSMutableArray*)contentListArray
+{
+    if (!_contentListArray) {
+        _contentListArray = [NSMutableArray array];
+    }
+    return _contentListArray;
 }
 
 -(zShouYeLeftMenu*)leftMenu
@@ -81,18 +98,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    __weak typeof(self)weakSelf = self;
     self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.leftMenu];
+    [self.view addSubview:self.menuTableView];
+    
+    __weak typeof(self)weakSelf = self;
     NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kGoodsMangerMenu];
     self.noContentView.retryTapBack = ^{
         [weakSelf postDataWithUrl:url WithParam:nil];
         [weakSelf loadList];
     };
-    [self.view addSubview:self.leftMenu];
-    [self.view addSubview:self.menuTableView];
     [self postDataWithUrl:url WithParam:nil];
-    [self loadList];
-    
     
     
 //    [self requestPostWithUrl:listurl paraString:self.listParmas success:^(id  _Nonnull response) {
@@ -119,6 +135,31 @@
     
     [self requestPostWithUrl:kGoodsMangerList paraString:self.listParmas success:^(id  _Nonnull response) {
         [[zHud shareInstance]hild];
+        NSString * code = response[@"code"];
+        if ([code integerValue] == 0) {
+            NSDictionary * dic = response[@"page"];
+            NSLog(@"货源列表%@",dic);
+            NSArray * list = dic[@"list"];
+            if (list.count==0) {
+                self.nothingView.alpha =1;
+                [self.view bringSubviewToFront:self.nothingView];
+            }else
+            {
+                self.nothingView.alpha =0;
+                [self.contentListArray removeAllObjects];
+                [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    NSDictionary * dic = list[idx];
+                    zGoodsContentModel * model = [zGoodsContentModel mj_objectWithKeyValues:dic];
+                    [self.contentListArray addObject:model];
+                }];
+                [self.menuTableView reloadData];
+            }
+            
+        }else
+        {
+            NSString * msg =response[@"msg"];
+            [[zHud shareInstance]showMessage:msg];
+        }
     } failure:^(NSError * _Nonnull error) {
         [[zHud shareInstance]hild];
     }];
@@ -160,6 +201,8 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     zHuoYuanListCell * cell = [zHuoYuanListCell instanceWithTableView:tableView AndIndexPath:indexPath];
+    zGoodsContentModel * model =  self.contentListArray[indexPath.row];
+    cell.model = model;
     return cell;
 }
 
@@ -175,7 +218,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    zGoodsContentModel * model =  self.contentListArray[indexPath.row];
+    zCompanyDetailController * detailVC = [[zCompanyDetailController alloc]init];
+    detailVC.title = @"公司详情";
+    detailVC.goosModel = model;
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 -(void)RequsetFileWithUrl:(NSString*)url WithError:(NSError*)err
@@ -242,28 +289,10 @@
         }
         
     }
-    if ([url containsString:kGoodsMangerList]) {
-        [[zHud shareInstance]hild];
-        NSString * code = data[@"code"];
-        if ([code integerValue] == 0) {
-            NSDictionary * dic = data[@"page"];
-            NSLog(@"货源列表%@",dic);
-            NSArray * list = dic[@"list"];
-            if (list.count==0) {
-                self.nothingView.alpha =1;
-                [self.view bringSubviewToFront:self.nothingView];
-            }else
-            {
-                self.nothingView.alpha =0;
-                self.contentListArray = [[NSMutableArray alloc]initWithArray:list];
-            }
-            
-        }else
-        {
-            NSString * msg =data[@"msg"];
-            [[zHud shareInstance]showMessage:msg];
-        }
-    }
+//    if ([url containsString:kGoodsMangerList]) {
+//        [[zHud shareInstance]hild];
+//
+//    }
 }
 
 

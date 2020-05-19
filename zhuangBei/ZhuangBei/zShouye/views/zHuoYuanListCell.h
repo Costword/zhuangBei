@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "zGoodsContentModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(zHuoYuanListCell*)instanceWithTableView:(UITableView*)tableView AndIndexPath:(NSIndexPath*)indexPath;
 
+@property(strong,nonatomic)zGoodsContentModel * model;
 
 @end
 

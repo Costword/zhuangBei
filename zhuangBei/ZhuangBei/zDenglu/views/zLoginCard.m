@@ -18,6 +18,8 @@
 
 @property(strong,nonatomic)UIImageView * logoImage;
 
+@property(strong,nonatomic)UIImageView * smallLogoImage;
+
 
 @property(strong,nonatomic)UIView * baseView;
 @property(strong,nonatomic)LoginTextField * accountField;
@@ -49,9 +51,22 @@
         _logoImage = [[UIImageView alloc]init];
         _logoImage.image = [UIImage imageNamed:@"LOGO"];
         _logoImage.contentMode = UIViewContentModeScaleAspectFill;
+        _logoImage.alpha = 0.3;
     }
     return _logoImage;;
 }
+
+-(UIImageView*)smallLogoImage
+{
+    if (!_smallLogoImage) {
+        _smallLogoImage = [[UIImageView alloc]init];
+        _smallLogoImage.image = [UIImage imageNamed:@"LOGO"];
+        _smallLogoImage.contentMode = UIViewContentModeScaleAspectFill;
+    }
+    return _smallLogoImage;;
+}
+
+
 
 -(UIView*)baseView
 {
@@ -71,7 +86,7 @@
     if (!_accountField) {
         _accountField = [[LoginTextField alloc]init];
         _accountField.icon = [UIImage imageNamed:@"zAccount"];
-        _accountField.keyboardType = UIKeyboardTypePhonePad;
+        _accountField.keyboardType = UIKeyboardTypeASCIICapable;
         _accountField.maxLength = 11;
         _accountField.myPlaceHolder = @"请输入账号";
     }
@@ -174,6 +189,7 @@
         self.backgroundColor = [kMainSingleton colorWithHexString:@"#FAFAFA" alpha:1];
         [self addSubview:self.imageBaseView];
         [self.imageBaseView addSubview:self.logoImage];
+        [self.imageBaseView addSubview:self.smallLogoImage];
         [self addSubview:self.baseView];
         [self.baseView addSubview:self.accountField];
         [self.baseView addSubview:self.passWordField];
@@ -205,6 +221,12 @@
         make.centerX.mas_equalTo(self.imageBaseView.mas_centerX);
         make.centerY.mas_equalTo(self.imageBaseView.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(kWidthFlot(200), kWidthFlot(200)));
+    }];
+    
+    [self.smallLogoImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.imageBaseView.mas_centerX);
+        make.centerY.mas_equalTo(self.imageBaseView.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(kWidthFlot(100), kWidthFlot(100)));
     }];
     
     [self.baseView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -317,8 +339,8 @@
     }
     if (button.tag==3) {
         //登录
-        BOOL rightNum = [phoneNumCheck validateMobile:self.accountField.text];
-        if (rightNum) {
+//        BOOL rightNum = [phoneNumCheck validateMobile:self.accountField.text];
+//        if (rightNum) {
             if (self.passWordField.text.length>0) {
                 if (self.logInBack) {
                     self.logInBack(self.accountField.text,self.passWordField.text,self.remmberPasswordBtn.selected);
@@ -327,10 +349,10 @@
             {
                 [[zHud shareInstance]showMessage:@"请输入密码"];
             }
-        }else
-        {
-            [[zHud shareInstance]showMessage:@"请输入正确的手机号"];
-        }
+//        }else
+//        {
+//            [[zHud shareInstance]showMessage:@"请输入正确的手机号"];
+//        }
         return;
     }
     if (button.tag==4) {
