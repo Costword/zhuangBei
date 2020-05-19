@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0000B1BB247372AB00B2F419 /* zCompanyGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0000B1BA247372AB00B2F419 /* zCompanyGoodsModel.m */; };
+		0000B1BE24738BED00B2F419 /* zMyFriendListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0000B1BD24738BED00B2F419 /* zMyFriendListCell.m */; };
 		00159E192463BF58005DE17B /* zHuoYuanMangerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00159E182463BF58005DE17B /* zHuoYuanMangerController.m */; };
 		00159E1C2463F745005DE17B /* zHuoYuanScrollHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 00159E1B2463F745005DE17B /* zHuoYuanScrollHeader.m */; };
 		00159E222463FDF8005DE17B /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = 00159E1E2463FDF8005DE17B /* PGIndexBannerSubiew.m */; };
@@ -261,6 +263,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0000B1B9247372AB00B2F419 /* zCompanyGoodsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = zCompanyGoodsModel.h; path = ZhuangBei/zShouye/zCompanyGoodsModel.h; sourceTree = SOURCE_ROOT; };
+		0000B1BA247372AB00B2F419 /* zCompanyGoodsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = zCompanyGoodsModel.m; path = ZhuangBei/zShouye/zCompanyGoodsModel.m; sourceTree = SOURCE_ROOT; };
+		0000B1BC24738BED00B2F419 /* zMyFriendListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zMyFriendListCell.h; sourceTree = "<group>"; };
+		0000B1BD24738BED00B2F419 /* zMyFriendListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zMyFriendListCell.m; sourceTree = "<group>"; };
 		00159E172463BF58005DE17B /* zHuoYuanMangerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zHuoYuanMangerController.h; sourceTree = "<group>"; };
 		00159E182463BF58005DE17B /* zHuoYuanMangerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zHuoYuanMangerController.m; sourceTree = "<group>"; };
 		00159E1A2463F745005DE17B /* zHuoYuanScrollHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zHuoYuanScrollHeader.h; sourceTree = "<group>"; };
@@ -859,6 +865,8 @@
 				0091FCF9245EC1700046691F /* zPersonalHeader.m */,
 				0091FCEA245E6AC60046691F /* zCityEditFooter.h */,
 				0091FCEB245E6AC60046691F /* zCityEditFooter.m */,
+				0000B1BC24738BED00B2F419 /* zMyFriendListCell.h */,
+				0000B1BD24738BED00B2F419 /* zMyFriendListCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1236,6 +1244,8 @@
 				00CB202F2471327200171284 /* zGoodsMenuModel.m */,
 				004E435A2472B964000A4627 /* zGoodsContentModel.h */,
 				004E435B2472B964000A4627 /* zGoodsContentModel.m */,
+				0000B1B9247372AB00B2F419 /* zCompanyGoodsModel.h */,
+				0000B1BA247372AB00B2F419 /* zCompanyGoodsModel.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -2107,6 +2117,7 @@
 				89844BA82473CAA00045A75A /* FacePanel.m in Sources */,
 				00B0A5F324654FC60041C234 /* zGoodsDetailCell.m in Sources */,
 				0091FCF7245EBD870046691F /* handWritingListLayout.m in Sources */,
+				0000B1BB247372AB00B2F419 /* zCompanyGoodsModel.m in Sources */,
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				890643FD24695C370099508C /* MessageGroupSettingViewController.m in Sources */,
 				004E435F2472CC04000A4627 /* zCompanyGoodsCell.m in Sources */,
@@ -2197,6 +2208,7 @@
 				009FB636244FE8DF00133974 /* FUTabBar.m in Sources */,
 				009FB68024500D7800133974 /* UIView+Frame.m in Sources */,
 				008FB01E246AD71D00B207CD /* zUpLoadUserModel.m in Sources */,
+				0000B1BE24738BED00B2F419 /* zMyFriendListCell.m in Sources */,
 				8921698824569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m in Sources */,
 				89D2578524669C4900CB3910 /* LWBaseLabelAttributeStringModel.m in Sources */,
 				009FB619244FE8C200133974 /* SceneDelegate.m in Sources */,

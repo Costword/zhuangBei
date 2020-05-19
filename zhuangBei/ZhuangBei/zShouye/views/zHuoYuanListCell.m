@@ -51,7 +51,7 @@
 {
     if (!_baseImageView) {
         _baseImageView = [[UIImageView alloc]init];
-        _baseImageView.image = [UIImage imageNamed:@"huowu_logo"];
+        _baseImageView.image = [UIImage imageNamed:@"testicon"];
     }
     return _baseImageView;
 }

@@ -30,7 +30,7 @@
 
 -(UILabel*)NameLabel
 {
-    if (_NameLabel) {
+    if (!_NameLabel) {
         _NameLabel = [[UILabel alloc]init];
         _NameLabel.textAlignment = NSTextAlignmentLeft;
         CGFloat fitSize = kWidthFlot(18);
@@ -42,7 +42,7 @@
 
 -(UILabel*)contentLabel
 {
-    if (_contentLabel) {
+    if (!_contentLabel) {
         _contentLabel = [[UILabel alloc]init];
         _contentLabel.textAlignment = NSTextAlignmentLeft;
         CGFloat fitSize = kWidthFlot(14);
@@ -64,10 +64,11 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
+        self.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
         [self.contentView addSubview:self.NameLabel];
         [self.contentView addSubview:self.contentLabel];
         [self.contentView addSubview:self.lineView];
+        [self updateConstraintsForView];
     }
     return self;
 }
@@ -97,16 +98,21 @@
     }];
 }
 
--(void)setGoosModel:(zGoodsContentModel *)goosModel
+-(void)setGoosModel:(zCompanyGoodsModel *)goosModel
 {
-    
-}
-
--(void)setGoosDic:(NSDictionary *)goosDic
-{
-    _goosDic = goosDic;
-    
-//    self.NameLabel.text = goosDic[@""];
+    _goosModel = goosModel;
+    self.NameLabel.text = goosModel.zbName;
+    if (goosModel.productSource == 1) {
+        //自产
+        self.contentLabel.text = @"产品来源：自产";
+        return;
+    }
+    if (goosModel.productSource == 2) {
+        //总代理
+        self.contentLabel.text = @"产品来源：总代理";
+        return;
+    }
+    self.contentLabel.text = @"产品来源：";
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

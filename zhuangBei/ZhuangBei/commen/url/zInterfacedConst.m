@@ -356,6 +356,16 @@ NSString *const kGoodsMangerMenu = @"app/appzhuangbeitype/getTreeToMyAttentionCo
 NSString *const kGoodsMangerList = @"app/appgyszblink/listzbGys";
 
 /**
+ *查询公司产品
+ *POST
+ *URL    http://test.110zhuangbei.com:8105/app/app/appgyszblink/listAndroid
+ *gysId    418
+ limit    20
+ page    1
+ */
+NSString *const kGetCompanyGoodsList = @"app/appgyszblink/listAndroid";
+
+/**
  登录
  > **username**  (String)    *用户名*    |   必填
  > **password**  (String)    *密码*      |   必填

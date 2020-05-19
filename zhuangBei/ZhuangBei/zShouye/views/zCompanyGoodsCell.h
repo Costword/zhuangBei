@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "zGoodsContentModel.h"
+#import "zCompanyGoodsModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface zCompanyGoodsCell : UITableViewCell
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(strong,nonatomic)NSArray * typesArray;
 
-@property(strong,nonatomic)zGoodsContentModel * goosModel;
+@property(strong,nonatomic)zCompanyGoodsModel * goosModel;
 
 @property(strong,nonatomic)NSDictionary * goosDic;
 

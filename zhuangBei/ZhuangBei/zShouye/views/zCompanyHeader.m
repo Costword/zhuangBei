@@ -86,7 +86,7 @@
         _descContentLabel = [[UILabel alloc]init];
         _descContentLabel.font = kFont(12);
         _descContentLabel.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
-        _descContentLabel.text = @"装备生产商公司我们的防爆产品很好很多，种类全年齐全激动，啊的顶级爱，顶级爱的嗯嗯记得你打算几点拿到你三代打马赛克吗看到马大姐我你的世界你多久啊水。利水电电脑上看你打击我的女神经的呢就到家啊上课考试的女生。奈史密斯的呢撒啊大姐。";
+        _descContentLabel.text = @"";
         _descContentLabel.numberOfLines = 0;
     }
     return _descContentLabel;
@@ -102,7 +102,7 @@
         _navigationSliderMenu.sliderRoundCorner = 1.5;
         _navigationSliderMenu.normalFontColor = [UIColor colorWithHexString:@"#666666"];
         _navigationSliderMenu.selectFontColor = [UIColor colorWithHexString:@"#333333"];
-        [_navigationSliderMenu setSourceArray:@[@"货物管理",@"经销商管理"]];
+        [_navigationSliderMenu setSourceArray:@[@"企业详情",@"货源详情"]];
         _navigationSliderMenu.sliderType = menuAligenLeft;
         _navigationSliderMenu.delegate = self;
     }
