@@ -133,7 +133,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         ShowMsgElem *newMsgElem = [self convertMsgToModel:msg userID:userID];
         [self.showDatasArray addObject:newMsgElem];
-        [self.chatView.tableView reloadData];
+        [self.chatTableView reloadData];
         [self scrollTableToFoot:NO];
     });
 }
@@ -143,7 +143,7 @@
     newMsgElem.userID = userID;
     //    newMsgElem.text = msg;
     //    newMsgElem.isMySelf = [userID isEqualToString:UserId];
-    newMsgElem.rowHeight = [IFChatCell caculateTextHeightWithMaxWidth:self.chatView.tableView.width - [IFChatCell reserveWithForCell] text:msg];
+    newMsgElem.rowHeight = [IFChatCell caculateTextHeightWithMaxWidth:self.chatTableView.width - [IFChatCell reserveWithForCell] text:msg];
     return newMsgElem;
 }
 

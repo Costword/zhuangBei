@@ -214,10 +214,6 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     return string;
 }
 
-
-
-
-
 @end
 /*
  群聊上传接口：app/appgroupmessage/save

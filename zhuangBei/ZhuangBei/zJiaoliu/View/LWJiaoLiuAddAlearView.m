@@ -86,7 +86,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"cell"];
-        cell.imageView.image = IMAGENAME(@"icon");
+        cell.imageView.image = IMAGENAME(self.datas[indexPath.row][@"icon"]);
         cell.textLabel.text = self.datas[indexPath.row][@"name"];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

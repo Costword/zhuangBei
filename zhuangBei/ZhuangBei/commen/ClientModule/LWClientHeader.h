@@ -19,7 +19,7 @@
 #import "IFChatCell.h"
 #import "XHClient.h"
 #import "LWTool.h"
-#import "PPStickerDataManager.h"
+#import "ChatKeyBoard.h"
 
 //接收到新的一对一消息
 static NSString *const NEW_MSG_CHAT_NOTI_KEY = @"NEW_MSG_CHAT_NOTI_KEY";

@@ -168,32 +168,44 @@
 		8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A6245955F50096F1D7 /* LWSeachView.m */; };
 		8957D4AA245975370096F1D7 /* LWHuoYuanDeatilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A9245975370096F1D7 /* LWHuoYuanDeatilViewController.m */; };
 		8957D4AD245975E10096F1D7 /* LWHuoYuanDeatilView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4AC245975E00096F1D7 /* LWHuoYuanDeatilView.m */; };
+		895A37C024739DC90074E425 /* LWGroupMemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A37BF24739DC90074E425 /* LWGroupMemberListViewController.m */; };
+		895A37C324739F330074E425 /* LWGroupMemberListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A37C224739F330074E425 /* LWGroupMemberListModel.m */; };
 		895BD9C52462604600AA5947 /* ServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9C42462604600AA5947 /* ServiceManager.m */; };
 		895BD9C82462661800AA5947 /* LWHuoYuanDaTingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9C72462661800AA5947 /* LWHuoYuanDaTingModel.m */; };
 		895BD9CD24626C4000AA5947 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9CC24626C4000AA5947 /* BaseModel.m */; };
 		895BD9D424629AFC00AA5947 /* UIImageView+LWImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9D324629AFC00AA5947 /* UIImageView+LWImageView.m */; };
+		896624C22473E5E5009F286D /* emoji.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 896624C12473E5E5009F286D /* emoji.bundle */; };
+		896624C82473EBD0009F286D /* LWEmojiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 896624C72473EBD0009F286D /* LWEmojiManager.m */; };
+		896624DE2473EC6D009F286D /* PPQueuingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 896624CA2473EC6D009F286D /* PPQueuingScrollView.m */; };
+		896624DF2473EC6D009F286D /* NSAttributedString+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 896624CB2473EC6D009F286D /* NSAttributedString+PPAddition.m */; };
+		896624E02473EC6D009F286D /* UIScreen+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 896624CE2473EC6D009F286D /* UIScreen+PPAddition.m */; };
+		896624E12473EC6D009F286D /* UIScrollView+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 896624CF2473EC6D009F286D /* UIScrollView+PPAddition.m */; };
+		896624E22473EC6D009F286D /* UIColor+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 896624D02473EC6D009F286D /* UIColor+PPAddition.m */; };
+		896624E32473EC6D009F286D /* PPTextBackedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 896624D12473EC6D009F286D /* PPTextBackedString.m */; };
+		896624E42473EC6D009F286D /* NSString+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 896624D52473EC6D009F286D /* NSString+PPAddition.m */; };
+		896624E52473EC6D009F286D /* PPSlideLineButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 896624D62473EC6D009F286D /* PPSlideLineButton.m */; };
+		896624E62473EC6D009F286D /* UIButton+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 896624DB2473EC6D009F286D /* UIButton+PPAddition.m */; };
 		896DA521246BD077001ED8C1 /* LWTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 896DA520246BD077001ED8C1 /* LWTool.m */; };
 		89831FCE2472923400C6184E /* LWAddNewChatGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89831FCD2472923400C6184E /* LWAddNewChatGroupViewController.m */; };
 		89831FD12472959200C6184E /* LWAddNewGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89831FD02472959200C6184E /* LWAddNewGroupModel.m */; };
-		89A26F68246E3F9D008EFB01 /* InnerStickersInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A26F5A246E3F9D008EFB01 /* InnerStickersInfo.plist */; };
-		89A26F69246E3F9D008EFB01 /* PPStickerDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F5C246E3F9D008EFB01 /* PPStickerDataManager.m */; };
-		89A26F6A246E3F9D008EFB01 /* PPEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F5D246E3F9D008EFB01 /* PPEmoji.m */; };
-		89A26F6B246E3F9D008EFB01 /* PPSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F5E246E3F9D008EFB01 /* PPSticker.m */; };
-		89A26F6C246E3F9D008EFB01 /* Sticker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 89A26F60246E3F9D008EFB01 /* Sticker.bundle */; };
-		89A26F6D246E3F9D008EFB01 /* PPEmojiPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F61246E3F9D008EFB01 /* PPEmojiPreviewView.m */; };
-		89A26F6E246E3F9D008EFB01 /* PPStickerPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F62246E3F9D008EFB01 /* PPStickerPageView.m */; };
-		89A26F6F246E3F9D008EFB01 /* PPStickerTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F63246E3F9D008EFB01 /* PPStickerTextView.m */; };
-		89A26F70246E3F9D008EFB01 /* PPStickerKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F64246E3F9D008EFB01 /* PPStickerKeyboard.m */; };
-		89A26F86246E4001008EFB01 /* PPQueuingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F72246E4000008EFB01 /* PPQueuingScrollView.m */; };
-		89A26F87246E4001008EFB01 /* NSAttributedString+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F73246E4000008EFB01 /* NSAttributedString+PPAddition.m */; };
-		89A26F88246E4001008EFB01 /* UIScreen+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F76246E4000008EFB01 /* UIScreen+PPAddition.m */; };
-		89A26F89246E4001008EFB01 /* UIScrollView+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F77246E4000008EFB01 /* UIScrollView+PPAddition.m */; };
-		89A26F8A246E4001008EFB01 /* UIColor+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F78246E4000008EFB01 /* UIColor+PPAddition.m */; };
-		89A26F8B246E4001008EFB01 /* PPTextBackedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F79246E4000008EFB01 /* PPTextBackedString.m */; };
-		89A26F8C246E4001008EFB01 /* NSString+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F7D246E4000008EFB01 /* NSString+PPAddition.m */; };
-		89A26F8D246E4001008EFB01 /* PPSlideLineButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F7E246E4000008EFB01 /* PPSlideLineButton.m */; };
-		89A26F8E246E4001008EFB01 /* UIButton+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F83246E4000008EFB01 /* UIButton+PPAddition.m */; };
-		89A26F91246E4101008EFB01 /* PPStickerInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A26F8F246E4100008EFB01 /* PPStickerInputView.m */; };
+		89844BA12473CAA00045A75A /* systemEmoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89844B792473CA9F0045A75A /* systemEmoji.plist */; };
+		89844BA22473CAA00045A75A /* emotion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89844B7A2473CA9F0045A75A /* emotion.plist */; };
+		89844BA32473CAA00045A75A /* face.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89844B7B2473CA9F0045A75A /* face.plist */; };
+		89844BA42473CAA00045A75A /* NSString+Emoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B7E2473CA9F0045A75A /* NSString+Emoji.m */; };
+		89844BA52473CAA00045A75A /* MoreItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B842473CA9F0045A75A /* MoreItem.m */; };
+		89844BA62473CAA00045A75A /* ChatToolBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B852473CA9F0045A75A /* ChatToolBarItem.m */; };
+		89844BA72473CAA00045A75A /* FaceThemeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B862473CA9F0045A75A /* FaceThemeModel.m */; };
+		89844BA82473CAA00045A75A /* FacePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B8C2473CA9F0045A75A /* FacePanel.m */; };
+		89844BA92473CAA00045A75A /* PanelBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B8E2473CA9F0045A75A /* PanelBottomView.m */; };
+		89844BAA2473CAA00045A75A /* FaceThemeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B8F2473CA9F0045A75A /* FaceThemeView.m */; };
+		89844BAB2473CAA00045A75A /* FacePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B912473CA9F0045A75A /* FacePageView.m */; };
+		89844BAC2473CAA00045A75A /* FaceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B932473CA9F0045A75A /* FaceButton.m */; };
+		89844BAD2473CAA00045A75A /* RFRecordButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B962473CA9F0045A75A /* RFRecordButton.m */; };
+		89844BAE2473CAA00045A75A /* ChatToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B982473CAA00045A75A /* ChatToolBar.m */; };
+		89844BAF2473CAA00045A75A /* RFTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B992473CAA00045A75A /* RFTextView.m */; };
+		89844BB02473CAA00045A75A /* OfficialAccountToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B9A2473CAA00045A75A /* OfficialAccountToolbar.m */; };
+		89844BB12473CAA00045A75A /* MorePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844B9E2473CAA00045A75A /* MorePanel.m */; };
+		89844BB22473CAA00045A75A /* ChatKeyBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 89844BA02473CAA00045A75A /* ChatKeyBoard.m */; };
 		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
 		89C112DA246E8599007EAABB /* LWJiaoLiuAddAlearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112D9246E8599007EAABB /* LWJiaoLiuAddAlearView.m */; };
 		89C112DD246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112DC246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m */; };
@@ -593,6 +605,10 @@
 		8957D4A9245975370096F1D7 /* LWHuoYuanDeatilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDeatilViewController.m; sourceTree = "<group>"; };
 		8957D4AB245975E00096F1D7 /* LWHuoYuanDeatilView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanDeatilView.h; sourceTree = "<group>"; };
 		8957D4AC245975E00096F1D7 /* LWHuoYuanDeatilView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDeatilView.m; sourceTree = "<group>"; };
+		895A37BE24739DC90074E425 /* LWGroupMemberListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWGroupMemberListViewController.h; sourceTree = "<group>"; };
+		895A37BF24739DC90074E425 /* LWGroupMemberListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWGroupMemberListViewController.m; sourceTree = "<group>"; };
+		895A37C124739F330074E425 /* LWGroupMemberListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWGroupMemberListModel.h; sourceTree = "<group>"; };
+		895A37C224739F330074E425 /* LWGroupMemberListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWGroupMemberListModel.m; sourceTree = "<group>"; };
 		895BD9C32462604600AA5947 /* ServiceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceManager.h; sourceTree = "<group>"; };
 		895BD9C42462604600AA5947 /* ServiceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceManager.m; sourceTree = "<group>"; };
 		895BD9C62462661800AA5947 /* LWHuoYuanDaTingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanDaTingModel.h; sourceTree = "<group>"; };
@@ -601,50 +617,69 @@
 		895BD9CC24626C4000AA5947 /* BaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
 		895BD9D224629AFC00AA5947 /* UIImageView+LWImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LWImageView.h"; sourceTree = "<group>"; };
 		895BD9D324629AFC00AA5947 /* UIImageView+LWImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LWImageView.m"; sourceTree = "<group>"; };
+		896624C12473E5E5009F286D /* emoji.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = emoji.bundle; sourceTree = "<group>"; };
+		896624C62473EBD0009F286D /* LWEmojiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWEmojiManager.h; sourceTree = "<group>"; };
+		896624C72473EBD0009F286D /* LWEmojiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWEmojiManager.m; sourceTree = "<group>"; };
+		896624CA2473EC6D009F286D /* PPQueuingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPQueuingScrollView.m; sourceTree = "<group>"; };
+		896624CB2473EC6D009F286D /* NSAttributedString+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+PPAddition.m"; sourceTree = "<group>"; };
+		896624CC2473EC6D009F286D /* PPSlideLineButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPSlideLineButton.h; sourceTree = "<group>"; };
+		896624CD2473EC6D009F286D /* NSString+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PPAddition.h"; sourceTree = "<group>"; };
+		896624CE2473EC6D009F286D /* UIScreen+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+PPAddition.m"; sourceTree = "<group>"; };
+		896624CF2473EC6D009F286D /* UIScrollView+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+PPAddition.m"; sourceTree = "<group>"; };
+		896624D02473EC6D009F286D /* UIColor+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PPAddition.m"; sourceTree = "<group>"; };
+		896624D12473EC6D009F286D /* PPTextBackedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPTextBackedString.m; sourceTree = "<group>"; };
+		896624D22473EC6D009F286D /* UIButton+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+PPAddition.h"; sourceTree = "<group>"; };
+		896624D32473EC6D009F286D /* PPQueuingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPQueuingScrollView.h; sourceTree = "<group>"; };
+		896624D42473EC6D009F286D /* PPReusablePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPReusablePage.h; sourceTree = "<group>"; };
+		896624D52473EC6D009F286D /* NSString+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PPAddition.m"; sourceTree = "<group>"; };
+		896624D62473EC6D009F286D /* PPSlideLineButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPSlideLineButton.m; sourceTree = "<group>"; };
+		896624D72473EC6D009F286D /* NSAttributedString+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+PPAddition.h"; sourceTree = "<group>"; };
+		896624D82473EC6D009F286D /* UIScrollView+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+PPAddition.h"; sourceTree = "<group>"; };
+		896624D92473EC6D009F286D /* UIScreen+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+PPAddition.h"; sourceTree = "<group>"; };
+		896624DA2473EC6D009F286D /* PPUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPUtil.h; sourceTree = "<group>"; };
+		896624DB2473EC6D009F286D /* UIButton+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PPAddition.m"; sourceTree = "<group>"; };
+		896624DC2473EC6D009F286D /* PPTextBackedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPTextBackedString.h; sourceTree = "<group>"; };
+		896624DD2473EC6D009F286D /* UIColor+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PPAddition.h"; sourceTree = "<group>"; };
 		896DA51F246BD077001ED8C1 /* LWTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWTool.h; sourceTree = "<group>"; };
 		896DA520246BD077001ED8C1 /* LWTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWTool.m; sourceTree = "<group>"; };
 		89831FCC2472923400C6184E /* LWAddNewChatGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddNewChatGroupViewController.h; sourceTree = "<group>"; };
 		89831FCD2472923400C6184E /* LWAddNewChatGroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAddNewChatGroupViewController.m; sourceTree = "<group>"; };
 		89831FCF2472959200C6184E /* LWAddNewGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddNewGroupModel.h; sourceTree = "<group>"; };
 		89831FD02472959200C6184E /* LWAddNewGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAddNewGroupModel.m; sourceTree = "<group>"; };
-		89A26F58246E3F9D008EFB01 /* PPStickerTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerTextView.h; sourceTree = "<group>"; };
-		89A26F59246E3F9D008EFB01 /* PPStickerPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerPageView.h; sourceTree = "<group>"; };
-		89A26F5A246E3F9D008EFB01 /* InnerStickersInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InnerStickersInfo.plist; sourceTree = "<group>"; };
-		89A26F5B246E3F9D008EFB01 /* PPEmojiPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPEmojiPreviewView.h; sourceTree = "<group>"; };
-		89A26F5C246E3F9D008EFB01 /* PPStickerDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPStickerDataManager.m; sourceTree = "<group>"; };
-		89A26F5D246E3F9D008EFB01 /* PPEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPEmoji.m; sourceTree = "<group>"; };
-		89A26F5E246E3F9D008EFB01 /* PPSticker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPSticker.m; sourceTree = "<group>"; };
-		89A26F5F246E3F9D008EFB01 /* PPStickerKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerKeyboard.h; sourceTree = "<group>"; };
-		89A26F60246E3F9D008EFB01 /* Sticker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Sticker.bundle; sourceTree = "<group>"; };
-		89A26F61246E3F9D008EFB01 /* PPEmojiPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPEmojiPreviewView.m; sourceTree = "<group>"; };
-		89A26F62246E3F9D008EFB01 /* PPStickerPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPStickerPageView.m; sourceTree = "<group>"; };
-		89A26F63246E3F9D008EFB01 /* PPStickerTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPStickerTextView.m; sourceTree = "<group>"; };
-		89A26F64246E3F9D008EFB01 /* PPStickerKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPStickerKeyboard.m; sourceTree = "<group>"; };
-		89A26F65246E3F9D008EFB01 /* PPSticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPSticker.h; sourceTree = "<group>"; };
-		89A26F66246E3F9D008EFB01 /* PPEmoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPEmoji.h; sourceTree = "<group>"; };
-		89A26F67246E3F9D008EFB01 /* PPStickerDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerDataManager.h; sourceTree = "<group>"; };
-		89A26F72246E4000008EFB01 /* PPQueuingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPQueuingScrollView.m; sourceTree = "<group>"; };
-		89A26F73246E4000008EFB01 /* NSAttributedString+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+PPAddition.m"; sourceTree = "<group>"; };
-		89A26F74246E4000008EFB01 /* PPSlideLineButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPSlideLineButton.h; sourceTree = "<group>"; };
-		89A26F75246E4000008EFB01 /* NSString+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PPAddition.h"; sourceTree = "<group>"; };
-		89A26F76246E4000008EFB01 /* UIScreen+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+PPAddition.m"; sourceTree = "<group>"; };
-		89A26F77246E4000008EFB01 /* UIScrollView+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+PPAddition.m"; sourceTree = "<group>"; };
-		89A26F78246E4000008EFB01 /* UIColor+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PPAddition.m"; sourceTree = "<group>"; };
-		89A26F79246E4000008EFB01 /* PPTextBackedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPTextBackedString.m; sourceTree = "<group>"; };
-		89A26F7A246E4000008EFB01 /* UIButton+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+PPAddition.h"; sourceTree = "<group>"; };
-		89A26F7B246E4000008EFB01 /* PPQueuingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPQueuingScrollView.h; sourceTree = "<group>"; };
-		89A26F7C246E4000008EFB01 /* PPReusablePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPReusablePage.h; sourceTree = "<group>"; };
-		89A26F7D246E4000008EFB01 /* NSString+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PPAddition.m"; sourceTree = "<group>"; };
-		89A26F7E246E4000008EFB01 /* PPSlideLineButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPSlideLineButton.m; sourceTree = "<group>"; };
-		89A26F7F246E4000008EFB01 /* NSAttributedString+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+PPAddition.h"; sourceTree = "<group>"; };
-		89A26F80246E4000008EFB01 /* UIScrollView+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+PPAddition.h"; sourceTree = "<group>"; };
-		89A26F81246E4000008EFB01 /* UIScreen+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+PPAddition.h"; sourceTree = "<group>"; };
-		89A26F82246E4000008EFB01 /* PPUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPUtil.h; sourceTree = "<group>"; };
-		89A26F83246E4000008EFB01 /* UIButton+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PPAddition.m"; sourceTree = "<group>"; };
-		89A26F84246E4000008EFB01 /* PPTextBackedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPTextBackedString.h; sourceTree = "<group>"; };
-		89A26F85246E4001008EFB01 /* UIColor+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PPAddition.h"; sourceTree = "<group>"; };
-		89A26F8F246E4100008EFB01 /* PPStickerInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPStickerInputView.m; sourceTree = "<group>"; };
-		89A26F90246E4101008EFB01 /* PPStickerInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerInputView.h; sourceTree = "<group>"; };
+		89844B792473CA9F0045A75A /* systemEmoji.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = systemEmoji.plist; sourceTree = "<group>"; };
+		89844B7A2473CA9F0045A75A /* emotion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emotion.plist; sourceTree = "<group>"; };
+		89844B7B2473CA9F0045A75A /* face.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = face.plist; sourceTree = "<group>"; };
+		89844B7C2473CA9F0045A75A /* ChatKeyBoardMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatKeyBoardMacroDefine.h; sourceTree = "<group>"; };
+		89844B7E2473CA9F0045A75A /* NSString+Emoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Emoji.m"; sourceTree = "<group>"; };
+		89844B7F2473CA9F0045A75A /* NSString+Emoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Emoji.h"; sourceTree = "<group>"; };
+		89844B812473CA9F0045A75A /* ChatToolBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatToolBarItem.h; sourceTree = "<group>"; };
+		89844B822473CA9F0045A75A /* MoreItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreItem.h; sourceTree = "<group>"; };
+		89844B832473CA9F0045A75A /* FaceThemeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceThemeModel.h; sourceTree = "<group>"; };
+		89844B842473CA9F0045A75A /* MoreItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreItem.m; sourceTree = "<group>"; };
+		89844B852473CA9F0045A75A /* ChatToolBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatToolBarItem.m; sourceTree = "<group>"; };
+		89844B862473CA9F0045A75A /* FaceThemeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceThemeModel.m; sourceTree = "<group>"; };
+		89844B872473CA9F0045A75A /* ChatKeyBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatKeyBoard.h; sourceTree = "<group>"; };
+		89844B8A2473CA9F0045A75A /* FaceThemeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceThemeView.h; sourceTree = "<group>"; };
+		89844B8B2473CA9F0045A75A /* FacePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacePageView.h; sourceTree = "<group>"; };
+		89844B8C2473CA9F0045A75A /* FacePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacePanel.m; sourceTree = "<group>"; };
+		89844B8D2473CA9F0045A75A /* FaceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceButton.h; sourceTree = "<group>"; };
+		89844B8E2473CA9F0045A75A /* PanelBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanelBottomView.m; sourceTree = "<group>"; };
+		89844B8F2473CA9F0045A75A /* FaceThemeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceThemeView.m; sourceTree = "<group>"; };
+		89844B902473CA9F0045A75A /* FacePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacePanel.h; sourceTree = "<group>"; };
+		89844B912473CA9F0045A75A /* FacePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacePageView.m; sourceTree = "<group>"; };
+		89844B922473CA9F0045A75A /* PanelBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanelBottomView.h; sourceTree = "<group>"; };
+		89844B932473CA9F0045A75A /* FaceButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceButton.m; sourceTree = "<group>"; };
+		89844B952473CA9F0045A75A /* RFTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFTextView.h; sourceTree = "<group>"; };
+		89844B962473CA9F0045A75A /* RFRecordButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFRecordButton.m; sourceTree = "<group>"; };
+		89844B972473CA9F0045A75A /* OfficialAccountToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficialAccountToolbar.h; sourceTree = "<group>"; };
+		89844B982473CAA00045A75A /* ChatToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatToolBar.m; sourceTree = "<group>"; };
+		89844B992473CAA00045A75A /* RFTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFTextView.m; sourceTree = "<group>"; };
+		89844B9A2473CAA00045A75A /* OfficialAccountToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialAccountToolbar.m; sourceTree = "<group>"; };
+		89844B9B2473CAA00045A75A /* RFRecordButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFRecordButton.h; sourceTree = "<group>"; };
+		89844B9C2473CAA00045A75A /* ChatToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatToolBar.h; sourceTree = "<group>"; };
+		89844B9E2473CAA00045A75A /* MorePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MorePanel.m; sourceTree = "<group>"; };
+		89844B9F2473CAA00045A75A /* MorePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MorePanel.h; sourceTree = "<group>"; };
+		89844BA02473CAA00045A75A /* ChatKeyBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatKeyBoard.m; sourceTree = "<group>"; };
 		89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C112D8246E8599007EAABB /* LWJiaoLiuAddAlearView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWJiaoLiuAddAlearView.h; sourceTree = "<group>"; };
 		89C112D9246E8599007EAABB /* LWJiaoLiuAddAlearView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJiaoLiuAddAlearView.m; sourceTree = "<group>"; };
@@ -1442,7 +1477,7 @@
 		890643EE24695AE90099508C /* ClientModule */ = {
 			isa = PBXGroup;
 			children = (
-				89A26F57246E3F9D008EFB01 /* Keyboard */,
+				89844B772473CA9F0045A75A /* KeyBoard */,
 				89298186246D04D700C3DFE0 /* ChatRoom */,
 				89C9DD9B246A4252005341CE /* ILGImagePicker */,
 				89C9DD7D246A3775005341CE /* config */,
@@ -1474,6 +1509,8 @@
 				890643F224695B330099508C /* MessageGroupViewController.m */,
 				8929818A246D092B00C3DFE0 /* LWChatListBaseViewController.h */,
 				8929818B246D092B00C3DFE0 /* LWChatListBaseViewController.m */,
+				895A37BE24739DC90074E425 /* LWGroupMemberListViewController.h */,
+				895A37BF24739DC90074E425 /* LWGroupMemberListViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1504,6 +1541,8 @@
 				890643FE24695C7A0099508C /* InterfaceUrls.m */,
 				890643F824695BFA0099508C /* ShowMsgElem.h */,
 				890643F924695BFA0099508C /* ShowMsgElem.m */,
+				895A37C124739F330074E425 /* LWGroupMemberListModel.h */,
+				895A37C224739F330074E425 /* LWGroupMemberListModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1638,6 +1677,41 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		896624C02473E5A5009F286D /* rescoure */ = {
+			isa = PBXGroup;
+			children = (
+				896624C12473E5E5009F286D /* emoji.bundle */,
+			);
+			path = rescoure;
+			sourceTree = "<group>";
+		};
+		896624C92473EC6D009F286D /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				896624CA2473EC6D009F286D /* PPQueuingScrollView.m */,
+				896624CB2473EC6D009F286D /* NSAttributedString+PPAddition.m */,
+				896624CC2473EC6D009F286D /* PPSlideLineButton.h */,
+				896624CD2473EC6D009F286D /* NSString+PPAddition.h */,
+				896624CE2473EC6D009F286D /* UIScreen+PPAddition.m */,
+				896624CF2473EC6D009F286D /* UIScrollView+PPAddition.m */,
+				896624D02473EC6D009F286D /* UIColor+PPAddition.m */,
+				896624D12473EC6D009F286D /* PPTextBackedString.m */,
+				896624D22473EC6D009F286D /* UIButton+PPAddition.h */,
+				896624D32473EC6D009F286D /* PPQueuingScrollView.h */,
+				896624D42473EC6D009F286D /* PPReusablePage.h */,
+				896624D52473EC6D009F286D /* NSString+PPAddition.m */,
+				896624D62473EC6D009F286D /* PPSlideLineButton.m */,
+				896624D72473EC6D009F286D /* NSAttributedString+PPAddition.h */,
+				896624D82473EC6D009F286D /* UIScrollView+PPAddition.h */,
+				896624D92473EC6D009F286D /* UIScreen+PPAddition.h */,
+				896624DA2473EC6D009F286D /* PPUtil.h */,
+				896624DB2473EC6D009F286D /* UIButton+PPAddition.m */,
+				896624DC2473EC6D009F286D /* PPTextBackedString.h */,
+				896624DD2473EC6D009F286D /* UIColor+PPAddition.h */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		896DA51E246BD056001ED8C1 /* lwtool */ = {
 			isa = PBXGroup;
 			children = (
@@ -1647,57 +1721,105 @@
 			path = lwtool;
 			sourceTree = "<group>";
 		};
-		89A26F57246E3F9D008EFB01 /* Keyboard */ = {
+		89844B772473CA9F0045A75A /* KeyBoard */ = {
 			isa = PBXGroup;
 			children = (
-				89A26F90246E4101008EFB01 /* PPStickerInputView.h */,
-				89A26F8F246E4100008EFB01 /* PPStickerInputView.m */,
-				89A26F71246E4000008EFB01 /* Util */,
-				89A26F58246E3F9D008EFB01 /* PPStickerTextView.h */,
-				89A26F63246E3F9D008EFB01 /* PPStickerTextView.m */,
-				89A26F5A246E3F9D008EFB01 /* InnerStickersInfo.plist */,
-				89A26F5B246E3F9D008EFB01 /* PPEmojiPreviewView.h */,
-				89A26F5D246E3F9D008EFB01 /* PPEmoji.m */,
-				89A26F5E246E3F9D008EFB01 /* PPSticker.m */,
-				89A26F5F246E3F9D008EFB01 /* PPStickerKeyboard.h */,
-				89A26F60246E3F9D008EFB01 /* Sticker.bundle */,
-				89A26F61246E3F9D008EFB01 /* PPEmojiPreviewView.m */,
-				89A26F59246E3F9D008EFB01 /* PPStickerPageView.h */,
-				89A26F62246E3F9D008EFB01 /* PPStickerPageView.m */,
-				89A26F64246E3F9D008EFB01 /* PPStickerKeyboard.m */,
-				89A26F65246E3F9D008EFB01 /* PPSticker.h */,
-				89A26F66246E3F9D008EFB01 /* PPEmoji.h */,
-				89A26F67246E3F9D008EFB01 /* PPStickerDataManager.h */,
-				89A26F5C246E3F9D008EFB01 /* PPStickerDataManager.m */,
+				896624C92473EC6D009F286D /* Util */,
+				896624C02473E5A5009F286D /* rescoure */,
+				89844B782473CA9F0045A75A /* plist */,
+				89844B7C2473CA9F0045A75A /* ChatKeyBoardMacroDefine.h */,
+				89844B7D2473CA9F0045A75A /* Cagegory */,
+				89844B802473CA9F0045A75A /* Models */,
+				89844B872473CA9F0045A75A /* ChatKeyBoard.h */,
+				89844B882473CA9F0045A75A /* Views */,
+				89844BA02473CAA00045A75A /* ChatKeyBoard.m */,
+				896624C62473EBD0009F286D /* LWEmojiManager.h */,
+				896624C72473EBD0009F286D /* LWEmojiManager.m */,
 			);
-			path = Keyboard;
+			path = KeyBoard;
 			sourceTree = "<group>";
 		};
-		89A26F71246E4000008EFB01 /* Util */ = {
+		89844B782473CA9F0045A75A /* plist */ = {
 			isa = PBXGroup;
 			children = (
-				89A26F72246E4000008EFB01 /* PPQueuingScrollView.m */,
-				89A26F73246E4000008EFB01 /* NSAttributedString+PPAddition.m */,
-				89A26F74246E4000008EFB01 /* PPSlideLineButton.h */,
-				89A26F75246E4000008EFB01 /* NSString+PPAddition.h */,
-				89A26F76246E4000008EFB01 /* UIScreen+PPAddition.m */,
-				89A26F77246E4000008EFB01 /* UIScrollView+PPAddition.m */,
-				89A26F78246E4000008EFB01 /* UIColor+PPAddition.m */,
-				89A26F79246E4000008EFB01 /* PPTextBackedString.m */,
-				89A26F7A246E4000008EFB01 /* UIButton+PPAddition.h */,
-				89A26F7B246E4000008EFB01 /* PPQueuingScrollView.h */,
-				89A26F7C246E4000008EFB01 /* PPReusablePage.h */,
-				89A26F7D246E4000008EFB01 /* NSString+PPAddition.m */,
-				89A26F7E246E4000008EFB01 /* PPSlideLineButton.m */,
-				89A26F7F246E4000008EFB01 /* NSAttributedString+PPAddition.h */,
-				89A26F80246E4000008EFB01 /* UIScrollView+PPAddition.h */,
-				89A26F81246E4000008EFB01 /* UIScreen+PPAddition.h */,
-				89A26F82246E4000008EFB01 /* PPUtil.h */,
-				89A26F83246E4000008EFB01 /* UIButton+PPAddition.m */,
-				89A26F84246E4000008EFB01 /* PPTextBackedString.h */,
-				89A26F85246E4001008EFB01 /* UIColor+PPAddition.h */,
+				89844B792473CA9F0045A75A /* systemEmoji.plist */,
+				89844B7A2473CA9F0045A75A /* emotion.plist */,
+				89844B7B2473CA9F0045A75A /* face.plist */,
 			);
-			path = Util;
+			path = plist;
+			sourceTree = "<group>";
+		};
+		89844B7D2473CA9F0045A75A /* Cagegory */ = {
+			isa = PBXGroup;
+			children = (
+				89844B7E2473CA9F0045A75A /* NSString+Emoji.m */,
+				89844B7F2473CA9F0045A75A /* NSString+Emoji.h */,
+			);
+			path = Cagegory;
+			sourceTree = "<group>";
+		};
+		89844B802473CA9F0045A75A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				89844B812473CA9F0045A75A /* ChatToolBarItem.h */,
+				89844B822473CA9F0045A75A /* MoreItem.h */,
+				89844B832473CA9F0045A75A /* FaceThemeModel.h */,
+				89844B842473CA9F0045A75A /* MoreItem.m */,
+				89844B852473CA9F0045A75A /* ChatToolBarItem.m */,
+				89844B862473CA9F0045A75A /* FaceThemeModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		89844B882473CA9F0045A75A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				89844B892473CA9F0045A75A /* FacePanel */,
+				89844B942473CA9F0045A75A /* ToolBarPanel */,
+				89844B9D2473CAA00045A75A /* MorePanel */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		89844B892473CA9F0045A75A /* FacePanel */ = {
+			isa = PBXGroup;
+			children = (
+				89844B8A2473CA9F0045A75A /* FaceThemeView.h */,
+				89844B8B2473CA9F0045A75A /* FacePageView.h */,
+				89844B8C2473CA9F0045A75A /* FacePanel.m */,
+				89844B8D2473CA9F0045A75A /* FaceButton.h */,
+				89844B8E2473CA9F0045A75A /* PanelBottomView.m */,
+				89844B8F2473CA9F0045A75A /* FaceThemeView.m */,
+				89844B902473CA9F0045A75A /* FacePanel.h */,
+				89844B912473CA9F0045A75A /* FacePageView.m */,
+				89844B922473CA9F0045A75A /* PanelBottomView.h */,
+				89844B932473CA9F0045A75A /* FaceButton.m */,
+			);
+			path = FacePanel;
+			sourceTree = "<group>";
+		};
+		89844B942473CA9F0045A75A /* ToolBarPanel */ = {
+			isa = PBXGroup;
+			children = (
+				89844B952473CA9F0045A75A /* RFTextView.h */,
+				89844B962473CA9F0045A75A /* RFRecordButton.m */,
+				89844B972473CA9F0045A75A /* OfficialAccountToolbar.h */,
+				89844B982473CAA00045A75A /* ChatToolBar.m */,
+				89844B992473CAA00045A75A /* RFTextView.m */,
+				89844B9A2473CAA00045A75A /* OfficialAccountToolbar.m */,
+				89844B9B2473CAA00045A75A /* RFRecordButton.h */,
+				89844B9C2473CAA00045A75A /* ChatToolBar.h */,
+			);
+			path = ToolBarPanel;
+			sourceTree = "<group>";
+		};
+		89844B9D2473CAA00045A75A /* MorePanel */ = {
+			isa = PBXGroup;
+			children = (
+				89844B9E2473CAA00045A75A /* MorePanel.m */,
+				89844B9F2473CAA00045A75A /* MorePanel.h */,
+			);
+			path = MorePanel;
 			sourceTree = "<group>";
 		};
 		89A9382924542A06001C77A8 /* Other */ = {
@@ -1906,11 +2028,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89844BA12473CAA00045A75A /* systemEmoji.plist in Resources */,
 				89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */,
-				89A26F68246E3F9D008EFB01 /* InnerStickersInfo.plist in Resources */,
+				896624C22473E5E5009F286D /* emoji.bundle in Resources */,
+				89844BA22473CAA00045A75A /* emotion.plist in Resources */,
 				009FB5EA244E89CD00133974 /* Assets.xcassets in Resources */,
-				89A26F6C246E3F9D008EFB01 /* Sticker.bundle in Resources */,
 				89DF44D92470E433002CAE83 /* LWAddNewUserGroupView.xib in Resources */,
+				89844BA32473CAA00045A75A /* face.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1980,15 +2104,15 @@
 				89C9DD85246A3E45005341CE /* IFChatView.m in Sources */,
 				00B0A5E0246500840041C234 /* WKWebView+Post.m in Sources */,
 				893A18EE2459182800D8C36C /* LWHuoYuanThreeLevelViewController.m in Sources */,
+				89844BA82473CAA00045A75A /* FacePanel.m in Sources */,
 				00B0A5F324654FC60041C234 /* zGoodsDetailCell.m in Sources */,
 				0091FCF7245EBD870046691F /* handWritingListLayout.m in Sources */,
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				890643FD24695C370099508C /* MessageGroupSettingViewController.m in Sources */,
-				89A26F8D246E4001008EFB01 /* PPSlideLineButton.m in Sources */,
 				004E435F2472CC04000A4627 /* zCompanyGoodsCell.m in Sources */,
 				890643ED246955DA0099508C /* LWClientManager.m in Sources */,
-				89A26F8A246E4001008EFB01 /* UIColor+PPAddition.m in Sources */,
 				89216982245686E2007C6615 /* LWJiaoLiuGroupCollectionView.m in Sources */,
+				896624E52473EC6D009F286D /* PPSlideLineButton.m in Sources */,
 				8921697B245670AE007C6615 /* LWSwitchBarView.m in Sources */,
 				89C112E0246E93AA007EAABB /* LWAddFriendTableViewCell.m in Sources */,
 				890643FA24695BFA0099508C /* ShowMsgElem.m in Sources */,
@@ -1996,17 +2120,16 @@
 				895BD9C52462604600AA5947 /* ServiceManager.m in Sources */,
 				00B0A5EA24653E3F0041C234 /* zCompanyDetailController.m in Sources */,
 				0091FCE6245E681B0046691F /* zCityCollectionCell.m in Sources */,
+				896624E22473EC6D009F286D /* UIColor+PPAddition.m in Sources */,
 				894E4118245A97A20028D2B4 /* LWButton.m in Sources */,
 				009FB61A244FE8C200133974 /* AppDelegate.m in Sources */,
 				8906440024695C7A0099508C /* InterfaceUrls.m in Sources */,
 				89C9DD79246A35FC005341CE /* IFChatCell.m in Sources */,
 				89C9DD8E246A4050005341CE /* IFCreateBaseVC.m in Sources */,
-				89A26F8C246E4001008EFB01 /* NSString+PPAddition.m in Sources */,
 				89C9DD88246A4003005341CE /* MessageGroupListViewController.m in Sources */,
 				890643C624690A030099508C /* LWThreeLevelTableView.m in Sources */,
 				009FB639244FE8DF00133974 /* UIView+TouchAreaInsets.m in Sources */,
 				001ECA712453C49500727379 /* zZhaoHuiController.m in Sources */,
-				89A26F89246E4001008EFB01 /* UIScrollView+PPAddition.m in Sources */,
 				89C112F2246EA485007EAABB /* LWUserGroupManagerTableViewCell.m in Sources */,
 				009FB6722450094C00133974 /* zShouyeController.m in Sources */,
 				89C9DD76246A3564005341CE /* IMUserInfo.m in Sources */,
@@ -2029,7 +2152,8 @@
 				00B0A5D1246500180041C234 /* zXieYiController.m in Sources */,
 				0091FCFA245EC1700046691F /* zPersonalHeader.m in Sources */,
 				009E218D246A763500AD1637 /* SelectedListModel.m in Sources */,
-				89A26F87246E4001008EFB01 /* NSAttributedString+PPAddition.m in Sources */,
+				895A37C324739F330074E425 /* LWGroupMemberListModel.m in Sources */,
+				89844BAB2473CAA00045A75A /* FacePageView.m in Sources */,
 				00B0A5E7246520D10041C234 /* zJxsLeftMenu.m in Sources */,
 				009FB68B2450428000133974 /* zNothingView.m in Sources */,
 				895BD9C82462661800AA5947 /* LWHuoYuanDaTingModel.m in Sources */,
@@ -2039,26 +2163,27 @@
 				89F5B7E2245599530040F7B1 /* LWHuoYuanItemsListViewController.m in Sources */,
 				009FB635244FE8DF00133974 /* MainTabBarController.m in Sources */,
 				00558BDD24610CA700550FBC /* zShouYeLeftMenu.m in Sources */,
-				89A26F6A246E3F9D008EFB01 /* PPEmoji.m in Sources */,
 				8921697E24567278007C6615 /* UIImage+Extension.m in Sources */,
 				00CB202A2471122A00171284 /* ZFTabBarViewController.m in Sources */,
 				89D2578224669C0900CB3910 /* LWBaseLabel.m in Sources */,
+				896624E12473EC6D009F286D /* UIScrollView+PPAddition.m in Sources */,
 				001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */,
 				00871852245960B2003F8CD3 /* NSArray+JSON.m in Sources */,
 				0091FCE0245E59EE0046691F /* zPersonalCell.m in Sources */,
 				00CA47802455C839006A2885 /* QuestionTableViewCell.m in Sources */,
 				0036407224701B5500B93431 /* zUserInvitelController.m in Sources */,
 				003A932D2450866D0001F615 /* LoginTextField.m in Sources */,
-				89A26F91246E4101008EFB01 /* PPStickerInputView.m in Sources */,
+				89844BA92473CAA00045A75A /* PanelBottomView.m in Sources */,
 				003FEABF245BFB8500E8D61E /* zSettingCellView.m in Sources */,
 				893A18F724592D3E00D8C36C /* LWGongYingShangListTableViewCell.m in Sources */,
 				89C9DD8B246A4024005341CE /* MessageGroupCreateViewController.m in Sources */,
 				890643F324695B330099508C /* MessageGroupViewController.m in Sources */,
 				89D36E0C245AB1C800A6C014 /* LWSystemMessageListViewController.m in Sources */,
-				89A26F6F246E3F9D008EFB01 /* PPStickerTextView.m in Sources */,
+				896624E02473EC6D009F286D /* UIScreen+PPAddition.m in Sources */,
 				009FB6882450425900133974 /* zNoContentView.m in Sources */,
 				0087184B2459585C003F8CD3 /* QuestionFootView.m in Sources */,
 				89C9DD6C246A343C005341CE /* UIView+ILGKit.m in Sources */,
+				89844BA42473CAA00045A75A /* NSString+Emoji.m in Sources */,
 				00558BD42460FF4200550FBC /* sliderNavMenu.m in Sources */,
 				001ECA7B2454449000727379 /* zhuCeCard.m in Sources */,
 				89C112EC246EA293007EAABB /* LWUserGroupModel.m in Sources */,
@@ -2075,6 +2200,7 @@
 				8921698824569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m in Sources */,
 				89D2578524669C4900CB3910 /* LWBaseLabelAttributeStringModel.m in Sources */,
 				009FB619244FE8C200133974 /* SceneDelegate.m in Sources */,
+				896624E62473EC6D009F286D /* UIButton+PPAddition.m in Sources */,
 				00B0A5E1246500840041C234 /* WKWebView+BAJavaScriptAlert.m in Sources */,
 				89C112DD246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m in Sources */,
 				89C9DD7C246A36EC005341CE /* UIView+Toast.m in Sources */,
@@ -2084,7 +2210,6 @@
 				89F5B7DF245596DD0040F7B1 /* UIView+Extension.m in Sources */,
 				009E2191246A7EDF00AD1637 /* zTypesModel.m in Sources */,
 				00B0A5ED24653F0F0041C234 /* zCompanyHeader.m in Sources */,
-				89A26F8E246E4001008EFB01 /* UIButton+PPAddition.m in Sources */,
 				00372B0C2456A54B00E51931 /* zCategoryCard.m in Sources */,
 				009E2187246A4BAB00AD1637 /* zEducationRankTypeInfo.m in Sources */,
 				00CA477A2455BAEB006A2885 /* QuestionHeaderView.m in Sources */,
@@ -2094,20 +2219,21 @@
 				008FB024246B7E1B00B207CD /* zUserCenterModel.m in Sources */,
 				89C9DDA1246A4252005341CE /* ILGImagePicker.m in Sources */,
 				89C9DD92246A4086005341CE /* IFCreateSessionView.m in Sources */,
+				896624DE2473EC6D009F286D /* PPQueuingScrollView.m in Sources */,
 				009FB634244FE8DF00133974 /* MainNavController.m in Sources */,
 				8929818C246D092B00C3DFE0 /* LWChatListBaseViewController.m in Sources */,
 				896DA521246BD077001ED8C1 /* LWTool.m in Sources */,
 				89C9DD80246A378C005341CE /* AppConfig.m in Sources */,
-				89A26F70246E3F9D008EFB01 /* PPStickerKeyboard.m in Sources */,
+				896624C82473EBD0009F286D /* LWEmojiManager.m in Sources */,
 				009FB669245007ED00133974 /* zDengluController.m in Sources */,
 				894E4115245A96430028D2B4 /* LWLabel.m in Sources */,
 				8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */,
 				00CA47702455B9DD006A2885 /* QuestionModel.m in Sources */,
-				89A26F86246E4001008EFB01 /* PPQueuingScrollView.m in Sources */,
 				00558BDA2461000500550FBC /* zCompanyController.m in Sources */,
 				00372B0B2456A54B00E51931 /* zInstructionsCard.m in Sources */,
 				003FEABC245BFB0D00E8D61E /* zSettingViewController.m in Sources */,
 				004E435C2472B964000A4627 /* zGoodsContentModel.m in Sources */,
+				89844BAA2473CAA00045A75A /* FaceThemeView.m in Sources */,
 				89C9DDA0246A4252005341CE /* ILGImageCropViewController.m in Sources */,
 				009FB67F24500D7800133974 /* NSDictionary+NSNull.m in Sources */,
 				89C112DA246E8599007EAABB /* LWJiaoLiuAddAlearView.m in Sources */,
@@ -2115,12 +2241,15 @@
 				89C112E3246E9894007EAABB /* LWAddFriendModel.m in Sources */,
 				8957D4A4245955250096F1D7 /* LWSearchViewController.m in Sources */,
 				009FB66F2450093A00133974 /* zJiaoliuController.m in Sources */,
+				89844BB22473CAA00045A75A /* ChatKeyBoard.m in Sources */,
 				009E218E246A763500AD1637 /* SelectedListView.m in Sources */,
+				896624DF2473EC6D009F286D /* NSAttributedString+PPAddition.m in Sources */,
+				89844BA72473CAA00045A75A /* FaceThemeModel.m in Sources */,
 				00B0A5F024654FB20041C234 /* zCompanyDetailCell.m in Sources */,
+				89844BA52473CAA00045A75A /* MoreItem.m in Sources */,
 				00CA47792455BAEB006A2885 /* AnswerCell.m in Sources */,
 				893A18F1245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m in Sources */,
 				0091FD00245EE1520046691F /* zUserDescController.m in Sources */,
-				89A26F6E246E3F9D008EFB01 /* PPStickerPageView.m in Sources */,
 				8957D4A124594C230096F1D7 /* LWHuoYuanBaseViewController.m in Sources */,
 				00372B0D2456A54B00E51931 /* zUserInfoCard.m in Sources */,
 				0036407524701B7600B93431 /* zUserGoodsController.m in Sources */,
@@ -2128,33 +2257,37 @@
 				00159E232463FDF8005DE17B /* NewPagedFlowView.m in Sources */,
 				895BD9D424629AFC00AA5947 /* UIImageView+LWImageView.m in Sources */,
 				005ECE73246431DF00D90341 /* zLeftMenuHeader.m in Sources */,
-				89A26F6D246E3F9D008EFB01 /* PPEmojiPreviewView.m in Sources */,
 				009FB63E244FE8DF00133974 /* NSString+size.m in Sources */,
 				00B49B35246C2E61009D9ED0 /* zCityCollectionHeaderView.m in Sources */,
 				003FEAC2245C198A00E8D61E /* zUserModel.m in Sources */,
 				8957D4AD245975E10096F1D7 /* LWHuoYuanDeatilView.m in Sources */,
 				009FB63D244FE8DF00133974 /* FUTabBarController.m in Sources */,
 				8921698B2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m in Sources */,
+				89844BB12473CAA00045A75A /* MorePanel.m in Sources */,
+				89844BA62473CAA00045A75A /* ChatToolBarItem.m in Sources */,
 				890643F624695B5D0099508C /* IFBaseVC.m in Sources */,
 				00CA47712455B9DD006A2885 /* AnswerModel.m in Sources */,
 				009FB6752450095C00133974 /* zWodeController.m in Sources */,
 				00558BD72460FFE000550FBC /* zGoodsMangerController.m in Sources */,
 				0091FCEC245E6AC60046691F /* zCityEditFooter.m in Sources */,
+				89844BAF2473CAA00045A75A /* RFTextView.m in Sources */,
 				89C112E6246E9FB5007EAABB /* LWAddFriendDeatilViewController.m in Sources */,
 				00CB20302471327200171284 /* zGoodsMenuModel.m in Sources */,
 				00B26CF024580A390099FFD5 /* zUserInfo.m in Sources */,
+				89844BAE2473CAA00045A75A /* ChatToolBar.m in Sources */,
 				89C9DD73246A3538005341CE /* IFBaseView.m in Sources */,
-				89A26F8B246E4001008EFB01 /* PPTextBackedString.m in Sources */,
+				89844BB02473CAA00045A75A /* OfficialAccountToolbar.m in Sources */,
 				89C9DD98246A40CE005341CE /* IFListView.m in Sources */,
+				896624E42473EC6D009F286D /* NSString+PPAddition.m in Sources */,
 				002A6180245B0199009A53AA /* cookiesTool.m in Sources */,
 				0036407B24701FE300B93431 /* zUserDetailController.m in Sources */,
-				89A26F6B246E3F9D008EFB01 /* PPSticker.m in Sources */,
 				00C9524C2469040B00C24472 /* KKPaddingLabel.m in Sources */,
 				001ECA6A2453B6F300727379 /* zLoginCard.m in Sources */,
 				009FB638244FE8DF00133974 /* FUBadgeButton.m in Sources */,
 				89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */,
 				00B0A5E4246520220041C234 /* zjxsMenuCell.m in Sources */,
 				003A9330245089540001F615 /* UITextField+maxLength.m in Sources */,
+				89844BAC2473CAA00045A75A /* FaceButton.m in Sources */,
 				00558BE024614D6E00550FBC /* zLeftMenuCell.m in Sources */,
 				009FB666244FF64D00133974 /* zInterfacedConst.m in Sources */,
 				89F5B7DC2455955E0040F7B1 /* UIViewAdditions.m in Sources */,
@@ -2166,21 +2299,22 @@
 				00159E192463BF58005DE17B /* zHuoYuanMangerController.m in Sources */,
 				005ECE762464357800D90341 /* zHuoYuanModel.m in Sources */,
 				0091FCF3245EB2920046691F /* zPersonalModel.m in Sources */,
+				895A37C024739DC90074E425 /* LWGroupMemberListViewController.m in Sources */,
 				00D6E2DD2459A6D200B6E327 /* zNetWorkManger.m in Sources */,
+				896624E32473EC6D009F286D /* PPTextBackedString.m in Sources */,
 				0065DF16245FADBF008D3D98 /* zInviteController.m in Sources */,
 				00159E222463FDF8005DE17B /* PGIndexBannerSubiew.m in Sources */,
 				0036407824701B8600B93431 /* zBusinessController.m in Sources */,
 				009FB68124500D7800133974 /* MainSingleton.m in Sources */,
 				00CB202C2471122A00171284 /* ZFTabBarButton.m in Sources */,
-				89A26F88246E4001008EFB01 /* UIScreen+PPAddition.m in Sources */,
 				005ECE7924644E0A00D90341 /* zHuoYuanListCell.m in Sources */,
 				89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */,
 				00CB202D2471122A00171284 /* ZFBadgeButton.m in Sources */,
 				89831FD12472959200C6184E /* LWAddNewGroupModel.m in Sources */,
 				00159E1C2463F745005DE17B /* zHuoYuanScrollHeader.m in Sources */,
 				0091FCEF245EAE870046691F /* zPersonalController.m in Sources */,
-				89A26F69246E3F9D008EFB01 /* PPStickerDataManager.m in Sources */,
 				009FB63A244FE8DF00133974 /* UIView+FU_Animation.m in Sources */,
+				89844BAD2473CAA00045A75A /* RFRecordButton.m in Sources */,
 				89298189246D04EE00C3DFE0 /* ChatRoomViewController.m in Sources */,
 				895BD9CD24626C4000AA5947 /* BaseModel.m in Sources */,
 				89C112E9246E9FE7007EAABB /* LWAddGroupDeatilViewController.m in Sources */,

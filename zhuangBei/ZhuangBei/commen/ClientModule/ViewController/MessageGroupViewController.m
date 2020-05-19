@@ -14,6 +14,7 @@
 #import "IFChatView.h"
 #import "IFChatCell.h"
 #import "LWTool.h"
+#import "LWGroupMemberListViewController.h"
 
 #define INTERVAL_KEYBOARD  2
 
@@ -27,18 +28,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    UIButton *rightbtn = [UIButton new];
+    [rightbtn setImage:IMAGENAME(@"addnewchat") forState:UIControlStateNormal];
+    [rightbtn addTarget:self action:@selector(rightButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    rightbtn.frame = CGRectMake(0, 0, 40, 40);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightbtn];
 }
 
 
 
 #pragma mark - Event
 - (void)rightButtonClicked:(UIButton *)button {
-    MessageGroupSettingViewController *vc = [[MessageGroupSettingViewController alloc] init];
-//    vc.groupID = self.m_Group_ID;
-//    if ([self.creatorID isEqualToString:[IMUserInfo shareInstance].userID]) {
-//        vc.isOwner = YES;
-//    }
+    LWGroupMemberListViewController *vc = [[LWGroupMemberListViewController alloc] init];
+    vc.roomId = self.roomId;
+    vc.roomName = self.roomName;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
