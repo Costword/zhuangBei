@@ -34,8 +34,9 @@
         __weak typeof(self)weakSelf = self;
         _zhuceView = [[zhuCeCard alloc]init];
         _zhuceView.getMessageCodeTapBack = ^(NSString * _Nonnull phoneNum) {
-            NSString *url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kSendVerificationCode];
-            [weakSelf postDataWithUrl:url WithParam:@{@"phone":phoneNum}];
+            NSString *url = [NSString stringWithFormat:@"%@%@?phone=%@",kApiPrefix,kSendVerificationCode,phoneNum];
+//            @{@"phone":phoneNum}
+            [weakSelf postDataWithUrl:url WithParam:nil];
         };
         _zhuceView.zhuceBack = ^(NSMutableDictionary * _Nonnull userDic) {
 //            NSLog(@"注册信息:%@",userDic);
@@ -98,8 +99,16 @@
 {
     if ([url containsString:kSendVerificationCode]) {
         NSDictionary * dic = data;
+        NSString * code = dic[@"code"];
+        NSString * msg = dic[@"msg"];
         NSLog(@"验证码成功%@",dic);
-        [[zHud shareInstance]showMessage:@"获取验证码成功"];
+        if ([code integerValue]==500) {
+            [[zHud shareInstance]showMessage:msg];
+        }else
+        {
+            [[zHud shareInstance]showMessage:@"获取验证码成功"];
+        }
+        
     }
     if ([url containsString:kRegister]) {
         NSDictionary * dic = data;
