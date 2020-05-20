@@ -8,26 +8,31 @@
 
 #import "IFChatView.h"
 #import "LWClientHeader.h"
-#import "PPStickerInputView.h"
-#import "PPUtil.h"
-@interface IFChatView ()<PPStickerInputViewDelegate>
+//#import "PPStickerInputView.h"
+//#import "PPUtil.h"
+
+@interface IFChatView ()
+//<ChatKeyBoardDelegate, ChatKeyBoardDataSource>
+//<PPStickerInputViewDelegate>
 @property (nonatomic, weak) id delegate;
-@property (nonatomic, strong) PPStickerInputView *inputView;
+//@property (nonatomic, strong) PPStickerInputView *inputView;
 @property (nonatomic, strong) UIButton *button;
+///** 聊天键盘 */
+//@property (nonatomic, strong) ChatKeyBoard *chatKeyBoard;
 @end
 
 @implementation IFChatView
-//检查是否有y发言权限
-- (void)checkUserCanSendmsg:(BOOL)iscan msg:(NSString *)msg;
-{
-    if (!iscan) {
-        [self.inputView setCustomPlainText:msg];
-        self.inputView.userInteractionEnabled = NO;
-    }else{
-        
-    }
-    
-}
+////检查是否有y发言权限
+//- (void)checkUserCanSendmsg:(BOOL)iscan msg:(NSString *)msg;
+//{
+//    if (!iscan) {
+//        [self.inputView setCustomPlainText:msg];
+//        self.inputView.userInteractionEnabled = NO;
+//    }else{
+//
+//    }
+//
+//}
 - (instancetype)initWithDelegate:(id<UITableViewDelegate, UITableViewDataSource, IFChatViewDelegate>)delegate {
     self = [super init];
     if (self) {
@@ -45,16 +50,16 @@
 //    [_button setMulColor:@[(id)[UIColor colorWithHexString:@"FF6000"].CGColor, (id)[UIColor colorWithHexString:@"FFA414"].CGColor] startPoint:@[@0.0, @0.75]];
     
     
-        CGFloat height = [self.inputView heightThatFits];
-    //    CGFloat minY = CGRectGetHeight(self.view.bounds) - height - PP_SAFEAREAINSETS(self.view).bottom;
-    //    self.inputView.frame = CGRectMake(0, minY, CGRectGetWidth(self.view.bounds), height);
-        [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_offset(height);
-        }];
-    [_tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.inputView.mas_top).offset(-5);
-    }];
-    LWLog(@"----------------------%f",height);
+//        CGFloat height = [self.inputView heightThatFits];
+//    //    CGFloat minY = CGRectGetHeight(self.view.bounds) - height - PP_SAFEAREAINSETS(self.view).bottom;
+//    //    self.inputView.frame = CGRectMake(0, minY, CGRectGetWidth(self.view.bounds), height);
+//        [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.height.mas_offset(height);
+//        }];
+//    [_tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(self.inputView.mas_top).offset(-5);
+//    }];
+//    LWLog(@"----------------------%f",height);
 }
 
 - (void)dealloc {
@@ -66,7 +71,7 @@
 - (void)createUI {
     self.backgroundColor = [UIColor clearColor];
     
-    UITableView *tableView = [[UITableView alloc] init];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-NAVIGATOR_HEIGHT-49) style:UITableViewStylePlain];
     tableView.delegate = _delegate;
     tableView.dataSource = _delegate;
 //    tableView.backgroundColor = [UIColor colorWithHexString:@"F7F7F7"];
@@ -82,94 +87,50 @@
     _tableView.rowHeight = UITableViewAutomaticDimension;
     _tableView.estimatedRowHeight = 30;
     
-//    UITextField *textField = [[UITextField alloc] init];
-//    textField.placeholder = @"请输入内容...";
-//    textField.backgroundColor = [UIColor colorWithHexString:@"F2F2F2"];
-//    textField.layer.masksToBounds = YES;
-//    textField.layer.cornerRadius = 20;
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChanged:) name:UITextFieldTextDidChangeNotification object:nil];
-//    _textField = textField;
-//    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 12, 5)];
-//    textField.leftView = leftView;
-//    textField.leftViewMode = UITextFieldViewModeAlways;
-//
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    button.titleLabel.font = [UIFont systemFontOfSize:16];
-//    button.layer.masksToBounds = YES;
-//    button.layer.cornerRadius = 20;
-//    [button setTitle:@"发送" forState:UIControlStateNormal];
-//    [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    button.enabled = NO;
-//    _button = button;
-//
-//    UIButton *micBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [micBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    micBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-//    micBtn.layer.masksToBounds = YES;
-//    micBtn.layer.cornerRadius = 20;
-//    [micBtn setTitle:@"上麦" forState:UIControlStateNormal];
-//    [micBtn setTitle:@"下麦" forState:UIControlStateSelected];
-////    [micBtn addTarget:self action:@selector(micBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    micBtn.hidden = YES;
-//    _micButton = micBtn;
+
+      
+      [self addSubview:self.tableView];
+      
+//    
+//    self.chatKeyBoard = [ChatKeyBoard keyBoardWithParentViewBounds:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATOR_HEIGHT)];
+//    self.chatKeyBoard.delegate = self;
+//    self.chatKeyBoard.dataSource = self;
+//    self.chatKeyBoard.associateTableView = self.tableView;
+//    [self addSubview:self.chatKeyBoard];
+//    self.chatKeyBoard.backgroundColor = UIColor.redColor;
     
-    [self addSubview:tableView];
-    [self addSubview:self.inputView];
-//    [self addSubview:textField];
-//    [self addSubview:button];
-//    [self addSubview:micBtn];
     
-//    __weak typeof(self) weakSelf = self;
+                                                                           
+                                                                           
+//    CGFloat height = [self.inputView heightThatFits];
+////    CGFloat minY = CGRectGetHeight(self.view.bounds) - height - PP_SAFEAREAINSETS(self.view).bottom;
+////    self.inputView.frame = CGRectMake(0, minY, CGRectGetWidth(self.view.bounds), height);
 //
-//    [button mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.trailing.equalTo(weakSelf).offset(-15);
-//        make.bottom.equalTo(weakSelf).offset(-5);
-//        make.height.mas_equalTo(40);
-//        make.width.mas_equalTo(75);
+//    [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(self.mas_left).mas_offset(0);
+//        make.right.mas_equalTo(self.mas_right).mas_offset(-0);
+////        make.top.mas_equalTo(<#name#>.mas_top).mas_offset(<#name#>);
+//        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(0);
+//        make.height.mas_offset(height);
+//        make.height.mas_lessThanOrEqualTo(74);
 //    }];
-//
-//    [textField mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.leading.equalTo(weakSelf).offset(15);
-//        make.bottom.equalTo(button);
-//        make.height.equalTo(button);
-//        make.trailing.equalTo(button.mas_leading).offset(-15);
+//    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self).offset(0);
+//        make.leading.equalTo(self).offset(0);
+//        make.trailing.equalTo(self).offset(0);
+//        make.bottom.equalTo(self.inputView.mas_top).offset(-5);
 //    }];
-//
-//    [micBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo(button.mas_top).offset(-5);
-//        make.trailing.equalTo(button).offset(0);
-//        make.width.mas_equalTo(button);
-//        make.height.mas_equalTo(button);
-//    }];
-    
-    CGFloat height = [self.inputView heightThatFits];
-//    CGFloat minY = CGRectGetHeight(self.view.bounds) - height - PP_SAFEAREAINSETS(self.view).bottom;
-//    self.inputView.frame = CGRectMake(0, minY, CGRectGetWidth(self.view.bounds), height);
-    
-    [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.mas_left).mas_offset(0);
-        make.right.mas_equalTo(self.mas_right).mas_offset(-0);
-//        make.top.mas_equalTo(<#name#>.mas_top).mas_offset(<#name#>);
-        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(0);
-        make.height.mas_offset(height);
-    }];
-    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(0);
-        make.leading.equalTo(self).offset(0);
-        make.trailing.equalTo(self).offset(0);
-        make.bottom.equalTo(self.inputView.mas_top).offset(-5);
-    }];
+//                                                                           };
 }
 
-- (PPStickerInputView *)inputView
-{
-    if (!_inputView) {
-        _inputView = [[PPStickerInputView alloc] init];
-        _inputView.delegate = self;
-    }
-    return _inputView;
-}
+//- (PPStickerInputView *)inputView
+//{
+//    if (!_inputView) {
+//        _inputView = [[PPStickerInputView alloc] init];
+//        _inputView.delegate = self;
+//    }
+//    return _inputView;
+//}
 #pragma mark - Event
 
 - (void)buttonClicked:(UIButton *)button {
@@ -182,39 +143,97 @@
 }
 
 
-#pragma  mark ---------------- PPStickerInputViewDelegate ------------------
-
-- (void)stickerInputViewDidClickSendButton:(PPStickerInputView *)inputView
-{
-    NSString *plainText = inputView.plainText;
-       if (!plainText.length) {
-           return;
-       }
-       [inputView clearText];
-       
-    if (_delegate && [_delegate respondsToSelector:@selector(chatViewDidSendText:)]) {
-        [_delegate chatViewDidSendText:plainText];
-    }
-    
-    [self endEditing:YES];
-//    self.textField.text = nil;
-//    self.button.enabled = NO;
-}
-
-//- (void)micBtnClicked:(UIButton *)button {
-//    button.selected = !button.selected;
-//    
+//#pragma  mark ---------------- PPStickerInputViewDelegate ------------------
+//
+//- (void)stickerInputViewDidClickSendButton:(PPStickerInputView *)inputView
+//{
+//    NSString *plainText = inputView.plainText;
+//       if (!plainText.length) {
+//           return;
+//       }
+//       [inputView clearText];
+//
+//    if (_delegate && [_delegate respondsToSelector:@selector(chatViewDidSendText:)]) {
+//        [_delegate chatViewDidSendText:plainText];
+//    }
+//
+//    [self endEditing:YES];
 //}
 
-- (void)textFieldTextDidChanged:(NSNotification *)notif {
-    if (self.textField.text.length == 0) {
-        self.button.enabled = NO;
-    } else {
-        self.button.enabled = YES;
-    }
-}
+
+
 
 #pragma mark - other
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+//{
+//    [self.chatKeyBoard keyboardDown];
+//}
+
+- (void)chatKeyBoardSendText:(NSString *)text;
+{
+    LWLog(@"********************text:%@",text);
+}
+#pragma mark -- ChatKeyBoardDataSource
+- (NSArray<MoreItem *> *)chatKeyBoardMorePanelItems
+{
+    MoreItem *item1 = [MoreItem moreItemWithPicName:@"sharemore_location" highLightPicName:nil itemName:@"位置"];
+    MoreItem *item2 = [MoreItem moreItemWithPicName:@"sharemore_pic" highLightPicName:nil itemName:@"图片"];
+    MoreItem *item3 = [MoreItem moreItemWithPicName:@"sharemore_video" highLightPicName:nil itemName:@"拍照"];
+    MoreItem *item4 = [MoreItem moreItemWithPicName:@"sharemore_location" highLightPicName:nil itemName:@"位置"];
+    MoreItem *item5 = [MoreItem moreItemWithPicName:@"sharemore_pic" highLightPicName:nil itemName:@"图片"];
+    MoreItem *item6 = [MoreItem moreItemWithPicName:@"sharemore_video" highLightPicName:nil itemName:@"拍照"];
+    MoreItem *item7 = [MoreItem moreItemWithPicName:@"sharemore_location" highLightPicName:nil itemName:@"位置"];
+    MoreItem *item8 = [MoreItem moreItemWithPicName:@"sharemore_pic" highLightPicName:nil itemName:@"图片"];
+    MoreItem *item9 = [MoreItem moreItemWithPicName:@"sharemore_video" highLightPicName:nil itemName:@"拍照"];
+    return @[item1, item2, item3, item4, item5, item6, item7, item8, item9];
+}
+- (NSArray<ChatToolBarItem *> *)chatKeyBoardToolbarItems
+{
+    ChatToolBarItem *item1 = [ChatToolBarItem barItemWithKind:kBarItemFace normal:@"face" high:@"face_HL" select:@"keyboard"];
+    
+    ChatToolBarItem *item2 = [ChatToolBarItem barItemWithKind:kBarItemVoice normal:@"voice" high:@"voice_HL" select:@"keyboard"];
+    
+    ChatToolBarItem *item3 = [ChatToolBarItem barItemWithKind:kBarItemMore normal:@"more_ios" high:@"more_ios_HL" select:nil];
+    
+    ChatToolBarItem *item4 = [ChatToolBarItem barItemWithKind:kBarItemSwitchBar normal:@"switchDown" high:nil select:nil];
+    
+    return @[item1, item2, item3, item4];
+}
+
+- (NSArray<FaceThemeModel *> *)chatKeyBoardFacePanelSubjectItems
+{
+    NSMutableArray *subjectArray = [NSMutableArray array];
+    
+    NSArray *sources = @[@"face"];
+    
+    for (int i = 0; i < sources.count; ++i)
+    {
+        NSString *plistName = sources[i];
+        
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:plistName ofType:@"plist"];
+        NSDictionary *faceDic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        NSArray *allkeys = faceDic.allKeys;
+        
+        FaceThemeModel *themeM = [[FaceThemeModel alloc] init];
+        themeM.themeStyle = FaceThemeStyleCustomEmoji;
+        themeM.themeDecribe = [NSString stringWithFormat:@"f%d", i];
+        
+        NSMutableArray *modelsArr = [NSMutableArray array];
+        
+        for (int i = 0; i < allkeys.count; ++i) {
+            NSString *name = allkeys[i];
+            FaceModel *fm = [[FaceModel alloc] init];
+            fm.faceTitle = name;
+            fm.faceIcon = [faceDic objectForKey:name];
+            [modelsArr addObject:fm];
+        }
+        themeM.faceModels = modelsArr;
+        
+        [subjectArray addObject:themeM];
+    }
+    
+    return subjectArray;
+}
 
 
 @end

@@ -8,18 +8,21 @@
 
 #import "LWChatListBaseViewController.h"
 #import "IQKeyboardManager.h"
+#import "LWEmojiManager.h"
 
 NSString *const getlist_group_url  = @"app/appgroupmessage/getGroupMsgList";
 
 NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 
 
-@interface LWChatListBaseViewController ()<IFChatViewDelegate, UITableViewDataSource,UITableViewDelegate, UITextViewDelegate,UIScrollViewDelegate>
+@interface LWChatListBaseViewController ()<IFChatViewDelegate, UITableViewDataSource,UITableViewDelegate, UITextViewDelegate,UIScrollViewDelegate,ChatKeyBoardDelegate, ChatKeyBoardDataSource>
 @property (nonatomic, strong) NSMutableArray<ShowMsgElem *> *totalDatasArray;
 @property (nonatomic, strong) NSString *m_Group_ID;
 @property (nonatomic, assign) LWChatRoomType  roomType;
 @property (nonatomic, strong) dispatch_group_t dispatch_group;
 @property (nonatomic, assign) NSInteger  successNum;
+/** 聊天键盘 */
+@property (nonatomic, strong) ChatKeyBoard *chatKeyBoard;
 
 @end
 
@@ -31,7 +34,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     [self requestPostWithUrl:@"app/appgroupuser/findOneByGroupIdAndUserId" paraString:@{@"groupId":LWDATA(self.roomId)} success:^(id  _Nonnull response) {
         NSInteger code = [response[@"code"] integerValue];
         NSString *msg = response[@"mag"];
-        [self.chatView checkUserCanSendmsg:(code == 1) msg:(code == 1)?@"":msg];
+        //        [self.chatView checkUserCanSendmsg:(code == 1) msg:(code == 1)?@"":msg];
     } failure:^(NSError * _Nonnull error) {
         
     }];
@@ -62,7 +65,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
             self.showDatasArray = [self.totalDatasArray mutableCopy];
         }
         
-        [self.chatView.tableView reloadData];
+        [self.chatTableView reloadData];
         [self scrollTableToFoot:NO];
     } failure:^(NSError * _Nonnull error) {
         
@@ -160,12 +163,12 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         if ([msgModel.userID isEqualToString:[IMUserInfo shareInstance].userID]) {
             msgModel.isMySelf = YES;
         }
-        msgModel.rowHeight = [IFChatCell caculateTextHeightWithMaxWidth:self.chatView.tableView.width - [IFChatCell reserveWithForCell] text:msgModel.content];
+        msgModel.rowHeight = [IFChatCell caculateTextHeightWithMaxWidth:self.chatTableView.width - [IFChatCell reserveWithForCell] text:msgModel.content];
         [self.totalDatasArray addObject:msgModel];
         [self.showDatasArray removeAllObjects];
         //        [self.showDatasArray addObjectsFromArray: [self.totalDatasArray subarrayWithRange:NSMakeRange(self.totalDatasArray.count - 100, 100)]];
         [self getNeetShowDatas];
-        [self.chatView.tableView reloadData];
+        [self.chatTableView reloadData];
         [self scrollTableToFoot:NO];
     });
 }
@@ -252,7 +255,6 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     
     self.title = self.roomName;
     
-    [self addNotiObserver];
     
     [self requestRecordListDatas];
 }
@@ -260,82 +262,24 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 #pragma mark - UI
 - (void)createUI {
     
-    IFChatView *chatView = [[IFChatView alloc] initWithDelegate:self];
-    [self.view addSubview:chatView];
-    chatView.textField.placeholder = @"来聊吧";
-    _chatView = chatView;
-    
-    __weak typeof(self) weakSelf = self;
-    [chatView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.view).offset(0);
-        make.leading.equalTo(weakSelf.view);
-        make.trailing.equalTo(weakSelf.view);
-        make.bottom.equalTo(weakSelf.view);
-    }];
-}
-
-- (void)addNotiObserver
-{
-    //注册键盘出现的通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification object:nil];
-    //注册键盘消失的通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-    
-}
-
-///键盘显示事件
-- (void)keyboardWillShow:(NSNotification *)notification {
-    //获取键盘高度，在不同设备上，以及中英文下是不同的
-    CGFloat kbHeight = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
-    
-    // 取得键盘的动画时间，这样可以在视图上移的时候更连贯
-    double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    __weak typeof(self) weakSelf = self;
-    
-    [UIView beginAnimations:@"Animation" context:nil];
-    //设置动画的间隔时间
-    [UIView setAnimationDuration:duration];
-    //??使用当前正在运行的状态开始下一段动画
-    [UIView setAnimationBeginsFromCurrentState: YES];
-    
-    [self.chatView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf.view).offset(-kbHeight);
-    }];
-    [self.view layoutIfNeeded];
-    
-    //设置动画结束
-    [UIView commitAnimations];
-}
-
-///键盘消失事件
-- (void)keyboardWillHide:(NSNotification *)notify {
-    // 键盘动画时间
-    double duration = [[notify.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    __weak typeof(self) weakSelf = self;
-    //视图下沉恢复原状
-    [UIView animateWithDuration:duration animations:^{
-        [self.chatView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(weakSelf.view).offset(0);
-        }];
-    }];
-    [self.view layoutIfNeeded];
+    [self.view addSubview:self.chatTableView];
+    self.chatKeyBoard = [ChatKeyBoard keyBoardWithParentViewBounds:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATOR_HEIGHT)];
+    self.chatKeyBoard.delegate = self;
+    self.chatKeyBoard.dataSource = self;
+    self.chatKeyBoard.associateTableView = self.chatTableView;
+    [self.view addSubview:self.chatKeyBoard];
+    self.chatKeyBoard.placeHolder = @"来聊吧...";
 }
 
 
 - (void)scrollTableToFoot:(BOOL)animated
 {
-    NSInteger s = [self.chatView.tableView numberOfSections];  //有多少组
+    NSInteger s = [self.chatTableView numberOfSections];  //有多少组
     if (s<1) return;  //无数据时不执行 要不会crash
-    NSInteger r = [self.chatView.tableView numberOfRowsInSection:s-1]; //最后一组有多少行
+    NSInteger r = [self.chatTableView numberOfRowsInSection:s-1]; //最后一组有多少行
     if (r<1) return;
     NSIndexPath *ip = [NSIndexPath indexPathForRow:r-1 inSection:s-1];  //取最后一行数据
-    [self.chatView.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:animated]; //滚动到最后一行
+    [self.chatTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:animated]; //滚动到最后一行
 }
 
 
@@ -365,8 +309,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     cell.titleLabel.text = getNewShowMsgElem.username;
     cell.subTitleLabel.text = getNewShowMsgElem.time;
     NSMutableAttributedString *attributedMessage = [[NSMutableAttributedString alloc] initWithString:getNewShowMsgElem.content attributes:@{ NSFontAttributeName: kFont(15), NSForegroundColorAttributeName: UIColor.whiteColor }];
-    [PPStickerDataManager.sharedInstance replaceEmojiForAttributedString:attributedMessage font:kFont(15)];
-    //    cell.contentLabel.adjustsFontSizeToFitWidth = true;
+    [LWEmojiManager.share replaceEmojiForAttributedString:attributedMessage font:kFont(15)];
+    cell.contentLabel.adjustsFontSizeToFitWidth = true;
     cell.contentLabel.attributedText = attributedMessage;
     //    cell.contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     cell.contentLabel.numberOfLines = 0;
@@ -376,7 +320,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     ShowMsgElem *getNewShowMsgElem = [self.showDatasArray objectAtIndex:indexPath.row];
     if (getNewShowMsgElem.rowHeight == 0) {
-        getNewShowMsgElem.rowHeight = [IFChatCell caculateTextHeightWithMaxWidth:self.chatView.tableView.width - [IFChatCell reserveWithForCell] text:getNewShowMsgElem.content];
+        getNewShowMsgElem.rowHeight = [IFChatCell caculateTextHeightWithMaxWidth:self.chatTableView.width - [IFChatCell reserveWithForCell] text:getNewShowMsgElem.content];
     }
     
     return getNewShowMsgElem.rowHeight;
@@ -408,9 +352,64 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         }else{
             self.showDatasArray = [self.totalDatasArray mutableCopy];
         }
+        [self.chatTableView reloadData];
     }
-    
-    [self.chatView.tableView reloadData];
+}
+#pragma mark - other
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.chatKeyBoard keyboardDown];
 }
 
+- (void)chatKeyBoardSendText:(NSString *)text;
+{
+    LWLog(@"********************text:%@",text);
+    [self chatViewDidSendText:text];
+}
+#pragma mark -- ChatKeyBoardDataSource
+- (NSArray<MoreItem *> *)chatKeyBoardMorePanelItems
+{
+    MoreItem *item1 = [MoreItem moreItemWithPicName:@"sharemore_location" highLightPicName:nil itemName:@"相册"];
+    MoreItem *item2 = [MoreItem moreItemWithPicName:@"sharemore_pic" highLightPicName:nil itemName:@"相机"];
+    MoreItem *item3 = [MoreItem moreItemWithPicName:@"sharemore_video" highLightPicName:nil itemName:@"连接"];
+    return @[item1, item2, item3,];
+}
+- (NSArray<ChatToolBarItem *> *)chatKeyBoardToolbarItems
+{
+    ChatToolBarItem *item1 = [ChatToolBarItem barItemWithKind:kBarItemFace normal:@"face" high:@"face_HL" select:@"keyboard"];
+    
+    ChatToolBarItem *item2 = [ChatToolBarItem barItemWithKind:kBarItemVoice normal:@"voice" high:@"voice_HL" select:@"keyboard"];
+    
+    ChatToolBarItem *item3 = [ChatToolBarItem barItemWithKind:kBarItemMore normal:@"more_ios" high:@"more_ios_HL" select:nil];
+    
+    ChatToolBarItem *item4 = [ChatToolBarItem barItemWithKind:kBarItemSwitchBar normal:@"switchDown" high:nil select:nil];
+    
+    return @[item1, item2, item3, item4];
+}
+
+- (NSArray<FaceThemeModel *> *)chatKeyBoardFacePanelSubjectItems
+{
+    return [LWEmojiManager share].emojiMutableArray;
+}
+
+- (UITableView *)chatTableView
+{
+    if (!_chatTableView) {
+        
+        _chatTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-NAVIGATOR_HEIGHT-49) style:UITableViewStylePlain];
+        _chatTableView.delegate = self;
+        _chatTableView.dataSource = self;
+        _chatTableView.backgroundColor = UIColor.whiteColor;
+        //    tableView.separatorInset = UIEdgeInsetsMake(0, 14, 0, 18);
+        //    tableView.separatorColor = [UIColor darkGrayColor];
+        _chatTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _chatTableView.tableFooterView = [UIView new];
+        _chatTableView.layer.masksToBounds = YES;
+        _chatTableView.layer.cornerRadius = 8;
+        _chatTableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+        _chatTableView.rowHeight = UITableViewAutomaticDimension;
+        _chatTableView.estimatedRowHeight = 30;
+    }
+    return _chatTableView;
+}
 @end

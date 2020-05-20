@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, LWChatRoomType) {
 
 @interface LWChatListBaseViewController : IFBaseVC
 
-@property (nonatomic, strong) IFChatView *chatView;
+@property (nonatomic, strong) UITableView *chatTableView;
 @property (nonatomic, strong) NSString *roomName;
 @property (nonatomic, strong) NSString * roomId;
 @property (nonatomic, strong) NSMutableArray<ShowMsgElem *> *showDatasArray;
