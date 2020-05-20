@@ -343,6 +343,15 @@ NSString *const changePersonalMin = @"app/appqyuser/update";
 
 
 /**
+ *邀请人详情
+ *URL    http://test.110zhuangbei.com:8105/app/app/appqyuser/findOne
+ *userId    768
+ */
+
+NSString *const getFriendDetail = @"app/appqyuser/findOne";
+
+
+/**
  *货源管理
  *POST
  *无参数

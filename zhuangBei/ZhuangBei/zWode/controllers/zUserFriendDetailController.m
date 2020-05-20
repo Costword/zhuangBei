@@ -1,16 +1,17 @@
 //
-//  zUserInvitelController.m
+//  zUserFriendDetailController.m
 //  ZhuangBei
 //
-//  Created by aa on 2020/5/16.
+//  Created by aa on 2020/5/19.
 //  Copyright © 2020 aa. All rights reserved.
 //
 
-#import "zUserInvitelController.h"
+#import "zUserFriendDetailController.h"
 #import "zMyFriendListCell.h"
-#import "zFriendsModel.h"
 
-@interface zUserInvitelController ()<UITableViewDelegate,UITableViewDataSource>
+
+
+@interface zUserFriendDetailController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(strong,nonatomic)UITableView*persoanTableView;
 
@@ -18,7 +19,7 @@
 
 @end
 
-@implementation zUserInvitelController
+@implementation zUserFriendDetailController
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -47,7 +48,40 @@
 -(NSMutableArray*)friendArray
 {
     if (!_friendArray) {
-        _friendArray = [NSMutableArray array];
+       NSArray * array =  @[
+        @{
+            @"name":@"出生日期",
+            @"content":@"",
+        },
+        @{
+            @"name":@"最高学历",
+            @"content":@"",
+        },
+        @{
+            @"name":@"工作年限",
+            @"content":@"",
+        },
+        @{
+            @"name":@"公司名称",
+            @"content":@"",
+        },
+        @{
+            @"name":@"公司类型",
+            @"content":@"",
+        },
+        @{
+            @"name":@"公司所在省",
+            @"content":@"",
+        },
+        @{
+            @"name":@"部门-职务",
+            @"content":@"",
+        },
+        @{
+            @"name":@"管辖地",
+            @"content":@"",
+        }];
+        _friendArray = [[NSMutableArray alloc]initWithArray:array];
     }
     return _friendArray;
 }
@@ -57,7 +91,7 @@
     
     [self.view addSubview:self.persoanTableView];
     
-    NSString * getUserIntevial = [NSString stringWithFormat:@"%@%@",kApiPrefix,kuserGetInvitelList];
+    NSString * getUserIntevial = [NSString stringWithFormat:@"%@%@?userId=%@",kApiPrefix,getFriendDetail,self.userId];
     [self getDataurl:getUserIntevial withParam:nil];
 }
 
@@ -79,8 +113,6 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     zMyFriendListCell * cell = [zMyFriendListCell instanceWithTableView:tableView AndIndexPath:indexPath];
-    zFriendsModel * model = self.friendArray[indexPath.row];
-    cell.model = model;
     return cell;
 }
 
@@ -104,29 +136,16 @@
 
 -(void)RequsetSuccessWithData:(id)data AndUrl:(NSString*)url
 {
-    if ([url containsString:kuserGetInvitelList]) {
+    if ([url containsString:getFriendDetail]) {
         NSDictionary * dic = data[@"page"];
         NSString * code = data[@"code"];
         if ([code integerValue] == 0) {
-            
-            NSArray * list = dic[@"list"];
-            if (list.count == 0) {
-                [[zHud shareInstance]showMessage:@"暂无邀请人"];
-                self.nothingView.alpha = 1;
-                [self.view bringSubviewToFront:self.nothingView];
-            }else
-            {
-                [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    NSDictionary * dic = list[idx];
-                    zFriendsModel * model = [zFriendsModel mj_objectWithKeyValues:dic];
-                    [self.friendArray addObject:model];
-                }];
-                [self.persoanTableView reloadData];
-            }
+            NSDictionary * list = dic[@"list"];
         }
         NSLog(@"公司认证信息%@",dic);
     }
 }
+
 
 
 @end

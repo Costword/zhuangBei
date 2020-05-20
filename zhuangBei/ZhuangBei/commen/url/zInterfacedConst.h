@@ -56,6 +56,9 @@ UIKIT_EXTERN NSString *const kupUserInfo;
 /**验证公司是否审核*/
 UIKIT_EXTERN NSString *const kgetCompanyID;
 
+/**查看邀请人详情*/
+UIKIT_EXTERN NSString *const getFriendDetail;
+
 /** 获取货源管理列表*/
 UIKIT_EXTERN NSString *const kGoodsMangerMenu;
 

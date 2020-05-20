@@ -34,6 +34,7 @@
 {
     [super viewWillAppear:animated];
     
+    [self loadMenuList];
     [self loadList];
 }
 
@@ -102,31 +103,19 @@
     [self.view addSubview:self.leftMenu];
     [self.view addSubview:self.menuTableView];
     
+   
+    
+}
+
+-(void)loadMenuList
+{
     __weak typeof(self)weakSelf = self;
-    NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kGoodsMangerMenu];
-    self.noContentView.retryTapBack = ^{
-        [weakSelf postDataWithUrl:url WithParam:nil];
-        [weakSelf loadList];
-    };
-    [self postDataWithUrl:url WithParam:nil];
-    
-    
-//    [self requestPostWithUrl:listurl paraString:self.listParmas success:^(id  _Nonnull response) {
-//        NSString * code = response[@"code"];
-//        if ([code integerValue] == 0) {
-//            NSDictionary * dic = response[@"page"];
-//            NSLog(@"货源列表%@",dic);
-//        }else
-//        {
-//            NSString * msg =response[@"msg"];
-//            [[zHud shareInstance]showMessage:msg];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//        [[zHud shareInstance]showMessage:@"无法连接服务器"];
-//    }];
-    
-    
+   NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kGoodsMangerMenu];
+   self.noContentView.retryTapBack = ^{
+       [weakSelf postDataWithUrl:url WithParam:nil];
+       [weakSelf loadList];
+   };
+   [self postDataWithUrl:url WithParam:nil];
 }
 
 -(void)loadList

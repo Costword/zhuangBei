@@ -20,6 +20,10 @@
 		001ECA752453CCB700727379 /* zHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA742453CCB700727379 /* zHud.m */; };
 		001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA772453DA3200727379 /* phoneNumCheck.m */; };
 		001ECA7B2454449000727379 /* zhuCeCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 001ECA7A2454449000727379 /* zhuCeCard.m */; };
+		0026C4B42474106C00C6ACB6 /* zFriendsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0026C4B32474106C00C6ACB6 /* zFriendsModel.m */; };
+		0026C4B724741A3E00C6ACB6 /* zUserFriendDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0026C4B624741A3E00C6ACB6 /* zUserFriendDetailController.m */; };
+		0026C4BA24741CCE00C6ACB6 /* zMyFriendsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0026C4B924741CCE00C6ACB6 /* zMyFriendsHeader.m */; };
+		0026C4BD24741E6900C6ACB6 /* zMyfriendDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0026C4BC24741E6900C6ACB6 /* zMyfriendDetailCell.m */; };
 		002A6180245B0199009A53AA /* cookiesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 002A617F245B0199009A53AA /* cookiesTool.m */; };
 		0036407224701B5500B93431 /* zUserInvitelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0036407124701B5500B93431 /* zUserInvitelController.m */; };
 		0036407524701B7600B93431 /* zUserGoodsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0036407424701B7500B93431 /* zUserGoodsController.m */; };
@@ -277,6 +281,14 @@
 		001ECA772453DA3200727379 /* phoneNumCheck.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = phoneNumCheck.m; sourceTree = "<group>"; };
 		001ECA792454449000727379 /* zhuCeCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zhuCeCard.h; sourceTree = "<group>"; };
 		001ECA7A2454449000727379 /* zhuCeCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhuCeCard.m; sourceTree = "<group>"; };
+		0026C4B22474106C00C6ACB6 /* zFriendsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zFriendsModel.h; sourceTree = "<group>"; };
+		0026C4B32474106C00C6ACB6 /* zFriendsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zFriendsModel.m; sourceTree = "<group>"; };
+		0026C4B524741A3E00C6ACB6 /* zUserFriendDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zUserFriendDetailController.h; sourceTree = "<group>"; };
+		0026C4B624741A3E00C6ACB6 /* zUserFriendDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zUserFriendDetailController.m; sourceTree = "<group>"; };
+		0026C4B824741CCE00C6ACB6 /* zMyFriendsHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zMyFriendsHeader.h; sourceTree = "<group>"; };
+		0026C4B924741CCE00C6ACB6 /* zMyFriendsHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zMyFriendsHeader.m; sourceTree = "<group>"; };
+		0026C4BB24741E6900C6ACB6 /* zMyfriendDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zMyfriendDetailCell.h; sourceTree = "<group>"; };
+		0026C4BC24741E6900C6ACB6 /* zMyfriendDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zMyfriendDetailCell.m; sourceTree = "<group>"; };
 		002A617E245B0199009A53AA /* cookiesTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cookiesTool.h; sourceTree = "<group>"; };
 		002A617F245B0199009A53AA /* cookiesTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cookiesTool.m; sourceTree = "<group>"; };
 		0036407024701B5500B93431 /* zUserInvitelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zUserInvitelController.h; sourceTree = "<group>"; };
@@ -832,6 +844,10 @@
 				0091FCEB245E6AC60046691F /* zCityEditFooter.m */,
 				0000B1BC24738BED00B2F419 /* zMyFriendListCell.h */,
 				0000B1BD24738BED00B2F419 /* zMyFriendListCell.m */,
+				0026C4B824741CCE00C6ACB6 /* zMyFriendsHeader.h */,
+				0026C4B924741CCE00C6ACB6 /* zMyFriendsHeader.m */,
+				0026C4BB24741E6900C6ACB6 /* zMyfriendDetailCell.h */,
+				0026C4BC24741E6900C6ACB6 /* zMyfriendDetailCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -903,6 +919,8 @@
 				008FB01D246AD71D00B207CD /* zUpLoadUserModel.m */,
 				008FB01F246AEC4000B207CD /* zListTypeModel.h */,
 				008FB020246AEC4000B207CD /* zListTypeModel.m */,
+				0026C4B22474106C00C6ACB6 /* zFriendsModel.h */,
+				0026C4B32474106C00C6ACB6 /* zFriendsModel.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -1230,6 +1248,8 @@
 				0091FCFF245EE1520046691F /* zUserDescController.m */,
 				0036407024701B5500B93431 /* zUserInvitelController.h */,
 				0036407124701B5500B93431 /* zUserInvitelController.m */,
+				0026C4B524741A3E00C6ACB6 /* zUserFriendDetailController.h */,
+				0026C4B624741A3E00C6ACB6 /* zUserFriendDetailController.m */,
 				0036407324701B7500B93431 /* zUserGoodsController.h */,
 				0036407424701B7500B93431 /* zUserGoodsController.m */,
 				0036407624701B8600B93431 /* zBusinessController.h */,
@@ -1995,6 +2015,7 @@
 				0000B1BB247372AB00B2F419 /* zCompanyGoodsModel.m in Sources */,
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				890643FD24695C370099508C /* MessageGroupSettingViewController.m in Sources */,
+				0026C4BD24741E6900C6ACB6 /* zMyfriendDetailCell.m in Sources */,
 				89A26F8D246E4001008EFB01 /* PPSlideLineButton.m in Sources */,
 				004E435F2472CC04000A4627 /* zCompanyGoodsCell.m in Sources */,
 				890643ED246955DA0099508C /* LWClientManager.m in Sources */,
@@ -2040,6 +2061,7 @@
 				00B0A5D1246500180041C234 /* zXieYiController.m in Sources */,
 				0091FCFA245EC1700046691F /* zPersonalHeader.m in Sources */,
 				009E218D246A763500AD1637 /* SelectedListModel.m in Sources */,
+				0026C4BA24741CCE00C6ACB6 /* zMyFriendsHeader.m in Sources */,
 				89A26F87246E4001008EFB01 /* NSAttributedString+PPAddition.m in Sources */,
 				00B0A5E7246520D10041C234 /* zJxsLeftMenu.m in Sources */,
 				009FB68B2450428000133974 /* zNothingView.m in Sources */,
@@ -2071,6 +2093,7 @@
 				0087184B2459585C003F8CD3 /* QuestionFootView.m in Sources */,
 				89C9DD6C246A343C005341CE /* UIView+ILGKit.m in Sources */,
 				00558BD42460FF4200550FBC /* sliderNavMenu.m in Sources */,
+				0026C4B42474106C00C6ACB6 /* zFriendsModel.m in Sources */,
 				001ECA7B2454449000727379 /* zhuCeCard.m in Sources */,
 				89C112EC246EA293007EAABB /* LWUserGroupModel.m in Sources */,
 				00372AED2456842F00E51931 /* PPNetworkHelper.m in Sources */,
@@ -2145,6 +2168,7 @@
 				00B49B35246C2E61009D9ED0 /* zCityCollectionHeaderView.m in Sources */,
 				003FEAC2245C198A00E8D61E /* zUserModel.m in Sources */,
 				8957D4AD245975E10096F1D7 /* LWHuoYuanDeatilView.m in Sources */,
+				0026C4B724741A3E00C6ACB6 /* zUserFriendDetailController.m in Sources */,
 				009FB63D244FE8DF00133974 /* FUTabBarController.m in Sources */,
 				8921698B2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m in Sources */,
 				890643F624695B5D0099508C /* IFBaseVC.m in Sources */,
@@ -2349,7 +2373,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K2YCGMC4SW;
+				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -2375,7 +2399,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K2YCGMC4SW;
+				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
