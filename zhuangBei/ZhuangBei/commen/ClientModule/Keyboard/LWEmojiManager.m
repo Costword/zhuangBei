@@ -44,7 +44,7 @@
            NSArray *faceArr =  [NSArray arrayWithContentsOfFile:plistPath];
            FaceThemeModel *themeM = [[FaceThemeModel alloc] init];
            themeM.themeStyle = FaceThemeStyleCustomEmoji;
-           themeM.themeDecribe = [NSString stringWithFormat:@"f%d", i];
+           themeM.themeDecribe = @"Emoji";
            
            NSMutableArray *modelsArr = [NSMutableArray array];
            for (NSDictionary *dict in faceArr) {

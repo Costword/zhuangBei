@@ -371,7 +371,7 @@ selectStateImageStr:(NSString *)selectStr highLightStateImageStr:(NSString *)hig
     switch (sender.tag) {
         case 1:
         {
-            [self handelVoiceClick:sender];
+//            [self handelVoiceClick:sender];
             break;
         }
         case 2:

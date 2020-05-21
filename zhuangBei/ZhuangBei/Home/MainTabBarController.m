@@ -41,7 +41,7 @@
     //交流
     zJiaoliuController*jlVC = [[zJiaoliuController alloc]init];
     UIViewController *jlNVC = [self setupChildViewController:jlVC navigationController:[MainNavController class] title:@"交流大厅" imageName:@"huoyuan_kefu.png" selectedImageName:@"huoyuan_kefu.png" offset:NO];
-    jlNVC.tabBarItem.badgeValue = @"88";
+//    jlNVC.tabBarItem.badgeValue = @"88";
     
     //我的
     zWodeController*wdVC = [[zWodeController alloc]init];

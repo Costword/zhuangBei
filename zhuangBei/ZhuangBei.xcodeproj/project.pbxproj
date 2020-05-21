@@ -149,6 +149,7 @@
 		890643FD24695C370099508C /* MessageGroupSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 890643FC24695C370099508C /* MessageGroupSettingViewController.m */; };
 		8906440024695C7A0099508C /* InterfaceUrls.m in Sources */ = {isa = PBXBuildFile; fileRef = 890643FE24695C7A0099508C /* InterfaceUrls.m */; };
 		8906440324695C9B0099508C /* IFGroupMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8906440224695C9B0099508C /* IFGroupMemberCell.m */; };
+		891C7CE9247611AD00760F64 /* LWLocalChatRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 891C7CE8247611AD00760F64 /* LWLocalChatRecordModel.m */; };
 		8921697524566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921697124566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m */; };
 		8921697624566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921697224566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m */; };
 		8921697B245670AE007C6615 /* LWSwitchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921697A245670AE007C6615 /* LWSwitchBarView.m */; };
@@ -574,6 +575,8 @@
 		890643FF24695C7A0099508C /* InterfaceUrls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceUrls.h; sourceTree = "<group>"; };
 		8906440124695C9B0099508C /* IFGroupMemberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFGroupMemberCell.h; sourceTree = "<group>"; };
 		8906440224695C9B0099508C /* IFGroupMemberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFGroupMemberCell.m; sourceTree = "<group>"; };
+		891C7CE7247611AD00760F64 /* LWLocalChatRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWLocalChatRecordModel.h; sourceTree = "<group>"; };
+		891C7CE8247611AD00760F64 /* LWLocalChatRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWLocalChatRecordModel.m; sourceTree = "<group>"; };
 		8921697124566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanListCollectionViewCell.m; sourceTree = "<group>"; };
 		8921697224566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanItemListCollectionViewCell.m; sourceTree = "<group>"; };
 		8921697324566BAA007C6615 /* LWHuoYuanListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanListCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1472,6 +1475,8 @@
 				89C112EB246EA293007EAABB /* LWUserGroupModel.m */,
 				89831FCF2472959200C6184E /* LWAddNewGroupModel.h */,
 				89831FD02472959200C6184E /* LWAddNewGroupModel.m */,
+				891C7CE7247611AD00760F64 /* LWLocalChatRecordModel.h */,
+				891C7CE8247611AD00760F64 /* LWLocalChatRecordModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1760,8 +1765,8 @@
 				89844B7C2473CA9F0045A75A /* ChatKeyBoardMacroDefine.h */,
 				89844B7D2473CA9F0045A75A /* Cagegory */,
 				89844B802473CA9F0045A75A /* Models */,
-				89844B872473CA9F0045A75A /* ChatKeyBoard.h */,
 				89844B882473CA9F0045A75A /* Views */,
+				89844B872473CA9F0045A75A /* ChatKeyBoard.h */,
 				89844BA02473CAA00045A75A /* ChatKeyBoard.m */,
 				896624C62473EBD0009F286D /* LWEmojiManager.h */,
 				896624C72473EBD0009F286D /* LWEmojiManager.m */,
@@ -2141,7 +2146,6 @@
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				890643FD24695C370099508C /* MessageGroupSettingViewController.m in Sources */,
 				0026C4BD24741E6900C6ACB6 /* zMyfriendDetailCell.m in Sources */,
-				89A26F8D246E4001008EFB01 /* PPSlideLineButton.m in Sources */,
 				004E435F2472CC04000A4627 /* zCompanyGoodsCell.m in Sources */,
 				890643ED246955DA0099508C /* LWClientManager.m in Sources */,
 				89216982245686E2007C6615 /* LWJiaoLiuGroupCollectionView.m in Sources */,
@@ -2186,7 +2190,6 @@
 				0091FCFA245EC1700046691F /* zPersonalHeader.m in Sources */,
 				009E218D246A763500AD1637 /* SelectedListModel.m in Sources */,
 				0026C4BA24741CCE00C6ACB6 /* zMyFriendsHeader.m in Sources */,
-				89A26F87246E4001008EFB01 /* NSAttributedString+PPAddition.m in Sources */,
 				895A37C324739F330074E425 /* LWGroupMemberListModel.m in Sources */,
 				89844BAB2473CAA00045A75A /* FacePageView.m in Sources */,
 				00B0A5E7246520D10041C234 /* zJxsLeftMenu.m in Sources */,
@@ -2312,6 +2315,7 @@
 				89C112E6246E9FB5007EAABB /* LWAddFriendDeatilViewController.m in Sources */,
 				00CB20302471327200171284 /* zGoodsMenuModel.m in Sources */,
 				00B26CF024580A390099FFD5 /* zUserInfo.m in Sources */,
+				891C7CE9247611AD00760F64 /* LWLocalChatRecordModel.m in Sources */,
 				89844BAE2473CAA00045A75A /* ChatToolBar.m in Sources */,
 				89C9DD73246A3538005341CE /* IFBaseView.m in Sources */,
 				89844BB02473CAA00045A75A /* OfficialAccountToolbar.m in Sources */,
@@ -2509,7 +2513,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -2535,7 +2539,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";

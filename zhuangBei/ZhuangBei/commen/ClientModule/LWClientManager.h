@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LWLocalChatRecordModel.h"
 
-NS_ASSUME_NONNULL_BEGIN
 
 /**
  请求成功的block
@@ -51,6 +51,21 @@ typedef void(^RequestFailure)(NSError *error);
 /// @param failure
 - (void)sendMsgOneToOne:(NSString *)msg roomId:(NSString *)roomId success:(RequestSuccess)success failure:(RequestFailure)failure;
 
+
+
+#pragma mark --------------------- 聊天室记录本地化 ---------------------
+/// 保存聊天记录
+/// @param roomName 聊天室名字
+/// @param roomId 聊天室id
+/// @param type 聊天类型
+/// @param extend 扩展字段
++ (void)saveLocalChatRecordWithRoomName:(NSString *)roomName roomId:(NSString *)roomId chatType:(NSInteger)type extend:(id)extend;
+
+/// 获取本地聊天记录
++ (NSMutableArray *)getLocalChatRecord;
+
+/// 删除本地聊天记录
++ (void)removeLocalChatRecord;
+
 @end
 
-NS_ASSUME_NONNULL_END

@@ -24,7 +24,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 @interface LWClientManager()<XHLoginManagerDelegate,XHChatManagerDelegate, XHGroupManagerDelegate>
 @property (nonatomic, strong) XHCustomConfig *config;
-
+//@property (nonatomic, assign) NSInteger  maxNum;
 @end
 
 @implementation LWClientManager
@@ -38,6 +38,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         manager.config = [[XHCustomConfig alloc] init];
         [[XHClient sharedClient].groupManager addDelegate:manager];
         [[XHClient sharedClient].chatManager addDelegate:manager];
+        [[XHClient sharedClient].loginManager addDelegate:manager];
     });
     return manager;
 }
@@ -81,7 +82,6 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         [loginmanager loginFree:^(NSError *error) {
             LWLog(@"——————————XHLoginManager登录error：%@",error);
         }];
-        [loginmanager addDelegate:self];
     }
 }
 
@@ -111,12 +111,6 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 - (void)chatMessageDidReceived:(NSString *)message fromID:(NSString *)uid;
 {
-//    NSDictionary *dict = [LWTool stringToDictory:message];
-//    ShowMsgElem *model = [ShowMsgElem modelWithDictionary:dict];
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self showTrace:model];
-//    });
-    
     POST_NOTI(NEW_MSG_CHAT_NOTI_KEY, (@{@"msg":message,@"fromid":uid}));
 }
 
@@ -138,6 +132,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 {
     [[zHud shareInstance] showMessage:@"该用户已从其他设备登录"];
 }
+
 /**
  关闭啦，需要重新登录
  */
@@ -214,7 +209,61 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     return string;
 }
 
+
+
+#pragma mark --------------------- 聊天室记录本地化 ---------------------
+
+/// 保存聊天记录
+/// @param roomName 聊天室名字
+/// @param roomId 聊天室id
+/// @param type 聊天类型
+/// @param extend 扩展字段
++ (void)saveLocalChatRecordWithRoomName:(NSString *)roomName roomId:(NSString *)roomId chatType:(NSInteger)type extend:(id)extend
+{
+    NSMutableArray *chatrecord = [LWClientManager getLocalChatRecord];
+    __block BOOL ishave = NO;
+    [chatrecord enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.roomId isEqualToString:roomId]) {
+            ishave = YES;
+            *stop = YES;
+        }
+    }];
+    if (!ishave) {
+        LWLocalChatRecordModel *model = [LWLocalChatRecordModel new];
+        model.roomId = roomId;
+        model.roomName = roomName;
+        model.chatType = type;
+        NSData *modeldata = [NSKeyedArchiver archivedDataWithRootObject:model];
+        NSMutableArray *recoddata = [[NSMutableArray alloc] initWithArray:[SYSTEM_USERDEFAULTS objectForKey:LOCAL_CHATRECORD_LIST_KEY]];
+        [recoddata addObject:modeldata];
+        [SYSTEM_USERDEFAULTS setObject:recoddata forKey:LOCAL_CHATRECORD_LIST_KEY];
+        [SYSTEM_USERDEFAULTS synchronize];
+        POST_NOTI(@"refreshChatRecordList", nil);
+    }
+}
+
+/// 获取本地聊天记录
++ (NSMutableArray *)getLocalChatRecord
+{
+    NSArray *chatrecord = [SYSTEM_USERDEFAULTS objectForKey:LOCAL_CHATRECORD_LIST_KEY];
+    NSMutableArray *tem = [[NSMutableArray alloc] initWithCapacity:chatrecord.count];
+    for (NSData *data in chatrecord) {
+        LWLocalChatRecordModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        [tem addObject:model];
+    }
+    return tem;
+}
+
+/// 删除本地聊天记录
++ (void)removeLocalChatRecord
+{
+    [SYSTEM_USERDEFAULTS removeObjectForKey:LOCAL_CHATRECORD_LIST_KEY];
+    [SYSTEM_USERDEFAULTS synchronize];
+}
+
 @end
+
+
 /*
  群聊上传接口：app/appgroupmessage/save
  一对一聊天接口：app/appfriendmessage/save

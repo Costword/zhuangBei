@@ -67,9 +67,24 @@
         model.cellType = self.selectIndex + 1;
         [self.listDatas addObject:model];
     }
+    if (self.listDatas.count == 0) {
+        [self.view bringSubviewToFront:self.nothingView];
+        self.nothingView.alpha = 1;
+    }else{
+        [self.view sendSubviewToBack:self.nothingView];
+        self.nothingView.alpha = 0;
+    }
     [self.tableView reloadData];
 }
 
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self.nothingView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.bottom.left.mas_equalTo(self.view).mas_offset(0);
+        make.top.mas_equalTo(self.searchView.mas_bottom).mas_offset(10);
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

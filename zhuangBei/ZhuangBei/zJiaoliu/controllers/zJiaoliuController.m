@@ -18,7 +18,7 @@
 #import "LWAddFriendOrGroupViewController.h"
 #import "LWUserGroupManagerViewController.h"
 #import "LWAddNewChatGroupViewController.h"
-
+#import "LWLocalChatRecordModel.h"
 @interface zJiaoliuController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) LWSwitchBarView * switchBarView;
 @property (nonatomic, strong) UICollectionView * collectView;
@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSMutableArray<LWJiaoLiuModel *> * listDatas_JiaoLiu;//交流
 @property (nonatomic, strong) NSMutableArray * listDatas_Message;
 @property (nonatomic, strong) NSMutableArray<friendListModel *> * listDatas_Contatcs;
+@property (nonatomic, strong) NSMutableArray<LWLocalChatRecordModel *> * listDatas_chatrecord;
+
 @property (nonatomic, strong) UITableView * messageTableView;
 @property (nonatomic, strong) UITableView * contatcsTableView;
 @property (nonatomic, strong) UITableView * groupTableView;
@@ -57,16 +59,19 @@
 - (void)requestJiaoLiuDatas
 {
     [self requestPostWithUrl:@"app/imgroupclassify/findListByTypeId" paraString:@{@"typeId":@"1,2,4"} success:^(id  _Nonnull response) {
+        [self.self.listDatas_JiaoLiu removeAllObjects];
         NSArray *data = response[@"data"];
         if (data&&data.count > 0) {
             for (NSDictionary*dict  in data) {
                 [self.listDatas_JiaoLiu addObject:[LWJiaoLiuModel modelWithDictionary: dict]];
             }
         }
+        [self.collectView.mj_header endRefreshing];
         [self.collectView reloadData];
         [[zHud shareInstance] hild];
     } failure:^(NSError * _Nonnull error) {
         [[zHud shareInstance] hild];
+        [self.collectView.mj_header endRefreshing];
     }];
 }
 
@@ -77,20 +82,25 @@
     
     [self requestPostWithUrl:@"app/appfriendtype/getFriendTypeAndFriendList" Parameters:@{} success:^(id  _Nonnull response) {
         NSDictionary *data = response[@"data"];
-
+        [self.listDatas_Contatcs removeAllObjects];
         NSArray *friend = data[@"friend"];
         for (NSDictionary*dict  in friend) {
             [self.listDatas_Contatcs addObject:[friendListModel modelWithDictionary: dict]];
         }
         NSArray *group = data[@"group"];
+        [self.listDatas_Group removeAllObjects];
         for (NSDictionary*dict  in group) {
             [self.listDatas_Group addObject:[imGroupListModel modelWithDictionary: dict]];
         }
         [self.groupTableView reloadData];
         [self.contatcsTableView reloadData];
-        [[zHud shareInstance] hild];
+        [self.contatcsTableView.mj_header endRefreshing];
+        [self.groupTableView.mj_header endRefreshing];
+//        [[zHud shareInstance] hild];
     } failure:^(NSError * _Nonnull error) {
-        [[zHud shareInstance] hild];
+//        [[zHud shareInstance] hild];
+        [self.contatcsTableView.mj_header endRefreshing];
+        [self.groupTableView.mj_header endRefreshing];
     }];
 }
 
@@ -123,7 +133,15 @@
     if (_switchBarView) {
         [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH*self.switchBarView.currentIndex, 1) animated:NO];
     }
-//    self.tabBarItem.badgeValue = @"28";
+    
+}
+
+- (void)refreshChatRecordList
+{
+    self.listDatas_chatrecord = [LWClientManager getLocalChatRecord];
+    if (_messageTableView) {
+        [_messageTableView reloadData];
+    }
 }
 
 - (void)viewDidLoad {
@@ -136,12 +154,19 @@
     [self.nothingView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view.mas_top).mas_offset(36+40+NAVIGATOR_HEIGHT);
-      }];
+    }];
     [self.noContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.nothingView);
     }];
     
     ADD_NOTI(requestDatas, @"refreshJiaoLiuListDataKey");
+//    刷新本地的聊天记录
+    ADD_NOTI(refreshChatRecordList, @"refreshChatRecordList");
+    
+    self.listDatas_chatrecord = [LWClientManager getLocalChatRecord];
+    if (_messageTableView) {
+        [_messageTableView reloadData];
+    }
 }
 
 - (void)confiUI
@@ -178,7 +203,7 @@
 {
     if (tableView == _contatcsTableView || tableView == _groupTableView) {
         LWJiaoLiuContatcsListTableViewCell * cell =  [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuContatcsListTableViewCell" forIndexPath:indexPath];
-
+        
         if (tableView == _groupTableView) {
             imGroupListModel *model = self.listDatas_Group[indexPath.row];
             cell.nameL.text = model.groupName;
@@ -191,10 +216,18 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
-        LWJiaoLiuMessageListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuMessageListTableViewCell" forIndexPath:indexPath];
-        cell.nameL.text = @"系统消息";
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
+        if(indexPath.row == 0){
+            LWJiaoLiuMessageListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuMessageListTableViewCell" forIndexPath:indexPath];
+            cell.nameL.text = @"系统消息";
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }else{
+            LWJiaoLiuContatcsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuContatcsListTableViewCell" forIndexPath:indexPath];
+            LWLocalChatRecordModel *model = self.listDatas_chatrecord[indexPath.row - 1];
+            cell.nameL.text = model.roomName;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }
     }
 }
 
@@ -206,6 +239,9 @@
     }
     if(tableView == _groupTableView){
         return self.listDatas_Group.count;
+    }
+    if (tableView == _messageTableView) {
+        return self.listDatas_chatrecord.count + 1;
     }
     return  1;
 }
@@ -221,20 +257,13 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if(tableView == _contatcsTableView){
-       __block LWJiaoLiuContatcsSeactionView *seactionview = [[LWJiaoLiuContatcsSeactionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+        __block LWJiaoLiuContatcsSeactionView *seactionview = [[LWJiaoLiuContatcsSeactionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
         friendListModel *listmodel = self.listDatas_Contatcs[section];
         seactionview.leftL.text = listmodel.groupname;
-//        seactionview.rightBtn.sel
         WEAKSELF(self)
         seactionview.block = ^(BOOL isShow) {
-//            weakself.isShow = isShow;
             listmodel.isShow = isShow;
             [weakself.contatcsTableView reloadData];
-//            [weakself.contatcsTableView reloadSection:section withRowAnimation:(UITableViewRowAnimationNone)];
-//            [UIView animateWithDuration:0.25 animations:^{
-//                seactionview.rightBtn.imageView.transform = listmodel.isShow ? CGAffineTransformMakeRotation(M_PI):CGAffineTransformIdentity;
-//            }];
-            
         };
         seactionview.rightBtn.selected = listmodel.isShow;
         return seactionview;
@@ -256,12 +285,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == _messageTableView) {
-        LWSystemMessageListViewController *system = [LWSystemMessageListViewController new];
-        [self.navigationController pushViewController:system animated:YES];
+        if (indexPath.row == 0) {
+            LWSystemMessageListViewController *system = [LWSystemMessageListViewController new];
+            [self.navigationController pushViewController:system animated:YES];
+        }else{
+            LWLocalChatRecordModel *model = self.listDatas_chatrecord[indexPath.row-1];
+            if (model.chatType == 1) {
+                [self pushToGroupRoom:model.roomId groupname:model.roomName];
+            }else{
+                [self.navigationController pushViewController:[ChatRoomViewController chatRoomViewControllerWithRoomId:model.roomId roomName:model.roomName roomType:(LWChatRoomTypeOneTOne) extend:nil] animated:YES];
+            }
+        }
     }else if(tableView == _contatcsTableView){
         friendListModel *listmodel = self.listDatas_Contatcs[indexPath.section];
         friendItemModel *itemmodel = listmodel.list[indexPath.row];
-         ChatRoomViewController *vc= [ChatRoomViewController chatRoomViewControllerWithRoomId:itemmodel.customId roomName:itemmodel.username roomType:(LWChatRoomTypeOneTOne) extend:nil];
+        ChatRoomViewController *vc= [ChatRoomViewController chatRoomViewControllerWithRoomId:itemmodel.customId roomName:itemmodel.username roomType:(LWChatRoomTypeOneTOne) extend:nil];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (tableView == _groupTableView){
         imGroupListModel *groupmodel = self.listDatas_Group[indexPath.row];
@@ -335,8 +373,7 @@
         _collectView.dataSource = self;
         [_collectView registerClass:[LWJiaoLiuGroupCollectionCell class] forCellWithReuseIdentifier:@"LWJiaoLiuGroupCollectionCell"];
         [_collectView registerClass:[LWJiaoLiuGroupCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"LWJiaoLiuGroupCollectionReusableView"];
-        _collectView.backgroundColor = UIColor.whiteColor;
-//        _collectView.mj_header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
+        _collectView.mj_header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestJiaoLiuDatas)];
     }
     return _collectView;
 }
@@ -348,9 +385,12 @@
         _messageTableView = [[UITableView alloc] initWithFrame:CGRectZero style:(UITableViewStyleGrouped)];
         _messageTableView.delegate = self;
         _messageTableView.dataSource = self;
-        _messageTableView.rowHeight = 50;
+        _messageTableView.rowHeight = 60;
         [_messageTableView registerClass:[LWJiaoLiuMessageListTableViewCell class] forCellReuseIdentifier:@"LWJiaoLiuMessageListTableViewCell"];
+        [_messageTableView registerClass:[LWJiaoLiuContatcsListTableViewCell class] forCellReuseIdentifier:@"LWJiaoLiuContatcsListTableViewCell"];
         _messageTableView.backgroundColor = UIColor.whiteColor;
+        _messageTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _messageTableView.mj_header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
     }
     return _messageTableView;
 }
@@ -366,6 +406,7 @@
         [_contatcsTableView registerClass:[LWJiaoLiuContatcsListTableViewCell class] forCellReuseIdentifier:@"LWJiaoLiuContatcsListTableViewCell"];
         _contatcsTableView.backgroundColor = UIColor.whiteColor;
         _contatcsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _contatcsTableView.mj_header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
     }
     return _contatcsTableView;
 }
@@ -409,7 +450,7 @@
 {
     if (!_listDatas_Group) {
         _listDatas_Group = [[NSMutableArray alloc] init];
-
+        
         _listDatas_Message = [[NSMutableArray alloc] initWithArray:@[]];
         _listDatas_Contatcs = [[NSMutableArray alloc] init];
     }

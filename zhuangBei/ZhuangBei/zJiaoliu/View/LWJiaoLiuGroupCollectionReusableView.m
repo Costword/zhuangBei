@@ -84,8 +84,8 @@
             make.edges.mas_equalTo(self);
         }];
         [_nameL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(_bgImageView.mas_left).mas_offset(10);
-            make.right.mas_equalTo(_bgImageView.mas_right).mas_offset(-10);
+            make.left.mas_equalTo(_bgImageView.mas_left).mas_offset(3);
+            make.right.mas_equalTo(_bgImageView.mas_right).mas_offset(-3);
             make.top.mas_equalTo(_bgImageView.mas_top).mas_offset(10);
         }];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {

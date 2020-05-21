@@ -122,6 +122,16 @@
     }];
 }
 
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    [self.nothingView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.bottom.left.mas_equalTo(self.view).mas_offset(0);
+        make.top.mas_equalTo(self.searchView.mas_bottom).mas_offset(10);
+    }];
+}
+
 - (LWThreeLevelTableView *)tableView
 {
     if (!_tableView) {
