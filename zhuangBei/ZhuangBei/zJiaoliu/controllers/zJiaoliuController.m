@@ -36,6 +36,7 @@
 
 @implementation zJiaoliuController
 
+
 //是否有创建群聊权限
 - (void)verifiAccountIsAdmin
 {
@@ -119,7 +120,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+
     if (_switchBarView) {
         [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH*self.switchBarView.currentIndex, 1) animated:NO];
     }

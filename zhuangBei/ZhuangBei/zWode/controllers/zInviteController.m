@@ -79,6 +79,7 @@
         _inviteImageView = [[UIImageView alloc]init];
         _inviteImageView.image = [UIImage imageNamed:@"z_nothing"];
         _inviteImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _inviteImageView.alpha = 0;
     }
     return _inviteImageView;
 }
@@ -91,6 +92,7 @@
         _shareLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         _shareLabel.font = kFont(16);
         _shareLabel.numberOfLines = 0;
+        _shareLabel.alpha = 0;
     }
     return _shareLabel;
 }
@@ -104,6 +106,7 @@
         _QQShareBtn.clipsToBounds = YES;
         _QQShareBtn.tag = 2;
         [_QQShareBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        _QQShareBtn.alpha = 0;
     }
     return _QQShareBtn;
 }
@@ -117,6 +120,7 @@
         _WXShareBtn.clipsToBounds = YES;
         _WXShareBtn.tag = 3;
         [_WXShareBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        _WXShareBtn.alpha = 0;
     }
     return _WXShareBtn;
 }

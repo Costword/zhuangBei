@@ -94,7 +94,7 @@
     [self setupChildViewController:hyVC title:@"货源" imageName:@"goods_nor" selectedImageName:@"goods_sel"];
      //交流
      zJiaoliuController*jlVC = [[zJiaoliuController alloc]init];
-    jlVC.tabBarItem.badgeValue = @"28";
+//    jlVC.tabBarItem.badgeValue = @"28";
     [self setupChildViewController:jlVC title:@"交流大厅" imageName:@"friend_nor" selectedImageName:@"friend_sel"];
      
      //我的

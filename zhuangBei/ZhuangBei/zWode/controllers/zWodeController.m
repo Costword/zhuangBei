@@ -21,6 +21,7 @@
 #import "zUserGoodsController.h"
 #import "zBusinessController.h"
 #import "zUserDetailController.h"
+#import "zJiaoliuController.h"
 
 @interface zWodeController ()
 
@@ -78,17 +79,17 @@
                 return;
             }
             if (type == 2) {
-                [[zHud shareInstance]showMessage:@"功能开发中"];
-//                zUserGoodsController * yaoqing = [[zUserGoodsController alloc]init];
-//                yaoqing.title = @"我关注的货源";
-//                [weakSelf.navigationController pushViewController:yaoqing animated:YES];
+//                [[zHud shareInstance]showMessage:@"功能开发中"];
+                zUserGoodsController * yaoqing = [[zUserGoodsController alloc]init];
+                yaoqing.title = @"我关注的货源";
+                [weakSelf.navigationController pushViewController:yaoqing animated:YES];
                 return;
             }
             if (type == 3) {
-                [[zHud shareInstance]showMessage:@"功能开发中"];
-//                zBusinessController * yaoqing = [[zBusinessController alloc]init];
-//                yaoqing.title = @"我的经销商";
-//                [weakSelf.navigationController pushViewController:yaoqing animated:YES];
+//                [[zHud shareInstance]showMessage:@"功能开发中"];
+                zBusinessController * yaoqing = [[zBusinessController alloc]init];
+                yaoqing.title = @"我的经销商";
+                [weakSelf.navigationController pushViewController:yaoqing animated:YES];
                 return;
             }
             if (type == 4) {
@@ -126,6 +127,11 @@
                 [weakSelf.navigationController pushViewController:userDesc animated:YES];
                 return;
             }
+            if (type == 2) {
+                zJiaoliuController * jlVC = [[zJiaoliuController alloc]init];
+                jlVC.title = @"联系人";
+                [weakSelf.navigationController pushViewController:jlVC animated:YES];
+            }
             if (type == 3) {
                 zInviteController * inviter = [[zInviteController alloc]init];
                 inviter.title = @"邀请好友";
@@ -136,6 +142,7 @@
                 zcallBack.title = @"意见反馈";
                 [weakSelf.navigationController pushViewController:zcallBack animated:YES];
             }
+            
         };
     }
     return _categoryCard;
