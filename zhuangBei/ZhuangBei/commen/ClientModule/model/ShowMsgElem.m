@@ -19,4 +19,23 @@
               @"userID":@"uid",
     };
 }
+
+- (LWMsgType)msgType
+{
+    
+    return MessageIsImage(self.content)?LWMsgTypeImage:LWMsgTypeText;
+}
+
+- (NSString *)imagePath
+{
+    if (self.msgType == LWMsgTypeImage) {
+        if (self.content.length <  6) {
+            return nil;
+        }
+        NSString *tem1 = [self.content substringWithRange:NSMakeRange(4, self.content.length - 1 - 4)];
+        NSLog(@"------------%@",tem1);
+        return [NSString stringWithFormat:@"%@%@",kApiPrefix,tem1];
+    }
+    return nil;
+}
 @end

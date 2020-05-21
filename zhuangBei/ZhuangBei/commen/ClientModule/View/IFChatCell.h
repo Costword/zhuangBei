@@ -23,10 +23,20 @@ extern const int leadingSpace; //文本两端空白
 @property (nonatomic, strong, readonly) UILabel *contentLabel;
 @property (nonatomic, strong, readonly) UIImageView *iconIV;
 @property (nonatomic, assign) BOOL isNotNeedBackground;
+@property (nonatomic, strong) UIImageView * textBGIV;
+@property (nonatomic, assign) IFChatCellStyle  layoutType;
+
+@property (nonatomic, strong) UIImageView * contextImageView;
 
 - (instancetype)initWithStyle:(IFChatCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 
 + (CGFloat)caculateTextHeightWithMaxWidth:(CGFloat)maxWidth text:(NSString *)text;
 
 + (CGFloat)reserveWithForCell;
+
+@end
+
+@interface IFChatImageCell : IFChatCell
+
+
 @end

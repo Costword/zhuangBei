@@ -11,7 +11,7 @@
 //
 
 #import "ChatKeyBoard.h"
-
+#import "PPUtil.h"
 #import "OfficialAccountToolbar.h"
 
 #import "NSString+Emoji.h"
@@ -435,6 +435,11 @@
         [self.delegate chatKeyBoardSendText:self.chatToolBar.textView.text];
     }
     [self.chatToolBar clearTextViewContent];
+}
+
+- (NSString *)plainText
+{
+    return [self.chatToolBar.textView.attributedText pp_plainTextForRange:NSMakeRange(0, self.chatToolBar.textView.attributedText.length)];
 }
 
 - (void)facePanelAddSubject:(FacePanel *)facePanel

@@ -149,6 +149,8 @@
 		890643FD24695C370099508C /* MessageGroupSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 890643FC24695C370099508C /* MessageGroupSettingViewController.m */; };
 		8906440024695C7A0099508C /* InterfaceUrls.m in Sources */ = {isa = PBXBuildFile; fileRef = 890643FE24695C7A0099508C /* InterfaceUrls.m */; };
 		8906440324695C9B0099508C /* IFGroupMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8906440224695C9B0099508C /* IFGroupMemberCell.m */; };
+		8907722224768D3400470058 /* launch_icon_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 8907722124768D3400470058 /* launch_icon_big.png */; };
+		8907722424768D5F00470058 /* launch_icon_s.png in Resources */ = {isa = PBXBuildFile; fileRef = 8907722324768D5E00470058 /* launch_icon_s.png */; };
 		891C7CE9247611AD00760F64 /* LWLocalChatRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 891C7CE8247611AD00760F64 /* LWLocalChatRecordModel.m */; };
 		8921697524566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921697124566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m */; };
 		8921697624566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921697224566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m */; };
@@ -575,6 +577,8 @@
 		890643FF24695C7A0099508C /* InterfaceUrls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceUrls.h; sourceTree = "<group>"; };
 		8906440124695C9B0099508C /* IFGroupMemberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFGroupMemberCell.h; sourceTree = "<group>"; };
 		8906440224695C9B0099508C /* IFGroupMemberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFGroupMemberCell.m; sourceTree = "<group>"; };
+		8907722124768D3400470058 /* launch_icon_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch_icon_big.png; path = Assets.xcassets/shouYe/launch_icon_b.imageset/launch_icon_big.png; sourceTree = "<group>"; };
+		8907722324768D5E00470058 /* launch_icon_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch_icon_s.png; path = Assets.xcassets/shouYe/launch_icon_w.imageset/launch_icon_s.png; sourceTree = "<group>"; };
 		891C7CE7247611AD00760F64 /* LWLocalChatRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWLocalChatRecordModel.h; sourceTree = "<group>"; };
 		891C7CE8247611AD00760F64 /* LWLocalChatRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWLocalChatRecordModel.m; sourceTree = "<group>"; };
 		8921697124566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanListCollectionViewCell.m; sourceTree = "<group>"; };
@@ -1860,6 +1864,8 @@
 		89A9382924542A06001C77A8 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				8907722324768D5E00470058 /* launch_icon_s.png */,
+				8907722124768D3400470058 /* launch_icon_big.png */,
 				009FB5EE244E89CD00133974 /* Info.plist */,
 				89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */,
 				009FB617244FE8C200133974 /* PrefixHeader.pch */,
@@ -2068,8 +2074,10 @@
 				896624C22473E5E5009F286D /* emoji.bundle in Resources */,
 				89844BA22473CAA00045A75A /* emotion.plist in Resources */,
 				009FB5EA244E89CD00133974 /* Assets.xcassets in Resources */,
+				8907722224768D3400470058 /* launch_icon_big.png in Resources */,
 				89DF44D92470E433002CAE83 /* LWAddNewUserGroupView.xib in Resources */,
 				89844BA32473CAA00045A75A /* face.plist in Resources */,
+				8907722424768D5F00470058 /* launch_icon_s.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

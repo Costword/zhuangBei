@@ -167,6 +167,9 @@ typedef NS_ENUM(NSInteger, KeyBoardStyle)
  */
 - (void)keyboardDownForComment;
 
+
+@property (nonatomic, strong, readonly) NSString *plainText;
+
 @end
 
 
