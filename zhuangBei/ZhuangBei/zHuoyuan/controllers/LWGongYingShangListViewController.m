@@ -18,7 +18,7 @@
 
 @implementation LWGongYingShangListViewController
 
-- (void)requestDatas
+- (void)refreshData
 {
     [self requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"Id":LWDATA(self.zbTypeId),@"gysLimit":@(100),@"page":@(self.currPage),@"searchGYSName":@"",@"zbId":LWDATA(self.zbId)} success:^(id  _Nonnull response) {
         
@@ -68,7 +68,7 @@
     // Do any additional setup after loading the view.
     self.title = @"供应商列表";
     [self confiUI];
-    [self requestDatas];
+    [self refreshData];
 }
 
 - (void)confiUI
@@ -124,11 +124,4 @@
     return _tableView;
 }
 
-//- (NSMutableArray *)listDatas
-//{
-//    if (!_listDatas) {
-//        _listDatas = [[NSMutableArray alloc] init];
-//    }
-//    return _listDatas;
-//}
 @end

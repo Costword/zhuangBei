@@ -69,7 +69,7 @@ typedef NS_ENUM(NSUInteger, LWRequestParamType) {
                    success:(RequestSuccess)success
                    failure:(RequestFailure)failure;
 
-- (void)requestDatas;
+//- (void)requestDatas;
 
 /// post网络请求
 /// @param url url
