@@ -616,7 +616,7 @@
     return self.superview.frame.size.height;
 }
 
-#pragma mark - 回删表情或文字
+#pragma mark - 回删表情或文字-----
 
 - (void)deleteBackward:(NSString *)text appendText:(NSString *)appendText
 {
