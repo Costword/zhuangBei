@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+/**  判断文字中是否包含表情 */
+#define MessageIsImage(text) [text hasPrefix:@"img["] && [text containsString:@"img["] &&  [text containsString:@"]"] && [[text substringFromIndex:text.length - 1] isEqualToString:@"]"]
+
+typedef NS_ENUM(NSUInteger, LWMsgType) {
+    LWMsgTypeText,
+    LWMsgTypeImage,
+};
+
 @interface ShowMsgElem : NSObject
 @property (nonatomic, strong) NSString * username;
 //@property (nonatomic, assign) NSInteger  uid;
@@ -22,7 +30,8 @@
 
 @property (nonatomic, assign) CGFloat rowHeight;
 
-//- (instancetype)initWithDict:(NSDictionary *)dict;
-
+@property (nonatomic, assign) LWMsgType  msgType;
+//如果是图片类型的 则获取图片地址
+@property (nonatomic, strong) NSString * imagePath;
 
 @end

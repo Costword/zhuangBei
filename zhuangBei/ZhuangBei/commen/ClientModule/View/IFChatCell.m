@@ -22,8 +22,7 @@ const static int subTitleFontNum = 16;
 
 
 @interface IFChatCell () {
-    UIImageView *_textBGIV;
-    IFChatCellStyle _layoutType;
+    
 }
 @end
 
@@ -127,12 +126,12 @@ const static int subTitleFontNum = 16;
             make.bottom.equalTo(self).offset(-textTopSpace);
         }];
         
-        [textBGIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(label3).offset(-1); // -textTopSpace
-            make.leading.equalTo(label3).offset(-13);
-            make.trailing.equalTo(label3).offset(13);
-            make.bottom.equalTo(label3).offset(5);
-        }];
+        //        [textBGIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+        //            make.top.equalTo(label3).offset(-1); // -textTopSpace
+        //            make.leading.equalTo(label3).offset(-13);
+        //            make.trailing.equalTo(label3).offset(13);
+        //            make.bottom.equalTo(label3).offset(5);
+        //        }];
         label.textAlignment = label2.textAlignment  = NSTextAlignmentLeft;
     } else {
         label.textAlignment = label2.textAlignment  = NSTextAlignmentRight;
@@ -157,18 +156,19 @@ const static int subTitleFontNum = 16;
         [label3 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(label2.mas_bottom).offset(textTopSpace);
             make.right.equalTo(imageView.mas_left).offset(-textLeadingSpace);
-//            make.left.lessThanOrEqualTo(self.mas_left).offset(textTrailingSpace);
+            //            make.left.lessThanOrEqualTo(self.mas_left).offset(textTrailingSpace);
             make.bottom.equalTo(self).offset(-textTopSpace);
             make.width.mas_lessThanOrEqualTo(250);
         }];
         
-        [textBGIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(label3).offset(-1); // -textTopSpace
-            make.leading.equalTo(label3).offset(-13);
-            make.trailing.equalTo(label3).offset(13);
-            make.bottom.equalTo(label3).offset(5);
-        }];
+        
     }
+    [textBGIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(label3).offset(-1); // -textTopSpace
+        make.leading.equalTo(label3).offset(-13);
+        make.trailing.equalTo(label3).offset(13);
+        make.bottom.equalTo(label3).offset(5);
+    }];
 }
 
 + (CGFloat)reserveWithForCell {
@@ -185,4 +185,43 @@ const static int subTitleFontNum = 16;
     //    return  height + textTopSpace + 2*textBottomSpace;
     return height + 10+20 + 25+ 15 + 15+10+15;
 }
+@end
+
+
+@implementation IFChatImageCell
+
+- (void)createUI
+{
+    [super createUI];
+    self.contextImageView = [UIImageView new];
+    [self addSubview:self.contextImageView];
+    self.contentLabel.hidden = YES;
+    self.contextImageView.contentMode = UIViewContentModeScaleAspectFit;
+    if (self.layoutType == IFChatCellStyleLeft || self.layoutType == IFChatCellStyleLeftAndNoBG) {
+        
+        [self.contextImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.titleLabel.mas_left).mas_offset(0);
+            make.top.mas_equalTo(self.subTitleLabel.mas_bottom).mas_offset(10);
+            make.width.mas_offset(150);
+            make.height.mas_offset(200);
+        }];
+        
+    } else {
+        [self.contextImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.titleLabel.mas_right).mas_offset(0);
+            make.top.mas_equalTo(self.subTitleLabel.mas_bottom).mas_offset(10);
+            make.width.mas_offset(150);
+            make.height.mas_offset(200);
+        }];
+        
+    }
+    [self.textBGIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contextImageView).offset(-1); // -textTopSpace
+        make.leading.equalTo(self.contextImageView).offset(-13);
+        make.trailing.equalTo(self.contextImageView).offset(13);
+        make.bottom.equalTo(self.contextImageView).offset(5);
+    }];
+}
+
+
 @end

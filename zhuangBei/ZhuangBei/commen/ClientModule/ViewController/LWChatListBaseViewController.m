@@ -319,34 +319,47 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     NSUInteger row = [indexPath row];
     ShowMsgElem * getNewShowMsgElem =  [self.showDatasArray objectAtIndex:row];
     
-    NSString *tableSampleIdentifier = getNewShowMsgElem.isMySelf ? @"TableSampleIdentifierRight":@"TableSampleIdentifierLeft";
+    IFChatCell *cell;
     IFChatCellStyle cellStyle = getNewShowMsgElem.isMySelf ? IFChatCellStyleRight:IFChatCellStyleLeft;
     
-    IFChatCell *cell = [tableView dequeueReusableCellWithIdentifier:
-                        tableSampleIdentifier];
-    if (cell == nil) {
-        cell = [[IFChatCell alloc]
-                initWithStyle:cellStyle
-                reuseIdentifier:tableSampleIdentifier];
+    if (getNewShowMsgElem.msgType == LWMsgTypeText) {
+        NSString *tableSampleIdentifier = getNewShowMsgElem.isMySelf ? @"TableSampleIdentifierRight":@"TableSampleIdentifierLeft";
+        
+       cell = [tableView dequeueReusableCellWithIdentifier:
+                            tableSampleIdentifier];
+        if (cell == nil) {
+            cell = [[IFChatCell alloc]
+                    initWithStyle:cellStyle
+                    reuseIdentifier:tableSampleIdentifier];
+        }
+
+        NSMutableAttributedString *attributedMessage = [[NSMutableAttributedString alloc] initWithString:getNewShowMsgElem.content attributes:@{ NSFontAttributeName: kFont(15), NSForegroundColorAttributeName: UIColor.whiteColor }];
+        [LWEmojiManager.share replaceEmojiForAttributedString:attributedMessage font:kFont(15)];
+        cell.contentLabel.adjustsFontSizeToFitWidth = true;
+        cell.contentLabel.attributedText = attributedMessage;
+    }else{
+        cell = [tableView dequeueReusableCellWithIdentifier:@"IFChatImageCell"];
+        if (!cell) {
+            cell = [[IFChatImageCell alloc] initWithStyle:cellStyle reuseIdentifier:@"IFChatImageCell"];
+        }
+        [cell.contextImageView sd_setImageWithURL:[NSURL URLWithString:getNewShowMsgElem.imagePath] placeholderImage:[UIImage imageNamed:@"testicon"]];
     }
     [cell.iconIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",kApiPrefix,getNewShowMsgElem.uavatar]] placeholderImage:[UIImage imageNamed:@"voip_header"]];
     cell.titleLabel.text = getNewShowMsgElem.username;
     cell.subTitleLabel.text = getNewShowMsgElem.time;
-    NSMutableAttributedString *attributedMessage = [[NSMutableAttributedString alloc] initWithString:getNewShowMsgElem.content attributes:@{ NSFontAttributeName: kFont(15), NSForegroundColorAttributeName: UIColor.whiteColor }];
-    [LWEmojiManager.share replaceEmojiForAttributedString:attributedMessage font:kFont(15)];
-    cell.contentLabel.adjustsFontSizeToFitWidth = true;
-    cell.contentLabel.attributedText = attributedMessage;
-    //    cell.contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    cell.contentLabel.numberOfLines = 0;
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     ShowMsgElem *getNewShowMsgElem = [self.showDatasArray objectAtIndex:indexPath.row];
     if (getNewShowMsgElem.rowHeight == 0) {
-        getNewShowMsgElem.rowHeight = [IFChatCell caculateTextHeightWithMaxWidth:self.chatTableView.width - [IFChatCell reserveWithForCell] text:getNewShowMsgElem.content];
+        if (getNewShowMsgElem.msgType == LWMsgTypeText) {
+            getNewShowMsgElem.rowHeight = [IFChatCell caculateTextHeightWithMaxWidth:self.chatTableView.width - [IFChatCell reserveWithForCell] text:getNewShowMsgElem.content];
+        }else{
+            getNewShowMsgElem.rowHeight = 200+ 10+20 + 25+ 15 + 15+10+15;
+        }
     }
-    
     return getNewShowMsgElem.rowHeight;
 }
 
