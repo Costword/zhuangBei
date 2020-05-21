@@ -119,13 +119,14 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
         _icon = [UIImageView new];
         _icon.image = IMAGENAME(@"icon_into");
         _icon.contentMode = UIViewContentModeScaleAspectFit;
         _nameL = [UILabel new];
         _nameL.font = kFont(15);
-        [self.contentView addSubviews:@[_icon,_nameL]];
+        UIView *line = [UIView new];
+          line.backgroundColor = BASECOLOR_BOARD;
+        [self.contentView addSubviews:@[_icon,_nameL,line]];
         [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
             make.width.mas_offset(20);
@@ -137,6 +138,12 @@
             make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
             make.centerY.mas_equalTo(self.mas_centerY);
         }];
+        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.contentView.mas_left).mas_offset(0);
+                make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-0);
+                make.height.mas_offset(0.5);
+                make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(0);
+            }];
     }
     return self;
 }

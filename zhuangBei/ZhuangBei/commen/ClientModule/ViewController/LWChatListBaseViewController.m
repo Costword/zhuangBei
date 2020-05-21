@@ -34,7 +34,10 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     [self requestPostWithUrl:@"app/appgroupuser/findOneByGroupIdAndUserId" paraString:@{@"groupId":LWDATA(self.roomId)} success:^(id  _Nonnull response) {
         NSInteger code = [response[@"code"] integerValue];
         NSString *msg = response[@"mag"];
-        //        [self.chatView checkUserCanSendmsg:(code == 1) msg:(code == 1)?@"":msg];
+        if (code != 1) {
+            self.chatKeyBoard.placeHolder = msg;
+            self.chatKeyBoard.userInteractionEnabled = NO;
+        }
     } failure:^(NSError * _Nonnull error) {
         
     }];
@@ -75,24 +78,32 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 //向后台发消息
 - (void)requsetSendMsgService:(NSString *)text
 {
-    dispatch_group_enter(self.dispatch_group);
+//    dispatch_group_enter(self.dispatch_group);
     if (_roomType == LWChatRoomTypeGroup) {
         [[LWClientManager share] sendGroupMsg:text groupId:self.m_Group_ID success:^(id  _Nonnull response) {
             if ([response[@"code"] intValue] == 0) {
                 self.successNum++;
+                [self sendMsgSuccess:text];
+            }else{
+                [[zHud shareInstance] showMessage:@"消息发送失败"];
             }
-            dispatch_group_leave(self.dispatch_group);
+//            dispatch_group_leave(self.dispatch_group);
         } failure:^(NSError * _Nonnull error) {
-            dispatch_group_leave(self.dispatch_group);
+            [[zHud shareInstance] showMessage:@"消息发送失败"];
+//            dispatch_group_leave(self.dispatch_group);
         }];
     }else if(_roomType == LWChatRoomTypeOneTOne){
         [[LWClientManager share] sendMsgOneToOne:text roomId:self.roomId success:^(id  _Nonnull response) {
             if ([response[@"code"] intValue] == 0) {
                 self.successNum++;
+                [self sendMsgSuccess:text];
+            }else{
+                [[zHud shareInstance] showMessage:@"消息发送失败"];
             }
-            dispatch_group_leave(self.dispatch_group);
+//            dispatch_group_leave(self.dispatch_group);
         } failure:^(NSError * _Nonnull error) {
-            dispatch_group_leave(self.dispatch_group);
+            [[zHud shareInstance] showMessage:@"消息发送失败"];
+//            dispatch_group_leave(self.dispatch_group);
         }];
     }
 }
@@ -100,7 +111,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 //向SDK发消息
 - (void)requestSDKSendMsg:(NSString *)text
 {
-    dispatch_group_enter(self.dispatch_group);
+//    dispatch_group_enter(self.dispatch_group);
     if (_roomType == LWChatRoomTypeGroup) {
         [[XHClient sharedClient].groupManager sendMessage:text toGroup:self.m_Group_ID atUsers:nil completion:^(NSError *error) {
             if (error) {
@@ -109,9 +120,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
             }else{
                 self.successNum++;
             }
-            dispatch_group_leave(self.dispatch_group);
+//            dispatch_group_leave(self.dispatch_group);
         }];
-        
     }else if (_roomType == LWChatRoomTypeOneTOne){
         [[XHClient sharedClient].chatManager sendMessage:text toID:self.roomId completion:^(NSError *error) {
             if (error) {
@@ -120,39 +130,49 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
             } else {
                 self.successNum++;
             }
-            dispatch_group_leave(self.dispatch_group);
+//            dispatch_group_leave(self.dispatch_group);
         }];
     }
 }
 
 
-#pragma mark IFChatViewDelegate
-- (void)chatViewDidSendText:(NSString *)text {
-    //    if (!self.dispatch_group) {
-    //    }
-    self.dispatch_group = dispatch_group_create();
-    
-    [self requsetSendMsgService:text];
-    
-    [self requestSDKSendMsg:text];
-    
-    dispatch_group_notify(self.dispatch_group, dispatch_get_main_queue(), ^{
-        [self.view endEditing:YES];
-        if (self.successNum == 2) {
-            ShowMsgElem * newMsgElem = [[ShowMsgElem alloc] init];
-            newMsgElem.userID = [IMUserInfo shareInstance].userID;
-            newMsgElem.content = text;
-            newMsgElem.username = [LWDATA([zUserInfo shareInstance].userInfo.username) isEqualToString:@""]?@"未知昵称":[zUserInfo shareInstance].userInfo.username;
-            newMsgElem.time = [[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
-            
-            [self showTrace:newMsgElem];
-        }else{
-            [[zHud shareInstance] showMessage:@"消息发送失败"];
-        }
-        self.successNum = 0;
-    });
+//- (void)chatViewDidSendText:(NSString *)text {
+//
+//    self.dispatch_group = dispatch_group_create();
+//
+//    [self requsetSendMsgService:text];
+//
+//    [self requestSDKSendMsg:text];
+//
+//    dispatch_group_notify(self.dispatch_group, dispatch_get_main_queue(), ^{
+//        [self.view endEditing:YES];
+//        if (self.successNum == 2) {
+//            ShowMsgElem * newMsgElem = [[ShowMsgElem alloc] init];
+//            newMsgElem.userID = [IMUserInfo shareInstance].userID;
+//            newMsgElem.content = text;
+//            newMsgElem.username = [LWDATA([zUserInfo shareInstance].userInfo.username) isEqualToString:@""]?@"未知昵称":[zUserInfo shareInstance].userInfo.username;
+//            newMsgElem.time = [[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+//
+//            [self showTrace:newMsgElem];
+//        }else{
+//            [[zHud shareInstance] showMessage:@"消息发送失败"];
+//        }
+//        self.successNum = 0;
+//    });
+//}
+
+// 发送成功
+- (void)sendMsgSuccess:(NSString *)text
+{
+    ShowMsgElem * newMsgElem = [[ShowMsgElem alloc] init];
+    newMsgElem.userID = [IMUserInfo shareInstance].userID;
+    newMsgElem.content = text;
+    newMsgElem.username = [LWDATA([zUserInfo shareInstance].userInfo.username) isEqualToString:@""]?@"未知昵称":[zUserInfo shareInstance].userInfo.username;
+    newMsgElem.time = [[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [self showTrace:newMsgElem];
 }
 
+ // 发送成功后，刷新当前页面
 - (void)showTrace:(ShowMsgElem *)msgModel
 {
     if (!msgModel) {
@@ -170,6 +190,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         [self getNeetShowDatas];
         [self.chatTableView reloadData];
         [self scrollTableToFoot:NO];
+        
+        [LWClientManager saveLocalChatRecordWithRoomName:self.roomName roomId:self.roomId chatType:self.roomType==1?1:2 extend:nil];
     });
 }
 
@@ -255,7 +277,6 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     
     self.title = self.roomName;
     
-    
     [self requestRecordListDatas];
 }
 
@@ -269,6 +290,9 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     self.chatKeyBoard.associateTableView = self.chatTableView;
     [self.view addSubview:self.chatKeyBoard];
     self.chatKeyBoard.placeHolder = @"来聊吧...";
+    
+    self.chatKeyBoard.allowVoice = NO;
+    self.chatKeyBoard.allowMore = NO;
 }
 
 
@@ -364,7 +388,10 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (void)chatKeyBoardSendText:(NSString *)text;
 {
     LWLog(@"********************text:%@",text);
-    [self chatViewDidSendText:text];
+    [self requsetSendMsgService:text];
+    
+    [self requestSDKSendMsg:text];
+    
 }
 #pragma mark -- ChatKeyBoardDataSource
 - (NSArray<MoreItem *> *)chatKeyBoardMorePanelItems
