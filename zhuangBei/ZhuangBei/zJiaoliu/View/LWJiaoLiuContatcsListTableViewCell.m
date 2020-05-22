@@ -27,13 +27,17 @@
         _nameL = [LWLabel lw_lable:@"admin" font:15 textColor:BASECOLOR_TEXTCOLOR];
         _descL = [LWLabel lw_lable:@"在么？这个问题在么解决？" font:12 textColor:BASECOLOR_GREYCOLOR155];
         _timelL = [LWLabel lw_lable:@"2020/04/22  18:20" font:12 textColor:BASECOLOR_TEXTCOLOR];
+        _unreadnumL = [LWLabel lw_lable:@"" font:10 textColor:UIColor.whiteColor];
+        _unreadnumL.backgroundColor = UIColor.redColor;
+        [_unreadnumL setBoundWidth:0 cornerRadius:8 boardColor:UIColor.whiteColor];
+        
         UIView *line = [UIView new];
         line.backgroundColor = BASECOLOR_BOARD;
         _leftBtn = [LWButton lw_button:@"同意" font:14 textColor:UIColor.whiteColor backColor:BASECOLOR_BLUECOLOR target:self acction:@selector(clickBtn:)];
         _rightBtn = [LWButton lw_button:@"拒绝" font:14 textColor:UIColor.whiteColor backColor:BASECOLOR_BLUECOLOR target:self acction:@selector(clickBtn:)];
         _leftBtn.tag = 1;
         _rightBtn.tag = 2;
-        [self.contentView addSubviews:@[_icon,_nameL,_timelL,_descL,line,_leftBtn,_rightBtn]];
+        [self.contentView addSubviews:@[_icon,_nameL,_timelL,_descL,line,_leftBtn,_rightBtn,_unreadnumL]];
         [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.contentView.mas_left).mas_offset(10);
             make.height.width.mas_offset(50);
@@ -44,15 +48,7 @@
             make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
             make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(-0);
         }];
-//        [_descL mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.mas_equalTo(_nameL.mas_left);
-//            make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
-//            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(15);
-//        }];
-//        [_timelL mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
-//            make.centerY.mas_equalTo(_nameL.mas_centerY);
-//        }];
+
         _descL.hidden = _timelL.hidden = YES;
         
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,7 +60,6 @@
         [_icon setBoundWidth:0 cornerRadius:25];
         [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
-//            make.centerY.mas_equalTo(_descL.mas_centerY);
             make.top.mas_equalTo(_timelL.mas_bottom).mas_offset(10);
             make.width.mas_offset(60);
             make.height.mas_offset(30);
@@ -79,6 +74,14 @@
         _line = line;
         [_leftBtn setBoundWidth:0 cornerRadius:4];
         [_rightBtn setBoundWidth:0 cornerRadius:4];
+        
+        [_unreadnumL mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_offset(16);
+            make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+            make.centerY.mas_equalTo(self.contentView.mas_centerY);
+        }];
+        _unreadnumL.hidden = YES;
+        _unreadnumL.textAlignment = NSTextAlignmentCenter;
     }
     return self;
 }
@@ -109,6 +112,12 @@
         make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(0);
     }];
     _leftBtn.hidden = _rightBtn.hidden = NO;
+}
+
+- (void)setunreadNumber:(NSInteger)num;
+{
+    _unreadnumL.hidden = (num <= 0);
+    _unreadnumL.text = [NSString stringWithFormat:@"%ld",num];
 }
 
 @end
