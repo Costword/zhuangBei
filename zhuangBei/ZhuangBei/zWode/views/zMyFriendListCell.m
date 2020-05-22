@@ -159,7 +159,7 @@
     [self.emailButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.descLabel.mas_bottom).offset(kWidthFlot(10));
         make.left.mas_equalTo(left);
-        make.right.mas_equalTo(-kWidthFlot(150));
+        make.right.mas_equalTo(-kWidthFlot(50));
         make.height.mas_equalTo(kWidthFlot(30));
     }];
     

@@ -34,9 +34,12 @@
 //    config.QQAppKey = qqAppKey;
 //    [JSHAREService setupWithConfig:config];
     
+    NSString *version= [UIDevice currentDevice].systemVersion;
+    if(version.doubleValue >=13.0) {
+        // 针对13.0 以上的iOS系统进行处理
+    }
     if (@available(iOS 13.0, *)) {
                 
-        
     } else
     {
 //        NSHTTPCookie * cookie = [cookiesTool cookieWithName:kLoginUserInfo];
