@@ -29,10 +29,9 @@
     [[zHud shareInstance] hild];
     [PPNetworkHelper cancelAllRequest];
     
-    [self requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"searchValue":LWDATA(self.searchValue),@"gysLimit":@"1000"} success:^(id  _Nonnull response) {
+    [self requestPostWithUrl:@"app/appzhuangbei/listByQian" para:@{@"searchValue":LWDATA(self.searchValue),@"gysLimit":@"100",} paraType:(LWRequestParamTypeString) success:^(id  _Nonnull response) {
         
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
+        
         
         if ([response[@"code"] integerValue] == 0) {
             NSDictionary *page = response[@"page"];
@@ -45,6 +44,9 @@
             for (NSDictionary *dict in list) {
                 [self.listDatas addObject: [LWHuoYuanThreeLevelModel modelWithDictionary:dict]];
             }
+            
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
             
             if (self.currPage >= self.totalPage) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -69,6 +71,7 @@
             [self.tableView.mj_footer setHidden:YES];
         }
     }];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -95,6 +98,7 @@
     [super viewDidLoad];
     [self ConfiUI];
     self.tableView.mj_footer.hidden = YES;
+    [self requestDatas];
 }
 
 - (void)ConfiUI

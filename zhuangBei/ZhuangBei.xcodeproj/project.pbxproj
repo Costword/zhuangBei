@@ -164,7 +164,6 @@
 		00FE9B942476B878002A1F86 /* systemEmoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00FE9B392476B878002A1F86 /* systemEmoji.plist */; };
 		00FE9B952476B878002A1F86 /* emotion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00FE9B3A2476B878002A1F86 /* emotion.plist */; };
 		00FE9B962476B878002A1F86 /* face.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00FE9B3B2476B878002A1F86 /* face.plist */; };
-		00FE9B972476B878002A1F86 /* PPQueuingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B3F2476B878002A1F86 /* PPQueuingScrollView.m */; };
 		00FE9B982476B878002A1F86 /* NSAttributedString+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B402476B878002A1F86 /* NSAttributedString+PPAddition.m */; };
 		00FE9B992476B878002A1F86 /* UIScreen+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B432476B878002A1F86 /* UIScreen+PPAddition.m */; };
 		00FE9B9A2476B878002A1F86 /* UIScrollView+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B442476B878002A1F86 /* UIScrollView+PPAddition.m */; };
@@ -612,7 +611,6 @@
 		00FE9B3B2476B878002A1F86 /* face.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = face.plist; sourceTree = "<group>"; };
 		00FE9B3C2476B878002A1F86 /* LWEmojiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEmojiManager.h; sourceTree = "<group>"; };
 		00FE9B3D2476B878002A1F86 /* ChatKeyBoardMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatKeyBoardMacroDefine.h; sourceTree = "<group>"; };
-		00FE9B3F2476B878002A1F86 /* PPQueuingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPQueuingScrollView.m; sourceTree = "<group>"; };
 		00FE9B402476B878002A1F86 /* NSAttributedString+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+PPAddition.m"; sourceTree = "<group>"; };
 		00FE9B412476B878002A1F86 /* PPSlideLineButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPSlideLineButton.h; sourceTree = "<group>"; };
 		00FE9B422476B878002A1F86 /* NSString+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PPAddition.h"; sourceTree = "<group>"; };
@@ -621,7 +619,6 @@
 		00FE9B452476B878002A1F86 /* UIColor+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PPAddition.m"; sourceTree = "<group>"; };
 		00FE9B462476B878002A1F86 /* PPTextBackedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPTextBackedString.m; sourceTree = "<group>"; };
 		00FE9B472476B878002A1F86 /* UIButton+PPAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+PPAddition.h"; sourceTree = "<group>"; };
-		00FE9B482476B878002A1F86 /* PPQueuingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPQueuingScrollView.h; sourceTree = "<group>"; };
 		00FE9B492476B878002A1F86 /* PPReusablePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPReusablePage.h; sourceTree = "<group>"; };
 		00FE9B4A2476B878002A1F86 /* NSString+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PPAddition.m"; sourceTree = "<group>"; };
 		00FE9B4B2476B878002A1F86 /* PPSlideLineButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPSlideLineButton.m; sourceTree = "<group>"; };
@@ -1644,7 +1641,6 @@
 		00FE9B3E2476B878002A1F86 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				00FE9B3F2476B878002A1F86 /* PPQueuingScrollView.m */,
 				00FE9B402476B878002A1F86 /* NSAttributedString+PPAddition.m */,
 				00FE9B412476B878002A1F86 /* PPSlideLineButton.h */,
 				00FE9B422476B878002A1F86 /* NSString+PPAddition.h */,
@@ -1653,7 +1649,6 @@
 				00FE9B452476B878002A1F86 /* UIColor+PPAddition.m */,
 				00FE9B462476B878002A1F86 /* PPTextBackedString.m */,
 				00FE9B472476B878002A1F86 /* UIButton+PPAddition.h */,
-				00FE9B482476B878002A1F86 /* PPQueuingScrollView.h */,
 				00FE9B492476B878002A1F86 /* PPReusablePage.h */,
 				00FE9B4A2476B878002A1F86 /* NSString+PPAddition.m */,
 				00FE9B4B2476B878002A1F86 /* PPSlideLineButton.m */,
@@ -2217,7 +2212,6 @@
 				00CB202A2471122A00171284 /* ZFTabBarViewController.m in Sources */,
 				89D2578224669C0900CB3910 /* LWBaseLabel.m in Sources */,
 				001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */,
-				00FE9B972476B878002A1F86 /* PPQueuingScrollView.m in Sources */,
 				00FE9BAF2476B878002A1F86 /* MorePanel.m in Sources */,
 				00871852245960B2003F8CD3 /* NSArray+JSON.m in Sources */,
 				0091FCE0245E59EE0046691F /* zPersonalCell.m in Sources */,
@@ -2522,7 +2516,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -2550,7 +2544,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";

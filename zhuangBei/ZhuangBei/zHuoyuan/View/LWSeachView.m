@@ -17,10 +17,11 @@
     return search;
 }
 
-- (void)clickBtn
+- (void)clickBtn:(UIButton *)sender
 {
+    [self.tf resignFirstResponder];
     if (self.block) {
-        self.block(1, @"");
+        self.block(sender.tag, self.tf.text);
     }
 }
 
@@ -31,7 +32,8 @@
         
         UIButton *backbtn = [UIButton new];
         [backbtn setImage:IMAGENAME(@"return_btn") forState:UIControlStateNormal];
-        [backbtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
+        [backbtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
+        backbtn.tag = 1;
         
         UITextField *tf = [UITextField new];
         tf.placeholder = @"搜索";
@@ -42,7 +44,12 @@
         tfbg.backgroundColor = UIColor.grayColor;
         tfbg.alpha = 0.3;
         
-        [self addSubviews:@[backbtn,tfbg,tf]];
+        UIButton *searchbtn = [UIButton new];
+        [searchbtn setImage:IMAGENAME(@"icon_search") forState:UIControlStateNormal];
+        [searchbtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
+        searchbtn.tag = 2;
+        
+        [self addSubviews:@[backbtn,tfbg,tf,searchbtn]];
         [backbtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.mas_left).mas_offset(15);
             make.centerY.mas_equalTo(self.mas_centerY);
@@ -56,14 +63,20 @@
         }];
         [tfbg mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(backbtn.mas_right).mas_offset(10);
-            make.right.mas_equalTo(self.mas_right).mas_offset(-25);
+            make.right.mas_equalTo(searchbtn.mas_left).mas_offset(-10);
             make.centerY.mas_equalTo(self.mas_centerY);
             make.height.mas_offset(34);
         }];
         [tfbg setBoundWidth:0 cornerRadius:17 boardColor:UIColor.grayColor];
         _tf = tf;
         tf.returnKeyType = UIReturnKeySearch;//变为搜索按钮
-        [tf becomeFirstResponder];
+        //        [tf becomeFirstResponder];
+        
+        [searchbtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(self.mas_right).mas_offset(-10);
+            make.centerY.mas_equalTo(self.mas_centerY);
+            make.width.height.mas_offset(40);
+        }];
     }
     return self;
 }
@@ -75,14 +88,7 @@
     if (self.block) {
         self.block(2, textField.text);
     }
-      return YES;
+    return YES;
 }
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
-////    if (self.block) {
-////        self.block(2, str);
-////    }
-//    return YES;
-//}
+
 @end

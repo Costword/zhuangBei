@@ -41,9 +41,9 @@
         param = @{@"groupName":LWDATA(self.tf.text),@"limit":@"200",@"page":@(self.currPage)};
         [self requestPostWithUrl:@"app/appgroup/findGroupByGroupNameList" para:param paraType:(LWRequestParamTypeDict) success:^(id  _Nonnull response) {
             [self handlerDatas:response];
-         } failure:^(NSError * _Nonnull error) {
-             
-         }];
+        } failure:^(NSError * _Nonnull error) {
+            
+        }];
     }else{
         [self requestPostWithUrl:url paraString:param success:^(id  _Nonnull response) {
             [self handlerDatas:response];

@@ -14,7 +14,6 @@
 #import "UIButton+PPAddition.h"
 #import "PPSlideLineButton.h"
 #import "UIColor+PPAddition.h"
-#import "PPQueuingScrollView.h"
 #import "UIScreen+PPAddition.h"
 #import "UIScrollView+PPAddition.h"
 

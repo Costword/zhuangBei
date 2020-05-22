@@ -23,4 +23,4 @@
 - (void)didBecomeFocusPage;
 - (void)didResignFocusPage;
 
-@end
+@endPPQueuingScrollView
