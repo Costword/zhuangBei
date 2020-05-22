@@ -30,7 +30,7 @@
 -(void)setSourceVc:(UIViewController *)sourceVc
 {
     _sourceVc = sourceVc;
-    self.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:_sourceVc refreshingAction:@selector(refreshData)];
+    self.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:_sourceVc refreshingAction:@selector(requestDatas)];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView

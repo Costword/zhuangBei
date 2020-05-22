@@ -135,8 +135,6 @@
 {
     if (!_listDatasMutableArray) {
         _listDatasMutableArray = [[NSMutableArray alloc] init];
-#warning +++++++++++testdatas
-//        [self.listDatasMutableArray addObjectsFromArray:@[@"特巡警装备/软件",@"警保装备/软件",@"刑侦装备/软件",@"禁毒装备/软件",@"交警装备/软件",@"监所装备/软件",@"法制装备/软件"]];
     }
     return _listDatasMutableArray;
 }
