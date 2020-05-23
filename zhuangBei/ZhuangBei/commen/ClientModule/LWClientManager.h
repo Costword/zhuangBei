@@ -73,16 +73,19 @@ typedef void(^RequestFailure)(NSError *error);
 - (void)requestUnReadSystemMsgNumber;
 
 /// 已读系统消息
-/// @param type 已读消息类型
+/// @param type 已读消息类型* type类型：* 0：管理员收到入群申请* 1：收到好友请求
 - (void)requestReadSystemMsg:(NSString *)type;
-
 
 /// 删除该条聊天室的未读消息
 /// @param roomId 聊天室的id
 - (void)deleteUnReadMsgWithroomId:(NSString *)roomId;
 
+
 /// 聊天消息的未读数量
 @property (nonatomic, assign,readonly) NSInteger  unreadMsgNum;
+
+// 系统未读消息数量
+@property (nonatomic, assign,readonly) NSInteger  unreadSysMsgNum;
 
 @end
 

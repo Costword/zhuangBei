@@ -44,7 +44,7 @@
 - (void)unreadMsgNumberChange
 {
     zJiaoliuController *vc = (zJiaoliuController *)(self.childViewControllers[2].childViewControllers.lastObject);
-    NSInteger num = [LWClientManager share].unreadMsgNum;
+    NSInteger num = [LWClientManager share].unreadMsgNum + LWClientManager.share.unreadSysMsgNum;
     vc.navigationController.tabBarItem.badgeValue = (num == 0) ? nil: [NSString stringWithFormat:@"%ld",num];
 }
 
@@ -105,7 +105,7 @@
     [self setupChildViewController:hyVC title:@"货源" imageName:@"goods_nor" selectedImageName:@"goods_sel"];
     //交流
     zJiaoliuController*jlVC = [[zJiaoliuController alloc]init];
-    NSInteger num = [LWClientManager share].unreadMsgNum;
+    NSInteger num = [LWClientManager share].unreadMsgNum + LWClientManager.share.unreadSysMsgNum;
     jlVC.tabBarItem.badgeValue =  num == 0 ? nil: [NSString stringWithFormat:@"%ld",num];
     
     [self setupChildViewController:jlVC title:@"交流大厅" imageName:@"friend_nor" selectedImageName:@"friend_sel"];

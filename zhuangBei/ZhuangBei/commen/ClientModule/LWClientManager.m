@@ -25,6 +25,10 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 @interface LWClientManager()<XHLoginManagerDelegate,XHChatManagerDelegate, XHGroupManagerDelegate>
 @property (nonatomic, strong) XHCustomConfig *config;
+// 系统未读消息数量
+@property (nonatomic, assign) NSInteger  unreadSysMsgNum;
+//该用户的群组<groupid:groupname>
+@property (nonatomic, strong) NSMutableDictionary * allGroupDatas;
 
 @end
 
@@ -46,6 +50,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 - (void)installConfigure
 {
+    [self requestUnReadSystemMsgNumber];
+    
     self.config.serverType =  SERVER_TYPE_CUSTOM;;
     self.config.imServerURL = IM_SERVER_URL;
     self.config.chatRoomServerURL = CHATROOM_SERVER_URL;
@@ -62,6 +68,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 //配置userID
 - (void)configureUserId
 {
+    [self requestUnReadSystemMsgNumber];
+    
     zUserModel * model = [zUserInfo shareInstance].userInfo;
     [self.config sdkInitForFree:LWDATA(model.userId)];
     [self userLogin];
@@ -88,26 +96,27 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 
 #pragma mark ----------- XHGroupManagerDelegate -----------
-
+//群组成员数目变化
 - (void)group:(NSString*)groupID didMembersNumberUpdeted:(NSInteger)membersNumber {
-    //    self.title = [NSString stringWithFormat:@"%@(%d人在线)", self.roomName, (int)membersNumber];
 }
 
+// 自己被移除当前群组
 - (void)groupUserKicked:(NSString*)groupID {
     POST_NOTI(DELE_USER_GROPU_CHAT_NOTI_KEY, nil);
 }
 
+//群组解散
 - (void)groupDidDeleted:(NSString*)groupID {
     POST_NOTI(DELE_GROPU_CHAT_NOTI_KEY, nil);
 }
 
+//接收群组消息
 - (void)groupMessagesDidReceive:(NSString *)aMessage fromID:(NSString *)fromID groupID:(NSString *)groupID{
-    
     POST_NOTI(NEW_MSG_GROPU_NOTI_KEY, (@{@"msg":aMessage,@"fromid":fromID,@"groupID":groupID}));
     
-    NSDictionary *dict = [LWTool stringToDictory:aMessage][@"mid"];
+    NSString *groupname = self.allGroupDatas[[NSNumber numberWithString:groupID]];
     //type: 1:group; 2:oto
-    [self addNewUnReadMsgWithRoomName:LWDATA(dict[@"groupName"]) roomId:LWDATA(dict[@"groupId"]) chatType:1 extend:nil];
+    [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
 }
 
 
@@ -272,6 +281,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 /// 删除本地聊天记录
 + (void)removeLocalChatRecord
 {
+    [LWClientManager.share deleteAllUnReadMsgNum];
+    
     [SYSTEM_USERDEFAULTS removeObjectForKey:LOCAL_CHATRECORD_LIST_KEY];
     [SYSTEM_USERDEFAULTS synchronize];
 }
@@ -298,23 +309,45 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 #pragma mark ------------------- 获取系统消息的未读数 ---------------------
 
+// 获取该用户的所有群组信息，用于群组未读消息的 反查群组名称
+- (void)requestAllGroupInforDatas
+{
+     [ServiceManager requestPostWithUrl:@"app/appfriendtype/getFriendTypeAndFriendList" Parameters:@{} success:^(id  _Nonnull response) {
+            NSDictionary *data = response[@"data"];
+            NSArray *group = data[@"group"];
+         [self.allGroupDatas removeAllObjects];
+         for (NSDictionary *dict in group) {
+             [self.allGroupDatas setObject:LWDATA(dict[@"groupname"]) forKey:LWDATA(dict[@"id"])];
+         }
+        } failure:^(NSError * _Nonnull error) {
+    
+        }];
+}
 
 /// 获取系统消息未读数
 - (void)requestUnReadSystemMsgNumber
 {
-    [ServiceManager requestPostWithUrl:@"app/app/appfriendapply/countList" paraString:@{} success:^(id  _Nonnull response) {
-        
+    [self requestAllGroupInforDatas];
+    
+    [ServiceManager requestPostWithUrl:@"app/appfriendapply/countList" paraString:@{} success:^(id  _Nonnull response) {
+        if ([response[@"code"] integerValue] == 0) {
+            NSInteger countMun = [response[@"countMun"] integerValue];
+            self.unreadSysMsgNum = countMun;
+            POST_NOTI(LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY, nil);
+        }
     } failure:^(NSError * _Nonnull error) {
         
     }];
 }
 
 /// 已读系统消息
-/// @param type 已读消息类型
+/// @param type 已读消息类型* type类型：* 0：管理员收到入群申请* 1：收到好友请求
 - (void)requestReadSystemMsg:(NSString *)type
 {
-    [ServiceManager requestPostWithUrl:@"/app/app/appfriendapply/read" paraString:@{@"type":LWDATA(type)} success:^(id  _Nonnull response) {
-        
+    if(self.unreadSysMsgNum <= 0) return;
+    
+    [ServiceManager requestPostWithUrl:@"/app/appfriendapply/read" paraString:@{@"type":LWDATA(type)} success:^(id  _Nonnull response) {
+        [self requestUnReadSystemMsgNumber];
     } failure:^(NSError * _Nonnull error) {
         
     }];
@@ -414,6 +447,14 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     POST_NOTI(LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY, nil);
 }
 
+
+/// 清空本地缓存的未读消息数据
+- (void)deleteAllUnReadMsgNum
+{
+    [SYSTEM_USERDEFAULTS removeObjectForKey:LOCAL_UNRADER_MSG_LIST_KEY];
+    [SYSTEM_USERDEFAULTS synchronize];
+}
+
 /// 获取本地的未读消息数量 private
 -(NSInteger)unreadMsgNum
 {
@@ -425,7 +466,13 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     return num;
 }
 
-
+- (NSMutableDictionary *)allGroupDatas
+{
+    if (!_allGroupDatas) {
+        _allGroupDatas = [[NSMutableDictionary alloc] init];
+    }
+    return _allGroupDatas;
+}
 @end
 
 
@@ -440,4 +487,24 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
  * 0：管理员收到入群申请
  * 1：收到好友请求
  
+ */
+
+
+/*
+ 群组消息：
+ {
+     "avatar": "/app/app/appfujian/download?attID=3379",
+     "content": "还",
+     "id": "696",
+     "isGroup": true,
+     "mid": {
+         "content": "还",
+         "groupId": "63",
+         "id": "3379",
+         "sendTime": "2020-05-23 10:19",
+         "userId": "696"
+     },
+     "msgCount": 0,
+     "username": "北京真格lw2000-销售部-总经理"
+ }
  */

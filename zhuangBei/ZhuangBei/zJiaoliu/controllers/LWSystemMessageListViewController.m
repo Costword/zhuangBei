@@ -10,6 +10,7 @@
 #import "LWJiaoLiuContatcsListTableViewCell.h"
 #import "HYTopBarView.h"
 #import "LWSystemListModel.h"
+#import "LWClientManager.h"
 
 @interface LWSystemMessageListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -64,6 +65,10 @@
 //系统消息列表
 - (void)requestSystemMsg
 {
+    //    有未读系统消息时调用
+    if (LWClientManager.share.unreadSysMsgNum != 0) {
+        [LWClientManager.share requestReadSystemMsg:@"0"];
+    }
     [self requestPostWithUrl:@"app/appgroupapply/msgList" para:@{@"page":@(_curretnPage_sys)} paraType:(LWRequestParamTypeString) success:^(id  _Nonnull response) {
         
         [self.groupTableView.mj_header endRefreshing];
@@ -98,6 +103,7 @@
         [self.groupTableView.mj_footer endRefreshing];
     }];
 }
+
 //好友y验证列表
 - (void)requestDatas
 {
@@ -146,7 +152,10 @@
     [self requestDatas];
 //    [self requestSystemMsg];
     
+    [LWClientManager.share requestReadSystemMsg:@"1"];
+    
 }
+
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -155,6 +164,7 @@
         make.top.mas_equalTo(_topBarView.mas_bottom).mas_offset(0);
     }];
 }
+
 - (void)confiUI
 {
     WEAKSELF(self)
@@ -165,7 +175,6 @@
     }];
     _topBarView.backgroundColor = UIColor.whiteColor;
     [self.view addSubview:_topBarView];
-    CGFloat left = (SCREEN_WIDTH - 200)/2 - 10;
     [_topBarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view.mas_left).mas_offset(0);
         make.right.mas_equalTo(self.view.mas_right).mas_offset(-0);
