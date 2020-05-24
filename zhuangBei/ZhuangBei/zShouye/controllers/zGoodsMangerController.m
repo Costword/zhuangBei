@@ -20,6 +20,8 @@
 
 @property(strong,nonatomic)zShouYeLeftMenu * leftMenu;
 
+@property(assign,nonatomic)NSInteger currentPage;
+
 @property(strong,nonatomic)NSMutableArray * menuListArray;
 
 @property(strong,nonatomic)NSMutableArray * contentListArray;
@@ -33,7 +35,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    if (self.showNav) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    }
     [self loadMenuList];
     [self loadList];
 }
@@ -93,6 +97,8 @@
         _menuTableView.showsVerticalScrollIndicator = NO;
         _menuTableView.rowHeight = UITableViewAutomaticDimension;
         _menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _menuTableView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
+        _menuTableView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     }
     return _menuTableView;
 }
@@ -102,9 +108,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.leftMenu];
     [self.view addSubview:self.menuTableView];
-    
-   
-    
+
 }
 
 -(void)loadMenuList
@@ -129,11 +133,27 @@
             NSDictionary * dic = response[@"page"];
             NSLog(@"货源列表%@",dic);
             NSArray * list = dic[@"list"];
+            [self.menuTableView.mj_header endRefreshing];
             if (list.count==0) {
-                self.nothingView.alpha =1;
-                [self.view bringSubviewToFront:self.nothingView];
+                if (self.currentPage == 1) {
+                    self.nothingView.alpha =1;
+                    [self.view bringSubviewToFront:self.nothingView];
+                }else
+                {
+                    [self.menuTableView.mj_footer endRefreshingWithNoMoreData];
+                }
             }else
             {
+                if (list.count<20) {
+                    [self.menuTableView.mj_footer endRefreshingWithNoMoreData];
+                    [self.menuTableView.mj_footer setHidden:YES];
+                }else
+                {
+                    [self.menuTableView.mj_footer endRefreshing];
+                }
+                if (self.currentPage == 1) {
+                    [self.contentListArray removeAllObjects];
+                }
                 self.nothingView.alpha =0;
                 [self.contentListArray removeAllObjects];
                 [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -152,10 +172,22 @@
     } failure:^(NSError * _Nonnull error) {
         [[zHud shareInstance]hild];
     }];
-    
-//    [self postDataWithUrl:listurl WithParam:self.listParmas];
     [[zHud shareInstance]show];
 }
+
+-(void)refreshData
+{
+    [_listParmas setObject:@(1) forKey:@"page"];
+    [self loadList];
+}
+
+-(void)loadMoreData
+{
+    self.currentPage ++ ;
+    [_listParmas setObject:@(self.currentPage) forKey:@"page"];
+    [self loadList];
+}
+
 
 -(void)viewDidLayoutSubviews
 {

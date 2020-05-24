@@ -179,6 +179,12 @@
     self.descContentLabel.text = _goosModel.approveText;
 }
 
+-(void)setCompanyType:(NSInteger)companyType
+{
+    _companyType = companyType;
+    self.navigationSliderMenu.selectIndex = companyType;
+}
+
 -(void)sliderNavMenuSelectIndex:(NSInteger)index
 {
     if (self.headerSlideBack) {

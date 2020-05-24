@@ -352,6 +352,11 @@ NSString *const getFriendDetail = @"app/appqyuser/findOne";
 
 
 /**
+ *获取分享二维码
+ *Url app/appandroidversion/generateApplicationMarketLinkQrCode
+ */
+NSString *const getShareImage = @"app/appandroidversion/generateApplicationMarketLinkQrCode";
+/**
  *货源管理
  *POST
  *无参数
@@ -374,6 +379,18 @@ NSString *const kGoodsMangerList = @"app/appgyszblink/listzbGys";
  */
 NSString *const kGetCompanyGoodsList = @"app/appgyszblink/listAndroid";
 
+/**
+ *经销商管理
+ *URL    http://test.110zhuangbei.com:8105/app/app/appzhuangbeitype/getTreeToMyAttentionCompanyNew
+ */
+NSString *const kGetBusinessManLocationList = @"app/appzhuangbeitype/getTreeToMyAttentionCompanyNew";
+
+/**
+ *获取经销商列表
+ *URL    http://test.110zhuangbei.com:8105/app/app/appgongys/followGsList?code=2&typeIds=&limit=20&page=1&searchData=
+ *typeIds 城市地址 用编号代替
+ */
+NSString *const kGetMyBusinessManList = @"app/appgongys/followGsList";
 /**
  登录
  > **username**  (String)    *用户名*    |   必填

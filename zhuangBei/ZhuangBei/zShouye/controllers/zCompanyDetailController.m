@@ -65,6 +65,8 @@
     
 }
 
+
+
 -(void)getCompanyGoodsList
 {
     NSDictionary * dic = @{@"gysId":@(self.goosModel.goodsid),
@@ -163,6 +165,7 @@
         }];
     };
     companyHeader.goosModel = _goosModel;
+    companyHeader.companyType = self.companyType;
     return companyHeader;
 }
 

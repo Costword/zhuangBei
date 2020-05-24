@@ -19,6 +19,8 @@ typedef void(^headerSliderMenuBack)(NSInteger index);
 
 @property(strong,nonatomic)zGoodsContentModel * goosModel;
 
+@property(assign,nonatomic)NSInteger companyType;
+
 @end
 
 NS_ASSUME_NONNULL_END

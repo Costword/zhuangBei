@@ -29,11 +29,12 @@
     if (!_arrowButton) {
         _arrowButton = [[UIButton alloc]init];
         _arrowButton.userInteractionEnabled = NO;
-        [_arrowButton setImage:[UIImage imageNamed:@"chose_normal"] forState:UIControlStateNormal];
+        [_arrowButton setImage:[UIImage imageNamed:@"blank"] forState:UIControlStateNormal];
         [_arrowButton setImage:[UIImage imageNamed:@"chose_select"] forState:UIControlStateSelected];
+        _arrowButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _arrowButton.titleLabel.font = [UIFont systemFontOfSize:kWidthFlot(12)];
         [_arrowButton setTitleColor:[UIColor colorWithHexString:@"#4A4A4A"] forState:UIControlStateNormal];
-//        [_arrowButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        _arrowButton.backgroundColor = [UIColor whiteColor];
     }
     return _arrowButton;
 }
@@ -53,16 +54,26 @@
     [self.arrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(kWidthFlot(5));
         make.left.mas_equalTo(kWidthFlot(20));
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(kWidthFlot(30));
+        make.right.mas_equalTo(-kWidthFlot(20));
         make.bottom.mas_equalTo(-kWidthFlot(5));
     }];
 }
 
--(void)setModel:(zHuoYuanModel *)model
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self.arrowButton setNeedsLayout];
+    [self.arrowButton layoutIfNeeded];
+    [self.arrowButton setIconInLeftWithSpacing:kWidthFlot(5)];
+}
+
+-(void)setModel:(zBusinessLoactionModel *)model
 {
     _model = model;
     self.arrowButton.selected = model.select;
-    [self.arrowButton setTitle:model.name forState:UIControlStateNormal];
+    [self.arrowButton setTitle:model.title forState:UIControlStateNormal];
+    [self.arrowButton setTitle:model.title forState:UIControlStateSelected];
 }
 
 //-(void)buttonClick:(UIButton*)button

@@ -32,9 +32,9 @@
         NSArray *keys = ((NSDictionary *)paraString).allKeys;
         NSMutableString *tem = [[NSMutableString alloc] initWithString:@""];
         for (NSString *key in keys) {
-            if ([paraString[key] isKindOfClass:[NSString class]] && [paraString[key] isEqualToString:@""]) {
-                continue;
-            }
+//            if ([paraString[key] isKindOfClass:[NSString class]] && [paraString[key] isEqualToString:@""]) {
+//                continue;
+//            }
             [tem appendFormat:@"%@=%@&",key,paraString[key]];
         }
         if ([tem hasSuffix:@"&"]) {
