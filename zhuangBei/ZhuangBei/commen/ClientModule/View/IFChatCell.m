@@ -208,7 +208,7 @@ const static int subTitleFontNum = 16;
         
     } else {
         [self.contextImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.titleLabel.mas_right).mas_offset(0);
+            make.right.mas_equalTo(self.titleLabel.mas_right).mas_offset(0);
             make.top.mas_equalTo(self.subTitleLabel.mas_bottom).mas_offset(10);
             make.width.mas_offset(150);
             make.height.mas_offset(200);
@@ -221,7 +221,14 @@ const static int subTitleFontNum = 16;
         make.trailing.equalTo(self.contextImageView).offset(13);
         make.bottom.equalTo(self.contextImageView).offset(5);
     }];
+    
+    [self.contextImageView ex_addTapAction:self selector:@selector(clickImageView)];
 }
 
-
+- (void)clickImageView
+{
+    if(self.clickImgeBlock){
+        self.self.clickImgeBlock();
+    }
+}
 @end

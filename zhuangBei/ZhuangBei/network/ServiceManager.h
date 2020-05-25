@@ -59,6 +59,14 @@ typedef void(^RequestFailure)(NSError *error);
             success:(RequestSuccess)success
             failure:(RequestFailure)failure;
 
+//post请求并上传图片 img/ 上限9M
++ (void)postImageWithUrl:(NSString *)url
+                    img:(UIImage *)img
+                 dataKey:(NSString *)key
+                    name:(NSString *)uploadName
+                 success:(RequestSuccess)successBlock
+                  failed:(RequestFailure)failedBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

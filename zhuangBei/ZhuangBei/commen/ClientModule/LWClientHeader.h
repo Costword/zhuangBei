@@ -40,5 +40,9 @@ static NSString *const LOCAL_UNRADER_MSG_LIST_KEY = @"LOCAL_UNRADER_MSG_LIST_KEY
 // 本来的未读消息数量变化，同时UI
 static NSString *const LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY = @"LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY";
 
+//用户的名称，IM
+static NSString *const USER_ACCOUNT_IM_NICKNAME = @"USER_ACCOUNT_IM_NICKNAME";
+//用户的头像 IM
+static NSString *const USER_ACCOUNT_IM_AVATAR = @"USER_ACCOUNT_IM_AVATAR";
 
 #endif /* LWClientHeader_h */

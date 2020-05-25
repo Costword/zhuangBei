@@ -1,5 +1,6 @@
 #source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
-source 'https://github.com/CocoaPods/Specs.git'
+#source 'https://github.com/CocoaPods/Specs.git'
+source 'https://gitee.com/mirrors/CocoaPods-Specs.git'
 platform :ios, '9.0'
 
 target 'ZhuangBei' do
@@ -17,5 +18,6 @@ target 'ZhuangBei' do
   pod 'LEEAlert'
   pod "UITextView-WZB","1.1.1"
   pod 'JShare'
+  
 end   
 

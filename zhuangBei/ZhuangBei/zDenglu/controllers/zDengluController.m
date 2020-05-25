@@ -116,13 +116,14 @@
             [zUserInfo shareInstance].userAccount = self.loginParam[@"username"];
             [zUserInfo shareInstance].userPassWord = self.loginParam[@"password"];
             
-            zUserModel * model = [zUserModel mj_objectWithKeyValues:dataDic];
-            [zUserInfo shareInstance].userInfo = model;
-            [[zUserInfo shareInstance]saveUserInfo];
-            
+//            add by lw 2020年05月25日10:13:17 调整代码执行顺序，d保存个人信息后，需要即刻请求
             NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:url]];
             NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
             [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUserDefaultsCookie];
+            
+            zUserModel * model = [zUserModel mj_objectWithKeyValues:dataDic];
+            [zUserInfo shareInstance].userInfo = model;
+            [[zUserInfo shareInstance]saveUserInfo];
             
             [self changeRootVC];
         }

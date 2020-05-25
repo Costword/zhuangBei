@@ -34,8 +34,9 @@
         }
         NSString *tem1 = [self.content substringWithRange:NSMakeRange(4, self.content.length - 1 - 4)];
         NSLog(@"------------%@",tem1);
-        return [NSString stringWithFormat:@"%@%@",kApiPrefix,tem1];
+        return [NSString stringWithFormat:@"%@%@",kApiPrefix_PIC,tem1];
     }
     return nil;
 }
+
 @end

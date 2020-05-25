@@ -134,5 +134,59 @@
 
 
 
+//post请求并上传图片 img/ 上限9M
++ (void)postImageWithUrl:(NSString *)url
+                    img:(UIImage *)img
+                 dataKey:(NSString *)key
+                    name:(NSString *)uploadName
+                 success:(RequestSuccess)successBlock
+                  failed:(RequestFailure)failedBlock{
+    LWLog(@"+++++j压缩前：%lu++++++img:%@",(unsigned long)UIImagePNGRepresentation(img).length,img);
+    img = [UIImage compressImage:img toByte:5*1024*1024];
+    NSData *imgdata = UIImageJPEGRepresentation(img,1);
+    LWLog(@"+++++j压缩后：%lu++++++img:%@",(unsigned long)imgdata.length,img);
+    [ServiceManager postWithUrl:url data:imgdata dataKey:key name:uploadName success:successBlock failed:failedBlock];
+}
 
+//图片上传
++ (void)postWithUrl:(NSString *)url
+               data:(NSData *)data
+            dataKey:(NSString *)key
+               name:(NSString *)uploadName
+            success:(RequestSuccess)successBlock
+             failed:(RequestFailure)failedBlock{
+    
+    NSString *URLTmp;
+    NSString *rootUrl = kApiPrefix;
+    URLTmp = [NSString stringWithFormat:@"%@%@",rootUrl,url];
+    
+    AFHTTPSessionManager  *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html",@"application/x-javascript", nil];
+    
+    manager.requestSerializer= [AFHTTPRequestSerializer serializer];
+
+//    [manager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"Require-From"];
+    
+    NSMutableDictionary *params=[NSMutableDictionary dictionary];
+
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 20;
+    
+    
+    [manager POST:URLTmp parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:data name:uploadName fileName:@"upload.jpg" mimeType:@"image/jpeg"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        if (!error) {
+            
+        }
+        failedBlock(error);
+    }];
+
+}
 @end

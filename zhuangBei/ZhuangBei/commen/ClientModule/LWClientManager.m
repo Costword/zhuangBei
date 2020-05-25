@@ -227,6 +227,13 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 }
 
 
+/// 上传图片
+/// @param pic image
+- (void)requestUploadPicFile:(UIImage *)pic success:(RequestSuccess)success failure:(RequestFailure)failure
+{
+    [ServiceManager postImageWithUrl:@"app/appfujian/upload" img:pic dataKey:@"file" name:@"file" success:success failed:failure];
+}
+
 
 #pragma mark --------------------- 聊天室记录本地化 ---------------------
 
@@ -312,16 +319,27 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 // 获取该用户的所有群组信息，用于群组未读消息的 反查群组名称
 - (void)requestAllGroupInforDatas
 {
-     [ServiceManager requestPostWithUrl:@"app/appfriendtype/getFriendTypeAndFriendList" Parameters:@{} success:^(id  _Nonnull response) {
-            NSDictionary *data = response[@"data"];
-            NSArray *group = data[@"group"];
-         [self.allGroupDatas removeAllObjects];
-         for (NSDictionary *dict in group) {
-             [self.allGroupDatas setObject:LWDATA(dict[@"groupname"]) forKey:LWDATA(dict[@"id"])];
-         }
-        } failure:^(NSError * _Nonnull error) {
-    
-        }];
+    [ServiceManager requestPostWithUrl:@"app/appfriendtype/getFriendTypeAndFriendList" Parameters:@{} success:^(id  _Nonnull response) {
+        NSDictionary *data = response[@"data"];
+        NSDictionary *mine = data[@"mine"];
+        NSString *username = mine[@"username"];
+        NSString *avatar = mine[@"avatar"];
+        if (username) {
+            [SYSTEM_USERDEFAULTS setObject:username forKey:USER_ACCOUNT_IM_NICKNAME];
+        }
+        if (avatar) {
+            [SYSTEM_USERDEFAULTS setObject:username forKey:USER_ACCOUNT_IM_AVATAR];
+        }
+        [SYSTEM_USERDEFAULTS synchronize];
+        
+        NSArray *group = data[@"group"];
+        [self.allGroupDatas removeAllObjects];
+        for (NSDictionary *dict in group) {
+            [self.allGroupDatas setObject:LWDATA(dict[@"groupname"]) forKey:LWDATA(dict[@"id"])];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 /// 获取系统消息未读数
@@ -427,7 +445,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     [SYSTEM_USERDEFAULTS setObject:unreaddata forKey:LOCAL_UNRADER_MSG_LIST_KEY];
     [SYSTEM_USERDEFAULTS synchronize];
     
-//    清空本地聊天记录的未读数
+    //    清空本地聊天记录的未读数
     NSMutableArray *localchatreacrod = [LWClientManager getLocalChatRecordModelList];
     [localchatreacrod enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.roomId isEqualToString:roomId]) {
@@ -493,18 +511,53 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 /*
  群组消息：
  {
-     "avatar": "/app/app/appfujian/download?attID=3379",
-     "content": "还",
-     "id": "696",
-     "isGroup": true,
-     "mid": {
-         "content": "还",
-         "groupId": "63",
-         "id": "3379",
-         "sendTime": "2020-05-23 10:19",
-         "userId": "696"
-     },
-     "msgCount": 0,
-     "username": "北京真格lw2000-销售部-总经理"
+ "avatar": "/app/app/appfujian/download?attID=3379",
+ "content": "还",
+ "id": "696",
+ "isGroup": true,
+ "mid": {
+ "content": "还",
+ "groupId": "63",
+ "id": "3379",
+ "sendTime": "2020-05-23 10:19",
+ "userId": "696"
+ },
+ "msgCount": 0,
+ "username": "北京真格lw2000-销售部-总经理"
+ }
+ */
+
+
+/* oto
+ 上传图片
+ app/appfujian/upload
+ param:file data
+ response:
+ {
+ "code": 0,
+ "msg": "success",
+ "data": {
+ "id": 6474,
+ "name": "IMG_20200130_183050.jpg",
+ "format": "multipart/form-data",
+ "realName": "1590371128550.jpg",
+ "remark": null,
+ "fullName": "download/attachment/1590371128550.jpg",
+ "size": 6877751,
+ "type": null,
+ "groupId": null,
+ "userId": 688,
+ "userName": null,
+ "src": "/app/app/appfujian/download?attID=6474",
+ "updateDate": 1590371128570,
+ "activeState": 0,
+ "ossDownloadSrc": null
+ }
+ }
+ 
+ 发送图片
+ {
+ "toUserId": "696",
+ "content": "img[\/app\/app\/appfujian\/download?attID=6474]"
  }
  */

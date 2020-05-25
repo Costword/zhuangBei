@@ -51,6 +51,9 @@ typedef void(^RequestFailure)(NSError *error);
 /// @param failure
 - (void)sendMsgOneToOne:(NSString *)msg roomId:(NSString *)roomId success:(RequestSuccess)success failure:(RequestFailure)failure;
 
+/// 上传图片
+/// @param pic image
+- (void)requestUploadPicFile:(UIImage *)pic success:(RequestSuccess)success failure:(RequestFailure)failure;
 
 
 #pragma mark --------------------- 聊天室记录本地化 ---------------------

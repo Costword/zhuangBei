@@ -244,6 +244,25 @@
 		89D36E0C245AB1C800A6C014 /* LWSystemMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D36E0B245AB1C800A6C014 /* LWSystemMessageListViewController.m */; };
 		89D36E0F245AB93F00A6C014 /* HYTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D36E0E245AB93F00A6C014 /* HYTopBarView.m */; };
 		89D51C6E246503EA00ABA70D /* LWHuoYuanDeatilModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D51C6D246503EA00ABA70D /* LWHuoYuanDeatilModel.m */; };
+		89D9D9E6247B58D300D4EDF5 /* LWPhotoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9D9E5247B58D300D4EDF5 /* LWPhotoPicker.m */; };
+		89D9DA22247B980E00D4EDF5 /* KNActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9D9FE247B980D00D4EDF5 /* KNActionSheet.m */; };
+		89D9DA23247B980E00D4EDF5 /* KNActionSheetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9D9FF247B980D00D4EDF5 /* KNActionSheetItem.m */; };
+		89D9DA24247B980E00D4EDF5 /* KNPhotoDownloadMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA03247B980D00D4EDF5 /* KNPhotoDownloadMgr.m */; };
+		89D9DA25247B980E00D4EDF5 /* UIView+PBExtesion.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA05247B980D00D4EDF5 /* UIView+PBExtesion.m */; };
+		89D9DA26247B980E00D4EDF5 /* KNPhotoBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA0A247B980D00D4EDF5 /* KNPhotoBaseCell.m */; };
+		89D9DA27247B980E00D4EDF5 /* KNProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA0B247B980D00D4EDF5 /* KNProgressHUD.m */; };
+		89D9DA28247B980E00D4EDF5 /* KNPhotoVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA0C247B980D00D4EDF5 /* KNPhotoVideoCell.m */; };
+		89D9DA29247B980E00D4EDF5 /* KNPhotoAVPlayerActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA11247B980D00D4EDF5 /* KNPhotoAVPlayerActionView.m */; };
+		89D9DA2A247B980E00D4EDF5 /* KNPhotoAVPlayerActionBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA12247B980D00D4EDF5 /* KNPhotoAVPlayerActionBar.m */; };
+		89D9DA2B247B980E00D4EDF5 /* KNPhotoAVPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA13247B980E00D4EDF5 /* KNPhotoAVPlayerView.m */; };
+		89D9DA2C247B980E00D4EDF5 /* KNToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA15247B980E00D4EDF5 /* KNToast.m */; };
+		89D9DA2D247B980E00D4EDF5 /* KNPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 89D9DA17247B980E00D4EDF5 /* KNPhotoBrowser.bundle */; };
+		89D9DA2E247B980E00D4EDF5 /* KNPhotoBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA18247B980E00D4EDF5 /* KNPhotoBrowserImageView.m */; };
+		89D9DA2F247B980E00D4EDF5 /* KNPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA19247B980E00D4EDF5 /* KNPhotoBrowser.m */; };
+		89D9DA30247B980E00D4EDF5 /* KNPhotoBrowserNumView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA1A247B980E00D4EDF5 /* KNPhotoBrowserNumView.m */; };
+		89D9DA31247B980E00D4EDF5 /* KNPhotoBrowserProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA1F247B980E00D4EDF5 /* KNPhotoBrowserProxy.m */; };
+		89D9DA32247B980E00D4EDF5 /* KNAnimatedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA20247B980E00D4EDF5 /* KNAnimatedImage.m */; };
+		89D9DA33247B980E00D4EDF5 /* KNAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9DA21247B980E00D4EDF5 /* KNAnimatedImageView.m */; };
 		89DF44D42470C66C002CAE83 /* LWAlearCustomManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF44D32470C66C002CAE83 /* LWAlearCustomManagerView.m */; };
 		89DF44D92470E433002CAE83 /* LWAddNewUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89DF44D82470E433002CAE83 /* LWAddNewUserGroupView.xib */; };
 		89F5B7DC2455955E0040F7B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F5B7DB2455955E0040F7B1 /* UIViewAdditions.m */; };
@@ -762,6 +781,44 @@
 		89D36E0E245AB93F00A6C014 /* HYTopBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYTopBarView.m; sourceTree = "<group>"; };
 		89D51C6C246503EA00ABA70D /* LWHuoYuanDeatilModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanDeatilModel.h; sourceTree = "<group>"; };
 		89D51C6D246503EA00ABA70D /* LWHuoYuanDeatilModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDeatilModel.m; sourceTree = "<group>"; };
+		89D9D9E4247B58D300D4EDF5 /* LWPhotoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWPhotoPicker.h; sourceTree = "<group>"; };
+		89D9D9E5247B58D300D4EDF5 /* LWPhotoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWPhotoPicker.m; sourceTree = "<group>"; };
+		89D9D9FC247B980D00D4EDF5 /* KNActionSheetItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNActionSheetItem.h; sourceTree = "<group>"; };
+		89D9D9FD247B980D00D4EDF5 /* KNActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNActionSheet.h; sourceTree = "<group>"; };
+		89D9D9FE247B980D00D4EDF5 /* KNActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNActionSheet.m; sourceTree = "<group>"; };
+		89D9D9FF247B980D00D4EDF5 /* KNActionSheetItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNActionSheetItem.m; sourceTree = "<group>"; };
+		89D9DA00247B980D00D4EDF5 /* KNProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNProgressHUD.h; sourceTree = "<group>"; };
+		89D9DA01247B980D00D4EDF5 /* KNPhotoBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNPhotoBaseCell.h; sourceTree = "<group>"; };
+		89D9DA02247B980D00D4EDF5 /* KNPhotoBrowserPch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNPhotoBrowserPch.h; sourceTree = "<group>"; };
+		89D9DA03247B980D00D4EDF5 /* KNPhotoDownloadMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNPhotoDownloadMgr.m; sourceTree = "<group>"; };
+		89D9DA04247B980D00D4EDF5 /* KNToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNToast.h; sourceTree = "<group>"; };
+		89D9DA05247B980D00D4EDF5 /* UIView+PBExtesion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PBExtesion.m"; sourceTree = "<group>"; };
+		89D9DA06247B980D00D4EDF5 /* KNPhotoVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNPhotoVideoCell.h; sourceTree = "<group>"; };
+		89D9DA07247B980D00D4EDF5 /* KNPhotoBrowserNumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNPhotoBrowserNumView.h; sourceTree = "<group>"; };
+		89D9DA08247B980D00D4EDF5 /* KNPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNPhotoBrowser.h; sourceTree = "<group>"; };
+		89D9DA09247B980D00D4EDF5 /* KNPhotoBrowserImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNPhotoBrowserImageView.h; sourceTree = "<group>"; };
+		89D9DA0A247B980D00D4EDF5 /* KNPhotoBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNPhotoBaseCell.m; sourceTree = "<group>"; };
+		89D9DA0B247B980D00D4EDF5 /* KNProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNProgressHUD.m; sourceTree = "<group>"; };
+		89D9DA0C247B980D00D4EDF5 /* KNPhotoVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNPhotoVideoCell.m; sourceTree = "<group>"; };
+		89D9DA0E247B980D00D4EDF5 /* KNPhotoAVPlayerActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNPhotoAVPlayerActionView.h; sourceTree = "<group>"; };
+		89D9DA0F247B980D00D4EDF5 /* KNPhotoAVPlayerActionBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNPhotoAVPlayerActionBar.h; sourceTree = "<group>"; };
+		89D9DA10247B980D00D4EDF5 /* KNPhotoAVPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNPhotoAVPlayerView.h; sourceTree = "<group>"; };
+		89D9DA11247B980D00D4EDF5 /* KNPhotoAVPlayerActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNPhotoAVPlayerActionView.m; sourceTree = "<group>"; };
+		89D9DA12247B980D00D4EDF5 /* KNPhotoAVPlayerActionBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNPhotoAVPlayerActionBar.m; sourceTree = "<group>"; };
+		89D9DA13247B980E00D4EDF5 /* KNPhotoAVPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNPhotoAVPlayerView.m; sourceTree = "<group>"; };
+		89D9DA14247B980E00D4EDF5 /* UIView+PBExtesion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PBExtesion.h"; sourceTree = "<group>"; };
+		89D9DA15247B980E00D4EDF5 /* KNToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNToast.m; sourceTree = "<group>"; };
+		89D9DA16247B980E00D4EDF5 /* KNPhotoDownloadMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNPhotoDownloadMgr.h; sourceTree = "<group>"; };
+		89D9DA17247B980E00D4EDF5 /* KNPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KNPhotoBrowser.bundle; sourceTree = "<group>"; };
+		89D9DA18247B980E00D4EDF5 /* KNPhotoBrowserImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNPhotoBrowserImageView.m; sourceTree = "<group>"; };
+		89D9DA19247B980E00D4EDF5 /* KNPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNPhotoBrowser.m; sourceTree = "<group>"; };
+		89D9DA1A247B980E00D4EDF5 /* KNPhotoBrowserNumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNPhotoBrowserNumView.m; sourceTree = "<group>"; };
+		89D9DA1C247B980E00D4EDF5 /* KNAnimatedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNAnimatedImage.h; sourceTree = "<group>"; };
+		89D9DA1D247B980E00D4EDF5 /* KNPhotoBrowserProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNPhotoBrowserProxy.h; sourceTree = "<group>"; };
+		89D9DA1E247B980E00D4EDF5 /* KNAnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNAnimatedImageView.h; sourceTree = "<group>"; };
+		89D9DA1F247B980E00D4EDF5 /* KNPhotoBrowserProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNPhotoBrowserProxy.m; sourceTree = "<group>"; };
+		89D9DA20247B980E00D4EDF5 /* KNAnimatedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNAnimatedImage.m; sourceTree = "<group>"; };
+		89D9DA21247B980E00D4EDF5 /* KNAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNAnimatedImageView.m; sourceTree = "<group>"; };
 		89DF44D22470C66C002CAE83 /* LWAlearCustomManagerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAlearCustomManagerView.h; sourceTree = "<group>"; };
 		89DF44D32470C66C002CAE83 /* LWAlearCustomManagerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAlearCustomManagerView.m; sourceTree = "<group>"; };
 		89DF44D82470E433002CAE83 /* LWAddNewUserGroupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LWAddNewUserGroupView.xib; sourceTree = "<group>"; };
@@ -1812,6 +1869,7 @@
 		8921697824567045007C6615 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				89D9D9E3247B58D300D4EDF5 /* PhotoPicker */,
 				89C9DD81246A37C7005341CE /* Views */,
 			);
 			path = Component;
@@ -1844,6 +1902,7 @@
 		89487BE724544E1500D4FA67 /* Thrid */ = {
 			isa = PBXGroup;
 			children = (
+				89D9D9FA247B980D00D4EDF5 /* KNPhotoBrowser */,
 				00FE9AE12476B832002A1F86 /* IFYunSDK */,
 				008FB02F246BFBA400B207CD /* BLDatePickerView */,
 				00C952492469040A00C24472 /* KKPaddingLabel */,
@@ -1947,6 +2006,82 @@
 				89D2578424669C4900CB3910 /* LWBaseLabelAttributeStringModel.m */,
 			);
 			path = Lable;
+			sourceTree = "<group>";
+		};
+		89D9D9E3247B58D300D4EDF5 /* PhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+				89D9D9E4247B58D300D4EDF5 /* LWPhotoPicker.h */,
+				89D9D9E5247B58D300D4EDF5 /* LWPhotoPicker.m */,
+			);
+			path = PhotoPicker;
+			sourceTree = "<group>";
+		};
+		89D9D9FA247B980D00D4EDF5 /* KNPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				89D9D9FB247B980D00D4EDF5 /* KNActionSheet */,
+				89D9DA00247B980D00D4EDF5 /* KNProgressHUD.h */,
+				89D9DA01247B980D00D4EDF5 /* KNPhotoBaseCell.h */,
+				89D9DA02247B980D00D4EDF5 /* KNPhotoBrowserPch.h */,
+				89D9DA03247B980D00D4EDF5 /* KNPhotoDownloadMgr.m */,
+				89D9DA04247B980D00D4EDF5 /* KNToast.h */,
+				89D9DA05247B980D00D4EDF5 /* UIView+PBExtesion.m */,
+				89D9DA06247B980D00D4EDF5 /* KNPhotoVideoCell.h */,
+				89D9DA07247B980D00D4EDF5 /* KNPhotoBrowserNumView.h */,
+				89D9DA08247B980D00D4EDF5 /* KNPhotoBrowser.h */,
+				89D9DA09247B980D00D4EDF5 /* KNPhotoBrowserImageView.h */,
+				89D9DA0A247B980D00D4EDF5 /* KNPhotoBaseCell.m */,
+				89D9DA0B247B980D00D4EDF5 /* KNProgressHUD.m */,
+				89D9DA0C247B980D00D4EDF5 /* KNPhotoVideoCell.m */,
+				89D9DA0D247B980D00D4EDF5 /* KNPhotoAVPlayer */,
+				89D9DA14247B980E00D4EDF5 /* UIView+PBExtesion.h */,
+				89D9DA15247B980E00D4EDF5 /* KNToast.m */,
+				89D9DA16247B980E00D4EDF5 /* KNPhotoDownloadMgr.h */,
+				89D9DA17247B980E00D4EDF5 /* KNPhotoBrowser.bundle */,
+				89D9DA18247B980E00D4EDF5 /* KNPhotoBrowserImageView.m */,
+				89D9DA19247B980E00D4EDF5 /* KNPhotoBrowser.m */,
+				89D9DA1A247B980E00D4EDF5 /* KNPhotoBrowserNumView.m */,
+				89D9DA1B247B980E00D4EDF5 /* KNAnimatedImage */,
+			);
+			path = KNPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		89D9D9FB247B980D00D4EDF5 /* KNActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				89D9D9FC247B980D00D4EDF5 /* KNActionSheetItem.h */,
+				89D9D9FD247B980D00D4EDF5 /* KNActionSheet.h */,
+				89D9D9FE247B980D00D4EDF5 /* KNActionSheet.m */,
+				89D9D9FF247B980D00D4EDF5 /* KNActionSheetItem.m */,
+			);
+			path = KNActionSheet;
+			sourceTree = "<group>";
+		};
+		89D9DA0D247B980D00D4EDF5 /* KNPhotoAVPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				89D9DA0E247B980D00D4EDF5 /* KNPhotoAVPlayerActionView.h */,
+				89D9DA0F247B980D00D4EDF5 /* KNPhotoAVPlayerActionBar.h */,
+				89D9DA10247B980D00D4EDF5 /* KNPhotoAVPlayerView.h */,
+				89D9DA11247B980D00D4EDF5 /* KNPhotoAVPlayerActionView.m */,
+				89D9DA12247B980D00D4EDF5 /* KNPhotoAVPlayerActionBar.m */,
+				89D9DA13247B980E00D4EDF5 /* KNPhotoAVPlayerView.m */,
+			);
+			path = KNPhotoAVPlayer;
+			sourceTree = "<group>";
+		};
+		89D9DA1B247B980E00D4EDF5 /* KNAnimatedImage */ = {
+			isa = PBXGroup;
+			children = (
+				89D9DA1C247B980E00D4EDF5 /* KNAnimatedImage.h */,
+				89D9DA1D247B980E00D4EDF5 /* KNPhotoBrowserProxy.h */,
+				89D9DA1E247B980E00D4EDF5 /* KNAnimatedImageView.h */,
+				89D9DA1F247B980E00D4EDF5 /* KNPhotoBrowserProxy.m */,
+				89D9DA20247B980E00D4EDF5 /* KNAnimatedImage.m */,
+				89D9DA21247B980E00D4EDF5 /* KNAnimatedImageView.m */,
+			);
+			path = KNAnimatedImage;
 			sourceTree = "<group>";
 		};
 		F717A43D4ED9D0BFAF898114 /* Pods */ = {
@@ -2068,6 +2203,7 @@
 				89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */,
 				009FB5EA244E89CD00133974 /* Assets.xcassets in Resources */,
 				8907722224768D3400470058 /* launch_icon_big.png in Resources */,
+				89D9DA2D247B980E00D4EDF5 /* KNPhotoBrowser.bundle in Resources */,
 				00FE9B962476B878002A1F86 /* face.plist in Resources */,
 				89DF44D92470E433002CAE83 /* LWAddNewUserGroupView.xib in Resources */,
 				00FE9B942476B878002A1F86 /* systemEmoji.plist in Resources */,
@@ -2154,6 +2290,7 @@
 				89C112E0246E93AA007EAABB /* LWAddFriendTableViewCell.m in Sources */,
 				89DF44D42470C66C002CAE83 /* LWAlearCustomManagerView.m in Sources */,
 				895BD9C52462604600AA5947 /* ServiceManager.m in Sources */,
+				89D9DA2A247B980E00D4EDF5 /* KNPhotoAVPlayerActionBar.m in Sources */,
 				00FE9BA82476B878002A1F86 /* FaceThemeView.m in Sources */,
 				00B0A5EA24653E3F0041C234 /* zCompanyDetailController.m in Sources */,
 				0091FCE6245E681B0046691F /* zCityCollectionCell.m in Sources */,
@@ -2180,6 +2317,7 @@
 				00FE9B9A2476B878002A1F86 /* UIScrollView+PPAddition.m in Sources */,
 				00FE9B992476B878002A1F86 /* UIScreen+PPAddition.m in Sources */,
 				00FE9B932476B878002A1F86 /* IFBaseVC.m in Sources */,
+				89D9DA23247B980E00D4EDF5 /* KNActionSheetItem.m in Sources */,
 				89298185246CD62600C3DFE0 /* LWServiceModel.m in Sources */,
 				8921697524566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m in Sources */,
 				890643C924693C360099508C /* LWJiaoLiuModel.m in Sources */,
@@ -2205,11 +2343,14 @@
 				8921697624566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m in Sources */,
 				893A18F424592D1E00D8C36C /* LWGongYingShangListViewController.m in Sources */,
 				00D4B5A8246302F900CD4784 /* zAshouyeController.m in Sources */,
+				89D9DA30247B980E00D4EDF5 /* KNPhotoBrowserNumView.m in Sources */,
 				89F5B7E2245599530040F7B1 /* LWHuoYuanItemsListViewController.m in Sources */,
 				009FB635244FE8DF00133974 /* MainTabBarController.m in Sources */,
 				00558BDD24610CA700550FBC /* zShouYeLeftMenu.m in Sources */,
 				8921697E24567278007C6615 /* UIImage+Extension.m in Sources */,
+				89D9DA2C247B980E00D4EDF5 /* KNToast.m in Sources */,
 				00CB202A2471122A00171284 /* ZFTabBarViewController.m in Sources */,
+				89D9DA31247B980E00D4EDF5 /* KNPhotoBrowserProxy.m in Sources */,
 				89D2578224669C0900CB3910 /* LWBaseLabel.m in Sources */,
 				001ECA6E2453C43600727379 /* zZhuCeController.m in Sources */,
 				00FE9BAF2476B878002A1F86 /* MorePanel.m in Sources */,
@@ -2221,6 +2362,7 @@
 				003A932D2450866D0001F615 /* LoginTextField.m in Sources */,
 				00FE9B882476B878002A1F86 /* IFListView.m in Sources */,
 				003FEABF245BFB8500E8D61E /* zSettingCellView.m in Sources */,
+				89D9DA2E247B980E00D4EDF5 /* KNPhotoBrowserImageView.m in Sources */,
 				893A18F724592D3E00D8C36C /* LWGongYingShangListTableViewCell.m in Sources */,
 				89D36E0C245AB1C800A6C014 /* LWSystemMessageListViewController.m in Sources */,
 				009FB6882450425900133974 /* zNoContentView.m in Sources */,
@@ -2231,6 +2373,7 @@
 				0026C4B42474106C00C6ACB6 /* zFriendsModel.m in Sources */,
 				001ECA7B2454449000727379 /* zhuCeCard.m in Sources */,
 				89C112EC246EA293007EAABB /* LWUserGroupModel.m in Sources */,
+				89D9DA26247B980E00D4EDF5 /* KNPhotoBaseCell.m in Sources */,
 				00372AED2456842F00E51931 /* PPNetworkHelper.m in Sources */,
 				8957D4AA245975370096F1D7 /* LWHuoYuanDeatilViewController.m in Sources */,
 				00E33FAA24715A95005F980A /* zLeftMenuThirdCell.m in Sources */,
@@ -2241,6 +2384,7 @@
 				009FB636244FE8DF00133974 /* FUTabBar.m in Sources */,
 				009FB68024500D7800133974 /* UIView+Frame.m in Sources */,
 				008FB01E246AD71D00B207CD /* zUpLoadUserModel.m in Sources */,
+				89D9DA2F247B980E00D4EDF5 /* KNPhotoBrowser.m in Sources */,
 				0000B1BE24738BED00B2F419 /* zMyFriendListCell.m in Sources */,
 				8921698824569B25007C6615 /* LWJiaoLiuGroupCollectionReusableView.m in Sources */,
 				89D2578524669C4900CB3910 /* LWBaseLabelAttributeStringModel.m in Sources */,
@@ -2267,6 +2411,7 @@
 				896DA521246BD077001ED8C1 /* LWTool.m in Sources */,
 				009FB669245007ED00133974 /* zDengluController.m in Sources */,
 				00FE9B7F2476B878002A1F86 /* UIView+Toast.m in Sources */,
+				89D9DA29247B980E00D4EDF5 /* KNPhotoAVPlayerActionView.m in Sources */,
 				894E4115245A96430028D2B4 /* LWLabel.m in Sources */,
 				8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */,
 				00CA47702455B9DD006A2885 /* QuestionModel.m in Sources */,
@@ -2274,6 +2419,7 @@
 				00372B0B2456A54B00E51931 /* zInstructionsCard.m in Sources */,
 				003FEABC245BFB0D00E8D61E /* zSettingViewController.m in Sources */,
 				00FE9BA12476B878002A1F86 /* MoreItem.m in Sources */,
+				89D9DA24247B980E00D4EDF5 /* KNPhotoDownloadMgr.m in Sources */,
 				00FE9B7E2476B878002A1F86 /* UIView+ILGKit.m in Sources */,
 				004E435C2472B964000A4627 /* zGoodsContentModel.m in Sources */,
 				009FB67F24500D7800133974 /* NSDictionary+NSNull.m in Sources */,
@@ -2289,9 +2435,12 @@
 				893A18F1245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m in Sources */,
 				0091FD00245EE1520046691F /* zUserDescController.m in Sources */,
 				8957D4A124594C230096F1D7 /* LWHuoYuanBaseViewController.m in Sources */,
+				89D9DA33247B980E00D4EDF5 /* KNAnimatedImageView.m in Sources */,
+				89D9DA27247B980E00D4EDF5 /* KNProgressHUD.m in Sources */,
 				00372B0D2456A54B00E51931 /* zUserInfoCard.m in Sources */,
 				00FE9B8F2476B878002A1F86 /* MessageGroupViewController.m in Sources */,
 				0036407524701B7600B93431 /* zUserGoodsController.m in Sources */,
+				89D9DA25247B980E00D4EDF5 /* UIView+PBExtesion.m in Sources */,
 				8929818F246D5EBA00C3DFE0 /* LWSystemListModel.m in Sources */,
 				00159E232463FDF8005DE17B /* NewPagedFlowView.m in Sources */,
 				895BD9D424629AFC00AA5947 /* UIImageView+LWImageView.m in Sources */,
@@ -2306,6 +2455,7 @@
 				00FE9B7D2476B878002A1F86 /* AppConfig.m in Sources */,
 				009FB63D244FE8DF00133974 /* FUTabBarController.m in Sources */,
 				00FE9B9E2476B878002A1F86 /* PPSlideLineButton.m in Sources */,
+				89D9DA22247B980E00D4EDF5 /* KNActionSheet.m in Sources */,
 				8921698B2456B06D007C6615 /* LWJiaoLiuContatcsListTableViewCell.m in Sources */,
 				00CA47712455B9DD006A2885 /* AnswerModel.m in Sources */,
 				00FE9BB02476B878002A1F86 /* ChatKeyBoard.m in Sources */,
@@ -2328,6 +2478,8 @@
 				001ECA6A2453B6F300727379 /* zLoginCard.m in Sources */,
 				009FB638244FE8DF00133974 /* FUBadgeButton.m in Sources */,
 				89487BEB24544E4B00D4FA67 /* Foundation+Log.m in Sources */,
+				89D9D9E6247B58D300D4EDF5 /* LWPhotoPicker.m in Sources */,
+				89D9DA2B247B980E00D4EDF5 /* KNPhotoAVPlayerView.m in Sources */,
 				00B0A5E4246520220041C234 /* zjxsMenuCell.m in Sources */,
 				003A9330245089540001F615 /* UITextField+maxLength.m in Sources */,
 				00558BE024614D6E00550FBC /* zLeftMenuCell.m in Sources */,
@@ -2351,6 +2503,7 @@
 				00FE9B9F2476B878002A1F86 /* UIButton+PPAddition.m in Sources */,
 				00CB202C2471122A00171284 /* ZFTabBarButton.m in Sources */,
 				005ECE7924644E0A00D90341 /* zHuoYuanListCell.m in Sources */,
+				89D9DA32247B980E00D4EDF5 /* KNAnimatedImage.m in Sources */,
 				89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */,
 				00CB202D2471122A00171284 /* ZFBadgeButton.m in Sources */,
 				00FE9BA62476B878002A1F86 /* FacePanel.m in Sources */,
@@ -2364,6 +2517,7 @@
 				89C112EF246EA3BE007EAABB /* LWUserGroupManagerViewController.m in Sources */,
 				0065DF19245FB7A9008D3D98 /* zCallBackController.m in Sources */,
 				00FE9B982476B878002A1F86 /* NSAttributedString+PPAddition.m in Sources */,
+				89D9DA28247B980E00D4EDF5 /* KNPhotoVideoCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
