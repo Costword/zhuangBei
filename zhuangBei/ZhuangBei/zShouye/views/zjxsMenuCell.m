@@ -29,7 +29,7 @@
     if (!_arrowButton) {
         _arrowButton = [[UIButton alloc]init];
         _arrowButton.userInteractionEnabled = NO;
-        [_arrowButton setImage:[UIImage imageNamed:@"blank"] forState:UIControlStateNormal];
+        [_arrowButton setImage:[UIImage imageNamed:@"chose_normal"] forState:UIControlStateNormal];
         [_arrowButton setImage:[UIImage imageNamed:@"chose_select"] forState:UIControlStateSelected];
         _arrowButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _arrowButton.titleLabel.font = [UIFont systemFontOfSize:kWidthFlot(12)];
