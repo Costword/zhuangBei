@@ -86,6 +86,7 @@
         [_levelBtn setTitle:@"会员等级" forState:UIControlStateNormal];
         [_levelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _levelBtn.clipsToBounds = YES;
+        _levelBtn.alpha = 0;
     }
     return _levelBtn;
 }

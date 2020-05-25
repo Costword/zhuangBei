@@ -260,6 +260,7 @@
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyDesc.mas_bottom).offset(top);
         make.right.mas_equalTo(-right);
+        make.height.mas_equalTo(height);
     }];
     
     [self.companyCurrentAddress mas_makeConstraints:^(MASConstraintMaker *make) {

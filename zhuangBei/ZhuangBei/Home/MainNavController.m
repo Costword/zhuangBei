@@ -31,8 +31,8 @@
                                           };
     [bar setTitleTextAttributes:titleTextAttributes];
     
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"··· " style:UIBarButtonItemStyleDone target:self action:nil];
     
     //统一返回按钮样式

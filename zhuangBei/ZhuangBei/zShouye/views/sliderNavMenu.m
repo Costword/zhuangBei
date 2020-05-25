@@ -219,8 +219,81 @@
     {
         _selectIndex = selectIndex;
         UIButton * btn = self.itemsArray[selectIndex];
-        [self buttonClick:btn];
+        [self setSelectIndexButton:btn];
     }
+}
+
+-(void)setSelectIndexButton:(UIButton*)button
+{
+    [self.selectButton.titleLabel setFont:self.normalFont];
+        self.selectButton.selected = NO;
+        button.selected = YES;
+        self.selectButton = button;
+        
+        [self.selectButton setNeedsLayout];
+        [self.selectButton layoutIfNeeded];
+        CGRect buttonFrame = self.selectButton.bounds;
+        self.sliderWidth = buttonFrame.size.width;
+        [self.selectButton.titleLabel setFont:self.selectFont];
+        if (self.havesliderBar) {
+            [self.scrollView bringSubviewToFront:self.sliderBar];
+    //        CGFloat x = button.frame.origin.x;
+            //   底部滑条
+            if (_sliderAnimation == YES) {
+                [UIView animateWithDuration:.25
+                                 animations:^{
+                    CGFloat sliderwidth;
+                    if ((button.frame.size.width-30) < 20) {
+                        if (self.sliderWidth) {
+                            sliderwidth = self.sliderWidth;
+                        } else {
+                            sliderwidth = button.frame.size.width;
+                        }
+                       self.sliderBar.frame =
+                        CGRectMake(button.frame.origin.x + (button.frame.size.width/2) - (sliderwidth/2), CGRectGetMaxY(button.frame) - 3,
+                                   sliderwidth, 3);
+                    }else
+                    {
+                        if (self.sliderWidth) {
+                            sliderwidth = self.sliderWidth;
+                        } else {
+                            sliderwidth = 20;
+                        }
+                        self.sliderBar.frame =
+                        CGRectMake(button.frame.origin.x+(button.frame.size.width-sliderwidth)/2, CGRectGetMaxY(button.frame) - 3,
+                                   sliderwidth, 3);
+                    }
+                    [self.sliderBar layoutIfNeeded];
+                }];
+            }else
+            {
+                CGFloat sliderwidth;
+                if ((button.frame.size.width-30) < 20) {
+                    if (self.sliderWidth) {
+                        sliderwidth = self.sliderWidth;
+                    } else {
+                        sliderwidth = button.frame.size.width;
+                    }
+                   self.sliderBar.frame =
+                    CGRectMake(button.frame.origin.x + (button.frame.size.width/2) - (sliderwidth/2), CGRectGetMaxY(button.frame) - 3,
+                               sliderwidth, 3);
+                }else
+                {
+                    if (self.sliderWidth) {
+                        sliderwidth = self.sliderWidth;
+                    } else {
+                        sliderwidth = 20;
+                    }
+                    self.sliderBar.frame =
+                    CGRectMake(button.frame.origin.x+(button.frame.size.width-sliderwidth)/2, CGRectGetMaxY(button.frame) - 3,
+                               sliderwidth, 3);
+                }
+                [self.sliderBar layoutIfNeeded];
+            }
+        }
+        if (self.canScroll) {
+            [self adjustScrollView:button];
+        }
 }
 
 -(void)buttonClick:(UIButton*)button

@@ -15,9 +15,14 @@ typedef void(^headerSliderMenuBack)(NSInteger index);
 
 @interface zCompanyHeader : UIView
 
+
 @property(copy,nonatomic)headerSliderMenuBack headerSlideBack;
 
 @property(strong,nonatomic)zGoodsContentModel * goosModel;
+
+@property(assign,nonatomic)NSInteger companyType;
+
+@property(assign,nonatomic)NSInteger type;//type 1 时只显示企业详情
 
 @end
 

@@ -43,7 +43,7 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor colorWithHexString:@"#D8D8D8"];
+        self.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6"];
         [self addSubview:self.menuTableView];
         [self updateConstraintsForView];
     }

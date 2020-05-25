@@ -8,7 +8,7 @@
 
 #import "zJxsLeftMenu.h"
 #import "zjxsMenuCell.h"
-#import "zHuoYuanModel.h"
+#import "zCompanyGoodsModel.h"
 
 @interface zJxsLeftMenu ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -40,7 +40,8 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor colorWithHexString:@"#D8D8D8"];
+        self.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6"];
+        
         [self addSubview:self.menuTableView];
         [self updateConstraintsForView];
     }
@@ -67,7 +68,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     zjxsMenuCell * cell = [zjxsMenuCell instanceWithTableView:tableView AndIndexPath:indexPath];
-    zHuoYuanModel * model =  self.menuArray[indexPath.row];
+    zBusinessLoactionModel * model =  self.menuArray[indexPath.row];
     cell.model = model;
     return cell;
 }
@@ -75,27 +76,21 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    __weak typeof(self)weakSelf = self;
-    zHuoYuanModel * jmodel = weakSelf.menuArray[indexPath.row];
-    jmodel.select = !jmodel.select;
-   [UIView performWithoutAnimation:^{
-       NSIndexPath * indexpath = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
-      [self.menuTableView reloadRowAtIndexPath:indexpath withRowAnimation:UITableViewRowAnimationNone];
-   }];
+//    __weak typeof(self)weakSelf = self;
+//    zBusinessLoactionModel * jmodel = weakSelf.menuArray[indexPath.row];
+//    jmodel.select = !jmodel.select;
+//   [UIView performWithoutAnimation:^{
+//       NSIndexPath * indexpath = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
+//      [self.menuTableView reloadRowAtIndexPath:indexpath withRowAnimation:UITableViewRowAnimationNone];
+//   }];
+    if (self.menutapBack) {
+        self.menutapBack(indexPath.row);
+    }
 }
 
 -(void)setMenuArray:(NSArray *)menuArray
 {
-    NSMutableArray * array = [NSMutableArray array];
-    [menuArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        zHuoYuanModel * model = [[zHuoYuanModel alloc]init];
-        model.name = [NSString stringWithFormat:@"目录--%ld",idx];
-        model.select = NO;
-        model.indexSection = idx;
-        model.hyArray = @[@"二级目录1",@"二级目录2",@"二级目录3"];
-        [array addObject:model];
-    }];
-    _menuArray = array;
+    _menuArray = menuArray;
     [self.menuTableView reloadData];
 }
 

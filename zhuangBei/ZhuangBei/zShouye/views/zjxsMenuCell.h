@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "zHuoYuanModel.h"
+#import "zBusinessLoactionModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^menuSelectTapBack)(zHuoYuanModel * jxsModel);
+typedef void(^menuSelectTapBack)(zBusinessLoactionModel * jxsModel);
 
 
 @interface zjxsMenuCell : UITableViewCell
 
 +(zjxsMenuCell*)instanceWithTableView:(UITableView*)tableView AndIndexPath:(NSIndexPath*)indexPath;
 
-@property(strong,nonatomic)zHuoYuanModel * model;
+@property(strong,nonatomic)zBusinessLoactionModel * model;
 
 @property(copy,nonatomic)menuSelectTapBack  selectTapBack;
 

@@ -23,16 +23,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    
     self.window = [[UIWindow alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT)];
     
     
-//    JSHARELaunchConfig *config = [[JSHARELaunchConfig alloc] init];
-//    config.appKey = JGAPPK;
-//    config.WeChatAppId = weXinAppId;
+    JSHARELaunchConfig *config = [[JSHARELaunchConfig alloc] init];
+    config.appKey = JGAPPK;
+    config.WeChatAppId = weXinAppId;
 //    config.WeChatAppSecret = weiXinSecret;
-//    config.QQAppId = qqAppId;
-//    config.QQAppKey = qqAppKey;
-//    [JSHAREService setupWithConfig:config];
+    config.QQAppId = qqAppId;
+    config.QQAppKey = qqAppKey;
+    [JSHAREService setupWithConfig:config];
     
     NSString *version= [UIDevice currentDevice].systemVersion;
     if(version.doubleValue >=13.0) {

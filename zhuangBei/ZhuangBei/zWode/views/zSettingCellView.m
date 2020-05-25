@@ -95,6 +95,13 @@
     
 }
 
+-(void)updateConstraintsBUtton
+{
+    [self.contentButton setNeedsLayout];
+    [self.contentButton layoutIfNeeded];
+    [self.contentButton setIconInRightWithSpacing:5];
+}
+
 -(void)setName:(NSString *)name
 {
     _name = name;
@@ -105,6 +112,7 @@
 {
     _content = content;
     [self.contentButton setTitle:content forState:UIControlStateNormal];
+    [self updateConstraintsBUtton];
 }
 
 -(void)setIsPhoneNum:(BOOL)isPhoneNum

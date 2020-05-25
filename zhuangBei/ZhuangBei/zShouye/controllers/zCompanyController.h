@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface zCompanyController : baseViewController
 
+@property(assign,nonatomic)BOOL showNav;
+
 @end
 
 NS_ASSUME_NONNULL_END

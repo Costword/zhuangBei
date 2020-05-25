@@ -51,7 +51,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     //设置响应体数据为json类型
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html",@"charset=UTF-8", nil];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html",@"charset=UTF-8",@"octet-stream", nil];
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = 10.f;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
@@ -84,9 +84,13 @@
         }
         if (code == 3840) {
             
+            [[zUserInfo shareInstance]deleate];
+            
+            NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:url]];
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUserDefaultsCookie];
             [[zHud shareInstance]showMessage:@"登录信息超时,请重新登录"];
             //登录超时重新登录
-            
             zDengluController * rootVC  = [[zDengluController alloc]init];
             MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
             rootNav.navigationBar.hidden = YES;

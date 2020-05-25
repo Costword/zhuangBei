@@ -102,7 +102,12 @@
         _navigationSliderMenu.sliderRoundCorner = 1.5;
         _navigationSliderMenu.normalFontColor = [UIColor colorWithHexString:@"#666666"];
         _navigationSliderMenu.selectFontColor = [UIColor colorWithHexString:@"#333333"];
-        [_navigationSliderMenu setSourceArray:@[@"企业详情",@"货源详情"]];
+        if (self.type ==1) {
+            [_navigationSliderMenu setSourceArray:@[@"企业详情"]];
+        }else
+        {
+            [_navigationSliderMenu setSourceArray:@[@"企业详情",@"货源详情"]];
+        }
         _navigationSliderMenu.sliderType = menuAligenLeft;
         _navigationSliderMenu.delegate = self;
     }
@@ -171,6 +176,14 @@
     }];
 }
 
+-(void)setType:(NSInteger)type
+{
+    _type = type;
+    if (type==1) {
+        [self.navigationSliderMenu setSourceArray:@[@"企业详情"]];
+    }
+}
+
 -(void)setGoosModel:(zGoodsContentModel *)goosModel
 {
     _goosModel = goosModel;
@@ -178,6 +191,14 @@
     self.timeLabel.text = [NSString stringWithFormat:@"成立时间:%@",_goosModel.createDate];
     self.descContentLabel.text = _goosModel.approveText;
 }
+
+-(void)setCompanyType:(NSInteger)companyType
+{
+    _companyType = companyType;
+    self.navigationSliderMenu.selectIndex = companyType;
+}
+
+
 
 -(void)sliderNavMenuSelectIndex:(NSInteger)index
 {

@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(strong,nonatomic)zGoodsContentModel * goosModel;
 
+@property(assign,nonatomic)NSInteger type;
+
 @end
 
 NS_ASSUME_NONNULL_END

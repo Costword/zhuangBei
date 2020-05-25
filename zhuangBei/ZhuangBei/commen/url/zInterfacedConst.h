@@ -63,6 +63,9 @@ UIKIT_EXTERN NSString *const kgetCompanyID;
 /**查看邀请人详情*/
 UIKIT_EXTERN NSString *const getFriendDetail;
 
+/**获取分享二维码*/
+UIKIT_EXTERN NSString *const getShareImage;
+
 /** 获取货源管理列表*/
 UIKIT_EXTERN NSString *const kGoodsMangerMenu;
 
@@ -71,6 +74,12 @@ UIKIT_EXTERN NSString *const kGoodsMangerList;
 
 /** 查询公司产品*/
 UIKIT_EXTERN NSString *const kGetCompanyGoodsList;
+
+/** 我的经销商地址*/
+UIKIT_EXTERN NSString *const kGetBusinessManLocationList;
+
+/** 我的经销商*/
+UIKIT_EXTERN NSString *const kGetMyBusinessManList;
 
 /**修改个人简介*/
 UIKIT_EXTERN NSString *const changePersonalMin;

@@ -10,6 +10,7 @@
 #import "zSettingCellView.h"
 #import "zDengluController.h"
 #import "MainNavController.h"
+#import "SDImageCache.h"
 
 @interface zSettingViewController ()
 
@@ -29,6 +30,7 @@
 
 @property(strong,nonatomic)UILabel* titleLabel;
 
+@property(copy,nonatomic)NSString* cacheSize;
 
 @end
 
@@ -54,20 +56,38 @@
 -(zSettingCellView*)clearnCell
 {
     if (!_clearnCell) {
+        __weak typeof(self)weakSelf = self;
         _clearnCell = [[zSettingCellView alloc]init];
         _clearnCell.name = @"清除缓存";
-        NSString * huancun = @"12.5MB";
-        _clearnCell.content = huancun;
+        
+        [[SDImageCache sharedImageCache] calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
+            float MBCache = totalSize/1000/1000;
+            
+            float KBCache = totalSize/1000;
+            
+            NSString * cacheSize;
+            if (MBCache>0) {
+                cacheSize = [NSString stringWithFormat:@"%0.1fMB",MBCache];
+            }else
+            {
+//                cacheSize = [NSString stringWithFormat:@"%0.1fKB",KBCache];
+                cacheSize = [NSString stringWithFormat:@"%0.1fMB",MBCache];
+            }
+            weakSelf.cacheSize = cacheSize;
+            weakSelf.clearnCell.content = cacheSize;
+        }];
         _clearnCell.settingBack = ^{
-          
+            NSString * content = [NSString stringWithFormat:@"当前缓存约有：%@\n离线缓存可以帮你在没有网络的情况下也能进行浏览。",weakSelf.cacheSize];
             [LEEAlert alert].config
             .LeeTitle(@"温馨提示")
-            .LeeContent(@"当前缓存约有：12.5MB\n离线缓存可以帮你在没有网络的情况下也能进行浏览.")
+            .LeeContent(content)
             .LeeCancelAction(@"取消", ^{
                 
             })
             .LeeAction(@"确定", ^{
-                
+                [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+                    weakSelf.clearnCell.content = @"0MB";
+                }];
             })
             .LeeShow();
             ;

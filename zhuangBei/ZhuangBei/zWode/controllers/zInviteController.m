@@ -8,6 +8,8 @@
 
 #import "zInviteController.h"
 #import "zEducationRankTypeInfo.h"
+#import <AFNetworking.h>
+#import "JShareApp.h"
 
 @interface zInviteController ()
 
@@ -77,9 +79,10 @@
 {
     if (!_inviteImageView) {
         _inviteImageView = [[UIImageView alloc]init];
-        _inviteImageView.image = [UIImage imageNamed:@"z_nothing"];
+        _inviteImageView.image = [UIImage imageNamed:@"storeIMage"];
         _inviteImageView.contentMode = UIViewContentModeScaleAspectFit;
-        _inviteImageView.alpha = 0;
+        _inviteImageView.alpha = 1;
+        _inviteImageView.backgroundColor = [UIColor redColor];
     }
     return _inviteImageView;
 }
@@ -92,7 +95,7 @@
         _shareLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         _shareLabel.font = kFont(16);
         _shareLabel.numberOfLines = 0;
-        _shareLabel.alpha = 0;
+        _shareLabel.alpha = 1;
     }
     return _shareLabel;
 }
@@ -106,7 +109,7 @@
         _QQShareBtn.clipsToBounds = YES;
         _QQShareBtn.tag = 2;
         [_QQShareBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        _QQShareBtn.alpha = 0;
+        _QQShareBtn.alpha = 1;
     }
     return _QQShareBtn;
 }
@@ -135,6 +138,19 @@
     [self.view addSubview:self.shareLabel];
     [self.view addSubview:self.QQShareBtn];
     [self.view addSubview:self.WXShareBtn];
+    NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,getShareImage];
+}
+
+
+
+
+-(void)shareQQ{
+    NSString *url = [[NSBundle mainBundle] URLForResource:@"storeIMage" withExtension:@"png"].absoluteString;
+    [JShareApp shareImageWithPlatform:JSHAREPlatformQQ imageUrl:url success:^(id  _Nonnull info) {
+        
+    } fail:^(id  _Nonnull info) {
+        
+    }];
 }
 
 -(void)viewDidLayoutSubviews
@@ -197,12 +213,38 @@
     
     if (button.tag == 2) {
         [[zHud shareInstance]showMessage:@"分享QQ"];
+        [self shareQQ];
         return;
     }
     
     if (button.tag == 3) {
         [[zHud shareInstance]showMessage:@"分享微信"];
         return;
+    }
+}
+
+-(void)RequsetFileWithUrl:(NSString*)url WithError:(NSError*)err
+{
+    if ([url containsString:getShareImage]) {
+        
+        if (err.code == -1001) {
+            [[zHud shareInstance] showMessage:@"无法连接服务器"];
+        }
+    }
+
+}
+
+
+
+-(void)RequsetSuccessWithData:(id)data AndUrl:(NSString*)url
+{
+    if ([url containsString:getShareImage]) {
+        NSDictionary * dic = data[@"page"];
+        NSString * code = data[@"code"];
+        if ([code integerValue] == 0) {
+            
+        }
+        NSLog(@"公司认证信息%@",dic);
     }
 }
 

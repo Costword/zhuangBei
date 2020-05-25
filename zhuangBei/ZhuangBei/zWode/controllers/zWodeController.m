@@ -18,8 +18,8 @@
 #import "zListTypeModel.h"
 #import "zEducationRankTypeInfo.h"
 #import "zUserInvitelController.h"
-#import "zUserGoodsController.h"
-#import "zBusinessController.h"
+#import "zGoodsMangerController.h"
+#import "zCompanyController.h"
 #import "zUserDetailController.h"
 #import "zJiaoliuController.h"
 
@@ -80,15 +80,17 @@
             }
             if (type == 2) {
 //                [[zHud shareInstance]showMessage:@"功能开发中"];
-                zUserGoodsController * yaoqing = [[zUserGoodsController alloc]init];
+                zGoodsMangerController * yaoqing = [[zGoodsMangerController alloc]init];
                 yaoqing.title = @"我关注的货源";
+                yaoqing.showNav = YES;
                 [weakSelf.navigationController pushViewController:yaoqing animated:YES];
                 return;
             }
             if (type == 3) {
 //                [[zHud shareInstance]showMessage:@"功能开发中"];
-                zBusinessController * yaoqing = [[zBusinessController alloc]init];
+                zCompanyController * yaoqing = [[zCompanyController alloc]init];
                 yaoqing.title = @"我的经销商";
+                yaoqing.showNav = YES;
                 [weakSelf.navigationController pushViewController:yaoqing animated:YES];
                 return;
             }
