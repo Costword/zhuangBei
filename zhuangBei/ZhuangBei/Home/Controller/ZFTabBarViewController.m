@@ -14,7 +14,7 @@
 #import "zJiaoliuController.h"
 #import "zWodeController.h"
 
-
+#import "LWClientHeader.h"
 
 @interface ZFTabBarViewController () <ZFTabBarDelegate>
 /**
@@ -35,6 +35,17 @@
     
     // 初始化所有的子控制器
     [self setupAllChildViewControllers];
+    
+    //    未读聊天消息数量变化
+    ADD_NOTI(unreadMsgNumberChange, LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY);
+    
+}
+
+- (void)unreadMsgNumberChange
+{
+    zJiaoliuController *vc = (zJiaoliuController *)(self.childViewControllers[2].childViewControllers.lastObject);
+    NSInteger num = [LWClientManager share].unreadMsgNum + LWClientManager.share.unreadSysMsgNum;
+    vc.navigationController.tabBarItem.badgeValue = (num == 0) ? nil: [NSString stringWithFormat:@"%ld",num];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -69,9 +80,9 @@
 - (void)tabBar:(ZFTabBar *)tabBar didSelectedButtonFrom:(NSInteger)from to:(NSInteger)to
 {
     if (self.selectedIndex == to && to == 0 ) {//双击刷新制定页面的列表
-//        UINavigationController *nav = self.viewControllers[0];
-//        FirstViewController *firstVC = nav.viewControllers[0];
-//        [firstVC refrshUI];
+        //        UINavigationController *nav = self.viewControllers[0];
+        //        FirstViewController *firstVC = nav.viewControllers[0];
+        //        [firstVC refrshUI];
     }
     self.selectedIndex = to;
 }
@@ -82,25 +93,27 @@
 - (void)setupAllChildViewControllers
 {
     //首页
-     
-     zAshouyeController *syVC = [[zAshouyeController alloc]init];
-//        syVC.tabBarItem.badgeValue = @"N";
+    
+    zAshouyeController *syVC = [[zAshouyeController alloc]init];
+    //        syVC.tabBarItem.badgeValue = @"N";
     [self setupChildViewController:syVC title:@"首页" imageName:@"home_nor" selectedImageName:@"home_sel"];
     
-     
-     //货源
-     zHyController *hyVC = [[zHyController alloc]init];
-//    hyVC.tabBarItem.badgeValue = @"8";
+    
+    //货源
+    zHyController *hyVC = [[zHyController alloc]init];
+    //    hyVC.tabBarItem.badgeValue = @"8";
     [self setupChildViewController:hyVC title:@"货源" imageName:@"goods_nor" selectedImageName:@"goods_sel"];
-     //交流
-     zJiaoliuController*jlVC = [[zJiaoliuController alloc]init];
-//    jlVC.tabBarItem.badgeValue = @"28";
+    //交流
+    zJiaoliuController*jlVC = [[zJiaoliuController alloc]init];
+    NSInteger num = [LWClientManager share].unreadMsgNum + LWClientManager.share.unreadSysMsgNum;
+    jlVC.tabBarItem.badgeValue =  num == 0 ? nil: [NSString stringWithFormat:@"%ld",num];
+    
     [self setupChildViewController:jlVC title:@"交流大厅" imageName:@"friend_nor" selectedImageName:@"friend_sel"];
-     
-     //我的
-     zWodeController*wdVC = [[zWodeController alloc]init];
-//    wdVC.tabBarItem.badgeValue = @"128";
-     [self setupChildViewController:wdVC title:@"我的" imageName:@"personal_nor" selectedImageName:@"personal_sel"];
+    
+    //我的
+    zWodeController*wdVC = [[zWodeController alloc]init];
+    //    wdVC.tabBarItem.badgeValue = @"128";
+    [self setupChildViewController:wdVC title:@"我的" imageName:@"personal_nor" selectedImageName:@"personal_sel"];
     
 }
 

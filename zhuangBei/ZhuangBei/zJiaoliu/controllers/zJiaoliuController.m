@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSMutableArray<LWJiaoLiuModel *> * listDatas_JiaoLiu;//交流
 @property (nonatomic, strong) NSMutableArray * listDatas_Message;
 @property (nonatomic, strong) NSMutableArray<friendListModel *> * listDatas_Contatcs;
-@property (nonatomic, strong) NSMutableArray<LWLocalChatRecordModel *> * listDatas_chatrecord;
+@property (nonatomic, strong) NSArray<LWLocalChatRecordModel *> * listDatas_chatrecord;
 
 @property (nonatomic, strong) UITableView * messageTableView;
 @property (nonatomic, strong) UITableView * contatcsTableView;
@@ -164,6 +164,7 @@
     ADD_NOTI(requestDatas, @"refreshJiaoLiuListDataKey");
 //    刷新本地的聊天记录
     ADD_NOTI(refreshChatRecordList, @"refreshChatRecordList");
+    ADD_NOTI(refreshChatRecordList, LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY);
     
     self.listDatas_chatrecord = [LWClientManager getLocalChatRecord];
     if (_messageTableView) {
@@ -227,6 +228,7 @@
             LWJiaoLiuContatcsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuContatcsListTableViewCell" forIndexPath:indexPath];
             LWLocalChatRecordModel *model = self.listDatas_chatrecord[indexPath.row - 1];
             cell.nameL.text = model.roomName;
+            [cell setunreadNumber:model.unreadNum];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }

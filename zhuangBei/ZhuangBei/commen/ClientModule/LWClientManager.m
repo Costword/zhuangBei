@@ -13,6 +13,7 @@
 #import "AppConfig.h"
 #import "LWClientHeader.h"
 
+
 static NSString * const VOIP_SERVER_URL = @"testrtc.bdmgxq.cn:10086";
 static NSString * const IM_SERVER_URL = @"testrtc.bdmgxq.cn:19903";
 static NSString * const CHATROOM_SERVER_URL = @"testrtc.bdmgxq.cn:19906";
@@ -24,7 +25,11 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 @interface LWClientManager()<XHLoginManagerDelegate,XHChatManagerDelegate, XHGroupManagerDelegate>
 @property (nonatomic, strong) XHCustomConfig *config;
-//@property (nonatomic, assign) NSInteger  maxNum;
+// 系统未读消息数量
+@property (nonatomic, assign) NSInteger  unreadSysMsgNum;
+//该用户的群组<groupid:groupname>
+@property (nonatomic, strong) NSMutableDictionary * allGroupDatas;
+
 @end
 
 @implementation LWClientManager
@@ -45,6 +50,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 - (void)installConfigure
 {
+    [self requestUnReadSystemMsgNumber];
+    
     self.config.serverType =  SERVER_TYPE_CUSTOM;;
     self.config.imServerURL = IM_SERVER_URL;
     self.config.chatRoomServerURL = CHATROOM_SERVER_URL;
@@ -61,6 +68,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 //配置userID
 - (void)configureUserId
 {
+    [self requestUnReadSystemMsgNumber];
+    
     zUserModel * model = [zUserInfo shareInstance].userInfo;
     [self.config sdkInitForFree:LWDATA(model.userId)];
     [self userLogin];
@@ -87,24 +96,28 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 
 #pragma mark ----------- XHGroupManagerDelegate -----------
-
+//群组成员数目变化
 - (void)group:(NSString*)groupID didMembersNumberUpdeted:(NSInteger)membersNumber {
-//    self.title = [NSString stringWithFormat:@"%@(%d人在线)", self.roomName, (int)membersNumber];
 }
 
+// 自己被移除当前群组
 - (void)groupUserKicked:(NSString*)groupID {
     POST_NOTI(DELE_USER_GROPU_CHAT_NOTI_KEY, nil);
 }
 
+//群组解散
 - (void)groupDidDeleted:(NSString*)groupID {
     POST_NOTI(DELE_GROPU_CHAT_NOTI_KEY, nil);
 }
 
+//接收群组消息
 - (void)groupMessagesDidReceive:(NSString *)aMessage fromID:(NSString *)fromID groupID:(NSString *)groupID{
-    
     POST_NOTI(NEW_MSG_GROPU_NOTI_KEY, (@{@"msg":aMessage,@"fromid":fromID,@"groupID":groupID}));
+    
+    NSString *groupname = self.allGroupDatas[[NSNumber numberWithString:groupID]];
+    //type: 1:group; 2:oto
+    [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
 }
-
 
 
 #pragma mark ----------- XHChatManagerDelegate -------------
@@ -112,6 +125,10 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 - (void)chatMessageDidReceived:(NSString *)message fromID:(NSString *)uid;
 {
     POST_NOTI(NEW_MSG_CHAT_NOTI_KEY, (@{@"msg":message,@"fromid":uid}));
+    
+    NSDictionary *dict = [LWTool stringToDictory:message];
+    //type: 1:group; 2:oto
+    [self addNewUnReadMsgWithRoomName:LWDATA(dict[@"username"]) roomId:LWDATA(dict[@"id"]) chatType:2 extend:nil];
 }
 
 #pragma mark -------------------XHLoginManagerDelegate--------------
@@ -216,11 +233,11 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 /// 保存聊天记录
 /// @param roomName 聊天室名字
 /// @param roomId 聊天室id
-/// @param type 聊天类型
+/// @param type 聊天类型 // 1:group; 2:oto
 /// @param extend 扩展字段
 + (void)saveLocalChatRecordWithRoomName:(NSString *)roomName roomId:(NSString *)roomId chatType:(NSInteger)type extend:(id)extend
 {
-    NSMutableArray *chatrecord = [LWClientManager getLocalChatRecord];
+    NSMutableArray *chatrecord = [LWClientManager getLocalChatRecordModelList];
     __block BOOL ishave = NO;
     [chatrecord enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.roomId isEqualToString:roomId]) {
@@ -241,9 +258,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         POST_NOTI(@"refreshChatRecordList", nil);
     }
 }
-
-/// 获取本地聊天记录
-+ (NSMutableArray *)getLocalChatRecord
+/// 获取本地聊天记录 private
++ (NSMutableArray *)getLocalChatRecordModelList
 {
     NSArray *chatrecord = [SYSTEM_USERDEFAULTS objectForKey:LOCAL_CHATRECORD_LIST_KEY];
     NSMutableArray *tem = [[NSMutableArray alloc] initWithCapacity:chatrecord.count];
@@ -254,17 +270,241 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     return tem;
 }
 
+/// 获取本地聊天记录 public
++ (NSArray *)getLocalChatRecord
+{
+    NSArray *tem = [LWClientManager.share MergeUnreadMsgListToLocalChatRecord];
+    
+    return tem;
+}
+
 /// 删除本地聊天记录
 + (void)removeLocalChatRecord
 {
+    [LWClientManager.share deleteAllUnReadMsgNum];
+    
     [SYSTEM_USERDEFAULTS removeObjectForKey:LOCAL_CHATRECORD_LIST_KEY];
     [SYSTEM_USERDEFAULTS synchronize];
 }
 
+
+/// 把未读消息数据合并到本地消息l记录中
+- (NSArray *)MergeUnreadMsgListToLocalChatRecord
+{
+    NSMutableArray *unreadmsg = [self getLocalUnReadMsg];
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    for (LWLocalChatRecordModel *model in unreadmsg) {
+        [dict setValue:model forKey:model.roomId];
+    }
+    
+    NSMutableArray *localchatrecord = [LWClientManager getLocalChatRecordModelList];
+    [localchatrecord enumerateObjectsUsingBlock:^(LWLocalChatRecordModel *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        LWLocalChatRecordModel *model = [dict objectForKey:obj.roomId];
+        if (model) {
+            obj.unreadNum = model.unreadNum;
+        }
+    }];
+    return localchatrecord;
+}
+
+#pragma mark ------------------- 获取系统消息的未读数 ---------------------
+
+// 获取该用户的所有群组信息，用于群组未读消息的 反查群组名称
+- (void)requestAllGroupInforDatas
+{
+     [ServiceManager requestPostWithUrl:@"app/appfriendtype/getFriendTypeAndFriendList" Parameters:@{} success:^(id  _Nonnull response) {
+            NSDictionary *data = response[@"data"];
+            NSArray *group = data[@"group"];
+         [self.allGroupDatas removeAllObjects];
+         for (NSDictionary *dict in group) {
+             [self.allGroupDatas setObject:LWDATA(dict[@"groupname"]) forKey:LWDATA(dict[@"id"])];
+         }
+        } failure:^(NSError * _Nonnull error) {
+    
+        }];
+}
+
+/// 获取系统消息未读数
+- (void)requestUnReadSystemMsgNumber
+{
+    [self requestAllGroupInforDatas];
+    
+    [ServiceManager requestPostWithUrl:@"app/appfriendapply/countList" paraString:@{} success:^(id  _Nonnull response) {
+        if ([response[@"code"] integerValue] == 0) {
+            NSInteger countMun = [response[@"countMun"] integerValue];
+            self.unreadSysMsgNum = countMun;
+            POST_NOTI(LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY, nil);
+        }
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
+/// 已读系统消息
+/// @param type 已读消息类型* type类型：* 0：管理员收到入群申请* 1：收到好友请求
+- (void)requestReadSystemMsg:(NSString *)type
+{
+    if(self.unreadSysMsgNum <= 0) return;
+    
+    [ServiceManager requestPostWithUrl:@"/app/appfriendapply/read" paraString:@{@"type":LWDATA(type)} success:^(id  _Nonnull response) {
+        [self requestUnReadSystemMsgNumber];
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
+
+/// 添加新的未读消息
+/// @param roomName 聊天室名称
+/// @param roomId 聊天室id
+/// @param type 聊天类型 1:group; 2:oto
+/// @param extend 扩展字段
+- (void)addNewUnReadMsgWithRoomName:(NSString *)roomName roomId:(NSString *)roomId chatType:(NSInteger)type extend:(id)extend
+{
+    [LWClientManager saveLocalChatRecordWithRoomName:roomName roomId:roomId chatType:type extend:extend];
+    
+    NSMutableArray *unreadmsg = [self getLocalUnReadMsg];
+    __block BOOL ishave = NO;
+    [unreadmsg enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.roomId intValue] == [roomId intValue]) {
+            ishave = YES;
+            obj.unreadNum ++;
+            *stop = YES;
+        }
+    }];
+    if (!ishave) {
+        LWLocalChatRecordModel *model = [LWLocalChatRecordModel new];
+        model.roomId = roomId;
+        model.roomName = roomName;
+        model.chatType = type;
+        model.unreadNum = 1;
+        NSData *modeldata = [NSKeyedArchiver archivedDataWithRootObject:model];
+        NSMutableArray *recoddata = [[NSMutableArray alloc] initWithArray:[SYSTEM_USERDEFAULTS objectForKey:LOCAL_UNRADER_MSG_LIST_KEY]];
+        [recoddata addObject:modeldata];
+        [SYSTEM_USERDEFAULTS setObject:recoddata forKey:LOCAL_UNRADER_MSG_LIST_KEY];
+        [SYSTEM_USERDEFAULTS synchronize];
+    }else{
+        NSMutableArray *recoddata = [[NSMutableArray alloc] initWithCapacity:unreadmsg.count];
+        for (LWLocalChatRecordModel *model in unreadmsg) {
+            NSData *modeldata = [NSKeyedArchiver archivedDataWithRootObject:model];
+            [recoddata addObject:modeldata];
+        }
+        [SYSTEM_USERDEFAULTS setObject:recoddata forKey:LOCAL_UNRADER_MSG_LIST_KEY];
+        [SYSTEM_USERDEFAULTS synchronize];
+    }
+    POST_NOTI(LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY, nil);
+}
+
+/// 获取本地未读消息
+- (NSMutableArray *)getLocalUnReadMsg
+{
+    NSArray *unreadmsg = [SYSTEM_USERDEFAULTS objectForKey:LOCAL_UNRADER_MSG_LIST_KEY];
+    NSMutableArray *tem = [[NSMutableArray alloc] initWithCapacity:unreadmsg.count];
+    for (NSData *data in unreadmsg) {
+        LWLocalChatRecordModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        [tem addObject:model];
+    }
+    return tem;
+}
+
+
+/// 删除该条聊天室的未读消息
+/// @param roomId 聊天室的id
+- (void)deleteUnReadMsgWithroomId:(NSString *)roomId
+{
+    NSMutableArray *unreadmsg = [self getLocalUnReadMsg];
+    [unreadmsg enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.roomId isEqualToString:roomId]) {
+            [unreadmsg removeObject:obj];
+            *stop = YES;
+        }
+    }];
+    NSMutableArray *unreaddata = [[NSMutableArray alloc] initWithCapacity:unreadmsg.count];
+    for (LWLocalChatRecordModel *model in unreadmsg) {
+        NSData *modeldata = [NSKeyedArchiver archivedDataWithRootObject:model];
+        [unreaddata addObject:modeldata];
+    }
+    [SYSTEM_USERDEFAULTS setObject:unreaddata forKey:LOCAL_UNRADER_MSG_LIST_KEY];
+    [SYSTEM_USERDEFAULTS synchronize];
+    
+//    清空本地聊天记录的未读数
+    NSMutableArray *localchatreacrod = [LWClientManager getLocalChatRecordModelList];
+    [localchatreacrod enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.roomId isEqualToString:roomId]) {
+            obj.unreadNum = 0;
+            *stop = YES;
+        }
+    }];
+    NSMutableArray *recoddata = [[NSMutableArray alloc] initWithCapacity:localchatreacrod.count];
+    for (LWLocalChatRecordModel *model in localchatreacrod) {
+        NSData *modeldata = [NSKeyedArchiver archivedDataWithRootObject:model];
+        [recoddata addObject:modeldata];
+    }
+    [SYSTEM_USERDEFAULTS setObject:recoddata forKey:LOCAL_CHATRECORD_LIST_KEY];
+    [SYSTEM_USERDEFAULTS synchronize];
+    
+    
+    POST_NOTI(LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY, nil);
+}
+
+
+/// 清空本地缓存的未读消息数据
+- (void)deleteAllUnReadMsgNum
+{
+    [SYSTEM_USERDEFAULTS removeObjectForKey:LOCAL_UNRADER_MSG_LIST_KEY];
+    [SYSTEM_USERDEFAULTS synchronize];
+}
+
+/// 获取本地的未读消息数量 private
+-(NSInteger)unreadMsgNum
+{
+    NSMutableArray *unreadmsg = [self getLocalUnReadMsg];
+    __block NSInteger num = 0;
+    [unreadmsg enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        num = num + obj.unreadNum;
+    }];
+    return num;
+}
+
+- (NSMutableDictionary *)allGroupDatas
+{
+    if (!_allGroupDatas) {
+        _allGroupDatas = [[NSMutableDictionary alloc] init];
+    }
+    return _allGroupDatas;
+}
 @end
 
 
 /*
  群聊上传接口：app/appgroupmessage/save
  一对一聊天接口：app/appfriendmessage/save
+ 系统的未读数量： app/app/appfriendapply/countList
+ 
+ /app/app/appfriendapply/read
+ * 【系统消息】读取后，消息数量清零
+ * type类型：
+ * 0：管理员收到入群申请
+ * 1：收到好友请求
+ 
+ */
+
+
+/*
+ 群组消息：
+ {
+     "avatar": "/app/app/appfujian/download?attID=3379",
+     "content": "还",
+     "id": "696",
+     "isGroup": true,
+     "mid": {
+         "content": "还",
+         "groupId": "63",
+         "id": "3379",
+         "sendTime": "2020-05-23 10:19",
+         "userId": "696"
+     },
+     "msgCount": 0,
+     "username": "北京真格lw2000-销售部-总经理"
+ }
  */

@@ -62,10 +62,30 @@ typedef void(^RequestFailure)(NSError *error);
 + (void)saveLocalChatRecordWithRoomName:(NSString *)roomName roomId:(NSString *)roomId chatType:(NSInteger)type extend:(id)extend;
 
 /// 获取本地聊天记录
-+ (NSMutableArray *)getLocalChatRecord;
++ (NSArray *)getLocalChatRecord;
 
 /// 删除本地聊天记录
 + (void)removeLocalChatRecord;
+
+#pragma mark ------------------- 获取系统消息的未读数 ---------------------
+
+/// 获取系统消息未读数
+- (void)requestUnReadSystemMsgNumber;
+
+/// 已读系统消息
+/// @param type 已读消息类型* type类型：* 0：管理员收到入群申请* 1：收到好友请求
+- (void)requestReadSystemMsg:(NSString *)type;
+
+/// 删除该条聊天室的未读消息
+/// @param roomId 聊天室的id
+- (void)deleteUnReadMsgWithroomId:(NSString *)roomId;
+
+
+/// 聊天消息的未读数量
+@property (nonatomic, assign,readonly) NSInteger  unreadMsgNum;
+
+// 系统未读消息数量
+@property (nonatomic, assign,readonly) NSInteger  unreadSysMsgNum;
 
 @end
 

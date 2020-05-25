@@ -264,7 +264,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     self.showDatasArray = [NSMutableArray array];
     self.totalDatasArray = [NSMutableArray array];
     self.m_Group_ID = self.roomId;
-    
+
+    //    消息监听
     ADD_NOTI(receiveNewChatMsg:, NEW_MSG_CHAT_NOTI_KEY);
     ADD_NOTI(receiveNewChatGroupMsg:, NEW_MSG_GROPU_NOTI_KEY);
     ADD_NOTI(deleGroupChat, DELE_GROPU_CHAT_NOTI_KEY);
@@ -278,6 +279,10 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     self.title = self.roomName;
     
     [self requestRecordListDatas];
+    
+    //    删除本地的未读消息
+    [[LWClientManager share] deleteUnReadMsgWithroomId:self.roomId];
+    POST_NOTI(@"refreshChatRecordList", nil);
 }
 
 #pragma mark - UI

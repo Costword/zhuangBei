@@ -84,9 +84,13 @@
         }
         if (code == 3840) {
             
+            [[zUserInfo shareInstance]deleate];
+            
+            NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:url]];
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUserDefaultsCookie];
             [[zHud shareInstance]showMessage:@"登录信息超时,请重新登录"];
             //登录超时重新登录
-            
             zDengluController * rootVC  = [[zDengluController alloc]init];
             MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
             rootNav.navigationBar.hidden = YES;

@@ -243,6 +243,7 @@
     zCompanyDetailController * detailVC = [[zCompanyDetailController alloc]init];
     detailVC.title = @"公司详情";
     detailVC.goosModel = model;
+    detailVC.type = 1;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

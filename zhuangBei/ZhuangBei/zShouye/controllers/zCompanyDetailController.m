@@ -82,8 +82,8 @@
             NSLog(@"货源列表%@",dic);
             NSArray * list = dic[@"list"];
             if (list.count==0) {
-                self.nothingView.alpha =1;
-                [self.view bringSubviewToFront:self.nothingView];
+//                self.nothingView.alpha =1;
+//                [self.view bringSubviewToFront:self.nothingView];
             }else
             {
                 self.nothingView.alpha =0;
@@ -161,9 +161,10 @@
         weakSelf.companyType = index;
         [UIView performWithoutAnimation:^{
 //            NSIndexPath * indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
-           [self.companyTable reloadData];
+           [self.companyTable reloadSection:0 withRowAnimation:UITableViewRowAnimationNone];
         }];
     };
+    companyHeader.type = self.type;
     companyHeader.goosModel = _goosModel;
     companyHeader.companyType = self.companyType;
     return companyHeader;

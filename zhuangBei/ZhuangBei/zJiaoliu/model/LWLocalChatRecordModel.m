@@ -15,6 +15,7 @@
     [coder encodeObject:_roomId forKey:@"roomId"];
     [coder encodeObject:_roomName forKey:@"roomName"];
     [coder encodeInteger:_chatType forKey:@"chatType"];
+    [coder encodeInteger:_unreadNum forKey:@"unreadNum"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -23,6 +24,7 @@
         self.roomId = [coder decodeObjectForKey:@"roomId"];
         self.roomName = [coder decodeObjectForKey:@"roomName"];
         self.chatType = [coder decodeIntegerForKey:@"chatType"];
+        self.unreadNum = [coder decodeIntegerForKey:@"unreadNum"];
     }
     return self;
 }

@@ -32,12 +32,14 @@
         self.clickItemsBlock(model);
     }
 }
+
 - (void)clickMoreBtn
 {
     if(self.clickItemsBlock){
                self.clickItemsBlock(nil);
            }
 }
+
 - (void)setModel:(LWHuoYuanThreeLevelModel *)model
 {
     _model = model;
@@ -46,7 +48,7 @@
     NSMutableArray *items = [[NSMutableArray alloc] init];
     //    NSMutableArray *itemsModelArr= [[NSMutableArray alloc] init];
     for (gysListModel *itemmodel in model.gysList) {
-//        if(!itemmodel.companyNameSecond || !itemmodel.companyNameFirst) break;
+        if(!itemmodel.companyNameSecond || !itemmodel.companyNameFirst) break;
         if (items.count >= 4)  break;
         [items addObject:[NSString stringWithFormat:@"%@%@",itemmodel.companyNameFirst,itemmodel.companyNameSecond]];
         //        [itemsModelArr addObject:itemmodel];

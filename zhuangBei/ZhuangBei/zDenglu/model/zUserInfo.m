@@ -96,7 +96,6 @@ static NSString * UserDefaultInfo = @"userInfo.archiver";
         [NSKeyedArchiver archiveRootObject:self.userInfo toFile:filePath];
         
         [[LWClientManager share] configureUserId];
-        
     }else
     {
         NSLog(@"账号或密码为空");

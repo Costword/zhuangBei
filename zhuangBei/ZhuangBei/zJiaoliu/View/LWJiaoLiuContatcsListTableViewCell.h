@@ -19,10 +19,14 @@ typedef void(^clickBtnBlock)(NSInteger tag);
 @property (nonatomic, strong) UILabel * timelL;
 @property (nonatomic, strong) UIButton * leftBtn;
 @property (nonatomic, strong) UIButton * rightBtn;
+@property (nonatomic, strong) UILabel * unreadnumL;
+
 - (void)setBottomLine:(NSInteger)tag;
 @property (nonatomic, strong) UIView * line;
 - (void)updateForVerifiCell;
 @property (nonatomic, copy) clickBtnBlock  block;
+- (void)setunreadNumber:(NSInteger)num;
+
 @end
 
 // 消息列表 cell
