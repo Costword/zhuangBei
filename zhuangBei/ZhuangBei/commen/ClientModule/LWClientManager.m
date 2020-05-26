@@ -102,12 +102,12 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 // 自己被移除当前群组
 - (void)groupUserKicked:(NSString*)groupID {
-    POST_NOTI(DELE_USER_GROPU_CHAT_NOTI_KEY, nil);
+    POST_NOTI(DELE_USER_GROPU_CHAT_NOTI_KEY, @{@"groupID":groupID});
 }
 
 //群组解散
 - (void)groupDidDeleted:(NSString*)groupID {
-    POST_NOTI(DELE_GROPU_CHAT_NOTI_KEY, nil);
+    POST_NOTI(DELE_GROPU_CHAT_NOTI_KEY, @{@"groupID":groupID});
 }
 
 //接收群组消息
@@ -214,7 +214,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 /// @param param 参数字典
 - (NSString *)getGroupParamString:(NSDictionary *)param
 {
-    NSString *string = [NSString stringWithFormat:@"{\"groupId\":\"%@\",\"content\":\"%@\",\"sendTime\":%.0f,\"userId\":%.0f}",param[@"groupId"],param[@"content"],[param[@"sendTime"] floatValue],[param[@"userId"] floatValue]];
+    NSString *string = [NSString stringWithFormat:@"{\"groupId\":\"%@\",\"content\":\"%@\",\"sendTime\":%.0f,\"userId\":%.0f,\"mainProduct\":\"\"}",param[@"groupId"],param[@"content"],[param[@"sendTime"] floatValue],[param[@"userId"] floatValue]];
     return string;
 }
 
@@ -222,7 +222,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 /// @param param 参数字典
 - (NSString *)gettotoParamString:(NSDictionary *)param
 {
-    NSString *string = [NSString stringWithFormat:@"{\"toUserId\":\"%@\",\"content\":\"%@\"}",param[@"toUserId"],param[@"content"]];
+    NSString *string = [NSString stringWithFormat:@"{\"toUserId\":\"%@\",\"content\":\"%@\",\"mainProduct\":\"\"}",param[@"toUserId"],param[@"content"]];
     return string;
 }
 

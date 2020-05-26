@@ -217,16 +217,22 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     });
 }
 
-- (void)deleUserGroupChat
+- (void)deleUserGroupChat:(NSNotification *)noti
 {
-    [UIView ilg_makeToast:@"您已被管理员剔除"];
-    [self.navigationController popViewControllerAnimated:YES];
+    NSString *groupID = noti.object[@"groupID"];
+    if ([groupID isEqualToString:self.roomId]) {
+        [UIView ilg_makeToast:@"您已被管理员剔除"];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
-- (void)deleGroupChat
+- (void)deleGroupChat:(NSNotification *)noti
 {
-    [UIView ilg_makeToast:@"此群已被删除"];
-    [self.navigationController popViewControllerAnimated:YES];
+    NSString *groupID = noti.object[@"groupID"];
+    if ([groupID isEqualToString:self.roomId]) {
+        [UIView ilg_makeToast:@"此群已被删除"];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark ----------- XHChatManagerDelegate 通知-------------
@@ -277,8 +283,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     //    消息监听
     ADD_NOTI(receiveNewChatMsg:, NEW_MSG_CHAT_NOTI_KEY);
     ADD_NOTI(receiveNewChatGroupMsg:, NEW_MSG_GROPU_NOTI_KEY);
-    ADD_NOTI(deleGroupChat, DELE_GROPU_CHAT_NOTI_KEY);
-    ADD_NOTI(deleUserGroupChat, DELE_USER_GROPU_CHAT_NOTI_KEY);
+    ADD_NOTI(deleGroupChat:, DELE_GROPU_CHAT_NOTI_KEY);
+    ADD_NOTI(deleUserGroupChat:, DELE_USER_GROPU_CHAT_NOTI_KEY);
     
     if (_roomType == LWChatRoomTypeGroup) {
         [self requestGroupCanSendmsg];
@@ -449,7 +455,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 {
     MoreItem *item1 = [MoreItem moreItemWithPicName:@"sharemore_location" highLightPicName:nil itemName:@"相册"];
     MoreItem *item2 = [MoreItem moreItemWithPicName:@"sharemore_pic" highLightPicName:nil itemName:@"相机"];
-//    MoreItem *item3 = [MoreItem moreItemWithPicName:@"sharemore_video" highLightPicName:nil itemName:@"连接"];
+    //    MoreItem *item3 = [MoreItem moreItemWithPicName:@"sharemore_video" highLightPicName:nil itemName:@"连接"];
     return @[item1, item2,];
 }
 
@@ -531,4 +537,11 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     }
     return _photopicker;
 }
+
+
+- (void)dealloc
+{
+    LWLog(@"\n***************************dealloc:%@****************************\n",self);
+}
+
 @end
