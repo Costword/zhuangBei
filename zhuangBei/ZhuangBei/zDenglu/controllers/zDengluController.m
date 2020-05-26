@@ -13,7 +13,7 @@
 #import "zZhaoHuiController.h"
 #import "zQuestionController.h"
 #import "zUserInfo.h"
-#import "MainTabBarController.h"
+//#import "MainTabBarController.h"
 #import "LSTabBarController.h"
 #import "MainNavController.h"
 

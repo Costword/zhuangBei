@@ -8,7 +8,7 @@
 
 #import "SceneDelegate.h"
 #import "MainNavController.h"
-#import "MainTabBarController.h"
+//#import "MainTabBarController.h"
 #import "LSTabBarController.h"
 #import "zDengluController.h"
 

@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MainTabBarController.h"
+//#import "MainTabBarController.h"
 #import "MainNavController.h"
 #import "zDengluController.h"
 #import "LWClientManager.h"
