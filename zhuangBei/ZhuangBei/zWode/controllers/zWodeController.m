@@ -39,7 +39,6 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    
     NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kgetUserInfo];
     [self postDataWithUrl:url WithParam:nil];
     

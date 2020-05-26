@@ -19,6 +19,7 @@
     
     UINavigationBar *bar = [UINavigationBar appearance];
 
+    [bar setTranslucent:NO];
     //设置导航条背景颜色
     [bar setBarTintColor:[UIColor whiteColor]];
     [bar setBackgroundColor:[UIColor whiteColor]];

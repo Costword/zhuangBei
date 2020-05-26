@@ -295,6 +295,14 @@
     if (userCenterModel.rankDm != nil) {
         [self.levelBtn setTitle:userCenterModel.rankDm forState:UIControlStateNormal];
     }
+    
+    NSString * url = [NSString stringWithFormat:@"%@app/appfujian/download?attID=%ld",kApiPrefix,(long)[zUserInfo shareInstance].userInfo.avatar];
+    __weak typeof(self) weakSelf = self;
+    [self.headerImageBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:url] forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        if (image == nil) {
+            [weakSelf.headerImageBtn setBackgroundImage:[UIImage imageNamed:@"wode_defoutHeader"] forState:UIControlStateNormal];
+        }
+    }];
 }
 
 -(void)updateTYTLabel:(TYAttributedLabel*)label

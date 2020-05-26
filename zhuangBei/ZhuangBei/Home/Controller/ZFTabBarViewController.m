@@ -13,7 +13,6 @@
 #import "zHyController.h"
 #import "zJiaoliuController.h"
 #import "zWodeController.h"
-
 #import "LWClientHeader.h"
 
 @interface ZFTabBarViewController () <ZFTabBarDelegate>
@@ -25,10 +24,11 @@
 
 @implementation ZFTabBarViewController
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.tabBar.backgroundImage = [UIImage imageNamed:@"white_bg"];
     // 初始化tabbar
     [self setupTabbar];
@@ -51,13 +51,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [UITabBar appearance].translucent = NO;
     // 删除系统自动生成的UITabBarButton
-    for (UIView *child in self.tabBar.subviews) {
-        if ([child isKindOfClass:[UIControl class]]) {
-            [child removeFromSuperview];
-        }
-    }
+//    for (UIView *child in self.tabBar.subviews) {
+//        if ([child isKindOfClass:[UIControl class]]) {
+//            [child removeFromSuperview];
+//        }
+//    }
 }
 
 /**
@@ -101,7 +101,6 @@
     
     //货源
     zHyController *hyVC = [[zHyController alloc]init];
-    //    hyVC.tabBarItem.badgeValue = @"8";
     [self setupChildViewController:hyVC title:@"货源" imageName:@"goods_nor" selectedImageName:@"goods_sel"];
     //交流
     zJiaoliuController*jlVC = [[zJiaoliuController alloc]init];
@@ -112,7 +111,6 @@
     
     //我的
     zWodeController*wdVC = [[zWodeController alloc]init];
-    //    wdVC.tabBarItem.badgeValue = @"128";
     [self setupChildViewController:wdVC title:@"我的" imageName:@"personal_nor" selectedImageName:@"personal_sel"];
     
 }

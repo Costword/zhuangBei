@@ -10,8 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^zPersonalHeaderTap)(void);
+
 @interface zPersonalHeader : UIView
 
+
+@property(copy,nonatomic)zPersonalHeaderTap personalTap;
+
+@property(assign,nonatomic)NSInteger canEdit;
+
+@property(copy,nonatomic)NSString * imageID;
 
 @end
 

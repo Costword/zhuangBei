@@ -23,6 +23,8 @@
 
 @property(strong,nonatomic)UIButton * descLabel;
 
+@property(strong,nonatomic)UIButton * arrowButton;
+
 @end
 
 @implementation zUserDetailController
@@ -51,7 +53,7 @@
         _imageHeader.userInteractionEnabled = NO;
         _imageHeader.layer.cornerRadius = kWidthFlot(50);
         _imageHeader.clipsToBounds = YES;
-        _imageHeader.image = [UIImage imageNamed:@"testicon"];
+        _imageHeader.image = [UIImage imageNamed:@"wode_defoutHeader"];
     }
     return _imageHeader;
 }
@@ -87,13 +89,28 @@
         _descLabel.tag = 2;
         _descLabel.titleLabel.font = kFont(16);
         _descLabel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [_descLabel setImage:[UIImage imageNamed:@"vip_crown"] forState:UIControlStateNormal];
+//        [_descLabel setImage:[UIImage imageNamed:@"icon_into"] forState:UIControlStateNormal];
         [_descLabel setTitle:@"个人简介" forState:UIControlStateNormal];
         [_descLabel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _descLabel.clipsToBounds = YES;
         [_descLabel addTarget:self action:@selector(buttonCLick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _descLabel;
+}
+
+-(UIButton*)arrowButton
+{
+    if (!_arrowButton) {
+        _arrowButton = [[UIButton alloc]init];
+        _arrowButton.tag = 2;
+        _arrowButton.titleLabel.font = kFont(16);
+//        _arrowButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [_arrowButton setImage:[UIImage imageNamed:@"icon_into"] forState:UIControlStateNormal];
+        [_arrowButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _arrowButton.clipsToBounds = YES;
+        [_arrowButton addTarget:self action:@selector(buttonCLick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _arrowButton;
 }
 
 
@@ -103,11 +120,13 @@
     [self.userDetailButton addSubview:self.imageHeader];
     [self.userDetailButton addSubview:self.nameLabel];
     [self.userDetailButton addSubview:self.EmailLabel];
-    [self.view addSubview:self.descLabel];
     
+    [self.view addSubview:self.descLabel];
+    [self.view addSubview:self.arrowButton];
     self.nameLabel.text = [zEducationRankTypeInfo shareInstance].userInfoModel.userName;
     
     self.EmailLabel.text = [NSString stringWithFormat:@"邮箱:%@",[zEducationRankTypeInfo shareInstance].userInfoModel.email];
+    [self.imageHeader z_imageWithImageId:[NSString stringWithFormat:@"%ld",(long)[zUserInfo shareInstance].userInfo.avatar] placeholderImage:@"wode_defoutHeader"];
     
 }
 
@@ -138,10 +157,22 @@
     }];
     
     [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
+        make.left.mas_equalTo(kWidthFlot(20));
+        make.right.mas_equalTo(-kWidthFlot(44));
         make.top.mas_equalTo(self.userDetailButton.mas_bottom).offset(0);
         make.height.mas_equalTo(kWidthFlot(44));
     }];
+    
+    [self.arrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(0);
+        make.top.mas_equalTo(self.userDetailButton.mas_bottom).offset(0);
+        make.width.mas_equalTo(kWidthFlot(44));
+        make.height.mas_equalTo(kWidthFlot(44));
+    }];
+    
+    [self.descLabel setNeedsLayout];
+    [self.descLabel layoutIfNeeded];
+    [self.descLabel setIconInRight];
 }
 
 -(void)buttonCLick:(UIButton*)button

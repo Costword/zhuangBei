@@ -15,6 +15,8 @@
 #import "zUpLoadUserModel.h"
 #import "zListTypeModel.h"
 #import "NSDictionary+NSNull.h"
+#import "HeaderManager.h"
+
 @interface zPersonalController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(strong,nonatomic)UITableView * persoanTableView;
@@ -154,7 +156,23 @@
 -(zPersonalHeader*)headerView
 {
     if (!_headerView) {
+        __weak typeof(self) weakSelf = self;
         _headerView = [[zPersonalHeader alloc]init];
+        _headerView.imageID = [NSString stringWithFormat:@"%ld",[zUserInfo shareInstance].userInfo.avatar];
+        _headerView.personalTap = ^{
+          
+            [HeaderManager.inst showMenuWithController:weakSelf startUpload:^{
+                //开始
+                NSLog(@"开始上传");
+            } change:^(UIImage * _Nonnull image, NSString * _Nonnull ossUrl) {
+                //改变
+                weakSelf.headerView.imageID = ossUrl;
+                NSLog(@"上传成功");
+            } fail:^{
+                //失败
+                NSLog(@"上传失败");
+            }];
+        };
     }
     return _headerView;
 }
@@ -292,6 +310,7 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    self.headerView.canEdit = self.canEdit;;
     return self.headerView;
 }
 

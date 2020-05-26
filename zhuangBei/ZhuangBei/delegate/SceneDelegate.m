@@ -9,7 +9,7 @@
 #import "SceneDelegate.h"
 #import "MainNavController.h"
 #import "MainTabBarController.h"
-#import "ZFTabBarViewController.h"
+#import "LSTabBarController.h"
 #import "zDengluController.h"
 
 @interface SceneDelegate ()
@@ -31,7 +31,7 @@
 //        NSHTTPCookie * cookie = [cookiesTool cookieWithName:kLoginUserInfo];
         NSString * token =  [zUserInfo shareInstance].userInfo.token;
         if (token.length>0) {
-            ZFTabBarViewController * rootVC  = [[ZFTabBarViewController alloc]init];
+            LSTabBarController * rootVC  = [[LSTabBarController alloc]init];
             MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
             rootNav.navigationBar.hidden = YES;
             self.window.rootViewController = rootNav;

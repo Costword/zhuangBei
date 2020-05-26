@@ -11,6 +11,7 @@
 #import "zDengluController.h"
 #import "MainNavController.h"
 #import "SDImageCache.h"
+#import "zXieYiController.h"
 
 @interface zSettingViewController ()
 
@@ -19,6 +20,7 @@
 @property(strong,nonatomic)zSettingCellView * clearnCell;
 
 @property(strong,nonatomic)zSettingCellView * versionCell;
+
 
 @property(strong,nonatomic)UIButton * loginBtn;
 
@@ -254,11 +256,19 @@
     }
     
     if (button.tag ==2) {
-        [[zHud shareInstance]showMessage:@"服务协议"];
+//        [[zHud shareInstance]showMessage:@"服务协议"];
+        zXieYiController * xyVC = [[zXieYiController alloc]init];
+        xyVC.type = button.tag;
+        xyVC.title = @"服务协议";
+        [self.navigationController pushViewController:xyVC animated:YES];
     }
     
     if (button.tag==3) {
-        [[zHud shareInstance]showMessage:@"隐私政策"];
+//        [[zHud shareInstance]showMessage:@"隐私政策"];
+        zXieYiController * xyVC = [[zXieYiController alloc]init];
+        xyVC.type = button.tag;
+        xyVC.title = @"隐私政策";
+        [self.navigationController pushViewController:xyVC animated:YES];
     }
 }
 

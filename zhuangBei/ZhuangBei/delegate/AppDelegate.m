@@ -12,7 +12,7 @@
 #import "zDengluController.h"
 #import "LWClientManager.h"
 #import "IQKeyboardManager.h"
-#import "ZFTabBarViewController.h"
+#import "LSTabBarController.h"
 #import "JSHAREService.h"
 @interface AppDelegate ()
 
@@ -25,8 +25,6 @@
     
     
     self.window = [[UIWindow alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT)];
-    
-    
     JSHARELaunchConfig *config = [[JSHARELaunchConfig alloc] init];
     config.appKey = JGAPPK;
     config.WeChatAppId = weXinAppId;
@@ -47,7 +45,7 @@
         NSString * token =  [zUserInfo shareInstance].userInfo.token;
         if (token.length>0) {
             //登录状态 进入首页
-            ZFTabBarViewController * rootVC  = [[ZFTabBarViewController alloc]init];
+            LSTabBarController * rootVC  = [[LSTabBarController alloc]init];
             MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
             rootNav.navigationBar.hidden = YES;
             self.window.rootViewController = rootNav;

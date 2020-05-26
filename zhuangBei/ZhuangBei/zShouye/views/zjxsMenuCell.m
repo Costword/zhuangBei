@@ -34,7 +34,6 @@
         _arrowButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _arrowButton.titleLabel.font = [UIFont systemFontOfSize:kWidthFlot(12)];
         [_arrowButton setTitleColor:[UIColor colorWithHexString:@"#4A4A4A"] forState:UIControlStateNormal];
-        _arrowButton.backgroundColor = [UIColor whiteColor];
     }
     return _arrowButton;
 }
@@ -63,8 +62,9 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    [self.arrowButton setNeedsLayout];
     [self.arrowButton layoutIfNeeded];
+    [self.arrowButton setNeedsLayout];
+    
     [self.arrowButton setIconInLeftWithSpacing:kWidthFlot(5)];
 }
 
