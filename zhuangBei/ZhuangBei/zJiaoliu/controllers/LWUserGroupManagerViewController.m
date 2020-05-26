@@ -199,7 +199,7 @@
         UILabel *lable = [LWLabel lw_lable:@"添加分组" font:18 textColor:BASECOLOR_TEXTCOLOR];
         [_seactionView addSubviews:@[icon,lable]];
         [icon mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.mas_offset(50);
+            make.width.height.mas_offset(40);
             make.left.mas_equalTo(_seactionView.mas_left).mas_offset(20);
             make.centerY.mas_equalTo(_seactionView.mas_centerY);
         }];

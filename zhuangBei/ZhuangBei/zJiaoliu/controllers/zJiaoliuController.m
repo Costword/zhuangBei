@@ -394,7 +394,7 @@
         [_messageTableView registerClass:[LWJiaoLiuContatcsListTableViewCell class] forCellReuseIdentifier:@"LWJiaoLiuContatcsListTableViewCell"];
         _messageTableView.backgroundColor = UIColor.whiteColor;
         _messageTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _messageTableView.mj_header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
+//        _messageTableView.mj_header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
     }
     return _messageTableView;
 }

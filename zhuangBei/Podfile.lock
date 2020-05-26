@@ -50,7 +50,7 @@ DEPENDENCIES:
   - YYKit
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://gitee.com/mirrors/CocoaPods-Specs.git:
     - AFNetworking
     - IQKeyboardManager
     - JCore
@@ -82,6 +82,6 @@ SPEC CHECKSUMS:
   UITextView-WZB: aa7306ec35ad35d325f8e608366ecd5ac8c8eed9
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: c23031b1c7c21c085adaf66f075c0d7e63816bf1
+PODFILE CHECKSUM: 1a0f4acf244f9c55c9d9be9feeafc42bd87596a4
 
 COCOAPODS: 1.9.1

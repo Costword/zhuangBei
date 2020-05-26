@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, IFChatCellStyle) {
 };
 
 extern const int leadingSpace; //文本两端空白
+typedef void(^clickImageMsgBlock)(void);
 
 @interface IFChatCell : UITableViewCell
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
@@ -27,6 +28,7 @@ extern const int leadingSpace; //文本两端空白
 @property (nonatomic, assign) IFChatCellStyle  layoutType;
 
 @property (nonatomic, strong) UIImageView * contextImageView;
+@property (nonatomic, copy) clickImageMsgBlock clickImgeBlock;
 
 - (instancetype)initWithStyle:(IFChatCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 

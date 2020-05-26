@@ -9,6 +9,9 @@
 #import "LWChatListBaseViewController.h"
 #import "IQKeyboardManager.h"
 #import "LWEmojiManager.h"
+#import "LWPhotoPicker.h"
+#import "KNPhotoBrowser.h"
+#import "UIImageView+WebCache.h"
 
 NSString *const getlist_group_url  = @"app/appgroupmessage/getGroupMsgList";
 
@@ -23,6 +26,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 @property (nonatomic, assign) NSInteger  successNum;
 /** 聊天键盘 */
 @property (nonatomic, strong) ChatKeyBoard *chatKeyBoard;
+@property (nonatomic, strong) LWPhotoPicker * photopicker;
 
 @end
 
@@ -78,7 +82,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 //向后台发消息
 - (void)requsetSendMsgService:(NSString *)text
 {
-//    dispatch_group_enter(self.dispatch_group);
+    //    dispatch_group_enter(self.dispatch_group);
     if (_roomType == LWChatRoomTypeGroup) {
         [[LWClientManager share] sendGroupMsg:text groupId:self.m_Group_ID success:^(id  _Nonnull response) {
             if ([response[@"code"] intValue] == 0) {
@@ -87,10 +91,10 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
             }else{
                 [[zHud shareInstance] showMessage:@"消息发送失败"];
             }
-//            dispatch_group_leave(self.dispatch_group);
+            //            dispatch_group_leave(self.dispatch_group);
         } failure:^(NSError * _Nonnull error) {
             [[zHud shareInstance] showMessage:@"消息发送失败"];
-//            dispatch_group_leave(self.dispatch_group);
+            //            dispatch_group_leave(self.dispatch_group);
         }];
     }else if(_roomType == LWChatRoomTypeOneTOne){
         [[LWClientManager share] sendMsgOneToOne:text roomId:self.roomId success:^(id  _Nonnull response) {
@@ -100,10 +104,10 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
             }else{
                 [[zHud shareInstance] showMessage:@"消息发送失败"];
             }
-//            dispatch_group_leave(self.dispatch_group);
+            //            dispatch_group_leave(self.dispatch_group);
         } failure:^(NSError * _Nonnull error) {
             [[zHud shareInstance] showMessage:@"消息发送失败"];
-//            dispatch_group_leave(self.dispatch_group);
+            //            dispatch_group_leave(self.dispatch_group);
         }];
     }
 }
@@ -111,7 +115,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 //向SDK发消息
 - (void)requestSDKSendMsg:(NSString *)text
 {
-//    dispatch_group_enter(self.dispatch_group);
+    //    dispatch_group_enter(self.dispatch_group);
     if (_roomType == LWChatRoomTypeGroup) {
         [[XHClient sharedClient].groupManager sendMessage:text toGroup:self.m_Group_ID atUsers:nil completion:^(NSError *error) {
             if (error) {
@@ -120,7 +124,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
             }else{
                 self.successNum++;
             }
-//            dispatch_group_leave(self.dispatch_group);
+            //            dispatch_group_leave(self.dispatch_group);
         }];
     }else if (_roomType == LWChatRoomTypeOneTOne){
         [[XHClient sharedClient].chatManager sendMessage:text toID:self.roomId completion:^(NSError *error) {
@@ -130,7 +134,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
             } else {
                 self.successNum++;
             }
-//            dispatch_group_leave(self.dispatch_group);
+            //            dispatch_group_leave(self.dispatch_group);
         }];
     }
 }
@@ -167,12 +171,13 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     ShowMsgElem * newMsgElem = [[ShowMsgElem alloc] init];
     newMsgElem.userID = [IMUserInfo shareInstance].userID;
     newMsgElem.content = text;
-    newMsgElem.username = [LWDATA([zUserInfo shareInstance].userInfo.username) isEqualToString:@""]?@"未知昵称":[zUserInfo shareInstance].userInfo.username;
+    NSString *username = [SYSTEM_USERDEFAULTS objectForKey:USER_ACCOUNT_IM_NICKNAME];
+    newMsgElem.username = [username isNotBlank] ? username : [zUserInfo shareInstance].userInfo.username;
     newMsgElem.time = [[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
     [self showTrace:newMsgElem];
 }
 
- // 发送成功后，刷新当前页面
+// 发送成功后，刷新当前页面
 - (void)showTrace:(ShowMsgElem *)msgModel
 {
     if (!msgModel) {
@@ -183,7 +188,11 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         if ([msgModel.userID isEqualToString:[IMUserInfo shareInstance].userID]) {
             msgModel.isMySelf = YES;
         }
-        msgModel.rowHeight = [IFChatCell caculateTextHeightWithMaxWidth:self.chatTableView.width - [IFChatCell reserveWithForCell] text:msgModel.content];
+        if(msgModel.msgType == LWMsgTypeImage){
+            msgModel.rowHeight = 200+ 10+20 + 25+ 15 + 15+10+15;
+        }else{
+            msgModel.rowHeight = [IFChatCell caculateTextHeightWithMaxWidth:self.chatTableView.width - [IFChatCell reserveWithForCell] text:msgModel.content];
+        }
         [self.totalDatasArray addObject:msgModel];
         [self.showDatasArray removeAllObjects];
         //        [self.showDatasArray addObjectsFromArray: [self.totalDatasArray subarrayWithRange:NSMakeRange(self.totalDatasArray.count - 100, 100)]];
@@ -208,16 +217,22 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     });
 }
 
-- (void)deleUserGroupChat
+- (void)deleUserGroupChat:(NSNotification *)noti
 {
-    [UIView ilg_makeToast:@"您已被管理员剔除"];
-    [self.navigationController popViewControllerAnimated:YES];
+    NSString *groupID = noti.object[@"groupID"];
+    if ([groupID isEqualToString:self.roomId]) {
+        [UIView ilg_makeToast:@"您已被管理员剔除"];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
-- (void)deleGroupChat
+- (void)deleGroupChat:(NSNotification *)noti
 {
-    [UIView ilg_makeToast:@"此群已被删除"];
-    [self.navigationController popViewControllerAnimated:YES];
+    NSString *groupID = noti.object[@"groupID"];
+    if ([groupID isEqualToString:self.roomId]) {
+        [UIView ilg_makeToast:@"此群已被删除"];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark ----------- XHChatManagerDelegate 通知-------------
@@ -264,12 +279,12 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     self.showDatasArray = [NSMutableArray array];
     self.totalDatasArray = [NSMutableArray array];
     self.m_Group_ID = self.roomId;
-
+    
     //    消息监听
     ADD_NOTI(receiveNewChatMsg:, NEW_MSG_CHAT_NOTI_KEY);
     ADD_NOTI(receiveNewChatGroupMsg:, NEW_MSG_GROPU_NOTI_KEY);
-    ADD_NOTI(deleGroupChat, DELE_GROPU_CHAT_NOTI_KEY);
-    ADD_NOTI(deleUserGroupChat, DELE_USER_GROPU_CHAT_NOTI_KEY);
+    ADD_NOTI(deleGroupChat:, DELE_GROPU_CHAT_NOTI_KEY);
+    ADD_NOTI(deleUserGroupChat:, DELE_USER_GROPU_CHAT_NOTI_KEY);
     
     if (_roomType == LWChatRoomTypeGroup) {
         [self requestGroupCanSendmsg];
@@ -330,14 +345,14 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     if (getNewShowMsgElem.msgType == LWMsgTypeText) {
         NSString *tableSampleIdentifier = getNewShowMsgElem.isMySelf ? @"TableSampleIdentifierRight":@"TableSampleIdentifierLeft";
         
-       cell = [tableView dequeueReusableCellWithIdentifier:
-                            tableSampleIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:
+                tableSampleIdentifier];
         if (cell == nil) {
             cell = [[IFChatCell alloc]
                     initWithStyle:cellStyle
                     reuseIdentifier:tableSampleIdentifier];
         }
-
+        
         NSMutableAttributedString *attributedMessage = [[NSMutableAttributedString alloc] initWithString:getNewShowMsgElem.content attributes:@{ NSFontAttributeName: kFont(15), NSForegroundColorAttributeName: UIColor.whiteColor }];
         [LWEmojiManager.share replaceEmojiForAttributedString:attributedMessage font:kFont(15)];
         cell.contentLabel.adjustsFontSizeToFitWidth = true;
@@ -348,8 +363,11 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
             cell = [[IFChatImageCell alloc] initWithStyle:cellStyle reuseIdentifier:@"IFChatImageCell"];
         }
         [cell.contextImageView sd_setImageWithURL:[NSURL URLWithString:getNewShowMsgElem.imagePath] placeholderImage:[UIImage imageNamed:@"testicon"]];
+        cell.clickImgeBlock = ^{
+            [self showPic:getNewShowMsgElem.imagePath imageView:cell.contextImageView];
+        };
     }
-    [cell.iconIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",kApiPrefix,getNewShowMsgElem.uavatar]] placeholderImage:[UIImage imageNamed:@"voip_header"]];
+    [cell.iconIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",kApiPrefix_PIC,getNewShowMsgElem.uavatar]] placeholderImage:[UIImage imageNamed:@"voip_header"]];
     cell.titleLabel.text = getNewShowMsgElem.username;
     cell.subTitleLabel.text = getNewShowMsgElem.time;
     
@@ -397,6 +415,26 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         [self.chatTableView reloadData];
     }
 }
+
+//图片预览
+- (void)showPic:(NSString *)picPath imageView:(UIImageView *)imageview
+{
+    KNPhotoItems *items = [[KNPhotoItems alloc] init];
+    items.url = picPath;
+    items.sourceView = imageview;
+    
+    KNPhotoBrowser *photoBrower = [[KNPhotoBrowser alloc] init];
+    photoBrower.itemsArr = @[items];
+    photoBrower.currentIndex = 0;
+    //    photoBrower.isNeedPageControl = true;
+    //    photoBrower.isNeedPageNumView = true;
+    //    photoBrower.isNeedRightTopBtn = true;
+    //    photoBrower.isNeedPictureLongPress = true;
+    [photoBrower present];
+    //    photoBrower.delegate = self;
+    //    _photoBrowser = photoBrower;
+}
+
 #pragma mark - other
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
@@ -411,14 +449,16 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     [self requestSDKSendMsg:text];
     
 }
+
 #pragma mark -- ChatKeyBoardDataSource
 - (NSArray<MoreItem *> *)chatKeyBoardMorePanelItems
 {
     MoreItem *item1 = [MoreItem moreItemWithPicName:@"sharemore_location" highLightPicName:nil itemName:@"相册"];
     MoreItem *item2 = [MoreItem moreItemWithPicName:@"sharemore_pic" highLightPicName:nil itemName:@"相机"];
-    MoreItem *item3 = [MoreItem moreItemWithPicName:@"sharemore_video" highLightPicName:nil itemName:@"连接"];
-    return @[item1, item2, item3,];
+    //    MoreItem *item3 = [MoreItem moreItemWithPicName:@"sharemore_video" highLightPicName:nil itemName:@"连接"];
+    return @[item1, item2,];
 }
+
 - (NSArray<ChatToolBarItem *> *)chatKeyBoardToolbarItems
 {
     ChatToolBarItem *item1 = [ChatToolBarItem barItemWithKind:kBarItemFace normal:@"face" high:@"face_HL" select:@"keyboard"];
@@ -435,6 +475,37 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (NSArray<FaceThemeModel *> *)chatKeyBoardFacePanelSubjectItems
 {
     return [LWEmojiManager share].emojiMutableArray;
+}
+
+- (void)updatePicwithpic:(UIImage *)pic
+{
+    [LWClientManager.share requestUploadPicFile:pic success:^(id response) {
+        if ([response[@"code"] integerValue] == 0) {
+            NSDictionary *data = response[@"data"];
+            NSString *msgtext = [NSString stringWithFormat:@"img[%@]",data[@"src"]];
+            [self chatKeyBoardSendText:msgtext];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+/**
+ *  更多功能
+ */
+- (void)chatKeyBoard:(ChatKeyBoard *)chatKeyBoard didSelectMorePanelItemIndex:(NSInteger)index;
+{
+    WEAKSELF(self)
+    if (index == 0) {
+        [self.photopicker photoPickerWithPhotoLibrary:NO photoBlock:^(UIImage * _Nonnull image) {
+            [weakself updatePicwithpic:image];
+        }];
+    }else if(index == 1){
+        
+        [self.photopicker photoPickerWithCamera:NO photoBlock:^(UIImage * _Nonnull image) {
+            [weakself updatePicwithpic:image];
+        }];
+    }
 }
 
 - (UITableView *)chatTableView
@@ -457,4 +528,20 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     }
     return _chatTableView;
 }
+
+- (LWPhotoPicker *)photopicker
+{
+    if (!_photopicker) {
+        _photopicker = [[LWPhotoPicker alloc] init];
+        _photopicker.viewController = self;
+    }
+    return _photopicker;
+}
+
+
+- (void)dealloc
+{
+    LWLog(@"\n***************************dealloc:%@****************************\n",self);
+}
+
 @end

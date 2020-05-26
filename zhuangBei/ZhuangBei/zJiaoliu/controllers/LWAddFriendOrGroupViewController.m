@@ -56,6 +56,9 @@
 - (void)handlerDatas:(id)response
 {
     NSDictionary *page = response[@"page"];
+    if ([page isKindOfClass:[NSNull class]]) {
+        return;
+    }
     self.currPage = [page[@"currPage"] intValue];
     self.totalPage = [page[@"totalPage"] intValue];
     NSArray *list = page[@"list"];

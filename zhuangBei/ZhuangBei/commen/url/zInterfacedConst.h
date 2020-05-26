@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 /** 接口前缀-开发服务器*/
 UIKIT_EXTERN NSString *const kApiPrefix;
 
+/** 接口前缀-开发服务器*/
+UIKIT_EXTERN NSString *const kApiPrefix_PIC;
+
+
 #pragma mark - 详细接口地址
 /** 验证码*/
 UIKIT_EXTERN NSString *const kSendVerificationCode;

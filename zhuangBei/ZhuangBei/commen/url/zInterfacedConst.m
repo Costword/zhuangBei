@@ -11,13 +11,17 @@
 #if DevelopSever
 /** 接口前缀-开发服务器*/
 NSString *const kApiPrefix = @"http://39.101.166.209/app/";
+NSString *const kApiPrefix_PIC = @"http://39.101.166.209/";
 #elif TestSever
 /** 接口前缀-测试服务器*/
 NSString *const kApiPrefix = @"http://test.110zhuangbei.com:8105/app/";
+NSString *const kApiPrefix_PIC = @"http://test.110zhuangbei.com:8105/";
 #elif ProductSever
 /** 接口前缀-生产服务器*/
 NSString *const kApiPrefix = @"http://110zhuangbei.com/app/";
+NSString *const kApiPrefix_PIC = @"http://110zhuangbei.com/";
 #endif
+
 
 /**获取验证码
  > **phone** (String)    *手机号*    |   必填
