@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "LWLocalChatRecordModel.h"
 
+//当前登录的个人信息
+@interface LWUserinforIMModel : BaseModel
+@property (nonatomic, strong) NSString * username;
+@property (nonatomic, strong) NSString * sign;
+@property (nonatomic, strong) NSString * corporateName;
+@property (nonatomic, strong) NSString * mainProducts;
+@property (nonatomic, strong) NSString * avatar;
+@property (nonatomic, strong) NSString * avatarID;
+@end
 
 /**
  请求成功的block
@@ -22,6 +31,8 @@ typedef void(^RequestSuccess)(id response);
 typedef void(^RequestFailure)(NSError *error);
 
 @interface LWClientManager : NSObject
+
+@property (nonatomic, strong) LWUserinforIMModel * userinforIM;
 
 + (instancetype)share;
 

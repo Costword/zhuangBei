@@ -12,6 +12,7 @@
 #import "LWPhotoPicker.h"
 #import "KNPhotoBrowser.h"
 #import "UIImageView+WebCache.h"
+#import "LWJiaoLiuModel.h"
 
 NSString *const getlist_group_url  = @"app/appgroupmessage/getGroupMsgList";
 
@@ -27,6 +28,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 /** 聊天键盘 */
 @property (nonatomic, strong) ChatKeyBoard *chatKeyBoard;
 @property (nonatomic, strong) LWPhotoPicker * photopicker;
+//好友信息
+@property (nonatomic, strong) friendItemModel * friendInforModel;
 
 @end
 
@@ -56,7 +59,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         url = getlist_oto_url;
         param = @{@"toUserId":LWDATA(self.roomId)};
     }else{
-        param = @{@"groupId":LWDATA(self.m_Group_ID)};
+        param = @{@"groupId":LWDATA(self.m_Group_ID),@"limit":@"100000",@"page":@"1"};
     }
     [self requestPostWithUrl:url paraString:param success:^(id  _Nonnull response) {
         
@@ -204,6 +207,18 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     });
 }
 
+//获取好友的信息
+- (void)requestFriendInfor
+{
+    [ServiceManager requestPostWithUrl:@"app/appqyuser/findOne" paraString:@{@"userId":self.roomId} success:^(id  _Nonnull response) {
+        if ([response[@"code"] integerValue] == 0) {
+            NSDictionary *list = response[@"list"];
+            self.friendInforModel = [friendItemModel modelWithDictionary:list];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
 
 #pragma mark ----------- XHGroupManagerDelegate 通知-----------
 
@@ -220,7 +235,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (void)deleUserGroupChat:(NSNotification *)noti
 {
     NSString *groupID = noti.object[@"groupID"];
-    if ([groupID isEqualToString:self.roomId]) {
+    if ([self isCurrentViewController] && [groupID isEqualToString:self.roomId]) {
         [UIView ilg_makeToast:@"您已被管理员剔除"];
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -229,7 +244,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (void)deleGroupChat:(NSNotification *)noti
 {
     NSString *groupID = noti.object[@"groupID"];
-    if ([groupID isEqualToString:self.roomId]) {
+    if ([self isCurrentViewController] && [groupID isEqualToString:self.roomId]) {
         [UIView ilg_makeToast:@"此群已被删除"];
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -258,6 +273,9 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     vc.roomName = roomName;
     vc.roomId = roomId;
     vc.roomType = roomType;
+//    if ([extend isKindOfClass:[LWJiaoLiuModel class]]) {
+//        vc.friendInforModel = extend;
+//    }
     return vc;
 }
 
@@ -298,6 +316,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     //    删除本地的未读消息
     [[LWClientManager share] deleteUnReadMsgWithroomId:self.roomId];
     POST_NOTI(@"refreshChatRecordList", nil);
+    
+    [self requestFriendInfor];
 }
 
 #pragma mark - UI
@@ -443,11 +463,58 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 
 - (void)chatKeyBoardSendText:(NSString *)text;
 {
-    LWLog(@"********************text:%@",text);
     [self requsetSendMsgService:text];
-    
-    [self requestSDKSendMsg:text];
-    
+
+    NSString *msgjson = [self MsgToJsonString:text];
+    [self requestSDKSendMsg:msgjson];
+}
+
+/// 处理向SDK发送的消息格式
+/// @param text 输入的消息
+- (NSString *)MsgToJsonString:(NSString *)text
+{
+    NSString *res;
+    if (self.roomType == LWChatRoomTypeOneTOne) {
+        NSDictionary *dict = @{
+            @"id":LWDATA(self.roomId),
+            @"username":LWDATA(_friendInforModel.chatNickName),
+            @"avatar":[NSString stringWithFormat:@"/app/app/appfujian/download?attID=%@",LWDATA(_friendInforModel.portrait)],
+            @"content":LWDATA(text),
+            @"sign":LWDATA(_friendInforModel.sign),
+            @"mainProduct":LWDATA(_friendInforModel.mainProducts),
+            @"msgCount":@"0",
+            @"mid":@{
+                    @"id":LWDATA(LWClientManager.share.userinforIM.avatarID),
+                    @"userId":LWDATA(LWClientManager.share.userinforIM.customId),
+                    @"groupId":LWDATA(self.roomId),
+                    @"content":LWDATA(text),
+                    @"sendTime":LWDATA([[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]),
+                    @"isDel":@"",
+                    @"isRead":@"",
+                    @"isBack":@""
+            },
+        };
+        res = [LWTool dictoryToString:dict];
+        LWLog(@"***************发送的单聊消息：%@\n",res);
+    }else if (self.roomType == LWChatRoomTypeGroup){
+        NSDictionary *dict = @{@"avatar":LWDATA(LWClientManager.share.userinforIM.avatar),
+                                    @"content":text,
+                                    @"id":LWDATA(IMUserInfo.shareInstance.userID),
+                                    @"isGroup":@"false",
+                                    @"mainProduct":LWDATA(LWClientManager.share.userinforIM.mainProducts),
+                                    @"mid":@{@"content":LWDATA(text),
+                                             @"groupId":LWDATA(self.roomId),
+                                             @"id":LWDATA(LWClientManager.share.userinforIM.avatarID),
+                                             @"sendTime":LWDATA([[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]),
+                                             @"userId":LWDATA(IMUserInfo.shareInstance.userID),
+                                    },
+                                    @"msgCount":@"0",
+                                    @"username":LWDATA(LWClientManager.share.userinforIM.username)
+             };
+        res = [LWTool dictoryToString:dict];
+        LWLog(@"***************发送群组消息：%@\n",res);
+    }
+    return  res;
 }
 
 #pragma mark -- ChatKeyBoardDataSource
@@ -538,6 +605,15 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     return _photopicker;
 }
 
+
+- (BOOL)isCurrentViewController
+{
+    UIViewController *vc = self.navigationController.childViewControllers.lastObject;
+    if (vc && [vc isKindOfClass:[LWChatListBaseViewController class]]) {
+        return YES;
+    }
+    return NO;
+}
 
 - (void)dealloc
 {
