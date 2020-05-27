@@ -233,7 +233,7 @@
             [citys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 NSDictionary * dic = citys[idx];
                 zListTypeModel * typeModel = [zListTypeModel mj_objectWithKeyValues:dic];
-                typeModel.select = NO;
+//                typeModel.select = NO;
                 [cityArray addObject:typeModel];
             }];
             NSDictionary * userInfoDic = dic[@"list"];

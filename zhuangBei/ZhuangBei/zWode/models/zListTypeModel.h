@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(strong,nonatomic)NSString * name;
 @property(strong,nonatomic)NSString * typeId;
+
+//@property(assign,nonatomic)BOOL checked;
+
 @property(assign,nonatomic)BOOL select;
 @end
 

@@ -15,6 +15,7 @@
     return @{
         @"name":@[@"value",@"name"],
         @"typeId":@[@"code",@"id"],
+        @"select":@"checked"
     };
 }
 
