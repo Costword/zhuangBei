@@ -326,6 +326,12 @@ NSString *const kgetUserInfo = @"app/appqyuser/qyinfo";
 NSString *const kupUserInfo = @"app/appqyuser/update";
 
 /**
+ *上传图片
+ *
+ */
+NSString *const kupLoadUserImage = @"app/appfujian/upload";
+
+/**
  *上传公司名称获取公司id
  *POST
  *参数

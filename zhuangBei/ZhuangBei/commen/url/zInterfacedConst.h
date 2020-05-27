@@ -60,6 +60,11 @@ UIKIT_EXTERN NSString *const kupUserInfo;
 /**验证公司是否审核*/
 UIKIT_EXTERN NSString *const kgetCompanyID;
 
+/**
+ *上传头像
+ */
+UIKIT_EXTERN NSString *const kupLoadUserImage;
+
 /**查看邀请人详情*/
 UIKIT_EXTERN NSString *const getFriendDetail;
 

@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(copy,nonatomic)NSString * userPassWord;
 
+
 @property(strong,nonatomic)zUserModel * userInfo;//用户信息
 
 -(void)saveUserInfo;
