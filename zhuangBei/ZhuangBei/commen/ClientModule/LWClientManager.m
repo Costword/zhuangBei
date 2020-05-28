@@ -14,6 +14,18 @@
 #import "LWClientHeader.h"
 
 
+@implementation LWUserinforIMModel
+-(NSString *)avatarID
+{
+    if ([_avatar isNotBlank] && [_avatar containsString:@"attID="]) {
+        NSArray *ids = [_avatar componentsSeparatedByString:@"attID="];
+        return ids.lastObject;
+    }
+    return nil;
+}
+
+@end
+
 static NSString * const VOIP_SERVER_URL = @"testrtc.bdmgxq.cn:10086";
 static NSString * const IM_SERVER_URL = @"testrtc.bdmgxq.cn:19903";
 static NSString * const CHATROOM_SERVER_URL = @"testrtc.bdmgxq.cn:19906";
@@ -85,6 +97,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 //登录SDK
 - (void)userLogin
 {
+    [self userLogout];
+    
     zUserModel * model = [zUserInfo shareInstance].userInfo;
     if (model.userId) {
         XHLoginManager *loginmanager = [[XHLoginManager alloc] init];
@@ -211,18 +225,18 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 
 /// 处理群里消息的参数格式
-/// @param param 参数字典
+/// @param param 参数字典 ,\"mainProduct\":\"\"
 - (NSString *)getGroupParamString:(NSDictionary *)param
 {
-    NSString *string = [NSString stringWithFormat:@"{\"groupId\":\"%@\",\"content\":\"%@\",\"sendTime\":%.0f,\"userId\":%.0f,\"mainProduct\":\"\"}",param[@"groupId"],param[@"content"],[param[@"sendTime"] floatValue],[param[@"userId"] floatValue]];
+    NSString *string = [NSString stringWithFormat:@"{\"groupId\":\"%@\",\"content\":\"%@\",\"sendTime\":%.0f,\"userId\":%.0f}",param[@"groupId"],param[@"content"],[param[@"sendTime"] floatValue],[param[@"userId"] floatValue]];
     return string;
 }
 
 /// 处理i一对一里消息的参数格式
-/// @param param 参数字典
+/// @param param 参数字典 ,\"mainProduct\":\"\"
 - (NSString *)gettotoParamString:(NSDictionary *)param
 {
-    NSString *string = [NSString stringWithFormat:@"{\"toUserId\":\"%@\",\"content\":\"%@\",\"mainProduct\":\"\"}",param[@"toUserId"],param[@"content"]];
+    NSString *string = [NSString stringWithFormat:@"{\"toUserId\":\"%@\",\"content\":\"%@\"}",param[@"toUserId"],param[@"content"]];
     return string;
 }
 
@@ -331,6 +345,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
             [SYSTEM_USERDEFAULTS setObject:username forKey:USER_ACCOUNT_IM_AVATAR];
         }
         [SYSTEM_USERDEFAULTS synchronize];
+        
+        self.userinforIM = [LWUserinforIMModel modelWithDictionary:mine];
         
         NSArray *group = data[@"group"];
         [self.allGroupDatas removeAllObjects];

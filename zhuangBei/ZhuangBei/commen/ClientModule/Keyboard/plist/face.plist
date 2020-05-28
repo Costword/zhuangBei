@@ -424,13 +424,13 @@
         </dict>
         <dict>
             <key>desc</key>
-            <string>face[face[蜡烛]</string>
+            <string>face[蜡烛]</string>
             <key>image</key>
             <string>70.gif</string>
         </dict>
         <dict>
             <key>desc</key>
-            <string>face[face[蛋糕]</string>
+            <string>face[蛋糕]</string>
             <key>image</key>
             <string>71.gif</string>
         </dict>

@@ -24,7 +24,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * corporateName;
 @property (nonatomic, strong) NSString * sign;
 @property (nonatomic, strong) NSString * avatar;
+@property (nonatomic, strong) NSString * mainProducts;
 //id
+@property (nonatomic, strong) NSString * avatarID;
+
+@property (nonatomic, strong) NSString * chatNickName;
+@property (nonatomic, strong) NSString * sectionName;
+@property (nonatomic, strong) NSString * userId;
+@property (nonatomic, strong) NSString * portrait; //avatarID
+
 @end
 
 //联系人 组列表
@@ -164,4 +172,82 @@ NS_ASSUME_NONNULL_END
      }
  }
 
+ */
+
+
+/*
+ {
+     "code": 0,
+     "msg": "success",
+     "list": {
+         "userId": 747,
+         "userBh": null,
+         "userDm": 688,
+         "userName": "lwq",
+         "minsummary": "哈哈哈哈",
+         "birth": null,
+         "isShowBirth": 0,
+         "jobYear": null,
+         "isShowJobYear": 0,
+         "nativePlace": null,
+         "headSet": null,
+         "mobile": "18801040890",
+         "isShowMobile": 0,
+         "email": "42253@163.com",
+         "jobName": null,
+         "wordShow": null,
+         "sex": 0,
+         "education": null,
+         "isShowEducation": 0,
+         "nation": null,
+         "provinceId": null,
+         "provinceName": null,
+         "cityId": null,
+         "cityName": null,
+         "marriagestatus": null,
+         "politicalstatus": null,
+         "height": null,
+         "weight": null,
+         "portrait": 3379,
+         "chaungJianRq": "2020-05-06 08:00:00",
+         "chuangJianR": null,
+         "xiuGaiRq": null,
+         "xiuGaiR": null,
+         "suoShuGs": 626,
+         "suoShuGsName": "北京真格科技",
+         "suoShuGsCompanyType": null,
+         "suoShuGsCreditCodeState": null,
+         "status": null,
+         "post": 1,
+         "jobId": null,
+         "rankDm": null,
+         "buMen": 1,
+         "quanXianDm": null,
+         "quanXianMc": null,
+         "shiFouGly": 0,
+         "followStatus": null,
+         "district": null,
+         "districtIdList": null,
+         "quJson": null,
+         "xmJson": null,
+         "jyJson": null,
+         "gzJson": null,
+         "userName2": null,
+         "email2": null,
+         "mobile2": null,
+         "jobName2": null,
+         "companyType": null,
+         "companyNameFirst": "北京",
+         "companyNameSecond": "真格",
+         "companyNameThird": "科技",
+         "regLocation": 110000,
+         "chatNickName": "北京真格lwq-销售部-总经理",
+         "mainProduct": null,
+         "sexName": "女",
+         "sectionName": "销售部",
+         "rankName": null
+     },
+     "provinceList": []
+ }
+ 
  */

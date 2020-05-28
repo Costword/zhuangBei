@@ -63,6 +63,7 @@
         NSInteger code =[response[@"code"] integerValue];
         if (code == 0) {
             [self requestDatas];
+            POST_NOTI(@"refreshUserGroupListData", nil);
         }
     } failure:^(NSError * _Nonnull error) {
         
@@ -77,6 +78,7 @@
         NSInteger code =[response[@"code"] integerValue];
         if (code == 0) {
             [self requestDatas];
+            POST_NOTI(@"refreshUserGroupListData", nil);
         }
     } failure:^(NSError * _Nonnull error) {
         
@@ -96,6 +98,7 @@
         NSInteger code =[response[@"code"] integerValue];
         if (code == 0) {
             [self requestDatas];
+            POST_NOTI(@"refreshUserGroupListData", nil);
         }
     } failure:^(NSError * _Nonnull error) {
         

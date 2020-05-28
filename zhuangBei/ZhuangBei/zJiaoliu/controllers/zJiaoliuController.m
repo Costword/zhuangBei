@@ -170,6 +170,8 @@
     if (_messageTableView) {
         [_messageTableView reloadData];
     }
+//    操作分组后，刷新联系人列表
+    ADD_NOTI(requestDatas, @"refreshUserGroupListData");
 }
 
 - (void)confiUI
@@ -297,13 +299,13 @@
             if (model.chatType == 1) {
                 [self pushToGroupRoom:model.roomId groupname:model.roomName];
             }else{
-                [self.navigationController pushViewController:[ChatRoomViewController chatRoomViewControllerWithRoomId:model.roomId roomName:model.roomName roomType:(LWChatRoomTypeOneTOne) extend:nil] animated:YES];
+                [self.navigationController pushViewController:[ChatRoomViewController chatRoomViewControllerWithRoomId:model.roomId roomName:model.roomName roomType:(LWChatRoomTypeOneTOne) extend:model] animated:YES];
             }
         }
     }else if(tableView == _contatcsTableView){
         friendListModel *listmodel = self.listDatas_Contatcs[indexPath.section];
         friendItemModel *itemmodel = listmodel.list[indexPath.row];
-        ChatRoomViewController *vc= [ChatRoomViewController chatRoomViewControllerWithRoomId:itemmodel.customId roomName:itemmodel.username roomType:(LWChatRoomTypeOneTOne) extend:nil];
+        ChatRoomViewController *vc= [ChatRoomViewController chatRoomViewControllerWithRoomId:itemmodel.customId roomName:itemmodel.username roomType:(LWChatRoomTypeOneTOne) extend:itemmodel];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (tableView == _groupTableView){
         imGroupListModel *groupmodel = self.listDatas_Group[indexPath.row];

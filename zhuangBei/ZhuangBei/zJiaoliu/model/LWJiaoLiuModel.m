@@ -11,6 +11,15 @@
 
 @implementation friendItemModel
 
+-(NSString *)avatarID
+{
+    if ([_avatar isNotBlank] && [_avatar containsString:@"attID="]) {
+        NSArray *ids = [_avatar componentsSeparatedByString:@"attID="];
+        return ids.lastObject;
+    }
+    return nil;
+}
+
 @end
 
 
@@ -21,6 +30,7 @@
     return @{@"list":friendItemModel.class,
     };
 }
+
 @end
 
 
