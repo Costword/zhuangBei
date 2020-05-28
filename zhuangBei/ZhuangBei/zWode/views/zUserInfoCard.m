@@ -7,7 +7,7 @@
 //
 
 #import "zUserInfoCard.h"
-
+#import "zEducationRankTypeInfo.h"
 @interface zUserInfoCard ()
 
 @property(strong,nonatomic)UIView * baseView;
@@ -296,7 +296,7 @@
         [self.levelBtn setTitle:userCenterModel.rankDm forState:UIControlStateNormal];
     }
     
-    NSString * url = [NSString stringWithFormat:@"%@app/appfujian/download?attID=%ld",kApiPrefix,(long)[zUserInfo shareInstance].userInfo.avatar];
+    NSString * url = [NSString stringWithFormat:@"%@app/appfujian/download?attID=%@",kApiPrefix,[zEducationRankTypeInfo shareInstance].userInfoModel.portrait];
     __weak typeof(self) weakSelf = self;
     [self.headerImageBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:url] forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         if (image == nil) {

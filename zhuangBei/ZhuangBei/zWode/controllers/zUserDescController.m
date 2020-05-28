@@ -47,7 +47,7 @@
 {
     if (!_imageHeader) {
         _imageHeader = [[UIButton alloc]init];
-        _imageHeader.layer.cornerRadius = kWidthFlot(2);
+        _imageHeader.layer.cornerRadius = kWidthFlot(25);
         _imageHeader.clipsToBounds = YES;
         [_imageHeader setBackgroundImage:[UIImage imageNamed:@"wode_defoutHeader"] forState:UIControlStateNormal];
     }
@@ -81,6 +81,7 @@
         _descTextView.delegate =self;
         [_descTextView setWzb_placeholder:@"请填写个人简介"];
         [_descTextView setWzb_placeholderColor:[UIColor colorWithHexString:@"#bababa"]];
+        _descTextView.editable = NO;
     }
     return _descTextView;
 }
@@ -92,6 +93,7 @@
         _editButton.titleLabel.font = kFont(20);
         [_editButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_editButton setTitle:@"编辑" forState:UIControlStateNormal];
+        [_editButton setTitle:@"确定" forState:UIControlStateSelected];
         _editButton.backgroundColor = [kMainSingleton colorWithHexString:@"#3F50B5" alpha:1];
         _editButton.layer.cornerRadius = kWidthFlot(20);
         _editButton.clipsToBounds = YES;
@@ -112,6 +114,13 @@
     [self.view addSubview:self.descTextView];
     [self.view addSubview:self.editButton];
     
+        NSString * url = [NSString stringWithFormat:@"%@app/appfujian/download?attID=%@",kApiPrefix,[zEducationRankTypeInfo shareInstance].userInfoModel.portrait];
+        __weak typeof(self) weakSelf = self;
+        [self.imageHeader sd_setBackgroundImageWithURL:[NSURL URLWithString:url] forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            if (image == nil) {
+                [weakSelf.imageHeader setBackgroundImage:[UIImage imageNamed:@"wode_defoutHeader"] forState:UIControlStateNormal];
+            }
+        }];
 }
 
 -(void)viewDidLayoutSubviews
@@ -148,16 +157,24 @@
 
 -(void)buttonClick:(UIButton*)button
 {
-    if (self.descTextView.text.length>0) {
-        
-        [self.mianParam setObject:self.descTextView.text forKey:@"minsummary"];
-        
-        NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,changePersonalMin];
-        [self postDataWithUrl:url WithParam:self.mianParam];
+    self.editButton.selected  = !button.selected;
+    if (self.editButton.selected) {
+        self.descTextView.editable = YES;
+        [self.descTextView becomeFirstResponder];
     }else
     {
-        [[zHud shareInstance] showMessage:@"请填写个人简介"];
+        if (self.descTextView.text.length>0) {
+            
+            [self.mianParam setObject:self.descTextView.text forKey:@"minsummary"];
+            
+            NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,changePersonalMin];
+            [self postDataWithUrl:url WithParam:self.mianParam];
+        }else
+        {
+            [[zHud shareInstance] showMessage:@"请填写个人简介"];
+        }
     }
+    
     
 }
 

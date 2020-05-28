@@ -365,7 +365,7 @@ NSString *const getFriendDetail = @"app/appqyuser/findOne";
  *获取分享二维码
  *Url app/appandroidversion/generateApplicationMarketLinkQrCode
  */
-NSString *const getShareImage = @"app/appandroidversion/generateApplicationMarketLinkQrCode";
+NSString *const getShareImage = @"app/appandroidversion/generateInstallationPackageQrCode";
 /**
  *货源管理
  *POST

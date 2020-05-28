@@ -25,7 +25,7 @@ typedef void(^ShareHandle)(id info);
 + (void)shareWebURLWithPlatform:(JSHAREPlatform)platform title:(NSString *)title text:(NSString *)text url:(NSString *)url icon:(NSString *)iconUrl success:(ShareHandle _Nullable)successHandle fail:(ShareHandle _Nullable)failHandle;
 
 /** 分享图片 */
-+ (void)shareImageWithPlatform:(JSHAREPlatform)platform imageUrl:(NSString *)url success:(ShareHandle)successHandle fail:(ShareHandle)failHandle;
++ (void)shareImageWithPlatform:(JSHAREPlatform)platform imageUrl:(NSString *)url OrImage:(UIImage*)image success:(ShareHandle)successHandle fail:(ShareHandle)failHandle;
 
 @end
 

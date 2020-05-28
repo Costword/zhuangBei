@@ -82,7 +82,7 @@
         _inviteImageView.image = [UIImage imageNamed:@"storeIMage"];
         _inviteImageView.contentMode = UIViewContentModeScaleAspectFit;
         _inviteImageView.alpha = 1;
-        _inviteImageView.backgroundColor = [UIColor redColor];
+        _inviteImageView.backgroundColor = [UIColor whiteColor];
     }
     return _inviteImageView;
 }
@@ -139,6 +139,10 @@
     [self.view addSubview:self.QQShareBtn];
     [self.view addSubview:self.WXShareBtn];
     NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,getShareImage];
+    
+    [self.inviteImageView sd_setImageWithURL:[NSURL URLWithString:url] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+//        NSLog(@"加载图片");
+    }];
 }
 
 
@@ -146,7 +150,7 @@
 
 -(void)shareQQ{
     NSString *url = [[NSBundle mainBundle] URLForResource:@"storeIMage" withExtension:@"png"].absoluteString;
-    [JShareApp shareImageWithPlatform:JSHAREPlatformQQ imageUrl:url success:^(id  _Nonnull info) {
+    [JShareApp shareImageWithPlatform:JSHAREPlatformQQ imageUrl:url OrImage:self.inviteImageView.image success:^(id  _Nonnull info) {
         
     } fail:^(id  _Nonnull info) {
         

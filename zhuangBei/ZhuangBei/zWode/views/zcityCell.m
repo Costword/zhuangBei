@@ -426,6 +426,13 @@
 
 -(void)setPersoamModel:(zPersonalModel *)persoamModel
 {
+    [self.myCityArray removeAllObjects];
+    [persoamModel.city enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        zListTypeModel * model = persoamModel.city[idx];
+        if (model.select) {
+            [self.myCityArray addObject:model];
+        }
+    }];
     _persoamModel = persoamModel;
     self.nameLabel.text = persoamModel.name;
     self.inputTextFild.canShow = persoamModel.canShow;

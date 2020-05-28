@@ -40,7 +40,7 @@
                 @"name":@"基本信息",
                 @"image":@"wode_jiben",
             },@{
-                @"name":@"个人信息",
+                @"name":@"个人简介",
                 @"image":@"wode_personal",
             },@{
                 @"name":@"联系人",

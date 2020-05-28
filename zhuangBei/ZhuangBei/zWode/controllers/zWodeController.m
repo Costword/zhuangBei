@@ -143,6 +143,9 @@
                 zcallBack.title = @"意见反馈";
                 [weakSelf.navigationController pushViewController:zcallBack animated:YES];
             }
+            if (type == 5) {
+                [[zHud shareInstance]showMessage:@"阿猿正在玩命开发中，敬请期待..."];
+            }
             
         };
     }

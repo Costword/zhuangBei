@@ -126,7 +126,7 @@
     self.nameLabel.text = [zEducationRankTypeInfo shareInstance].userInfoModel.userName;
     
     self.EmailLabel.text = [NSString stringWithFormat:@"邮箱:%@",[zEducationRankTypeInfo shareInstance].userInfoModel.email];
-    [self.imageHeader z_imageWithImageId:[NSString stringWithFormat:@"%ld",(long)[zUserInfo shareInstance].userInfo.avatar] placeholderImage:@"wode_defoutHeader"];
+    [self.imageHeader z_imageWithImageId:[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.portrait] placeholderImage:@"wode_defoutHeader"];
     
 }
 

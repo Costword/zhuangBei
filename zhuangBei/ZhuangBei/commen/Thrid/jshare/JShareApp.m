@@ -52,13 +52,21 @@
     }];
 }
 
-+ (void)shareImageWithPlatform:(JSHAREPlatform)platform imageUrl:(NSString *)url success:(ShareHandle)successHandle fail:(ShareHandle)failHandle {
++ (void)shareImageWithPlatform:(JSHAREPlatform)platform imageUrl:(NSString *)url OrImage:(UIImage*)image success:(ShareHandle)successHandle fail:(ShareHandle)failHandle {
     JSHAREMessage *message = [JSHAREMessage message];
     message.mediaType = JSHAREImage;
     message.title = @"邀请好友";
     [message setPlatform:(platform)];
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-    message.image = imageData;
+    if (image != nil) {
+//        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+        NSData * imgData = UIImagePNGRepresentation(image);
+        message.image = imgData;
+    }else
+    {
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+        message.image = imageData;
+    }
+    
     
     [JSHAREService share:message handler:^(JSHAREState state, NSError *error) {
         if (error) {

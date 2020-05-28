@@ -31,6 +31,8 @@
 
 @property(strong,nonatomic)NSString * companyId;
 
+@property(strong,nonatomic)NSString * portrait;
+
 @end
 
 @implementation zPersonalController
@@ -158,7 +160,7 @@
     if (!_headerView) {
         __weak typeof(self) weakSelf = self;
         _headerView = [[zPersonalHeader alloc]init];
-        _headerView.imageID = [NSString stringWithFormat:@"%ld",[zUserInfo shareInstance].userInfo.avatar];
+        _headerView.imageID = [NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.portrait];
         _headerView.personalTap = ^{
           
             [HeaderManager.inst showMenuWithController:weakSelf startUpload:^{
@@ -167,6 +169,7 @@
             } change:^(UIImage * _Nonnull image, NSString * _Nonnull ossUrl) {
                 //改变
                 weakSelf.headerView.imageID = ossUrl;
+                weakSelf.portrait = ossUrl;
                 NSLog(@"上传成功");
             } fail:^{
                 //失败
@@ -211,6 +214,9 @@
                 }
                 if ([weakSelf.upLoadModel.birth isEqualToString:@"(null)"]) {
                     weakSelf.upLoadModel.birth = @"";
+                }
+                if (weakSelf.portrait != nil) {
+                    weakSelf.upLoadModel.portrait = weakSelf.portrait;
                 }
                 NSDictionary * dic = [weakSelf.upLoadModel mj_keyValues];
                 weakSelf.canEdit = NO;
