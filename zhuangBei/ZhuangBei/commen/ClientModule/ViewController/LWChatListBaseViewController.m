@@ -273,9 +273,9 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     vc.roomName = roomName;
     vc.roomId = roomId;
     vc.roomType = roomType;
-//    if ([extend isKindOfClass:[LWJiaoLiuModel class]]) {
-//        vc.friendInforModel = extend;
-//    }
+    //    if ([extend isKindOfClass:[LWJiaoLiuModel class]]) {
+    //        vc.friendInforModel = extend;
+    //    }
     return vc;
 }
 
@@ -464,7 +464,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (void)chatKeyBoardSendText:(NSString *)text;
 {
     [self requsetSendMsgService:text];
-
+    
     NSString *msgjson = [self MsgToJsonString:text];
     [self requestSDKSendMsg:msgjson];
 }
@@ -498,19 +498,19 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         LWLog(@"***************发送的单聊消息：%@\n",res);
     }else if (self.roomType == LWChatRoomTypeGroup){
         NSDictionary *dict = @{@"avatar":LWDATA(LWClientManager.share.userinforIM.avatar),
-                                    @"content":text,
-                                    @"id":LWDATA(IMUserInfo.shareInstance.userID),
-                                    @"isGroup":@"false",
-                                    @"mainProduct":LWDATA(LWClientManager.share.userinforIM.mainProducts),
-                                    @"mid":@{@"content":LWDATA(text),
-                                             @"groupId":LWDATA(self.roomId),
-                                             @"id":LWDATA(LWClientManager.share.userinforIM.avatarID),
-                                             @"sendTime":LWDATA([[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]),
-                                             @"userId":LWDATA(IMUserInfo.shareInstance.userID),
-                                    },
-                                    @"msgCount":@"0",
-                                    @"username":LWDATA(LWClientManager.share.userinforIM.username)
-             };
+                               @"content":text,
+                               @"id":LWDATA(IMUserInfo.shareInstance.userID),
+                               @"isGroup":@"false",
+                               @"mainProduct":LWDATA(LWClientManager.share.userinforIM.mainProducts),
+                               @"mid":@{@"content":LWDATA(text),
+                                        @"groupId":LWDATA(self.roomId),
+                                        @"id":LWDATA(LWClientManager.share.userinforIM.avatarID),
+                                        @"sendTime":LWDATA([[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]),
+                                        @"userId":LWDATA(IMUserInfo.shareInstance.userID),
+                               },
+                               @"msgCount":@"0",
+                               @"username":LWDATA(LWClientManager.share.userinforIM.username)
+        };
         res = [LWTool dictoryToString:dict];
         LWLog(@"***************发送群组消息：%@\n",res);
     }
