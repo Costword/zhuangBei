@@ -120,8 +120,9 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 }
 
 //群组解散
-- (void)groupDidDeleted:(NSString*)groupID {
+- (void)groupDidDeleted:(NSString*)groupID{
     POST_NOTI(DELE_GROPU_CHAT_NOTI_KEY, @{@"groupID":groupID});
+
 }
 
 //接收群组消息

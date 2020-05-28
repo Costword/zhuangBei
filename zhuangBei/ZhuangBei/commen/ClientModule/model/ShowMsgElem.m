@@ -17,6 +17,7 @@
 {
     return  @{@"isMySelf":@"mine",
               @"userID":@"uid",
+              @"time":@"sendTime",
     };
 }
 
