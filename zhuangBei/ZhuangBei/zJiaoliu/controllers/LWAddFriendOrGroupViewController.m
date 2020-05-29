@@ -36,21 +36,22 @@
         return;
     }
     NSDictionary *param = @{@"nickName":LWDATA(self.tf.text),@"limit":@"200",@"page":@(self.currPage)};
-    NSString *url = @"sys/user/findUserByUserNameList";
+    NSString *url = @"app/appqyuser/findUserByUserNameList";
     if (_selectIndex == 1) {
         param = @{@"groupName":LWDATA(self.tf.text),@"limit":@"200",@"page":@(self.currPage)};
-        [self requestPostWithUrl:@"app/appgroup/findGroupByGroupNameList" para:param paraType:(LWRequestParamTypeDict) success:^(id  _Nonnull response) {
-            [self handlerDatas:response];
-        } failure:^(NSError * _Nonnull error) {
-            
-        }];
+        url = @"app/appgroup/findGroupByGroupNameList";
+//        [self requestPostWithUrl:@"app/appgroup/findGroupByGroupNameList" para:param paraType:(LWRequestParamTypeDict) success:^(id  _Nonnull response) {
+//            [self handlerDatas:response];
+//        } failure:^(NSError * _Nonnull error) {
+//
+//        }];
     }else{
-        [self requestPostWithUrl:url paraString:param success:^(id  _Nonnull response) {
-            [self handlerDatas:response];
-        } failure:^(NSError * _Nonnull error) {
-            
-        }];
     }
+    [self requestPostWithUrl:url paraString:param success:^(id  _Nonnull response) {
+        [self handlerDatas:response];
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)handlerDatas:(id)response

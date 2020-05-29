@@ -103,7 +103,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     if (model.userId) {
         XHLoginManager *loginmanager = [[XHLoginManager alloc] init];
         [loginmanager loginFree:^(NSError *error) {
-            LWLog(@"——————————XHLoginManager登录error：%@",error);
+            LWLog(@"——————%@————XHLoginManager登录error：%@",model.userId,error);
         }];
     }
 }
@@ -141,9 +141,9 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 {
     POST_NOTI(NEW_MSG_CHAT_NOTI_KEY, (@{@"msg":message,@"fromid":uid}));
     
-    NSDictionary *dict = [LWTool stringToDictory:message];
+    NSString *friendname = self.allGroupDatas[[NSNumber numberWithString:uid]];
     //type: 1:group; 2:oto
-    [self addNewUnReadMsgWithRoomName:LWDATA(dict[@"username"]) roomId:LWDATA(dict[@"id"]) chatType:2 extend:nil];
+    [self addNewUnReadMsgWithRoomName:LWDATA(friendname) roomId:LWDATA(uid) chatType:2 extend:nil];
 }
 
 #pragma mark -------------------XHLoginManagerDelegate--------------
@@ -267,7 +267,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
             *stop = YES;
         }
     }];
-    if (!ishave) {
+    if (!ishave && ![LWClientManager.share.userinforIM.customId isEqualToString:roomId]) {
         LWLocalChatRecordModel *model = [LWLocalChatRecordModel new];
         model.roomId = roomId;
         model.roomName = roomName;
@@ -280,6 +280,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         POST_NOTI(@"refreshChatRecordList", nil);
     }
 }
+
 /// 获取本地聊天记录 private
 + (NSMutableArray *)getLocalChatRecordModelList
 {
@@ -348,11 +349,16 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         [SYSTEM_USERDEFAULTS synchronize];
         
         self.userinforIM = [LWUserinforIMModel modelWithDictionary:mine];
-        
+        NSArray *friend = data[@"friend"];
         NSArray *group = data[@"group"];
         [self.allGroupDatas removeAllObjects];
         for (NSDictionary *dict in group) {
             [self.allGroupDatas setObject:LWDATA(dict[@"groupname"]) forKey:LWDATA(dict[@"id"])];
+        }
+        for (NSDictionary *dict in friend) {
+            for (NSDictionary *item in dict[@"list"]) {
+                [self.allGroupDatas setObject:LWDATA(item[@"username"]) forKey:LWDATA(item[@"id"])];
+            }
         }
     } failure:^(NSError * _Nonnull error) {
         
@@ -407,7 +413,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
             *stop = YES;
         }
     }];
-    if (!ishave) {
+    if (!ishave &&![self.userinforIM.customId isEqualToString:roomId]) {
         LWLocalChatRecordModel *model = [LWLocalChatRecordModel new];
         model.roomId = roomId;
         model.roomName = roomName;

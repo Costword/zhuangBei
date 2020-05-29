@@ -73,6 +73,7 @@ static NSString * UserDefaultInfo = @"userInfo.archiver";
     NSString * filePath = [temp stringByAppendingPathComponent:UserDefaultInfo];
     [NSKeyedArchiver archiveRootObject:self.userInfo toFile:filePath];
     
+    [LWClientManager.share userLogout];
     [LWClientManager removeLocalChatRecord];
 }
 

@@ -23,13 +23,13 @@
 {
     _model = model;
     if(model.cellType == 1){
-        [_icon z_imageWithImageId:model.imagesId];
-        _nameL.text = model.nickName;
+        [_icon z_imageWithImageId:model.portrait placeholderImage:@"testtouxiang"];
+        _nameL.text = model.chatNickName;
         _emailL.text = [NSString stringWithFormat:@"邮箱：%@",model.email?LWDATA(model.email):@"暂无"];
         _phoneL.text = [NSString stringWithFormat:@"电话：%@",model.mobile?LWDATA(model.mobile):@"暂无"];
         _descL.text = [NSString stringWithFormat:@"个性签名：%@",model.sign?LWDATA(model.sign):@"暂无"];
     }else{
-        [_icon z_imageWithImageId:model.appBackgroundImage];
+        [_icon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kApiPrefix_PIC,model.avatar]] placeholderImage:IMAGENAME(@"testtouxiang")];
         _nameL.text = model.groupName;
         _emailL.text = [NSString stringWithFormat:@"创建时间：%@",LWDATA(model.buildTime)];
         _phoneL.text = [NSString stringWithFormat:@"创建人：%@",LWDATA(model.userName)];
@@ -54,7 +54,7 @@
     _emailL = [LWLabel lw_lable:@"邮箱：" font:14 textColor:BASECOLOR_GREYCOLOR155];
     _phoneL = [LWLabel lw_lable:@"电话：" font:14 textColor:BASECOLOR_GREYCOLOR155];
     _descL = [LWLabel lw_lable:@"个性签名：" font:14 textColor:BASECOLOR_GREYCOLOR155];
-    
+    [_icon setBoundWidth:0 cornerRadius:40];
     [self.contentView addSubviews:@[_icon,_nameL,_phoneL,_descL,_emailL]];
     [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.contentView.mas_left).mas_offset(15);

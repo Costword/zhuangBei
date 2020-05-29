@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * mobile;
 @property (nonatomic, strong) NSString * sign;
 @property (nonatomic, strong) NSString * imagesId;
+@property (nonatomic, strong) NSString * portrait;
+@property (nonatomic, strong) NSString * chatNickName;
 
 
 @property (nonatomic, strong) NSString * groupName;
@@ -25,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * groupdescription;
 @property (nonatomic, strong) NSString * appBackgroundImage;
 @property (nonatomic, strong) NSString * buildTime;
+@property (nonatomic, strong) NSString * avatar;
 
 //1 friend; 2 group
 @property (nonatomic, assign) NSInteger  cellType;
