@@ -32,6 +32,9 @@
 
 @end
 
+@implementation productEnclosureListModel
+
+@end
 @implementation LWHuoYuanDeatilModel
 
 // 声明自定义类参数类型
@@ -43,6 +46,7 @@
              @"productPictureList":productPictureListModel.class,
              @"productIntroduction":productIntroductionModel.class,
              @"productParameterList":productParameterListModel.class,
+             @"productEnclosureList":productEnclosureListModel.class,
     };
 }
 @end

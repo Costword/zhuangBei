@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LWHuoYuanDeatilModel.h"
     
-NS_ASSUME_NONNULL_BEGIN
+
 typedef void(^changeModelBlock)(NSString *modelid);
 @interface LWHuoYuanDeatilView : UIView
 @property (nonatomic, strong) LWHuoYuanDeatilModel * model;
@@ -19,4 +19,7 @@ typedef void(^changeModelBlock)(NSString *modelid);
 
 @end
 
-NS_ASSUME_NONNULL_END
+@interface LWCanShuDeatilTableCell : UITableViewCell
+@property (nonatomic, strong) UILabel * leftL;
+@property (nonatomic, strong) UILabel * descL;
+@end

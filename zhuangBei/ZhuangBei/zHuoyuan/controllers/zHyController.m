@@ -70,6 +70,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"货源";
     [self confiUI];
     __weak typeof(self)weakSelf  = self;
     self.noContentView.retryTapBack = ^{

@@ -81,7 +81,7 @@
 - (void)confiUI
 {
     UILabel *tishiL = [LWLabel lw_lable:@"提示" font:17 textColor:BASECOLOR_TEXTCOLOR];
-    NSString *friendname = [NSString stringWithFormat:@"是否要加【%@】为好友？",LWDATA(_friendModel.nickName)];
+    NSString *friendname = [NSString stringWithFormat:@"是否要加【%@】为好友？",LWDATA(_friendModel.chatNickName)];
     UILabel *tishidescL = [LWLabel lw_lable:friendname font:15 textColor:BASECOLOR_TEXTCOLOR];
     UILabel *fenzutitleL = [LWLabel lw_lable:@"请选择分组" font:15 textColor:BASECOLOR_TEXTCOLOR];
     UIView *fenzubgview = [UIView new];
@@ -211,6 +211,7 @@
         _tableview.dataSource = self;
         _tableview.rowHeight = 40;
         [_tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+        _tableview.tableFooterView = [UIView new];
     }
     return _tableview;
 }
