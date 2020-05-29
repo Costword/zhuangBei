@@ -27,6 +27,7 @@
         _nameL = [LWLabel lw_lable:@"admin" font:15 textColor:BASECOLOR_TEXTCOLOR];
         _descL = [LWLabel lw_lable:@"在么？这个问题在么解决？" font:12 textColor:BASECOLOR_GREYCOLOR155];
         _timelL = [LWLabel lw_lable:@"2020/04/22  18:20" font:12 textColor:BASECOLOR_TEXTCOLOR];
+        _sendApplyStatusL = [LWLabel lw_lable:@"" font:15 textColor:BASECOLOR_BLUECOLOR];
         _unreadnumL = [LWLabel lw_lable:@"" font:10 textColor:UIColor.whiteColor];
         _unreadnumL.backgroundColor = UIColor.redColor;
         [_unreadnumL setBoundWidth:0 cornerRadius:8 boardColor:UIColor.whiteColor];
@@ -37,7 +38,7 @@
         _rightBtn = [LWButton lw_button:@"拒绝" font:14 textColor:UIColor.whiteColor backColor:BASECOLOR_BLUECOLOR target:self acction:@selector(clickBtn:)];
         _leftBtn.tag = 1;
         _rightBtn.tag = 2;
-        [self.contentView addSubviews:@[_icon,_nameL,_timelL,_descL,line,_leftBtn,_rightBtn,_unreadnumL]];
+        [self.contentView addSubviews:@[_icon,_nameL,_timelL,_descL,line,_leftBtn,_rightBtn,_unreadnumL,self.sendApplyStatusL]];
         [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.contentView.mas_left).mas_offset(10);
             make.height.width.mas_offset(50);
@@ -60,7 +61,7 @@
         [_icon setBoundWidth:0 cornerRadius:25];
         [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
-            make.top.mas_equalTo(_timelL.mas_bottom).mas_offset(10);
+            make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-10);
             make.width.mas_offset(60);
             make.height.mas_offset(30);
         }];
@@ -70,6 +71,11 @@
             make.width.mas_offset(60);
             make.height.mas_offset(30);
         }];
+        [_sendApplyStatusL mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+            make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-10);
+        }];
+        _sendApplyStatusL.hidden = YES;
         _leftBtn.hidden = _rightBtn.hidden = YES;
         _line = line;
         [_leftBtn setBoundWidth:0 cornerRadius:4];
@@ -90,17 +96,21 @@
     _descL.hidden = _timelL.hidden = NO;
     [_nameL mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(_icon.mas_right).mas_offset(10);
-        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
-        make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(-10);
-    }];
-    [_descL mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(_nameL.mas_left);
-        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
-        make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(15);
+        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-5);
+        make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(-15);
     }];
     [_timelL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
-        make.centerY.mas_equalTo(_nameL.mas_centerY);
+//        make.centerY.mas_equalTo(_nameL.mas_centerY);
+//        make.width.mas_greaterThanOrEqualTo(125);
+        make.top.mas_equalTo(_nameL.mas_bottom).mas_offset(5);
+        make.left.mas_equalTo(_nameL.mas_left);
+    }];
+    [_descL mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(_nameL.mas_left);
+        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
+//        make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(15);
+        make.top.mas_equalTo(_timelL.mas_bottom).mas_offset(5);
     }];
 }
 

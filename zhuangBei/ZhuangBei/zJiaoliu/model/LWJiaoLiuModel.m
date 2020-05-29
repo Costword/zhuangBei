@@ -20,6 +20,13 @@
     return nil;
 }
 
+-(NSString *)username
+{
+    if(_username){
+        return _username;
+    }
+    return @"佚名";
+}
 @end
 
 

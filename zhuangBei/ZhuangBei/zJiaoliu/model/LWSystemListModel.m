@@ -16,7 +16,7 @@
 // 声明自定义类参数类型
 + (NSDictionary *)modelContainerPropertyGenericClass
 {
-    return @{@"user":userModel.class,
+    return @{@"toUser":userModel.class,
     };
 }
 @end

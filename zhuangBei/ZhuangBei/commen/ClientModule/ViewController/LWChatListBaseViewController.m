@@ -140,7 +140,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
             //            dispatch_group_leave(self.dispatch_group);
         }];
     }else if (_roomType == LWChatRoomTypeOneTOne){
-        [[XHClient sharedClient].chatManager sendMessage:text toID:self.roomId completion:^(NSError *error) {
+        [[XHClient sharedClient].chatManager sendMessage:text toID:[NSString stringWithFormat:@"%@",self.roomId] completion:^(NSError *error) {
             if (error) {
                 LWLog(@"**************消息发送失败error:%@",error);
                 [UIView ilg_makeToast:error.localizedDescription];

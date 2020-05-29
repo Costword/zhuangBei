@@ -28,7 +28,7 @@
     [self requestPostWithUrl:@"app/appqyuser/findCompanyAdmin" para:@{@"gysId":LWDATA(_gongYingShangDm)} paraType:(LWRequestParamTypeString) success:^(id  _Nonnull response) {
         if ([response[@"code"] intValue] == 1) {
             NSString *touserid = [NSString stringWithFormat:@"%@",LWDATA(response[@"data"][@"userDm"])];
-            NSString *username = LWDATA(response[@"data"][@"userName"]);
+            NSString *username = LWDATA(response[@"data"][@"chatNickName"]);
             ChatRoomViewController *chatvc = [ChatRoomViewController chatRoomViewControllerWithRoomId:touserid roomName:username roomType:(LWChatRoomTypeOneTOne) extend:nil];
             [self.navigationController pushViewController:chatvc animated:YES];
         }else{

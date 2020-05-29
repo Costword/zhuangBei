@@ -24,7 +24,7 @@
     _model = model;
     if(model.cellType == 1){
         [_icon z_imageWithImageId:model.portrait placeholderImage:@"testtouxiang"];
-        _nameL.text = model.chatNickName;
+        _nameL.text = model.userName;
         _emailL.text = [NSString stringWithFormat:@"邮箱：%@",model.email?LWDATA(model.email):@"暂无"];
         _phoneL.text = [NSString stringWithFormat:@"电话：%@",model.mobile?LWDATA(model.mobile):@"暂无"];
         _descL.text = [NSString stringWithFormat:@"个性签名：%@",model.sign?LWDATA(model.sign):@"暂无"];

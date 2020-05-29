@@ -11,6 +11,7 @@
 #import "HYTopBarView.h"
 #import "LWSystemListModel.h"
 #import "LWClientManager.h"
+#import "LWAddFriendDeatilViewController.h"
 
 @interface LWSystemMessageListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -23,7 +24,7 @@
 @property (nonatomic, assign) NSInteger  curretnPage_sys;
 @property (nonatomic, assign) NSInteger  totalPage_sys;
 @property (nonatomic, assign) NSInteger  totalCount;
-
+@property (nonatomic, assign) NSInteger  tabbarIndex;
 @end
 
 @implementation LWSystemMessageListViewController
@@ -104,6 +105,27 @@
     }];
 }
 
+// tag:1 同意 2拒绝
+- (void)requestCaoZuoFriendApplyWithTag:(NSInteger)tag userid:(NSString *)userid
+{
+    //    uid=688&applyId=379&group=695
+    NSString *url = @"app/appfriend/agreeFriend";
+    NSDictionary *para;
+    if (tag == 2) {
+        //id=379
+        url = @"app/appfriend/refuseFriend";
+        para = @{@"id":userid};
+    }else{
+        
+    }
+    [self requestPostWithUrl:url para:para paraType:(LWRequestParamTypeString) success:^(id  _Nonnull response) {
+        [zHud showMessage:@"已拒绝申请"];
+        [self requestDatas];
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
 //好友y验证列表
 - (void)requestDatas
 {
@@ -150,10 +172,8 @@
     self.title = @"系统消息";
     [self confiUI];
     [self requestDatas];
-//    [self requestSystemMsg];
-    
     [LWClientManager.share requestReadSystemMsg:@"1"];
-    
+    ADD_NOTI(requestDatas, @"refrshSysteMsgmList");
 }
 
 -(void)viewDidLayoutSubviews
@@ -171,6 +191,7 @@
     _topBarView = [HYTopBarView creatTopBarWithDataArr:@[@"好友验证",@"群系统消息"] selectColor:BASECOLOR_TEXTCOLOR callBack:^(NSInteger index) {
         weakself.curretnPage_sys = weakself.currPage = 1;
         index == 0 ?[weakself requestDatas]:[weakself requestSystemMsg];
+        weakself.tabbarIndex = index;
         [weakself.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH*index, 1) animated:YES];
     }];
     _topBarView.backgroundColor = UIColor.whiteColor;
@@ -193,12 +214,6 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    if (tableView == _groupTableView) {
-    //        LWSystemGroupMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWSystemGroupMessageCell" forIndexPath:indexPath];
-    //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //        return cell;
-    //    }else{
-    //    }
     LWJiaoLiuContatcsListTableViewCell * cell =  [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuContatcsListTableViewCell" forIndexPath:indexPath];
     [cell setBottomLine:1];
     [cell updateForVerifiCell];
@@ -211,33 +226,50 @@
     }else{
         model = self.listdatas_verifi[indexPath.row];
         cell.descL.text = model.content;
-        cell.nameL.text = model.user.username;
+        cell.nameL.text = model.toUser.username;
         cell.timelL.text = model.time;
     }
     
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.leftBtn.hidden = model.status != 0;
-    cell.rightBtn.enabled = model.status == 0;
-    if (model.status == 1) {
-        [cell.rightBtn setTitle:@"已同意" forState:UIControlStateNormal];
-    }else if (model.status == 2){
-        [cell.rightBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
+    
+    if([model.from integerValue] == [model.uid integerValue]){
+        cell.sendApplyStatusL.hidden =  NO;
+        cell.leftBtn.hidden = cell.rightBtn.hidden = YES;
+        cell.sendApplyStatusL.text = (model.status == 0)?@"等待验证":(model.status == 1)?@"申请已通过":@"申请被拒绝";
     }else{
-        [cell.leftBtn setTitle:@"同意" forState:UIControlStateNormal];
-        [cell.rightBtn setTitle:@"拒绝" forState:UIControlStateNormal];
+        cell.leftBtn.hidden = model.status != 0;
+        cell.rightBtn.enabled = model.status == 0;
+        cell.sendApplyStatusL.hidden =  YES;
+        if (model.status == 1) {
+            [cell.rightBtn setTitle:@"已同意" forState:UIControlStateNormal];
+        }else if (model.status == 2){
+            [cell.rightBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
+        }else{
+            [cell.leftBtn setTitle:@"同意" forState:UIControlStateNormal];
+            [cell.rightBtn setTitle:@"拒绝" forState:UIControlStateNormal];
+        }
     }
     WEAKSELF(self)
     cell.block = ^(NSInteger tag) {
-        if (tag == 1) {
-            [weakself requestAgreeGroup:model.fromUserName toGroupId:model.toGroupId fromUserId:model.fromUserId toGroupName:model.toGroupName groupApplyId:model.groupApplyId];
-        }else
-        {
-            [weakself refuseGroup:model.fromUserId groupId:model.toGroupId groupApplyId:model.groupApplyId];
+        if (weakself.tabbarIndex == 1) {
+            if (tag == 1) {
+                [weakself requestAgreeGroup:model.fromUserName toGroupId:model.toGroupId fromUserId:model.fromUserId toGroupName:model.toGroupName groupApplyId:model.groupApplyId];
+            }else
+            {
+                [weakself refuseGroup:model.fromUserId groupId:model.toGroupId groupApplyId:model.groupApplyId];
+            }
+        }else{
+            if (tag == 1) {
+                LWAddFriendDeatilViewController *addfrienddeatil = [LWAddFriendDeatilViewController new];
+                addfrienddeatil.systemModel = model;
+                [self.navigationController pushViewController:addfrienddeatil animated:YES];
+            }else{
+                [weakself requestCaoZuoFriendApplyWithTag:tag userid:model.customId];
+            }
         }
     };
     return cell;
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -249,14 +281,6 @@
     }
 }
 
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //    if (tableView == _messageTableView) {
-    //        LWSystemMessageListViewController *system = [LWSystemMessageListViewController new];
-    //        [self.navigationController pushViewController:system animated:YES];
-    //    }
-}
 
 - (UIScrollView *)mainScrollView
 {
@@ -285,7 +309,7 @@
         _friendVerifiTableView = [[UITableView alloc] init];
         _friendVerifiTableView.delegate = self;
         _friendVerifiTableView.dataSource = self;
-        _friendVerifiTableView.rowHeight = 90;
+        _friendVerifiTableView.rowHeight = 85;
         [_friendVerifiTableView registerClass:[LWJiaoLiuContatcsListTableViewCell class] forCellReuseIdentifier:@"LWJiaoLiuContatcsListTableViewCell"];
         _friendVerifiTableView.backgroundColor = UIColor.whiteColor;
         _friendVerifiTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -308,8 +332,8 @@
         _groupTableView = [[UITableView alloc] init];
         _groupTableView.delegate = self;
         _groupTableView.dataSource = self;
-//        _groupTableView.estimatedRowHeight = 1;
-        _groupTableView.rowHeight = 90;
+        //        _groupTableView.estimatedRowHeight = 1;
+        _groupTableView.rowHeight = 85;
         [_groupTableView registerClass:[LWJiaoLiuContatcsListTableViewCell class] forCellReuseIdentifier:@"LWJiaoLiuContatcsListTableViewCell"];
         _groupTableView.backgroundColor = UIColor.whiteColor;
         _groupTableView.separatorStyle = UITableViewCellSeparatorStyleNone;

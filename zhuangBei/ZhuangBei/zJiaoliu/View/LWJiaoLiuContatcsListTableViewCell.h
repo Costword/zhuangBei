@@ -20,6 +20,7 @@ typedef void(^clickBtnBlock)(NSInteger tag);
 @property (nonatomic, strong) UIButton * leftBtn;
 @property (nonatomic, strong) UIButton * rightBtn;
 @property (nonatomic, strong) UILabel * unreadnumL;
+@property (nonatomic, strong) UILabel * sendApplyStatusL;
 
 - (void)setBottomLine:(NSInteger)tag;
 @property (nonatomic, strong) UIView * line;

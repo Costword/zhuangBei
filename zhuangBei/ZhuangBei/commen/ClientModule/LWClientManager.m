@@ -134,13 +134,13 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     UIViewController *currentVC = [LWClientManager topController];
     if ([currentVC isKindOfClass: [MessageGroupViewController class]]) {
         MessageGroupViewController *chatvc = (MessageGroupViewController *)currentVC;
-        if (![chatvc.roomId isEqualToString:groupID]) {
-            NSString *groupname = self.allGroupDatas[[NSNumber numberWithString:groupID]];
+        if ([chatvc.roomId integerValue] != [groupID integerValue]) {
+            NSString *groupname = self.allGroupDatas[[NSNumber numberWithInteger:[groupID integerValue]]];
             //type: 1:group; 2:oto
             [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
         }
     }else{
-        NSString *groupname = self.allGroupDatas[[NSNumber numberWithString:groupID]];
+        NSString *groupname = self.allGroupDatas[[NSNumber numberWithInteger:[groupID integerValue]]];
         //type: 1:group; 2:oto
         [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
     }
@@ -157,15 +157,15 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     UIViewController *currentVC = [LWClientManager topController];
     if ([currentVC isKindOfClass: [ChatRoomViewController class]]) {
         ChatRoomViewController *chatvc = (ChatRoomViewController *)currentVC;
-        if (![chatvc.roomId isEqualToString:uid]) {
-            NSString *friendname = self.allGroupDatas[[NSNumber numberWithString:uid]];
+        if ([chatvc.roomId integerValue] != [uid integerValue]) {
+            NSString *friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]];
             //type: 1:group; 2:oto
-            [self addNewUnReadMsgWithRoomName:LWDATA(friendname) roomId:LWDATA(uid) chatType:2 extend:nil];
+            [self addNewUnReadMsgWithRoomName:[LWDATA(friendname) isNotBlank] ? friendname:@"临时消息" roomId:LWDATA(uid) chatType:2 extend:nil];
         }
     }else{
-        NSString *friendname = self.allGroupDatas[[NSNumber numberWithString:uid]];
+        NSString *friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]];
         //type: 1:group; 2:oto
-        [self addNewUnReadMsgWithRoomName:LWDATA(friendname) roomId:LWDATA(uid) chatType:2 extend:nil];
+        [self addNewUnReadMsgWithRoomName:[LWDATA(friendname) isNotBlank] ? friendname:@"临时消息" roomId:LWDATA(uid) chatType:2 extend:nil];
     }
 }
 
@@ -230,7 +230,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         [[zHud shareInstance] showMessage:@"未获取到userId"];
         return;
     }
-    NSString *nowtime = [self currentdateInterval];
+//    NSString *nowtime = [self currentdateInterval];
     [ServiceManager requestPostWithUrl:sendmsg_oto_url body:[self gettotoParamString:@{@"content":LWDATA(msg),@"toUserId":LWDATA(roomId)}] success:^(id  _Nonnull response) {
         success(response);
     } failure:^(NSError * _Nonnull error) {
@@ -285,12 +285,12 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     NSMutableArray *chatrecord = [LWClientManager getLocalChatRecordModelList];
     __block BOOL ishave = NO;
     [chatrecord enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj.roomId isEqualToString:roomId]) {
+        if ([obj.roomId integerValue] == [roomId integerValue]) {
             ishave = YES;
             *stop = YES;
         }
     }];
-    if (!ishave && ![LWClientManager.share.userinforIM.customId isEqualToString:roomId]) {
+    if (!ishave && [LWClientManager.share.userinforIM.customId integerValue] != [roomId integerValue]) {
         LWLocalChatRecordModel *model = [LWLocalChatRecordModel new];
         model.roomId = roomId;
         model.roomName = roomName;
@@ -436,7 +436,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
             *stop = YES;
         }
     }];
-    if (!ishave &&![self.userinforIM.customId isEqualToString:roomId]) {
+    if (!ishave && [self.userinforIM.customId  integerValue] != [roomId integerValue]) {
         LWLocalChatRecordModel *model = [LWLocalChatRecordModel new];
         model.roomId = roomId;
         model.roomName = roomName;
@@ -478,7 +478,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 {
     NSMutableArray *unreadmsg = [self getLocalUnReadMsg];
     [unreadmsg enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj.roomId isEqualToString:roomId]) {
+        if ([obj.roomId integerValue] ==  [roomId integerValue]) {
             [unreadmsg removeObject:obj];
             *stop = YES;
         }
@@ -494,7 +494,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     //    清空本地聊天记录的未读数
     NSMutableArray *localchatreacrod = [LWClientManager getLocalChatRecordModelList];
     [localchatreacrod enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj.roomId isEqualToString:roomId]) {
+        if ([obj.roomId integerValue] ==  [roomId integerValue]) {
             obj.unreadNum = 0;
             *stop = YES;
         }

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * username;
 @property (nonatomic, strong) NSString * avatar;
 @property (nonatomic, strong) NSString * corporateName;
+@property (nonatomic, strong) NSString * sign;
 @end
 
 @interface LWSystemListModel : BaseModel
@@ -21,11 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * content;
 @property (nonatomic, strong) NSString * remark;
 @property (nonatomic, strong) NSString * time;
-@property (nonatomic, strong) userModel * user;
+@property (nonatomic, strong) userModel * toUser;
 @property (nonatomic, strong) NSString * uid;
 @property (nonatomic, strong) NSString * from;
 //0等待验证  1同意 2拒绝
 @property (nonatomic, assign) NSInteger  status;
+
+@property (nonatomic, assign) NSInteger  read;
 
 //----sys---------
 @property (nonatomic, strong) NSString * fromUserId;
