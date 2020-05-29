@@ -63,8 +63,6 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     }
     [self requestPostWithUrl:url paraString:param success:^(id  _Nonnull response) {
         
-        [self.totalDatasArray removeAllObjects];
-        
         NSArray *data = response[@"data"];
         for (NSDictionary *dict in data) {
             [self.totalDatasArray addObject:[ShowMsgElem modelWithDictionary:dict]];
@@ -224,9 +222,12 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 
 - (void)receiveNewChatGroupMsg:(NSNotification *)noti
 {
+    if (self.roomType != LWChatRoomTypeGroup) return;
     NSDictionary *msgdic = noti.object;
     NSDictionary *dict = [LWTool stringToDictory:msgdic[@"msg"]];
     ShowMsgElem *model = [ShowMsgElem modelWithDictionary:dict[@"mid"]];
+    model.username = LWDATA(dict[@"username"]);
+    model.uavatar = LWDATA(dict[@"avatar"]);
     dispatch_async(dispatch_get_main_queue(), ^{
         [self showTrace:model];
     });
@@ -234,6 +235,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 
 - (void)deleUserGroupChat:(NSNotification *)noti
 {
+    if (self.roomType != LWChatRoomTypeGroup) return;
     NSString *groupID = noti.object[@"groupID"];
     if ([self isCurrentViewController] && [groupID isEqualToString:self.roomId]) {
         [UIView ilg_makeToast:@"您已被管理员剔除"];
@@ -243,6 +245,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 
 - (void)deleGroupChat:(NSNotification *)noti
 {
+    if (self.roomType != LWChatRoomTypeGroup) return;
     NSString *groupID = noti.object[@"groupID"];
     if ([self isCurrentViewController] && [groupID isEqualToString:self.roomId]) {
         [UIView ilg_makeToast:@"此群已被删除"];
@@ -253,6 +256,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 #pragma mark ----------- XHChatManagerDelegate 通知-------------
 - (void)receiveNewChatMsg:(NSNotification *)noti
 {
+    if (self.roomType != LWChatRoomTypeOneTOne) return;
     NSDictionary *msgdic = noti.object;
     NSDictionary *dict = [LWTool stringToDictory:msgdic[@"msg"]];
     ShowMsgElem *model = [ShowMsgElem modelWithDictionary:dict];
@@ -273,9 +277,9 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     vc.roomName = roomName;
     vc.roomId = roomId;
     vc.roomType = roomType;
-//    if ([extend isKindOfClass:[LWJiaoLiuModel class]]) {
-//        vc.friendInforModel = extend;
-//    }
+    //    if ([extend isKindOfClass:[LWJiaoLiuModel class]]) {
+    //        vc.friendInforModel = extend;
+    //    }
     return vc;
 }
 
@@ -303,14 +307,14 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     ADD_NOTI(receiveNewChatGroupMsg:, NEW_MSG_GROPU_NOTI_KEY);
     ADD_NOTI(deleGroupChat:, DELE_GROPU_CHAT_NOTI_KEY);
     ADD_NOTI(deleUserGroupChat:, DELE_USER_GROPU_CHAT_NOTI_KEY);
-    
+
     if (_roomType == LWChatRoomTypeGroup) {
         [self requestGroupCanSendmsg];
     }else if (_roomType == LWChatRoomTypeOneTOne){
     }
     
     self.title = self.roomName;
-    
+    [self.totalDatasArray removeAllObjects];
     [self requestRecordListDatas];
     
     //    删除本地的未读消息
@@ -464,7 +468,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (void)chatKeyBoardSendText:(NSString *)text;
 {
     [self requsetSendMsgService:text];
-
+    
     NSString *msgjson = [self MsgToJsonString:text];
     [self requestSDKSendMsg:msgjson];
 }
@@ -498,19 +502,19 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         LWLog(@"***************发送的单聊消息：%@\n",res);
     }else if (self.roomType == LWChatRoomTypeGroup){
         NSDictionary *dict = @{@"avatar":LWDATA(LWClientManager.share.userinforIM.avatar),
-                                    @"content":text,
-                                    @"id":LWDATA(IMUserInfo.shareInstance.userID),
-                                    @"isGroup":@"false",
-                                    @"mainProduct":LWDATA(LWClientManager.share.userinforIM.mainProducts),
-                                    @"mid":@{@"content":LWDATA(text),
-                                             @"groupId":LWDATA(self.roomId),
-                                             @"id":LWDATA(LWClientManager.share.userinforIM.avatarID),
-                                             @"sendTime":LWDATA([[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]),
-                                             @"userId":LWDATA(IMUserInfo.shareInstance.userID),
-                                    },
-                                    @"msgCount":@"0",
-                                    @"username":LWDATA(LWClientManager.share.userinforIM.username)
-             };
+                               @"content":text,
+                               @"id":LWDATA(IMUserInfo.shareInstance.userID),
+                               @"isGroup":@"false",
+                               @"mainProduct":LWDATA(LWClientManager.share.userinforIM.mainProducts),
+                               @"mid":@{@"content":LWDATA(text),
+                                        @"groupId":LWDATA(self.roomId),
+                                        @"id":LWDATA(LWClientManager.share.userinforIM.avatarID),
+                                        @"sendTime":LWDATA([[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]),
+                                        @"userId":LWDATA(IMUserInfo.shareInstance.userID),
+                               },
+                               @"msgCount":@"0",
+                               @"username":LWDATA(LWClientManager.share.userinforIM.username)
+        };
         res = [LWTool dictoryToString:dict];
         LWLog(@"***************发送群组消息：%@\n",res);
     }
@@ -618,6 +622,10 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (void)dealloc
 {
     LWLog(@"\n***************************dealloc:%@****************************\n",self);
+    REMOVIE_NOTI(NEW_MSG_CHAT_NOTI_KEY);
+    REMOVIE_NOTI(NEW_MSG_GROPU_NOTI_KEY);
+    REMOVIE_NOTI(DELE_GROPU_CHAT_NOTI_KEY);
+    REMOVIE_NOTI(DELE_USER_GROPU_CHAT_NOTI_KEY);
 }
 
 @end

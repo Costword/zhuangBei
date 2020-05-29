@@ -100,6 +100,7 @@ const static int subTitleFontNum = 16;
     [self addSubview:label2];
     [self addSubview:label3];
     
+    [_iconIV setBoundWidth:0 cornerRadius:20];
     
     if (_layoutType == IFChatCellStyleLeft || _layoutType == IFChatCellStyleLeftAndNoBG) {
         [imageView mas_remakeConstraints:^(MASConstraintMaker *make) {

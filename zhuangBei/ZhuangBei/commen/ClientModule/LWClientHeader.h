@@ -26,9 +26,9 @@ static NSString *const NEW_MSG_CHAT_NOTI_KEY = @"NEW_MSG_CHAT_NOTI_KEY";
 //接收到新的群组消息
 static NSString *const NEW_MSG_GROPU_NOTI_KEY = @"NEW_MSG_GROPU_NOTI_KEY";
 // 删除群组
-static NSString *const DELE_GROPU_CHAT_NOTI_KEY = @"NEW_MSG_GROPU_NOTI_KEY";
+static NSString *const DELE_GROPU_CHAT_NOTI_KEY = @"DELE_GROPU_CHAT_NOTI_KEY";
 //被踢出群组
-static NSString *const DELE_USER_GROPU_CHAT_NOTI_KEY = @"NEW_MSG_GROPU_NOTI_KEY";
+static NSString *const DELE_USER_GROPU_CHAT_NOTI_KEY = @"DELE_USER_GROPU_CHAT_NOTI_KEY";
 
 // 保存本地聊天记录
 static NSString *const LOCAL_CHATRECORD_LIST_KEY = @"LOCAL_CHATRECORD_LIST_KEY";
