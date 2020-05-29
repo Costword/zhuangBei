@@ -39,7 +39,7 @@
 
 - (void)unreadMsgNumberChange
 {
-    zJiaoliuController *vc = (zJiaoliuController *)(self.childViewControllers[2].childViewControllers.lastObject);
+    zJiaoliuController *vc = (zJiaoliuController *)(self.childViewControllers[2].childViewControllers.firstObject);
     NSInteger num = [LWClientManager share].unreadMsgNum + LWClientManager.share.unreadSysMsgNum;
     vc.navigationController.tabBarItem.badgeValue = (num == 0) ? nil: [NSString stringWithFormat:@"%ld",(long)num];
 }

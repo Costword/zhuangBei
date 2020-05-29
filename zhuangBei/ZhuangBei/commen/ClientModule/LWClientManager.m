@@ -13,6 +13,7 @@
 #import "AppConfig.h"
 #import "LWClientHeader.h"
 #import "ChatRoomViewController.h"
+#import "MessageGroupViewController.h"
 
 @implementation LWUserinforIMModel
 -(NSString *)avatarID
@@ -131,13 +132,17 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     
     //    如果当前控制器是正是当前群组时，本地不再添加未读数
     UIViewController *currentVC = [LWClientManager topController];
-    if ([currentVC isKindOfClass: [ChatRoomViewController class]]) {
-        ChatRoomViewController *chatvc = (ChatRoomViewController *)currentVC;
+    if ([currentVC isKindOfClass: [MessageGroupViewController class]]) {
+        MessageGroupViewController *chatvc = (MessageGroupViewController *)currentVC;
         if (![chatvc.roomId isEqualToString:groupID]) {
             NSString *groupname = self.allGroupDatas[[NSNumber numberWithString:groupID]];
             //type: 1:group; 2:oto
             [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
         }
+    }else{
+        NSString *groupname = self.allGroupDatas[[NSNumber numberWithString:groupID]];
+        //type: 1:group; 2:oto
+        [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
     }
 }
 
@@ -157,6 +162,10 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
             //type: 1:group; 2:oto
             [self addNewUnReadMsgWithRoomName:LWDATA(friendname) roomId:LWDATA(uid) chatType:2 extend:nil];
         }
+    }else{
+        NSString *friendname = self.allGroupDatas[[NSNumber numberWithString:uid]];
+        //type: 1:group; 2:oto
+        [self addNewUnReadMsgWithRoomName:LWDATA(friendname) roomId:LWDATA(uid) chatType:2 extend:nil];
     }
 }
 
