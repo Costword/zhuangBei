@@ -27,6 +27,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
 //    self.tabBarItem.badgeValue = @"28";
+    self.navigationController.tabBarItem.badgeValue = @"0";
 }
 
 -(sliderNavMenu*)navigationSliderMenu

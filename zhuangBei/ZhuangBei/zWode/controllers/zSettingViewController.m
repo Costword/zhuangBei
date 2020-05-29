@@ -12,6 +12,7 @@
 #import "MainNavController.h"
 #import "SDImageCache.h"
 #import "zXieYiController.h"
+#import "zEducationRankTypeInfo.h"
 
 @interface zSettingViewController ()
 
@@ -252,6 +253,7 @@
     if (button.tag==1) {
         [[zHud shareInstance]showMessage:@"退出登录"];
         [[zUserInfo shareInstance]deleate];
+        [[zEducationRankTypeInfo shareInstance]deleate];
         [self changeRootVC];
     }
     
