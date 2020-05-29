@@ -12,6 +12,8 @@
 #import "zCityCollectionCell.h"
 #import <WebKit/WebKit.h>
 #import "BAKit_WebView.h"
+#import "WKWebView+BAKit.h"
+
 @interface LWHuoYuanDeatilView ()<SDCycleScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDataSource>
 @property (nonatomic, strong) UIScrollView * scrollView;
 @property (nonatomic, strong) UILabel * nameL;
@@ -121,10 +123,15 @@
             make.top.mas_equalTo(_productJiesao_titleL.mas_bottom).mas_offset(5);
             make.bottom.mas_equalTo(_chanpinJieSaoView.mas_bottom).mas_offset(-10);
         }];
+        
         NSString *headerString = @"<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'><style>img{max-width:100%}</style></header>";
         
         NSString *htmlstring = [headerString stringByAppendingString:_model.productIntroduction.jianJieNr] ;
-        [_productJieSaoL loadHTMLString:htmlstring baseURL:nil];
+        if ([htmlstring containsString:@"../../../"]) {
+            htmlstring = [htmlstring stringByReplacingOccurrencesOfString:@"../../../" withString:[NSString stringWithFormat:@"%@",kApiPrefix]];
+        }
+        LWLog(@"*********%@",htmlstring);
+        [_productJieSaoL ba_web_loadHTMLString:htmlstring];
     }
     
     
@@ -143,6 +150,24 @@
 {
     NSInteger tag = tap.view.tag;
     NSLog(@"-------------点击参数的item:%ld",tag);
+    //    参数详情赋值
+    NSMutableArray *tem = [NSMutableArray array];
+    if (tag != 4) {
+        for (productParameterListModel *parammodel in _model.productParameterList) {
+            if (parammodel.canShuLx == tag) {
+                [tem addObject:parammodel];
+            }
+        }
+    }else{
+        for (productEnclosureListModel *parammodel in _model.productEnclosureList) {
+            [tem addObject:parammodel];
+        }
+    }
+    if (tem.count == 0) {
+        [zHud showMessage:@"暂无数据"];
+        return;
+    }
+    
     _maskView = [UIView new];
     _maskView.backgroundColor = UIColor.blackColor;
     _maskView.alpha = 0.3;
@@ -159,19 +184,7 @@
         make.bottom.mas_equalTo(window.mas_bottom).mas_offset(0);
     }];
     
-    //    参数详情赋值
-    NSMutableArray *tem = [NSMutableArray array];
-    if (tag != 4) {
-        for (productParameterListModel *parammodel in _model.productParameterList) {
-            if (parammodel.canShuLx == tag) {
-                [tem addObject:parammodel];
-            }
-        }
-    }else{
-        for (productEnclosureListModel *parammodel in _model.productEnclosureList) {
-            [tem addObject:parammodel];
-        }
-    }
+    
     _canshuDeatilArray = [tem copy];
     [_canshuDeatilTv reloadData];
     //    _canshuDeatilView_titleL.text = parammodel.canShuMc;
@@ -196,8 +209,11 @@
     _nameL = [LWLabel lw_lable:@"" font:21 textColor:BASECOLOR_GREYCOLOR155];
     _nameL.numberOfLines = 3;
     _companL = [LWLabel lw_lable:@"" font:16 textColor:BASECOLOR_GREYCOLOR155];;
+    _companL.numberOfLines = 3;
     _proveL = [LWLabel lw_lable:@"" font:16 textColor:BASECOLOR_GREYCOLOR155];
+    _proveL.numberOfLines = 3;
     _addressL = [LWLabel lw_lable:@"" font:16 textColor:BASECOLOR_GREYCOLOR155];
+    _addressL.numberOfLines = 3;
     _productNickL = [LWLabel lw_lable:@"" font:16 textColor:[UIColor colorWithRed:155/255.0 green:155/255.0 blue:155/255.0 alpha:1.0] backColor:[UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1.0]];
     _xinghaoL = [LWLabel lw_lable:@"" font:16 textColor:RGB(63, 80, 181)];
     UILabel *nickL = [LWLabel lw_lable:@"产品别称" font:18 textColor:BASECOLOR_TEXTCOLOR];

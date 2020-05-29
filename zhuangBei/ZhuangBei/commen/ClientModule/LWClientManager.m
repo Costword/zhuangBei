@@ -280,6 +280,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         POST_NOTI(@"refreshChatRecordList", nil);
     }
 }
+
 /// 获取本地聊天记录 private
 + (NSMutableArray *)getLocalChatRecordModelList
 {
