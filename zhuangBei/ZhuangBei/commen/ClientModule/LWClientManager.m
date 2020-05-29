@@ -12,7 +12,7 @@
 #import "XHGroupManager.h"
 #import "AppConfig.h"
 #import "LWClientHeader.h"
-
+#import "ChatRoomViewController.h"
 
 @implementation LWUserinforIMModel
 -(NSString *)avatarID
@@ -129,9 +129,16 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 - (void)groupMessagesDidReceive:(NSString *)aMessage fromID:(NSString *)fromID groupID:(NSString *)groupID{
     POST_NOTI(NEW_MSG_GROPU_NOTI_KEY, (@{@"msg":aMessage,@"fromid":fromID,@"groupID":groupID}));
     
-    NSString *groupname = self.allGroupDatas[[NSNumber numberWithString:groupID]];
-    //type: 1:group; 2:oto
-    [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
+    //    如果当前控制器是正是当前群组时，本地不再添加未读数
+    UIViewController *currentVC = [LWClientManager topController];
+    if ([currentVC isKindOfClass: [ChatRoomViewController class]]) {
+        ChatRoomViewController *chatvc = (ChatRoomViewController *)currentVC;
+        if (![chatvc.roomId isEqualToString:groupID]) {
+            NSString *groupname = self.allGroupDatas[[NSNumber numberWithString:groupID]];
+            //type: 1:group; 2:oto
+            [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
+        }
+    }
 }
 
 
@@ -141,9 +148,16 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 {
     POST_NOTI(NEW_MSG_CHAT_NOTI_KEY, (@{@"msg":message,@"fromid":uid}));
     
-    NSString *friendname = self.allGroupDatas[[NSNumber numberWithString:uid]];
-    //type: 1:group; 2:oto
-    [self addNewUnReadMsgWithRoomName:LWDATA(friendname) roomId:LWDATA(uid) chatType:2 extend:nil];
+//    如果当前控制器是正是对方时，本地不再添加未读数
+    UIViewController *currentVC = [LWClientManager topController];
+    if ([currentVC isKindOfClass: [ChatRoomViewController class]]) {
+        ChatRoomViewController *chatvc = (ChatRoomViewController *)currentVC;
+        if (![chatvc.roomId isEqualToString:uid]) {
+            NSString *friendname = self.allGroupDatas[[NSNumber numberWithString:uid]];
+            //type: 1:group; 2:oto
+            [self addNewUnReadMsgWithRoomName:LWDATA(friendname) roomId:LWDATA(uid) chatType:2 extend:nil];
+        }
+    }
 }
 
 #pragma mark -------------------XHLoginManagerDelegate--------------
@@ -514,6 +528,27 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     }
     return _allGroupDatas;
 }
+
+
++ (UIViewController *)topController {
+    
+    UIViewController *topC = [self topViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
+    while (topC.presentedViewController) {
+        topC = [self topViewController:topC.presentedViewController];
+    }
+    return topC;
+}
+
++ (UIViewController *)topViewController:(UIViewController *)controller {
+    if ([controller isKindOfClass:[UINavigationController class]]) {
+        return [self topViewController:[(UINavigationController *)controller topViewController]];
+    } else if ([controller isKindOfClass:[UITabBarController class]]) {
+        return [self topViewController:[(UITabBarController *)controller selectedViewController]];
+    } else {
+        return controller;
+    }
+}
+
 @end
 
 

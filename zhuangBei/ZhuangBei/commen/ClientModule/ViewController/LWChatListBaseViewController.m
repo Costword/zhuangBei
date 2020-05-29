@@ -30,6 +30,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 @property (nonatomic, strong) LWPhotoPicker * photopicker;
 //好友信息
 @property (nonatomic, strong) friendItemModel * friendInforModel;
+//当前页数
+@property (nonatomic, assign) NSInteger  currentPage;
 
 @end
 
@@ -57,26 +59,36 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     NSString *url = getlist_group_url;
     if (_roomType == LWChatRoomTypeOneTOne) {
         url = getlist_oto_url;
-        param = @{@"toUserId":LWDATA(self.roomId)};
+        param = @{@"toUserId":LWDATA(self.roomId),@"limit":@"20",@"page":@(self.currentPage)};
     }else{
-        param = @{@"groupId":LWDATA(self.m_Group_ID),@"limit":@"100000",@"page":@"1"};
+        param = @{@"groupId":LWDATA(self.m_Group_ID),@"limit":@"20",@"page":@(self.currentPage)};
     }
     [self requestPostWithUrl:url paraString:param success:^(id  _Nonnull response) {
-        
         NSArray *data = response[@"data"];
+        NSMutableArray *temarr = [NSMutableArray array];
         for (NSDictionary *dict in data) {
-            [self.totalDatasArray addObject:[ShowMsgElem modelWithDictionary:dict]];
+            [temarr addObject:[ShowMsgElem modelWithDictionary:dict]];
         }
-        if (self.totalDatasArray.count > 100) {
-            [self.showDatasArray addObjectsFromArray: [self.totalDatasArray subarrayWithRange:NSMakeRange(self.totalDatasArray.count - 100, 100)]];
-        }else{
-            self.showDatasArray = [self.totalDatasArray mutableCopy];
-        }
+        [self.totalDatasArray insertObjects:temarr atIndex:0];
         
+//        if (self.totalDatasArray.count > 100) {
+//            [self.showDatasArray addObjectsFromArray: [self.totalDatasArray subarrayWithRange:NSMakeRange(self.totalDatasArray.count - 100, 100)]];
+//        }else{
+//        }
+//        [self.showDatasArray removeAllObjects];
+        self.showDatasArray = [self.totalDatasArray mutableCopy];
+
         [self.chatTableView reloadData];
-        [self scrollTableToFoot:NO];
+        if (self.currentPage == 1) {
+            [self scrollTableToFoot:NO];
+        }
+        if (data.count > 0) {
+            self.currentPage++;
+            [self.chatTableView scrollToRow:data.count-1 inSection:0 atScrollPosition:(UITableViewScrollPositionNone) animated:NO];
+        }
+        [self.chatTableView.mj_header endRefreshing];
     } failure:^(NSError * _Nonnull error) {
-        
+        [self.chatTableView.mj_header endRefreshing];
     }];
 }
 
@@ -195,9 +207,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
             msgModel.rowHeight = [IFChatCell caculateTextHeightWithMaxWidth:self.chatTableView.width - [IFChatCell reserveWithForCell] text:msgModel.content];
         }
         [self.totalDatasArray addObject:msgModel];
-        [self.showDatasArray removeAllObjects];
-        //        [self.showDatasArray addObjectsFromArray: [self.totalDatasArray subarrayWithRange:NSMakeRange(self.totalDatasArray.count - 100, 100)]];
-        [self getNeetShowDatas];
+        [self.showDatasArray addObject:msgModel];
         [self.chatTableView reloadData];
         [self scrollTableToFoot:NO];
         
@@ -297,6 +307,9 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.currentPage = 1;
+    
     [self createUI];
     self.showDatasArray = [NSMutableArray array];
     self.totalDatasArray = [NSMutableArray array];
@@ -418,27 +431,27 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    CGPoint offset = scrollView.contentOffset;
-    if (offset.y <= 0) {
-        [self getNeetShowDatas];
-    }
-}
-
-//加载更多数据
-- (void)getNeetShowDatas
-{
-    if (self.totalDatasArray.count > self.showDatasArray.count) {
-        if (self.totalDatasArray.count - self.showDatasArray.count > 50) {
-            NSMutableArray *tem = [[NSMutableArray alloc] initWithArray:[self.totalDatasArray subarrayWithRange:NSMakeRange(self.totalDatasArray.count - self.showDatasArray.count - 50, 50)]];
-            [self.showDatasArray insertObjects:tem atIndex:0];
-        }else{
-            self.showDatasArray = [self.totalDatasArray mutableCopy];
-        }
-        [self.chatTableView reloadData];
-    }
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    CGPoint offset = scrollView.contentOffset;
+//    if (offset.y <= 0) {
+//        [self getNeetShowDatas];
+//    }
+//}
+//
+////加载更多数据
+//- (void)getNeetShowDatas
+//{
+//    if (self.totalDatasArray.count > self.showDatasArray.count) {
+//        if (self.totalDatasArray.count - self.showDatasArray.count > 50) {
+//            NSMutableArray *tem = [[NSMutableArray alloc] initWithArray:[self.totalDatasArray subarrayWithRange:NSMakeRange(self.totalDatasArray.count - self.showDatasArray.count - 50, 50)]];
+//            [self.showDatasArray insertObjects:tem atIndex:0];
+//        }else{
+//            self.showDatasArray = [self.totalDatasArray mutableCopy];
+//        }
+//        [self.chatTableView reloadData];
+//    }
+//}
 
 //图片预览
 - (void)showPic:(NSString *)picPath imageView:(UIImageView *)imageview
@@ -596,6 +609,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         _chatTableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         _chatTableView.rowHeight = UITableViewAutomaticDimension;
         _chatTableView.estimatedRowHeight = 30;
+        _chatTableView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestRecordListDatas)];
     }
     return _chatTableView;
 }
