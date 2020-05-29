@@ -170,8 +170,18 @@
     if (_messageTableView) {
         [_messageTableView reloadData];
     }
-//    操作分组后，刷新联系人列表
+    //    操作分组后，刷新联系人列表
     ADD_NOTI(requestDatas, @"refreshUserGroupListData");
+    
+    ADD_NOTI(unreadMsgNumberChange, LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY);
+}
+
+//监听消息未读数
+- (void)unreadMsgNumberChange
+{
+    //        zJiaoliuController *vc = (zJiaoliuController *)(self.childViewControllers[2].childViewControllers.firstObject);
+    NSInteger num = [LWClientManager share].unreadMsgNum + LWClientManager.share.unreadSysMsgNum;
+    self.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld",(long)num];
 }
 
 - (void)confiUI

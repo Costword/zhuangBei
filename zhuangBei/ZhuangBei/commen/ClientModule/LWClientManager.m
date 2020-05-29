@@ -12,7 +12,8 @@
 #import "XHGroupManager.h"
 #import "AppConfig.h"
 #import "LWClientHeader.h"
-
+#import "ChatRoomViewController.h"
+#import "MessageGroupViewController.h"
 
 @implementation LWUserinforIMModel
 -(NSString *)avatarID
@@ -129,9 +130,20 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 - (void)groupMessagesDidReceive:(NSString *)aMessage fromID:(NSString *)fromID groupID:(NSString *)groupID{
     POST_NOTI(NEW_MSG_GROPU_NOTI_KEY, (@{@"msg":aMessage,@"fromid":fromID,@"groupID":groupID}));
     
-    NSString *groupname = self.allGroupDatas[[NSNumber numberWithString:groupID]];
-    //type: 1:group; 2:oto
-    [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
+    //    如果当前控制器是正是当前群组时，本地不再添加未读数
+    UIViewController *currentVC = [LWClientManager topController];
+    if ([currentVC isKindOfClass: [MessageGroupViewController class]]) {
+        MessageGroupViewController *chatvc = (MessageGroupViewController *)currentVC;
+        if ([chatvc.roomId integerValue] != [groupID integerValue]) {
+            NSString *groupname = self.allGroupDatas[[NSNumber numberWithInteger:[groupID integerValue]]];
+            //type: 1:group; 2:oto
+            [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
+        }
+    }else{
+        NSString *groupname = self.allGroupDatas[[NSNumber numberWithInteger:[groupID integerValue]]];
+        //type: 1:group; 2:oto
+        [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
+    }
 }
 
 
@@ -141,9 +153,20 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 {
     POST_NOTI(NEW_MSG_CHAT_NOTI_KEY, (@{@"msg":message,@"fromid":uid}));
     
-    NSString *friendname = self.allGroupDatas[[NSNumber numberWithString:uid]];
-    //type: 1:group; 2:oto
-    [self addNewUnReadMsgWithRoomName:LWDATA(friendname) roomId:LWDATA(uid) chatType:2 extend:nil];
+//    如果当前控制器是正是对方时，本地不再添加未读数
+    UIViewController *currentVC = [LWClientManager topController];
+    if ([currentVC isKindOfClass: [ChatRoomViewController class]]) {
+        ChatRoomViewController *chatvc = (ChatRoomViewController *)currentVC;
+        if ([chatvc.roomId integerValue] != [uid integerValue]) {
+            NSString *friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]];
+            //type: 1:group; 2:oto
+            [self addNewUnReadMsgWithRoomName:[LWDATA(friendname) isNotBlank] ? friendname:@"临时消息" roomId:LWDATA(uid) chatType:2 extend:nil];
+        }
+    }else{
+        NSString *friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]];
+        //type: 1:group; 2:oto
+        [self addNewUnReadMsgWithRoomName:[LWDATA(friendname) isNotBlank] ? friendname:@"临时消息" roomId:LWDATA(uid) chatType:2 extend:nil];
+    }
 }
 
 #pragma mark -------------------XHLoginManagerDelegate--------------
@@ -207,7 +230,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         [[zHud shareInstance] showMessage:@"未获取到userId"];
         return;
     }
-    NSString *nowtime = [self currentdateInterval];
+//    NSString *nowtime = [self currentdateInterval];
     [ServiceManager requestPostWithUrl:sendmsg_oto_url body:[self gettotoParamString:@{@"content":LWDATA(msg),@"toUserId":LWDATA(roomId)}] success:^(id  _Nonnull response) {
         success(response);
     } failure:^(NSError * _Nonnull error) {
@@ -262,12 +285,12 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     NSMutableArray *chatrecord = [LWClientManager getLocalChatRecordModelList];
     __block BOOL ishave = NO;
     [chatrecord enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj.roomId isEqualToString:roomId]) {
+        if ([obj.roomId integerValue] == [roomId integerValue]) {
             ishave = YES;
             *stop = YES;
         }
     }];
-    if (!ishave && ![LWClientManager.share.userinforIM.customId isEqualToString:roomId]) {
+    if (!ishave && [LWClientManager.share.userinforIM.customId integerValue] != [roomId integerValue]) {
         LWLocalChatRecordModel *model = [LWLocalChatRecordModel new];
         model.roomId = roomId;
         model.roomName = roomName;
@@ -413,7 +436,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
             *stop = YES;
         }
     }];
-    if (!ishave &&![self.userinforIM.customId isEqualToString:roomId]) {
+    if (!ishave && [self.userinforIM.customId  integerValue] != [roomId integerValue]) {
         LWLocalChatRecordModel *model = [LWLocalChatRecordModel new];
         model.roomId = roomId;
         model.roomName = roomName;
@@ -455,7 +478,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 {
     NSMutableArray *unreadmsg = [self getLocalUnReadMsg];
     [unreadmsg enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj.roomId isEqualToString:roomId]) {
+        if ([obj.roomId integerValue] ==  [roomId integerValue]) {
             [unreadmsg removeObject:obj];
             *stop = YES;
         }
@@ -471,7 +494,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     //    清空本地聊天记录的未读数
     NSMutableArray *localchatreacrod = [LWClientManager getLocalChatRecordModelList];
     [localchatreacrod enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj.roomId isEqualToString:roomId]) {
+        if ([obj.roomId integerValue] ==  [roomId integerValue]) {
             obj.unreadNum = 0;
             *stop = YES;
         }
@@ -514,6 +537,27 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     }
     return _allGroupDatas;
 }
+
+
++ (UIViewController *)topController {
+    
+    UIViewController *topC = [self topViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
+    while (topC.presentedViewController) {
+        topC = [self topViewController:topC.presentedViewController];
+    }
+    return topC;
+}
+
++ (UIViewController *)topViewController:(UIViewController *)controller {
+    if ([controller isKindOfClass:[UINavigationController class]]) {
+        return [self topViewController:[(UINavigationController *)controller topViewController]];
+    } else if ([controller isKindOfClass:[UITabBarController class]]) {
+        return [self topViewController:[(UITabBarController *)controller selectedViewController]];
+    } else {
+        return controller;
+    }
+}
+
 @end
 
 

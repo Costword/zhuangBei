@@ -17,8 +17,16 @@
 {
     return  @{@"isMySelf":@"mine",
               @"userID":@"uid",
-              @"time":@"sendTime",
+              @"time":@[@"sendTime",@"time"],
     };
+}
+
+-(NSString *)username
+{
+    if(_username){
+        return _username;
+    }
+    return @"佚名";
 }
 
 - (LWMsgType)msgType
