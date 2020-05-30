@@ -187,6 +187,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     NSString *username = [SYSTEM_USERDEFAULTS objectForKey:USER_ACCOUNT_IM_NICKNAME];
     newMsgElem.username = [username isNotBlank] ? username : [zUserInfo shareInstance].userInfo.username;
     newMsgElem.time = [[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+    newMsgElem.uavatar = LWClientManager.share.userinforIM.avatar;
     [self showTrace:newMsgElem];
 }
 
@@ -199,7 +200,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     dispatch_async(dispatch_get_main_queue(), ^{
         
         if ([msgModel.userID isEqualToString:[IMUserInfo shareInstance].userID]) {
-            msgModel.isMySelf = YES;
+            msgModel.mine = 1;
         }
         if(msgModel.msgType == LWMsgTypeImage){
             msgModel.rowHeight = 200+ 10+20 + 25+ 15 + 15+10+15;
@@ -232,8 +233,9 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 
 - (void)receiveNewChatGroupMsg:(NSNotification *)noti
 {
-    if (self.roomType != LWChatRoomTypeGroup) return;
     NSDictionary *msgdic = noti.object;
+    if (self.roomType != LWChatRoomTypeGroup) return;
+    if([self.roomId integerValue] != [msgdic[@"groupID"] integerValue]) return;
     NSDictionary *dict = [LWTool stringToDictory:msgdic[@"msg"]];
     ShowMsgElem *model = [ShowMsgElem modelWithDictionary:dict[@"mid"]];
     model.username = LWDATA(dict[@"username"]);
@@ -266,10 +268,12 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 #pragma mark ----------- XHChatManagerDelegate 通知-------------
 - (void)receiveNewChatMsg:(NSNotification *)noti
 {
-    if (self.roomType != LWChatRoomTypeOneTOne) return;
     NSDictionary *msgdic = noti.object;
+    if (self.roomType != LWChatRoomTypeOneTOne) return;
+    if([self.roomId integerValue] != [msgdic[@"fromid"] integerValue]) return;
     NSDictionary *dict = [LWTool stringToDictory:msgdic[@"msg"]];
     ShowMsgElem *model = [ShowMsgElem modelWithDictionary:dict];
+    model.uavatar = [NSString stringWithFormat:@"/app/app/appfujian/download?attID=%@",dict[@"mid"][@"id"]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self showTrace:model];
     });
@@ -377,10 +381,10 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     ShowMsgElem * getNewShowMsgElem =  [self.showDatasArray objectAtIndex:row];
     
     IFChatCell *cell;
-    IFChatCellStyle cellStyle = getNewShowMsgElem.isMySelf ? IFChatCellStyleRight:IFChatCellStyleLeft;
+    IFChatCellStyle cellStyle = getNewShowMsgElem.mine == 1 ? IFChatCellStyleRight:IFChatCellStyleLeft;
     
     if (getNewShowMsgElem.msgType == LWMsgTypeText) {
-        NSString *tableSampleIdentifier = getNewShowMsgElem.isMySelf ? @"TableSampleIdentifierRight":@"TableSampleIdentifierLeft";
+        NSString *tableSampleIdentifier = getNewShowMsgElem.mine == 1 ? @"TableSampleIdentifierRight":@"TableSampleIdentifierLeft";
         
         cell = [tableView dequeueReusableCellWithIdentifier:
                 tableSampleIdentifier];
@@ -404,7 +408,13 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
             [self showPic:getNewShowMsgElem.imagePath imageView:cell.contextImageView];
         };
     }
-    [cell.iconIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",kApiPrefix_PIC,getNewShowMsgElem.uavatar]] placeholderImage:[UIImage imageNamed:@"voip_header"]];
+    NSString *avatar;
+//    if (getNewShowMsgElem.mine == 1) {
+//    }else{
+//        avatar = getNewShowMsgElem.toAvatar;
+//    }
+    avatar = getNewShowMsgElem.uavatar;
+    [cell.iconIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",kApiPrefix_PIC,avatar]] placeholderImage:[UIImage imageNamed:@"voip_header"]];
     cell.titleLabel.text = getNewShowMsgElem.username;
     cell.subTitleLabel.text = getNewShowMsgElem.time;
     
@@ -495,7 +505,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         NSDictionary *dict = @{
             @"id":LWDATA(self.roomId),
             @"username":LWDATA(_friendInforModel.chatNickName),
-            @"avatar":[NSString stringWithFormat:@"/app/app/appfujian/download?attID=%@",LWDATA(_friendInforModel.portrait)],
+            @"avatar": [NSString stringWithFormat:@"/app/app/appfujian/download?attID=%@",LWDATA(self.friendInforModel.portrait)],
             @"content":LWDATA(text),
             @"sign":LWDATA(_friendInforModel.sign),
             @"mainProduct":LWDATA(_friendInforModel.mainProducts),
