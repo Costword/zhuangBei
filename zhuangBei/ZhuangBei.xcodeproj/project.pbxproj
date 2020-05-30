@@ -226,10 +226,10 @@
 		00FE9BAF2476B878002A1F86 /* MorePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B772476B878002A1F86 /* MorePanel.m */; };
 		00FE9BB02476B878002A1F86 /* ChatKeyBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B792476B878002A1F86 /* ChatKeyBoard.m */; };
 		6BE41E3FCD0C213AB1550073 /* libPods-ZhuangBei.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */; };
+		890424802481E3120032B1C8 /* libbz2.1.0.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 890643E424694F570099508C /* libbz2.1.0.5.tbd */; };
 		890643C624690A030099508C /* LWThreeLevelTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 890643C524690A030099508C /* LWThreeLevelTableView.m */; };
 		890643C924693C360099508C /* LWJiaoLiuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 890643C824693C360099508C /* LWJiaoLiuModel.m */; };
 		890643E324694F030099508C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 890643E224694EFA0099508C /* libz.tbd */; };
-		890643E524694F680099508C /* libbz2.1.0.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 890643E424694F570099508C /* libbz2.1.0.5.tbd */; };
 		890643E724694F780099508C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 890643E624694F780099508C /* VideoToolbox.framework */; };
 		890643E924694F8B0099508C /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 890643E824694F830099508C /* libiconv.tbd */; };
 		8907722224768D3400470058 /* launch_icon_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 8907722124768D3400470058 /* launch_icon_big.png */; };
@@ -892,8 +892,8 @@
 			files = (
 				890643E924694F8B0099508C /* libiconv.tbd in Frameworks */,
 				6BE41E3FCD0C213AB1550073 /* libPods-ZhuangBei.a in Frameworks */,
-				890643E524694F680099508C /* libbz2.1.0.5.tbd in Frameworks */,
 				890643E724694F780099508C /* VideoToolbox.framework in Frameworks */,
+				890424802481E3120032B1C8 /* libbz2.1.0.5.tbd in Frameworks */,
 				890643E324694F030099508C /* libz.tbd in Frameworks */,
 				00FE9AF72476B832002A1F86 /* libstarRTC.a in Frameworks */,
 			);

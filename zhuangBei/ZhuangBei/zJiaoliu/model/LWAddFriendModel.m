@@ -13,6 +13,8 @@
 + (NSDictionary *)modelCustomPropertyMapper
 {
     return @{@"groupdescription":@[@"description"],
-             @"customId":@"id"};
+             @"customId":@"id",
+             @"nickName":@[@"nickName",@"nickname"],
+    };
 }
 @end

@@ -26,7 +26,11 @@ typedef NS_ENUM(NSUInteger, LWMsgType) {
 
 @property (nonatomic, copy) NSString *userID;
 @property (nonatomic, copy) NSString *content;
-@property (nonatomic, assign) BOOL isMySelf; //是否是自己消息
+//@property (nonatomic, assign) BOOL isMySelf; //是否是自己消息
+// 1 self; 0 other
+@property (nonatomic, assign) NSInteger mine;
+
+@property (nonatomic, strong) NSString * toAvatar;
 
 @property (nonatomic, assign) CGFloat rowHeight;
 

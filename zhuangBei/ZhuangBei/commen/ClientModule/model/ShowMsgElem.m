@@ -18,6 +18,7 @@
     return  @{@"isMySelf":@"mine",
               @"userID":@"uid",
               @"time":@[@"sendTime",@"time"],
+              @"uavatar":@[@"avatar",@"uavatar"],
     };
 }
 
