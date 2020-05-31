@@ -33,7 +33,7 @@
 @property (nonatomic, strong) UITableView * groupTableView;
 @property (nonatomic, strong) UIScrollView * mainScrollView;
 @property (nonatomic, strong) LWJiaoLiuAddAlearView * alearView;
-
+@property (nonatomic, assign) BOOL  isLoad;
 @end
 
 @implementation zJiaoliuController
@@ -135,7 +135,17 @@
     if (_switchBarView) {
         [self.mainScrollView setContentOffset:CGPointMake(SCREEN_WIDTH*self.switchBarView.currentIndex, 1) animated:NO];
     }
-    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (_isLoad) {
+        if ((LWClientManager.share.unreadMsgNum + LWClientManager.share.unreadSysMsgNum)>0) {
+            self.switchBarView.selectIndex = 3;
+        }
+    }
+    _isLoad = NO;
 }
 
 - (void)refreshChatRecordList
@@ -174,6 +184,8 @@
     ADD_NOTI(requestDatas, @"refreshUserGroupListData");
     
     ADD_NOTI(unreadMsgNumberChange, LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY);
+    
+    _isLoad = YES;
 }
 
 //监听消息未读数
