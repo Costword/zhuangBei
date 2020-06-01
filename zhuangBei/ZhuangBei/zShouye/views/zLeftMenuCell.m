@@ -109,17 +109,17 @@
     return cell;
 }
 
-//-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return CGSizeMake(kWidthFlot(110), kWidthFlot(50));
-//}
-
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    zGoodsMenuModel * typeModel = self.goodsModel.children[indexPath.item];
-    CGSize total =  [self stringSize:typeModel.title];
-    return CGSizeMake(total.width, kWidthFlot(30));
+    return CGSizeMake(kWidthFlot(110), kWidthFlot(30));
 }
+
+//-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    zGoodsMenuModel * typeModel = self.goodsModel.children[indexPath.item];
+//    CGSize total =  [self stringSize:typeModel.title];
+//    return CGSizeMake(total.width, kWidthFlot(30));
+//}
 
 
 - (CGSize)stringSize:(NSString *)string {
