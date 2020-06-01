@@ -33,7 +33,7 @@
 @property (nonatomic, strong) UITableView * groupTableView;
 @property (nonatomic, strong) UIScrollView * mainScrollView;
 @property (nonatomic, strong) LWJiaoLiuAddAlearView * alearView;
-@property (nonatomic, assign) BOOL  isLoad;
+ 
 @end
 
 @implementation zJiaoliuController
@@ -137,17 +137,6 @@
     }
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    if (_isLoad) {
-        if ((LWClientManager.share.unreadMsgNum + LWClientManager.share.unreadSysMsgNum)>0) {
-            self.switchBarView.selectIndex = 3;
-        }
-    }
-    _isLoad = NO;
-}
-
 - (void)refreshChatRecordList
 {
     self.listDatas_chatrecord = [LWClientManager getLocalChatRecord];
@@ -185,7 +174,6 @@
     
     ADD_NOTI(unreadMsgNumberChange, LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY);
     
-    _isLoad = YES;
 }
 
 //监听消息未读数
@@ -199,7 +187,7 @@
 - (void)confiUI
 {
     WEAKSELF(self)
-    self.switchBarView = [LWSwitchBarView switchBarView:@[@"交流",@"联系人",@"群组",@"消息",] clickBlock:^(UIButton * _Nonnull btn) {
+    self.switchBarView = [LWSwitchBarView switchBarView:@[@"消息",@"联盟",@"群组",@"联系人",] clickBlock:^(UIButton * _Nonnull btn) {
         [weakself clickSwitchBarEvent:btn.tag];
     }];
     [self.view addSubview:self.switchBarView];
@@ -459,7 +447,7 @@
         _mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, SCREEN_WIDTH, self.view.height-60-10)];
         _mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH*4, 1000);
         _mainScrollView.backgroundColor = UIColor.whiteColor;
-        NSArray *sub = @[self.collectView,self.contatcsTableView,self.groupTableView,self.messageTableView,];
+        NSArray *sub = @[self.messageTableView,self.collectView,self.groupTableView,self.contatcsTableView,];
         [_mainScrollView addSubviews:sub];
         for (int i = 0; i< sub.count; i++) {
             [sub[i] mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -485,7 +473,6 @@
     return _listDatas_Group;
 }
 
-
 - (NSMutableArray *)listDatas_JiaoLiu
 {
     if (!_listDatas_JiaoLiu) {
@@ -493,6 +480,7 @@
     }
     return _listDatas_JiaoLiu;
 }
+
 - (LWJiaoLiuAddAlearView *)alearView
 {
     if (!_alearView) {
@@ -500,4 +488,5 @@
     }
     return _alearView;
 }
+
 @end

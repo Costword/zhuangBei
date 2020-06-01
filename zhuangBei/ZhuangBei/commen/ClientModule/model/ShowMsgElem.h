@@ -38,4 +38,6 @@ typedef NS_ENUM(NSUInteger, LWMsgType) {
 //如果是图片类型的 则获取图片地址
 @property (nonatomic, strong) NSString * imagePath;
 
+@property (nonatomic, strong) NSString * mainProduct;
+
 @end

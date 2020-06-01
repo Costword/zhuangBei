@@ -416,7 +416,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     avatar = getNewShowMsgElem.uavatar;
     [cell.iconIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",kApiPrefix_PIC,avatar]] placeholderImage:[UIImage imageNamed:@"voip_header"]];
     cell.titleLabel.text = getNewShowMsgElem.username;
-    cell.subTitleLabel.text = getNewShowMsgElem.time;
+    cell.subTitleLabel.text = getNewShowMsgElem.mainProduct;
     
     return cell;
 }
