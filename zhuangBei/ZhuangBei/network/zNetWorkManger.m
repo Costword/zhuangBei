@@ -67,22 +67,15 @@
     NSString *requestUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [manager POST:requestUrl parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[zHud shareInstance]hild];
-//        });
+        [[zHud shareInstance]hild];
         NSLog(@"\n*************url:%@,\n para:%@ \n*********responseObject:%@",url,param,responseObject); 
         loadSuccess(responseObject);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[zHud shareInstance]hild];
-//        });
-        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {        
         LWLog(@"\n***********请求失败**url:%@,\n para:%@ \n*********error:%@********",url,param,error);
         NSInteger code = error.code;
         if (code == -1004 || code == -1001) {
             [[zHud shareInstance]showMessage:@"请求超时,无法连接服务器"];
-        }
-        if (code == 3840) {
+        }else if (code == 3840) {
             
             [[zUserInfo shareInstance]deleate];
             
@@ -96,6 +89,9 @@
             rootNav.navigationBar.hidden = YES;
              UIApplication *app = [UIApplication sharedApplication];
             [app keyWindow].rootViewController = rootNav;
+        }else
+        {
+            [[zHud shareInstance]hild];
         }
         loadFailure(error);
     }];
