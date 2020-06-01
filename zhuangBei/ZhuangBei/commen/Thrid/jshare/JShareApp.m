@@ -80,6 +80,9 @@
                     }
                     failHandle(@(JShareAppErrorNotInstall));
                 } else {
+                    if (error.code == 40003) {
+                        [[zHud shareInstance]showMessage:@"配置有误"];
+                    }
                     failHandle(@"");
                 }
             }

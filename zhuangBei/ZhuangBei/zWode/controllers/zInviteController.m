@@ -119,11 +119,10 @@
     if (!_WXShareBtn) {
         _WXShareBtn = [[UIButton alloc]init];
         [_WXShareBtn setImage:[UIImage imageNamed:@"WX_Share"] forState:UIControlStateNormal];
-//        _WXShareBtn.layer.cornerRadius = kWidthFlot(25);
         _WXShareBtn.clipsToBounds = YES;
         _WXShareBtn.tag = 3;
         [_WXShareBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        _WXShareBtn.alpha = 0;
+        _WXShareBtn.alpha = 1;
     }
     return _WXShareBtn;
 }
@@ -148,14 +147,7 @@
 
 
 
--(void)shareQQ{
-    NSString *url = [[NSBundle mainBundle] URLForResource:@"storeIMage" withExtension:@"png"].absoluteString;
-    [JShareApp shareImageWithPlatform:JSHAREPlatformQQ imageUrl:url OrImage:self.inviteImageView.image success:^(id  _Nonnull info) {
-        
-    } fail:^(id  _Nonnull info) {
-        
-    }];
-}
+
 
 -(void)viewDidLayoutSubviews
 {
@@ -216,15 +208,34 @@
     }
     
     if (button.tag == 2) {
-        [[zHud shareInstance]showMessage:@"分享QQ"];
+//        [[zHud shareInstance]showMessage:@"分享QQ"];
         [self shareQQ];
         return;
     }
     
     if (button.tag == 3) {
-        [[zHud shareInstance]showMessage:@"分享微信"];
+//        [[zHud shareInstance]showMessage:@"分享微信"];
+        [self shareWX];
         return;
     }
+}
+
+-(void)shareQQ{
+    NSString *url = [[NSBundle mainBundle] URLForResource:@"storeIMage" withExtension:@"png"].absoluteString;
+    [JShareApp shareImageWithPlatform:JSHAREPlatformQQ imageUrl:url OrImage:self.inviteImageView.image success:^(id  _Nonnull info) {
+        
+    } fail:^(id  _Nonnull info) {
+        
+    }];
+}
+
+-(void)shareWX{
+    NSString *url = [[NSBundle mainBundle] URLForResource:@"storeIMage" withExtension:@"png"].absoluteString;
+    [JShareApp shareImageWithPlatform:JSHAREPlatformWechatSession imageUrl:url OrImage:self.inviteImageView.image success:^(id  _Nonnull info) {
+        
+    } fail:^(id  _Nonnull info) {
+        
+    }];
 }
 
 -(void)RequsetFileWithUrl:(NSString*)url WithError:(NSError*)err
