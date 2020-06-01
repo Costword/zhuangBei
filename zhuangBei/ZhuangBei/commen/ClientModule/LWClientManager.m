@@ -14,6 +14,8 @@
 #import "LWClientHeader.h"
 #import "ChatRoomViewController.h"
 #import "MessageGroupViewController.h"
+#import "zDengluController.h"
+#import "MainNavController.h"
 
 @implementation LWUserinforIMModel
 -(NSString *)avatarID
@@ -186,6 +188,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 - (void)userAccountDidLoginFromOtherDevice;
 {
     [[zHud shareInstance] showMessage:@"该用户已从其他设备登录"];
+    [self needRelogin];
 }
 
 /**
@@ -556,6 +559,20 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     } else {
         return controller;
     }
+}
+
+
+/// 账号被挤掉
+- (void)needRelogin
+{
+    [[zUserInfo shareInstance]deleate];
+//    [[zHud shareInstance]showMessage:@"登录信息超时,请重新登录"];
+    //登录超时重新登录
+    zDengluController * rootVC  = [[zDengluController alloc]init];
+    MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
+    rootNav.navigationBar.hidden = YES;
+    UIApplication *app = [UIApplication sharedApplication];
+    [app keyWindow].rootViewController = rootNav;
 }
 
 @end
