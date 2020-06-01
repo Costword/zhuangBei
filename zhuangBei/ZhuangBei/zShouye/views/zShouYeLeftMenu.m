@@ -64,7 +64,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   zGoodsMenuModel * model =  _menuArray[section];
+   zGoodsMenuModel * model =  self.menuArray[section];
     if (model.select==YES) {
         return model.children.count;
     }
@@ -80,7 +80,7 @@
             weakSelf.menuSelectBack(goodsModel);
         }
     };
-    zGoodsMenuModel * model =  _menuArray[indexPath.section];
+    zGoodsMenuModel * model =  self.menuArray[indexPath.section];
     zGoodsMenuModel * secondModel = model.children[indexPath.row];
     cell.goodsModel =  secondModel;
     return cell;
@@ -97,41 +97,26 @@
             weakSelf.menuSelectBack(model);
         }
         [UIView performWithoutAnimation:^{
-           [weakSelf.menuTableView reloadSection:hymodel.indexSection withRowAnimation:UITableViewRowAnimationNone];
+            [weakSelf.menuTableView reloadData];
         }];
     };
-    header.hyModel = _menuArray[section];
+    header.hyModel = self.menuArray[section];
     return header;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     __weak typeof(self)weakSelf = self;
-    zGoodsMenuModel * model =  _menuArray[indexPath.section];
+    zGoodsMenuModel * model =  self.menuArray[indexPath.section];
     zGoodsMenuModel * secondModel = model.children[indexPath.row];
     secondModel.select = !secondModel.select;
     [UIView performWithoutAnimation:^{
-       [weakSelf.menuTableView reloadSection:model.indexSection withRowAnimation:UITableViewRowAnimationNone];
+        [weakSelf.menuTableView reloadData];
     }];
-    if (self.menutapBack) {
-        self.menutapBack(indexPath.row);
-    }
-    if (weakSelf.menuSelectBack) {
-        weakSelf.menuSelectBack(model);
-    }
 }
 
 -(void)setMenuArray:(NSArray *)menuArray
 {
-//    NSMutableArray * array = [NSMutableArray array];
-//    [menuArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        zHuoYuanModel * model = [[zHuoYuanModel alloc]init];
-//        model.name = [NSString stringWithFormat:@"目录--%ld",idx];
-//        model.select = NO;
-//        model.indexSection = idx;
-//        model.hyArray = @[@"二级目录1",@"二级目录2",@"二级目录3"];
-//        [array addObject:model];
-//    }];
     _menuArray = menuArray;
     [self.menuTableView reloadData];
 }
