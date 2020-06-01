@@ -92,4 +92,13 @@
     self.layer.shadowRadius=5;
 }
 
+-(void)setSelectIndex:(NSInteger)selectIndex
+{
+    if(selectIndex > _itembtns.count - 1) return;
+    _selectIndex = selectIndex;
+    _currentIndex = _selectIndex;
+    UIButton *item = self.itembtns[_selectIndex];
+    [self clickBtnItem:item];
+}
+
 @end

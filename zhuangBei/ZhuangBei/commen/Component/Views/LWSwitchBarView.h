@@ -22,6 +22,9 @@ typedef void(^clickBlock)(UIButton *btn);
 /// @param callBlock 点击事件回调（UIButton）
 + (instancetype)switchBarView:(NSArray *)items clickBlock:(clickBlock)callBlock;
 
+//主动设置当前的index
+@property (nonatomic, assign) NSInteger  selectIndex;
+
 @end
 
 NS_ASSUME_NONNULL_END
