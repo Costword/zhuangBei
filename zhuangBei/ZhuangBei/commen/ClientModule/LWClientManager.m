@@ -93,8 +93,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 //退出SDK
 - (void)userLogout
 {
-    XHLoginManager *loginmanager = [[XHLoginManager alloc] init];
-    [loginmanager logout];
+    [[XHClient sharedClient].loginManager logout];
 }
 
 //登录SDK
@@ -104,8 +103,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     
     zUserModel * model = [zUserInfo shareInstance].userInfo;
     if (model.userId) {
-        XHLoginManager *loginmanager = [[XHLoginManager alloc] init];
-        [loginmanager loginFree:^(NSError *error) {
+        [[XHClient sharedClient].loginManager loginFree:^(NSError *error) {
             LWLog(@"——————%@————XHLoginManager登录error：%@",model.userId,error);
         }];
     }

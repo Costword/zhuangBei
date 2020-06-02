@@ -9,6 +9,7 @@
 #import "zLeftMenuCell.h"
 #import "UICollectionViewLeftAlignedLayout.h"
 #import "zLeftMenuThirdCell.h"
+#import "handWritingListLayout.h"
 
 @interface zLeftMenuCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -35,7 +36,7 @@
         _arrowButton = [[UIButton alloc]init];
         _arrowButton.userInteractionEnabled = NO;
         [_arrowButton setImage:[UIImage imageNamed:@"leftMenu_arrowDown"] forState:UIControlStateNormal];
-        [_arrowButton setImage:[UIImage imageNamed:@"leftMenu_arrowLeft"] forState:UIControlStateNormal];
+        [_arrowButton setImage:[UIImage imageNamed:@"leftMenu_arrowLeft"] forState:UIControlStateSelected];
         _arrowButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _arrowButton.titleLabel.font = [UIFont systemFontOfSize:kWidthFlot(12)];
         [_arrowButton setTitleColor:[UIColor colorWithHexString:@"#4A4A4A"] forState:UIControlStateNormal];
@@ -46,7 +47,7 @@
 -(UICollectionView*)cityCollectView
 {
     if (!_cityCollectView) {
-        UICollectionViewLeftAlignedLayout * layout = [[UICollectionViewLeftAlignedLayout alloc]init];
+        handWritingListLayout * layout = [[handWritingListLayout alloc]init];
         layout.sectionInset = UIEdgeInsetsMake(0,0,0,0);
         layout.minimumLineSpacing = kWidthFlot(1);
         layout.minimumInteritemSpacing = kWidthFlot(1);
@@ -89,7 +90,7 @@
         make.left.mas_equalTo(kWidthFlot(20));
         make.right.mas_equalTo(-kWidthFlot(20));
         make.height.mas_equalTo(kWidthFlot(1)).priorityLow();
-        make.bottom.mas_equalTo(-kWidthFlot(5));
+        make.bottom.mas_equalTo(-kWidthFlot(1));
     }];
 }
 
@@ -110,10 +111,15 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    zGoodsMenuModel * typeModel = self.goodsModel.children[indexPath.item];
-    CGSize total =  [self stringSize:typeModel.title];
-    return CGSizeMake(total.width, kWidthFlot(40));
+    return CGSizeMake(kWidthFlot(110), kWidthFlot(30));
 }
+
+//-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    zGoodsMenuModel * typeModel = self.goodsModel.children[indexPath.item];
+//    CGSize total =  [self stringSize:typeModel.title];
+//    return CGSizeMake(total.width, kWidthFlot(30));
+//}
 
 
 - (CGSize)stringSize:(NSString *)string {
@@ -140,11 +146,12 @@
 {
     _goodsModel = goodsModel;
     [self.arrowButton setTitle:goodsModel.title forState:UIControlStateNormal];
+    self.arrowButton.selected = goodsModel.select;
     if (_goodsModel.children.count>0) {
         [self.cityCollectView reloadData];
         [self.cityCollectView layoutIfNeeded];
         CGFloat height = self.cityCollectView.collectionViewLayout.collectionViewContentSize.height;
-
+        NSLog(@"height = %lf",height);
         [self.cityCollectView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(height).priorityHigh();
         }];

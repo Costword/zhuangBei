@@ -278,18 +278,18 @@
         if ([code integerValue] == 0) {
             NSArray * treeList = dic[@"treeList"];
             NSMutableArray * firstArray = [NSMutableArray array];
-            NSMutableArray * secondArray = [NSMutableArray array];
-            NSMutableArray * thirdArray = [NSMutableArray array];
             [treeList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 //遍历一级数组
                 NSDictionary * dic =treeList[idx];
                 zGoodsMenuModel * model = [zGoodsMenuModel mj_objectWithKeyValues:dic];
                 model.indexSection = idx;
+                NSMutableArray * secondArray = [NSMutableArray array];
                 [model.children enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger jdx, BOOL * _Nonnull stop) {
                     //遍历二级数组
                     NSDictionary * sedondDic = model.children[jdx];
                     zGoodsMenuModel * secondModel = [zGoodsMenuModel mj_objectWithKeyValues:sedondDic];
                     secondModel.indexSection = jdx;
+                    NSMutableArray * thirdArray = [NSMutableArray array];
                     [secondModel.children enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger zdx, BOOL * _Nonnull stop) {
                         //遍历数组
                         NSDictionary * thirdDic = secondModel.children[zdx];

@@ -28,7 +28,7 @@
     JSHARELaunchConfig *config = [[JSHARELaunchConfig alloc] init];
     config.appKey = JGAPPK;
     config.WeChatAppId = weXinAppId;
-//    config.WeChatAppSecret = weiXinSecret;
+    config.WeChatAppSecret = weiXinSecret;
     config.QQAppId = qqAppId;
     config.QQAppKey = qqAppKey;
     [JSHAREService setupWithConfig:config];

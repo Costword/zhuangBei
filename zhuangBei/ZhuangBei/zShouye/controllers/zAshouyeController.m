@@ -77,7 +77,7 @@
     CGPoint offset = self.childScroContentView.contentOffset;
     offset.x = 0;
     [self.childScroContentView setContentOffset:offset animated:YES];
-    [[LWClientManager share] userLogin];
+    
 }
 
 -(void)setupChildViewControllers

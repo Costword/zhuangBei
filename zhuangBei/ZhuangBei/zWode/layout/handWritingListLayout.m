@@ -48,16 +48,17 @@
     
     //保存内容尺寸
     
-    int count = SCREEN_WIDTH == 320 ? 5 : 5;
-    NSInteger linesItem =  maxNumberOfItems / count;
-    NSInteger yushu = maxNumberOfItems % count;
+//    int count = SCREEN_WIDTH == 320 ? 5 : 5;
+    NSInteger linesItem =  maxNumberOfItems;
+//    / count;
+//    NSInteger yushu = maxNumberOfItems % count;
     
-    CGSize exactItemSize = CGSizeMake(kWidthFlot(70), kWidthFlot(30));
+    CGSize exactItemSize = CGSizeMake(kWidthFlot(110), kWidthFlot(30));
     
-    if (yushu != 0) {
-        linesItem += 1;
-    }
-    self.contentSize = CGSizeMake(SCREEN_WIDTH, linesItem * exactItemSize.height + (linesItem-1)*10 + 20);
+//    if (yushu != 0) {
+//        linesItem += 1;
+//    }
+    self.contentSize = CGSizeMake(kWidthFlot(110), linesItem * exactItemSize.height + (linesItem-1)*1 +5);
 }
 
 
