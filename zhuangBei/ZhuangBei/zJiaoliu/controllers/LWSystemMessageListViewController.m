@@ -75,7 +75,7 @@
         [self.groupTableView.mj_header endRefreshing];
         [self.groupTableView.mj_footer endRefreshing];
         
-        NSDictionary *data = response[@"data"];
+        NSDictionary *data = response[@"page"];
         self.curretnPage_sys = [data[@"currPage"] integerValue];
         self.totalPage_sys = [data[@"totalPage"] integerValue];
         NSArray *list = data[@"list"];
@@ -130,7 +130,7 @@
 - (void)requestDatas
 {
     [self requestPostWithUrl:@"app/appfriendapply/msgList" Parameters:@{@"page":@(self.currPage)} success:^(id  _Nonnull response) {
-        NSDictionary *data = response[@"data"];
+        NSDictionary *data = response[@"page"];
         self.currPage = [data[@"currPage"] integerValue];
         self.totalPage = [data[@"totalPage"] integerValue];
         NSArray *list = data[@"list"];

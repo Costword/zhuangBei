@@ -130,6 +130,13 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 //接收群组消息
 - (void)groupMessagesDidReceive:(NSString *)aMessage fromID:(NSString *)fromID groupID:(NSString *)groupID{
+    
+    if ([fromID integerValue] == 0) {
+        if ([fromID isEqualToString:@"system"]) {
+            [self requestUnReadSystemMsgNumber];
+        }
+        return;
+    }
     POST_NOTI(NEW_MSG_GROPU_NOTI_KEY, (@{@"msg":aMessage,@"fromid":fromID,@"groupID":groupID}));
     
     //    如果当前控制器是正是当前群组时，本地不再添加未读数
@@ -153,6 +160,12 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 - (void)chatMessageDidReceived:(NSString *)message fromID:(NSString *)uid;
 {
+    if ([uid integerValue] == 0) {
+        if ([uid isEqualToString:@"system"]) {
+            [self requestUnReadSystemMsgNumber];
+        }
+        return;
+    }
     POST_NOTI(NEW_MSG_CHAT_NOTI_KEY, (@{@"msg":message,@"fromid":uid}));
     
 //    如果当前控制器是正是对方时，本地不再添加未读数
@@ -331,7 +344,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 + (void)removeLocalChatRecord
 {
     [LWClientManager.share deleteAllUnReadMsgNum];
-    
+    [LWClientManager.share.allGroupDatas removeAllObjects];
     [SYSTEM_USERDEFAULTS removeObjectForKey:LOCAL_CHATRECORD_LIST_KEY];
     [SYSTEM_USERDEFAULTS synchronize];
 }

@@ -345,7 +345,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (void)createUI {
     
     [self.view addSubview:self.chatTableView];
-    self.chatKeyBoard = [ChatKeyBoard keyBoardWithParentViewBounds:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATOR_HEIGHT)];
+    self.chatKeyBoard = [ChatKeyBoard keyBoardWithParentViewBounds:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATOR_HEIGHT- LL_TabbarSafeBottomMargin)];
     self.chatKeyBoard.delegate = self;
     self.chatKeyBoard.dataSource = self;
     self.chatKeyBoard.associateTableView = self.chatTableView;
@@ -490,6 +490,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 
 - (void)chatKeyBoardSendText:(NSString *)text;
 {
+    if(![text isNotBlank]) return;
     [self requsetSendMsgService:text];
     
     NSString *msgjson = [self MsgToJsonString:text];
@@ -606,7 +607,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 {
     if (!_chatTableView) {
         
-        _chatTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-NAVIGATOR_HEIGHT-49) style:UITableViewStylePlain];
+        _chatTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-NAVIGATOR_HEIGHT-49-LL_TabbarSafeBottomMargin) style:UITableViewStylePlain];
         _chatTableView.delegate = self;
         _chatTableView.dataSource = self;
         _chatTableView.backgroundColor = UIColor.whiteColor;
