@@ -10,7 +10,7 @@
 #import "MBProgressHUD.h"
 @interface zHud ()
 
-@property(strong,nonatomic)MBProgressHUD *hud;
+//@property(strong,nonatomic)MBProgressHUD *hud;
 
 @end
 
@@ -35,10 +35,10 @@
 
 -(void)showMessage:(NSString*)message{
     UIView * view = [self mainWindow];
-    self.hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    self.hud.mode = MBProgressHUDModeText;
-    self.hud.label.text = message;
-    [self.hud hideAnimated:YES afterDelay:1.f];
+    MBProgressHUD * hudView = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    hudView.mode = MBProgressHUDModeText;
+    hudView.label.text = message;
+    [hudView hideAnimated:YES afterDelay:1.f];
 }
 
 -(void)show{

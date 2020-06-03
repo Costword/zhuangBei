@@ -21,6 +21,7 @@
     if (!_arrowButton) {
         _arrowButton = [[UIButton alloc]init];
         _arrowButton.userInteractionEnabled = NO;
+        _arrowButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         [_arrowButton setImage:[UIImage imageNamed:@"leftMenu_arrowDown"] forState:UIControlStateNormal];
         [_arrowButton setImage:[UIImage imageNamed:@"leftMenu_arrowDown"] forState:UIControlStateNormal];
         _arrowButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -47,7 +48,7 @@
     [self.arrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.mas_centerY);
         make.left.mas_equalTo(kWidthFlot(10));
-        make.right.mas_equalTo(-kWidthFlot(10));
+        make.right.mas_equalTo(-kWidthFlot(1));
         make.height.mas_equalTo(kWidthFlot(30));
     }];
 }

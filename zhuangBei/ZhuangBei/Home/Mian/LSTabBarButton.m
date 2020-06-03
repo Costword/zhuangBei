@@ -72,17 +72,18 @@
 
 - (CGRect)titleRectForContentRect:(CGRect)contentRect
 {
-    UIImage *image =  [self imageForState:UIControlStateNormal];
-    CGFloat titleY = image.size.height + 5;
-    CGFloat titleHeight = self.bounds.size.height - titleY;
+//    UIImage *image =  [self imageForState:UIControlStateNormal];
+    CGFloat titleY = 30 ;
+//    CGFloat titleHeight = self.bounds.size.height - titleY;
     
-    return CGRectMake(0, titleY, self.bounds.size.width,  titleHeight);
+    return CGRectMake(0, titleY, self.bounds.size.width, 15);
 }
 
 - (CGRect)imageRectForContentRect:(CGRect)contentRect
 {
-    UIImage *image = [self imageForState:UIControlStateNormal];
+//    UIImage *image = [self imageForState:UIControlStateNormal];
     
-    return CGRectMake(0, 7, contentRect.size.width, image.size.height);
+//    image.size.height
+    return CGRectMake(0, 5, contentRect.size.width,25);
 }
 @end

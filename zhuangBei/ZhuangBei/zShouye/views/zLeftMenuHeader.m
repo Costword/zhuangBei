@@ -44,7 +44,7 @@
 -(void)updateConstraintsForView
 {
     [self.arrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 10,0, 10));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(kWidthFlot(10), 10,kWidthFlot(1), 10));
         make.height.mas_equalTo(kWidthFlot(20));
     }];
 }

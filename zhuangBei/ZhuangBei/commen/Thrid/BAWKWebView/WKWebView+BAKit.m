@@ -50,9 +50,9 @@
 //    NSLog(@"%s",__FUNCTION__);
     @try {
         //        Code that can potentially throw an exception[可能抛出异常的代码]
-        [self removeObserver:self forKeyPath:kBAKit_WK_title];
-        [self removeObserver:self forKeyPath:kBAKit_WK_estimatedProgress];
-        [self removeObserver:self forKeyPath:kBAKit_WK_URL];
+//        [self removeObserver:self forKeyPath:kBAKit_WK_title];
+//        [self removeObserver:self forKeyPath:kBAKit_WK_estimatedProgress];
+//        [self removeObserver:self forKeyPath:kBAKit_WK_URL];
     } @catch (NSException *exception) {
         //        Handle an exception thrown in the @try block[处理@try块中抛出的异常]
     } @finally {
@@ -71,22 +71,22 @@
 - (void)ba_web_addNoti
 {
     // 获取页面标题
-    [self addObserver:self
-                   forKeyPath:kBAKit_WK_title
-                      options:NSKeyValueObservingOptionNew
-                      context:nil];
+//    [self addObserver:self
+//                   forKeyPath:kBAKit_WK_title
+//                      options:NSKeyValueObservingOptionNew
+//                      context:nil];
     
     // 当前页面载入进度
-    [self addObserver:self
-                   forKeyPath:kBAKit_WK_estimatedProgress
-                      options:NSKeyValueObservingOptionNew
-                      context:nil];
+//    [self addObserver:self
+//                   forKeyPath:kBAKit_WK_estimatedProgress
+//                      options:NSKeyValueObservingOptionNew
+//                      context:nil];
     
     // 监听 URL，当之前的 URL 不为空，而新的 URL 为空时则表示进程被终止
-    [self addObserver:self
-           forKeyPath:kBAKit_WK_URL
-              options:NSKeyValueObservingOptionNew
-              context:nil];
+//    [self addObserver:self
+//           forKeyPath:kBAKit_WK_URL
+//              options:NSKeyValueObservingOptionNew
+//              context:nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
