@@ -39,6 +39,7 @@ static NSString *const sendmsg_oto_url =  @"app/appfriendmessage/save";
 static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 @interface LWClientManager()<XHLoginManagerDelegate,XHChatManagerDelegate, XHGroupManagerDelegate>
+
 @property (nonatomic, strong) XHCustomConfig *config;
 // 系统未读消息数量
 @property (nonatomic, assign) NSInteger  unreadSysMsgNum;
@@ -123,12 +124,12 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 //群组解散
 - (void)groupDidDeleted:(NSString*)groupID{
     POST_NOTI(DELE_GROPU_CHAT_NOTI_KEY, @{@"groupID":groupID});
-
+    
 }
 
 //接收群组消息
 - (void)groupMessagesDidReceive:(NSString *)aMessage fromID:(NSString *)fromID groupID:(NSString *)groupID{
-    
+    //    如果是添加好友的系统消息则取请求未读系统消息
     if ([fromID integerValue] == 0) {
         if ([fromID isEqualToString:@"system"]) {
             [self requestUnReadSystemMsgNumber];
@@ -158,6 +159,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 - (void)chatMessageDidReceived:(NSString *)message fromID:(NSString *)uid;
 {
+    //    如果是添加好友的系统消息则取请求未读系统消息
     if ([uid integerValue] == 0) {
         if ([uid isEqualToString:@"system"]) {
             [self requestUnReadSystemMsgNumber];
@@ -166,7 +168,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     }
     POST_NOTI(NEW_MSG_CHAT_NOTI_KEY, (@{@"msg":message,@"fromid":uid}));
     
-//    如果当前控制器是正是对方时，本地不再添加未读数
+    //    如果当前控制器是正是对方时，本地不再添加未读数
     UIViewController *currentVC = [LWClientManager topController];
     if ([currentVC isKindOfClass: [ChatRoomViewController class]]) {
         ChatRoomViewController *chatvc = (ChatRoomViewController *)currentVC;
@@ -244,7 +246,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         [[zHud shareInstance] showMessage:@"未获取到userId"];
         return;
     }
-//    NSString *nowtime = [self currentdateInterval];
+    //    NSString *nowtime = [self currentdateInterval];
     [ServiceManager requestPostWithUrl:sendmsg_oto_url body:[self gettotoParamString:@{@"content":LWDATA(msg),@"toUserId":LWDATA(roomId)}] success:^(id  _Nonnull response) {
         success(response);
     } failure:^(NSError * _Nonnull error) {
@@ -577,7 +579,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 - (void)needRelogin
 {
     [[zUserInfo shareInstance]deleate];
-//    [[zHud shareInstance]showMessage:@"登录信息超时,请重新登录"];
+    //    [[zHud shareInstance]showMessage:@"登录信息超时,请重新登录"];
     //登录超时重新登录
     zDengluController * rootVC  = [[zDengluController alloc]init];
     MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];

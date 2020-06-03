@@ -71,13 +71,9 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         }
         [self.totalDatasArray insertObjects:temarr atIndex:0];
         
-//        if (self.totalDatasArray.count > 100) {
-//            [self.showDatasArray addObjectsFromArray: [self.totalDatasArray subarrayWithRange:NSMakeRange(self.totalDatasArray.count - 100, 100)]];
-//        }else{
-//        }
-//        [self.showDatasArray removeAllObjects];
+        
         self.showDatasArray = [self.totalDatasArray mutableCopy];
-
+        
         [self.chatTableView reloadData];
         if (self.currentPage == 1) {
             [self scrollTableToFoot:NO];
@@ -151,32 +147,6 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         }];
     }
 }
-
-
-//- (void)chatViewDidSendText:(NSString *)text {
-//
-//    self.dispatch_group = dispatch_group_create();
-//
-//    [self requsetSendMsgService:text];
-//
-//    [self requestSDKSendMsg:text];
-//
-//    dispatch_group_notify(self.dispatch_group, dispatch_get_main_queue(), ^{
-//        [self.view endEditing:YES];
-//        if (self.successNum == 2) {
-//            ShowMsgElem * newMsgElem = [[ShowMsgElem alloc] init];
-//            newMsgElem.userID = [IMUserInfo shareInstance].userID;
-//            newMsgElem.content = text;
-//            newMsgElem.username = [LWDATA([zUserInfo shareInstance].userInfo.username) isEqualToString:@""]?@"未知昵称":[zUserInfo shareInstance].userInfo.username;
-//            newMsgElem.time = [[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
-//
-//            [self showTrace:newMsgElem];
-//        }else{
-//            [[zHud shareInstance] showMessage:@"消息发送失败"];
-//        }
-//        self.successNum = 0;
-//    });
-//}
 
 // 发送成功
 - (void)sendMsgSuccess:(NSString *)text
@@ -273,7 +243,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     if([self.roomId integerValue] != [msgdic[@"fromid"] integerValue]) return;
     NSDictionary *dict = [LWTool stringToDictory:msgdic[@"msg"]];
     ShowMsgElem *model = [ShowMsgElem modelWithDictionary:dict];
-    model.uavatar = [NSString stringWithFormat:@"/app/app/appfujian/download?attID=%@",dict[@"mid"][@"id"]];
+    model.uavatar = dict[@"avatar"];
+//    model.uavatar = [NSString stringWithFormat:@"/app/app/appfujian/download?attID=%@",dict[@"mid"][@"id"]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self showTrace:model];
     });
@@ -311,7 +282,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = UIColor.whiteColor;
     self.currentPage = 1;
     
     [self createUI];
@@ -324,7 +295,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     ADD_NOTI(receiveNewChatGroupMsg:, NEW_MSG_GROPU_NOTI_KEY);
     ADD_NOTI(deleGroupChat:, DELE_GROPU_CHAT_NOTI_KEY);
     ADD_NOTI(deleUserGroupChat:, DELE_USER_GROPU_CHAT_NOTI_KEY);
-
+    
     if (_roomType == LWChatRoomTypeGroup) {
         [self requestGroupCanSendmsg];
     }else if (_roomType == LWChatRoomTypeOneTOne){
@@ -345,7 +316,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (void)createUI {
     
     [self.view addSubview:self.chatTableView];
-    self.chatKeyBoard = [ChatKeyBoard keyBoardWithParentViewBounds:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATOR_HEIGHT- LL_TabbarSafeBottomMargin)];
+    self.chatKeyBoard = [ChatKeyBoard keyBoardWithParentViewBounds:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATOR_HEIGHT - LL_TabbarSafeBottomMargin)];
     self.chatKeyBoard.delegate = self;
     self.chatKeyBoard.dataSource = self;
     self.chatKeyBoard.associateTableView = self.chatTableView;
@@ -409,10 +380,6 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         };
     }
     NSString *avatar;
-//    if (getNewShowMsgElem.mine == 1) {
-//    }else{
-//        avatar = getNewShowMsgElem.toAvatar;
-//    }
     avatar = getNewShowMsgElem.uavatar;
     [cell.iconIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",kApiPrefix_PIC,avatar]] placeholderImage:[UIImage imageNamed:@"voip_header"]];
     cell.titleLabel.text = getNewShowMsgElem.username;
@@ -440,28 +407,6 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     
     
 }
-
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    CGPoint offset = scrollView.contentOffset;
-//    if (offset.y <= 0) {
-//        [self getNeetShowDatas];
-//    }
-//}
-//
-////加载更多数据
-//- (void)getNeetShowDatas
-//{
-//    if (self.totalDatasArray.count > self.showDatasArray.count) {
-//        if (self.totalDatasArray.count - self.showDatasArray.count > 50) {
-//            NSMutableArray *tem = [[NSMutableArray alloc] initWithArray:[self.totalDatasArray subarrayWithRange:NSMakeRange(self.totalDatasArray.count - self.showDatasArray.count - 50, 50)]];
-//            [self.showDatasArray insertObjects:tem atIndex:0];
-//        }else{
-//            self.showDatasArray = [self.totalDatasArray mutableCopy];
-//        }
-//        [self.chatTableView reloadData];
-//    }
-//}
 
 //图片预览
 - (void)showPic:(NSString *)picPath imageView:(UIImageView *)imageview
@@ -607,7 +552,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 {
     if (!_chatTableView) {
         
-        _chatTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-NAVIGATOR_HEIGHT-49-LL_TabbarSafeBottomMargin) style:UITableViewStylePlain];
+        _chatTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-NAVIGATOR_HEIGHT-49 - LL_TabbarSafeBottomMargin) style:UITableViewStylePlain];
         _chatTableView.delegate = self;
         _chatTableView.dataSource = self;
         _chatTableView.backgroundColor = UIColor.whiteColor;
