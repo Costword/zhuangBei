@@ -42,12 +42,13 @@
     [self addSubview:_facePickerView];
     
     _sendBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    _sendBtn.frame = CGRectMake(kScreenWidth-kFacePanelBottomToolBarHeight, 0, kFacePanelBottomToolBarHeight, kFacePanelBottomToolBarHeight);
+    _sendBtn.frame = CGRectMake(kScreenWidth-kFacePanelBottomToolBarHeight-50, 0, kFacePanelBottomToolBarHeight + 50, kFacePanelBottomToolBarHeight);
     [_sendBtn setTitle:@"发送" forState:UIControlStateNormal];
+    _sendBtn.titleLabel.font = kFont(16);
     [_sendBtn setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
     [_sendBtn addTarget:self action:@selector(sendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_sendBtn];
-    
+//    _sendBtn.backgroundColor = UIColor.redColor;
     
     _setBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     _setBtn.frame = _sendBtn.frame;
