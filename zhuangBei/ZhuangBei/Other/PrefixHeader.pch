@@ -67,6 +67,8 @@
 //程序主颜色
 #define kNavColor [kMainSingleton colorWithHexString:@"#3F50B5" alpha:1]
 
+#define  LL_TabbarSafeBottomMargin         (iPhoneX ? 34.f : 0.f)
+
 /**
  * 状态栏高度
  */
