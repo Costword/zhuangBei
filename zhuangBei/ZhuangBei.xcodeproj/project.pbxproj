@@ -258,6 +258,7 @@
 		8957D4A7245955F50096F1D7 /* LWSeachView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A6245955F50096F1D7 /* LWSeachView.m */; };
 		8957D4AA245975370096F1D7 /* LWHuoYuanDeatilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4A9245975370096F1D7 /* LWHuoYuanDeatilViewController.m */; };
 		8957D4AD245975E10096F1D7 /* LWHuoYuanDeatilView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8957D4AC245975E00096F1D7 /* LWHuoYuanDeatilView.m */; };
+		8958F14A248791E3000135E2 /* UIViewController+LWUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8958F148248791E3000135E2 /* UIViewController+LWUtils.m */; };
 		895BD9C52462604600AA5947 /* ServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9C42462604600AA5947 /* ServiceManager.m */; };
 		895BD9C82462661800AA5947 /* LWHuoYuanDaTingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9C72462661800AA5947 /* LWHuoYuanDaTingModel.m */; };
 		895BD9CD24626C4000AA5947 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9CC24626C4000AA5947 /* BaseModel.m */; };
@@ -829,6 +830,8 @@
 		8957D4A9245975370096F1D7 /* LWHuoYuanDeatilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDeatilViewController.m; sourceTree = "<group>"; };
 		8957D4AB245975E00096F1D7 /* LWHuoYuanDeatilView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanDeatilView.h; sourceTree = "<group>"; };
 		8957D4AC245975E00096F1D7 /* LWHuoYuanDeatilView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanDeatilView.m; sourceTree = "<group>"; };
+		8958F148248791E3000135E2 /* UIViewController+LWUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LWUtils.m"; sourceTree = "<group>"; };
+		8958F149248791E3000135E2 /* UIViewController+LWUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LWUtils.h"; sourceTree = "<group>"; };
 		895BD9C32462604600AA5947 /* ServiceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceManager.h; sourceTree = "<group>"; };
 		895BD9C42462604600AA5947 /* ServiceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceManager.m; sourceTree = "<group>"; };
 		895BD9C62462661800AA5947 /* LWHuoYuanDaTingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHuoYuanDaTingModel.h; sourceTree = "<group>"; };
@@ -1778,6 +1781,8 @@
 		00FE9B032476B877002A1F86 /* catergate */ = {
 			isa = PBXGroup;
 			children = (
+				8958F149248791E3000135E2 /* UIViewController+LWUtils.h */,
+				8958F148248791E3000135E2 /* UIViewController+LWUtils.m */,
 				00FE9B042476B877002A1F86 /* UIView+ILGKit.m */,
 				00FE9B052476B877002A1F86 /* UIView+Toast.h */,
 				00FE9B062476B877002A1F86 /* UIView+ILGKit.h */,
@@ -2509,6 +2514,7 @@
 				00FE9B9D2476B878002A1F86 /* NSString+PPAddition.m in Sources */,
 				006AA426247BF78000DBD559 /* TZVideoPlayerController.m in Sources */,
 				00558BD42460FF4200550FBC /* sliderNavMenu.m in Sources */,
+				8958F14A248791E3000135E2 /* UIViewController+LWUtils.m in Sources */,
 				0026C4B42474106C00C6ACB6 /* zFriendsModel.m in Sources */,
 				001ECA7B2454449000727379 /* zhuCeCard.m in Sources */,
 				89C112EC246EA293007EAABB /* LWUserGroupModel.m in Sources */,
@@ -2818,7 +2824,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -2848,7 +2854,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+				DEVELOPMENT_TEAM = K2YCGMC4SW;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";

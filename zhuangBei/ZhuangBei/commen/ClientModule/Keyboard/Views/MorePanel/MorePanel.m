@@ -38,7 +38,7 @@ typedef void (^ItemViewAction)(MoreItemView *itemView);
         [_iconBtn addTarget:self action:@selector(iconBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_iconBtn];
         
-        _nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_iconBtn.frame), kMoreItemIconSize, kMoreItemH- kMoreItemIconSize)];
+        _nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_iconBtn.frame)+5, kMoreItemIconSize, kMoreItemH- kMoreItemIconSize)];
         _nameLbl.textAlignment = NSTextAlignmentCenter;
         _nameLbl.textColor = [UIColor blackColor];
         _nameLbl.font = [UIFont systemFontOfSize:13.f];

@@ -554,7 +554,6 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     return _allGroupDatas;
 }
 
-
 + (UIViewController *)topController {
     
     UIViewController *topC = [self topViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
@@ -573,7 +572,6 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         return controller;
     }
 }
-
 
 /// 账号被挤掉
 - (void)needRelogin
