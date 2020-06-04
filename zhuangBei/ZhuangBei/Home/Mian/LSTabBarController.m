@@ -104,7 +104,7 @@
            badgeValue:@"0"];
     
     [self addVCWithvc:[[zHyController alloc] init]
-                title:@"货源"
+                title:@"货源大厅"
                 image:@"goods_nor"
         selectedImage:@"goods_sel"
            badgeValue:@"0"];

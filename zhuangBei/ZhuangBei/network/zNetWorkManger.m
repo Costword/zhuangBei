@@ -75,16 +75,14 @@
         NSInteger code = error.code;
         if (code == -1004 || code == -1001) {
             [[zHud shareInstance]showMessage:@"请求超时,无法连接服务器"];
-//            [[zHud shareInstance]hild];
         }else if (code == 3840) {
-            
             [[zUserInfo shareInstance]deleate];
-            
             NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:url]];
             NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
             [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUserDefaultsCookie];
-            [[zHud shareInstance]showMessage:@"登录信息超时,请重新登录"];
-//            [[zHud shareInstance]hild];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [[zHud shareInstance]showMessage:@"您的账号在异地登录"];
+            });
             //登录超时重新登录
             zDengluController * rootVC  = [[zDengluController alloc]init];
             MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
