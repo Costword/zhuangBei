@@ -163,6 +163,17 @@
                 make.height.mas_offset(0.5);
                 make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(0);
             }];
+        _systemL = [LWLabel lw_lable:@"" font:12 textColor:UIColor.redColor];
+        [self.contentView addSubview:_systemL];
+        [_systemL mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(_icon.mas_left).mas_offset(-0);
+            make.top.mas_equalTo(_icon.mas_top).mas_offset(1);
+            make.width.mas_offset(10);
+            make.height.mas_offset(10);
+        }];
+        _systemL.backgroundColor = UIColor.redColor;
+        [_systemL setBoundWidth:0 cornerRadius:5];
+//        _systemL.hidden = YES;
     }
     return self;
 }

@@ -34,6 +34,8 @@ typedef void(^clickBtnBlock)(NSInteger tag);
 @interface LWJiaoLiuMessageListTableViewCell : UITableViewCell
 @property (nonatomic, strong) UILabel * nameL;
 @property (nonatomic, strong) UIImageView * icon;
+@property (nonatomic, strong) UILabel * systemL;
+
 @end
 
 

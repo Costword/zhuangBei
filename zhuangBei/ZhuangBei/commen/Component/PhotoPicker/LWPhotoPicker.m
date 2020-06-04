@@ -56,6 +56,7 @@
     [alertController addAction:cancleAction];
     // 判断是否支持拍照
     [self imagePickerControlerIsAvailabelToCamera] ? [alertController addAction:cemeraAction]:nil;
+    alertController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.viewController presentViewController:alertController animated:YES completion:nil];
 }
 
@@ -115,6 +116,7 @@
             }
         }];
         [alertController addAction:comfirmAction];
+        alertController.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.viewController presentViewController:alertController animated:YES completion:nil];
     }else if (cameragranted == 1) {
         [self presentPickerViewController];
@@ -139,13 +141,18 @@
             if (self.sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
                 [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
                     if (status == PHAuthorizationStatusAuthorized) { //授权成功
-                        [weakself presentPickerViewController];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [weakself presentPickerViewController];
+                        });
                     }
                 }];
             }else{
                 [AVCaptureDevice requestAccessForMediaType : AVMediaTypeVideo completionHandler:^(BOOL granted) {
                     if (granted) { //授权成功
-                        [weakself presentPickerViewController];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [weakself presentPickerViewController];
+                        });
+                        
                     }
                 }];
             }
@@ -170,6 +177,7 @@
     self.picker.delegate = self;
     self.picker.allowsEditing = _allowsEditing;          //-> 是否允许选取的图片可以裁剪编辑
     self.picker.sourceType = self.sourceType; //-> 媒体来源（相册/相机）
+    self.picker.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.viewController presentViewController:self.picker animated:YES completion:nil];
 }
 

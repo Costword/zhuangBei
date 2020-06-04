@@ -16,6 +16,7 @@
 #import "MessageGroupViewController.h"
 #import "zDengluController.h"
 #import "MainNavController.h"
+#import "LWSystemMessageListViewController.h"
 
 @implementation LWUserinforIMModel
 -(NSString *)avatarID
@@ -133,6 +134,12 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     if ([fromID integerValue] == 0) {
         if ([fromID isEqualToString:@"system"]) {
             [self requestUnReadSystemMsgNumber];
+            //    如果当前控制器是正是系统消息页面，更新后台的未读数
+            UIViewController *currentVC = [LWClientManager topController];
+            if ([currentVC isKindOfClass:[LWSystemMessageListViewController class]]) {
+                LWSystemMessageListViewController *systemvc = (LWSystemMessageListViewController *)currentVC;
+                [LWClientManager.share requestReadSystemMsg:systemvc.tabbarIndex == 0?@"1":@"0" ];
+            }
         }
         return;
     }
@@ -162,7 +169,14 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     //    如果是添加好友的系统消息则取请求未读系统消息
     if ([uid integerValue] == 0) {
         if ([uid isEqualToString:@"system"]) {
-            [self requestUnReadSystemMsgNumber];
+            //    如果当前控制器是正是系统消息页面，更新后台的未读数
+            UIViewController *currentVC = [LWClientManager topController];
+            if ([currentVC isKindOfClass:[LWSystemMessageListViewController class]]) {
+                LWSystemMessageListViewController *systemvc = (LWSystemMessageListViewController *)currentVC;
+                [LWClientManager.share requestReadSystemMsg:systemvc.tabbarIndex == 0?@"1":@"0" ];
+            }else{
+                [self requestUnReadSystemMsgNumber];
+            }
         }
         return;
     }
@@ -424,7 +438,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 /// @param type 已读消息类型* type类型：* 0：管理员收到入群申请* 1：收到好友请求
 - (void)requestReadSystemMsg:(NSString *)type
 {
-    if(self.unreadSysMsgNum <= 0) return;
+//    if(self.unreadSysMsgNum <= 0) return;
     
     [ServiceManager requestPostWithUrl:@"/app/appfriendapply/read" paraString:@{@"type":LWDATA(type)} success:^(id  _Nonnull response) {
         [self requestUnReadSystemMsgNumber];

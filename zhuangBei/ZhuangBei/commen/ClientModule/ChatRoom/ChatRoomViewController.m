@@ -23,53 +23,45 @@
 // app/appfriendmessage/save
 //app/appfriendmessage/getFriendMsgList
 
+- (void)deletefriend
+{
+    [self requestPostWithUrl:@"app/appfriend/delete" para:self.roomId paraType:(LWRequestParamTypeBody) success:^(id  _Nonnull response) {
+        POST_NOTI(@"refreshFriendListDataWhenDeleteFriend", nil);
+        if ([response[@"code"] intValue] == 0) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    UIButton *rightbtn = [UIButton new];
+    [rightbtn setTitle:@"删除好友" forState:UIControlStateNormal];
+    [rightbtn setTitleColor:BASECOLOR_BLUECOLOR forState:UIControlStateNormal];
+    [rightbtn addTarget:self action:@selector(rightButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    rightbtn.frame = CGRectMake(0, 0, 40, 40);
+    rightbtn.titleLabel.font = kFont(14);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightbtn];
+}
 
+- (void)rightButtonClicked
+{
+    [LEEAlert alert].config
+     .LeeTitle(@"温馨提示")
+     .LeeContent(@"确认删除当前该好友？")
+     .LeeCancelAction(@"取消", ^{
+         // 点击事件Block
+     })
+     .LeeAction(@"确认", ^{
+         // 点击事件Block
+         [self deletefriend];
+     })
+     .LeeShow();
 }
 
 #pragma mark - Event
-
-- (void)rightButtonClicked:(UIButton *)button {
-    if ([self.mCreaterId isEqualToString:[IMUserInfo shareInstance].userID]) {
-        [[XHClient sharedClient].roomManager deleteChatroom:self.mRoomId completion:^(NSError *error) {
-            if (error) {
-                [UIView ilg_makeToast:[NSString stringWithFormat:@"删除聊天室失败:%@", error.localizedDescription]];
-                
-            } else {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"IFChatroomListRefreshNotif" object:nil];
-                
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-        }];
-    }
-}
-
-- (void)kick:(NSString *)userID {
-    __weak typeof(self) weakSelf = self;
-    [[XHClient sharedClient].roomManager removeMember:userID fromChatroom:self.mRoomId completion:^(NSError *error) {
-        if (error) {
-            [weakSelf.view ilg_makeToast:error.localizedDescription position:ILGToastPositionCenter];
-        } else {
-            [weakSelf.view ilg_makeToast:@"移除成功" position:ILGToastPositionCenter];
-        }
-    }];
-}
-
-- (void)mute:(NSString *)userID {
-    __weak typeof(self) weakSelf = self;
-    [[XHClient sharedClient].roomManager muteMember:userID muteSeconds:60 fromChatroom:self.mRoomId completion:^(NSError *error) {
-        if (error) {
-            [weakSelf.view ilg_makeToast:error.localizedDescription position:ILGToastPositionCenter];
-        } else {
-            [weakSelf.view ilg_makeToast:@"禁言成功" position:ILGToastPositionCenter];
-        }
-    }];
-}
-
-
 
 - (void)chatMessageDidReceive:(NSNotification *)notif {
     NSDictionary *dic = notif.object;

@@ -92,6 +92,12 @@
     
     CGFloat maxX = 90;
     CGPoint offest = scrollView.contentOffset;
+    if(offest.x < 0) {
+        [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+        [scrollView setBounces:NO];
+        return;
+    }
+    [scrollView setBounces:YES];
     if (offest.x< 40) {
         [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
         self.isEditing = NO;

@@ -244,7 +244,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     NSDictionary *dict = [LWTool stringToDictory:msgdic[@"msg"]];
     ShowMsgElem *model = [ShowMsgElem modelWithDictionary:dict];
     model.uavatar = dict[@"avatar"];
-//    model.uavatar = [NSString stringWithFormat:@"/app/app/appfujian/download?attID=%@",dict[@"mid"][@"id"]];
+    //    model.uavatar = [NSString stringWithFormat:@"/app/app/appfujian/download?attID=%@",dict[@"mid"][@"id"]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self showTrace:model];
     });
@@ -324,7 +324,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     self.chatKeyBoard.placeHolder = @"来聊吧...";
     
     self.chatKeyBoard.allowVoice = NO;
-//    self.chatKeyBoard.allowMore = NO;
+    //    self.chatKeyBoard.allowMore = NO;
 }
 
 

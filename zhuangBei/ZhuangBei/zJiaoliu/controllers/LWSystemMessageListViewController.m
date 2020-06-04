@@ -12,7 +12,7 @@
 #import "LWSystemListModel.h"
 #import "LWClientManager.h"
 #import "LWAddFriendDeatilViewController.h"
-
+#import "LWClientHeader.h"
 @interface LWSystemMessageListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * friendVerifiTableView;
@@ -24,7 +24,7 @@
 @property (nonatomic, assign) NSInteger  curretnPage_sys;
 @property (nonatomic, assign) NSInteger  totalPage_sys;
 @property (nonatomic, assign) NSInteger  totalCount;
-@property (nonatomic, assign) NSInteger  tabbarIndex;
+
 @end
 
 @implementation LWSystemMessageListViewController
@@ -159,6 +159,7 @@
         }else{
             [self.friendVerifiTableView.mj_footer resetNoMoreData];
         }
+        
     } failure:^(NSError * _Nonnull error) {
         [self.friendVerifiTableView.mj_header endRefreshing];
         [self.friendVerifiTableView.mj_footer endRefreshing];
@@ -173,7 +174,15 @@
     [self confiUI];
     [self requestDatas];
     [LWClientManager.share requestReadSystemMsg:@"1"];
-    ADD_NOTI(requestDatas, @"refrshSysteMsgmList");
+//    同意添加好友后
+    ADD_NOTI(requestDatas, @"refrshSysteMsgmListWhenAgreeFriendApply");
+//    又新的系统消息时
+    ADD_NOTI(refreshListWhenHaveNewSystemMsg, LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY);
+}
+
+- (void)refreshListWhenHaveNewSystemMsg
+{
+    self.tabbarIndex == 0 ? [self requestDatas]:[self requestSystemMsg];
 }
 
 -(void)viewDidLayoutSubviews

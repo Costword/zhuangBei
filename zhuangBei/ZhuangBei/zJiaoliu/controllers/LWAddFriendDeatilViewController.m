@@ -63,7 +63,8 @@
         para = @{@"uid":LWDATA(_systemModel.from),@"applyId":LWDATA(_systemModel.customId),@"group":LWDATA(model.customId)};
         [self requestPostWithUrl:url para:para paraType:(LWRequestParamTypeString) success:^(id  _Nonnull response) {
             if ([response[@"code"] integerValue] == 0) {
-                POST_NOTI(@"refrshSysteMsgmList", nil);
+                POST_NOTI(@"refrshSysteMsgmListWhenAgreeFriendApply", nil);
+                POST_NOTI(@"refreshFriendListDataWhenAgreeFriendApply", nil);
                 [self.navigationController popViewControllerAnimated:YES];
             }
         } failure:^(NSError * _Nonnull error) {

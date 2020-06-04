@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LWSystemMessageListViewController : baseViewController
-
+@property (nonatomic, assign) NSInteger  tabbarIndex;
 @end
 
 NS_ASSUME_NONNULL_END

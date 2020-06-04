@@ -163,7 +163,6 @@
     ADD_NOTI(requestDatas, @"refreshJiaoLiuListDataKey");
 //    刷新本地的聊天记录
     ADD_NOTI(refreshChatRecordList, @"refreshChatRecordList");
-    ADD_NOTI(refreshChatRecordList, LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY);
     
     self.listDatas_chatrecord = [LWClientManager getLocalChatRecord];
     if (_messageTableView) {
@@ -171,17 +170,21 @@
     }
     //    操作分组后，刷新联系人列表
     ADD_NOTI(requestDatas, @"refreshUserGroupListData");
-    
+//    添加好友后刷新好友y列表
+    ADD_NOTI(requestDatas, @"refreshFriendListDataWhenAgreeFriendApply");
+    ADD_NOTI(requestDatas, @"refreshFriendListDataWhenDeleteFriend");
+//    未读消息数变化时
     ADD_NOTI(unreadMsgNumberChange, LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY);
-    
 }
 
 //监听消息未读数
 - (void)unreadMsgNumberChange
 {
-    //        zJiaoliuController *vc = (zJiaoliuController *)(self.childViewControllers[2].childViewControllers.firstObject);
+    [self refreshChatRecordList];
+
     NSInteger num = [LWClientManager share].unreadMsgNum + LWClientManager.share.unreadSysMsgNum;
     self.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld",(long)num];
+    [self haveSystemMsgRefreshUI:LWClientManager.share.unreadSysMsgNum > 0];
 }
 
 - (void)confiUI
@@ -212,6 +215,13 @@
     }];
 }
 
+//是否需要隐藏
+- (void)haveSystemMsgRefreshUI:(BOOL)isShow
+{
+    LWJiaoLiuMessageListTableViewCell *cell = [self.messageTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    cell.systemL.hidden = !isShow;
+}
+
 #pragma mark ------UITableViewDelegate----------
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -235,6 +245,7 @@
             LWJiaoLiuMessageListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuMessageListTableViewCell" forIndexPath:indexPath];
             cell.nameL.text = @"系统消息";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.systemL.hidden = LWClientManager.share.unreadSysMsgNum == 0;
             return cell;
         }else{
             LWJiaoLiuContatcsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuContatcsListTableViewCell" forIndexPath:indexPath];
