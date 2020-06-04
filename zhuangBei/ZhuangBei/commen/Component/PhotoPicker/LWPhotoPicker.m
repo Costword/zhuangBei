@@ -183,7 +183,7 @@
  如果第一次访问用户是否是授权，如果用户同意 直接再次执行
  */
 -(void)presentPickerViewController{
-<<<<<<< HEAD
+//<<<<<<< HEAD
     self.picker = [[UIImagePickerController alloc] init];
     if (@available(iOS 11.0, *)){
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentAlways];
@@ -193,27 +193,27 @@
     self.picker.sourceType = self.sourceType; //-> 媒体来源（相册/相机）
     self.picker.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.viewController presentViewController:self.picker animated:YES completion:nil];
-=======
-    
-    [PermissionKit checkCameraPermission:^(BOOL enable) {
-        if (enable) {
-            if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                   self.picker = [[UIImagePickerController alloc] init];
-                   if (@available(iOS 11.0, *)){
-                       [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentAlways];
-                   }
-                   self.picker.delegate = self;
-                    self.picker.allowsEditing = self->_allowsEditing;          //-> 是否允许选取的图片可以裁剪编辑
-                   self.picker.sourceType = self.sourceType; //-> 媒体来源（相册/相机）
-                   [self.viewController presentViewController:self.picker animated:YES completion:nil];
-                });
-            }else{
-                NSLog(@"不支持拍照");
-            }
-        }
-    }];
->>>>>>> 60527c0b9794507484621887484245455ff640c7
+//=======
+//
+//    [PermissionKit checkCameraPermission:^(BOOL enable) {
+//        if (enable) {
+//            if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                   self.picker = [[UIImagePickerController alloc] init];
+//                   if (@available(iOS 11.0, *)){
+//                       [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentAlways];
+//                   }
+//                   self.picker.delegate = self;
+//                    self.picker.allowsEditing = self->_allowsEditing;          //-> 是否允许选取的图片可以裁剪编辑
+//                   self.picker.sourceType = self.sourceType; //-> 媒体来源（相册/相机）
+//                   [self.viewController presentViewController:self.picker animated:YES completion:nil];
+//                });
+//            }else{
+//                NSLog(@"不支持拍照");
+//            }
+//        }
+//    }];
+//>>>>>>> 60527c0b9794507484621887484245455ff640c7
 }
 
 
