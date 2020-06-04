@@ -16,7 +16,7 @@
 #import <Photos/PHPhotoLibrary.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-
+#import "PermissionKit.h"
 
 @interface LWPhotoPicker ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -67,13 +67,26 @@
  @param type 点击的类型
  */
 - (void)getAlertActionType:(NSInteger)type {
-    NSInteger sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+   __block NSInteger sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     if (type == 1) {
         sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self creatUIImagePickerControllerWithAlertActionType:sourceType];
     }else if (type ==2){
-        sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        [PermissionKit checkCameraPermission:^(BOOL enable) {
+            if (enable) {
+                if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        sourceType = UIImagePickerControllerSourceTypeCamera;
+                        [self creatUIImagePickerControllerWithAlertActionType:sourceType];
+                    });
+                }else{
+                    NSLog(@"不支持拍照");
+                }
+            }
+        }];
     }
-    [self creatUIImagePickerControllerWithAlertActionType:sourceType];
+    
 }
 
 
@@ -163,14 +176,25 @@
  如果第一次访问用户是否是授权，如果用户同意 直接再次执行
  */
 -(void)presentPickerViewController{
-    self.picker = [[UIImagePickerController alloc] init];
-    if (@available(iOS 11.0, *)){
-        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentAlways];
-    }
-    self.picker.delegate = self;
-    self.picker.allowsEditing = _allowsEditing;          //-> 是否允许选取的图片可以裁剪编辑
-    self.picker.sourceType = self.sourceType; //-> 媒体来源（相册/相机）
-    [self.viewController presentViewController:self.picker animated:YES completion:nil];
+    
+    [PermissionKit checkCameraPermission:^(BOOL enable) {
+        if (enable) {
+            if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                   self.picker = [[UIImagePickerController alloc] init];
+                   if (@available(iOS 11.0, *)){
+                       [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentAlways];
+                   }
+                   self.picker.delegate = self;
+                    self.picker.allowsEditing = self->_allowsEditing;          //-> 是否允许选取的图片可以裁剪编辑
+                   self.picker.sourceType = self.sourceType; //-> 媒体来源（相册/相机）
+                   [self.viewController presentViewController:self.picker animated:YES completion:nil];
+                });
+            }else{
+                NSLog(@"不支持拍照");
+            }
+        }
+    }];
 }
 
 

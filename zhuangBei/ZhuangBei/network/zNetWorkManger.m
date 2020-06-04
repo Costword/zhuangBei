@@ -67,7 +67,7 @@
     NSString *requestUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [manager POST:requestUrl parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [[zHud shareInstance]hild];
+//        [[zHud shareInstance]hild];
         NSLog(@"\n*************url:%@,\n para:%@ \n*********responseObject:%@",url,param,responseObject); 
         loadSuccess(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {        
@@ -80,9 +80,22 @@
             NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:url]];
             NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
             [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUserDefaultsCookie];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [[zHud shareInstance]showMessage:@"您的账号在异地登录"];
-            });
+            
+            NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsCookie];
+            if ([data isEqualToData:cookiesdata]) {
+                if ([url containsString:kLogin]) {
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [[zHud shareInstance]showMessage:@"登录超时，请重新登录"];
+                    });
+                }
+            }else
+            {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [[zHud shareInstance]showMessage:@"您的账号在异地登录"];
+                });
+            }
+            
+            
             //登录超时重新登录
             zDengluController * rootVC  = [[zDengluController alloc]init];
             MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
