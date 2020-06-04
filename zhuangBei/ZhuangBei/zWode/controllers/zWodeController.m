@@ -174,13 +174,13 @@
     }];
     [self.settingButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-kWidthFlot(20));
-        make.top.mas_equalTo(KstatusBarHeight+20);
+        make.top.mas_equalTo(KstatusBarHeight+kWidthFlot(15));
         make.size.mas_equalTo(CGSizeMake(kWidthFlot(35), kWidthFlot(35)));
     }];
     [self.userinfoCard mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kWidthFlot(20));
         make.right.mas_equalTo(-kWidthFlot(20));
-        make.top.mas_equalTo(kWidthFlot(90));
+        make.top.mas_equalTo(self.settingButton.mas_bottom).offset(kWidthFlot(15));
         make.height.mas_equalTo(kWidthFlot(210));
     }];
     
@@ -236,7 +236,6 @@
             [citys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 NSDictionary * dic = citys[idx];
                 zListTypeModel * typeModel = [zListTypeModel mj_objectWithKeyValues:dic];
-//                typeModel.select = NO;
                 [cityArray addObject:typeModel];
             }];
             NSDictionary * userInfoDic = dic[@"list"];

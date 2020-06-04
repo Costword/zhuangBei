@@ -63,7 +63,7 @@
 //    [self removeObserver:self forKeyPath:kBAKit_WK_URL];
     if ( self.ba_web_isAutoHeight )
     {
-        [self.scrollView removeObserver:self forKeyPath:kBAKit_WK_contentSize];
+//        [self.scrollView removeObserver:self forKeyPath:kBAKit_WK_contentSize];
     }
 }
 
@@ -591,10 +591,10 @@
     if ( ba_web_isAutoHeight )
     {
         // 监听高度变化
-        [self.scrollView addObserver:self
-                          forKeyPath:kBAKit_WK_contentSize
-                             options:NSKeyValueObservingOptionNew
-                             context:nil];
+//        [self.scrollView addObserver:self
+//                          forKeyPath:kBAKit_WK_contentSize
+//                             options:NSKeyValueObservingOptionNew
+//                             context:nil];
     }
 }
 

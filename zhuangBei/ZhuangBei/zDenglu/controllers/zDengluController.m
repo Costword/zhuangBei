@@ -109,7 +109,9 @@
         NSDictionary * dataDic = dic[@"data"];
         NSString * msg = dic[@"msg"];
         if ([code integerValue] == 500) {
-            [[zHud shareInstance]showMessage:msg];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [[zHud shareInstance]showMessage:msg];
+            });
         }else
         {
             [[zHud shareInstance]showMessage:@"登陆成功"];
