@@ -493,8 +493,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 #pragma mark -- ChatKeyBoardDataSource
 - (NSArray<MoreItem *> *)chatKeyBoardMorePanelItems
 {
-    MoreItem *item1 = [MoreItem moreItemWithPicName:@"sharemore_pic" highLightPicName:nil itemName:@"相册"];
-    MoreItem *item2 = [MoreItem moreItemWithPicName:@"sharemore_video" highLightPicName:nil itemName:@"相机"];
+    MoreItem *item1 = [MoreItem moreItemWithPicName:@"sharemore_pic" highLightPicName:@"sharemore_pic" itemName:@"相册"];
+    MoreItem *item2 = [MoreItem moreItemWithPicName:@"sharemore_video" highLightPicName:@"sharemore_video" itemName:@"相机"];
     //    MoreItem *item3 = [MoreItem moreItemWithPicName:@"sharemore_video" highLightPicName:nil itemName:@"连接"];
     return @[item1, item2,];
 }

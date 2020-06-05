@@ -21,6 +21,8 @@ typedef NS_ENUM(NSUInteger, LWChatRoomType) {
 @property (nonatomic, strong) NSString *roomName;
 @property (nonatomic, strong) NSString * roomId;
 @property (nonatomic, strong) NSMutableArray<ShowMsgElem *> *showDatasArray;
+// 来自 货源详情1；
+@property (nonatomic, assign) NSInteger  fromType;
 
 - (void)scrollTableToFoot:(BOOL)animated;
 

@@ -30,6 +30,7 @@
             NSString *touserid = [NSString stringWithFormat:@"%@",LWDATA(response[@"data"][@"userDm"])];
             NSString *username = LWDATA(response[@"data"][@"chatNickName"]);
             ChatRoomViewController *chatvc = [ChatRoomViewController chatRoomViewControllerWithRoomId:touserid roomName:username roomType:(LWChatRoomTypeOneTOne) extend:nil];
+            chatvc.fromType = 1;
             [self.navigationController pushViewController:chatvc animated:YES];
         }else{
             [zHud showMessage:response[@"msg"]];
@@ -87,7 +88,7 @@
         [self handlerDatas];
         if ([response[@"code"] integerValue] == 0) {
         }else{
-            [[zHud shareInstance] showMessage:LWDATA(response[@"msg"])];
+//            [[zHud shareInstance] showMessage:LWDATA(response[@"msg"])];
         }
     } failure:^(NSError * _Nonnull error) {
         
@@ -187,7 +188,6 @@
     leftbtn.tag = 1;
     rightbtn.tag = 2;
 }
-
 
 
 @end

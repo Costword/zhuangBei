@@ -334,4 +334,9 @@
     }
     return _requestFailMutableArray;
 }
+
+- (void)dealloc
+{
+    LWLog(@"\n--------------------------dealloc:%@-----------------\n\n",self);
+}
 @end

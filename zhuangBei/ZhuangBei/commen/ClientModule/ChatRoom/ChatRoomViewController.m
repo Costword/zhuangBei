@@ -37,6 +37,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSArray *keys = LWClientManager.share.allGroupDatas.allKeys;
+    __block BOOL ishave = NO;
+    [keys enumerateObjectsUsingBlock:^(NSString*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj integerValue] == [self.roomId integerValue]) {
+            ishave = YES;
+            *stop = YES;
+        }
+    }];
+    if (self.fromType != 1 && ishave) {
+        [self addRightItem];
+    }
+}
+
+- (void)addRightItem
+{
     UIButton *rightbtn = [UIButton new];
     [rightbtn setTitle:@"删除好友" forState:UIControlStateNormal];
     [rightbtn setTitleColor:BASECOLOR_BLUECOLOR forState:UIControlStateNormal];

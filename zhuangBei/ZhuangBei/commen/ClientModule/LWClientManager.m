@@ -44,8 +44,6 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 @property (nonatomic, strong) XHCustomConfig *config;
 // 系统未读消息数量
 @property (nonatomic, assign) NSInteger  unreadSysMsgNum;
-//该用户的群组<groupid:groupname>
-@property (nonatomic, strong) NSMutableDictionary * allGroupDatas;
 
 @end
 

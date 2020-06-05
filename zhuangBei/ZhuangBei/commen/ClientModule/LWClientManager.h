@@ -34,6 +34,9 @@ typedef void(^RequestFailure)(NSError *error);
 
 @property (nonatomic, strong) LWUserinforIMModel * userinforIM;
 
+//该用户的群组<groupid:groupname> 该用户的好友和群组
+@property (nonatomic, strong) NSMutableDictionary * allGroupDatas;
+
 + (instancetype)share;
 
 - (void)installConfigure;

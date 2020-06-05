@@ -11,8 +11,6 @@
 #import "SDCycleScrollView.h"
 #import "zCityCollectionCell.h"
 #import <WebKit/WebKit.h>
-#import "BAKit_WebView.h"
-#import "WKWebView+BAKit.h"
 
 @interface LWHuoYuanDeatilView ()<SDCycleScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDataSource>
 @property (nonatomic, strong) UIScrollView * scrollView;
@@ -22,19 +20,12 @@
 @property (nonatomic, strong) UILabel * addressL;
 //@property (nonatomic, strong) UILabel * productTitleL;
 @property (nonatomic, strong) UILabel * productNickL;
-//@property (nonatomic, strong) UILabel * xinghaoTitleL;
 @property (nonatomic, strong) UILabel * xinghaoL;
 
 @property (nonatomic, strong) UIView * canshuView;
 @property (nonatomic, strong) UIView * lunboView;
 @property (nonatomic, strong) UIView * infor_topview;
 
-//@property (nonatomic, strong) UILabel * chanpincailiaoL;
-//@property (nonatomic, strong) UILabel * fanghucailiaoL;
-//@property (nonatomic, strong) UILabel * fanghumianjiL;
-//@property (nonatomic, strong) UILabel * guigeL;
-//@property (nonatomic, strong) UILabel * guigedescL;
-//@property (nonatomic, strong) UILabel * zhixingbiaozhunL;
 @property (nonatomic, strong) UIView * chanpinJieSaoView;
 @property (nonatomic, strong) WKWebView * productJieSaoL;
 //@property (nonatomic, strong) LWLabel * productJieSaoL;
@@ -43,8 +34,6 @@
 
 @property (nonatomic, strong) UIView * maskView;
 @property (nonatomic, strong) UIView * canshuDeatilView;
-@property (nonatomic, strong) UILabel * canshuDeatilView_titleL;
-@property (nonatomic, strong) UILabel * canshuDeatilView_descL;
 @property (nonatomic, strong) UIView * xhItemsView;
 @property (nonatomic, strong) UICollectionView * cityCollectView;
 @property (nonatomic, strong) SDCycleScrollView *sdcview;
@@ -79,27 +68,6 @@
         _sdcview.imageURLStringsGroup = imageids;
     }
     
-    
-    //    核心参数
-    //    [self.paramItemsBgView removeAllSubviews];
-    //    for (int i = 0; i < _model.productParameterList.count; i++) {
-    //        productParameterListModel *parammodel = _model.productParameterList[i];
-    //        UIView *item =  [self createCanshuItem:parammodel.canShuMc tag:i];
-    //        [self.paramItemsBgView addSubview:item];
-    //        [item mas_makeConstraints:^(MASConstraintMaker *make) {
-    //            make.right.left.mas_equalTo(_paramItemsBgView);
-    //            make.height.mas_offset(40);
-    //            if (i == 0) {
-    //                make.top.mas_equalTo(_paramItemsBgView.mas_top).mas_offset(0);
-    //            }else{
-    //                UIView *lastview = self.paramItemsBgView.subviews[self.paramItemsBgView.subviews.count - 2];
-    //                make.top.mas_equalTo(lastview.mas_bottom).mas_offset(5);
-    //            }
-    //            if (i == _model.productParameterList.count - 1) {
-    //                make.bottom.mas_equalTo(_paramItemsBgView.mas_bottom).mas_offset(-5);
-    //            }
-    //        }];
-    //    }
     if (_model.productIntroduction.jianJieNr) {
         //        NSString* htmlString = _model.productIntroduction.jianJieNr;
         //          NSMutableAttributedString * attrStr  = [[NSMutableAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
@@ -118,23 +86,21 @@
         //          [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, attrStr.length)];
         //          _productJieSaoL.attributedText = atter;
         
-        [_productJieSaoL mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(_productJiesao_titleL);
-            make.top.mas_equalTo(_productJiesao_titleL.mas_bottom).mas_offset(5);
-            make.bottom.mas_equalTo(_chanpinJieSaoView.mas_bottom).mas_offset(-10);
-        }];
-        
-        NSString *headerString = @"<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'><style>img{max-width:100%}</style></header>";
-        
-        NSString *htmlstring = [headerString stringByAppendingString:_model.productIntroduction.jianJieNr] ;
-        if ([htmlstring containsString:@"../../../"]) {
-            htmlstring = [htmlstring stringByReplacingOccurrencesOfString:@"../../../" withString:[NSString stringWithFormat:@"%@",kApiPrefix]];
+        @try {
+            NSString *headerString = @"<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'><style>img{max-width:100%}</style></header>";
+            
+            NSString *htmlstring = [headerString stringByAppendingString:_model.productIntroduction.jianJieNr] ;
+            if ([htmlstring containsString:@"../../../"]) {
+                htmlstring = [htmlstring stringByReplacingOccurrencesOfString:@"../../../" withString:[NSString stringWithFormat:@"%@",kApiPrefix]];
+            }
+            LWLog(@"*********%@",htmlstring);
+            [_productJieSaoL loadHTMLString:htmlstring baseURL:nil];
+        } @catch (NSException *exception) {
+            LWLog(@"==========================%@====================",exception.description);
+        } @finally {
+            
         }
-        LWLog(@"*********%@",htmlstring);
-        [_productJieSaoL ba_web_loadHTMLString:htmlstring];
     }
-    
-    
     
     //    更新约束
     [self.cityCollectView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -187,8 +153,6 @@
     
     _canshuDeatilArray = [tem copy];
     [_canshuDeatilTv reloadData];
-    //    _canshuDeatilView_titleL.text = parammodel.canShuMc;
-    //    _canshuDeatilView_descL.text = parammodel.canShuZhi;
     
 }
 
@@ -324,9 +288,6 @@
             make.bottom.mas_equalTo(_infor_topview.mas_bottom).mas_offset(-10);
         }];
         [_infor_topview setBoundWidth:1 cornerRadius:6 boardColor:BASECOLOR_BOARD];
-        
-        
-        
     }
     return _infor_topview;
 }
@@ -338,16 +299,7 @@
 {
     if (!_canshuView) {
         _canshuView = [[UIView alloc] init];
-        //        UILabel *titleL = [LWLabel lw_lable:@"核心参数" font:18 textColor:BASECOLOR_TEXTCOLOR];
-        //        titleL.textAlignment = NSTextAlignmentCenter;
-        
         [_canshuView addSubviews:@[self.paramItemsBgView,self.chanpinJieSaoView]];
-        
-        //        [titleL mas_makeConstraints:^(MASConstraintMaker *make) {
-        //            make.left.mas_equalTo(_canshuView.mas_left).mas_offset(0);
-        //            make.right.mas_equalTo(_canshuView.mas_right).mas_offset(-0);
-        //            make.top.mas_equalTo(_canshuView.mas_top).mas_offset(10);
-        //        }];
         [self.paramItemsBgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(_canshuView.mas_top).mas_offset(10);
             make.left.right.mas_equalTo(_canshuView);
@@ -452,9 +404,6 @@
         _chanpinJieSaoView = [[UIView alloc] init];
         
         UILabel *titleL = [UILabel new];
-        //        _productJieSaoL = [LWLabel lw_lable:@"" font:13 textColor:BASECOLOR_TEXTCOLOR];
-        //        _productJieSaoL = [[WKWebView alloc] init];
-        //        _productJieSaoL.numberOfLines = 0;
         titleL.text = @"产品介绍";
         _productJiesao_titleL = titleL;
         titleL.font = kFont(16);
@@ -472,8 +421,8 @@
         
         [_chanpinJieSaoView setBoundWidth:0.5 cornerRadius:6 boardColor:BASECOLOR_BOARD];
         //        添加观察者
-        //                [_productJieSaoL.scrollView addObserver:self forKeyPath:@"contentSize"
-        //                                              options:NSKeyValueObservingOptionNew context:nil];
+        [_productJieSaoL.scrollView addObserver:self forKeyPath:@"contentSize"
+                                        options:NSKeyValueObservingOptionNew context:nil];
     }
     return _chanpinJieSaoView;
 }
@@ -490,20 +439,20 @@
             make.height.mas_offset(self.cityCollectView.collectionViewLayout.collectionViewContentSize.height);
         }];
     }
-    //    else
-    //    //由于图片在实时加载，监听到内容高度变化，需要实时刷新您的控件展示高度
-    //    if([keyPath isEqualToString:@"contentSize"]) {
-    //        //直接使用scrollView.contentSize.height来刷新cell高度，不再使用JS获取
-    //        CGFloat height = self.productJieSaoL.scrollView.contentSize.height;
-    //        //定义一个属性保存高度，当上一次的高度等于这次的高度时就不要刷新cell了，不然cell会一直刷新
-    //        if (self.contentHeight_webview == height) {
-    //            return ;
-    //        }
-    //        [_productJieSaoL mas_updateConstraints:^(MASConstraintMaker *make) {
-    //            make.height.mas_offset(height);
-    //        }];
-    //        self.contentHeight_webview = height;
-    //    }
+    else
+        //由于图片在实时加载，监听到内容高度变化，需要实时刷新您的控件展示高度
+        if([keyPath isEqualToString:@"contentSize"]) {
+            //直接使用scrollView.contentSize.height来刷新cell高度，不再使用JS获取
+            CGFloat height = self.productJieSaoL.scrollView.contentSize.height;
+            //定义一个属性保存高度，当上一次的高度等于这次的高度时就不要刷新cell了，不然cell会一直刷新
+            if (self.contentHeight_webview == height) {
+                return ;
+            }
+            [_productJieSaoL mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_offset(height);
+            }];
+            self.contentHeight_webview = height;
+        }
     
 }
 
@@ -511,10 +460,6 @@
 {
     _maskView.alpha = 0;
     _canshuDeatilView.alpha = 0;
-    //    [_maskView removeFromSuperview];
-    //    [_canshuDeatilView removeFromSuperview];
-    //    _maskView = nil;
-    //    _canshuDeatilView = nil;
 }
 
 //参数详情
@@ -523,11 +468,6 @@
     if (!_canshuDeatilView) {
         _canshuDeatilView = [[UIView  alloc] init];
         _canshuDeatilView.backgroundColor = UIColor.whiteColor;
-        
-        //        UILabel *titleL = [LWLabel lw_lable:@"" font:18 textColor:BASECOLOR_TEXTCOLOR];
-        //        UILabel *desL = [LWLabel lw_lable:@"" font:18 textColor:BASECOLOR_TEXTCOLOR];
-        //        titleL.textAlignment = desL.textAlignment = NSTextAlignmentCenter;
-        
         UITableView *tableview = [[UITableView alloc] init];
         tableview.dataSource = self;
         tableview.rowHeight = UITableViewAutomaticDimension;
@@ -538,15 +478,6 @@
         [btn setBoundWidth:0 cornerRadius:6];
         [_canshuDeatilView addSubviews:@[tableview,btn]];
         _canshuDeatilTv = tableview;
-        //        [titleL mas_makeConstraints:^(MASConstraintMaker *make) {
-        //            make.left.mas_equalTo(_canshuDeatilView.mas_left).mas_offset(0);
-        //            make.right.mas_equalTo(_canshuDeatilView.mas_right).mas_offset(-0);
-        //            make.top.mas_equalTo(_canshuDeatilView.mas_top).mas_offset(30);
-        //        }];
-        //        [desL mas_makeConstraints:^(MASConstraintMaker *make) {
-        //            make.right.left.mas_equalTo(titleL);
-        //            make.top.mas_equalTo(titleL.mas_bottom).mas_offset(20);
-        //        }];
         [tableview mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(_canshuDeatilView).mas_offset(0);
             make.top.mas_equalTo(_canshuDeatilView.mas_top).mas_offset(5);
@@ -560,8 +491,6 @@
             make.height.mas_offset(40);
             make.bottom.mas_equalTo(_canshuDeatilView.mas_bottom).mas_offset(-1);
         }];
-        //        _canshuDeatilView_titleL = titleL;
-        //        _canshuDeatilView_descL = desL;
     }
     return _canshuDeatilView;
 }
@@ -673,20 +602,21 @@
 {
     if (!_productJieSaoL) {
         _productJieSaoL = [[WKWebView alloc] init];
-        _productJieSaoL.ba_web_isAutoHeight = YES;
-        WEAKSELF(self)
-        _productJieSaoL.ba_web_getCurrentHeightBlock = ^(CGFloat currentHeight) {
-            [weakself.productJieSaoL mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_offset(currentHeight);
-            }];
-        };
+        //        _productJieSaoL.ba_web_isAutoHeight = YES;
+        //        WEAKSELF(self)
+        //        _productJieSaoL.ba_web_getCurrentHeightBlock = ^(CGFloat currentHeight) {
+        //            [weakself.productJieSaoL mas_updateConstraints:^(MASConstraintMaker *make) {
+        //                make.height.mas_offset(currentHeight);
+        //            }];
+        //        };
     }
     return _productJieSaoL;
 }
 
 -(void)dealloc
 {
-    [self removeObserverBlocks];
+    [_productJieSaoL.scrollView removeObserver:self forKeyPath:@"contentSize"];
+    [_cityCollectView removeObserver:self forKeyPath:@"contentSize"];
 }
 
 @end
