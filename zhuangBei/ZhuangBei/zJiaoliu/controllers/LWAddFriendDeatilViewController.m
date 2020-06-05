@@ -174,11 +174,15 @@
     [surebtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(tishidescL.mas_left).mas_offset(0);
         make.right.mas_equalTo(tishidescL.mas_right).mas_offset(-0);
-        make.top.mas_equalTo(_tv.mas_bottom).mas_offset(40);
+        make.top.mas_equalTo(_fenzubgview.mas_bottom).mas_offset(40+170);
         make.height.mas_offset(40);
     }];
     [surebtn setBoundWidth:0 cornerRadius:20 boardColor:BASECOLOR_BLUECOLOR];
     [fenzubgview ex_addTapAction:self selector:@selector(showalearview)];
+    
+    if (_systemModel) {
+        yanzhengL.hidden = _tv.hidden = YES;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
