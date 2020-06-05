@@ -16,7 +16,7 @@
 #import "zListTypeModel.h"
 #import "NSDictionary+NSNull.h"
 #import "HeaderManager.h"
-
+#import "LWClientHeader.h"
 @interface zPersonalController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(strong,nonatomic)UITableView * persoanTableView;
@@ -422,6 +422,7 @@
             [[zHud shareInstance]showMessage:msg];
         }
         NSLog(@"提交信息%@",dic);
+        [LWClientManager.share requestAllGroupInforDatas];
     }
     
     if ([url containsString:kgetCompanyID]) {

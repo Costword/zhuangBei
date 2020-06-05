@@ -101,5 +101,9 @@ typedef void(^RequestFailure)(NSError *error);
 // 系统未读消息数量
 @property (nonatomic, assign,readonly) NSInteger  unreadSysMsgNum;
 
+
+// 获取该用户的所有群组信息，用于群组未读消息的 反查群组名称
+- (void)requestAllGroupInforDatas;
+
 @end
 

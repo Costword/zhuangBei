@@ -129,7 +129,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         [[XHClient sharedClient].groupManager sendMessage:text toGroup:self.m_Group_ID atUsers:nil completion:^(NSError *error) {
             if (error) {
                 LWLog(@"**************消息发送失败error:%@",error);
-                [UIView ilg_makeToast:error.localizedDescription];
+//                [UIView ilg_makeToast:error.localizedDescription];
             }else{
                 self.successNum++;
             }
@@ -139,7 +139,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         [[XHClient sharedClient].chatManager sendMessage:text toID:[NSString stringWithFormat:@"%@",self.roomId] completion:^(NSError *error) {
             if (error) {
                 LWLog(@"**************消息发送失败error:%@",error);
-                [UIView ilg_makeToast:error.localizedDescription];
+//                [UIView ilg_makeToast:error.localizedDescription];
             } else {
                 self.successNum++;
             }
