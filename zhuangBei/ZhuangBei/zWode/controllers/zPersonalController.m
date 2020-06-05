@@ -220,36 +220,6 @@
                 }
                 NSDictionary * dic = [weakSelf.upLoadModel mj_keyValues];
                 weakSelf.canEdit = NO;
-//                NSLog(@"------%@",dic);
-                NSDictionary * upDic = @{
-                    @"birth": @"2020-05-16",
-                    @"buMen": @"1",
-                    @"companyNameFirst": @"北京",
-                    @"companyNameSecond": @"真核",
-                    @"companyNameThird": @"科技公司",
-                    @"companyType": @"0",
-                    @"district": @"110000",
-                    @"education": @"1",
-                    @"email": @"1213@qq.com",
-                    @"isShowBirth": @0,
-                    @"isShowEducation": @0,
-                    @"isShowJobYear": @0,
-                    @"isShowMobile": @0,
-                    @"jobYear": @"1",
-                    @"mobile": @"15516562513",
-                    @"nativePlace": @"110000",
-                    @"portrait": @"3379",
-                    @"post": @"3",
-                    @"regLocation": @"110000",
-                    @"sex": @"1",
-                    @"shiFouGly": @0,
-                    @"userDm": @685,
-                    @"userId": @744,
-                    @"userName": @"Wa"
-                };
-                
-                NSLog(@"正确:%@=错误:%@",upDic,dic);
-                
                 NSMutableDictionary * tureDic = [[NSMutableDictionary alloc]initWithDictionary:dic];
                 if (weakSelf.companyId != nil) {
                 [tureDic setObject:weakSelf.companyId forKey:@"suoShuGs"];
@@ -412,6 +382,7 @@
         model.section = sectionArr;
         [zEducationRankTypeInfo shareInstance].typesModel = model;
         [[zEducationRankTypeInfo shareInstance] saveTypeInfo];
+        [self.persoanTableView reloadData];
         return;
     }
     if ([url containsString:kupUserInfo]) {
