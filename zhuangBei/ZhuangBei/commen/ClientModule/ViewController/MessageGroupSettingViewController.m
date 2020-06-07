@@ -253,7 +253,7 @@ static NSString *kMuteKey = @"kMuteKey";
 
     IFGroupMemberCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     if (userId.length) {
-        cell.iconIV.image = [UIImage imageNamed:@"voip_header"];
+        cell.iconIV.image = [UIImage imageNamed:@"testtouxiang"];
         cell.label.text = userId;
     } else {
         cell.iconIV.image = [UIImage imageNamed:@"member_add"];

@@ -98,11 +98,11 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
                 self.successNum++;
                 [self sendMsgSuccess:text];
             }else{
-                [[zHud shareInstance] showMessage:@"消息发送失败"];
+//                [[zHud shareInstance] showMessage:@"消息发送失败"];
             }
             //            dispatch_group_leave(self.dispatch_group);
         } failure:^(NSError * _Nonnull error) {
-            [[zHud shareInstance] showMessage:@"消息发送失败"];
+//            [[zHud shareInstance] showMessage:@"消息发送失败"];
             //            dispatch_group_leave(self.dispatch_group);
         }];
     }else if(_roomType == LWChatRoomTypeOneTOne){
@@ -111,11 +111,11 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
                 self.successNum++;
                 [self sendMsgSuccess:text];
             }else{
-                [[zHud shareInstance] showMessage:@"消息发送失败"];
+//                [[zHud shareInstance] showMessage:@"消息发送失败"];
             }
             //            dispatch_group_leave(self.dispatch_group);
         } failure:^(NSError * _Nonnull error) {
-            [[zHud shareInstance] showMessage:@"消息发送失败"];
+//            [[zHud shareInstance] showMessage:@"消息发送失败"];
             //            dispatch_group_leave(self.dispatch_group);
         }];
     }
@@ -245,6 +245,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     ShowMsgElem *model = [ShowMsgElem modelWithDictionary:dict];
     model.uavatar = dict[@"avatar"];
     //    model.uavatar = [NSString stringWithFormat:@"/app/app/appfujian/download?attID=%@",dict[@"mid"][@"id"]];
+    model.userID = self.roomId;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self showTrace:model];
     });
@@ -381,7 +382,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     }
     NSString *avatar;
     avatar = getNewShowMsgElem.uavatar;
-    [cell.iconIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",kApiPrefix_PIC,avatar]] placeholderImage:[UIImage imageNamed:@"voip_header"]];
+    [cell.iconIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",kApiPrefix_PIC,avatar]] placeholderImage:[UIImage imageNamed:@"testtouxiang"]];
     cell.titleLabel.text = getNewShowMsgElem.username;
     cell.subTitleLabel.text = getNewShowMsgElem.mainProduct;
     
@@ -449,7 +450,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     NSString *res;
     if (self.roomType == LWChatRoomTypeOneTOne) {
         NSDictionary *dict = @{
-            @"id":LWDATA(self.roomId),
+            @"id":LWDATA(LWClientManager.share.userinforIM.customId),
             @"username":LWDATA(_friendInforModel.chatNickName),
             @"avatar": [NSString stringWithFormat:@"/app/app/appfujian/download?attID=%@",LWDATA(self.friendInforModel.portrait)],
             @"content":LWDATA(text),
@@ -472,14 +473,14 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     }else if (self.roomType == LWChatRoomTypeGroup){
         NSDictionary *dict = @{@"avatar":LWDATA(LWClientManager.share.userinforIM.avatar),
                                @"content":text,
-                               @"id":LWDATA(IMUserInfo.shareInstance.userID),
+                               @"id":LWDATA(LWClientManager.share.userinforIM.customId),
                                @"isGroup":@"false",
                                @"mainProduct":LWDATA(LWClientManager.share.userinforIM.mainProducts),
                                @"mid":@{@"content":LWDATA(text),
                                         @"groupId":LWDATA(self.roomId),
                                         @"id":LWDATA(LWClientManager.share.userinforIM.avatarID),
                                         @"sendTime":LWDATA([[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]),
-                                        @"userId":LWDATA(IMUserInfo.shareInstance.userID),
+                                        @"userId":LWDATA(LWClientManager.share.userinforIM.customId),
                                },
                                @"msgCount":@"0",
                                @"username":LWDATA(LWClientManager.share.userinforIM.username)

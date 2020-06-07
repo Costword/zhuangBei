@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger  chatType;
 //当前未读数量
 @property (nonatomic, assign) NSInteger  unreadNum;
+// 好友头像
+@property (nonatomic, strong) NSString * avatar;
 
 @end
 
