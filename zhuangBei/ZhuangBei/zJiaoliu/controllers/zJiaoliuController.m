@@ -232,10 +232,12 @@
         if (tableView == _groupTableView) {
             imGroupListModel *model = self.listDatas_Group[indexPath.row];
             cell.nameL.text = model.groupName;
+            [cell.icon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kApiPrefix_PIC,model.avatar]] placeholderImage:IMAGENAME(@"testtouxiang")];
         }else{
             friendListModel *listmodel = self.listDatas_Contatcs[indexPath.section];
             friendItemModel *itemModel = listmodel.list[indexPath.row];
             cell.nameL.text = itemModel.username;
+            [cell.icon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kApiPrefix_PIC,itemModel.avatar]] placeholderImage:IMAGENAME(@"testtouxiang")];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -251,6 +253,7 @@
             LWJiaoLiuContatcsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuContatcsListTableViewCell" forIndexPath:indexPath];
             LWLocalChatRecordModel *model = self.listDatas_chatrecord[indexPath.row - 1];
             cell.nameL.text = model.roomName;
+            [cell.icon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kApiPrefix_PIC,model.avatar]] placeholderImage:IMAGENAME(@"testtouxiang")];
             [cell setunreadNumber:model.unreadNum];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;

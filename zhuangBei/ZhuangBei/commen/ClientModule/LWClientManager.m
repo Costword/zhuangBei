@@ -148,12 +148,12 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     if ([currentVC isKindOfClass: [MessageGroupViewController class]]) {
         MessageGroupViewController *chatvc = (MessageGroupViewController *)currentVC;
         if ([chatvc.roomId integerValue] != [groupID integerValue]) {
-            NSString *groupname = self.allGroupDatas[[NSNumber numberWithInteger:[groupID integerValue]]];
+            NSString *groupname = self.allGroupDatas[[NSNumber numberWithInteger:[groupID integerValue]]][@"name"];
             //type: 1:group; 2:oto
             [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
         }
     }else{
-        NSString *groupname = self.allGroupDatas[[NSNumber numberWithInteger:[groupID integerValue]]];
+        NSString *groupname = self.allGroupDatas[[NSNumber numberWithInteger:[groupID integerValue]]][@"name"];
         //type: 1:group; 2:oto
         [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
     }
@@ -185,12 +185,12 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     if ([currentVC isKindOfClass: [ChatRoomViewController class]]) {
         ChatRoomViewController *chatvc = (ChatRoomViewController *)currentVC;
         if ([chatvc.roomId integerValue] != [uid integerValue]) {
-            NSString *friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]];
+            NSString *friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]][@"name"];
             //type: 1:group; 2:oto
             [self addNewUnReadMsgWithRoomName:[LWDATA(friendname) isNotBlank] ? friendname:@"临时消息" roomId:LWDATA(uid) chatType:2 extend:nil];
         }
     }else{
-        NSString *friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]];
+        NSString *friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]][@"name"];
         //type: 1:group; 2:oto
         [self addNewUnReadMsgWithRoomName:[LWDATA(friendname) isNotBlank] ? friendname:@"临时消息" roomId:LWDATA(uid) chatType:2 extend:nil];
     }
@@ -318,11 +318,19 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
             *stop = YES;
         }
     }];
+    __block NSString *avatar = @"";
+    [LWClientManager.share.allGroupDatas enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSDictionary *  _Nonnull obj, BOOL * _Nonnull stop) {
+        if ([key integerValue] == [roomId integerValue]) {
+            avatar = obj[@"avatar"];
+            *stop = YES;
+        }
+    }];
     if (!ishave && [LWClientManager.share.userinforIM.customId integerValue] != [roomId integerValue]) {
         LWLocalChatRecordModel *model = [LWLocalChatRecordModel new];
         model.roomId = roomId;
         model.roomName = roomName;
         model.chatType = type;
+        model.avatar = avatar;
         NSData *modeldata = [NSKeyedArchiver archivedDataWithRootObject:model];
         NSMutableArray *recoddata = [[NSMutableArray alloc] initWithArray:[SYSTEM_USERDEFAULTS objectForKey:LOCAL_CHATRECORD_LIST_KEY]];
         [recoddata addObject:modeldata];
@@ -404,11 +412,11 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         NSArray *group = data[@"group"];
         [self.allGroupDatas removeAllObjects];
         for (NSDictionary *dict in group) {
-            [self.allGroupDatas setObject:LWDATA(dict[@"groupname"]) forKey:LWDATA(dict[@"id"])];
+            [self.allGroupDatas setObject:@{@"name":LWDATA(dict[@"groupname"]),@"avatar":LWDATA(dict[@"avatar"])} forKey:LWDATA(dict[@"id"])];
         }
         for (NSDictionary *dict in friend) {
             for (NSDictionary *item in dict[@"list"]) {
-                [self.allGroupDatas setObject:LWDATA(item[@"username"]) forKey:LWDATA(item[@"id"])];
+                [self.allGroupDatas setObject:@{@"name":LWDATA(item[@"username"]),@"avatar":LWDATA(item[@"avatar"])} forKey:LWDATA(item[@"id"])];
             }
         }
     } failure:^(NSError * _Nonnull error) {

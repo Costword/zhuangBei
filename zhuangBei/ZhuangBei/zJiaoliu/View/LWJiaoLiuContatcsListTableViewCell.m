@@ -24,6 +24,7 @@
         
         _icon = [UIImageView new];
         _icon.image = IMAGENAME(@"testtouxiang");
+        _icon.contentMode = UIViewContentModeScaleToFill;
         _nameL = [LWLabel lw_lable:@"admin" font:15 textColor:BASECOLOR_TEXTCOLOR];
         _descL = [LWLabel lw_lable:@"在么？这个问题在么解决？" font:12 textColor:BASECOLOR_GREYCOLOR155];
         _timelL = [LWLabel lw_lable:@"2020/04/22  18:20" font:12 textColor:BASECOLOR_TEXTCOLOR];
@@ -41,7 +42,7 @@
         [self.contentView addSubviews:@[_icon,_nameL,_timelL,_descL,line,_leftBtn,_rightBtn,_unreadnumL,self.sendApplyStatusL]];
         [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.contentView.mas_left).mas_offset(10);
-            make.height.width.mas_offset(50);
+            make.height.width.mas_offset(40);
             make.centerY.mas_equalTo(self.mas_centerY);
         }];
         [_nameL mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -58,7 +59,7 @@
             make.height.mas_offset(0.5);
             make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(0);
         }];
-        [_icon setBoundWidth:0 cornerRadius:25];
+        [_icon setBoundWidth:0 cornerRadius:20];
         [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
             make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-10);

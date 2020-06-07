@@ -34,7 +34,7 @@ typedef void(^RequestFailure)(NSError *error);
 
 @property (nonatomic, strong) LWUserinforIMModel * userinforIM;
 
-//该用户的群组<groupid:groupname> 该用户的好友和群组
+//该用户的群组<groupid:@{name:@"",avatar:@""}> 该用户的好友和群组 消息里取不到对方的头像，本地遍历解决，呵呵
 @property (nonatomic, strong) NSMutableDictionary * allGroupDatas;
 
 + (instancetype)share;

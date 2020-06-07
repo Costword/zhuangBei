@@ -30,6 +30,7 @@
         if ([response[@"code"] intValue] == 0) {
             [self.navigationController popViewControllerAnimated:YES];
         }
+        [LWClientManager.share requestAllGroupInforDatas];
     } failure:^(NSError * _Nonnull error) {
         
     }];
