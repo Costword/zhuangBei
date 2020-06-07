@@ -53,11 +53,13 @@
 -(UIButton*)headerImageBtn
 {
     if (!_headerImageBtn) {
+//        IMAGENAME(@"testtouxiang")
+//        wode_defoutHeader
         _headerImageBtn = [[UIButton alloc]init];
         _headerImageBtn.tag = 1;
         _headerImageBtn.layer.cornerRadius = kWidthFlot(50);
         _headerImageBtn.clipsToBounds = YES;
-        [_headerImageBtn setBackgroundImage:[UIImage imageNamed:@"wode_defoutHeader"] forState:UIControlStateNormal];
+        [_headerImageBtn setBackgroundImage:[UIImage imageNamed:@"testtouxiang"] forState:UIControlStateNormal];
         [_headerImageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _headerImageBtn;
@@ -300,7 +302,7 @@
     __weak typeof(self) weakSelf = self;
     [self.headerImageBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:url] forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         if (image == nil) {
-            [weakSelf.headerImageBtn setBackgroundImage:[UIImage imageNamed:@"wode_defoutHeader"] forState:UIControlStateNormal];
+            [weakSelf.headerImageBtn setBackgroundImage:[UIImage imageNamed:@"testtouxiang"] forState:UIControlStateNormal];
         }
     }];
 }

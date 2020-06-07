@@ -10,6 +10,7 @@
 #import "zEducationRankTypeInfo.h"
 #import "zPersonalController.h"
 #import "zUserDescController.h"
+#import "zListTypeModel.h"
 
 @interface zUserDetailController ()
 
@@ -33,6 +34,8 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
+    NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kgetUserInfo];
+    [self postDataWithUrl:url WithParam:nil];
 }
 
 
@@ -53,7 +56,7 @@
         _imageHeader.userInteractionEnabled = NO;
         _imageHeader.layer.cornerRadius = kWidthFlot(50);
         _imageHeader.clipsToBounds = YES;
-        _imageHeader.image = [UIImage imageNamed:@"wode_defoutHeader"];
+        _imageHeader.image = [UIImage imageNamed:@"testtouxiang"];
     }
     return _imageHeader;
 }
@@ -126,7 +129,7 @@
     self.nameLabel.text = [zEducationRankTypeInfo shareInstance].userInfoModel.userName;
     
     self.EmailLabel.text = [NSString stringWithFormat:@"邮箱:%@",[zEducationRankTypeInfo shareInstance].userInfoModel.email];
-    [self.imageHeader z_imageWithImageId:[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.portrait] placeholderImage:@"wode_defoutHeader"];
+    [self.imageHeader z_imageWithImageId:[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.portrait] placeholderImage:@"testtouxiang"];
     
 }
 
@@ -190,5 +193,36 @@
         return;
     }
 }
+
+-(void)RequsetSuccessWithData:(id)data AndUrl:(NSString*)url
+{
+    if ([url containsString:kgetUserInfo]) {
+        NSDictionary * dic = data;
+//        NSLog(@"验证码成功%@",dic);
+        NSString * msg = dic[@"msg"];
+        NSString * code = dic[@"code"];
+        
+        if ([code integerValue] == 0) {
+            //请求成功
+            NSArray * citys = dic[@"provinceList"];
+            NSMutableArray * cityArray = [NSMutableArray array];
+            [citys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSDictionary * dic = citys[idx];
+                zListTypeModel * typeModel = [zListTypeModel mj_objectWithKeyValues:dic];
+                [cityArray addObject:typeModel];
+            }];
+            NSDictionary * userInfoDic = dic[@"list"];
+
+            zUserCenterModel * userModel = [zUserCenterModel mj_objectWithKeyValues:userInfoDic];
+            [zEducationRankTypeInfo shareInstance].citys = cityArray;
+            [zEducationRankTypeInfo shareInstance].userInfoModel = userModel;
+        }else
+        {
+            [[zHud shareInstance]showMessage:msg];
+        }
+        
+    }
+}
+
 
 @end

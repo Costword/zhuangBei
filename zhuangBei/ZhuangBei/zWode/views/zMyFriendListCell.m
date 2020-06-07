@@ -57,7 +57,7 @@
         _headerImageBtn.tag = 1;
         _headerImageBtn.layer.cornerRadius = kWidthFlot(50);
         _headerImageBtn.clipsToBounds = YES;
-        [_headerImageBtn setBackgroundImage:[UIImage imageNamed:@"wode_defoutHeader"] forState:UIControlStateNormal];
+        [_headerImageBtn setBackgroundImage:[UIImage imageNamed:@"testtouxiang"] forState:UIControlStateNormal];
     }
     return _headerImageBtn;
 }

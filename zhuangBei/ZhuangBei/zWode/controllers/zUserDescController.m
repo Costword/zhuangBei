@@ -49,7 +49,7 @@
         _imageHeader = [[UIButton alloc]init];
         _imageHeader.layer.cornerRadius = kWidthFlot(25);
         _imageHeader.clipsToBounds = YES;
-        [_imageHeader setBackgroundImage:[UIImage imageNamed:@"wode_defoutHeader"] forState:UIControlStateNormal];
+        [_imageHeader setBackgroundImage:[UIImage imageNamed:@"testtouxiang"] forState:UIControlStateNormal];
     }
     return _imageHeader;
 }
@@ -118,7 +118,7 @@
         __weak typeof(self) weakSelf = self;
         [self.imageHeader sd_setBackgroundImageWithURL:[NSURL URLWithString:url] forState:UIControlStateNormal completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             if (image == nil) {
-                [weakSelf.imageHeader setBackgroundImage:[UIImage imageNamed:@"wode_defoutHeader"] forState:UIControlStateNormal];
+                [weakSelf.imageHeader setBackgroundImage:[UIImage imageNamed:@"testtouxiang"] forState:UIControlStateNormal];
             }
         }];
 }

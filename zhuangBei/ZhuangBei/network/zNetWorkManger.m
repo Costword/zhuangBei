@@ -67,36 +67,46 @@
     NSString *requestUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [manager POST:requestUrl parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        [[zHud shareInstance]hild];
+        if ([url containsString:kLogin]) {
+            NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:url]];
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUserDefaultsCookie];
+        }
         NSLog(@"\n*************url:%@,\n para:%@ \n*********responseObject:%@",url,param,responseObject); 
         loadSuccess(responseObject);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        if ([url containsString:kLogin]) {
+//
+//        }
         LWLog(@"\n***********请求失败**url:%@,\n para:%@ \n*********error:%@********",url,param,error);
         NSInteger code = error.code;
         if (code == -1004 || code == -1001) {
             [[zHud shareInstance]showMessage:@"请求超时,无法连接服务器"];
         }else if (code == 3840) {
-            [[zUserInfo shareInstance]deleate];
-            NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:url]];
-            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
-            [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUserDefaultsCookie];
             
-            if ([url containsString:kLogin]) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [[zHud shareInstance]showMessage:@"登录超时，请重新登录"];
-                });
+            
+            if ([url containsString:@"getFriendTypeAndFriendList"] || [url containsString:@"countList"] ||[url containsString:kGoodsMangerList]) {
+                
             }else
             {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [[zHud shareInstance]showMessage:@"您的账号在异地登录"];
-                });
+                [[zUserInfo shareInstance]deleate];
+                if ([url containsString:kLogin]) {
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [[zHud shareInstance]showMessage:@"登录超时，请重新登录"];
+                    });
+                }else
+                {
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [[zHud shareInstance]showMessage:@"您的账号在异地登录"];
+                    });
+                }
+                //登录超时重新登录
+                zDengluController * rootVC  = [[zDengluController alloc]init];
+                MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
+                rootNav.navigationBar.hidden = YES;
+                 UIApplication *app = [UIApplication sharedApplication];
+                [app keyWindow].rootViewController = rootNav;
             }
-            //登录超时重新登录
-            zDengluController * rootVC  = [[zDengluController alloc]init];
-            MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
-            rootNav.navigationBar.hidden = YES;
-             UIApplication *app = [UIApplication sharedApplication];
-            [app keyWindow].rootViewController = rootNav;
         }else
         {
             [[zHud shareInstance]hild];
