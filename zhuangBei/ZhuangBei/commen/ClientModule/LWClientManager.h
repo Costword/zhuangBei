@@ -8,6 +8,49 @@
 
 #import <Foundation/Foundation.h>
 #import "LWLocalChatRecordModel.h"
+//系统消息的类型
+typedef NS_ENUM(NSUInteger, LWSystemMsgType) {
+    /**
+     * 添加好友通知 --- 通知被添加人
+     */
+    LWSystemMsgTypeAddFriend = 10020,
+    /**
+     * 对方同意添加好友 --- 通知添加人
+     */
+    LWSystemMsgTypeAddFriendSuccess = 10021,
+    /**
+     * 对方拒绝添加好友 --- 通知添加人
+     */
+    LWSystemMsgTypeAddFriedFail = 10022,
+    /**
+     * 群邀请通知 --- 通知被邀请人
+     */
+    LWSystemMsgTypeGroupInvite = 10023,
+    /**
+     * 拒绝加群 --- 通知邀请人
+     */
+    LWSystemMsgTypeGroupJoinRefuse = 10024,
+    /**
+     * 同意加群 --- 通知邀请人
+     */
+    LWSystemMsgTypeGroupJoinSuccess = 20020,
+    /**
+     * 退出群通知 --- 你退出这个群，只有管理员看得到
+     */
+    LWSystemMsgTypeGroupExitSucess = 20021,
+    /**
+     * 禁言通知
+     */
+    LWSystemMsgTypeGroupBanned = 20022,
+    /**
+     * 撤回通知
+     */
+    LWSystemMsgTypeGroupWithdraw = 20023,
+    /**
+    * 其他状态
+    */
+    LWSystemMsgTypeOther,
+};
 
 //当前登录的个人信息
 @interface LWUserinforIMModel : BaseModel

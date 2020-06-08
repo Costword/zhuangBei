@@ -62,7 +62,6 @@
         }
     }
     
-    
 //    配置
     [[LWClientManager share] installConfigure];
     
@@ -71,6 +70,13 @@
     return YES;
 }
 
+- (BOOL)application:(UIApplication*)application shouldAllowExtensionPointIdentifier:(NSString*)extensionPointIdentifier
+{
+    if ([extensionPointIdentifier isEqualToString:@"com.apple.keyboard-service"]) {
+        return NO;
+    }
+    return YES;
+}
 
 #pragma mark - UISceneSession lifecycle
 
