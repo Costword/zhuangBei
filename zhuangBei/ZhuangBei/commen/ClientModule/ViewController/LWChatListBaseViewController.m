@@ -98,11 +98,11 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
                 self.successNum++;
                 [self sendMsgSuccess:text];
             }else{
-//                [[zHud shareInstance] showMessage:@"消息发送失败"];
+                [[zHud shareInstance] showMessage:@"消息发送失败"];
             }
             //            dispatch_group_leave(self.dispatch_group);
         } failure:^(NSError * _Nonnull error) {
-//            [[zHud shareInstance] showMessage:@"消息发送失败"];
+            [[zHud shareInstance] showMessage:@"消息发送失败"];
             //            dispatch_group_leave(self.dispatch_group);
         }];
     }else if(_roomType == LWChatRoomTypeOneTOne){
@@ -111,11 +111,11 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
                 self.successNum++;
                 [self sendMsgSuccess:text];
             }else{
-//                [[zHud shareInstance] showMessage:@"消息发送失败"];
+                [[zHud shareInstance] showMessage:@"消息发送失败"];
             }
             //            dispatch_group_leave(self.dispatch_group);
         } failure:^(NSError * _Nonnull error) {
-//            [[zHud shareInstance] showMessage:@"消息发送失败"];
+            [[zHud shareInstance] showMessage:@"消息发送失败"];
             //            dispatch_group_leave(self.dispatch_group);
         }];
     }

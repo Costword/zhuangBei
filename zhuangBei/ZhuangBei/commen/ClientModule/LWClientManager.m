@@ -167,6 +167,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     //    如果是添加好友的系统消息则取请求未读系统消息
     if ([uid integerValue] == 0) {
         if ([uid isEqualToString:@"system"]) {
+            LWSystemMsgType msgtype = (LWSystemMsgType)[message integerValue];
+            
             //    如果当前控制器是正是系统消息页面，更新后台的未读数
             UIViewController *currentVC = [LWClientManager topController];
             if ([currentVC isKindOfClass:[LWSystemMessageListViewController class]]) {
@@ -174,6 +176,11 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
                 [LWClientManager.share requestReadSystemMsg:systemvc.tabbarIndex == 0?@"1":@"0" ];
             }else{
                 [self requestUnReadSystemMsgNumber];
+            }
+            
+            if (msgtype == LWSystemMsgTypeAddFriendSuccess){
+                [self requestAllGroupInforDatas];
+                POST_NOTI(@"refreshFriendListDataWhenAgreeFriendApply", nil);
             }
         }
         return;
