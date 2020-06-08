@@ -53,7 +53,7 @@
         _childScroContentView.delegate = self;
         _childScroContentView.contentSize = CGSizeMake(SCREEN_WIDTH *self.childViewControllers.count,0);
         _childScroContentView.pagingEnabled = YES;
-        _childScroContentView.backgroundColor = [UIColor whiteColor];
+        _childScroContentView.backgroundColor = [UIColor clearColor];
         _childScroContentView.showsHorizontalScrollIndicator = NO;
         [self.view insertSubview:_childScroContentView atIndex:0];
         [self scrollViewDidEndScrollingAnimation:_childScroContentView];

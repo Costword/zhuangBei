@@ -213,7 +213,7 @@
     [self.menuTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.leftMenu.mas_right).offset(0);
        make.top.mas_equalTo(0);
-       make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+       make.bottom.mas_equalTo(-(KstatusBarHeight+44+LL_TabbarSafeBottomMargin));
        make.right.mas_equalTo(0);
     }];
     [self.nothingView mas_remakeConstraints:^(MASConstraintMaker *make) {

@@ -39,6 +39,7 @@
         [_nameBtn setTitle:@"操作手册" forState:UIControlStateNormal];
         [_nameBtn setTitleColor:[kMainSingleton colorWithHexString:@"#4A4A4A" alpha:1] forState:UIControlStateNormal];
         _nameBtn.clipsToBounds = YES;
+        [_nameBtn addTarget:self action:@selector(userBookClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nameBtn;
 }
@@ -76,5 +77,10 @@
     _baseView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     _baseView.layer.shadowOpacity = 0.1f;
     _baseView.layer.shadowPath = shadowPath.CGPath;
+}
+
+-(void)userBookClick
+{
+   [[zHud shareInstance]showMessage:@"阿猿正在玩命开发中，敬请期待..."];
 }
 @end
