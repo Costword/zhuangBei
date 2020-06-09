@@ -85,26 +85,46 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
+    if (scrollView.contentOffset.x<=0 ){
+        self.scrollView.bounces = NO;
+    }else{
+        self.scrollView.bounces = YES;
+    }
 }
+
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+//    NSLog(@"-----%f",scrollView.contentOffset.x);
+    CGFloat maxX = 90;
+    if (scrollView.contentOffset.x >40) {
+        self.isEditing = YES;
+        *targetContentOffset =CGPointMake(maxX, 0);
+    }else
+    {
+        self.isEditing = NO;
+        *targetContentOffset =CGPointMake(0, 0);
+    }
+}
+
+
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     
-    CGFloat maxX = 90;
-    CGPoint offest = scrollView.contentOffset;
-    if(offest.x < 0) {
-        [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
-        [scrollView setBounces:NO];
-        return;
-    }
-    [scrollView setBounces:YES];
-    if (offest.x< 40) {
-        [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
-        self.isEditing = NO;
-    }else {
-        [scrollView setContentOffset:CGPointMake(maxX, 0) animated:NO];
-        self.isEditing = YES;
-    }
+//    CGFloat maxX = 90;
+//    CGPoint offest = scrollView.contentOffset;
+//    if(offest.x < 0) {
+//        [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+//        [scrollView setBounces:NO];
+//        return;
+//    }
+//    [scrollView setBounces:YES];
+//    if (offest.x< 40) {
+//        [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+//        self.isEditing = NO;
+//    }else {
+//        [scrollView setContentOffset:CGPointMake(maxX, 0) animated:NO];
+//        self.isEditing = YES;
+//    }
 //        if (_lastOffsetX > offest.x) {
 //        [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
 //        _lastOffsetX = 0;
@@ -137,6 +157,7 @@
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-20, 230)];
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.delegate = self;
+    _scrollView.bounces = NO;
     [self.contentView addSubview:_scrollView];
     [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.contentView);
