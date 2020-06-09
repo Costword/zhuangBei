@@ -35,7 +35,9 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self endTableViewCellEdit];
+    if ([scrollView isKindOfClass:[UITableView class]]) {
+        [self endTableViewCellEdit];
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
