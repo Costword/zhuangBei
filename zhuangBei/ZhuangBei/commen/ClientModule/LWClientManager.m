@@ -142,18 +142,19 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         return;
     }
     POST_NOTI(NEW_MSG_GROPU_NOTI_KEY, (@{@"msg":aMessage,@"fromid":fromID,@"groupID":groupID}));
-    
+
+    NSString * groupname = self.allGroupDatas[[NSNumber numberWithInteger:[groupID integerValue]]][@"name"];
     //    如果当前控制器是正是当前群组时，本地不再添加未读数
     UIViewController *currentVC = [LWClientManager topController];
     if ([currentVC isKindOfClass: [MessageGroupViewController class]]) {
         MessageGroupViewController *chatvc = (MessageGroupViewController *)currentVC;
         if ([chatvc.roomId integerValue] != [groupID integerValue]) {
-            NSString *groupname = self.allGroupDatas[[NSNumber numberWithInteger:[groupID integerValue]]][@"name"];
+            
             //type: 1:group; 2:oto
             [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
         }
     }else{
-        NSString *groupname = self.allGroupDatas[[NSNumber numberWithInteger:[groupID integerValue]]][@"name"];
+//        NSString *groupname = self.allGroupDatas[[NSNumber numberWithInteger:[groupID integerValue]]][@"name"];
         //type: 1:group; 2:oto
         [self addNewUnReadMsgWithRoomName:LWDATA(groupname) roomId:LWDATA(groupID) chatType:1 extend:nil];
     }
@@ -186,18 +187,22 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
         return;
     }
     POST_NOTI(NEW_MSG_CHAT_NOTI_KEY, (@{@"msg":message,@"fromid":uid}));
-    
+    NSDictionary *msg = [LWTool stringToDictory:message];
+    NSString *friendname = msg[@"username"];
+    if (self.allGroupDatas.count > 0) {
+        friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]][@"name"];
+    }
     //    如果当前控制器是正是对方时，本地不再添加未读数
     UIViewController *currentVC = [LWClientManager topController];
     if ([currentVC isKindOfClass: [ChatRoomViewController class]]) {
         ChatRoomViewController *chatvc = (ChatRoomViewController *)currentVC;
         if ([chatvc.roomId integerValue] != [uid integerValue]) {
-            NSString *friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]][@"name"];
+//            NSString *friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]][@"name"];
             //type: 1:group; 2:oto
             [self addNewUnReadMsgWithRoomName:[LWDATA(friendname) isNotBlank] ? friendname:@"临时消息" roomId:LWDATA(uid) chatType:2 extend:nil];
         }
     }else{
-        NSString *friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]][@"name"];
+//        NSString *friendname = self.allGroupDatas[[NSNumber numberWithInteger:[uid integerValue]]][@"name"];
         //type: 1:group; 2:oto
         [self addNewUnReadMsgWithRoomName:[LWDATA(friendname) isNotBlank] ? friendname:@"临时消息" roomId:LWDATA(uid) chatType:2 extend:nil];
     }

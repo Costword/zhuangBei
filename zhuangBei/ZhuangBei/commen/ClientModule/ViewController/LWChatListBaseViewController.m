@@ -190,6 +190,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (void)requestFriendInfor
 {
     [ServiceManager requestPostWithUrl:@"app/appqyuser/findOne" paraString:@{@"userId":self.roomId} success:^(id  _Nonnull response) {
+        LWLog(@"***************好友信息：%@",response);
         if ([response[@"code"] integerValue] == 0) {
             NSDictionary *list = response[@"list"];
             self.friendInforModel = [friendItemModel modelWithDictionary:list];
@@ -451,11 +452,11 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     if (self.roomType == LWChatRoomTypeOneTOne) {
         NSDictionary *dict = @{
             @"id":LWDATA(LWClientManager.share.userinforIM.customId),
-            @"username":LWDATA(_friendInforModel.chatNickName),
-            @"avatar": [NSString stringWithFormat:@"/app/app/appfujian/download?attID=%@",LWDATA(self.friendInforModel.portrait)],
+            @"username":LWDATA(LWClientManager.share.userinforIM.username),
+            @"avatar":LWDATA(LWClientManager.share.userinforIM.avatar),
             @"content":LWDATA(text),
-            @"sign":LWDATA(_friendInforModel.sign),
-            @"mainProduct":LWDATA(_friendInforModel.mainProducts),
+            @"sign":LWDATA(LWClientManager.share.userinforIM.sign),
+            @"mainProduct":LWDATA(LWClientManager.share.userinforIM.mainProducts),
             @"msgCount":@"0",
             @"mid":@{
                     @"id":LWDATA(LWClientManager.share.userinforIM.avatarID),
