@@ -129,7 +129,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         [[XHClient sharedClient].groupManager sendMessage:text toGroup:self.m_Group_ID atUsers:nil completion:^(NSError *error) {
             if (error) {
                 LWLog(@"**************消息发送失败error:%@",error);
-//                [UIView ilg_makeToast:error.localizedDescription];
+                //                [UIView ilg_makeToast:error.localizedDescription];
             }else{
                 self.successNum++;
             }
@@ -139,7 +139,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         [[XHClient sharedClient].chatManager sendMessage:text toID:[NSString stringWithFormat:@"%@",self.roomId] completion:^(NSError *error) {
             if (error) {
                 LWLog(@"**************消息发送失败error:%@",error);
-//                [UIView ilg_makeToast:error.localizedDescription];
+                //                [UIView ilg_makeToast:error.localizedDescription];
             } else {
                 self.successNum++;
             }
@@ -455,9 +455,11 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
             @"username":LWDATA(LWClientManager.share.userinforIM.username),
             @"avatar":LWDATA(LWClientManager.share.userinforIM.avatar),
             @"content":LWDATA(text),
+            @"isGroup":@"false",
             @"sign":LWDATA(LWClientManager.share.userinforIM.sign),
             @"mainProduct":LWDATA(LWClientManager.share.userinforIM.mainProducts),
             @"msgCount":@"0",
+            @"isMyFriend":@"true",
             @"mid":@{
                     @"id":LWDATA(LWClientManager.share.userinforIM.avatarID),
                     @"userId":LWDATA(LWClientManager.share.userinforIM.customId),
@@ -472,19 +474,29 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         res = [LWTool dictoryToString:dict];
         LWLog(@"***************发送的单聊消息：%@\n",res);
     }else if (self.roomType == LWChatRoomTypeGroup){
-        NSDictionary *dict = @{@"avatar":LWDATA(LWClientManager.share.userinforIM.avatar),
-                               @"content":text,
-                               @"id":LWDATA(LWClientManager.share.userinforIM.customId),
-                               @"isGroup":@"false",
-                               @"mainProduct":LWDATA(LWClientManager.share.userinforIM.mainProducts),
-                               @"mid":@{@"content":LWDATA(text),
-                                        @"groupId":LWDATA(self.roomId),
-                                        @"id":LWDATA(LWClientManager.share.userinforIM.avatarID),
-                                        @"sendTime":LWDATA([[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]),
-                                        @"userId":LWDATA(LWClientManager.share.userinforIM.customId),
-                               },
-                               @"msgCount":@"0",
-                               @"username":LWDATA(LWClientManager.share.userinforIM.username)
+        NSString *groupavatar = LWClientManager.share.allGroupDatas[[NSNumber numberWithInteger:[self.roomId integerValue]]][@"avatar"];
+        NSDictionary *dict = @{
+            @"id":LWDATA(LWClientManager.share.userinforIM.customId),
+            @"username":LWDATA(LWClientManager.share.userinforIM.username),
+            @"avatar":LWDATA(LWClientManager.share.userinforIM.avatar),
+            @"content":LWDATA(text),
+            @"isGroup":@"true",
+            @"sign":LWDATA(LWClientManager.share.userinforIM.sign),
+            @"mainProduct":LWDATA(LWClientManager.share.userinforIM.mainProducts),
+            @"msgCount":@"0",
+            @"groupname":LWDATA(self.roomName),
+            @"groupavatar":LWDATA(groupavatar),
+            @"isMyFriend":@"flase",
+            @"mid":@{
+                    @"id":LWDATA(LWClientManager.share.userinforIM.avatarID),
+                    @"userId":LWDATA(LWClientManager.share.userinforIM.customId),
+                    @"groupId":LWDATA(self.roomId),
+                    @"content":LWDATA(text),
+                    @"sendTime":LWDATA([[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]),
+                    @"isDel":@"",
+                    @"isRead":@"",
+                    @"isBack":@""
+            },
         };
         res = [LWTool dictoryToString:dict];
         LWLog(@"***************发送群组消息：%@\n",res);
