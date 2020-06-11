@@ -169,10 +169,10 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        if ([msgModel.userID isEqualToString:[IMUserInfo shareInstance].userID]) {
-            msgModel.mine = 1;
+        if ([msgModel.userID integerValue] == [[IMUserInfo shareInstance].userID integerValue]) {
+            msgModel.isMySelf = 1;
         }else{
-            msgModel.mine = 0;
+            msgModel.isMySelf = 0;
         }
         if(msgModel.msgType == LWMsgTypeImage){
             msgModel.rowHeight = 200+ 10+20 + 25+ 15 + 15+10+15;
@@ -221,8 +221,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (void)deleUserGroupChat:(NSNotification *)noti
 {
     if (self.roomType != LWChatRoomTypeGroup) return;
-    NSString *groupID = noti.object[@"groupID"];
-    if ([self isCurrentViewController] && [groupID isEqualToString:self.roomId]) {
+    NSInteger groupID = [noti.object[@"groupID"] integerValue];
+    if ([self isCurrentViewController] && groupID == [self.roomId integerValue]) {
         [UIView ilg_makeToast:@"您已被管理员剔除"];
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -231,8 +231,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 - (void)deleGroupChat:(NSNotification *)noti
 {
     if (self.roomType != LWChatRoomTypeGroup) return;
-    NSString *groupID = noti.object[@"groupID"];
-    if ([self isCurrentViewController] && [groupID isEqualToString:self.roomId]) {
+    NSInteger groupID = [noti.object[@"groupID"] integerValue];
+    if ([self isCurrentViewController] && groupID == [self.roomId integerValue]) {
         [UIView ilg_makeToast:@"此群已被删除"];
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -352,10 +352,10 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     ShowMsgElem * getNewShowMsgElem =  [self.showDatasArray objectAtIndex:row];
     
     IFChatCell *cell;
-    IFChatCellStyle cellStyle = getNewShowMsgElem.mine == 1 ? IFChatCellStyleRight:IFChatCellStyleLeft;
+    IFChatCellStyle cellStyle = getNewShowMsgElem.isMySelf == 1 ? IFChatCellStyleRight:IFChatCellStyleLeft;
     
     if (getNewShowMsgElem.msgType == LWMsgTypeText) {
-        NSString *tableSampleIdentifier = getNewShowMsgElem.mine == 1 ? @"TableSampleIdentifierRight":@"TableSampleIdentifierLeft";
+        NSString *tableSampleIdentifier = getNewShowMsgElem.isMySelf == 1 ? @"TableSampleIdentifierRight":@"TableSampleIdentifierLeft";
         
         cell = [tableView dequeueReusableCellWithIdentifier:
                 tableSampleIdentifier];
