@@ -233,7 +233,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
  */
 - (void)userAccountDidLogout;
 {
-    [[zHud shareInstance] showMessage:@"关闭啦，需要重新登录"];
+//    [[zHud shareInstance] showMessage:@"关闭啦，需要重新登录"];
+    [LWClientManager.share userLogin];
 }
 
 
@@ -339,7 +340,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     }];
     if (!ishave && [LWClientManager.share.userinforIM.customId integerValue] != [roomId integerValue]) {
         LWLocalChatRecordModel *model = [LWLocalChatRecordModel new];
-        model.roomId = roomId;
+        model.roomId = [NSString stringWithFormat:@"%@",roomId];
         model.roomName = roomName;
         model.chatType = type;
         model.avatar = avatar;
@@ -388,7 +389,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     NSMutableArray *unreadmsg = [self getLocalUnReadMsg];
     NSMutableDictionary *dict = [NSMutableDictionary new];
     for (LWLocalChatRecordModel *model in unreadmsg) {
-        [dict setValue:model forKey:model.roomId];
+        [dict setValue:model forKey:[NSString stringWithFormat:@"%@",model.roomId]];
     }
     
     NSMutableArray *localchatrecord = [LWClientManager getLocalChatRecordModelList];

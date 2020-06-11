@@ -94,24 +94,24 @@
 
 
 
-- (NSArray *)actionTitleArr:(NSString *)targetID {
-    if ([targetID isEqualToString:[IMUserInfo shareInstance].userID]) { //自己
-        return @[];
-    } else if ([[IMUserInfo shareInstance].userID isEqualToString:self.mCreaterId]) { //不是自己，而且自己是拥有者
-        return @[@"踢出房间", @"禁止发言", @"私信"];
-    } else { //自己是普通成员
-        return @[@"私信"];
-    }
-}
-- (NSArray *)actionEventArr:(NSString *)targetID {
-    if ([targetID isEqualToString:[IMUserInfo shareInstance].userID]) { //自己
-        return @[];
-    } else if ([[IMUserInfo shareInstance].userID isEqualToString:self.mCreaterId]) { //不是自己，而且自己是拥有者
-        return @[@"kick:", @"mute:", @"privateMsg:"];
-    } else { //自己是普通成员
-        return @[@"privateMsg:"];
-    }
-}
+//- (NSArray *)actionTitleArr:(NSString *)targetID {
+//    if ([targetID isEqualToString:[IMUserInfo shareInstance].userID]) { //自己
+//        return @[];
+//    } else if ([[IMUserInfo shareInstance].userID isEqualToString:self.mCreaterId]) { //不是自己，而且自己是拥有者
+//        return @[@"踢出房间", @"禁止发言", @"私信"];
+//    } else { //自己是普通成员
+//        return @[@"私信"];
+//    }
+//}
+//- (NSArray *)actionEventArr:(NSString *)targetID {
+//    if ([targetID isEqualToString:[IMUserInfo shareInstance].userID]) { //自己
+//        return @[];
+//    } else if ([[IMUserInfo shareInstance].userID isEqualToString:self.mCreaterId]) { //不是自己，而且自己是拥有者
+//        return @[@"kick:", @"mute:", @"privateMsg:"];
+//    } else { //自己是普通成员
+//        return @[@"privateMsg:"];
+//    }
+//}
 
 
 
