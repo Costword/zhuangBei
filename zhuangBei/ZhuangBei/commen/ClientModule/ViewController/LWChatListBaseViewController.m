@@ -171,6 +171,8 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         
         if ([msgModel.userID isEqualToString:[IMUserInfo shareInstance].userID]) {
             msgModel.mine = 1;
+        }else{
+            msgModel.mine = 0;
         }
         if(msgModel.msgType == LWMsgTypeImage){
             msgModel.rowHeight = 200+ 10+20 + 25+ 15 + 15+10+15;
@@ -245,7 +247,6 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     NSDictionary *dict = [LWTool stringToDictory:msgdic[@"msg"]];
     ShowMsgElem *model = [ShowMsgElem modelWithDictionary:dict];
     model.uavatar = dict[@"avatar"];
-    //    model.uavatar = [NSString stringWithFormat:@"/app/app/appfujian/download?attID=%@",dict[@"mid"][@"id"]];
     model.userID = self.roomId;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self showTrace:model];
@@ -264,9 +265,6 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     vc.roomName = roomName;
     vc.roomId = roomId;
     vc.roomType = roomType;
-    //    if ([extend isKindOfClass:[LWJiaoLiuModel class]]) {
-    //        vc.friendInforModel = extend;
-    //    }
     return vc;
 }
 

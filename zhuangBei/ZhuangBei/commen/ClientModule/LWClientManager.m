@@ -388,7 +388,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     NSMutableArray *unreadmsg = [self getLocalUnReadMsg];
     NSMutableDictionary *dict = [NSMutableDictionary new];
     for (LWLocalChatRecordModel *model in unreadmsg) {
-        [dict setValue:model forKey:model.roomId];
+        [dict setValue:model forKey:[NSString stringWithFormat:@"%@",model.roomId]];
     }
     
     NSMutableArray *localchatrecord = [LWClientManager getLocalChatRecordModelList];
