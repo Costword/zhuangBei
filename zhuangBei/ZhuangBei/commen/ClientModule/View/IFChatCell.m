@@ -111,14 +111,16 @@ const static int subTitleFontNum = 16;
         [label mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(imageView.mas_top).offset(0);
             make.left.equalTo(imageView.mas_right).offset(leadingSpace);
-            make.trailing.lessThanOrEqualTo(self).offset(-textTrailingSpace);
+//            make.trailing.lessThanOrEqualTo(self).offset(-textTrailingSpace);
             make.height.mas_equalTo(20);
+            make.right.mas_lessThanOrEqualTo(self.mas_right).mas_offset(-10);
         }];
         [label2 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(label.mas_bottom).offset(5);
             make.left.equalTo(label.mas_left);
             make.height.mas_equalTo(15);
-            make.trailing.lessThanOrEqualTo(self).offset(-textTrailingSpace);
+//            make.trailing.lessThanOrEqualTo(self).offset(-textTrailingSpace);
+            make.right.mas_lessThanOrEqualTo(self.mas_right).mas_offset(-10);
         }];
         [label3 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(label2.mas_bottom).offset(textTopSpace);
@@ -126,13 +128,6 @@ const static int subTitleFontNum = 16;
             make.trailing.lessThanOrEqualTo(self).offset(-textTrailingSpace);
             make.bottom.equalTo(self).offset(-textTopSpace);
         }];
-        
-        //        [textBGIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-        //            make.top.equalTo(label3).offset(-1); // -textTopSpace
-        //            make.leading.equalTo(label3).offset(-13);
-        //            make.trailing.equalTo(label3).offset(13);
-        //            make.bottom.equalTo(label3).offset(5);
-        //        }];
         label.textAlignment = label2.textAlignment  = NSTextAlignmentLeft;
     } else {
         label.textAlignment = label2.textAlignment  = NSTextAlignmentRight;
@@ -143,15 +138,19 @@ const static int subTitleFontNum = 16;
         }];
         [label mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(imageView.mas_top).offset(0);
-            make.left.lessThanOrEqualTo(self.mas_left).offset(textTrailingSpace);
+//            make.left.lessThanOrEqualTo(self.mas_left).offset(textTrailingSpace);
             make.right.equalTo(imageView.mas_left).offset(-leadingSpace);
             make.height.mas_equalTo(20);
+//            make.left.mas_lessThanOrEqualTo(self.mas_left).mas_offset(10);
+            make.width.mas_lessThanOrEqualTo(@(SCREEN_WIDTH - leadingSpace*2-iconHeight-10));
         }];
         [label2 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(label.mas_bottom).offset(5);
             make.right.equalTo(label.mas_right);
             make.height.mas_equalTo(15);
-            make.left.lessThanOrEqualTo(self.mas_left).offset(textTrailingSpace);
+//            make.left.lessThanOrEqualTo(self.mas_left).offset(textTrailingSpace);
+//            make.left.mas_lessThanOrEqualTo(self.mas_left).mas_offset(10);
+            make.width.mas_lessThanOrEqualTo(@(SCREEN_WIDTH - leadingSpace*2-iconHeight-10));
         }];
         
         [label3 mas_remakeConstraints:^(MASConstraintMaker *make) {

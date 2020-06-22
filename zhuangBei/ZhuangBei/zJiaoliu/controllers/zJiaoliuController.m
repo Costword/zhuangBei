@@ -342,8 +342,10 @@
 {
     LWJiaoLiuGroupCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LWJiaoLiuGroupCollectionCell" forIndexPath:indexPath];
     LWJiaoLiuModel *model = self.listDatas_JiaoLiu[indexPath.section];
-    cell.nameL.text = model.imGroupList[indexPath.row].groupName;
-    [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kApiPrefix,model.avatar]] placeholderImage:IMAGENAME(@"jiaoliulisticon")];
+    imGroupListModel *groupmodel = model.imGroupList[indexPath.row];
+    cell.nameL.text = groupmodel.groupName;
+//    [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kApiPrefix,model.avatar]] placeholderImage:IMAGENAME(@"jiaoliulisticon")];
+    [cell.bgImageView z_imageWithImageId:groupmodel.appBackgroundImage placeholderImage:@"jiaoliulisticon"];
     return cell;
 }
 
