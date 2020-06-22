@@ -53,7 +53,12 @@
     _companL.text = _model.supplier.name;
     _proveL.text = _model.supplier.companyNameFirst;
     _addressL.text = _model.productInformation.productSourceName;
-    _productNickL.text = [_model.productInformation.zbBieMing isNotBlank] ? _model.productInformation.zbBieMing : @"暂无";
+    if (![_model.productInformation.zbBieMing isNotBlank]) {
+        _productNickL.textAlignment = NSTextAlignmentCenter;
+        _productNickL.text = @"暂无";
+    }else{
+        _productNickL.text =  _model.productInformation.zbBieMing;
+    }
     
     //    产品类型
     [self.cityCollectView reloadData];
@@ -179,6 +184,7 @@
     _addressL = [LWLabel lw_lable:@"" font:16 textColor:BASECOLOR_GREYCOLOR155];
     _addressL.numberOfLines = 3;
     _productNickL = [LWLabel lw_lable:@"" font:16 textColor:[UIColor colorWithRed:155/255.0 green:155/255.0 blue:155/255.0 alpha:1.0] backColor:[UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1.0]];
+    _productNickL.numberOfLines = 0;
     _xinghaoL = [LWLabel lw_lable:@"" font:16 textColor:RGB(63, 80, 181)];
     UILabel *nickL = [LWLabel lw_lable:@"产品别称" font:18 textColor:BASECOLOR_TEXTCOLOR];
     UILabel *xinghaoL = [LWLabel lw_lable:@"产品型号" font:18 textColor:BASECOLOR_TEXTCOLOR];
@@ -219,7 +225,8 @@
         make.left.mas_equalTo(_nameL);
         make.top.mas_equalTo(nickL.mas_bottom).mas_offset(10);
         make.width.mas_greaterThanOrEqualTo(@(60));
-        make.height.mas_offset(25);
+        make.height.mas_greaterThanOrEqualTo(@(25));
+        make.right.mas_lessThanOrEqualTo(_nameL.mas_right);
     }];
     [xinghaoL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(_nameL);
@@ -236,7 +243,7 @@
         make.bottom.mas_equalTo(_scrollView.mas_bottom).mas_offset(-20);
     }];
     
-    _productNickL.textAlignment = NSTextAlignmentCenter;
+    _productNickL.textAlignment = NSTextAlignmentLeft;
     [_productNickL setBoundWidth:1 cornerRadius:0 boardColor:BASECOLOR_BOARD];
     [_xinghaoL setBoundWidth:1 cornerRadius:0 boardColor:RGB(63, 80, 181)];
     [self.canshuView setBoundWidth:0.5 cornerRadius:10 boardColor:BASECOLOR_BOARD];

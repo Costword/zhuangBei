@@ -20,7 +20,7 @@
 
 - (void)refreshData
 {
-    [self requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"Id":LWDATA(self.zbTypeId),@"gysLimit":@(100),@"page":@(self.currPage),@"searchGYSName":@"",@"zbId":LWDATA(self.zbId)} success:^(id  _Nonnull response) {
+    [self requestPostWithUrl:@"app/appzhuangbei/listByQian" paraString:@{@"id":LWDATA(self.zbTypeId),@"gysLimit":@(100),@"page":@(self.currPage),@"searchGYSName":@"",@"zbId":LWDATA(self.zbId)} success:^(id  _Nonnull response) {
         
         [self.tableView.mj_footer endRefreshing];
         

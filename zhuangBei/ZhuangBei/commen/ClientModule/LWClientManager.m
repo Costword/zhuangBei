@@ -233,7 +233,7 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
  */
 - (void)userAccountDidLogout;
 {
-//    [[zHud shareInstance] showMessage:@"关闭啦，需要重新登录"];
+    [[zHud shareInstance] showMessage:@"关闭啦，需要重新登录"];
     [LWClientManager.share userLogin];
 }
 
