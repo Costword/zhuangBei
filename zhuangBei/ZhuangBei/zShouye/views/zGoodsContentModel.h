@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(copy,nonatomic)NSString * companyType;
 
-
+@property(copy,nonatomic)NSString * imagesId;
 
 
 @end

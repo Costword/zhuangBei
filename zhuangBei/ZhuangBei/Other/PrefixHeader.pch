@@ -41,8 +41,8 @@
 #define JGAPPK  @"341a4b6b8631c852448e6f94"
 // 真实wx96c1105f75be3361
 //wx51e3155d3e2276a7
-#define weXinAppId @"wx51e3155d3e2276a7"
-#define weiXinSecret @"ac565629bff939c3d10204feea96fabe"
+#define weXinAppId @"wx96c1105f75be3361"
+#define weiXinSecret @"6f256e3684aad70aa683977fd7883dfc"
 #define qqAppId @"101878768"
 #define qqAppKey @"85a69869801e368ed00b74bc3f0904b2"
 

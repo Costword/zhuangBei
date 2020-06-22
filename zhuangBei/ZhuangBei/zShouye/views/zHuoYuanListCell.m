@@ -14,6 +14,8 @@
 
 @property(strong,nonatomic)UIImageView * baseImageView;
 
+@property(strong,nonatomic)UIView * coverView;
+
 @property(strong,nonatomic)UIButton * arrowButton;
 
 @property(strong,nonatomic)UILabel * nameLabel;
@@ -51,9 +53,21 @@
 {
     if (!_baseImageView) {
         _baseImageView = [[UIImageView alloc]init];
+        _baseImageView.contentMode = UIViewContentModeScaleAspectFit;
         _baseImageView.image = [UIImage imageNamed:@"testicon"];
+        [_baseImageView addSubview:self.coverView];
     }
     return _baseImageView;
+}
+
+-(UIView*)coverView
+{
+    if (!_coverView) {
+        _coverView = [[UIView alloc]init];
+        _coverView.backgroundColor = [UIColor whiteColor];
+        _coverView.alpha = 0.5;
+    }
+    return _coverView;
 }
 
 -(UIButton*)arrowButton
@@ -68,6 +82,8 @@
     return _arrowButton;
 }
 
+
+
 -(UILabel*)nameLabel
 {
     if (!_nameLabel) {
@@ -75,7 +91,7 @@
         _nameLabel.font = kFont(12);
         _nameLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         _nameLabel.numberOfLines = 1;
-        _nameLabel.text = @"北京和为永泰";
+        _nameLabel.text = @"";
     }
     return _nameLabel;
 }
@@ -87,7 +103,7 @@
         _farenLabel.font = kFont(12);
         _farenLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         _farenLabel.numberOfLines = 1;
-        _farenLabel.text = @"法人：费云健";
+        _farenLabel.text = @"";
     }
     return _farenLabel;
 }
@@ -99,7 +115,7 @@
         _phoneLabel.font = kFont(12);
         _phoneLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         _phoneLabel.numberOfLines = 1;
-        _phoneLabel.text = @"电话：010-5269882223";
+        _phoneLabel.text = @"";
     }
     return _phoneLabel;
 }
@@ -111,7 +127,7 @@
         _descLabel.font = kFont(12);
         _descLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         _descLabel.numberOfLines = 1;
-        _descLabel.text = @"简介：北京和为永泰科技股份有限公司";
+        _descLabel.text = @"";
     }
     return _descLabel;
 }
@@ -143,6 +159,11 @@
     }];
     
     [self.baseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-kWidthFlot(1));
+        make.top.mas_equalTo(kWidthFlot(1));
+        make.size.mas_equalTo(CGSizeMake(kWidthFlot(100), kWidthFlot(80)));
+    }];
+    [self.coverView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     
@@ -194,6 +215,9 @@
     self.farenLabel.text = [NSString stringWithFormat:@"法人：%@",model.faRen];
     self.phoneLabel.text = [NSString stringWithFormat:@"电话：%@",model.phone];
     self.descLabel.text = [NSString stringWithFormat:@"简介："];
+    
+    NSString * url = [NSString stringWithFormat:@"%@app/appfujian/download?attID=%@",kApiPrefix,model.imagesId];
+    [self.baseImageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testicon"]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

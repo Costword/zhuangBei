@@ -97,17 +97,17 @@
 //
     
     
-    [self addVCWithvc:[[zAshouyeController alloc] init]
-                title:@"首页"
+    [self addVCWithvc:[[zHyController alloc] init]
+                title:@"货源大厅"
                 image:@"home_nor"
         selectedImage:@"home_sel"
            badgeValue:@"0"];
     
-    [self addVCWithvc:[[zHyController alloc] init]
-                title:@"货源大厅"
-                image:@"goods_nor"
-        selectedImage:@"goods_sel"
-           badgeValue:@"0"];
+    [self addVCWithvc:[[zAshouyeController alloc] init]
+            title:@"合作伙伴"
+            image:@"goods_nor"
+    selectedImage:@"goods_sel"
+       badgeValue:@"0"];
     
     NSInteger num = [LWClientManager share].unreadMsgNum + LWClientManager.share.unreadSysMsgNum;
     [self addVCWithvc:[[zJiaoliuController alloc] init]

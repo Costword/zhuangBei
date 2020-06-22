@@ -48,10 +48,13 @@
 //    [[zHud shareInstance]show];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置请求体数据为json类型
+    
+    
+    AFJSONResponseSerializer * responseSerializer =[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = responseSerializer;
     //设置响应体数据为json类型
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html",@"charset=UTF-8",@"octet-stream", nil];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json",@"text/json", @"text/javascript",@"charset=UTF-8",@"octet-stream", nil];
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = 10.f;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
@@ -65,6 +68,8 @@
     }
     
     NSString *requestUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+
     [manager POST:requestUrl parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([url containsString:kLogin]) {
@@ -75,31 +80,35 @@
         NSLog(@"\n*************url:%@,\n para:%@ \n*********responseObject:%@",url,param,responseObject); 
         loadSuccess(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        if ([url containsString:kLogin]) {
-//
-//        }
+        
+//        NSString *responseStr = operation.responseString;
+        
         LWLog(@"\n***********请求失败**url:%@,\n para:%@ \n*********error:%@********",url,param,error);
         NSInteger code = error.code;
         if (code == -1004 || code == -1001) {
+            [[zHud shareInstance]hild];
             [[zHud shareInstance]showMessage:@"请求超时,无法连接服务器"];
         }else if (code == 3840) {
             
             
-            if ([url containsString:@"getFriendTypeAndFriendList"] || [url containsString:@"countList"] ||[url containsString:kGoodsMangerList]) {
+            if ([url containsString:@"getFriendTypeAndFriendList"] || [url containsString:@"countList"]) {
                 
             }else
             {
-                [[zUserInfo shareInstance]deleate];
-                if ([url containsString:kLogin]) {
+                if ([url containsString:kGoodsMangerList] || [url containsString:kGoodsMangerMenu] ||[url containsString:kgetUserInfo]) {
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [[zHud shareInstance]showMessage:@"登录超时，请重新登录"];
+                        [[zHud shareInstance]hild];
+                        [[zHud shareInstance]showMessage:@"您的账号在异地登录"];
                     });
                 }else
                 {
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [[zHud shareInstance]showMessage:@"您的账号在异地登录"];
+                        [[zHud shareInstance]hild];
+                        [[zHud shareInstance]showMessage:@"您的账号已掉线  请重新登录"];
                     });
                 }
+                
+                [[zUserInfo shareInstance]deleate];
                 //登录超时重新登录
                 zDengluController * rootVC  = [[zDengluController alloc]init];
                 MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];

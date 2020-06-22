@@ -165,6 +165,7 @@
     }];
     _scrollView.backgroundColor = UIColor.whiteColor;
     _goodsIv = [UIImageView new];
+    _goodsIv.contentMode = UIViewContentModeScaleAspectFit;
     _goodsNameL = [UILabel new];
     _goodsDescL = [UILabel new];
     
