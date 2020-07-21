@@ -57,6 +57,7 @@
     return @{@"group":imGroupListModel.class,
              @"friend":friendListModel.class,
              @"imGroupList":imGroupListModel.class,
+             @"list":imGroupListModel.class,
     };
 }
 

@@ -17,7 +17,7 @@
 /// @param placeholderImage 站位图
 - (void)z_imageWithImageId:(NSString *)imageId placeholderImage:(NSString *)placeholderImage
 {
-    if (!imageId) {
+    if (!imageId && !placeholderImage) {
         return;
     }
     if (placeholderImage) {

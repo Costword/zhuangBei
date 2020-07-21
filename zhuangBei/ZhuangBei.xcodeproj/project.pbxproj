@@ -240,7 +240,6 @@
 		890643E724694F780099508C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 890643E624694F780099508C /* VideoToolbox.framework */; };
 		890643E924694F8B0099508C /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 890643E824694F830099508C /* libiconv.tbd */; };
 		8907722224768D3400470058 /* launch_icon_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 8907722124768D3400470058 /* launch_icon_big.png */; };
-		8907722424768D5F00470058 /* launch_icon_s.png in Resources */ = {isa = PBXBuildFile; fileRef = 8907722324768D5E00470058 /* launch_icon_s.png */; };
 		891C7CE9247611AD00760F64 /* LWLocalChatRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 891C7CE8247611AD00760F64 /* LWLocalChatRecordModel.m */; };
 		8921697524566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921697124566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m */; };
 		8921697624566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8921697224566BAA007C6615 /* LWHuoYuanItemListCollectionViewCell.m */; };
@@ -273,6 +272,9 @@
 		89831FCE2472923400C6184E /* LWAddNewChatGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89831FCD2472923400C6184E /* LWAddNewChatGroupViewController.m */; };
 		89831FD12472959200C6184E /* LWAddNewGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89831FD02472959200C6184E /* LWAddNewGroupModel.m */; };
 		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
+		89B323B824C5A4C200BD0722 /* LWSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B323B724C5A4C200BD0722 /* LWSound.m */; };
+		89B323BA24C5A68000BD0722 /* soundSrource.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 89B323B924C5A68000BD0722 /* soundSrource.mp3 */; };
+		89BC879B24C682C300AD0253 /* launch_icon_s.png in Resources */ = {isa = PBXBuildFile; fileRef = 89BC879A24C682C300AD0253 /* launch_icon_s.png */; };
 		89C112DA246E8599007EAABB /* LWJiaoLiuAddAlearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112D9246E8599007EAABB /* LWJiaoLiuAddAlearView.m */; };
 		89C112DD246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112DC246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m */; };
 		89C112E0246E93AA007EAABB /* LWAddFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112DF246E93AA007EAABB /* LWAddFriendTableViewCell.m */; };
@@ -802,7 +804,6 @@
 		890643E624694F780099508C /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		890643E824694F830099508C /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		8907722124768D3400470058 /* launch_icon_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch_icon_big.png; path = Assets.xcassets/shouYe/launch_icon_b.imageset/launch_icon_big.png; sourceTree = "<group>"; };
-		8907722324768D5E00470058 /* launch_icon_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch_icon_s.png; path = Assets.xcassets/shouYe/launch_icon_w.imageset/launch_icon_s.png; sourceTree = "<group>"; };
 		891C7CE7247611AD00760F64 /* LWLocalChatRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWLocalChatRecordModel.h; sourceTree = "<group>"; };
 		891C7CE8247611AD00760F64 /* LWLocalChatRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWLocalChatRecordModel.m; sourceTree = "<group>"; };
 		8921697124566BAA007C6615 /* LWHuoYuanListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWHuoYuanListCollectionViewCell.m; sourceTree = "<group>"; };
@@ -865,6 +866,10 @@
 		89831FCF2472959200C6184E /* LWAddNewGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddNewGroupModel.h; sourceTree = "<group>"; };
 		89831FD02472959200C6184E /* LWAddNewGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAddNewGroupModel.m; sourceTree = "<group>"; };
 		89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89B323B624C5A4C200BD0722 /* LWSound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSound.h; sourceTree = "<group>"; };
+		89B323B724C5A4C200BD0722 /* LWSound.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWSound.m; sourceTree = "<group>"; };
+		89B323B924C5A68000BD0722 /* soundSrource.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundSrource.mp3; sourceTree = "<group>"; };
+		89BC879A24C682C300AD0253 /* launch_icon_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_icon_s.png; sourceTree = "<group>"; };
 		89C112D8246E8599007EAABB /* LWJiaoLiuAddAlearView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWJiaoLiuAddAlearView.h; sourceTree = "<group>"; };
 		89C112D9246E8599007EAABB /* LWJiaoLiuAddAlearView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJiaoLiuAddAlearView.m; sourceTree = "<group>"; };
 		89C112DB246E8CB7007EAABB /* LWAddFriendOrGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddFriendOrGroupViewController.h; sourceTree = "<group>"; };
@@ -1251,6 +1256,7 @@
 		009FB5DC244E89C700133974 /* ZhuangBei */ = {
 			isa = PBXGroup;
 			children = (
+				89B323B924C5A68000BD0722 /* soundSrource.mp3 */,
 				89A9382924542A06001C77A8 /* Other */,
 				009FB654244FEC9900133974 /* commen */,
 				009FB613244FE8C200133974 /* delegate */,
@@ -1522,6 +1528,7 @@
 		009FB654244FEC9900133974 /* commen */ = {
 			isa = PBXGroup;
 			children = (
+				89B323BB24C5A6D900BD0722 /* Tool */,
 				00FE9AF82476B877002A1F86 /* ClientModule */,
 				895BD9C924626BDE00AA5947 /* baseMoudel */,
 				00D6E2DA2459A6B700B6E327 /* network */,
@@ -2224,8 +2231,8 @@
 		89A9382924542A06001C77A8 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				89BC879A24C682C300AD0253 /* launch_icon_s.png */,
 				00A0FE752477D87E001943EF /* storeIMage.png */,
-				8907722324768D5E00470058 /* launch_icon_s.png */,
 				8907722124768D3400470058 /* launch_icon_big.png */,
 				009FB5EE244E89CD00133974 /* Info.plist */,
 				89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */,
@@ -2236,6 +2243,15 @@
 				009FB5E9244E89CD00133974 /* Assets.xcassets */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		89B323BB24C5A6D900BD0722 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				89B323B624C5A4C200BD0722 /* LWSound.h */,
+				89B323B724C5A4C200BD0722 /* LWSound.m */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		89C9DD81246A37C7005341CE /* Views */ = {
@@ -2384,12 +2400,13 @@
 				009FB5EA244E89CD00133974 /* Assets.xcassets in Resources */,
 				006AA42B247BF78000DBD559 /* TZImagePickerController.bundle in Resources */,
 				8907722224768D3400470058 /* launch_icon_big.png in Resources */,
+				89BC879B24C682C300AD0253 /* launch_icon_s.png in Resources */,
 				00FE9B962476B878002A1F86 /* face.plist in Resources */,
+				89B323BA24C5A68000BD0722 /* soundSrource.mp3 in Resources */,
 				89DF44D92470E433002CAE83 /* LWAddNewUserGroupView.xib in Resources */,
 				00E4F45A247CEE0700F71D18 /* KNPhotoBrowser.bundle in Resources */,
 				00FE9B942476B878002A1F86 /* systemEmoji.plist in Resources */,
 				00FE9B952476B878002A1F86 /* emotion.plist in Resources */,
-				8907722424768D5F00470058 /* launch_icon_s.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2550,6 +2567,7 @@
 				0091FCE0245E59EE0046691F /* zPersonalCell.m in Sources */,
 				00FE9B9B2476B878002A1F86 /* UIColor+PPAddition.m in Sources */,
 				00CA47802455C839006A2885 /* QuestionTableViewCell.m in Sources */,
+				89B323B824C5A4C200BD0722 /* LWSound.m in Sources */,
 				0036407224701B5500B93431 /* zUserInvitelController.m in Sources */,
 				003A932D2450866D0001F615 /* LoginTextField.m in Sources */,
 				00FE9B882476B878002A1F86 /* IFListView.m in Sources */,

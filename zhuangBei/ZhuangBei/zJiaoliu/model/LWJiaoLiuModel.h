@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * userId;
 @property (nonatomic, strong) NSString * appBackgroundImage;
 @property (nonatomic, strong) NSString * groupName;
-
+// 群组状态：1 畅所欲言；2禁言
+@property (nonatomic, assign) NSInteger  status;
 @end
 
 //联系人items
@@ -51,8 +52,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray<imGroupListModel *> * imGroupList;
 @property (nonatomic, strong) NSArray<imGroupListModel *> * group;
 @property (nonatomic, strong) NSString * avatar;
-
-//@property (nonatomic, strong) NSArray<friendListModel *> * friend;
+// 新增适用新的群组列表数据格式
+@property (nonatomic, strong) NSString * groupname;
+@property (nonatomic, strong) NSArray<imGroupListModel *> * list;
+@property (nonatomic, assign) BOOL  isShow;
 @end
 
 NS_ASSUME_NONNULL_END

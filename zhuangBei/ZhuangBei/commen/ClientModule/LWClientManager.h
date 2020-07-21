@@ -151,5 +151,8 @@ typedef void(^RequestFailure)(NSError *error);
 // 获取该用户的所有群组信息，用于群组未读消息的 反查群组名称
 - (void)requestAllGroupInforDatas;
 
+/// 播放消息声音
++ (void)soundBell;
+
 @end
 
