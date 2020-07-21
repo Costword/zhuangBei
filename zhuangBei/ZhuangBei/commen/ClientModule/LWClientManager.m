@@ -17,6 +17,12 @@
 #import "zDengluController.h"
 #import "MainNavController.h"
 #import "LWSystemMessageListViewController.h"
+#import "LWSound.h"
+#import <AVFoundation/AVFoundation.h>
+
+//可以播放时间长度30秒以内的声音文件。
+@import AudioToolbox;
+
 
 @implementation LWUserinforIMModel
 -(NSString *)avatarID
@@ -44,6 +50,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 @property (nonatomic, strong) XHCustomConfig *config;
 // 系统未读消息数量
 @property (nonatomic, assign) NSInteger  unreadSysMsgNum;
+
+@property (nonatomic, strong) AVAudioPlayer * avaPlayer;
 
 @end
 
@@ -128,6 +136,9 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 //接收群组消息
 - (void)groupMessagesDidReceive:(NSString *)aMessage fromID:(NSString *)fromID groupID:(NSString *)groupID{
+    
+    [LWClientManager soundBell];
+    
     //    如果是添加好友的系统消息则取请求未读系统消息
     if ([fromID integerValue] == 0) {
         if ([fromID isEqualToString:@"system"]) {
@@ -165,6 +176,8 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
 
 - (void)chatMessageDidReceived:(NSString *)message fromID:(NSString *)uid;
 {
+    [LWClientManager soundBell];
+    
     //    如果是添加好友的系统消息则取请求未读系统消息
     if ([uid integerValue] == 0) {
         if ([uid isEqualToString:@"system"]) {
@@ -617,6 +630,22 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     rootNav.navigationBar.hidden = YES;
     UIApplication *app = [UIApplication sharedApplication];
     [app keyWindow].rootViewController = rootNav;
+}
+
+
+/// 播放消息声音
++ (void)soundBell;
+{
+//    SystemSoundID soundID;
+//    NSString *path=[[NSBundle mainBundle]pathForResource:@"soundSrource" ofType:@"mp3"];
+//    if (path) {
+//        AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:path], &soundID);
+//    }
+//    //需要手动释放：
+//    AudioServicesDisposeSystemSoundID(soundID);
+    
+    [[LWSound sharedInstance] play];
+    
 }
 
 @end

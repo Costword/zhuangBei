@@ -21,6 +21,7 @@ typedef void(^clickBtnBlock)(NSInteger tag);
 @property (nonatomic, strong) UIButton * rightBtn;
 @property (nonatomic, strong) UILabel * unreadnumL;
 @property (nonatomic, strong) UILabel * sendApplyStatusL;
+@property (nonatomic, strong) UIButton * tapbtn;
 
 - (void)setBottomLine:(NSInteger)tag;
 @property (nonatomic, strong) UIView * line;

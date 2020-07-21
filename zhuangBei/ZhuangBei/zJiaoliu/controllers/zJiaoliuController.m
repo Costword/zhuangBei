@@ -22,7 +22,7 @@
 @interface zJiaoliuController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) LWSwitchBarView * switchBarView;
 @property (nonatomic, strong) UICollectionView * collectView;
-@property (nonatomic, strong) NSMutableArray<imGroupListModel *> * listDatas_Group;//群组
+@property (nonatomic, strong) NSMutableArray * listDatas_Group;//群组
 @property (nonatomic, strong) NSMutableArray<LWJiaoLiuModel *> * listDatas_JiaoLiu;//交流
 @property (nonatomic, strong) NSMutableArray * listDatas_Message;
 @property (nonatomic, strong) NSMutableArray<friendListModel *> * listDatas_Contatcs;
@@ -81,7 +81,7 @@
 {
     [self requestJiaoLiuDatas];
     
-    [self requestPostWithUrl:@"app/appfriendtype/getFriendTypeAndFriendList" Parameters:@{} success:^(id  _Nonnull response) {
+    [self requestPostWithUrl:@"app/appfriendtype/getFriendTypeAndFriendListV2" Parameters:@{} success:^(id  _Nonnull response) {
         NSDictionary *data = response[@"data"];
         [self.listDatas_Contatcs removeAllObjects];
         NSArray *friend = data[@"friend"];
@@ -90,8 +90,9 @@
         }
         NSArray *group = data[@"group"];
         [self.listDatas_Group removeAllObjects];
+        
         for (NSDictionary*dict  in group) {
-            [self.listDatas_Group addObject:[imGroupListModel modelWithDictionary: dict]];
+            [self.listDatas_Group addObject:[LWJiaoLiuModel modelWithDictionary: dict]];
         }
         [self.groupTableView reloadData];
         [self.contatcsTableView reloadData];
@@ -230,9 +231,11 @@
         LWJiaoLiuContatcsListTableViewCell * cell =  [tableView dequeueReusableCellWithIdentifier:@"LWJiaoLiuContatcsListTableViewCell" forIndexPath:indexPath];
         
         if (tableView == _groupTableView) {
-            imGroupListModel *model = self.listDatas_Group[indexPath.row];
-            cell.nameL.text = model.groupName;
-            [cell.icon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kApiPrefix_PIC,model.avatar]] placeholderImage:IMAGENAME(@"testtouxiang")];
+            LWJiaoLiuModel *model = self.listDatas_Group[indexPath.section];
+            imGroupListModel *itemmodel = model.list[indexPath.row];
+            cell.nameL.text = itemmodel.groupName;
+            [cell.icon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kApiPrefix_PIC,itemmodel.avatar]] placeholderImage:IMAGENAME(@"testtouxiang")];
+            cell.tapbtn.hidden = (itemmodel.status == 1);
         }else{
             friendListModel *listmodel = self.listDatas_Contatcs[indexPath.section];
             friendItemModel *itemModel = listmodel.list[indexPath.row];
@@ -268,7 +271,8 @@
         return listmodel.isShow ? listmodel.list.count : 0;
     }
     if(tableView == _groupTableView){
-        return self.listDatas_Group.count;
+        LWJiaoLiuModel *listmodel = self.listDatas_Group[section];
+        return listmodel.isShow ? listmodel.list.count : 0;
     }
     if (tableView == _messageTableView) {
         return self.listDatas_chatrecord.count + 1;
@@ -280,31 +284,50 @@
 {
     if (tableView == _contatcsTableView) {
         return self.listDatas_Contatcs.count;
+    }else if (tableView == _groupTableView){
+        return self.listDatas_Group.count;
     }
     return 1;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if(tableView == _contatcsTableView){
+    if (tableView == _contatcsTableView || tableView == _groupTableView) {
+        
         __block LWJiaoLiuContatcsSeactionView *seactionview = [[LWJiaoLiuContatcsSeactionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
-        friendListModel *listmodel = self.listDatas_Contatcs[section];
-        seactionview.leftL.text = listmodel.groupname;
-        WEAKSELF(self)
-        seactionview.block = ^(BOOL isShow) {
-            listmodel.isShow = isShow;
-            [weakself.contatcsTableView reloadData];
-        };
-        seactionview.rightBtn.selected = listmodel.isShow;
+        
+        if (tableView == _contatcsTableView) {
+            
+            friendListModel *listmodel = self.listDatas_Contatcs[section];
+            seactionview.leftL.text = listmodel.groupname;
+            WEAKSELF(self)
+            seactionview.block = ^(BOOL isShow) {
+                listmodel.isShow = isShow;
+                [weakself.contatcsTableView reloadData];
+            };
+            seactionview.rightBtn.selected = listmodel.isShow;
+            
+        }else if (tableView == _groupTableView){
+            
+            LWJiaoLiuModel *listmodel = self.listDatas_Group[section];
+            seactionview.leftL.text = listmodel.groupname;
+            WEAKSELF(self)
+            seactionview.block = ^(BOOL isShow) {
+                listmodel.isShow = isShow;
+                [weakself.groupTableView reloadData];
+            };
+            seactionview.rightBtn.selected = listmodel.isShow;
+        }
         return seactionview;
     }
+
     return [UIView new];
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return _contatcsTableView == tableView ? 40:0.01;
+    return (_contatcsTableView == tableView || _groupTableView == tableView)? 40:0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -332,10 +355,12 @@
         ChatRoomViewController *vc= [ChatRoomViewController chatRoomViewControllerWithRoomId:itemmodel.customId roomName:itemmodel.username roomType:(LWChatRoomTypeOneTOne) extend:itemmodel];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (tableView == _groupTableView){
-        imGroupListModel *groupmodel = self.listDatas_Group[indexPath.row];
+        LWJiaoLiuModel *mode =  self.listDatas_Group[indexPath.section];
+        imGroupListModel *groupmodel = mode.list[indexPath.row];
         [self pushToGroupRoom:groupmodel.customId groupname:groupmodel.groupName];
     }
 }
+
 #pragma mark ------UICollectionViewDelegate----------
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -447,12 +472,14 @@
 - (UITableView *)groupTableView
 {
     if (!_groupTableView) {
-        _groupTableView = [[UITableView alloc] initWithFrame:CGRectZero];
+        _groupTableView = [[UITableView alloc] initWithFrame:CGRectZero style:(UITableViewStyleGrouped)];
         _groupTableView.delegate = self;
         _groupTableView.dataSource = self;
         _groupTableView.rowHeight = 66;
         [_groupTableView registerClass:[LWJiaoLiuContatcsListTableViewCell class] forCellReuseIdentifier:@"LWJiaoLiuContatcsListTableViewCell"];
         _groupTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _groupTableView.backgroundColor = UIColor.whiteColor;
+        _groupTableView.mj_header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
     }
     return _groupTableView;
 }
