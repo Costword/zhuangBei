@@ -412,3 +412,103 @@ NSString *const kLogin = @"sys/login";
 /** 平台会员退出*/
 NSString *const kExit = @"/exit";
 
+/**
+ *获取控制台快捷入口分类
+ *URL    http://test.110zhuangbei.com:8105/app/app/imgroupclassify/findListByTypeId
+ *typeId    1
+ *{
+     "code": 0,
+     "msg": "success",
+     "data": [{
+         "id": 2,
+         "name": "联盟总群",
+         "createDate": "2019-12-04 11:24:35",
+         "userId": 179,
+         "userName": null,
+         "typeId": 1,
+         "typeIdStr": null,
+         "sort": 1,
+         "imGroupList": [{
+             "id": 36,
+             "groupNum": null,
+             "groupName": "联盟总群",
+             "avatar": "6166",
+             "appBackgroundImage": 6195,
+             "userId": 1,
+             "userName": null,
+             "buildTime": "2019-09-03 10:21:57",
+             "description": "群主很懒，暂无描述！",
+             "status": 1,
+             "classifyId": 2
+         }, {
+             "id": 61,
+             "groupNum": null,
+             "groupName": "新品申报",
+             "avatar": "3379",
+             "appBackgroundImage": null,
+             "userId": 1,
+             "userName": null,
+             "buildTime": "2019-12-27 15:21:38",
+             "description": "群主很懒，暂无描述！",
+             "status": 1,
+             "classifyId": 2
+         }, {
+             "id": 62,
+             "groupNum": null,
+             "groupName": "爆款申请",
+             "avatar": "3379",
+             "appBackgroundImage": null,
+             "userId": 1,
+             "userName": null,
+             "buildTime": "2019-12-27 15:22:10",
+             "description": "群主很懒，暂无描述！",
+             "status": 1,
+             "classifyId": 2
+         }, {
+             "id": 63,
+             "groupNum": null,
+             "groupName": "管理员招聘",
+             "avatar": "3379",
+             "appBackgroundImage": null,
+             "userId": 1,
+             "userName": null,
+             "buildTime": "2019-12-27 15:22:23",
+             "description": "群主很懒，暂无描述！",
+             "status": 1,
+             "classifyId": 2
+         }]
+     }]
+ }
+ */
+NSString *const kFindListByID = @"app/imgroupclassify/findListByTypeId";
+
+/**
+ *通知列表
+ *URL    http://test.110zhuangbei.com:8105/app/app/appnotice/listByUser
+ *{
+     "code": 0,
+     "msg": "success",
+     "data": [{
+         "gongGaoDm": 76,
+         "gongGaoBt": "邀请推荐好友",
+         "gongGaoLx": 0,
+         "gongGaoLxName": null,
+         "gongGaoNr": "欢迎大家邀请推荐好友入驻平台。平台会根据您邀请的用户人数进行相应的奖励。",
+         "shiFouHz": 0,
+         "shiFouHzName": null,
+         "huoDongZt": 0,
+         "tongZhiFs": 0,
+         "tongZhiFsName": null,
+         "chuangJianR": 179,
+         "chuangJianSj": "2020-02-04 14:54:48",
+         "xiuGaiSj": "2020-02-04 14:56:13",
+         "xiuGaiR": 179,
+         "fsIds": "1",
+         "fsMcs": "admin",
+         "nameIds": null,
+         "nameIdss": null,
+         "huiZhiNr": null
+     }]
+ }
+ */
+NSString *const kAppnotice = @"app/imgroupclassify/findListByTypeId";

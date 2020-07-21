@@ -8,11 +8,14 @@
 
 #import "zHuoYuanMangerController.h"
 #import "zHuoYuanScrollHeader.h"
-@interface zHuoYuanMangerController ()
+#import "zHuoYuanListCell.h"
+#import "zNoticeUpDownCell.h"
+#import "zCategoryCell.h"
+
+@interface zHuoYuanMangerController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(strong,nonatomic)zHuoYuanScrollHeader * scrollHeader;
-
-@property(strong,nonatomic)UIButton * button;
+@property(strong,nonatomic)UITableView * menuTableView;
 
 @end
 
@@ -21,47 +24,83 @@
 -(zHuoYuanScrollHeader*)scrollHeader
 {
     if (!_scrollHeader) {
-        _scrollHeader = [[zHuoYuanScrollHeader alloc]init];
-        _scrollHeader.bannerArray = @[@"1",@"2",@"3",@"4"];
+        _scrollHeader = [[zHuoYuanScrollHeader alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH, SCREEN_WIDTH * 9/16)];
+        _scrollHeader.bannerArray = @[@"bg_banner_1",@"bg_banner_2",@"bg_banner_3",@"bg_banner_4",@"bg_banner_5"];
     }
     return _scrollHeader;
 }
 
--(UIButton*)button
+-(UITableView*)menuTableView
 {
-    if (!_button) {
-        _button = [[UIButton alloc]init];
-        _button.titleLabel.font = kFont(16);
-        [_button setBackgroundColor:[UIColor blackColor]];
-        [_button setTitle:@"个人信息" forState:UIControlStateNormal];
-        [_button setTitleColor: [kMainSingleton colorWithHexString:@"#FFFFFF" alpha:1] forState:UIControlStateNormal];
-        [_button addTarget:self action:@selector(gotoLogInVC) forControlEvents:UIControlEventTouchUpInside];
+    if (!_menuTableView) {
+        _menuTableView  = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _menuTableView.backgroundColor = [UIColor clearColor];
+        _menuTableView.delegate = self;
+        _menuTableView.dataSource = self;
+        _menuTableView.allowsSelection = YES;
+        _menuTableView.estimatedRowHeight = kWidthFlot(44);
+        _menuTableView.estimatedSectionHeaderHeight = 2;
+        _menuTableView.estimatedSectionFooterHeight = 2;
+        _menuTableView.showsVerticalScrollIndicator = NO;
+        _menuTableView.rowHeight = UITableViewAutomaticDimension;
+        _menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        _menuTableView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
+//        _menuTableView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     }
-    return _button;;
+    return _menuTableView;
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.scrollHeader];
-    [self.view addSubview:self.button];
+    self.menuTableView.tableHeaderView = self.scrollHeader;
+    [self.view addSubview:self.menuTableView];
 }
 
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     
-    [self.scrollHeader mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.menuTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
-        make.height.mas_equalTo(SCREEN_WIDTH * 9/16);
-    }];
-    
-    [self.button mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.centerY.mas_equalTo(self.view.mas_centerY);
-        make.height.mas_equalTo(kWidthFlot(30));
-        make.width.mas_equalTo(kWidthFlot(100));
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
     }];
 }
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 2;
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        
+        zNoticeUpDownCell * cell = [zNoticeUpDownCell instanceWithTableView:tableView AndIndexPath:indexPath];
+        return cell;
+    }else
+    {
+        zCategoryCell * categoryCell = [zCategoryCell instanceWithTableView:tableView AndIndexPath:indexPath];
+        return categoryCell;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 1;
+}
+
 
 -(void)gotoLogInVC
 {

@@ -91,7 +91,8 @@
 -(void)setBannerArray:(NSArray *)bannerArray
 {
     for (int index = 0; index <bannerArray.count; index++) {
-       UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"testicon"]];
+        NSString * imageName = bannerArray[index];
+       UIImage *image = [UIImage imageNamed:imageName];
        [self.imageArray addObject:image];
    }
     [self.pageFlowView reloadData];

@@ -39,6 +39,13 @@
 		003FEABC245BFB0D00E8D61E /* zSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003FEABB245BFB0D00E8D61E /* zSettingViewController.m */; };
 		003FEABF245BFB8500E8D61E /* zSettingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 003FEABE245BFB8500E8D61E /* zSettingCellView.m */; };
 		003FEAC2245C198A00E8D61E /* zUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 003FEAC1245C198A00E8D61E /* zUserModel.m */; };
+		004D7A4024C584E100EFFA82 /* UIView+HHAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A3E24C584E100EFFA82 /* UIView+HHAddition.m */; };
+		004D7A4124C584E100EFFA82 /* MarqueeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A3F24C584E100EFFA82 /* MarqueeView.m */; };
+		004D7A4424C5851500EFFA82 /* zNoticeUpDownCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A4324C5851500EFFA82 /* zNoticeUpDownCell.m */; };
+		004D7A4724C59DF700EFFA82 /* zBaoKuanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A4624C59DF700EFFA82 /* zBaoKuanCell.m */; };
+		004D7A4A24C5A2F900EFFA82 /* zCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A4924C5A2F900EFFA82 /* zCategoryCell.m */; };
+		004D7A4D24C5A77D00EFFA82 /* zCategoryCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A4C24C5A77D00EFFA82 /* zCategoryCollectCell.m */; };
+		004D7A5024C5A79400EFFA82 /* zBaoKuanItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A4F24C5A79400EFFA82 /* zBaoKuanItemCell.m */; };
 		004E435C2472B964000A4627 /* zGoodsContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 004E435B2472B964000A4627 /* zGoodsContentModel.m */; };
 		004E435F2472CC04000A4627 /* zCompanyGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 004E435E2472CC04000A4627 /* zCompanyGoodsCell.m */; };
 		00558BD42460FF4200550FBC /* sliderNavMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BD32460FF4200550FBC /* sliderNavMenu.m */; };
@@ -372,6 +379,20 @@
 		003FEABE245BFB8500E8D61E /* zSettingCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zSettingCellView.m; sourceTree = "<group>"; };
 		003FEAC0245C198A00E8D61E /* zUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zUserModel.h; sourceTree = "<group>"; };
 		003FEAC1245C198A00E8D61E /* zUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zUserModel.m; sourceTree = "<group>"; };
+		004D7A3C24C584E100EFFA82 /* MarqueeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeView.h; sourceTree = "<group>"; };
+		004D7A3D24C584E100EFFA82 /* UIView+HHAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HHAddition.h"; sourceTree = "<group>"; };
+		004D7A3E24C584E100EFFA82 /* UIView+HHAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HHAddition.m"; sourceTree = "<group>"; };
+		004D7A3F24C584E100EFFA82 /* MarqueeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeView.m; sourceTree = "<group>"; };
+		004D7A4224C5851500EFFA82 /* zNoticeUpDownCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zNoticeUpDownCell.h; sourceTree = "<group>"; };
+		004D7A4324C5851500EFFA82 /* zNoticeUpDownCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zNoticeUpDownCell.m; sourceTree = "<group>"; };
+		004D7A4524C59DF700EFFA82 /* zBaoKuanCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zBaoKuanCell.h; sourceTree = "<group>"; };
+		004D7A4624C59DF700EFFA82 /* zBaoKuanCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zBaoKuanCell.m; sourceTree = "<group>"; };
+		004D7A4824C5A2F900EFFA82 /* zCategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCategoryCell.h; sourceTree = "<group>"; };
+		004D7A4924C5A2F900EFFA82 /* zCategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zCategoryCell.m; sourceTree = "<group>"; };
+		004D7A4B24C5A77D00EFFA82 /* zCategoryCollectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCategoryCollectCell.h; sourceTree = "<group>"; };
+		004D7A4C24C5A77D00EFFA82 /* zCategoryCollectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zCategoryCollectCell.m; sourceTree = "<group>"; };
+		004D7A4E24C5A79400EFFA82 /* zBaoKuanItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zBaoKuanItemCell.h; sourceTree = "<group>"; };
+		004D7A4F24C5A79400EFFA82 /* zBaoKuanItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zBaoKuanItemCell.m; sourceTree = "<group>"; };
 		004E435A2472B964000A4627 /* zGoodsContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = zGoodsContentModel.h; path = ZhuangBei/zShouye/views/zGoodsContentModel.h; sourceTree = SOURCE_ROOT; };
 		004E435B2472B964000A4627 /* zGoodsContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = zGoodsContentModel.m; path = ZhuangBei/zShouye/views/zGoodsContentModel.m; sourceTree = SOURCE_ROOT; };
 		004E435D2472CC04000A4627 /* zCompanyGoodsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCompanyGoodsCell.h; sourceTree = "<group>"; };
@@ -1041,6 +1062,35 @@
 			path = category;
 			sourceTree = "<group>";
 		};
+		004D7A3A24C584B600EFFA82 /* kztView */ = {
+			isa = PBXGroup;
+			children = (
+				004D7A3B24C584E100EFFA82 /* Marquee */,
+				004D7A4224C5851500EFFA82 /* zNoticeUpDownCell.h */,
+				004D7A4324C5851500EFFA82 /* zNoticeUpDownCell.m */,
+				004D7A4824C5A2F900EFFA82 /* zCategoryCell.h */,
+				004D7A4924C5A2F900EFFA82 /* zCategoryCell.m */,
+				004D7A4524C59DF700EFFA82 /* zBaoKuanCell.h */,
+				004D7A4624C59DF700EFFA82 /* zBaoKuanCell.m */,
+				004D7A4B24C5A77D00EFFA82 /* zCategoryCollectCell.h */,
+				004D7A4C24C5A77D00EFFA82 /* zCategoryCollectCell.m */,
+				004D7A4E24C5A79400EFFA82 /* zBaoKuanItemCell.h */,
+				004D7A4F24C5A79400EFFA82 /* zBaoKuanItemCell.m */,
+			);
+			path = kztView;
+			sourceTree = "<group>";
+		};
+		004D7A3B24C584E100EFFA82 /* Marquee */ = {
+			isa = PBXGroup;
+			children = (
+				004D7A3C24C584E100EFFA82 /* MarqueeView.h */,
+				004D7A3F24C584E100EFFA82 /* MarqueeView.m */,
+				004D7A3D24C584E100EFFA82 /* UIView+HHAddition.h */,
+				004D7A3E24C584E100EFFA82 /* UIView+HHAddition.m */,
+			);
+			path = Marquee;
+			sourceTree = "<group>";
+		};
 		006AA3FD247BF65500DBD559 /* compants */ = {
 			isa = PBXGroup;
 			children = (
@@ -1388,6 +1438,7 @@
 		009FB64F244FEC5B00133974 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				004D7A3A24C584B600EFFA82 /* kztView */,
 				002C6F012484AF3500E90932 /* layout */,
 				00159E1D2463FDF8005DE17B /* NewPagedFlowView */,
 				00558BD22460FF4200550FBC /* sliderNavMenu.h */,
@@ -2441,6 +2492,7 @@
 				00CA47672455B91E006A2885 /* zQuestionController.m in Sources */,
 				006AA4DD247BFC2900DBD559 /* CustomIOSAlertView.m in Sources */,
 				00E4F45C247CEE0700F71D18 /* KNPhotoBrowser.m in Sources */,
+				004D7A4724C59DF700EFFA82 /* zBaoKuanCell.m in Sources */,
 				00871851245960B2003F8CD3 /* NSDictionary+JSON.m in Sources */,
 				00FE9B8B2476B878002A1F86 /* IFBaseView.m in Sources */,
 				00FE9BAD2476B878002A1F86 /* RFTextView.m in Sources */,
@@ -2468,12 +2520,15 @@
 				00E4F455247CEE0700F71D18 /* KNPhotoVideoCell.m in Sources */,
 				00FE9BA92476B878002A1F86 /* FacePageView.m in Sources */,
 				008FB021246AEC4000B207CD /* zListTypeModel.m in Sources */,
+				004D7A4024C584E100EFFA82 /* UIView+HHAddition.m in Sources */,
 				00FE9B9C2476B878002A1F86 /* PPTextBackedString.m in Sources */,
 				00FE9BA02476B878002A1F86 /* NSString+Emoji.m in Sources */,
+				004D7A4424C5851500EFFA82 /* zNoticeUpDownCell.m in Sources */,
 				00B0A5D1246500180041C234 /* zXieYiController.m in Sources */,
 				0091FCFA245EC1700046691F /* zPersonalHeader.m in Sources */,
 				009E218D246A763500AD1637 /* SelectedListModel.m in Sources */,
 				0026C4BA24741CCE00C6ACB6 /* zMyFriendsHeader.m in Sources */,
+				004D7A5024C5A79400EFFA82 /* zBaoKuanItemCell.m in Sources */,
 				00B0A5E7246520D10041C234 /* zJxsLeftMenu.m in Sources */,
 				009FB68B2450428000133974 /* zNothingView.m in Sources */,
 				00FE9B902476B878002A1F86 /* IFCreateBaseVC.m in Sources */,
@@ -2615,6 +2670,7 @@
 				00E4F458247CEE0700F71D18 /* KNPhotoAVPlayerView.m in Sources */,
 				00FE9B7A2476B878002A1F86 /* LWClientManager.m in Sources */,
 				00FE9BAA2476B878002A1F86 /* FaceButton.m in Sources */,
+				004D7A4D24C5A77D00EFFA82 /* zCategoryCollectCell.m in Sources */,
 				00B26CF024580A390099FFD5 /* zUserInfo.m in Sources */,
 				891C7CE9247611AD00760F64 /* LWLocalChatRecordModel.m in Sources */,
 				002A6180245B0199009A53AA /* cookiesTool.m in Sources */,
@@ -2629,6 +2685,8 @@
 				00B0A5E4246520220041C234 /* zjxsMenuCell.m in Sources */,
 				003A9330245089540001F615 /* UITextField+maxLength.m in Sources */,
 				00558BE024614D6E00550FBC /* zLeftMenuCell.m in Sources */,
+				004D7A4A24C5A2F900EFFA82 /* zCategoryCell.m in Sources */,
+				004D7A4124C584E100EFFA82 /* MarqueeView.m in Sources */,
 				009FB666244FF64D00133974 /* zInterfacedConst.m in Sources */,
 				89F5B7DC2455955E0040F7B1 /* UIViewAdditions.m in Sources */,
 				00E4F452247CEE0600F71D18 /* UIView+PBExtesion.m in Sources */,
@@ -2817,8 +2875,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
-				DEVELOPMENT_TEAM = NXHWCY9QS4;
+				CURRENT_PROJECT_VERSION = 20;
+				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -2832,7 +2890,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZhuangBei/commen/Thrid/IFYunSDK",
 				);
-				MARKETING_VERSION = 1.1.09;
+				MARKETING_VERSION = 1.1.11;
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2847,8 +2905,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
-				DEVELOPMENT_TEAM = NXHWCY9QS4;
+				CURRENT_PROJECT_VERSION = 20;
+				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -2862,7 +2920,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZhuangBei/commen/Thrid/IFYunSDK",
 				);
-				MARKETING_VERSION = 1.1.09;
+				MARKETING_VERSION = 1.1.11;
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
 				PROVISIONING_PROFILE_SPECIFIER = "";
