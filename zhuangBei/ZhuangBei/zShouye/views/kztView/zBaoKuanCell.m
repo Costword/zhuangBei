@@ -18,8 +18,8 @@ static NSString * scrollItemCell_id = @"zBaoKuanItemCell";
 
 @property(strong,nonatomic)UIView * baseView;
 
-@property(strong,nonatomic)UIImageView * noticImageView;
-
+@property(strong,nonatomic)UIImageView * iconView;
+@property(strong,nonatomic)UILabel * titleLabel;
 @property(strong,nonatomic)UICollectionView * collectionView;
 
 @end
@@ -38,29 +38,43 @@ static NSString * scrollItemCell_id = @"zBaoKuanItemCell";
 {
     if (!_baseView) {
         _baseView = [[UIView alloc]init];
-//        _baseView.layer.borderColor = [UIColor colorWithHexString:@"#DDDDDD"].CGColor;
-//        _baseView.layer.borderWidth = 1;
-//        _baseView.layer.cornerRadius = kWidthFlot(8);
+//        _baseView.backgroundColor = [UIColor greenColor];
     }
     return _baseView;
 }
 
--(UIImageView*)noticImageView
+-(UIImageView *)iconView
 {
-    if (!_noticImageView) {
-        _noticImageView = [[UIImageView alloc]init];
-        _noticImageView.contentMode = UIViewContentModeScaleAspectFit;
-        _noticImageView.image = [UIImage imageNamed:@"kefuicon"];
+    if (!_iconView) {
+        _iconView = [[UIImageView alloc]init];
+        _iconView.image = [UIImage imageNamed:@"fenge"];
+        _iconView.backgroundColor = [UIColor whiteColor];
+        _iconView.contentMode = UIViewContentModeScaleAspectFit;
     }
-    return _noticImageView;
+    return _iconView;
 }
+
+-(UILabel *)titleLabel
+{
+    if (!_titleLabel) {
+        
+        _titleLabel = [[UILabel alloc]init];
+        _titleLabel.font = kFont(16);
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel.textColor = [UIColor blackColor];
+        _titleLabel.text = @"爆款";
+    }
+    return _titleLabel;
+}
+
 -(UICollectionView*)collectionView
 {
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
            layout.minimumLineSpacing = kWidthFlot(10);
            layout.sectionInset = UIEdgeInsetsMake(0,0, 0, 0);
-           layout.itemSize = CGSizeMake(SCREEN_WIDTH - kWidthFlot(95), kWidthFlot(80));
+           CGFloat width = (SCREEN_WIDTH - kWidthFlot(95))/2;
+           layout.itemSize = CGSizeMake(width, width*0.7);
            layout.scrollDirection = UICollectionViewScrollDirectionVertical;
            UICollectionView * collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
            collectionView.backgroundColor = [UIColor clearColor];
@@ -81,7 +95,9 @@ static NSString * scrollItemCell_id = @"zBaoKuanItemCell";
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:self.baseView];
-        [self.baseView addSubview:self.noticImageView];
+        [self.contentView addSubview:self.iconView];
+        [self.contentView addSubview:self.titleLabel];
+        [self.contentView addSubview:self.collectionView];
         [self updateConstraintsForView];
     }
     return self;
@@ -92,24 +108,33 @@ static NSString * scrollItemCell_id = @"zBaoKuanItemCell";
 -(void)updateConstraintsForView
 {
     [self.baseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(kWidthFlot(10));
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+        make.height.mas_equalTo(kWidthFlot(160));
+    }];
+    
+    [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(kWidthFlot(20));
+        make.size.mas_equalTo(CGSizeMake(kWidthFlot(10),kWidthFlot(25)));
+        make.top.mas_equalTo(kWidthFlot(10));
+    }];
+    
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.iconView.mas_right).offset(kWidthFlot(10));
+        make.size.mas_equalTo(CGSizeMake(kWidthFlot(100), kWidthFlot(20)));
+        make.centerY.mas_equalTo(self.iconView.mas_centerY);
+    }];
+    
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.iconView.mas_bottom).offset(kWidthFlot(10));
+        make.left.mas_equalTo(kWidthFlot(20));
         make.right.mas_equalTo(-kWidthFlot(20));
-        make.top.mas_equalTo(kWidthFlot(5));
-        make.bottom.mas_equalTo(-kWidthFlot(5));
-        make.height.mas_equalTo(kWidthFlot(50));
+        make.bottom.mas_equalTo(-kWidthFlot(10));
     }];
-    
-    [self.noticImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(kWidthFlot(10));
-        make.centerY.mas_equalTo(self.baseView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(30), kWidthFlot(30)));
-    }];
-    
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 0;
+    return 1;
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {

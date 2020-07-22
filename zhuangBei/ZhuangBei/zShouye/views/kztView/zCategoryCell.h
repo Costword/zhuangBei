@@ -10,11 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^categoryItemTap)(NSDictionary * dic);
+
 @interface zCategoryCell : UITableViewCell
 
 +(zCategoryCell*)instanceWithTableView:(UITableView*)tableView AndIndexPath:(NSIndexPath*)indexPath;
 
 @property(strong,nonatomic)NSArray * Array;
+
+@property(copy,nonatomic)categoryItemTap categoryTapBack;
 
 @end
 

@@ -60,15 +60,15 @@ static NSString * scrollItemCell_id = @"zCategoryCollectCell";
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
         layout.minimumLineSpacing = kWidthFlot(1);
         layout.minimumInteritemSpacing = kWidthFlot(1);
-        layout.sectionInset = UIEdgeInsetsMake(10,0, 0, 0);
-        layout.itemSize = CGSizeMake((SCREEN_WIDTH-20-6-30)/5, kWidthFlot(80));
+        layout.sectionInset = UIEdgeInsetsMake(kWidthFlot(10),0, 0, 0);
+        layout.itemSize = CGSizeMake((SCREEN_WIDTH-20-kWidthFlot(40))/5, kWidthFlot(80));
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         UICollectionView * collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
         collectionView.backgroundColor = [UIColor clearColor];
         collectionView.showsVerticalScrollIndicator = NO;
         collectionView.showsHorizontalScrollIndicator = NO;
         collectionView.scrollEnabled = NO;
-        collectionView.allowsSelection = NO;
+        collectionView.allowsSelection = YES;
         collectionView.delegate = self;
         collectionView.dataSource = self;
         [collectionView registerClass:[zCategoryCollectCell class] forCellWithReuseIdentifier:scrollItemCell_id];
@@ -102,18 +102,19 @@ static NSString * scrollItemCell_id = @"zCategoryCollectCell";
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(0,10,0,10));
-        make.height.mas_equalTo(kWidthFlot(100)).priorityHigh();
+        make.height.mas_equalTo(kWidthFlot(90)).priorityHigh();
     }];
     
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 5;
+    return self.Array.count;
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     zCategoryCollectCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:scrollItemCell_id forIndexPath:indexPath];
+    cell.sourceDic = self.Array[indexPath.item];
     return cell;
 }
 
@@ -121,8 +122,18 @@ static NSString * scrollItemCell_id = @"zCategoryCollectCell";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary * dic = self.Array[indexPath.item];
+    if (self.categoryTapBack) {
+        self.categoryTapBack(dic);
+    }
 }
 
+
+-(void)setArray:(NSArray *)Array
+{
+    _Array = Array;
+    
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

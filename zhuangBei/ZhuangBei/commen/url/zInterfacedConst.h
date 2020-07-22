@@ -92,4 +92,17 @@ UIKIT_EXTERN NSString *const changePersonalMin;
 /** 平台会员退出*/
 UIKIT_EXTERN NSString *const kExit;
 
+/**查询首页通知列表*/
+UIKIT_EXTERN NSString *const kFindListByID;
+
+/**查询快捷入口列表*/
+UIKIT_EXTERN NSString *const kAppnotice;
+
+
+/**通知列表接口*/
+UIKIT_EXTERN NSString *const kAppnoticeList;
+
+/**通知列表接口*/
+
+UIKIT_EXTERN NSString *const klistAndUpdate;
 NS_ASSUME_NONNULL_END

@@ -480,7 +480,7 @@ NSString *const kExit = @"/exit";
      }]
  }
  */
-NSString *const kFindListByID = @"app/imgroupclassify/findListByTypeId";
+NSString *const kFindListByID = @"app/appfriendtype/getFriendTypeAndFriendListV2";
 
 /**
  *通知列表
@@ -511,4 +511,71 @@ NSString *const kFindListByID = @"app/imgroupclassify/findListByTypeId";
      }]
  }
  */
-NSString *const kAppnotice = @"app/imgroupclassify/findListByTypeId";
+NSString *const kAppnotice = @"app/appnotice/listByUser";
+
+
+/**
+ *通知列表
+ *URL    http://test.110zhuangbei.com:8105/app/app/appnoticeuserlink/listByUser
+ *limit    20；page    1
+ *{
+     "code": 0,
+     "msg": "success",
+     "page": {
+         "totalCount": 1,
+         "pageSize": 20,
+         "totalPage": 1,
+         "currPage": 1,
+         "list": [{
+             "guanLianDm": 769,
+             "gongGaoDm": 76,
+             "gongGaoDmName": "邀请推荐好友",
+             "shiFouYd": 1,
+             "shiFouYdName": "是",
+             "duQuSj": null,
+             "shiFouHz": 0,
+             "shiFouHzName": "否",
+             "chuangJianSj": "2020-02-04 16:49:53",
+             "yongHuDm": 1,
+             "yongHuName": "admin",
+             "huiZhiNr": null,
+             "huoDongZt": 0,
+             "tongZhiR": 179,
+             "tongZhiRName": null
+         }]
+     }
+ }
+ */
+NSString *const kAppnoticeList = @"app/appnoticeuserlink/listByUser";
+
+/**
+ *公告详情
+ *URL    http://test.110zhuangbei.com:8105/app/app/appnotice/listAndUpdate
+ *gongGaoDm    76
+ *{
+     "code": 0,
+     "msg": "success",
+     "appNotice": {
+         "gongGaoDm": 76,
+         "gongGaoBt": "邀请推荐好友",
+         "gongGaoLx": 0,
+         "gongGaoLxName": null,
+         "gongGaoNr": "欢迎大家邀请推荐好友入驻平台。平台会根据您邀请的用户人数进行相应的奖励。",
+         "shiFouHz": 0,
+         "shiFouHzName": null,
+         "huoDongZt": 0,
+         "tongZhiFs": 0,
+         "tongZhiFsName": null,
+         "chuangJianR": 179,
+         "chuangJianSj": "2020-02-04 14:54:48",
+         "xiuGaiSj": "2020-02-04 14:56:13",
+         "xiuGaiR": 179,
+         "fsIds": "1",
+         "fsMcs": "admin",
+         "nameIds": null,
+         "nameIdss": null,
+         "huiZhiNr": null
+     }
+ }
+ */
+NSString *const klistAndUpdate = @"app/appnotice/listAndUpdate";

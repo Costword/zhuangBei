@@ -11,11 +11,18 @@
 #import "zHuoYuanListCell.h"
 #import "zNoticeUpDownCell.h"
 #import "zCategoryCell.h"
+#import "zBaoKuanCell.h"
+#import "zInviteController.h"
+#import "zNotifacationController.h"
 
 @interface zHuoYuanMangerController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(strong,nonatomic)zHuoYuanScrollHeader * scrollHeader;
 @property(strong,nonatomic)UITableView * menuTableView;
+
+@property(strong,nonatomic)NSArray * categoryArray;
+
+@property(strong,nonatomic)NSArray * notiArray;
 
 @end
 
@@ -37,15 +44,13 @@
         _menuTableView.backgroundColor = [UIColor clearColor];
         _menuTableView.delegate = self;
         _menuTableView.dataSource = self;
-        _menuTableView.allowsSelection = YES;
+        _menuTableView.allowsSelection = NO;
         _menuTableView.estimatedRowHeight = kWidthFlot(44);
         _menuTableView.estimatedSectionHeaderHeight = 2;
         _menuTableView.estimatedSectionFooterHeight = 2;
         _menuTableView.showsVerticalScrollIndicator = NO;
         _menuTableView.rowHeight = UITableViewAutomaticDimension;
         _menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        _menuTableView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
-//        _menuTableView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     }
     return _menuTableView;
 }
@@ -56,6 +61,64 @@
     [self.view addSubview:self.scrollHeader];
     self.menuTableView.tableHeaderView = self.scrollHeader;
     [self.view addSubview:self.menuTableView];
+    
+    [self loadData];
+}
+
+
+-(void)loadData{
+    //获取分类
+    [self requestPostWithUrl:kFindListByID paraString:nil success:^(id  _Nonnull response) {
+        NSArray * data = response[@"data"][@"group"];
+        NSDictionary * dic = data[0];
+        NSArray * list = dic[@"list"];
+        
+        NSMutableArray * array = [NSMutableArray array];
+        [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary * dic = list[idx];
+            NSString * groupid = dic[@"id"];
+            if ([groupid integerValue] == 36 || [groupid integerValue] == 61) {
+                [array addObject:dic];
+            }
+        }];
+        
+        NSArray * buchangArr = @[
+            @{
+                @"status":@"2",
+                @"id":@"1",
+                @"groupname":@"邀请好友",
+                @"avatar":@"fenxiang",
+            },@{
+                @"status":@"2",
+                @"id":@"2",
+                @"groupname":@"通知公告",
+                @"avatar":@"gonggao",
+            },@{
+                @"status":@"2",
+                @"id":@"3",
+                @"groupname":@"即将推出",
+                @"avatar":@"baokuan",
+            },
+        ];
+        
+        [array addObjectsFromArray:buchangArr];
+        self.categoryArray = array;
+        [self.menuTableView reloadData];
+//        NSLog(@"通知结果:%@",imGroupList);
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+    
+    //获取通知
+    [self requestPostWithUrl:kAppnotice paraString:nil success:^(id  _Nonnull response) {
+        
+//        NSLog(@"快捷结果:%@",response);
+        NSArray * data = response[@"data"];
+        self.notiArray = data;
+        [self.menuTableView reloadData];
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 -(void)viewDidLayoutSubviews
@@ -70,7 +133,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -78,11 +141,41 @@
     if (indexPath.row == 0) {
         
         zNoticeUpDownCell * cell = [zNoticeUpDownCell instanceWithTableView:tableView AndIndexPath:indexPath];
+        cell.Array = self.notiArray;
         return cell;
-    }else
+    }else if(indexPath.row == 1)
     {
         zCategoryCell * categoryCell = [zCategoryCell instanceWithTableView:tableView AndIndexPath:indexPath];
+        categoryCell.Array = self.categoryArray;
+        categoryCell.categoryTapBack = ^(NSDictionary * _Nonnull dic) {
+            NSLog(@"%@",dic);
+            NSString * status = dic[@"status"];
+            NSString * myid = dic[@"id"];
+            if ([status integerValue] != 2) {
+                //进入聊天详情
+            }else
+            {
+                //进入其他页面
+                if ([myid integerValue]==1) {
+                    //邀请好友
+                    zInviteController * inviteVC = [[zInviteController alloc]init];
+                    [self.navigationController pushViewController:inviteVC animated:YES];
+                }else if ([myid integerValue]==2)
+                {
+                    //通知公告
+                    zNotifacationController * notiVC = [[zNotifacationController alloc]init];
+                    [self.navigationController pushViewController:notiVC animated:YES];
+                }else
+                {
+                    //即将推出
+                }
+            }
+        };
         return categoryCell;
+    }else
+    {
+        zBaoKuanCell * baoKuanCell = [zBaoKuanCell instanceWithTableView:tableView AndIndexPath:indexPath];
+        return baoKuanCell;
     }
 }
 

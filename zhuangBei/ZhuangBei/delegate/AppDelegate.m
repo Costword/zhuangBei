@@ -32,7 +32,7 @@
     config.QQAppId = qqAppId;
     config.QQAppKey = qqAppKey;
     [JSHAREService setupWithConfig:config];
-    
+    sleep(2);
     NSString *version= [UIDevice currentDevice].systemVersion;
     if(version.doubleValue >=13.0) {
         // 针对13.0 以上的iOS系统进行处理

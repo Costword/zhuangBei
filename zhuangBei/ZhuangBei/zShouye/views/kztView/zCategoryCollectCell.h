@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface zCategoryCollectCell : UICollectionViewCell
 
+@property(strong,nonatomic)NSDictionary  * sourceDic;
+
 @end
 
 NS_ASSUME_NONNULL_END

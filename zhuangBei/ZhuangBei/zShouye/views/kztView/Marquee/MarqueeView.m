@@ -27,27 +27,6 @@
         self.titleColor = [UIColor blackColor];
         self.titleFont =  [UIFont systemFontOfSize:14];
         self.clipsToBounds = YES;
-//        UILabel *tagLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, (self.frame.size.height - 20 )/2, 40, 20)];
-//        tagLabel.text = @"资讯";
-//        tagLabel.textAlignment = NSTextAlignmentCenter;
-//        tagLabel.textColor = [UIColor orangeColor];
-//        tagLabel.font = [UIFont systemFontOfSize:12];
-//        tagLabel.layer.borderColor =  [UIColor colorWithRed:0.94f green:0.46f blue:0.27f alpha:1.00f].CGColor;
-//        tagLabel.layer.borderWidth = 1.0f;
-//        [self addSubview:tagLabel];
-        
-        
-        NSMutableArray *MutableTitles = [NSMutableArray arrayWithArray:titles];
-        NSString *str = @"";
-        self.titles = MutableTitles;
-        [self.titles addObject:str]; //加一个空的,防止数组为空奔溃
-        self.index = 1;
-        self.firstBtn = [self btnframe:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 2 *30, self.bounds.size.height)  titleColor:_titleColor action:@selector(clickBtn:)];
-        self.firstBtn .tag = self.index;
-        [self.firstBtn  setTitle:self.titles[0] forState:UIControlStateNormal];
-        [self addSubview:self.firstBtn];
-        [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(nextAd) userInfo:nil repeats:YES];
-        
     }
     
     return self;
@@ -55,30 +34,32 @@
 
 #pragma mark - SEL Methods
 -(void)nextAd{
-    UIButton *firstBtn = [self viewWithTag:self.index];
-    self.moreBtn = [self btnframe: CGRectMake(0, self.bounds.size.height,[UIScreen mainScreen].bounds.size.width -2 *30, self.bounds.size.height)  titleColor:_titleColor action:@selector(clickBtn:)];
-    self.moreBtn.tag = self.index + 1;
-    if ([self.titles[self.titleIndex+1] isEqualToString:@""]) {
-        self.titleIndex = -1;
-        self.index = 0;
+    if (_titleArr.count>0) {
+        UIButton *firstBtn = [self viewWithTag:self.index];
+        self.moreBtn = [self btnframe: CGRectMake(0, self.bounds.size.height,[UIScreen mainScreen].bounds.size.width -2 *30, self.bounds.size.height)  titleColor:_titleColor action:@selector(clickBtn:)];
+        self.moreBtn.tag = self.index + 1;
+        if ([self.titles[self.titleIndex+1] isEqualToString:@""]) {
+            self.titleIndex = -1;
+            self.index = 0;
+        }
+        if (self.moreBtn.tag == self.titles.count) {
+            
+            self.moreBtn.tag = 1;
+        }
+        [self.moreBtn setTitle:self.titles[self.titleIndex+1] forState:UIControlStateNormal];
+        [self addSubview:self.moreBtn];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            firstBtn.y = -self.bounds.size.height;
+            self.moreBtn.y = 0;
+            
+        } completion:^(BOOL finished) {
+            [firstBtn removeFromSuperview];
+            
+        } ];
+        self.index++;
+        self.titleIndex++;
     }
-    if (self.moreBtn.tag == self.titles.count) {
-        
-        self.moreBtn.tag = 1;
-    }
-    [self.moreBtn setTitle:self.titles[self.titleIndex+1] forState:UIControlStateNormal];
-    [self addSubview:self.moreBtn];
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        firstBtn.y = -self.bounds.size.height;
-        self.moreBtn.y = 0;
-        
-    } completion:^(BOOL finished) {
-        [firstBtn removeFromSuperview];
-        
-    } ];
-    self.index++;
-    self.titleIndex++;
 }
 -(void)clickBtn:(UIButton *)btn{
     
@@ -115,6 +96,23 @@
    self.firstBtn.titleLabel.font = titleFont;
    self.moreBtn.titleLabel.font = titleFont;
     
+}
+
+-(void)setTitleArr:(NSArray *)titleArr
+{
+    _titleArr  = titleArr;
+    if (_titleArr.count>0) {
+        NSMutableArray *MutableTitles = [NSMutableArray arrayWithArray:_titleArr];
+        NSString *str = @"";
+        self.titles = MutableTitles;
+        [self.titles addObject:str]; //加一个空的,防止数组为空奔溃
+        self.index = 1;
+        self.firstBtn = [self btnframe:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 2 *30, self.bounds.size.height)  titleColor:_titleColor action:@selector(clickBtn:)];
+        self.firstBtn .tag = self.index;
+        [self.firstBtn  setTitle:self.titles[0] forState:UIControlStateNormal];
+        [self addSubview:self.firstBtn];
+        [NSTimer scheduledTimerWithTimeInterval:3.0 target:self     selector:@selector(nextAd) userInfo:nil repeats:YES];
+    }
 }
 
 

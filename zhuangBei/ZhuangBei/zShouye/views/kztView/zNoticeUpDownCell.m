@@ -55,7 +55,7 @@ const CGFloat kleftMargin = 20.f;
 - (MarqueeView *)marqueeView{
 
     if (!_marqueeView) {
-        MarqueeView *marqueeView =[[MarqueeView alloc]initWithFrame:CGRectMake(kleftMargin + kWidthFlot(30), 10, SCREEN_WIDTH-(kleftMargin*2+kWidthFlot(30)), kWidthFlot(30)) withTitle:@[@"1.我觉得封装好好玩",@"2.经常玩玩可以锻炼自己的技术耶",@"3.所以要经常经常玩玩，这样才能更加完美",@"4.你说对不对",@"end"]];
+        MarqueeView *marqueeView =[[MarqueeView alloc]initWithFrame:CGRectMake(kleftMargin + kWidthFlot(30), 10, SCREEN_WIDTH-(kleftMargin*2+kWidthFlot(30)), kWidthFlot(30)) withTitle:@[]];
         marqueeView.titleColor = [UIColor blackColor];
         marqueeView.titleFont = [UIFont systemFontOfSize:12];
         marqueeView.backgroundColor = [UIColor clearColor];
@@ -107,6 +107,20 @@ const CGFloat kleftMargin = 20.f;
     
 }
 
+-(void)setArray:(NSArray *)Array
+{
+    _Array = Array;
+    
+    NSMutableArray * titlesArr = [NSMutableArray array];
+    [Array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary * dic = Array[idx];
+        NSInteger current = idx+1;
+        NSString * title = [NSString stringWithFormat:@"%ld %@",current,dic[@"gongGaoBt"]];
+        [titlesArr addObject:title];
+    }];
+    self.marqueeView.titleArr = titlesArr;
+    
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
