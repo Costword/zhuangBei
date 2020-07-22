@@ -279,6 +279,10 @@
 		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
 		89B323B824C5A4C200BD0722 /* LWSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B323B724C5A4C200BD0722 /* LWSound.m */; };
 		89B323BA24C5A68000BD0722 /* soundSrource.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 89B323B924C5A68000BD0722 /* soundSrource.mp3 */; };
+
+		89BC879B24C682C300AD0253 /* launch_icon_s.png in Resources */ = {isa = PBXBuildFile; fileRef = 89BC879A24C682C300AD0253 /* launch_icon_s.png */; };
+		89BC879F24C68B3F00AD0253 /* LWUpdateVersionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BC879E24C68B3F00AD0253 /* LWUpdateVersionView.m */; };
+		89BC87A224C68BFB00AD0253 /* LWUpdateVersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BC87A124C68BFB00AD0253 /* LWUpdateVersionManager.m */; };
 		89C112DA246E8599007EAABB /* LWJiaoLiuAddAlearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112D9246E8599007EAABB /* LWJiaoLiuAddAlearView.m */; };
 		89C112DD246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112DC246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m */; };
 		89C112E0246E93AA007EAABB /* LWAddFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112DF246E93AA007EAABB /* LWAddFriendTableViewCell.m */; };
@@ -882,6 +886,11 @@
 		89B323B624C5A4C200BD0722 /* LWSound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSound.h; sourceTree = "<group>"; };
 		89B323B724C5A4C200BD0722 /* LWSound.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWSound.m; sourceTree = "<group>"; };
 		89B323B924C5A68000BD0722 /* soundSrource.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundSrource.mp3; sourceTree = "<group>"; };
+		89BC879A24C682C300AD0253 /* launch_icon_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_icon_s.png; sourceTree = "<group>"; };
+		89BC879D24C68B3F00AD0253 /* LWUpdateVersionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWUpdateVersionView.h; sourceTree = "<group>"; };
+		89BC879E24C68B3F00AD0253 /* LWUpdateVersionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWUpdateVersionView.m; sourceTree = "<group>"; };
+		89BC87A024C68BFB00AD0253 /* LWUpdateVersionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWUpdateVersionManager.h; sourceTree = "<group>"; };
+		89BC87A124C68BFB00AD0253 /* LWUpdateVersionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWUpdateVersionManager.m; sourceTree = "<group>"; };
 		89C112D8246E8599007EAABB /* LWJiaoLiuAddAlearView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWJiaoLiuAddAlearView.h; sourceTree = "<group>"; };
 		89C112D9246E8599007EAABB /* LWJiaoLiuAddAlearView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJiaoLiuAddAlearView.m; sourceTree = "<group>"; };
 		89C112DB246E8CB7007EAABB /* LWAddFriendOrGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddFriendOrGroupViewController.h; sourceTree = "<group>"; };
@@ -1271,6 +1280,7 @@
 			isa = PBXGroup;
 			children = (
 				89B323B924C5A68000BD0722 /* soundSrource.mp3 */,
+				89BC879C24C68A3600AD0253 /* UpdateVersion */,
 				89A9382924542A06001C77A8 /* Other */,
 				009FB654244FEC9900133974 /* commen */,
 				009FB613244FE8C200133974 /* delegate */,
@@ -2274,6 +2284,17 @@
 			path = Tool;
 			sourceTree = "<group>";
 		};
+		89BC879C24C68A3600AD0253 /* UpdateVersion */ = {
+			isa = PBXGroup;
+			children = (
+				89BC879D24C68B3F00AD0253 /* LWUpdateVersionView.h */,
+				89BC879E24C68B3F00AD0253 /* LWUpdateVersionView.m */,
+				89BC87A024C68BFB00AD0253 /* LWUpdateVersionManager.h */,
+				89BC87A124C68BFB00AD0253 /* LWUpdateVersionManager.m */,
+			);
+			path = UpdateVersion;
+			sourceTree = "<group>";
+		};
 		89C9DD81246A37C7005341CE /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -2689,6 +2710,7 @@
 				00FE9BAC2476B878002A1F86 /* ChatToolBar.m in Sources */,
 				0026C4B724741A3E00C6ACB6 /* zUserFriendDetailController.m in Sources */,
 				00FE9BA52476B878002A1F86 /* LWEmojiManager.m in Sources */,
+				89BC87A224C68BFB00AD0253 /* LWUpdateVersionManager.m in Sources */,
 				00FE9B7D2476B878002A1F86 /* AppConfig.m in Sources */,
 				00FE9B9E2476B878002A1F86 /* PPSlideLineButton.m in Sources */,
 				006AA42E247BF78000DBD559 /* TZPhotoPickerController.m in Sources */,
@@ -2753,6 +2775,7 @@
 				89216985245687C6007C6615 /* LWJiaoLiuMessageTableViewCell.m in Sources */,
 				00CB202D2471122A00171284 /* ZFBadgeButton.m in Sources */,
 				006AA42D247BF78000DBD559 /* TZImageManager.m in Sources */,
+				89BC879F24C68B3F00AD0253 /* LWUpdateVersionView.m in Sources */,
 				00FE9BA62476B878002A1F86 /* FacePanel.m in Sources */,
 				89831FD12472959200C6184E /* LWAddNewGroupModel.m in Sources */,
 				00159E1C2463F745005DE17B /* zHuoYuanScrollHeader.m in Sources */,

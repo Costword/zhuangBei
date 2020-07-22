@@ -11,13 +11,15 @@
 #import "zShouyeController.h"
 #import "zHuoYuanMangerController.h"
 #import "LWClientManager.h"
-//#import "zHuoYuanMangerController.h"
+#import "LWUpdateVersionManager.h"
 
 @interface zAshouyeController ()<sliderNavMenuDelegate,UIScrollViewDelegate>
 
 @property(strong,nonatomic)sliderNavMenu * navigationSliderMenu;
 
 @property(strong,nonatomic)UIScrollView* childScroContentView;
+
+@property (nonatomic, strong) LWUpdateVersionManager * updateManager;
 
 @end
 
@@ -80,7 +82,8 @@
     CGPoint offset = self.childScroContentView.contentOffset;
     offset.x = 0;
     [self.childScroContentView setContentOffset:offset animated:YES];
-    
+   _updateManager =  [LWUpdateVersionManager new];
+    [_updateManager  checkUpdate];
 }
 
 -(void)setupChildViewControllers
