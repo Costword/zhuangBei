@@ -159,6 +159,11 @@ NSMutableDictionary* para = [NSMutableDictionary dictionary];\
 #define APPVERSION                                                          ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
 
 /**
+ * 获取APP build版本
+ */
+#define APP_BUILD ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"])
+
+/**
  * 弱化指针
  */
 #define WEAKSELF(type)                                                      __weak typeof(type) weak##type = type;

@@ -13,49 +13,45 @@
 @end
 
 @interface LWUpdateVersionManager()
-//@property (nonatomic, strong) LWUpdateVersionModel *updateModel;
+
 @property (nonatomic, strong) LWUpdateVersionView * updateView;
 
 @end
 
 @implementation LWUpdateVersionManager
 
+/// 更新检查
 - (void)checkUpdate
 {
-    [ServiceManager requestPostWithUrl:@"app/appandroidversion/findNewOne" paraString:@{@"versionCode":@16} success:^(id  _Nonnull response) {
-        NSDictionary *appAndroidVersion = response[@"appAndroidVersion"];
+    NSDictionary *param = @{@"versionCode":LWDATA(APP_BUILD)};
+    LWLog(@"%@",param);
+    [ServiceManager requestGetWithUrl:@"app/appiosversion/findNewOne" Parameters:param success:^(id  _Nonnull response) {
+        NSDictionary *appAndroidVersion = response[@"appIosVersion"];
         if (appAndroidVersion && [appAndroidVersion isKindOfClass:[NSDictionary class]]) {
             LWUpdateVersionModel *updateModel = [LWUpdateVersionModel modelWithDictionary:appAndroidVersion];
-//            self.updateView = [LWUpdateVersionView showWithModel:updateModel];
+            self.updateView = [LWUpdateVersionView showWithModel:updateModel];
         }
-        NSLog(@"response:%@",response);
+        NSLog(@"0---response:%@",response);
     } failure:^(NSError * _Nonnull error) {
         
     }];
 }
+
 @end
+
 /**
- 
-  {
+ {
      msg = "success",
-     appAndroidVersion =     {
+     appIosVersion =     {
          versionCode = 16,
+         updateUser = 1,
          updateUserName = <null>,
-         updateDetails = "【合作伙伴】新增在线咨询功能
- 【交流大厅】系统群组和当前用户所在群组接口重构
- 【个人中心】用户基本信息代码优化，减少字典查询次数
- 【个人中心】用户资料功能开发，点击邀请人信息进入详情
- App IM通讯服务端地址动态获取
- App release版本调试配置buildTypes
- App 配置新版域名
- App 调试模式开发，新增彩蛋功能 ",
-         id = 35,
-         updateTime = "2020-04-26 11:46:48",
-         downloadLocation = "/app/appfujian/download?attID=6221",
-         packageMd5 = <null>,
-         isForceUpdate = 2,
-         updateUser = 435,
-         versionNumber = "1.1.7.1",
+         id = 39,
+         updateTime = "2020-07-23 14:43:05",
+         updateDetails = "测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据",
+         isForceUpdate = 1,
+         isForceUpdateShow = <null>,
+         versionNumber = "16",
      },
      code = 2,
  }
