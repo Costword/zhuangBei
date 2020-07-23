@@ -42,6 +42,7 @@
         make.centerY.mas_equalTo(window.mas_centerY);
         make.width.mas_equalTo(window.mas_width).multipliedBy(0.75);
         make.height.mas_lessThanOrEqualTo(window.mas_height).multipliedBy(0.9);
+        make.height.mas_greaterThanOrEqualTo(window.mas_height).multipliedBy(0.3);
     }];
 }
 
@@ -164,4 +165,5 @@
 {
     NSLog(@"%s",__func__);
 }
+
 @end
