@@ -16,6 +16,7 @@
 //#import "MainTabBarController.h"
 #import "LSTabBarController.h"
 #import "MainNavController.h"
+#import "zFogetController.h"
 
 @interface zDengluController ()
 
@@ -45,6 +46,12 @@
                 zhuceVC.title = @"用户注册";
                 [weakSelf.navigationController pushViewController:zhuceVC animated:YES];
                 return;
+            }
+            if (btnTag ==4 ) {
+                NSLog(@"修改密码");
+                zFogetController * fogetVC = [[zFogetController alloc]init];
+                fogetVC.title = @"修改密码";
+                [weakSelf.navigationController pushViewController:fogetVC animated:YES];
             }
         };
         _loginView.logInBack = ^(NSString * _Nonnull phone, NSString * _Nonnull passWord, BOOL remmber) {

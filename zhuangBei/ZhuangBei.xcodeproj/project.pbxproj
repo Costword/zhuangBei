@@ -51,6 +51,10 @@
 		004D7A5A24C7D3B600EFFA82 /* zNotifacationDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A5924C7D3B600EFFA82 /* zNotifacationDetailController.m */; };
 		004D7A5D24C7E6EB00EFFA82 /* zNotifacationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A5C24C7E6EB00EFFA82 /* zNotifacationCell.m */; };
 		004D7A6024C83C2400EFFA82 /* DIY_RefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A5F24C83C2400EFFA82 /* DIY_RefreshFooter.m */; };
+		004D7A6324C911EC00EFFA82 /* zFogetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A6224C911EC00EFFA82 /* zFogetController.m */; };
+		004D7A6624C913F000EFFA82 /* zFogetCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A6524C913F000EFFA82 /* zFogetCard.m */; };
+		004D7A6924C9868F00EFFA82 /* zChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A6824C9868F00EFFA82 /* zChangePasswordController.m */; };
+		004D7A6C24C9873000EFFA82 /* zChangePasswordCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A6B24C9873000EFFA82 /* zChangePasswordCard.m */; };
 		004E435C2472B964000A4627 /* zGoodsContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 004E435B2472B964000A4627 /* zGoodsContentModel.m */; };
 		004E435F2472CC04000A4627 /* zCompanyGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 004E435E2472CC04000A4627 /* zCompanyGoodsCell.m */; };
 		00558BD42460FF4200550FBC /* sliderNavMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BD32460FF4200550FBC /* sliderNavMenu.m */; };
@@ -279,8 +283,6 @@
 		89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A9382A24542B38001C77A8 /* LaunchScreen.storyboard */; };
 		89B323B824C5A4C200BD0722 /* LWSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B323B724C5A4C200BD0722 /* LWSound.m */; };
 		89B323BA24C5A68000BD0722 /* soundSrource.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 89B323B924C5A68000BD0722 /* soundSrource.mp3 */; };
-
-		89BC879B24C682C300AD0253 /* launch_icon_s.png in Resources */ = {isa = PBXBuildFile; fileRef = 89BC879A24C682C300AD0253 /* launch_icon_s.png */; };
 		89BC879F24C68B3F00AD0253 /* LWUpdateVersionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BC879E24C68B3F00AD0253 /* LWUpdateVersionView.m */; };
 		89BC87A224C68BFB00AD0253 /* LWUpdateVersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BC87A124C68BFB00AD0253 /* LWUpdateVersionManager.m */; };
 		89C112DA246E8599007EAABB /* LWJiaoLiuAddAlearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C112D9246E8599007EAABB /* LWJiaoLiuAddAlearView.m */; };
@@ -412,6 +414,14 @@
 		004D7A5C24C7E6EB00EFFA82 /* zNotifacationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zNotifacationCell.m; sourceTree = "<group>"; };
 		004D7A5E24C83C2400EFFA82 /* DIY_RefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIY_RefreshFooter.h; sourceTree = "<group>"; };
 		004D7A5F24C83C2400EFFA82 /* DIY_RefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIY_RefreshFooter.m; sourceTree = "<group>"; };
+		004D7A6124C911EC00EFFA82 /* zFogetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zFogetController.h; sourceTree = "<group>"; };
+		004D7A6224C911EC00EFFA82 /* zFogetController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zFogetController.m; sourceTree = "<group>"; };
+		004D7A6424C913F000EFFA82 /* zFogetCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zFogetCard.h; sourceTree = "<group>"; };
+		004D7A6524C913F000EFFA82 /* zFogetCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zFogetCard.m; sourceTree = "<group>"; };
+		004D7A6724C9868F00EFFA82 /* zChangePasswordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zChangePasswordController.h; sourceTree = "<group>"; };
+		004D7A6824C9868F00EFFA82 /* zChangePasswordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zChangePasswordController.m; sourceTree = "<group>"; };
+		004D7A6A24C9873000EFFA82 /* zChangePasswordCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zChangePasswordCard.h; sourceTree = "<group>"; };
+		004D7A6B24C9873000EFFA82 /* zChangePasswordCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zChangePasswordCard.m; sourceTree = "<group>"; };
 		004E435A2472B964000A4627 /* zGoodsContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = zGoodsContentModel.h; path = ZhuangBei/zShouye/views/zGoodsContentModel.h; sourceTree = SOURCE_ROOT; };
 		004E435B2472B964000A4627 /* zGoodsContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = zGoodsContentModel.m; path = ZhuangBei/zShouye/views/zGoodsContentModel.m; sourceTree = SOURCE_ROOT; };
 		004E435D2472CC04000A4627 /* zCompanyGoodsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCompanyGoodsCell.h; sourceTree = "<group>"; };
@@ -886,7 +896,6 @@
 		89B323B624C5A4C200BD0722 /* LWSound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSound.h; sourceTree = "<group>"; };
 		89B323B724C5A4C200BD0722 /* LWSound.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWSound.m; sourceTree = "<group>"; };
 		89B323B924C5A68000BD0722 /* soundSrource.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundSrource.mp3; sourceTree = "<group>"; };
-		89BC879A24C682C300AD0253 /* launch_icon_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_icon_s.png; sourceTree = "<group>"; };
 		89BC879D24C68B3F00AD0253 /* LWUpdateVersionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWUpdateVersionView.h; sourceTree = "<group>"; };
 		89BC879E24C68B3F00AD0253 /* LWUpdateVersionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWUpdateVersionView.m; sourceTree = "<group>"; };
 		89BC87A024C68BFB00AD0253 /* LWUpdateVersionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWUpdateVersionManager.h; sourceTree = "<group>"; };
@@ -989,6 +998,8 @@
 				001ECA7A2454449000727379 /* zhuCeCard.m */,
 				001ECA682453B6F300727379 /* zLoginCard.h */,
 				001ECA692453B6F300727379 /* zLoginCard.m */,
+				004D7A6424C913F000EFFA82 /* zFogetCard.h */,
+				004D7A6524C913F000EFFA82 /* zFogetCard.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1052,6 +1063,8 @@
 				0026C4B924741CCE00C6ACB6 /* zMyFriendsHeader.m */,
 				0026C4BB24741E6900C6ACB6 /* zMyfriendDetailCell.h */,
 				0026C4BC24741E6900C6ACB6 /* zMyfriendDetailCell.m */,
+				004D7A6A24C9873000EFFA82 /* zChangePasswordCard.h */,
+				004D7A6B24C9873000EFFA82 /* zChangePasswordCard.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1400,6 +1413,8 @@
 				00CA47662455B91E006A2885 /* zQuestionController.m */,
 				00B0A5CF246500180041C234 /* zXieYiController.h */,
 				00B0A5D0246500180041C234 /* zXieYiController.m */,
+				004D7A6124C911EC00EFFA82 /* zFogetController.h */,
+				004D7A6224C911EC00EFFA82 /* zFogetController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1549,6 +1564,8 @@
 				0065DF15245FADBF008D3D98 /* zInviteController.m */,
 				0065DF17245FB7A9008D3D98 /* zCallBackController.h */,
 				0065DF18245FB7A9008D3D98 /* zCallBackController.m */,
+				004D7A6724C9868F00EFFA82 /* zChangePasswordController.h */,
+				004D7A6824C9868F00EFFA82 /* zChangePasswordController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -2539,6 +2556,7 @@
 				0091FCE6245E681B0046691F /* zCityCollectionCell.m in Sources */,
 				00FE9B8C2476B878002A1F86 /* MessageGroupCreateViewController.m in Sources */,
 				894E4118245A97A20028D2B4 /* LWButton.m in Sources */,
+				004D7A6C24C9873000EFFA82 /* zChangePasswordCard.m in Sources */,
 				009FB61A244FE8C200133974 /* AppDelegate.m in Sources */,
 				00FE9B812476B878002A1F86 /* LWGroupMemberListModel.m in Sources */,
 				890643C624690A030099508C /* LWThreeLevelTableView.m in Sources */,
@@ -2630,6 +2648,7 @@
 				006AA431247BF78000DBD559 /* TZLocationManager.m in Sources */,
 				006AA436247BF86500DBD559 /* PermissionKit.m in Sources */,
 				00372AED2456842F00E51931 /* PPNetworkHelper.m in Sources */,
+				004D7A6624C913F000EFFA82 /* zFogetCard.m in Sources */,
 				8957D4AA245975370096F1D7 /* LWHuoYuanDeatilViewController.m in Sources */,
 				006AA429247BF78000DBD559 /* UIView+Layout.m in Sources */,
 				00E33FAA24715A95005F980A /* zLeftMenuThirdCell.m in Sources */,
@@ -2692,6 +2711,7 @@
 				006AA427247BF78000DBD559 /* TZAssetModel.m in Sources */,
 				893A18F1245919C800D8C36C /* LWHuoYuanThreeLevelListTableViewCell.m in Sources */,
 				004D7A6024C83C2400EFFA82 /* DIY_RefreshFooter.m in Sources */,
+				004D7A6924C9868F00EFFA82 /* zChangePasswordController.m in Sources */,
 				006AA42A247BF78000DBD559 /* TZPhotoPreviewController.m in Sources */,
 				0091FD00245EE1520046691F /* zUserDescController.m in Sources */,
 				8957D4A124594C230096F1D7 /* LWHuoYuanBaseViewController.m in Sources */,
@@ -2700,6 +2720,7 @@
 				0036407524701B7600B93431 /* zUserGoodsController.m in Sources */,
 				8929818F246D5EBA00C3DFE0 /* LWSystemListModel.m in Sources */,
 				00159E232463FDF8005DE17B /* NewPagedFlowView.m in Sources */,
+				004D7A6324C911EC00EFFA82 /* zFogetController.m in Sources */,
 				895BD9D424629AFC00AA5947 /* UIImageView+LWImageView.m in Sources */,
 				005ECE73246431DF00D90341 /* zLeftMenuHeader.m in Sources */,
 				00B49B35246C2E61009D9ED0 /* zCityCollectionHeaderView.m in Sources */,

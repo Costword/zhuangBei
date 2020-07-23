@@ -105,4 +105,12 @@ UIKIT_EXTERN NSString *const kAppnoticeList;
 /**通知列表接口*/
 
 UIKIT_EXTERN NSString *const klistAndUpdate;
+
+/**忘记密码*/
+
+UIKIT_EXTERN NSString *const kfogetPassword;
+
+/**修改密码*/
+
+UIKIT_EXTERN NSString *const kchangePassword;
 NS_ASSUME_NONNULL_END

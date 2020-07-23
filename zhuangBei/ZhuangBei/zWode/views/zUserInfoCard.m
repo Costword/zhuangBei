@@ -57,7 +57,7 @@
 //        wode_defoutHeader
         _headerImageBtn = [[UIButton alloc]init];
         _headerImageBtn.tag = 1;
-        _headerImageBtn.layer.cornerRadius = kWidthFlot(50);
+        _headerImageBtn.layer.cornerRadius = SCREEN_HEIGHT/12;
         _headerImageBtn.clipsToBounds = YES;
         [_headerImageBtn setBackgroundImage:[UIImage imageNamed:@"testtouxiang"] forState:UIControlStateNormal];
         [_headerImageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -172,7 +172,7 @@
     [self.headerImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kWidthFlot(20));
         make.top.mas_equalTo(kWidthFlot(10));
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(100),kWidthFlot(100)));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_HEIGHT/6,SCREEN_HEIGHT/6));
     }];
     
     [self.nameBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -211,7 +211,7 @@
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kWidthFlot(40));
         make.right.mas_equalTo(-kWidthFlot(40));
-        make.bottom.mas_equalTo(-kWidthFlot(20));
+        make.bottom.mas_equalTo(-kWidthFlot(10));
         make.height.mas_equalTo(kWidthFlot(0.5));
     }];
 }

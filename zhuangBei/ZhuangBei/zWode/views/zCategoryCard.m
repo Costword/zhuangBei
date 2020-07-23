@@ -88,7 +88,7 @@
         for (int i = 0; i<self.titleArray.count; i++) {
             UIButton * button = [[UIButton alloc]init];
             button.tag = i;
-            button.titleLabel.font = kFont(kWidthFlot(14));
+            button.titleLabel.font = kFont(14);
             NSString * name = self.titleArray[i][@"name"];
             NSString * image = self.titleArray[i][@"image"];
             [button setTitle:name forState:UIControlStateNormal];
@@ -115,7 +115,7 @@
         UIButton * button = self.itemsArray[i];
         
         CGFloat margin = (SCREEN_WIDTH - kWidthFlot(40))/3;
-        CGFloat height = kWidthFlot(100);
+        CGFloat height = SCREEN_HEIGHT/6;
         NSInteger lie = i % 3;
         NSInteger hang = i/3;
         CGFloat left = margin * lie;

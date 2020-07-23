@@ -13,10 +13,13 @@
 #import "SDImageCache.h"
 #import "zXieYiController.h"
 #import "zEducationRankTypeInfo.h"
+#import "zChangePasswordController.h"
 
 @interface zSettingViewController ()
 
 @property(strong,nonatomic)zSettingCellView * AccountCell;
+
+@property(strong,nonatomic)zSettingCellView * changePassword;
 
 @property(strong,nonatomic)zSettingCellView * clearnCell;
 
@@ -54,6 +57,20 @@
         _AccountCell.isPhoneNum = YES;
     }
     return _AccountCell;
+}
+
+-(zSettingCellView*)changePassword
+{
+    if (!_changePassword) {
+        __weak typeof(self)weakSelf  = self;
+        _changePassword = [[zSettingCellView alloc]init];
+        _changePassword.name = @"修改密码";
+        _changePassword.settingBack = ^{
+        
+            [weakSelf changePassowrdClick];
+        };
+    }
+    return _changePassword;
 }
 
 -(zSettingCellView*)clearnCell
@@ -181,6 +198,7 @@
     [super viewDidLoad];
     
     [self.view addSubview:self.AccountCell];
+    [self.view addSubview:self.changePassword];
     [self.view addSubview:self.clearnCell];
     [self.view addSubview:self.versionCell];
     [self.view addSubview:self.loginBtn];
@@ -201,11 +219,16 @@
         make.top.mas_equalTo(kWidthFlot(1));
         make.height.mas_equalTo(kWidthFlot(50));
     }];
-    
-    [self.clearnCell mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.changePassword mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
         make.top.mas_equalTo(self.AccountCell.mas_bottom).offset(kWidthFlot(1));
+        make.height.mas_equalTo(kWidthFlot(50));
+    }];
+    [self.clearnCell mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.right.mas_equalTo(0);
+        make.top.mas_equalTo(self.changePassword.mas_bottom).offset(kWidthFlot(1));
         make.height.mas_equalTo(kWidthFlot(50));
     }];
     
@@ -281,6 +304,12 @@
     rootNav.navigationBar.hidden = YES;
      UIApplication *app = [UIApplication sharedApplication];
     [app keyWindow].rootViewController = rootNav;
+}
+
+-(void)changePassowrdClick{
+    zChangePasswordController * changePassVC = [[zChangePasswordController alloc]init];
+    changePassVC.title = @"修改密码";
+    [self.navigationController pushViewController:changePassVC animated:YES];
 }
 
 @end

@@ -170,7 +170,8 @@
     [self.imageBaseView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(kWidthFlot(196));
+//        kWidthFlot(196)
+        make.height.mas_equalTo(SCREEN_HEIGHT/3);
     }];
     [self.settingButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-kWidthFlot(20));
@@ -181,20 +182,22 @@
         make.left.mas_equalTo(kWidthFlot(20));
         make.right.mas_equalTo(-kWidthFlot(20));
         make.top.mas_equalTo(self.settingButton.mas_bottom).offset(kWidthFlot(15));
-        make.height.mas_equalTo(kWidthFlot(210));
+//        kWidthFlot(210)
+        make.height.mas_equalTo(SCREEN_HEIGHT/3);
     }];
     
     [self.instructionCard mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kWidthFlot(20));
         make.right.mas_equalTo(-kWidthFlot(20));
         make.top.mas_equalTo(self.userinfoCard.mas_bottom).offset(kWidthFlot(15));
-        make.height.mas_equalTo(kWidthFlot(60));
+        make.height.mas_equalTo(60);
     }];
     [self.categoryCard mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kWidthFlot(20));
         make.right.mas_equalTo(-kWidthFlot(20));
         make.top.mas_equalTo(self.instructionCard.mas_bottom).offset(kWidthFlot(15));
-        make.height.mas_equalTo(kWidthFlot(210));
+//        kWidthFlot(210)
+        make.height.mas_equalTo(SCREEN_HEIGHT/3);
     }];
 
     [self.imageBaseView setNeedsLayout];

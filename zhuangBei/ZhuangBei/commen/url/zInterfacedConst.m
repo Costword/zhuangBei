@@ -579,3 +579,31 @@ NSString *const kAppnoticeList = @"app/appnoticeuserlink/listByUser";
  }
  */
 NSString *const klistAndUpdate = @"app/appnotice/listAndUpdate";
+
+
+/**
+ *忘记密码
+ *URL    http://test.110zhuangbei.com:8105/app/sys/user/forgetPassword
+ *{
+     "username": "15516562513",
+     "password": "111111",
+     "verificationCode": "123456"
+ }
+ * {
+     "code": 0,
+     "msg": "修改成功！"
+ }
+ */
+NSString *const kfogetPassword = @"sys/user/forgetPassword";
+
+
+/**
+ *修改密码
+ *URL    http://test.110zhuangbei.com:8105/app/sys/user/password
+ *password    123456 newPassword    111111
+ *{
+     "code": 500,
+     "msg": "原密码不正确"
+ }
+ */
+NSString *const kchangePassword = @"sys/user/password";

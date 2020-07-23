@@ -146,7 +146,7 @@
         [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
         _loginBtn.backgroundColor = [kMainSingleton colorWithHexString:@"#3F50B5" alpha:1];
-        _loginBtn.layer.cornerRadius = kWidthFlot(20);
+        _loginBtn.layer.cornerRadius = 20;
         _loginBtn.clipsToBounds = YES;
         _loginBtn.tag = 3;
         [_loginBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -214,7 +214,7 @@
     [self.imageBaseView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(kWidthFlot(290));
+        make.height.mas_equalTo(SCREEN_HEIGHT/3);
     }];
     
     [self.logoImage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -266,7 +266,7 @@
         make.top.mas_equalTo(self.showPasswordBtn.mas_bottom).offset(kWidthFlot(70));
         make.centerX.mas_equalTo(self.baseView.mas_centerX);
         make.width.mas_equalTo(kWidthFlot(230));
-        make.height.mas_equalTo(kWidthFlot(45));
+        make.height.mas_equalTo(45);
     }];
     
     [self.fogetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -357,10 +357,10 @@
     }
     if (button.tag==4) {
         //忘记密码
-//        if (self.eventBack) {
-//            self.eventBack(4);
-//        }
-        [[zHud shareInstance]showMessage:@"修改密码开发中"];
+        if (self.eventBack) {
+            self.eventBack(4);
+        }
+//        [[zHud shareInstance]showMessage:@"修改密码开发中"];
         return;
     }
     if (button.tag==5) {
