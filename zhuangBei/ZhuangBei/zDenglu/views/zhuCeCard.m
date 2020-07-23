@@ -180,7 +180,7 @@
         [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_loginBtn setTitle:@"注册" forState:UIControlStateNormal];
         _loginBtn.backgroundColor = [kMainSingleton colorWithHexString:@"#3F50B5" alpha:1];
-        _loginBtn.layer.cornerRadius = kWidthFlot(20);
+        _loginBtn.layer.cornerRadius = 20;
         _loginBtn.clipsToBounds = YES;
         _loginBtn.tag = 4;
         [_loginBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -348,7 +348,7 @@
         make.top.mas_equalTo(self.aggreBtn.mas_bottom).offset(kWidthFlot(40));
         make.centerX.mas_equalTo(self.mas_centerX);
         make.width.mas_equalTo(kWidthFlot(285));
-        make.height.mas_equalTo(kWidthFlot(45));
+        make.height.mas_equalTo(45);
     }];
     
     [self.gotoLoginLabel mas_makeConstraints:^(MASConstraintMaker *make) {

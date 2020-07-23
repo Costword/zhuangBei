@@ -174,7 +174,7 @@
         _reginstBtn.titleLabel.font = kFont(18);
         [_reginstBtn setTitleColor:[kMainSingleton colorWithHexString:@"#4A4A4A" alpha:1] forState:UIControlStateNormal];
         [_reginstBtn setTitle:@"新用户注册" forState:UIControlStateNormal];
-        _reginstBtn.layer.cornerRadius = kWidthFlot(20);
+        _reginstBtn.layer.cornerRadius = 20;
         _reginstBtn.clipsToBounds = YES;
         _reginstBtn.tag = 5;
         [_reginstBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -279,7 +279,7 @@
     [self.reginstBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.baseView.mas_bottom).offset(kWidthFlot(70));
         make.centerX.mas_equalTo(self.loginBtn.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(150), kWidthFlot(40)));
+        make.size.mas_equalTo(CGSizeMake(kWidthFlot(150), 40));
     }];
 }
 

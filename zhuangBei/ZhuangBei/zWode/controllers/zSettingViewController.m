@@ -137,7 +137,7 @@
         [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_loginBtn setTitle:@"退出登录" forState:UIControlStateNormal];
         _loginBtn.backgroundColor = [kMainSingleton colorWithHexString:@"#3F50B5" alpha:1];
-        _loginBtn.layer.cornerRadius = kWidthFlot(20);
+        _loginBtn.layer.cornerRadius = 20;
         _loginBtn.clipsToBounds = YES;
         _loginBtn.tag = 1;
         [_loginBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -242,7 +242,7 @@
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.versionCell.mas_bottom).offset(kWidthFlot(20));
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(298), kWidthFlot(46)));
+        make.size.mas_equalTo(CGSizeMake(kWidthFlot(298),46));
     }];
     
     [self.centerView mas_makeConstraints:^(MASConstraintMaker *make) {

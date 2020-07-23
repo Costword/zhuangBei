@@ -16,6 +16,13 @@
 
 @implementation zFogetController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    self.title = @"修改密码";
+}
+
 -(zFogetCard*)fogetCard
 {
     if (!_fogetCard) {
