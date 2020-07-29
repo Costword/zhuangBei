@@ -81,6 +81,9 @@
 
 -(void)userBookClick
 {
-   [[zHud shareInstance]showMessage:@"阿猿正在玩命开发中，敬请期待..."];
+//   [[zHud shareInstance]showMessage:@"阿猿正在玩命开发中，敬请期待..."];
+    if (self.shouceTapBack) {
+        self.shouceTapBack();
+    }
 }
 @end

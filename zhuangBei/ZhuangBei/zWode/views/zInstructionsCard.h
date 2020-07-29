@@ -10,7 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^shouCeTap)(void);
+
 @interface zInstructionsCard : UIView
+
+@property(copy,nonatomic)shouCeTap shouceTapBack;
 
 @end
 

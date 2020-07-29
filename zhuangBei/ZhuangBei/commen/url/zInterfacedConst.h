@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 #define DevelopSever 0
-#define TestSever    1
-#define ProductSever 0
+#define TestSever    0
+#define ProductSever 1
 
 /** 接口前缀-开发服务器*/
 UIKIT_EXTERN NSString *const kApiPrefix;
@@ -113,4 +113,9 @@ UIKIT_EXTERN NSString *const kfogetPassword;
 /**修改密码*/
 
 UIKIT_EXTERN NSString *const kchangePassword;
+
+/**课程列表*/
+
+UIKIT_EXTERN NSString *const kShouCeList;
+
 NS_ASSUME_NONNULL_END

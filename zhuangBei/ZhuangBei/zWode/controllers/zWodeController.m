@@ -22,6 +22,7 @@
 #import "zCompanyController.h"
 #import "zUserDetailController.h"
 #import "zJiaoliuController.h"
+#import "zShouCeController.h"
 
 @interface zWodeController ()
 
@@ -106,7 +107,12 @@
 -(zInstructionsCard*)instructionCard
 {
     if (!_instructionCard) {
+        __weak typeof(self)weakSelf = self;
         _instructionCard = [[zInstructionsCard alloc]init];
+        _instructionCard.shouceTapBack = ^{
+            zShouCeController * shouceVC = [[zShouCeController alloc]init];
+            [weakSelf.navigationController pushViewController:shouceVC animated:YES];
+        };
     }
     return _instructionCard;
 }

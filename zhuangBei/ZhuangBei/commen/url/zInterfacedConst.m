@@ -607,3 +607,103 @@ NSString *const kfogetPassword = @"sys/user/forgetPassword";
  }
  */
 NSString *const kchangePassword = @"sys/user/password";
+
+
+/**
+ *培训大厅获取课程列表
+ *URL    http://test.110zhuangbei.com:8105/app/kc/kckecheng/getByKcToAll
+ *wentiId    0 keChengDm    26 chuangjianId    1
+ *{
+     "code": 0,
+     "msg": "success",
+     "page": {
+         "keChengList": {
+             "totalCount": 0,
+             "pageSize": 10,
+             "totalPage": 0,
+             "currPage": 1,
+             "list": []
+         },
+         "wenDaList": {
+             "totalCount": 0,
+             "pageSize": 10,
+             "totalPage": 0,
+             "currPage": 1,
+             "list": []
+         },
+         "keChengs": {
+             "totalCount": 1,
+             "pageSize": 10,
+             "totalPage": 1,
+             "currPage": 1,
+             "list": [{
+                 "keChengDm": 26,
+                 "keChengBh": null,
+                 "keChengJj": "《警用装备联盟》的操作手册",
+                 "keChengMc": "《警用装备联盟》操作手册",
+                 "chuangJianR": 1,
+                 "chuangJianRImg": 5292,
+                 "chuangJianRnm": "admin",
+                 "chuangJianSj": "2020-03-03 06:38:17",
+                 "xiuGaiR": 1,
+                 "xiuGaiSj": "2020-04-16 14:18:27",
+                 "suoLueTu": 6100,
+                 "kcNanDu": null,
+                 "kcShiChang": null,
+                 "kcXuexiNum": null,
+                 "kcPingFen": null,
+                 "fuJianList": null,
+                 "file": null
+             }]
+         },
+         "biJiList": {
+             "totalCount": 0,
+             "pageSize": 10,
+             "totalPage": 0,
+             "currPage": 1,
+             "list": []
+         },
+         "Users": {
+             "userId": 700,
+             "username": "15516562515",
+             "nickName": "Waaw",
+             "salt": "DGhnHwJVg3kPpUQsh5Eh",
+             "email": null,
+             "mobile": null,
+             "isDisables": 1,
+             "createTime": "2020-05-14 10:38:56",
+             "sex": null,
+             "idCard": "",
+             "address": null,
+             "companyName": null,
+             "companyTypeName": null,
+             "creditCode": null,
+             "refereeName": null,
+             "refereeId": 532,
+             "imagesId": 3379,
+             "deptId": 1,
+             "deptName": null,
+             "roleIdList": [24],
+             "levelCode": "1",
+             "levelNickName": "小树会员",
+             "levelName": "入门会员\r",
+             "rankCode": null,
+             "rankName": null,
+             "postCode": null,
+             "postName": null,
+             "avatar": 3379,
+             "sign": null,
+             "status": null,
+             "qyuserId": null,
+             "verificationCode": null,
+             "invatationCode": "904181",
+             "companyLocation": null,
+             "companyShortName": null,
+             "companyType": null,
+             "minsummary": null
+         }
+     }
+ }
+ */
+
+NSString *const kShouCeList = @"kc/kckecheng/getByKcToAll";
