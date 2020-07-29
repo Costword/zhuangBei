@@ -155,25 +155,25 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.height.mas_equalTo(kWidthFlot(30));
-        make.top.mas_equalTo(kWidthFlot(100));
+        make.top.mas_equalTo(SCREEN_HEIGHT/5);
     }];
     
     [self.inviteNumBtn mas_makeConstraints:^(MASConstraintMaker *make) {
        make.centerX.mas_equalTo(self.view.mas_centerX);
         make.height.mas_equalTo(kWidthFlot(67));
-        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(kWidthFlot(10));
+        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(15);
     }];
     
     [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.height.mas_equalTo(kWidthFlot(20));
-        make.top.mas_equalTo(self.inviteNumBtn.mas_bottom).offset(kWidthFlot(10));
+        make.top.mas_equalTo(self.inviteNumBtn.mas_bottom).offset(15);
     }];
     
     [self.inviteImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.top.mas_equalTo(self.descLabel.mas_bottom).offset(kWidthFlot(10));
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(200), kWidthFlot(200)));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/3, SCREEN_WIDTH/3));
     }];
     
     [self.shareLabel mas_makeConstraints:^(MASConstraintMaker *make) {

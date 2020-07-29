@@ -40,11 +40,11 @@
         //后台返回是否继续播放
         configure.backPlay = NO;
         //转子颜色
-        configure.strokeColor = [UIColor redColor];
+        configure.strokeColor = [UIColor whiteColor];
         //工具条消失时间，默认10s
-        configure.toolBarDisappearTime = 8;
+        configure.toolBarDisappearTime = 10;
         //顶部工具条隐藏样式，默认不隐藏
-        configure.topToolBarHiddenType = TopToolBarHiddenAlways;
+        configure.topToolBarHiddenType = TopToolBarHiddenNever;
         configure.videoFillMode = VideoFillModeResizeAspect;
     }];
     
@@ -55,6 +55,8 @@
     //返回按钮点击事件回调,小屏状态才会调用，全屏默认变为小屏
     [_playerView backButton:^(UIButton *button) {
         NSLog(@"返回按钮被点击");
+        __weak typeof(self)weakSelf = self;
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
     //播放完成回调
     [_playerView endPlay:^{

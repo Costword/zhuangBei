@@ -73,17 +73,7 @@
         make.bottom.mas_equalTo(-Padding);
         make.width.mas_equalTo(self.backButton.mas_height);
     }];
-    //播放按钮
-    [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(Padding);
-        if (@available(iOS 11.0, *)) {
-            make.left.mas_equalTo(self.mas_safeAreaLayoutGuideLeft).mas_offset(Padding);
-        } else {
-            make.left.mas_equalTo(Padding);
-        }
-        make.bottom.mas_equalTo(-Padding);
-        make.width.mas_equalTo(self.playButton.mas_height);
-    }];
+    
     //全屏按钮
     [self.fullButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(-Padding);
@@ -95,15 +85,31 @@
         make.top.mas_equalTo(Padding);
         make.width.mas_equalTo(self.fullButton.mas_height);
     }];
+    //播放按钮
+    [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(Padding);
+        if (@available(iOS 11.0, *)) {
+            make.right.mas_equalTo(self.fullButton.mas_left).mas_offset(-Padding);
+        } else {
+            make.right.mas_equalTo(self.fullButton.mas_left).mas_offset(-Padding);
+        }
+        make.bottom.mas_equalTo(-Padding);
+        make.width.mas_equalTo(self.playButton.mas_height);
+    }];
+    
     //当前播放时间
     [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.playButton.mas_right).mas_offset(Padding);
+        if (@available(iOS 11.0, *)) {
+            make.left.mas_equalTo(self.mas_safeAreaLayoutGuideLeft).mas_offset(Padding);
+        } else {
+            make.left.mas_equalTo(Padding);
+        }
         make.width.mas_equalTo(45);
         make.centerY.mas_equalTo(self.bottomToolBar);
     }];
     //总时间
     [self.totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.fullButton.mas_left).mas_offset(-Padding);
+        make.right.mas_equalTo(self.playButton.mas_left).mas_offset(-Padding);
         make.width.mas_equalTo(45);
         make.centerY.mas_equalTo(self.bottomToolBar);
     }];
@@ -175,8 +181,8 @@
 - (UIButton *) playButton{
     if (_playButton == nil){
         _playButton = [[UIButton alloc] init];
-        [_playButton setImage:[CLImageHelper imageWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
-        [_playButton setImage:[CLImageHelper imageWithName:@"CLPauseBtn"] forState:UIControlStateSelected];
+        [_playButton setImage:[UIImage imageNamed:@"player_pause_icon"] forState:UIControlStateNormal];
+        [_playButton setImage:[UIImage imageNamed:@"player_play_icon"] forState:UIControlStateSelected];
         [_playButton addTarget:self action:@selector(playButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playButton;
@@ -185,8 +191,8 @@
 - (UIButton *) fullButton{
     if (_fullButton == nil){
         _fullButton = [[UIButton alloc] init];
-        [_fullButton setImage:[CLImageHelper imageWithName:@"CLMaxBtn"] forState:UIControlStateNormal];
-        [_fullButton setImage:[CLImageHelper imageWithName:@"CLMinBtn"] forState:UIControlStateSelected];
+        [_fullButton setImage:[UIImage imageNamed:@"full_icon"] forState:UIControlStateNormal];
+        [_fullButton setImage:[UIImage imageNamed:@"full_icon"] forState:UIControlStateSelected];
         [_fullButton addTarget:self action:@selector(fullButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _fullButton;

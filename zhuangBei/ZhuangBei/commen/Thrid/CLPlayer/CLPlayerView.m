@@ -752,7 +752,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     
     UIApplication *app = [UIApplication sharedApplication];
     UIWindow *keyWindow = [app keyWindow];
-    keyWindow.backgroundColor = [UIColor greenColor];
     [keyWindow addSubview:self];
     if (self.configure.isLandscape){
         //手动点击需要旋转方向
