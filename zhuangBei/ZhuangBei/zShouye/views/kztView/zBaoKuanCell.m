@@ -81,7 +81,7 @@ static NSString * scrollItemCell_id = @"zBaoKuanItemCell";
            collectionView.showsVerticalScrollIndicator = NO;
            collectionView.showsHorizontalScrollIndicator = NO;
            collectionView.scrollEnabled = NO;
-           collectionView.allowsSelection = NO;
+           collectionView.allowsSelection = YES;
            collectionView.delegate = self;
            collectionView.dataSource = self;
            [collectionView registerClass:[zBaoKuanItemCell class] forCellWithReuseIdentifier:scrollItemCell_id];
@@ -146,6 +146,10 @@ static NSString * scrollItemCell_id = @"zBaoKuanItemCell";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary * dic =@{};
+    if (self.baokuanTapback) {
+        self.baokuanTapback(dic);
+    }
 }
 
 

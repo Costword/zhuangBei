@@ -23,6 +23,12 @@
 // app/appfriendmessage/save
 //app/appfriendmessage/getFriendMsgList
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
 - (void)deletefriend
 {
     [self requestPostWithUrl:@"app/appfriend/delete" para:self.roomId paraType:(LWRequestParamTypeBody) success:^(id  _Nonnull response) {
