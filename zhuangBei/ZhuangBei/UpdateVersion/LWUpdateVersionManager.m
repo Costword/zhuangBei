@@ -24,7 +24,7 @@
 - (void)checkUpdate
 {
     NSDictionary *param = @{@"versionCode":LWDATA(APP_BUILD)};
-    LWLog(@"%@",param);
+    LWLog(@"版本更新参数：%@",param);
     [ServiceManager requestGetWithUrl:@"app/appiosversion/findNewOne" Parameters:param success:^(id  _Nonnull response) {
         NSDictionary *appAndroidVersion = response[@"appIosVersion"];
         if (appAndroidVersion && [appAndroidVersion isKindOfClass:[NSDictionary class]]) {
@@ -33,7 +33,7 @@
         }
         NSLog(@"0---response:%@",response);
     } failure:^(NSError * _Nonnull error) {
-        
+        NSLog(@"版本更新接口error：%@",error);
     }];
 }
 
