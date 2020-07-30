@@ -15,8 +15,8 @@
 #import "zInviteController.h"
 #import "zNotifacationController.h"
 #import "LEEAlert.h"
-#import "ChatRoomViewController.h"
-
+//#import "ChatRoomViewController.h"
+#import "MessageGroupViewController.h"
 
 @interface zHuoYuanMangerController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -158,7 +158,7 @@
                 //进入聊天详情
 //                NSString * roomId = dic[@"id"];
                 NSString* roomName = dic[@"groupname"];
-                [self.navigationController pushViewController:[ChatRoomViewController chatRoomViewControllerWithRoomId:myid roomName:roomName roomType:(LWChatRoomTypeGroup) extend:nil] animated:YES];
+                [self.navigationController pushViewController:[MessageGroupViewController chatRoomViewControllerWithRoomId:myid roomName:roomName roomType:(LWChatRoomTypeGroup) extend:nil] animated:YES];
             }else
             {
                 //进入其他页面
@@ -196,7 +196,7 @@
             })
             .LeeAction(@"进入群聊", ^{
                 // 点击事件Block
-                [self.navigationController pushViewController:[ChatRoomViewController chatRoomViewControllerWithRoomId:@"62" roomName:@"爆款" roomType:(LWChatRoomTypeGroup) extend:nil] animated:YES];
+                [self.navigationController pushViewController:[MessageGroupViewController chatRoomViewControllerWithRoomId:@"62" roomName:@"爆款" roomType:(LWChatRoomTypeGroup) extend:nil] animated:YES];
                 
             })
             .LeeShow();
