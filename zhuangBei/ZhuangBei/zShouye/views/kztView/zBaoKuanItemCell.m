@@ -38,6 +38,7 @@
         _iconView.contentMode = UIViewContentModeScaleAspectFill;
         _iconView.layer.cornerRadius = kWidthFlot(5);
         _iconView.clipsToBounds = YES;
+        _iconView.userInteractionEnabled = NO;
     }
     return _iconView;
 }

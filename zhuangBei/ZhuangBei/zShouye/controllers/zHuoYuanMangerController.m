@@ -14,6 +14,9 @@
 #import "zBaoKuanCell.h"
 #import "zInviteController.h"
 #import "zNotifacationController.h"
+#import "LEEAlert.h"
+#import "ChatRoomViewController.h"
+
 
 @interface zHuoYuanMangerController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -153,6 +156,9 @@
             NSString * myid = dic[@"id"];
             if ([status integerValue] != 2) {
                 //进入聊天详情
+//                NSString * roomId = dic[@"id"];
+                NSString* roomName = dic[@"groupname"];
+                [self.navigationController pushViewController:[ChatRoomViewController chatRoomViewControllerWithRoomId:myid roomName:roomName roomType:(LWChatRoomTypeGroup) extend:nil] animated:YES];
             }else
             {
                 //进入其他页面
@@ -175,6 +181,26 @@
     }else
     {
         zBaoKuanCell * baoKuanCell = [zBaoKuanCell instanceWithTableView:tableView AndIndexPath:indexPath];
+        __weak typeof(self)weakSelf = self;
+        baoKuanCell.baokuanTapback = ^(NSDictionary * _Nonnull sourceDic) {
+            NSString * content = @"爆款规则：\n1.有发明专利证书者\n2.功勋币换取爆款推荐\n3.本平台内搜索热度/被关注度最高者";
+            [LEEAlert alert].config
+            .LeeTitle(@"温馨提示")
+//            .LeeContent(content)
+            .LeeAddContent(^(UILabel * _Nonnull label) {
+                label.textAlignment = NSTextAlignmentLeft;
+                label.text = content;
+            })
+            .LeeCancelAction(@"取消", ^{
+                // 点击事件Block
+            })
+            .LeeAction(@"进入群聊", ^{
+                // 点击事件Block
+                [self.navigationController pushViewController:[ChatRoomViewController chatRoomViewControllerWithRoomId:@"62" roomName:@"爆款" roomType:(LWChatRoomTypeGroup) extend:nil] animated:YES];
+                
+            })
+            .LeeShow();
+        };
         return baoKuanCell;
     }
 }

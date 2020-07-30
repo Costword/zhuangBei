@@ -10,12 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^baokuanCellTap)(NSDictionary * sourceDic);
+
 @interface zBaoKuanCell : UITableViewCell
 
 +(zBaoKuanCell*)instanceWithTableView:(UITableView*)tableView AndIndexPath:(NSIndexPath*)indexPath;
 
 @property(strong,nonatomic)NSArray * Array;
 
+@property(copy,nonatomic)baokuanCellTap baokuanTapback;
 @end
 
 NS_ASSUME_NONNULL_END
