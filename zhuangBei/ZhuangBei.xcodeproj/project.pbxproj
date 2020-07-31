@@ -3089,7 +3089,7 @@
 				MARKETING_VERSION = 1.1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
-				PROVISIONING_PROFILE_SPECIFIER = zhuangbei_dev_730;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3103,6 +3103,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -3119,7 +3120,7 @@
 				MARKETING_VERSION = 1.1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
-				PROVISIONING_PROFILE_SPECIFIER = zhuangbei_dev_730;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -3129,7 +3130,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K2YCGMC4SW;
+				DEVELOPMENT_TEAM = ZW8V23FTFX;
 				INFOPLIST_FILE = ZhuangBeiTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3149,7 +3150,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K2YCGMC4SW;
+				DEVELOPMENT_TEAM = ZW8V23FTFX;
 				INFOPLIST_FILE = ZhuangBeiTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3168,7 +3169,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K2YCGMC4SW;
+				DEVELOPMENT_TEAM = ZW8V23FTFX;
 				INFOPLIST_FILE = ZhuangBeiUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3186,7 +3187,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K2YCGMC4SW;
+				DEVELOPMENT_TEAM = ZW8V23FTFX;
 				INFOPLIST_FILE = ZhuangBeiUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

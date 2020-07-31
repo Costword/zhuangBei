@@ -19,7 +19,7 @@
 @property (nonatomic, strong) UILabel * proveL;
 @property (nonatomic, strong) UILabel * addressL;
 //@property (nonatomic, strong) UILabel * productTitleL;
-@property (nonatomic, strong) UILabel * productNickL;
+//@property (nonatomic, strong) UILabel * productNickL;
 @property (nonatomic, strong) UILabel * xinghaoL;
 
 @property (nonatomic, strong) UIView * canshuView;
@@ -41,6 +41,9 @@
 @property (nonatomic, strong) NSArray * canshuDeatilArray;
 @property (nonatomic, strong) UITableView * canshuDeatilTv;
 
+@property (nonatomic, strong) NSArray * nicknameArray;
+@property (nonatomic, strong) UICollectionView * nickname_collectView;
+@property (nonatomic, strong) UIView * nickItemsView;
 @end
 
 @implementation LWHuoYuanDeatilView
@@ -53,15 +56,35 @@
     _companL.text = _model.supplier.name;
     _proveL.text = _model.supplier.companyNameFirst;
     _addressL.text = _model.productInformation.productSourceName;
-    if (![_model.productInformation.zbBieMing isNotBlank]) {
-        _productNickL.textAlignment = NSTextAlignmentCenter;
-        _productNickL.text = @"暂无";
+    
+    NSString *tem_nickname_str = _model.productInformation.zbBieMing;
+    if (![tem_nickname_str isNotBlank]) {
+        modelListModel *model = [[modelListModel alloc] init];
+        model.model = @"暂无";
+        self.nicknameArray = @[model];
     }else{
-        _productNickL.text =  _model.productInformation.zbBieMing;
+        NSArray *temarr = [tem_nickname_str componentsSeparatedByString:@","];
+        NSMutableArray *temmuarr = [NSMutableArray array];
+        for (NSString *str in temarr    ) {
+            modelListModel *model = [[modelListModel alloc] init];
+            model.model = str;
+            [temmuarr addObject:model];
+        }
+        self.nicknameArray = [temmuarr copy];
     }
     
+    
+    //   昵称
+    [self.nickname_collectView reloadData];
+    
+    if (!model.modelList || model.modelList.count == 0) {
+        modelListModel *model = [[modelListModel alloc] init];
+        model.model = @"暂无";
+        self.model.modelList = @[model];
+    }
     //    产品类型
     [self.cityCollectView reloadData];
+    
     
     //    图片
     if (_model.productPictureList.count > 0) {
@@ -74,23 +97,6 @@
     }
     
     if (_model.productIntroduction.jianJieNr) {
-        //        NSString* htmlString = _model.productIntroduction.jianJieNr;
-        //          NSMutableAttributedString * attrStr  = [[NSMutableAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-        //
-        //          NSString *temstr = attrStr.string;
-        //          while ([temstr hasSuffix:@"\n"]) {
-        //              if ([temstr isEqualToString:@"\n"]) {
-        //                  temstr = @"";
-        //                  break;
-        //              }
-        //              temstr = [temstr substringToIndex:temstr.length - 2];
-        //          }
-        //          NSMutableAttributedString *atter = [[NSMutableAttributedString alloc] initWithString:temstr];
-        //          NSMutableParagraphStyle *paragraphStyle                 = [[NSMutableParagraphStyle alloc] init];
-        //          [paragraphStyle setLineSpacing:5];
-        //          [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, attrStr.length)];
-        //          _productJieSaoL.attributedText = atter;
-        
         @try {
             NSString *headerString = @"<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'><style>img{max-width:100%}</style></header>";
             
@@ -107,15 +113,14 @@
         }
     }
     
-    //    更新约束
-    [self.cityCollectView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_offset(self.cityCollectView.collectionViewLayout.collectionViewContentSize.height).priorityHigh();
-    }];
-    [self.xhItemsView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_offset(self.cityCollectView.collectionViewLayout.collectionViewContentSize.height);
-    }];
+//    //    更新约束
+//    [self.cityCollectView mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_offset(self.cityCollectView.collectionViewLayout.collectionViewContentSize.height).priorityHigh();
+//    }];
+//    [self.xhItemsView mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_offset(self.cityCollectView.collectionViewLayout.collectionViewContentSize.height);
+//    }];
 }
-
 
 - (void)clickCanItems:(UITapGestureRecognizer *)tap
 {
@@ -183,8 +188,8 @@
     _proveL.numberOfLines = 3;
     _addressL = [LWLabel lw_lable:@"" font:16 textColor:BASECOLOR_GREYCOLOR155];
     _addressL.numberOfLines = 3;
-    _productNickL = [LWLabel lw_lable:@"" font:16 textColor:[UIColor colorWithRed:155/255.0 green:155/255.0 blue:155/255.0 alpha:1.0] backColor:[UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1.0]];
-    _productNickL.numberOfLines = 0;
+//    _productNickL = [LWLabel lw_lable:@"" font:16 textColor:[UIColor colorWithRed:155/255.0 green:155/255.0 blue:155/255.0 alpha:1.0] backColor:[UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1.0]];
+//    _productNickL.numberOfLines = 0;
     _xinghaoL = [LWLabel lw_lable:@"" font:16 textColor:RGB(63, 80, 181)];
     UILabel *nickL = [LWLabel lw_lable:@"产品别称" font:18 textColor:BASECOLOR_TEXTCOLOR];
     UILabel *xinghaoL = [LWLabel lw_lable:@"产品型号" font:18 textColor:BASECOLOR_TEXTCOLOR];
@@ -196,7 +201,7 @@
         make.edges.mas_equalTo(self);
         make.width.mas_offset(SCREEN_WIDTH);
     }];
-    [_scrollView addSubviews:@[self.lunboView,_nameL,_productNickL,self.xhItemsView,self.canshuView,xinghaoL,nickL]];
+    [_scrollView addSubviews:@[self.lunboView,_nameL,self.nickItemsView,self.xhItemsView,self.canshuView,xinghaoL,nickL]];
     
     
     [self.scrollView addSubview:self.infor_topview];
@@ -221,16 +226,14 @@
         make.left.right.mas_equalTo(_nameL);
         make.top.mas_equalTo(_infor_topview.mas_bottom).mas_offset(15);
     }];
-    [_productNickL mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(_nameL);
+      [_nickItemsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(_nameL);
         make.top.mas_equalTo(nickL.mas_bottom).mas_offset(10);
-        make.width.mas_greaterThanOrEqualTo(@(60));
-        make.height.mas_greaterThanOrEqualTo(@(25));
-        make.right.mas_lessThanOrEqualTo(_nameL.mas_right);
+        make.height.mas_offset(10);
     }];
     [xinghaoL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(_nameL);
-        make.top.mas_equalTo(_productNickL.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(_nickItemsView.mas_bottom).mas_offset(15);
     }];
     [_xhItemsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(_nameL);
@@ -243,8 +246,6 @@
         make.bottom.mas_equalTo(_scrollView.mas_bottom).mas_offset(-20);
     }];
     
-    _productNickL.textAlignment = NSTextAlignmentLeft;
-    [_productNickL setBoundWidth:1 cornerRadius:0 boardColor:BASECOLOR_BOARD];
     [_xinghaoL setBoundWidth:1 cornerRadius:0 boardColor:RGB(63, 80, 181)];
     [self.canshuView setBoundWidth:0.5 cornerRadius:10 boardColor:BASECOLOR_BOARD];
 }
@@ -385,7 +386,7 @@
         SDCycleScrollView *sdcview = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150) delegate:self placeholderImage:IMAGENAME(@"testicon")];
         _sdcview = sdcview;
         
-        sdcview.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
+        sdcview.bannerImageViewContentMode = UIViewContentModeScaleToFill;
         sdcview.pageDotColor = UIColor.blackColor;
         sdcview.currentPageDotColor = UIColor.grayColor;
         [_lunboView addSubview:sdcview];
@@ -438,29 +439,23 @@
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
                        context:(void *)context{
     if ([object isKindOfClass:[UICollectionView class]]){
-        //    更新约束
-        [self.cityCollectView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_offset(self.cityCollectView.collectionViewLayout.collectionViewContentSize.height).priorityHigh();
-        }];
-        [self.xhItemsView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_offset(self.cityCollectView.collectionViewLayout.collectionViewContentSize.height);
-        }];
-    }
-    else
-        //由于图片在实时加载，监听到内容高度变化，需要实时刷新您的控件展示高度
-        if([keyPath isEqualToString:@"contentSize"]) {
-            //直接使用scrollView.contentSize.height来刷新cell高度，不再使用JS获取
-            CGFloat height = self.productJieSaoL.scrollView.contentSize.height;
-            //定义一个属性保存高度，当上一次的高度等于这次的高度时就不要刷新cell了，不然cell会一直刷新
-            if (self.contentHeight_webview == height) {
-                return ;
-            }
-            [_productJieSaoL mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_offset(height);
-            }];
-            self.contentHeight_webview = height;
-        }
-    
+           if(object == self.cityCollectView){
+               //    更新约束
+               [self.cityCollectView mas_updateConstraints:^(MASConstraintMaker *make) {
+                   make.height.mas_offset(self.cityCollectView.collectionViewLayout.collectionViewContentSize.height).priorityHigh();
+               }];
+               [self.xhItemsView mas_updateConstraints:^(MASConstraintMaker *make) {
+                   make.height.mas_offset(self.cityCollectView.collectionViewLayout.collectionViewContentSize.height);
+               }];
+           }else if(object == self.nickname_collectView){
+              [self.nickname_collectView mas_updateConstraints:^(MASConstraintMaker *make) {
+                  make.height.mas_offset(self.nickname_collectView.collectionViewLayout.collectionViewContentSize.height).priorityHigh();
+              }];
+              [self.nickItemsView mas_updateConstraints:^(MASConstraintMaker *make) {
+                  make.height.mas_offset(self.nickname_collectView.collectionViewLayout.collectionViewContentSize.height);
+              }];
+           }
+       }
 }
 
 - (void)clickCanshuDeatilViewBtn
@@ -524,6 +519,19 @@
     return _canshuDeatilArray.count;
 }
 
+- (UIView *)nickItemsView
+{
+    if (!_nickItemsView) {
+        _nickItemsView = [[UIView alloc] init];
+        [_nickItemsView addSubview:self.nickname_collectView];
+        [self.nickname_collectView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(_nickItemsView);
+            make.height.mas_offset(self.nickname_collectView.collectionViewLayout.collectionViewContentSize.height).priorityHigh();
+        }];
+        [_nickname_collectView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
+    }
+    return _nickItemsView;
+}
 
 - (UIView *)xhItemsView
 {
@@ -561,27 +569,61 @@
     return _cityCollectView;
 }
 
+-(UICollectionView*)nickname_collectView
+{
+    if (!_nickname_collectView) {
+        UICollectionViewLeftAlignedLayout * layout = [[UICollectionViewLeftAlignedLayout alloc]init];
+        layout.sectionInset = UIEdgeInsetsMake(10,0, 10,0);
+        layout.minimumLineSpacing = kWidthFlot(10);
+        layout.minimumInteritemSpacing = kWidthFlot(10);
+        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        _nickname_collectView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        _nickname_collectView.showsVerticalScrollIndicator = NO;
+        _nickname_collectView.backgroundColor = [UIColor clearColor];
+        _nickname_collectView.delegate = self;
+        _nickname_collectView.dataSource = self;
+        _nickname_collectView.scrollEnabled = NO;
+        [_nickname_collectView registerClass:[zCityCollectionCell class] forCellWithReuseIdentifier:@"zCityCollectionCell"];
+        _nickname_collectView.delegate = self;
+        _nickname_collectView.dataSource = self;
+    }
+    return _nickname_collectView;
+}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.model.modelList.count;
+    if (collectionView == self.cityCollectView) {
+        return self.model.modelList.count;
+    }else if (collectionView == self.nickname_collectView){
+        return self.nicknameArray.count;
+    }else{
+        return 0;
+    }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     zCityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"zCityCollectionCell" forIndexPath:indexPath];
     cell.backColor = [UIColor colorWithHexString:@"#EFEFEF"];
-    modelListModel * model = self.model.modelList[indexPath.item];
-    cell.souceString = model.model;
-    cell.select = [model.customId isEqualToString:_currentModelId];
+    if (collectionView == self.cityCollectView) {
+        modelListModel * model = self.model.modelList[indexPath.item];
+        cell.souceString = model.model;
+        if (![model.model isEqual:@"暂无"]) {
+            cell.select = [model.customId isEqualToString:_currentModelId];
+        }
+    }else if (collectionView == self.nickname_collectView){
+        modelListModel * model = self.nicknameArray[indexPath.item];
+        cell.souceString = model.model;
+    }
     return cell;
 }
 
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    modelListModel * model = self.model.modelList[indexPath.item];
+    modelListModel * model = (collectionView == self.cityCollectView) ? self.model.modelList[indexPath.item]:self.nicknameArray[indexPath.row];
     return [self stringSize:model.model];
 }
+
 
 - (CGSize)stringSize:(NSString *)string {
     if (string.length == 0) return CGSizeZero;
@@ -596,10 +638,12 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (collectionView == self.nickname_collectView || [self.model.modelList.firstObject.model isEqualToString:@"暂无"]) {
+        return;
+    }
     modelListModel * model = self.model.modelList[indexPath.item];
     NSLog(@"%@",model.model);
     self.currentModelId = model.customId;
-    //    [self.cityCollectView reloadData];
     if (self.block) {
         self.block(model.customId);
     }
@@ -609,21 +653,16 @@
 {
     if (!_productJieSaoL) {
         _productJieSaoL = [[WKWebView alloc] init];
-        //        _productJieSaoL.ba_web_isAutoHeight = YES;
-        //        WEAKSELF(self)
-        //        _productJieSaoL.ba_web_getCurrentHeightBlock = ^(CGFloat currentHeight) {
-        //            [weakself.productJieSaoL mas_updateConstraints:^(MASConstraintMaker *make) {
-        //                make.height.mas_offset(currentHeight);
-        //            }];
-        //        };
     }
     return _productJieSaoL;
 }
 
 -(void)dealloc
 {
+    NSLog(@"LWHuoYuanDeatilView ---- dealoc -------");
     [_productJieSaoL.scrollView removeObserver:self forKeyPath:@"contentSize"];
     [_cityCollectView removeObserver:self forKeyPath:@"contentSize"];
+    [_nickname_collectView removeObserver:self forKeyPath:@"contentSize"];
 }
 
 @end
