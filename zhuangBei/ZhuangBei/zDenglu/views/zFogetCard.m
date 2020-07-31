@@ -10,7 +10,7 @@
 #import "LoginTextField.h"
 #import "phoneNumCheck.h"
 
-#define  heightMargin 45
+#define  heightMargin 35
 #define  leftMargin 25
 
 #define NUM @"0123456789"
@@ -194,7 +194,7 @@
         }];
     }
     
-    CGFloat left = kWidthFlot(100);
+    CGFloat left = 100;
     
     [self.nameField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 0);

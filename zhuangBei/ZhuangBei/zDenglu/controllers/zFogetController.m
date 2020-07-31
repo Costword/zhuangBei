@@ -20,7 +20,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    self.title = @"修改密码";
+    self.title = @"忘记密码";
 }
 
 -(zFogetCard*)fogetCard
