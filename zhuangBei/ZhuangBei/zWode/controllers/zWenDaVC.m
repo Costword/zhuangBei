@@ -10,13 +10,38 @@
 
 @interface zWenDaVC ()
 
+@property(strong,nonatomic)UILabel * descLabel;
+
 @end
 
 @implementation zWenDaVC
 
+
+-(UILabel*)descLabel
+{
+    if (!_descLabel) {
+        _descLabel = [[UILabel alloc]init];
+        _descLabel.font = kFont(14);
+        _descLabel.text = @"当前还没有评论";
+    }
+    return _descLabel;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.descLabel];
+}
+
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(kWidthFlot(5));
+        make.left.mas_equalTo(kWidthFlot(10));
+        make.right.mas_equalTo(-kWidthFlot(10));
+        make.height.mas_equalTo(kWidthFlot(20));
+    }];
 }
 
 

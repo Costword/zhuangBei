@@ -172,7 +172,7 @@
     if (!_reginstBtn) {
         _reginstBtn = [[UIButton alloc]init];
         _reginstBtn.titleLabel.font = kFont(18);
-        [_reginstBtn setTitleColor:[kMainSingleton colorWithHexString:@"#4A4A4A" alpha:1] forState:UIControlStateNormal];
+        [_reginstBtn setTitleColor:[kMainSingleton colorWithHexString:@"#3F50B5" alpha:1] forState:UIControlStateNormal];
         [_reginstBtn setTitle:@"新用户注册" forState:UIControlStateNormal];
         _reginstBtn.layer.cornerRadius = 20;
         _reginstBtn.clipsToBounds = YES;
@@ -214,23 +214,23 @@
     [self.imageBaseView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(SCREEN_HEIGHT/3);
+        make.height.mas_equalTo(SCREEN_HEIGHT/5*2);
     }];
     
     [self.logoImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.imageBaseView.mas_centerX);
         make.centerY.mas_equalTo(self.imageBaseView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(200), kWidthFlot(200)));
+        make.size.mas_equalTo(CGSizeMake(kWidthFlot(150), kWidthFlot(150)));
     }];
     
     [self.smallLogoImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.imageBaseView.mas_centerX);
-        make.centerY.mas_equalTo(self.imageBaseView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(100), kWidthFlot(100)));
+        make.centerX.mas_equalTo(self.logoImage.mas_centerX);
+        make.bottom.mas_equalTo(self.logoImage.mas_bottom).offset(-kWidthFlot(50));
+        make.size.mas_equalTo(CGSizeMake(kWidthFlot(50), kWidthFlot(50)));
     }];
     
     [self.baseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.imageBaseView.mas_bottom).offset(-kWidthFlot(80));
+        make.top.mas_equalTo(self.imageBaseView.mas_centerY).offset(kWidthFlot(40));
         make.centerX.mas_equalTo(self.mas_centerX);
         make.left.mas_equalTo(kWidthFlot(20));
         make.right.mas_equalTo(-kWidthFlot(20));
@@ -277,7 +277,7 @@
     }];
     
     [self.reginstBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.baseView.mas_bottom).offset(kWidthFlot(70));
+        make.bottom.mas_equalTo(self.mas_bottom).offset(-kWidthFlot(10));
         make.centerX.mas_equalTo(self.loginBtn.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(kWidthFlot(150), 40));
     }];

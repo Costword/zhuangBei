@@ -11,6 +11,7 @@
 #import "zHuoYuanListCell.h"
 #import "zCompanyDetailController.h"
 #import "zBusinessLoactionModel.h"
+#import "ChatRoomViewController.h"
 
 @interface zCompanyController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -200,6 +201,26 @@
     [_listParmas setObject:@(self.currentPage) forKey:@"page"];
     [self loadList];
 }
+
+-(void)getAdminDataWidthDic:(NSDictionary*)dic{
+//
+    [self requestPostWithUrl:kgetAdminData paraString:dic success:^(id  _Nonnull response) {
+         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:NSJSONWritingPrettyPrinted error:nil];
+
+            NSString * json =  [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",json);
+        
+        NSString * userDm = response[@"data"][@"userDm"];
+        NSString * name = response[@"data"][@"chatNickName"];
+
+        [self.navigationController pushViewController:[ChatRoomViewController chatRoomViewControllerWithRoomId:userDm roomName:name roomType:(LWChatRoomTypeOneTOne) extend:nil] animated:YES];
+        
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
+
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -234,6 +255,11 @@
     zHuoYuanListCell * cell = [zHuoYuanListCell instanceWithTableView:tableView AndIndexPath:indexPath];
     zGoodsContentModel * model =  self.contentListArray[indexPath.row];
     cell.model = model;
+    cell.kefuButtonTap = ^(zGoodsContentModel * _Nonnull model) {
+        NSMutableDictionary * mutableDic = [NSMutableDictionary dictionary];
+        [mutableDic setObject:@(model.goodsid) forKey:@"gysId"];
+        [self getAdminDataWidthDic:mutableDic];
+    };
     return cell;
 }
 

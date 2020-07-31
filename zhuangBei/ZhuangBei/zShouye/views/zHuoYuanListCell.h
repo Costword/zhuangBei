@@ -11,11 +11,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^kefuButtonTapBack)(zGoodsContentModel* model);
+
 @interface zHuoYuanListCell : UITableViewCell
+
 
 +(zHuoYuanListCell*)instanceWithTableView:(UITableView*)tableView AndIndexPath:(NSIndexPath*)indexPath;
 
 @property(strong,nonatomic)zGoodsContentModel * model;
+
+@property(copy,nonatomic)kefuButtonTapBack kefuButtonTap;
 
 @end
 

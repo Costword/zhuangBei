@@ -47,7 +47,7 @@ const CGFloat kleftMargin = 20.f;
     if (!_noticImageView) {
         _noticImageView = [[UIImageView alloc]init];
         _noticImageView.contentMode = UIViewContentModeScaleAspectFit;
-        _noticImageView.image = [UIImage imageNamed:@"kefuicon"];
+        _noticImageView.image = [UIImage imageNamed:@"laba"];
     }
     return _noticImageView;
 }
@@ -55,7 +55,7 @@ const CGFloat kleftMargin = 20.f;
 - (MarqueeView *)marqueeView{
 
     if (!_marqueeView) {
-        MarqueeView *marqueeView =[[MarqueeView alloc]initWithFrame:CGRectMake(kleftMargin + kWidthFlot(30), 10, SCREEN_WIDTH-(kleftMargin*2+kWidthFlot(30)), kWidthFlot(30)) withTitle:@[]];
+        MarqueeView *marqueeView =[[MarqueeView alloc]initWithFrame:CGRectMake(kleftMargin + kWidthFlot(30), 10, SCREEN_WIDTH-(kleftMargin*2+kWidthFlot(30)), kWidthFlot(20)) withTitle:@[]];
         marqueeView.titleColor = [UIColor blackColor];
         marqueeView.titleFont = [UIFont systemFontOfSize:12];
         marqueeView.backgroundColor = [UIColor clearColor];
@@ -88,21 +88,21 @@ const CGFloat kleftMargin = 20.f;
     [self.baseView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kWidthFlot(10));
         make.right.mas_equalTo(-kWidthFlot(20));
-        make.top.mas_equalTo(kWidthFlot(5));
-        make.bottom.mas_equalTo(-kWidthFlot(5));
-        make.height.mas_equalTo(kWidthFlot(50));
+        make.top.mas_equalTo(kWidthFlot(1));
+        make.bottom.mas_equalTo(-kWidthFlot(1));
+        make.height.mas_equalTo(kWidthFlot(40));
     }];
     
     [self.noticImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kWidthFlot(10));
         make.centerY.mas_equalTo(self.baseView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(30), kWidthFlot(30)));
+        make.size.mas_equalTo(CGSizeMake(kWidthFlot(20), kWidthFlot(20)));
     }];
     [self.marqueeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.noticImageView.mas_right).offset(kWidthFlot(5));
         make.right.mas_equalTo(self.baseView.mas_right).offset(-kWidthFlot(5));
         make.centerY.mas_equalTo(self.baseView.mas_centerY);
-        make.height.mas_equalTo(kWidthFlot(30));
+        make.height.mas_equalTo(kWidthFlot(20));
     }];
     
 }

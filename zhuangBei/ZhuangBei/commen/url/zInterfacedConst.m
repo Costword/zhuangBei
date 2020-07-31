@@ -380,6 +380,12 @@ NSString *const kGoodsMangerMenu = @"app/appzhuangbeitype/getTreeToMyAttentionCo
 NSString *const kGoodsMangerList = @"app/appgyszblink/listzbGys";
 
 /**
+ *获取公司负责人
+ *app/appqyuser/findCompanyAdmin
+ *参数 gysId
+ */
+NSString *const kgetAdminData = @"app/appqyuser/findCompanyAdmin";
+/**
  *查询公司产品
  *POST
  *URL    http://test.110zhuangbei.com:8105/app/app/appgyszblink/listAndroid

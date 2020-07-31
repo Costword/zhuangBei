@@ -78,6 +78,7 @@
         [_arrowButton setImage:[UIImage imageNamed:@"huoyuan_kefu"] forState:UIControlStateNormal];
         _arrowButton.titleLabel.font = [UIFont systemFontOfSize:kWidthFlot(12)];
         [_arrowButton setTitleColor:[UIColor colorWithHexString:@"#4A4A4A"] forState:UIControlStateNormal];
+        [_arrowButton addTarget:self action:@selector(kefuButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _arrowButton;
 }
@@ -168,10 +169,10 @@
     }];
     
     [self.arrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(kWidthFlot(7));
-        make.right.mas_equalTo(-kWidthFlot(15));
-        make.height.mas_equalTo(kWidthFlot(25));
-        make.width.mas_equalTo(kWidthFlot(25));
+        make.top.mas_equalTo(kWidthFlot(0));
+        make.right.mas_equalTo(-kWidthFlot(0));
+        make.height.mas_equalTo(kWidthFlot(50));
+        make.width.mas_equalTo(kWidthFlot(50));
     }];
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -218,6 +219,13 @@
     
     NSString * url = [NSString stringWithFormat:@"%@app/appfujian/download?attID=%@",kApiPrefix,model.imagesId];
     [self.baseImageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testicon"]];
+}
+
+-(void)kefuButtonClick:(UIButton*)button
+{
+    if (self.kefuButtonTap) {
+        self.kefuButtonTap(self.model);
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

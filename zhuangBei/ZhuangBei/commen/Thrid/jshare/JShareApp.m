@@ -17,10 +17,16 @@
     message.text = text;
     message.title = title;
     [message setPlatform:(platform)];
+    
     NSData *imageData;
     if (iconUrl.length == 0) {
-        NSString *url = [[NSBundle mainBundle] URLForResource:@"iconcover" withExtension:@"png"].absoluteString;
-        imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+//        NSString *url = [[NSBundle mainBundle] URLForResource:@"storeIMage" withExtension:@"png"].absoluteString;
+//        NSString *url = [[NSBundle mainBundle] URLForResource:@"storeIMage" withExtension:@"png"].absoluteString;
+//
+//        imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+        
+        imageData = UIImagePNGRepresentation([UIImage imageNamed:@"storeIMage"]);
+//        message.image = imgData;
     }else
     {
         imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:iconUrl]];
@@ -31,7 +37,12 @@
         if (error) {
             if (failHandle) {
                 if (error.code == 40009) {
-                    [[zHud shareInstance]showMessage:@"未安装微信客户端"];
+                    if (platform == JSHAREPlatformQQ) {
+                        [[zHud shareInstance]showMessage:@"未安装QQ户端"];
+                    }else
+                    {
+                        [[zHud shareInstance]showMessage:@"未安装微信客户端"];
+                    }
                     failHandle(@(JShareAppErrorNotInstall));
                 } else {
                     failHandle(@"");
