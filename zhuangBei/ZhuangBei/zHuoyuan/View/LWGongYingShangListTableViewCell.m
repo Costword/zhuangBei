@@ -94,17 +94,6 @@
         make.top.mas_equalTo(_addressL.mas_bottom).mas_offset(margin_t);
         make.bottom.mas_equalTo(_bgview.mas_bottom).mas_offset(-15);
     }];
-//    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(_compnayL.mas_left);
-//        make.right.mas_equalTo(_logo.mas_right);
-//        make.height.mas_offset(1);
-//        make.top.mas_equalTo(_desL.mas_bottom).mas_offset(margin_t+10);
-//    }];
-//    [startL mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(_compnayL.mas_left);
-//        make.top.mas_equalTo(line.mas_bottom).mas_offset(margin_t);
-//        make.bottom.mas_equalTo(_bgview.mas_bottom).mas_offset(-15);
-//    }];
     [_bgview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.contentView.mas_left).mas_offset(10);
         make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-10);
@@ -112,7 +101,7 @@
         make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(0);
     }];
     
-    [_bgview setBoundWidth:1 cornerRadius:0 boardColor:UIColor.grayColor];
+    [_bgview setBoundWidth:1 cornerRadius:0 boardColor:kSeparatorColor];
 }
 @end
 

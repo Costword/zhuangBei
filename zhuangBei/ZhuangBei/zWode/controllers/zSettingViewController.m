@@ -14,7 +14,7 @@
 #import "zXieYiController.h"
 #import "zEducationRankTypeInfo.h"
 #import "zChangePasswordController.h"
-
+#import "LWUpdateVersionManager.h"
 @interface zSettingViewController ()
 
 @property(strong,nonatomic)zSettingCellView * AccountCell;
@@ -37,6 +37,8 @@
 @property(strong,nonatomic)UILabel* titleLabel;
 
 @property(copy,nonatomic)NSString* cacheSize;
+
+@property (nonatomic, strong) LWUpdateVersionManager * updateVersionManager;
 
 @end
 
@@ -122,7 +124,10 @@
         _versionCell = [[zSettingCellView alloc]init];
         _versionCell.name = @"当前版本";
         NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-        
+        __weak typeof(self)weakself = self;
+        _versionCell.settingBack = ^{
+            [weakself.updateVersionManager checkUpdate];
+        };
         NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
         _versionCell.content = [NSString stringWithFormat:@"V%@",app_Version];
     }
@@ -208,6 +213,9 @@
     [self.view addSubview:self.yinsiButton];
     
     [self.view addSubview:self.titleLabel];
+    
+    _updateVersionManager = [LWUpdateVersionManager new];
+    _updateVersionManager.isShowToastWhenNoNewVersion = YES;
 }
 
 -(void)viewDidLayoutSubviews

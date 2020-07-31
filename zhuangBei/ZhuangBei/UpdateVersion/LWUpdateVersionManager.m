@@ -28,8 +28,15 @@
     [ServiceManager requestGetWithUrl:@"app/appiosversion/findNewOne" Parameters:param success:^(id  _Nonnull response) {
         NSDictionary *appAndroidVersion = response[@"appIosVersion"];
         if (appAndroidVersion && [appAndroidVersion isKindOfClass:[NSDictionary class]]) {
-            LWUpdateVersionModel *updateModel = [LWUpdateVersionModel modelWithDictionary:appAndroidVersion];
-            self.updateView = [LWUpdateVersionView showWithModel:updateModel];
+            NSInteger versionCode = [appAndroidVersion[@"versionCode"] integerValue];
+            if (versionCode > [APP_BUILD integerValue]) {
+                LWUpdateVersionModel *updateModel = [LWUpdateVersionModel modelWithDictionary:appAndroidVersion];
+                self.updateView = [LWUpdateVersionView showWithModel:updateModel];
+            }else{
+                if (self.isShowToastWhenNoNewVersion) {
+                    [[zHud shareInstance] showMessage:@"当前版本已是最新！"];
+                }
+            }
         }
         NSLog(@"0---response:%@",response);
     } failure:^(NSError * _Nonnull error) {

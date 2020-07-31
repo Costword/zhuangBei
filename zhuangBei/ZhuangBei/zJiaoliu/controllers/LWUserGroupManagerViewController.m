@@ -122,6 +122,10 @@
     if ([sender.titleLabel.text isEqualToString:@"删除"]) {
         [self requestDelete:model.customId];
     }else if([sender.titleLabel.text isEqualToString:@"修改"]){
+        if ([model.isDefault isEqualToString:@"1"]) {
+            [[zHud shareInstance] showMessage:@"默认分组无法修改"];
+            return;
+        }
         WEAKSELF(self)
         _alearmanager = [LWAlearCustomManagerView showAddNewUserGroupView:^(NSString * text,BOOL isselect) {
             [weakself requestEditInfor:model.customId groupname:text isDefault:isselect];
