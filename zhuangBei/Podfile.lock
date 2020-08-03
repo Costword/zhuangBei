@@ -14,6 +14,9 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - CocoaLumberjack (3.6.1):
+    - CocoaLumberjack/Core (= 3.6.1)
+  - CocoaLumberjack/Core (3.6.1)
   - IQKeyboardManager (6.5.5)
   - JCore (2.2.5)
   - JShare (1.8.1):
@@ -28,6 +31,8 @@ PODS:
   - SDWebImage (5.7.3):
     - SDWebImage/Core (= 5.7.3)
   - SDWebImage/Core (5.7.3)
+  - SVGKit (2.1.1):
+    - CocoaLumberjack (~> 3.0)
   - TYAttributedLabel (2.6.6)
   - UITextView-WZB (1.1.1)
   - YYKit (1.0.9):
@@ -45,6 +50,7 @@ DEPENDENCIES:
   - MJRefresh
   - SDCycleScrollView (>= 1.80)
   - SDWebImage
+  - SVGKit
   - TYAttributedLabel (~> 2.6.2)
   - UITextView-WZB (= 1.1.1)
   - YYKit
@@ -52,6 +58,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://gitee.com/mirrors/CocoaPods-Specs.git:
     - AFNetworking
+    - CocoaLumberjack
     - IQKeyboardManager
     - JCore
     - JShare
@@ -62,12 +69,14 @@ SPEC REPOS:
     - MJRefresh
     - SDCycleScrollView
     - SDWebImage
+    - SVGKit
     - TYAttributedLabel
     - UITextView-WZB
     - YYKit
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   JCore: d75c0306dc99875d323d23e5a063b3a3ef22335a
   JShare: d19013ffb1a095de31b20236fe08e9c74064cfe5
@@ -78,10 +87,11 @@ SPEC CHECKSUMS:
   MJRefresh: 3153c59a363159092c08b2177ec3a7d09f90bfaf
   SDCycleScrollView: b3c9a5ed840c771c4938978174c7c9d9feefeb96
   SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
+  SVGKit: 652cdf7bef8bec8564d04a8511d3ab50c7595fac
   TYAttributedLabel: cb8fc910d97eb5224936d4f692a78e042af691b2
   UITextView-WZB: aa7306ec35ad35d325f8e608366ecd5ac8c8eed9
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 1a0f4acf244f9c55c9d9be9feeafc42bd87596a4
+PODFILE CHECKSUM: 96d175b65ea57d6103906d476e1a937e1c21a4ff
 
 COCOAPODS: 1.9.1
