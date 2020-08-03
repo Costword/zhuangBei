@@ -10,7 +10,7 @@
 #import "LoginTextField.h"
 #import "phoneNumCheck.h"
 
-#define  heightMargin 45
+#define  heightMargin 35
 #define  leftMargin 25
 
 #define NUM @"0123456789"
@@ -284,22 +284,23 @@
         }];
     }
     
+    CGFloat left = 80;
     [self.nameField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 0);
-        make.left.mas_equalTo(kWidthFlot(80));
+        make.left.mas_equalTo(left);
         make.right.mas_equalTo(-leftMargin);
         make.height.mas_equalTo(40);
     }];
     [self.accountField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 1);
-        make.left.mas_equalTo(kWidthFlot(80));
+        make.left.mas_equalTo(left);
         make.right.mas_equalTo(-leftMargin);
         make.height.mas_equalTo(40);
     }];
 
     [self.passwordField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 2);
-        make.left.mas_equalTo(kWidthFlot(80));
+        make.left.mas_equalTo(left);
         make.right.mas_equalTo(-(leftMargin + 40));
         make.height.mas_equalTo(40);
     }];
@@ -313,7 +314,7 @@
 
     [self.checkField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 3);
-        make.left.mas_equalTo(kWidthFlot(80));
+        make.left.mas_equalTo(left);
         make.right.mas_equalTo(-(leftMargin + 80));
         make.height.mas_equalTo(40);
     }];
@@ -327,7 +328,7 @@
 
     [self.inviteField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 4);
-        make.left.mas_equalTo(kWidthFlot(80));
+        make.left.mas_equalTo(left);
         make.right.mas_equalTo(-leftMargin);
         make.height.mas_equalTo(40);
     }];

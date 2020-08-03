@@ -42,8 +42,8 @@
         self.selectItemBackGroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
         self.padding = 20;
         self.fontSize = 14.f;
-        self.normalFont = [UIFont fontWithName:@"TamilSangamMN" size:14];
-        self.selectFont = [UIFont fontWithName:@"TamilSangamMN-Bold" size:14];
+        self.normalFont = [UIFont fontWithName:@"TamilSangamMN" size:self.fontSize];
+        self.selectFont = [UIFont fontWithName:@"TamilSangamMN-Bold" size:self.fontSize];
         self.canScroll = YES;
         [self addSubview:self.scrollView];
         [self setNeedsLayout];
@@ -499,5 +499,17 @@
 {
     _normalFontColor = normalFontColor;
 }
+-(void)setFontSize:(CGFloat)fontSize
+{
+    _fontSize = fontSize;
+}
 
+-(void)setNormalFont:(UIFont *)normalFont{
+    _normalFont = normalFont;
+}
+
+-(void)setSelectFont:(UIFont *)selectFont
+{
+    _selectFont = selectFont;
+}
 @end

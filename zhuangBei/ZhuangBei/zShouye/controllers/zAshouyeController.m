@@ -47,6 +47,9 @@
         _navigationSliderMenu.normalFontColor = [UIColor colorWithHexString:@"#666666"];
         _navigationSliderMenu.selectFontColor = [UIColor colorWithHexString:@"#333333"];
         
+        _navigationSliderMenu.normalFont = [UIFont fontWithName:@"TamilSangamMN" size:18];
+        _navigationSliderMenu.selectFont = [UIFont fontWithName:@"TamilSangamMN-Bold" size:18];
+        _navigationSliderMenu.fontSize = 18;
         [_navigationSliderMenu setSourceArray:@[@"控制台",@"合作伙伴"]];
         _navigationSliderMenu.sliderType = menuAligenCenter;
         _navigationSliderMenu.delegate = self;

@@ -7,6 +7,8 @@
 //
 
 #import "zCategoryCollectCell.h"
+#import "UIImage+LWSVGKit.h"
+#import "SVGKImage.h"
 
 @interface zCategoryCollectCell ()
 
@@ -77,8 +79,34 @@
     if ([itemid integerValue] == 36 || [itemid integerValue] == 61) {
         imageName = @"shiti";
     }
-    [self.iconView setImage:[UIImage imageNamed:imageName]];
+//    [self.iconView setImage:[UIImage imageNamed:imageName]];
+    UIImage * image = [self z_getImageWithSVG:[NSString stringWithFormat:@"%@.svg",imageName] andImageView:self.iconView];
+    self.iconView.image = image;
     self.titleLabel.text = _sourceDic[@"groupname"];
+}
+
+- (UIImage *)z_getImageWithSVG:(NSString *)imageName
+                  andImageView:(UIImageView*)imageView
+{
+    if (self.frame.size.width == 0 && self.frame.size.height == 0) {
+        [self.superview layoutIfNeeded];
+    }
+    imageView.frame = CGRectMake(0,0, kWidthFlot(45), kWidthFlot(45));
+    UIImage *img;
+    if ([imageName hasSuffix:@".svg"]&& ![imageName containsString:@"gonggao"]) {
+        @try {
+            //        防止找不到该占位图的路径造成的崩溃
+            img = [UIImage svgImageNamed:imageName imgv:imageView];
+        } @catch (NSException *exception) {
+            
+        } @finally {
+            
+        }
+    }else{
+        imageName = [imageName substringToIndex:imageName.length-4];
+        img = IMAGENAME(imageName);
+    }
+    return img;
 }
 
 @end

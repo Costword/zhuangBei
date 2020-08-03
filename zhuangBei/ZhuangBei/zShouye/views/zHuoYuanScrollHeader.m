@@ -46,13 +46,14 @@
     if (self = [super initWithFrame:frame]) {
         [self setupUI];
         [self updateConstraintsForView];
+        self.backgroundColor = [UIColor redColor];
     }
     return self;
 }
 
 - (void)setupUI {
     
-    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 9 / 16)];;
+    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 9 / 18)];;
     pageFlowView.backgroundColor = [UIColor whiteColor];
     pageFlowView.delegate = self;
     pageFlowView.dataSource = self;
@@ -113,7 +114,7 @@
 
 #warning 假设产品需求左右中间页显示大小为 Width - 50, (Width - 50) * 9 / 16
 - (CGSize)sizeForPageInFlowView:(NewPagedFlowView *)flowView {
-    return CGSizeMake(SCREEN_WIDTH - 50, (SCREEN_WIDTH - 50) * 9 / 16);
+    return CGSizeMake(SCREEN_WIDTH - 60, (SCREEN_WIDTH - 60) * 9 / 18);
 }
 
 #pragma mark --NewPagedFlowView Datasource
