@@ -21,7 +21,8 @@
         return;
     }
     if (placeholderImage) {
-        [self sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@app/appfujian/download?attID=%@",kApiPrefix,imageId]] placeholderImage:IMAGENAME(placeholderImage)];
+        UIImage *placeholder = [UIImage ex_drawImage:IMAGENAME(placeholderImage) size:self.bounds.size backgroundColor:UIColor.whiteColor];
+        [self sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@app/appfujian/download?attID=%@",kApiPrefix,imageId]] placeholderImage:placeholder];
     }else{
         [self sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@app/appfujian/download?attID=%@",kApiPrefix,imageId]]];
     }

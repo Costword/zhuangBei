@@ -18,6 +18,6 @@ target 'ZhuangBei' do
   pod 'LEEAlert'
   pod "UITextView-WZB","1.1.1"
   pod 'JShare'
-  
+  pod 'SVGKit'
 end   
 

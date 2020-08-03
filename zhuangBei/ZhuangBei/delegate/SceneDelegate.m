@@ -11,7 +11,7 @@
 //#import "MainTabBarController.h"
 #import "LSTabBarController.h"
 #import "zDengluController.h"
-
+#import "ViewController.h"
 @interface SceneDelegate ()
 
 @end
@@ -36,7 +36,8 @@
             rootNav.navigationBar.hidden = YES;
             self.window.rootViewController = rootNav;
             [self.window makeKeyAndVisible];
-            
+//            self.window.rootViewController = [ViewController new];
+//            [self.window makeKeyAndVisible];
         }else
         {
             zDengluController * rootVC  = [[zDengluController alloc]init];
