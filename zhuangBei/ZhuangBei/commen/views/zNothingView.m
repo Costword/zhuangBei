@@ -23,7 +23,6 @@
     if (!_iconImageView) {
         _iconImageView = [[UIImageView alloc]init];
         _iconImageView.contentMode = UIViewContentModeScaleAspectFill;
-        [_iconImageView setImage:[UIImage imageNamed:@"z_nothing"]];
     }
     return _iconImageView;
 }
@@ -65,7 +64,8 @@
         make.height.mas_equalTo(kWidthFlot(20));
     }];
     
-    
+//    [_iconImageView setImage:[UIImage imageNamed:@"z_nothing"]];
+    _iconImageView.image = [_iconImageView z_getImageWithSVG:@"nodataicon.svg"];
 }
 
 @end

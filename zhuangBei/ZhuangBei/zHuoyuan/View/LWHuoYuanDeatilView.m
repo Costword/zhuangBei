@@ -11,6 +11,7 @@
 #import "SDCycleScrollView.h"
 #import "zCityCollectionCell.h"
 #import <WebKit/WebKit.h>
+#import "SVGKImage.h"
 
 @interface LWHuoYuanDeatilView ()<SDCycleScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDataSource>
 @property (nonatomic, strong) UIScrollView * scrollView;
@@ -383,7 +384,11 @@
 {
     if (!_lunboView) {
         _lunboView = [[UIView alloc] init];
-        SDCycleScrollView *sdcview = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150) delegate:self placeholderImage:IMAGENAME(@"testicon")];
+        
+        SVGKImage *svgImage = [SVGKImage imageNamed:@"placeholdericon.svg"];
+          svgImage.size = CGSizeMake(SCREEN_WIDTH, 150);
+        
+        SDCycleScrollView *sdcview = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150) delegate:self placeholderImage:svgImage.UIImage];
         _sdcview = sdcview;
         
         sdcview.bannerImageViewContentMode = UIViewContentModeScaleToFill;

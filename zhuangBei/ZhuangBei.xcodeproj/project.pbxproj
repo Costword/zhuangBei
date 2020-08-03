@@ -294,6 +294,8 @@
 		895BD9CD24626C4000AA5947 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9CC24626C4000AA5947 /* BaseModel.m */; };
 		895BD9D424629AFC00AA5947 /* UIImageView+LWImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895BD9D324629AFC00AA5947 /* UIImageView+LWImageView.m */; };
 		89666DC624D79FE90046F19E /* UIImage+LWSVGKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 89666DC524D79FE90046F19E /* UIImage+LWSVGKit.m */; };
+		8968A69B24D7E40300A2A741 /* placeholdericon.svg in Resources */ = {isa = PBXBuildFile; fileRef = 8968A69A24D7E40300A2A741 /* placeholdericon.svg */; };
+		8968A69D24D8024600A2A741 /* nodataicon.svg in Resources */ = {isa = PBXBuildFile; fileRef = 8968A69C24D8024600A2A741 /* nodataicon.svg */; };
 		896DA521246BD077001ED8C1 /* LWTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 896DA520246BD077001ED8C1 /* LWTool.m */; };
 		89831FCE2472923400C6184E /* LWAddNewChatGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89831FCD2472923400C6184E /* LWAddNewChatGroupViewController.m */; };
 		89831FD12472959200C6184E /* LWAddNewGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89831FD02472959200C6184E /* LWAddNewGroupModel.m */; };
@@ -936,6 +938,8 @@
 		895BD9D324629AFC00AA5947 /* UIImageView+LWImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LWImageView.m"; sourceTree = "<group>"; };
 		89666DC424D79FE90046F19E /* UIImage+LWSVGKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+LWSVGKit.h"; sourceTree = "<group>"; };
 		89666DC524D79FE90046F19E /* UIImage+LWSVGKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LWSVGKit.m"; sourceTree = "<group>"; };
+		8968A69A24D7E40300A2A741 /* placeholdericon.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = placeholdericon.svg; sourceTree = "<group>"; };
+		8968A69C24D8024600A2A741 /* nodataicon.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = nodataicon.svg; sourceTree = "<group>"; };
 		896DA51F246BD077001ED8C1 /* LWTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWTool.h; sourceTree = "<group>"; };
 		896DA520246BD077001ED8C1 /* LWTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWTool.m; sourceTree = "<group>"; };
 		89831FCC2472923400C6184E /* LWAddNewChatGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAddNewChatGroupViewController.h; sourceTree = "<group>"; };
@@ -2365,6 +2369,15 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		8968A69324D7CCFC00A2A741 /* SVG */ = {
+			isa = PBXGroup;
+			children = (
+				8968A69C24D8024600A2A741 /* nodataicon.svg */,
+				8968A69A24D7E40300A2A741 /* placeholdericon.svg */,
+			);
+			path = SVG;
+			sourceTree = "<group>";
+		};
 		896DA51E246BD056001ED8C1 /* lwtool */ = {
 			isa = PBXGroup;
 			children = (
@@ -2377,6 +2390,7 @@
 		89A9382924542A06001C77A8 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				8968A69324D7CCFC00A2A741 /* SVG */,
 				004D7A5324C7159600EFFA82 /* launch_icon_s.png */,
 				00A0FE752477D87E001943EF /* storeIMage.png */,
 				8907722124768D3400470058 /* launch_icon_big.png */,
@@ -2553,6 +2567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00FE9BA42476B878002A1F86 /* emoji.bundle in Resources */,
+				8968A69B24D7E40300A2A741 /* placeholdericon.svg in Resources */,
 				89A9382B24542B38001C77A8 /* LaunchScreen.storyboard in Resources */,
 				007E2FEE24D14F2F0058F960 /* CLPlayer.bundle in Resources */,
 				009FB5EA244E89CD00133974 /* Assets.xcassets in Resources */,
@@ -2562,6 +2577,7 @@
 				00FE9B962476B878002A1F86 /* face.plist in Resources */,
 				89B323BA24C5A68000BD0722 /* soundSrource.mp3 in Resources */,
 				89DF44D92470E433002CAE83 /* LWAddNewUserGroupView.xib in Resources */,
+				8968A69D24D8024600A2A741 /* nodataicon.svg in Resources */,
 				00E4F45A247CEE0700F71D18 /* KNPhotoBrowser.bundle in Resources */,
 				00FE9B942476B878002A1F86 /* systemEmoji.plist in Resources */,
 				00FE9B952476B878002A1F86 /* emotion.plist in Resources */,
@@ -3075,10 +3091,10 @@
 			baseConfigurationReference = 759737390EA2ABFD7BEC457D /* Pods-ZhuangBei.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
-				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+				DEVELOPMENT_TEAM = NXHWCY9QS4;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -3095,7 +3111,7 @@
 				MARKETING_VERSION = 1.1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
-				PROVISIONING_PROFILE_SPECIFIER = zhuangbei_dev_730;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3105,10 +3121,10 @@
 			baseConfigurationReference = 95998143212FCD9D90EA6CD4 /* Pods-ZhuangBei.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
-				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+				DEVELOPMENT_TEAM = NXHWCY9QS4;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -3125,7 +3141,7 @@
 				MARKETING_VERSION = 1.1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
-				PROVISIONING_PROFILE_SPECIFIER = zhuangbei_dev_730;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

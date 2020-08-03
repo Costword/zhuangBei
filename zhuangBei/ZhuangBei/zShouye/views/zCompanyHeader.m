@@ -38,7 +38,7 @@
         _logoImageView = [[UIImageView alloc]init];
         _logoImageView.clipsToBounds = YES;
         _logoImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _logoImageView.image = [UIImage imageNamed:@"testicon"];
+        _logoImageView.image = [_logoImageView z_getPlaceholderImageWithSVG];
     }
     return _logoImageView;
 }

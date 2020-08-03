@@ -43,7 +43,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
     [self requestPostWithUrl:@"app/appgroupuser/findOneByGroupIdAndUserId" paraString:@{@"groupId":LWDATA(self.roomId)} success:^(id  _Nonnull response) {
         NSInteger code = [response[@"code"] integerValue];
         NSString *msg = response[@"mag"];
-//        1:可聊 ； 2：该群暂未开发；3：非群成员，请先申请入群
+        //        1:可聊 ； 2：该群暂未开发；3：非群成员，请先申请入群
         if (code != 1) {
             self.chatKeyBoard.placeHolder = msg;
             self.chatKeyBoard.userInteractionEnabled = NO;
@@ -375,7 +375,7 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
         if (!cell) {
             cell = [[IFChatImageCell alloc] initWithStyle:cellStyle reuseIdentifier:@"IFChatImageCell"];
         }
-        [cell.contextImageView sd_setImageWithURL:[NSURL URLWithString:getNewShowMsgElem.imagePath] placeholderImage:[UIImage imageNamed:@"testicon"]];
+        [cell.contextImageView z_sd_setImageWithURLHaveDefaultPlaceHolderImage:[NSURL URLWithString:getNewShowMsgElem.imagePath]];
         cell.clickImgeBlock = ^{
             [self showPic:getNewShowMsgElem.imagePath imageView:cell.contextImageView];
         };

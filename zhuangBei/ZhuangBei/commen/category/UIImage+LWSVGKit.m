@@ -7,7 +7,7 @@
 //
 
 #import "UIImage+LWSVGKit.h"
-
+#import "SVGKImage.h"
 
 @implementation UIImage (LWSVGKit)
 
@@ -27,10 +27,9 @@
 
 #pragma mark - 加载svg图片统一调用此方法
 +(UIImage *)name:(NSString *)name imgv:(UIImageView *)imgv{
-//    SVGKImage *svgImage = [SVGKImage imageNamed:name];
-//    svgImage.size = CGSizeMake(imgv.frame.size.width, imgv.frame.size.height);
-//    return svgImage.UIImage;
-    return nil;
+    SVGKImage *svgImage = [SVGKImage imageNamed:name];
+    svgImage.size = CGSizeMake(imgv.frame.size.width, imgv.frame.size.height);
+    return svgImage.UIImage;
 }
 
 #pragma mark - 修改颜色统一调用此方法

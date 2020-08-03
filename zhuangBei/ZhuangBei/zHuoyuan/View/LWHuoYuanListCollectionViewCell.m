@@ -17,7 +17,7 @@
     if (self) {
         self.backgroundColor = UIColor.clearColor;
         _bgImageView = [UIImageView new];
-        _bgImageView.image = IMAGENAME(@"testicon");
+        
         _descL = [UILabel new];
         UIView * descL_bg = [UIView new];
         [self addSubviews:@[_bgImageView,descL_bg,_descL,]];
@@ -41,7 +41,7 @@
         }];
         
         [self.contentView setBoundWidth:1 cornerRadius:10 boardColor:BASECOLOR_BOARD];
-        
+        _bgImageView.image = [_bgImageView z_getPlaceholderImageWithSVG];
     }
     return self;
 }

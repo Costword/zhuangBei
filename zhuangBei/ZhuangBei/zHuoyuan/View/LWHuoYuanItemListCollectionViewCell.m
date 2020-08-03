@@ -16,7 +16,7 @@
     if (self) {
         self.backgroundColor = UIColor.clearColor;
         _bgImageView = [UIImageView new];
-        _bgImageView.image = IMAGENAME(@"testicon");
+        _bgImageView.image = [_bgImageView z_getPlaceholderImageWithSVG];
         _descL = [UILabel new];
         
         [self addSubviews:@[_bgImageView,_descL,]];

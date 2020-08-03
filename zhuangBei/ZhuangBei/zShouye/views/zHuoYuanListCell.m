@@ -54,7 +54,7 @@
     if (!_baseImageView) {
         _baseImageView = [[UIImageView alloc]init];
         _baseImageView.contentMode = UIViewContentModeScaleAspectFit;
-        _baseImageView.image = [UIImage imageNamed:@"testicon"];
+        _baseImageView.image = [_baseImageView z_getPlaceholderImageWithSVG];
         [_baseImageView addSubview:self.coverView];
     }
     return _baseImageView;
@@ -217,8 +217,7 @@
     self.phoneLabel.text = [NSString stringWithFormat:@"电话：%@",model.phone];
     self.descLabel.text = [NSString stringWithFormat:@"简介："];
     
-    NSString * url = [NSString stringWithFormat:@"%@app/appfujian/download?attID=%@",kApiPrefix,model.imagesId];
-    [self.baseImageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testicon"]];
+    [self.baseImageView z_imageWithImageId:model.imagesId];
 }
 
 -(void)kefuButtonClick:(UIButton*)button

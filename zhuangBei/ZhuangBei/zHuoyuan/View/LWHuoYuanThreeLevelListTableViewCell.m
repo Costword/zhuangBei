@@ -73,6 +73,7 @@
         }];
         [lables addObject:itemview];
     }
+
     [self.goodsIv z_imageWithImageId:model.imgId];
 }
 
@@ -192,7 +193,6 @@
     [morebtn setTitle:@"查看全部" forState:UIControlStateNormal];
     [morebtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     [morebtn addTarget:self action:@selector(clickMoreBtn) forControlEvents:UIControlEventTouchUpInside];
-    _goodsIv.image = IMAGENAME(@"testicon");
     _goodsNameL.text = @"防弹插板";
     _goodsNameL.font = kFont(16);
     _goodsDescL.text = @"特巡装备/软件>特警单警防护";
@@ -252,6 +252,8 @@
     }];
     self.contentView.tag = 100;
     [self.contentView ex_addTapAction:self selector:@selector(clickItemsView:)];
+    
+    _goodsIv.image = [_goodsIv z_getPlaceholderImageWithSVG];
 }
 
 - (UIView *)lineView:(NSString *)text tag:(NSInteger)tag

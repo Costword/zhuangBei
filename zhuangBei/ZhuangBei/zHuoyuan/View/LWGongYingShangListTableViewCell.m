@@ -24,13 +24,15 @@
 - (void)setModel:(gysListModel *)model
 {
     _model = model;
-    [_logo z_imageWithImageId:model.imagesId placeholderImage:@"testicon"];
+    [_logo z_imageWithImageId:model.imagesId];
     _compnayL.text = model.name;
     _farenL.text = [NSString stringWithFormat:@"法人：%@",model.faRen];
     _phoneL.text = [NSString stringWithFormat:@"电话：%@",model.phone];
     _addressL.text = [NSString stringWithFormat:@"地址：%@",model.gongSiUrl];
     
     _desL.text = [NSString stringWithFormat:@"简介：%@",model.gongSiJj];
+    
+    _logo.image = [_logo z_getPlaceholderImageWithSVG];
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -59,7 +61,7 @@
     [self.contentView addSubview:_bgview];
     _desL.numberOfLines = 0;
     startL.text = @"星级:  ";
-    _logo.image = IMAGENAME(@"testicon");
+    
     [_logo setBoundWidth:0 cornerRadius:35];
     
     CGFloat margin_l = 15;

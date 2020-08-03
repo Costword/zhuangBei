@@ -71,7 +71,6 @@
     if (self) {
         
         _bgImageView = [UIImageView new];
-        _bgImageView.image = IMAGENAME(@"testicon");
         _nameL = [UILabel new];
         _nameL.textColor = UIColor.whiteColor;
         _nameL.font = kFont(15);
@@ -95,6 +94,8 @@
             make.height.mas_offset(2);
         }];
         [_bgImageView setBoundWidth:0 cornerRadius:10];
+        
+        _bgImageView.image = [_bgImageView z_getPlaceholderImageWithSVG];
     }
     return self;
 }
