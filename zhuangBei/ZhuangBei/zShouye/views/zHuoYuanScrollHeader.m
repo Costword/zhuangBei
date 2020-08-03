@@ -46,7 +46,6 @@
     if (self = [super initWithFrame:frame]) {
         [self setupUI];
         [self updateConstraintsForView];
-        self.backgroundColor = [UIColor redColor];
     }
     return self;
 }
