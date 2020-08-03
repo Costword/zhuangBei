@@ -24,6 +24,9 @@
 
 @interface LWUpdateVersionManager : NSObject
 
+// 当前是最新版本 是否弹出提示
+@property (nonatomic, assign) BOOL  isShowToastWhenNoNewVersion;
+
 /// 更新检查
 - (void)checkUpdate;
 

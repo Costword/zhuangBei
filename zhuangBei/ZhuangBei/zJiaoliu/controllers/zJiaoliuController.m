@@ -56,10 +56,13 @@
     }];
 }
 
-//交流
+//联盟
 - (void)requestJiaoLiuDatas
 {
-    [self requestPostWithUrl:@"app/imgroupclassify/findListByTypeId" paraString:@{@"typeId":@"1,2,4"} success:^(id  _Nonnull response) {
+    
+//    [self requestPostWithUrl:@"app/imgroupclassify/findListByTypeId" paraString:@{@"typeId":@"1,2,4"}
+    [self requestPostWithUrl:@"/app/imgroupclassify/findListApp" Parameters:@{} success:^(id  _Nonnull response) {
+        NSLog(@"联盟数据:%@",response);
         [self.self.listDatas_JiaoLiu removeAllObjects];
         NSArray *data = response[@"data"];
         if (data&&data.count > 0) {
@@ -201,6 +204,7 @@
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.left.mas_equalTo(self.view.mas_left).mas_offset(20);
         make.right.mas_equalTo(self.view.mas_right).mas_offset(-20);
+        make.width.greaterThanOrEqualTo(@(340));
     }];
     
     UIButton *addBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
@@ -400,7 +404,11 @@
 {
     LWJiaoLiuModel *listmodel = self.listDatas_JiaoLiu[indexPath.section];
     imGroupListModel *groupmodel =  listmodel.imGroupList[indexPath.row];
-    [self pushToGroupRoom:groupmodel.customId groupname:groupmodel.groupName];
+    if ([groupmodel.customId isNotBlank]) {
+        [self pushToGroupRoom:groupmodel.customId groupname:groupmodel.groupName];
+    }else{
+        [[zHud shareInstance] showMessage:@"未安装直播平台"];
+    }
 }
 
 

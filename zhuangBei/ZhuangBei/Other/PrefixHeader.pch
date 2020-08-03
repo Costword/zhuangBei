@@ -91,7 +91,10 @@
  * 判断是否是iPhone
  */
 #define IS_IPHONE                                                       (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-
+/**
+ * 判断是否是ipad
+ */
+#define IS_IPAD                                                       (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 /**
  * 系统偏好设置单例
  */
