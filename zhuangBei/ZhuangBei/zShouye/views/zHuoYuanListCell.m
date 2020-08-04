@@ -56,6 +56,7 @@
         _baseImageView.contentMode = UIViewContentModeScaleAspectFit;
         _baseImageView.image = [_baseImageView z_getPlaceholderImageWithSVG];
         [_baseImageView addSubview:self.coverView];
+        _baseImageView.alpha = 0.5;
     }
     return _baseImageView;
 }

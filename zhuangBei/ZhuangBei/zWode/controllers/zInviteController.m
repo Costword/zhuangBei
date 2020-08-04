@@ -45,7 +45,7 @@
         _titleLabel = [[UILabel alloc]init];
         _titleLabel.text = @"我的邀请码";
         _titleLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
-        _titleLabel.font = kFont(20);
+        _titleLabel.font = kFont(26);
         _titleLabel.numberOfLines = 0;
     }
     return _titleLabel;
@@ -155,19 +155,19 @@
     [super viewDidLayoutSubviews];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.height.mas_equalTo(kWidthFlot(30));
-        make.top.mas_equalTo(SCREEN_HEIGHT/5);
+        make.height.mas_equalTo(40);
+        make.top.mas_equalTo(20);
     }];
     
     [self.inviteNumBtn mas_makeConstraints:^(MASConstraintMaker *make) {
        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.height.mas_equalTo(kWidthFlot(67));
+        make.height.mas_equalTo(67);
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(15);
     }];
     
     [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(20);
         make.top.mas_equalTo(self.inviteNumBtn.mas_bottom).offset(15);
     }];
     
@@ -179,20 +179,20 @@
     
     [self.shareLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.inviteImageView.mas_left).offset(-2);
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.height.mas_equalTo(20);
         make.top.mas_equalTo(self.inviteImageView.mas_bottom).offset(kWidthFlot(10));
     }];
     
     [self.QQShareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.view.mas_centerX).offset(-kWidthFlot(28));
-        make.top.mas_equalTo(self.shareLabel.mas_bottom).offset(kWidthFlot(10));
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(50), kWidthFlot(50)));
+        make.top.mas_equalTo(self.shareLabel.mas_bottom).offset(20);
+        make.size.mas_equalTo(CGSizeMake(50,50));
     }];
     
     [self.WXShareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view.mas_centerX).offset(kWidthFlot(28));
-        make.top.mas_equalTo(self.shareLabel.mas_bottom).offset(kWidthFlot(10));
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(50), kWidthFlot(50)));
+        make.top.mas_equalTo(self.shareLabel.mas_bottom).offset(20);
+        make.size.mas_equalTo(CGSizeMake(50, 50));
     }];
 }
 

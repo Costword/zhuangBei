@@ -15,7 +15,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = UIColor.clearColor;
-        _bgImageView = [UIImageView new];
+        CGFloat item_w = (SCREEN_WIDTH-50)/2;
+        _bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,item_w , item_w*0.618)];
+        _bgImageView.contentMode = UIViewContentModeScaleAspectFit;
         _bgImageView.image = [_bgImageView z_getPlaceholderImageWithSVG];
         _descL = [UILabel new];
         

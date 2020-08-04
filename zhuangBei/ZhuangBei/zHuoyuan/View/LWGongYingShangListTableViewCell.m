@@ -51,6 +51,7 @@
     _addressL = [LWLabel lw_lable:@"" font:15 textColor:BASECOLOR_TEXTCOLOR];
     _desL = [LWLabel lw_lable:@"" font:15 textColor:BASECOLOR_TEXTCOLOR];
     _logo = [UIImageView new];
+    _logo.contentMode = UIViewContentModeScaleAspectFit;
     _bgview = [UIView new];
     UIView *line = [UIView new];
     line.backgroundColor = UIColor.grayColor;

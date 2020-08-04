@@ -386,12 +386,12 @@
         _lunboView = [[UIView alloc] init];
         
         SVGKImage *svgImage = [SVGKImage imageNamed:@"placeholdericon.svg"];
-          svgImage.size = CGSizeMake(SCREEN_WIDTH, 150);
-        
+        svgImage.size = CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH*0.618);
+//        150
         SDCycleScrollView *sdcview = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150) delegate:self placeholderImage:svgImage.UIImage];
         _sdcview = sdcview;
         
-        sdcview.bannerImageViewContentMode = UIViewContentModeScaleToFill;
+        sdcview.bannerImageViewContentMode = UIViewContentModeScaleAspectFit;
         sdcview.pageDotColor = UIColor.blackColor;
         sdcview.currentPageDotColor = UIColor.grayColor;
         [_lunboView addSubview:sdcview];

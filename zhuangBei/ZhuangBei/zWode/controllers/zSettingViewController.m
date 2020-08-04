@@ -68,7 +68,7 @@
         _changePassword = [[zSettingCellView alloc]init];
         _changePassword.name = @"修改密码";
         _changePassword.settingBack = ^{
-        
+            
             [weakSelf changePassowrdClick];
         };
     }
@@ -92,7 +92,7 @@
                 cacheSize = [NSString stringWithFormat:@"%0.1fMB",MBCache];
             }else
             {
-//                cacheSize = [NSString stringWithFormat:@"%0.1fKB",KBCache];
+                //                cacheSize = [NSString stringWithFormat:@"%0.1fKB",KBCache];
                 cacheSize = [NSString stringWithFormat:@"%0.1fMB",MBCache];
             }
             weakSelf.cacheSize = cacheSize;
@@ -282,14 +282,27 @@
 {
     //退出登录
     if (button.tag==1) {
-        [[zHud shareInstance]showMessage:@"退出登录"];
-        [[zUserInfo shareInstance]deleate];
-        [[zEducationRankTypeInfo shareInstance]deleate];
-        [self changeRootVC];
+        
+        [LEEAlert alert].config
+        .LeeTitle(@"温馨提示")
+        .LeeContent(@"是否确认退出应用？")
+        .LeeCancelAction(@"取消", ^{
+            // 点击事件Block
+        })
+        .LeeAction(@"确定", ^{
+            // 点击事件Block
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[zHud shareInstance]showMessage:@"退出登录"];
+                [[zUserInfo shareInstance]deleate];
+                [[zEducationRankTypeInfo shareInstance]deleate];
+                [self changeRootVC];
+            });
+        })
+        .LeeShow();
     }
     
     if (button.tag ==2) {
-//        [[zHud shareInstance]showMessage:@"服务协议"];
+        //        [[zHud shareInstance]showMessage:@"服务协议"];
         zXieYiController * xyVC = [[zXieYiController alloc]init];
         xyVC.type = button.tag;
         xyVC.title = @"服务协议";
@@ -297,7 +310,7 @@
     }
     
     if (button.tag==3) {
-//        [[zHud shareInstance]showMessage:@"隐私政策"];
+        //        [[zHud shareInstance]showMessage:@"隐私政策"];
         zXieYiController * xyVC = [[zXieYiController alloc]init];
         xyVC.type = button.tag;
         xyVC.title = @"隐私政策";
@@ -310,7 +323,7 @@
     zDengluController * rootVC  = [[zDengluController alloc]init];
     MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
     rootNav.navigationBar.hidden = YES;
-     UIApplication *app = [UIApplication sharedApplication];
+    UIApplication *app = [UIApplication sharedApplication];
     [app keyWindow].rootViewController = rootNav;
 }
 

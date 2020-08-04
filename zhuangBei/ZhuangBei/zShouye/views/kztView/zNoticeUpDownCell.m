@@ -46,7 +46,7 @@ const CGFloat kleftMargin = 20.f;
 {
     if (!_noticImageView) {
         _noticImageView = [[UIImageView alloc]init];
-        _noticImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _noticImageView.contentMode = UIViewContentModeScaleAspectFill;
         _noticImageView.image = [UIImage imageNamed:@"laba"];
     }
     return _noticImageView;
@@ -90,11 +90,11 @@ const CGFloat kleftMargin = 20.f;
         make.right.mas_equalTo(-kWidthFlot(20));
         make.top.mas_equalTo(kWidthFlot(1));
         make.bottom.mas_equalTo(-kWidthFlot(1));
-        make.height.mas_equalTo(kWidthFlot(40));
+        make.height.mas_equalTo(kWidthFlot(30));
     }];
     
     [self.noticImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(kWidthFlot(10));
+        make.left.mas_equalTo(kWidthFlot(5));
         make.centerY.mas_equalTo(self.baseView.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(kWidthFlot(20), kWidthFlot(20)));
     }];

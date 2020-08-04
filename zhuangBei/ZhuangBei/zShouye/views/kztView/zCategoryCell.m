@@ -49,7 +49,7 @@ static NSString * scrollItemCell_id = @"zCategoryCollectCell";
 {
     if (!_noticImageView) {
         _noticImageView = [[UIImageView alloc]init];
-        _noticImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _noticImageView.contentMode = UIViewContentModeScaleAspectFill;
         _noticImageView.image = [UIImage imageNamed:@"kefuicon"];
     }
     return _noticImageView;

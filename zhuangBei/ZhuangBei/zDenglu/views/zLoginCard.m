@@ -240,26 +240,26 @@
         make.left.mas_equalTo(kWidthFlot(35));
         make.right.mas_equalTo(-kWidthFlot(35));
         make.top.mas_equalTo(kWidthFlot(40));
-        make.height.mas_equalTo(kWidthFlot(40));
+        make.height.mas_equalTo(40);
     }];
     
     [self.passWordField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.accountField.mas_bottom).offset(kWidthFlot(20));
         make.left.mas_equalTo(kWidthFlot(35));
         make.right.mas_equalTo(-kWidthFlot(35));
-        make.height.mas_equalTo(kWidthFlot(40));
+        make.height.mas_equalTo(40);
     }];
     
     [self.remmberPasswordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.passWordField.mas_bottom).offset(kWidthFlot(10));
         make.right.mas_equalTo(-kWidthFlot(20));
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(95), kWidthFlot(20)));
+        make.size.mas_equalTo(CGSizeMake(95, kWidthFlot(20)));
     }];
     
     [self.showPasswordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.passWordField.mas_bottom).offset(kWidthFlot(10));
-        make.right.mas_equalTo(self.remmberPasswordBtn.mas_left).offset(-10);
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(95), kWidthFlot(20)));
+        make.right.mas_equalTo(self.remmberPasswordBtn.mas_left).offset(-20);
+        make.size.mas_equalTo(CGSizeMake(95, kWidthFlot(20)));
     }];
     
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {

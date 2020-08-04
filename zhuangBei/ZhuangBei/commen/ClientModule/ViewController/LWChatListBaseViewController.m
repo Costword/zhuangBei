@@ -264,7 +264,11 @@ NSString *const getlist_oto_url =  @"app/appfriendmessage/getFriendMsgList";
 {
     LWChatListBaseViewController *vc = [[self alloc] init];
     vc.roomName = roomName;
-    vc.roomId = roomId;
+    if(![roomId isKindOfClass:[NSString class]]){
+        vc.roomId = [NSString stringWithFormat:@"%ld",(long)[roomId integerValue]];
+    }else{
+        vc.roomId = roomId;
+    }
     vc.roomType = roomType;
     return vc;
 }

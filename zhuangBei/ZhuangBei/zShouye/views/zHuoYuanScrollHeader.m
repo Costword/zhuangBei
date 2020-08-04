@@ -46,13 +46,14 @@
     if (self = [super initWithFrame:frame]) {
         [self setupUI];
         [self updateConstraintsForView];
+        self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
 
 - (void)setupUI {
     
-    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 9 / 18)];;
+    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH-60)*1080/1920)];;
     pageFlowView.backgroundColor = [UIColor whiteColor];
     pageFlowView.delegate = self;
     pageFlowView.dataSource = self;
@@ -90,11 +91,12 @@
 
 -(void)setBannerArray:(NSArray *)bannerArray
 {
-    for (int index = 0; index <bannerArray.count; index++) {
-        NSString * imageName = bannerArray[index];
-       UIImage *image = [UIImage imageNamed:imageName];
-       [self.imageArray addObject:image];
-   }
+    [self.imageArray removeAllObjects];
+    [bannerArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString * imageName = bannerArray[idx];
+        UIImage *image = [UIImage imageNamed:imageName];
+        [self.imageArray addObject:image];
+    }];
     [self.pageFlowView reloadData];
 }
 
@@ -113,7 +115,7 @@
 
 #warning 假设产品需求左右中间页显示大小为 Width - 50, (Width - 50) * 9 / 16
 - (CGSize)sizeForPageInFlowView:(NewPagedFlowView *)flowView {
-    return CGSizeMake(SCREEN_WIDTH - 60, (SCREEN_WIDTH - 60) * 9 / 18);
+    return CGSizeMake(SCREEN_WIDTH - 60, (SCREEN_WIDTH-60)*1080/1920);
 }
 
 #pragma mark --NewPagedFlowView Datasource

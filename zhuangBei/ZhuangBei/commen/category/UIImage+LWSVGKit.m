@@ -28,7 +28,12 @@
 #pragma mark - 加载svg图片统一调用此方法
 +(UIImage *)name:(NSString *)name imgv:(UIImageView *)imgv{
     SVGKImage *svgImage = [SVGKImage imageNamed:name];
-    svgImage.size = CGSizeMake(imgv.frame.size.width, imgv.frame.size.height);
+    if ([name containsString:@"placeholdericon"]) {
+        svgImage.size = CGSizeMake(imgv.frame.size.width, imgv.frame.size.width*0.618);
+    }else
+    {
+        svgImage.size = CGSizeMake(imgv.frame.size.width, imgv.frame.size.height);
+    }
     return svgImage.UIImage;
 }
 

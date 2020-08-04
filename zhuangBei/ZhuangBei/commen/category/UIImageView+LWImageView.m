@@ -51,6 +51,7 @@
     if (self.frame.size.width == 0 && self.frame.size.height == 0) {
         [self.superview layoutIfNeeded];
     }
+    
     UIImage *img;
     if ([imageName hasSuffix:@".svg"]) {
         @try {

@@ -35,8 +35,8 @@
         [self addSubview:_btnClear];
         [self addSubview:self.lineView];
         
-        self.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, kWidthFlot(50), 0)];
-        self.rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, kWidthFlot(12), 0)];
+        self.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, 50, 0)];
+        self.rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, 12, 0)];
         [self setLeftViewMode:(UITextFieldViewModeAlways)];
         [self setRightViewMode:(UITextFieldViewModeAlways)];
 //        self.layer.borderColor = [kMainSingleton colorWithHexString:@"#D1D4D8" alpha:1].CGColor;
@@ -56,11 +56,11 @@
 {
     [super layoutSubviews];
     [_iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(kWidthFlot(12));
-        make.centerY.mas_equalTo(self);
+        make.left.mas_equalTo(12);
+        make.bottom.mas_equalTo(-5);
     }];
     [_btnClear mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self).offset(-kWidthFlot(12));
+        make.right.mas_equalTo(self).offset(-12);
         make.centerY.mas_equalTo(self);
     }];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {

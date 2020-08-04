@@ -49,7 +49,7 @@ static NSString * scrollItemCell_id = @"zBaoKuanItemCell";
         _iconView = [[UIImageView alloc]init];
         _iconView.image = [UIImage imageNamed:@"fenge"];
         _iconView.backgroundColor = [UIColor whiteColor];
-        _iconView.contentMode = UIViewContentModeScaleAspectFit;
+        _iconView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _iconView;
 }

@@ -8,11 +8,12 @@
 
 #import "zCompanyHeader.h"
 #import "sliderNavMenu.h"
+#import "UIImageView+LWImageView.h"
 
 @interface zCompanyHeader ()<sliderNavMenuDelegate>
 
 @property(strong,nonatomic)UIView * baseView;
-
+@property(strong,nonatomic)UILabel * logoLabel;
 @property(strong,nonatomic)UIImageView * logoImageView;
 @property(strong,nonatomic)UILabel * nameLabel;
 @property(strong,nonatomic)UILabel * timeLabel;
@@ -35,20 +36,32 @@
 -(UIImageView*)logoImageView
 {
     if (!_logoImageView) {
-        _logoImageView = [[UIImageView alloc]init];
-        _logoImageView.clipsToBounds = YES;
+        _logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH*3/5, SCREEN_WIDTH*3/5*0.6)];
         _logoImageView.contentMode = UIViewContentModeScaleAspectFill;
         _logoImageView.image = [_logoImageView z_getPlaceholderImageWithSVG];
     }
     return _logoImageView;
 }
+-(UILabel*)logoLabel
+{
+    if (!_logoLabel) {
+        _logoLabel = [[UILabel alloc]init];
+        _logoLabel.textAlignment = NSTextAlignmentCenter;
+        _logoLabel.font = kFont(20);
+        _logoLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
+        _logoLabel.numberOfLines = 0;
+        _logoLabel.text = @"公司LOGO";
+    }
+    return _logoLabel;
+}
+
 
 -(UILabel*)nameLabel
 {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc]init];
-        _nameLabel.textAlignment = NSTextAlignmentCenter;
-        _nameLabel.font = kFont(14);
+        _nameLabel.textAlignment = NSTextAlignmentLeft;
+        _nameLabel.font = kFont(20);
         _nameLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         _nameLabel.numberOfLines = 0;
         _nameLabel.text = @"北京装备科技设计有限公司";
@@ -59,7 +72,7 @@
 {
     if (!_timeLabel) {
         _timeLabel = [[UILabel alloc]init];
-        _timeLabel.textAlignment = NSTextAlignmentCenter;
+        _timeLabel.textAlignment = NSTextAlignmentLeft;
         _timeLabel.font = kFont(12);
         _timeLabel.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
         _timeLabel.numberOfLines = 0;
@@ -71,7 +84,7 @@
 {
     if (!_descNameLabel) {
         _descNameLabel = [[UILabel alloc]init];
-        _descNameLabel.textAlignment = NSTextAlignmentCenter;
+        _descNameLabel.textAlignment = NSTextAlignmentLeft;
         _descNameLabel.font = kFont(12);
         _descNameLabel.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
         _descNameLabel.numberOfLines = 0;
@@ -120,6 +133,7 @@
         self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.baseView];
         
+        [self.baseView addSubview:self.logoLabel];
         [self.baseView addSubview:self.logoImageView];
         [self.baseView addSubview:self.nameLabel];
         [self.baseView addSubview:self.timeLabel];
@@ -134,37 +148,45 @@
 
 -(void)updateConstraintsForView
 {
+    CGFloat margin = 20;
     [self.baseView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
-    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(kWidthFlot(5));
+    
+    [self.logoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(10);
         make.centerX.mas_equalTo(self.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(kWidthFlot(50), kWidthFlot(50)));
+        make.size.mas_equalTo(CGSizeMake(100,30));
+    }];
+    
+    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.logoLabel.mas_bottom).offset(5);
+        make.centerX.mas_equalTo(self.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH*3/5, SCREEN_WIDTH*3/5*0.6));
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.logoImageView.mas_bottom).offset(kWidthFlot(10));
-        make.left.mas_equalTo(kWidthFlot(30));
-        make.right.mas_equalTo(-kWidthFlot(30));
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.top.mas_equalTo(self.logoImageView.mas_bottom).offset(10);
+        make.left.mas_equalTo(margin);
+        make.right.mas_equalTo(-margin);
+        make.height.mas_equalTo(20);
     }];
     
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(kWidthFlot(5));
-        make.left.mas_equalTo(kWidthFlot(30));
-        make.right.mas_equalTo(-kWidthFlot(30));
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(5);
+        make.left.mas_equalTo(margin);
+        make.right.mas_equalTo(-margin);
+        make.height.mas_equalTo(20);
     }];
     [self.descNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.timeLabel.mas_bottom).offset(kWidthFlot(5));
-        make.left.mas_equalTo(kWidthFlot(30));
-        make.width.mas_equalTo(SCREEN_WIDTH-kWidthFlot(60));
-        make.height.mas_equalTo(kWidthFlot(20));
+        make.top.mas_equalTo(self.timeLabel.mas_bottom).offset(5);
+        make.left.mas_equalTo(margin);
+        make.width.mas_equalTo(SCREEN_WIDTH-margin*2);
+        make.height.mas_equalTo(20);
     }];
     [self.descContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.descNameLabel.mas_bottom).offset(kWidthFlot(5));
-        make.left.mas_equalTo(kWidthFlot(30));
-        make.width.mas_equalTo(SCREEN_WIDTH-kWidthFlot(60));
+        make.top.mas_equalTo(self.descNameLabel.mas_bottom).offset(5);
+        make.left.mas_equalTo(margin);
+        make.width.mas_equalTo(SCREEN_WIDTH-margin*2);
     }];
     
     [self.navigationSliderMenu mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -190,12 +212,14 @@
     self.nameLabel.text = _goosModel.name;
     self.timeLabel.text = [NSString stringWithFormat:@"成立时间:%@",_goosModel.createDate];
     self.descContentLabel.text = _goosModel.approveText;
+    [self.logoImageView z_imageWithImageId:_goosModel.imagesId];
 }
 
 -(void)setCompanyType:(NSInteger)companyType
 {
     _companyType = companyType;
     self.navigationSliderMenu.selectIndex = companyType;
+    
 }
 
 

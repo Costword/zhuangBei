@@ -14,6 +14,7 @@
 @interface zCompanyDetailCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property(strong,nonatomic)UIView * BaseView;
+
 @property(strong,nonatomic)UILabel * companyName;//名称
 @property(strong,nonatomic)UILabel * companyType;//类型
 @property(strong,nonatomic)UILabel * companyFaren;//法人
