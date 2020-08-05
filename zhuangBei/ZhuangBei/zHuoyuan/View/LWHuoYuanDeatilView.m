@@ -210,7 +210,7 @@
     CGFloat margin_l = 20;
     [self.lunboView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(self.scrollView);
-        make.height.mas_offset(IS_IPAD ? 300 : 200);
+        make.height.mas_offset(IS_IPAD ? 300 : (SCREEN_WIDTH *.75));
     }];
     [_nameL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(_scrollView.mas_left).mas_offset(margin_l);
