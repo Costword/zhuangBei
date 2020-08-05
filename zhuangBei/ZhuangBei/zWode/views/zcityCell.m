@@ -531,6 +531,15 @@
         NSString * firstName = [zEducationRankTypeInfo shareInstance].userInfoModel.companyNameFirst;
         NSString * secondName = [zEducationRankTypeInfo shareInstance].userInfoModel.companyNameSecond;
         NSString * thirdName = [zEducationRankTypeInfo shareInstance].userInfoModel.companyNameThird;
+        if (firstName == nil) {
+            firstName = @"";
+        }
+        if (secondName == nil) {
+            secondName = @"";
+        }
+        if (thirdName == nil) {
+            thirdName = @"";
+        }
         self.upModel.companyNameFirst = firstName;
         self.upModel.companyNameSecond = secondName;
         self.upModel.companyNameThird = thirdName;

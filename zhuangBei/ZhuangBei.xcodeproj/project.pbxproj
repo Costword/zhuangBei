@@ -127,6 +127,8 @@
 		009A083224D812770048F471 /* fenxiang.svg in Resources */ = {isa = PBXBuildFile; fileRef = 009A082E24D812770048F471 /* fenxiang.svg */; };
 		009A083324D812770048F471 /* shiti.svg in Resources */ = {isa = PBXBuildFile; fileRef = 009A082F24D812770048F471 /* shiti.svg */; };
 		009A083424D812770048F471 /* baokuan.svg in Resources */ = {isa = PBXBuildFile; fileRef = 009A083024D812770048F471 /* baokuan.svg */; };
+		009A083724DA879E0048F471 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A083524DA879E0048F471 /* MyCell.m */; };
+		009A083A24DA90C00048F471 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A083924DA90BF0048F471 /* NullSafe.m */; };
 		009E2187246A4BAB00AD1637 /* zEducationRankTypeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 009E2186246A4BAB00AD1637 /* zEducationRankTypeInfo.m */; };
 		009E218D246A763500AD1637 /* SelectedListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 009E2189246A763500AD1637 /* SelectedListModel.m */; };
 		009E218E246A763500AD1637 /* SelectedListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009E218A246A763500AD1637 /* SelectedListView.m */; };
@@ -583,6 +585,9 @@
 		009A082E24D812770048F471 /* fenxiang.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fenxiang.svg; sourceTree = "<group>"; };
 		009A082F24D812770048F471 /* shiti.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = shiti.svg; sourceTree = "<group>"; };
 		009A083024D812770048F471 /* baokuan.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = baokuan.svg; sourceTree = "<group>"; };
+		009A083524DA879E0048F471 /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyCell.m; path = ZhuangBei/zShouye/views/MyCell.m; sourceTree = SOURCE_ROOT; };
+		009A083624DA879E0048F471 /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyCell.h; path = ZhuangBei/zShouye/views/MyCell.h; sourceTree = SOURCE_ROOT; };
+		009A083924DA90BF0048F471 /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
 		009E2185246A4BAB00AD1637 /* zEducationRankTypeInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zEducationRankTypeInfo.h; sourceTree = "<group>"; };
 		009E2186246A4BAB00AD1637 /* zEducationRankTypeInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zEducationRankTypeInfo.m; sourceTree = "<group>"; };
 		009E2189246A763500AD1637 /* SelectedListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectedListModel.m; sourceTree = "<group>"; };
@@ -1170,6 +1175,8 @@
 		004D7A3A24C584B600EFFA82 /* kztView */ = {
 			isa = PBXGroup;
 			children = (
+				009A083624DA879E0048F471 /* MyCell.h */,
+				009A083524DA879E0048F471 /* MyCell.m */,
 				004D7A3B24C584E100EFFA82 /* Marquee */,
 				004D7A4224C5851500EFFA82 /* zNoticeUpDownCell.h */,
 				004D7A4324C5851500EFFA82 /* zNoticeUpDownCell.m */,
@@ -1365,6 +1372,14 @@
 				009A083024D812770048F471 /* baokuan.svg */,
 			);
 			path = shouyeSVG;
+			sourceTree = "<group>";
+		};
+		009A083824DA90BF0048F471 /* NullSafe */ = {
+			isa = PBXGroup;
+			children = (
+				009A083924DA90BF0048F471 /* NullSafe.m */,
+			);
+			path = NullSafe;
 			sourceTree = "<group>";
 		};
 		009E2188246A763500AD1637 /* SelectedListView */ = {
@@ -2346,6 +2361,7 @@
 		89487BE824544E4000D4FA67 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				009A083824DA90BF0048F471 /* NullSafe */,
 				896DA51E246BD056001ED8C1 /* lwtool */,
 				002A617D245B014A009A53AA /* cookies */,
 				89487BEC24544F4A00D4FA67 /* Confi */,
@@ -2814,6 +2830,8 @@
 				00B0A5E1246500840041C234 /* WKWebView+BAJavaScriptAlert.m in Sources */,
 				89C112DD246E8CB7007EAABB /* LWAddFriendOrGroupViewController.m in Sources */,
 				00CB202B2471122A00171284 /* ZFTabBar.m in Sources */,
+				009A083A24DA90C00048F471 /* NullSafe.m in Sources */,
+				009A083724DA879E0048F471 /* MyCell.m in Sources */,
 				00FE9B892476B878002A1F86 /* IFListViewCell.m in Sources */,
 				89F5B7DF245596DD0040F7B1 /* UIView+Extension.m in Sources */,
 				009E2191246A7EDF00AD1637 /* zTypesModel.m in Sources */,
@@ -3115,10 +3133,10 @@
 			baseConfigurationReference = 759737390EA2ABFD7BEC457D /* Pods-ZhuangBei.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 25;
-				DEVELOPMENT_TEAM = NXHWCY9QS4;
+				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -3135,7 +3153,7 @@
 				MARKETING_VERSION = 1.1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = zhuangbei_dev_730;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3145,10 +3163,10 @@
 			baseConfigurationReference = 95998143212FCD9D90EA6CD4 /* Pods-ZhuangBei.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 25;
-				DEVELOPMENT_TEAM = NXHWCY9QS4;
+				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -3165,7 +3183,7 @@
 				MARKETING_VERSION = 1.1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = zhuangbei_dev_730;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

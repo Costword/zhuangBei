@@ -19,5 +19,6 @@ target 'ZhuangBei' do
   pod "UITextView-WZB","1.1.1"
   pod 'JShare'
   pod 'SVGKit'
+  pod 'WMZBanner'
 end   
 

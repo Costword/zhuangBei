@@ -7,86 +7,77 @@
 //
 
 #import "zHuoYuanScrollHeader.h"
-#import "NewPagedFlowView.h"
-#import "PGIndexBannerSubiew.h"
-#import "PGCustomBannerView.h"
+//#import "NewPagedFlowView.h"
+//#import "PGIndexBannerSubiew.h"
+//#import "PGCustomBannerView.h"
+#import "WMZBannerView.h"
+#import "MyCell.h"
 
-@interface zHuoYuanScrollHeader ()<NewPagedFlowViewDelegate, NewPagedFlowViewDataSource>
+@interface zHuoYuanScrollHeader ()
 
-/**
- *  图片数组
- */
-@property (nonatomic, strong) NSMutableArray *imageArray;
-
-/**
- *  指示label
- */
-@property (nonatomic, strong) UILabel *indicateLabel;
-
-/**
- *  轮播图
- */
-@property (nonatomic, strong) NewPagedFlowView *pageFlowView;
+@property(strong,nonatomic)NSMutableArray * imageArray;
 
 @end
 
 @implementation zHuoYuanScrollHeader
 
-//-(UILabel*)indicateLabel
-//{
-//    if (!_indicateLabel) {
-//        _indicateLabel = [[UILabel alloc]init];
-//        _indicateLabel.font = 
-//    }
-//    return _indicateLabel;
-//}
+
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        [self setupUI];
+//        [self demoOne];
         [self updateConstraintsForView];
         self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
+- (void)demoOne{
+    WMZBannerParam *param =
+        BannerParam()
+       //自定义视图必传
+       .wMyCellClassNameSet(@"MyCell")
+       .wMyCellSet(^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collectionView, id model, UIImageView *bgImageView,NSArray*dataArr) {
+                  //自定义视图
+           MyCell *cell = (MyCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([MyCell class]) forIndexPath:indexPath];
+           cell.leftText.text = model[@"name"];
+           [cell.icon setImage:model[@"image"]];
+           return cell;
+       })
+       .wFrameSet(CGRectMake(0,0, BannerWitdh, (BannerWitdh-40)*1080/1920))
+    .wDataSet(self.imageArray)
+       //关闭pageControl
+       .wHideBannerControlSet(YES)
+       //自定义item的大小
+       .wItemSizeSet(CGSizeMake(BannerWitdh*0.8, (BannerWitdh-40)*1080/1920))
+       //固定移动的距离
+       .wContentOffsetXSet(0.5)
+    //   //自动滚动
+       .wAutoScrollSet(YES)
+        //循环
+        .wRepeatSet(YES)
+       //整体左右间距  设置为size.width的一半 让最后一个可以居中
+       .wSectionInsetSet(UIEdgeInsetsMake(0,20, 0, (BannerWitdh-40)*0.55*0.3))
+       //间距
+       .wLineSpacingSet(20)
+       ;
+       WMZBannerView *bannerView = [[WMZBannerView alloc]initConfigureWithModel:param];
+       [self addSubview:bannerView];
+    }
 
-- (void)setupUI {
-    
-    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH-60)*1080/1920)];;
-    pageFlowView.backgroundColor = [UIColor whiteColor];
-    pageFlowView.delegate = self;
-    pageFlowView.dataSource = self;
-    pageFlowView.minimumPageAlpha = 0.4;
-    
-#warning 假设产品需求左右卡片间距30,底部对齐
-    pageFlowView.leftRightMargin = 30;
-    pageFlowView.topBottomMargin = 0;
-    
-    pageFlowView.orginPageCount = self.imageArray.count;
-    pageFlowView.isOpenAutoScroll = YES;
-    
-    //初始化pageControl
-//    UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, pageFlowView.frame.size.height - 24, SCREEN_WIDTH, 8)];
-//    pageFlowView.pageControl = pageControl;
-//    [pageFlowView addSubview:pageControl];
-    [pageFlowView reloadData];
-    [self addSubview:pageFlowView];
-    
-    
-    self.pageFlowView = pageFlowView;
-    //添加到主view上
-    [self addSubview:self.indicateLabel];
-    
+- (NSArray*)getData{
+    return @[
+      @{@"name":@"自定义文本1",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576744105022&di=f4aadd0b85f93309a4629c998773ae83&imgtype=0&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fwallpaper%2F1206%2F07%2Fc0%2F11909864_1339034191111.jpg"},
+      @{@"name":@"自定义文本2",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576744105022&di=f06819b43c8032d203642874d1893f3d&imgtype=0&src=http%3A%2F%2Fi2.sinaimg.cn%2Fent%2Fs%2Fm%2Fp%2F2009-06-25%2FU1326P28T3D2580888F326DT20090625072056.jpg"},
+      @{@"name":@"自定义文本3",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1577338893&di=189401ebacb9704d18f6ab02b7336923&imgtype=jpg&er=1&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201308%2F05%2F20130805105309_5E2zE.jpeg"},
+      @{@"name":@"自定义文本4",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576744174216&di=36ffb42bf8757df08455b34c6b7d66c5&imgtype=0&src=http%3A%2F%2Fwww.7dapei.com%2Fimages%2F201203c%2F119.3.jpg"}
+      ];
 }
+
 
 -(void)updateConstraintsForView
 {
-//    [self.pageFlowView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.top.mas_equalTo(0);
-//        make.height.mas_equalTo(SCREEN_WIDTH * 9/16);
-//        make.bottom.mas_equalTo(0);
-//    }];
+
 }
 
 -(void)setBannerArray:(NSArray *)bannerArray
@@ -95,54 +86,17 @@
     [bannerArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString * imageName = bannerArray[idx];
         UIImage *image = [UIImage imageNamed:imageName];
-        [self.imageArray addObject:image];
+        NSMutableDictionary * dic = [NSMutableDictionary dictionary];
+        [dic setObject:[NSString stringWithFormat:@"%ld/%ld",idx+1,bannerArray.count] forKey:@"name"];
+        [dic setObject:image forKey:@"image"];
+        [self.imageArray addObject:dic];
     }];
-    [self.pageFlowView reloadData];
+    [self demoOne];
 }
 
-#pragma mark --NewPagedFlowView Delegate
-- (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
-    
-//    NSLog(@"点击了第%ld张图",(long)subIndex + 1);
-    
-    self.indicateLabel.text = [NSString stringWithFormat:@"点击了第%ld张图",(long)subIndex + 1];
-}
-
-- (void)didScrollToPage:(NSInteger)pageNumber inFlowView:(NewPagedFlowView *)flowView {
-    
-//    NSLog(@"CustomViewController 滚动到了第%ld页",pageNumber);
-}
-
-#warning 假设产品需求左右中间页显示大小为 Width - 50, (Width - 50) * 9 / 16
-- (CGSize)sizeForPageInFlowView:(NewPagedFlowView *)flowView {
-    return CGSizeMake(SCREEN_WIDTH - 60, (SCREEN_WIDTH-60)*1080/1920);
-}
-
-#pragma mark --NewPagedFlowView Datasource
-- (NSInteger)numberOfPagesInFlowView:(NewPagedFlowView *)flowView {
-    
-    return self.imageArray.count;
-}
-
-- (PGIndexBannerSubiew *)flowView:(NewPagedFlowView *)flowView cellForPageAtIndex:(NSInteger)index{
-    
-    PGCustomBannerView *bannerView = (PGCustomBannerView *)[flowView dequeueReusableCell];
-    if (!bannerView) {
-        bannerView = [[PGCustomBannerView alloc] init];
-        bannerView.layer.cornerRadius = 4;
-        bannerView.layer.masksToBounds = YES;
-        bannerView.indexLabel.text = [NSString stringWithFormat:@"%ld / %ld",index+1,self.imageArray.count];
-    }
-    
-    //在这里下载网络图片
-    //[bannerView.mainImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:hostUrlsImg,imageDict[@"img"]]] placeholderImage:[UIImage imageNamed:@""]];
-    bannerView.mainImageView.image = self.imageArray[index];
-    return bannerView;
-}
-
-#pragma mark --懒加载
-- (NSMutableArray *)imageArray {
-    if (_imageArray == nil) {
+-(NSMutableArray*)imageArray
+{
+    if (!_imageArray) {
         _imageArray = [NSMutableArray array];
     }
     return _imageArray;

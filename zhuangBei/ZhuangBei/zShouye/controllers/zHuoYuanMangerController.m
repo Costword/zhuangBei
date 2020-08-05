@@ -34,7 +34,7 @@
 -(zHuoYuanScrollHeader*)scrollHeader
 {
     if (!_scrollHeader) {
-        _scrollHeader = [[zHuoYuanScrollHeader alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH,(SCREEN_WIDTH-50)*1080/1920)];
+        _scrollHeader = [[zHuoYuanScrollHeader alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH,(SCREEN_WIDTH-40)*1080/1920)];
         _scrollHeader.bannerArray = @[@"bg_banner_1",@"bg_banner_2",@"bg_banner_3",@"bg_banner_4",@"bg_banner_5"];
     }
     return _scrollHeader;

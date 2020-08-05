@@ -35,6 +35,8 @@ PODS:
     - CocoaLumberjack (~> 3.0)
   - TYAttributedLabel (2.6.6)
   - UITextView-WZB (1.1.1)
+  - WMZBanner (1.1.2):
+    - SDWebImage
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
   - YYKit/no-arc (1.0.9)
@@ -53,6 +55,7 @@ DEPENDENCIES:
   - SVGKit
   - TYAttributedLabel (~> 2.6.2)
   - UITextView-WZB (= 1.1.1)
+  - WMZBanner
   - YYKit
 
 SPEC REPOS:
@@ -72,6 +75,7 @@ SPEC REPOS:
     - SVGKit
     - TYAttributedLabel
     - UITextView-WZB
+    - WMZBanner
     - YYKit
 
 SPEC CHECKSUMS:
@@ -90,8 +94,9 @@ SPEC CHECKSUMS:
   SVGKit: 652cdf7bef8bec8564d04a8511d3ab50c7595fac
   TYAttributedLabel: cb8fc910d97eb5224936d4f692a78e042af691b2
   UITextView-WZB: aa7306ec35ad35d325f8e608366ecd5ac8c8eed9
+  WMZBanner: f02e77d9a70e4abd6c4136420afd44b167172625
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 96d175b65ea57d6103906d476e1a937e1c21a4ff
+PODFILE CHECKSUM: 5048c5a3912aa7e7f30f601746e5df230b62b616
 
 COCOAPODS: 1.9.1

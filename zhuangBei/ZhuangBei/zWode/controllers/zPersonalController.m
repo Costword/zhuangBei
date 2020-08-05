@@ -68,55 +68,55 @@
         NSArray * persoanl = @[
             @{
                 @"name":@"姓名（必填）",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.userName],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.userName!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.userName:@""],
                 @"canShow":@(0)
             },@{
                 @"name":@"性别（必填）",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.sex],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.sex!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.sex:@""],
                 @"canShow":@(0)
             },@{
                 @"name":@"手机号码",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.mobile],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.mobile!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.mobile:@""],
                 @"canShow":@(1)
             },@{
                 @"name":@"出生日期",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.birth],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.birth!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.birth:@""],
                 @"canShow":@(1)
             },@{
                 @"name":@"E-mail",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.email],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.email!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.email:@""],
                 @"canShow":@(0)
             },@{
                 @"name":@"籍贯",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.nativePlace],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.nativePlace!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.nativePlace:@""],
                 @"canShow":@(0)
             },@{
                 @"name":@"学历",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.education],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.education!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.education:@""],
                 @"canShow":@(1)
             },@{
                 @"name":@"工作年限",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.jobYear],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.jobYear!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.jobYear:@""],
                 @"canShow":@(1)
             },@{
                 @"name":@"公司名称",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.suoShuGsName],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.suoShuGsName!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.suoShuGsName:@""],
                 @"canShow":@(0)
             },@{
                 @"name":@"公司类型",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.companyType],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.companyType!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.companyType:@""],
                 @"canShow":@(0)
             },@{
                 @"name":@"公司所在省份（必选）",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.regLocation],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.regLocation!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.regLocation:@""],
                 @"canShow":@(0)
             },@{
                 @"name":@"部门（必填）",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.buMen],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.buMen!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.buMen:@""],
                 @"canShow":@(0)
             },@{
                 @"name":@"职务",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.post],
+                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.post!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.post:@""],
                 @"canShow":@(0)
             },
             @{

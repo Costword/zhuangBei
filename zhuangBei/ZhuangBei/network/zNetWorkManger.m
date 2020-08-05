@@ -21,10 +21,12 @@
     //设置请求体数据为json类型
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     //设置响应体数据为json类型
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = 10.f;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    AFJSONResponseSerializer *response = [AFJSONResponseSerializer serializer];
+    response.removesKeysWithNullValues = YES;
+    manager.responseSerializer = response;
     //请求体，参数（NSDictionary 类型）
     //    NSDictionary *parameters = param;
     [manager GET:url parameters:param progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -50,14 +52,21 @@
     //设置请求体数据为json类型
     
     
-    AFJSONResponseSerializer * responseSerializer =[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+//    AFJSONResponseSerializer * responseSerializer =[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = responseSerializer;
+//    manager.responseSerializer = responseSerializer;
+    
+//    manager.removesKeysWithNullValues
     //设置响应体数据为json类型
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json",@"text/json", @"text/javascript",@"charset=UTF-8",@"octet-stream", nil];
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = 10.f;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    AFJSONResponseSerializer *response = [AFJSONResponseSerializer serializer];
+    response.removesKeysWithNullValues = YES;
+    manager.responseSerializer = response;
+    
     NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsCookie];
     if([cookiesdata length]) {
         NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
