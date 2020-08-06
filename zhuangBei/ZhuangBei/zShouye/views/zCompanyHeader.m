@@ -36,8 +36,9 @@
 -(UIImageView*)logoImageView
 {
     if (!_logoImageView) {
-        _logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH*3/5, SCREEN_WIDTH*3/5*0.6)];
-        _logoImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH*0.6, SCREEN_WIDTH*0.75*0.6)];
+        _logoImageView.backgroundColor = [UIColor redColor];
+//        _logoImageView.contentMode = UIViewContentModeScaleAspectFit;
         _logoImageView.image = [_logoImageView z_getPlaceholderImageWithSVG];
     }
     return _logoImageView;
@@ -162,7 +163,7 @@
     [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.logoLabel.mas_bottom).offset(5);
         make.centerX.mas_equalTo(self.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH*3/5, SCREEN_WIDTH*3/5*0.6));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH*0.6, SCREEN_WIDTH*0.75*0.6));
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.logoImageView.mas_bottom).offset(10);

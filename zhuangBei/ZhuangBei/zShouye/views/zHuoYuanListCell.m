@@ -162,7 +162,7 @@
     
     [self.baseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-kWidthFlot(1));
-        make.top.mas_equalTo(kWidthFlot(1));
+        make.top.mas_equalTo(kWidthFlot(10));
         make.size.mas_equalTo(CGSizeMake(kWidthFlot(100), kWidthFlot(80)));
     }];
     [self.coverView mas_makeConstraints:^(MASConstraintMaker *make) {

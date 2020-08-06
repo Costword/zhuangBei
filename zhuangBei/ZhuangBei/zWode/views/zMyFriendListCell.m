@@ -195,6 +195,12 @@
     [self.nameButton setTitle:model.userName forState:UIControlStateNormal];
     
     self.descLabel.text = model.minsummary;
+    if (model.email == nil) {
+        model.email = @"";
+    }
+    if (model.mobile == nil) {
+        model.mobile = @"";
+    }
     
     [self.emailButton setTitle:[NSString stringWithFormat:@"邮箱：%@",model.email] forState:UIControlStateNormal];
     
