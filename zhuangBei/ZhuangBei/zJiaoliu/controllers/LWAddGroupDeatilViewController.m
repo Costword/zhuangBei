@@ -31,11 +31,13 @@
         
     }];
 }
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)aTextfield {
     [aTextfield resignFirstResponder];//关闭键盘
     return YES;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -47,13 +49,13 @@
 - (void)confiUI
 {
     UIImageView *icon = [UIImageView new];
-    icon.image = IMAGENAME(@"testtouxiang");
     UILabel *titleL = [LWLabel lw_lable:@"群聊资料" font:15 textColor:BASECOLOR_TEXTCOLOR];
-    UILabel *groupnameL = [LWLabel lw_lable:@"平台总群" font:20 textColor:BASECOLOR_TEXTCOLOR];
-    UILabel *timeL = [LWLabel lw_lable:@"创建人：admin" font:15 textColor:BASECOLOR_GREYCOLOR155];
-    UILabel *creatrenL = [LWLabel lw_lable:@"创建时间：2020-10-10" font:15 textColor:BASECOLOR_GREYCOLOR155];
+    UILabel *groupnameL = [LWLabel lw_lable:_listModel.groupName font:20 textColor:BASECOLOR_TEXTCOLOR];
+    
+    UILabel *timeL = [LWLabel lw_lable:[NSString stringWithFormat:@"创建人：%@",_listModel.userName] font:15 textColor:BASECOLOR_GREYCOLOR155];
+    UILabel *creatrenL = [LWLabel lw_lable:[NSString stringWithFormat:@"创建时间：%@",_listModel.buildTime] font:15 textColor:BASECOLOR_GREYCOLOR155];
     UILabel *qunjianjieL = [LWLabel lw_lable:@"群简介" font:17 textColor:BASECOLOR_TEXTCOLOR];
-    UILabel *qunjianjiedescL = [LWLabel lw_lable:@"群主很懒" font:15 textColor:BASECOLOR_GREYCOLOR155];
+    UILabel *qunjianjiedescL = [LWLabel lw_lable:_listModel.groupdescription font:15 textColor:BASECOLOR_GREYCOLOR155];
     UILabel *yanzhengL = [LWLabel lw_lable:@"请填写验证信息" font:17 textColor:BASECOLOR_TEXTCOLOR];
     IQTextView *tv = [IQTextView new];
     tv.placeholder = @"大家好...";
@@ -85,15 +87,15 @@
         make.right.mas_equalTo(self.view.mas_right).mas_offset(-10);
         make.top.mas_equalTo(icon.mas_top).mas_offset(0);
     }];
-    [creatrenL mas_makeConstraints:^(MASConstraintMaker *make) {
+    [timeL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(groupnameL.mas_left).mas_offset(0);
         make.right.mas_equalTo(groupnameL.mas_right).mas_offset(-0);
         make.top.mas_equalTo(groupnameL.mas_bottom).mas_offset(10);
     }];
-    [timeL mas_makeConstraints:^(MASConstraintMaker *make) {
+    [creatrenL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(groupnameL.mas_left).mas_offset(0);
         make.right.mas_equalTo(groupnameL.mas_right).mas_offset(-0);
-        make.top.mas_equalTo(creatrenL.mas_bottom).mas_offset(10);
+        make.top.mas_equalTo(timeL.mas_bottom).mas_offset(10);
     }];
     [qunjianjieL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(titleL.mas_left).mas_offset(0);
@@ -123,6 +125,8 @@
         make.top.mas_equalTo(tv.mas_bottom).mas_offset(40);
         make.height.mas_offset(40);
     }];
+    [icon setBoundWidth:0 cornerRadius:35];
+    [icon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kApiPrefix_PIC,_listModel.avatar]] placeholderImage:IMAGENAME(@"testtouxiang")];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range

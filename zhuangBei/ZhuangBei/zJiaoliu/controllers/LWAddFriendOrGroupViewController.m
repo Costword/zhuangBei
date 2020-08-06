@@ -12,6 +12,7 @@
 #import "LWAddFriendModel.h"
 #import "LWAddFriendDeatilViewController.h"
 #import "LWAddGroupDeatilViewController.h"
+#import "ChatRoomViewController.h"
 
 @interface LWAddFriendOrGroupViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) LWSwitchBarView * switchBarView;
@@ -40,12 +41,6 @@
     if (_selectIndex == 1) {
         param = @{@"groupName":LWDATA(self.tf.text),@"limit":@"200",@"page":@(self.currPage)};
         url = @"app/appgroup/findGroupByGroupNameList";
-//        [self requestPostWithUrl:@"app/appgroup/findGroupByGroupNameList" para:param paraType:(LWRequestParamTypeDict) success:^(id  _Nonnull response) {
-//            [self handlerDatas:response];
-//        } failure:^(NSError * _Nonnull error) {
-//
-//        }];
-    }else{
     }
     [self requestPostWithUrl:url paraString:param success:^(id  _Nonnull response) {
         [self handlerDatas:response];
@@ -168,8 +163,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LWAddFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LWAddFriendTableViewCell" forIndexPath:indexPath];
-    cell.model = self.listDatas[indexPath.row];
+    LWAddFriendModel *model = self.listDatas[indexPath.row];
+    cell.model = model;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    WEAKSELF(self)
+    cell.clickBlock = ^(NSInteger tag){
+        [weakself clickCellEvent:model tag:tag];
+    };
     return cell;
 }
 
@@ -178,19 +178,42 @@
     return self.listDatas.count;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)clickCellEvent:(LWAddFriendModel *)model tag:(NSInteger)tag
 {
-    LWAddFriendModel *model = self.listDatas[indexPath.row];
     if (model.cellType == 1) {
-        LWAddFriendDeatilViewController *vc = [LWAddFriendDeatilViewController new];
-        vc.friendModel = self.listDatas[indexPath.row];
-        [self.navigationController pushViewController:vc animated:YES];
+        if (tag == 1) {
+            // 临时聊天
+            NSString *touserid = model.userDm;
+            NSString *username = model.chatNickName;
+            ChatRoomViewController *chatvc = [ChatRoomViewController chatRoomViewControllerWithRoomId:touserid roomName:username roomType:(LWChatRoomTypeOneTOne) extend:nil];
+            chatvc.fromType = 1;
+            [self.navigationController pushViewController:chatvc animated:YES];
+        }else if (tag == 2){
+            // 添加好友
+            LWAddFriendDeatilViewController *vc = [LWAddFriendDeatilViewController new];
+            vc.friendModel = model;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }else{
         LWAddGroupDeatilViewController *vc = [LWAddGroupDeatilViewController new];
-        vc.listModel = self.listDatas[indexPath.row];
+        vc.listModel = model;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    LWAddFriendModel *model = self.listDatas[indexPath.row];
+//    if (model.cellType == 1) {
+//        LWAddFriendDeatilViewController *vc = [LWAddFriendDeatilViewController new];
+//        vc.friendModel = self.listDatas[indexPath.row];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }else{
+//        LWAddGroupDeatilViewController *vc = [LWAddGroupDeatilViewController new];
+//        vc.listModel = self.listDatas[indexPath.row];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
+//}
 
 - (UITableView *)tableView
 {
@@ -198,10 +221,12 @@
         _tableView = [[UITableView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 130;
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.estimatedRowHeight = 150;
         _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         [_tableView registerClass:[LWAddFriendTableViewCell class] forCellReuseIdentifier:@"LWAddFriendTableViewCell"];
         _tableView.tableFooterView = [UIView new];
+        _tableView.separatorStyle = UITableViewScrollPositionNone;
     }
     return _tableView;
 }

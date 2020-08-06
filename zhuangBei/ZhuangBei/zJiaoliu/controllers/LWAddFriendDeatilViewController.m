@@ -102,7 +102,7 @@
 - (void)confiUI
 {
     UILabel *tishiL = [LWLabel lw_lable:@"提示" font:17 textColor:BASECOLOR_TEXTCOLOR];
-    NSString *friendname = [NSString stringWithFormat:@"是否要加【%@】为好友？",[LWDATA(_friendModel.userName) isNotBlank]?LWDATA(_friendModel.userName):LWDATA(_friendModel.mobile)];
+    NSString *friendname = [NSString stringWithFormat:@"是否要加【%@】为好友？",[LWDATA(_friendModel.chatNickName) isNotBlank]?LWDATA(_friendModel.chatNickName):LWDATA(_friendModel.mobile)];
     if (_systemModel) {
         friendname = [NSString stringWithFormat:@"是否要加【%@】为好友？",_systemModel.toUser.username];
     }

@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * portrait;
 @property (nonatomic, strong) NSString * chatNickName;
 @property (nonatomic, strong) NSString * userDm;
+@property (nonatomic, strong) NSString * mainProduct;
+@property (nonatomic, strong) NSString * suoShuGsName;
 
 
 @property (nonatomic, strong) NSString * groupName;
