@@ -34,6 +34,7 @@
 #import "UIImageView+LWImageView.h"
 #import "zInterfacedConst.h"
 #import "SDWebImage.h"
+#import <ReactiveObjC.h>
 
 #define kLoginUserInfo @"loginUserInfo"
 #define kUserDefaultsCookie @"kUserDefaultsCookie"

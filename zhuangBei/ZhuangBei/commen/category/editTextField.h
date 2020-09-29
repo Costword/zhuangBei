@@ -15,15 +15,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface editTextField : UITextField
 
+@property(assign,nonatomic)NSInteger titleFontSize;
+
+@property(copy,nonatomic)NSString  * title;
+
 @property(assign,nonatomic)BOOL  canShow;//是否有隐藏显示按钮
 
 @property(assign,nonatomic)BOOL  Show;//当前是显示还是隐藏
 
 @property(assign,nonatomic)BOOL canTap;//是否可以点击，返回点击事件
 
+@property(assign,nonatomic)BOOL canEdit;//是否可以编辑
+
 @property(strong, nonatomic)UIImage *icon;
 
 @property(copy, nonatomic)NSString *myPlaceHolder;
+
+@property(strong,nonatomic)UIColor * fontColor;
 
 @property(copy,nonatomic)textFildTapBack tapBack;
 

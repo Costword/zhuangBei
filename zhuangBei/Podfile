@@ -1,7 +1,7 @@
 #source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 #source 'https://github.com/CocoaPods/Specs.git'
-source 'https://gitee.com/mirrors/CocoaPods-Specs.git'
-platform :ios, '9.0'
+#source 'https://gitee.com/mirrors/CocoaPods-Specs.git'
+#platform :ios, '7.0'
 
 target 'ZhuangBei' do
   pod "Masonry"
@@ -14,11 +14,12 @@ target 'ZhuangBei' do
   pod 'YYKit'
   pod 'AFNetworking', '~> 3.0'
   pod 'SDCycleScrollView','>= 1.80'
-  pod 'TYAttributedLabel', '~> 2.6.2'
+  pod 'TYAttributedLabel'
   pod 'LEEAlert'
   pod "UITextView-WZB","1.1.1"
   pod 'JShare'
   pod 'SVGKit'
   pod 'WMZBanner'
+  pod 'ReactiveObjC'
 end   
 

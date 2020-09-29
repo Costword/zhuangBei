@@ -27,6 +27,7 @@
 @property(strong,nonatomic)LoginTextField * accountField;
 @property(strong,nonatomic)LoginTextField * passwordField;
 @property(strong,nonatomic)LoginTextField * checkField;
+@property(strong,nonatomic)LoginTextField * companyField;
 @property(strong,nonatomic)LoginTextField * inviteField;
 
 @property(strong,nonatomic)UIButton * eyesButton;
@@ -56,7 +57,7 @@
 -(NSArray*)labelTitleArray
 {
     if (!_labelTitleArray) {
-        _labelTitleArray = @[@"姓名：",@"手机号：",@"密码：",@"验证码：",@"邀请码："];
+        _labelTitleArray = @[@"姓名：",@"手机号：",@"密码：",@"验证码：",@"公司名称：",@"邀请码："];
     }
     return _labelTitleArray;
 }
@@ -120,6 +121,17 @@
     return _checkField;
 }
 
+
+-(LoginTextField*)companyField
+{
+    if (!_companyField) {
+        _companyField = [[LoginTextField alloc]init];
+        _companyField.icon = [UIImage imageNamed:@"blank"];
+        _companyField.keyboardType = UIKeyboardTypeASCIICapable;
+        _companyField.myPlaceHolder = @"请输入所属公司";
+    }
+    return _companyField;
+}
 -(LoginTextField*)inviteField
 {
     if (!_inviteField) {
@@ -225,6 +237,7 @@
     if (!_gotoLoginLabel) {
         _gotoLoginLabel = [[TYAttributedLabel alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH,kWidthFlot(40))];
         _gotoLoginLabel.userInteractionEnabled = YES;
+        _gotoLoginLabel.backgroundColor = [UIColor clearColor];
         _gotoLoginLabel.numberOfLines = 1;
         NSString * labelStr = @"已有账号！立即去登录";
         NSString * num = @"去登录";
@@ -256,6 +269,7 @@
         [self addSubview:self.accountField];
         [self addSubview:self.passwordField];
         [self addSubview:self.checkField];
+        [self addSubview:self.companyField];
         [self addSubview:self.inviteField];
         
         [self addSubview:self.eyesButton];
@@ -326,8 +340,14 @@
         make.height.mas_equalTo(30);
     }];
 
-    [self.inviteField mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.companyField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 4);
+        make.left.mas_equalTo(left);
+        make.right.mas_equalTo(-leftMargin);
+        make.height.mas_equalTo(40);
+    }];
+    [self.inviteField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 5);
         make.left.mas_equalTo(left);
         make.right.mas_equalTo(-leftMargin);
         make.height.mas_equalTo(40);
@@ -404,6 +424,10 @@
             [[zHud shareInstance]showMessage:@"验证码不可为空"];
             return;
         }
+        if (self.companyField.text.length==0) {
+            [[zHud shareInstance]showMessage:@"公司名称不可为空"];
+            return;
+        }
         
         NSString * password = self.passwordField.text;
         [self.userDic setObject:self.nameField.text forKey:@"nickName"];
@@ -411,6 +435,7 @@
         [self.userDic setObject:password forKey:@"password"];
         [self.userDic setObject:self.checkField.text forKey:@"verificationCode"];
         [self.userDic setObject:self.inviteField.text forKey:@"invatationCode"];
+        [self.userDic setObject:self.companyField.text forKey:@"companyName"];
         if (self.aggreBtn.selected) {
             if (self.zhuceBack) {
                 self.zhuceBack(self.userDic);

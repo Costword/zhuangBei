@@ -14,6 +14,9 @@
 
 @interface zZhuCeController ()
 
+@property(strong,nonatomic)UIImageView * bgImageView;
+
+
 @property(strong,nonatomic)zhuCeCard * zhuceView;
 
 @property(strong,nonatomic)NSDictionary * userDic;
@@ -61,6 +64,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.bgImageView = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    self.bgImageView.image = [UIImage imageNamed:@"loginBG"];
+    [self.view addSubview:self.bgImageView];
    
     [self.view addSubview:self.zhuceView];
 }

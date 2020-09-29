@@ -263,6 +263,7 @@
 		00FE9BAE2476B878002A1F86 /* OfficialAccountToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B732476B878002A1F86 /* OfficialAccountToolbar.m */; };
 		00FE9BAF2476B878002A1F86 /* MorePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B772476B878002A1F86 /* MorePanel.m */; };
 		00FE9BB02476B878002A1F86 /* ChatKeyBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B792476B878002A1F86 /* ChatKeyBoard.m */; };
+		1812157E25216EF60055FB32 /* zPersonalTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1812157D25216EF60055FB32 /* zPersonalTableHeader.m */; };
 		6BE41E3FCD0C213AB1550073 /* libPods-ZhuangBei.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */; };
 		890424802481E3120032B1C8 /* libbz2.1.0.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 890643E424694F570099508C /* libbz2.1.0.5.tbd */; };
 		890643C624690A030099508C /* LWThreeLevelTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 890643C524690A030099508C /* LWThreeLevelTableView.m */; };
@@ -884,6 +885,8 @@
 		00FE9B772476B878002A1F86 /* MorePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MorePanel.m; sourceTree = "<group>"; };
 		00FE9B782476B878002A1F86 /* MorePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MorePanel.h; sourceTree = "<group>"; };
 		00FE9B792476B878002A1F86 /* ChatKeyBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatKeyBoard.m; sourceTree = "<group>"; };
+		1812157C25216EF60055FB32 /* zPersonalTableHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zPersonalTableHeader.h; sourceTree = "<group>"; };
+		1812157D25216EF60055FB32 /* zPersonalTableHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zPersonalTableHeader.m; sourceTree = "<group>"; };
 		759737390EA2ABFD7BEC457D /* Pods-ZhuangBei.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhuangBei.debug.xcconfig"; path = "Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei.debug.xcconfig"; sourceTree = "<group>"; };
 		890643C424690A030099508C /* LWThreeLevelTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWThreeLevelTableView.h; sourceTree = "<group>"; };
 		890643C524690A030099508C /* LWThreeLevelTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWThreeLevelTableView.m; sourceTree = "<group>"; };
@@ -1114,6 +1117,8 @@
 				003FEABE245BFB8500E8D61E /* zSettingCellView.m */,
 				0091FCDE245E59EE0046691F /* zPersonalCell.h */,
 				0091FCDF245E59EE0046691F /* zPersonalCell.m */,
+				1812157C25216EF60055FB32 /* zPersonalTableHeader.h */,
+				1812157D25216EF60055FB32 /* zPersonalTableHeader.m */,
 				0091FCE1245E66600046691F /* zcityCell.h */,
 				0091FCE2245E66600046691F /* zcityCell.m */,
 				00B49B33246C2E61009D9ED0 /* zCityCollectionHeaderView.h */,
@@ -2819,6 +2824,7 @@
 				001ECA782453DA3200727379 /* phoneNumCheck.m in Sources */,
 				00E4F453247CEE0600F71D18 /* KNPhotoBaseCell.m in Sources */,
 				00B0A5DE246500840041C234 /* WKWebView+BAKit.m in Sources */,
+				1812157E25216EF60055FB32 /* zPersonalTableHeader.m in Sources */,
 				894E4112245A7A810028D2B4 /* UIButton+typeLayout.m in Sources */,
 				009FB68024500D7800133974 /* UIView+Frame.m in Sources */,
 				008FB01E246AD71D00B207CD /* zUpLoadUserModel.m in Sources */,
@@ -3136,7 +3142,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 27;
-				DEVELOPMENT_TEAM = NXHWCY9QS4;
+				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -3151,6 +3157,9 @@
 					"$(PROJECT_DIR)/ZhuangBei/commen/Thrid/IFYunSDK",
 				);
 				MARKETING_VERSION = 1.1.17;
+				OTHER_CFLAGS = (
+					"-Xclang\n-fcompatibility-qualified-id-block-type-checking",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3166,7 +3175,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 27;
-				DEVELOPMENT_TEAM = NXHWCY9QS4;
+				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -3181,6 +3190,9 @@
 					"$(PROJECT_DIR)/ZhuangBei/commen/Thrid/IFYunSDK",
 				);
 				MARKETING_VERSION = 1.1.17;
+				OTHER_CFLAGS = (
+					"-Xclang\n-fcompatibility-qualified-id-block-type-checking",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
 				PROVISIONING_PROFILE_SPECIFIER = "";

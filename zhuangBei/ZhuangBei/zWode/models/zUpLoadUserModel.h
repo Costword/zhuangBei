@@ -16,11 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(copy,nonatomic)NSString * buMen;
 @property(copy,nonatomic)NSString * education;//学历
 
-@property(copy,nonatomic)NSString * companyNameFirst;
-@property(copy,nonatomic)NSString * companyNameSecond;
-@property(copy,nonatomic)NSString * companyNameThird;
+//@property(copy,nonatomic)NSString * companyNameFirst;
+//@property(copy,nonatomic)NSString * companyNameSecond;
+//@property(copy,nonatomic)NSString * companyNameThird;
 //@property(assign,nonatomic)NSInteger suoShuGs;//公司id
-//@property(copy,nonatomic)NSString * suoShuGsName;//公司名
+@property(copy,nonatomic)NSString * suoShuGsName;//公司名
 @property(copy,nonatomic)NSString * companyType;//公司类型
 
 

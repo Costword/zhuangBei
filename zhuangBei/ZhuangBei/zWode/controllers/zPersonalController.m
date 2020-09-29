@@ -17,10 +17,13 @@
 #import "NSDictionary+NSNull.h"
 #import "HeaderManager.h"
 #import "LWClientHeader.h"
+#import "zPersonalTableHeader.h"
+
 @interface zPersonalController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(strong,nonatomic)UITableView * persoanTableView;
 @property(strong,nonatomic)zPersonalHeader * headerView;
+@property(strong,nonatomic)zPersonalTableHeader * personalHeader;
 @property(strong,nonatomic)zCityEditFooter * footView;
 
 @property(strong,nonatomic)NSMutableArray * persoanArray;
@@ -43,6 +46,14 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
+-(zPersonalTableHeader *)personalHeader
+{
+    if (!_personalHeader) {
+        _personalHeader = [[zPersonalTableHeader alloc]initWithFrame:CGRectZero];
+    }
+    return _personalHeader;
+}
+
 -(zUpLoadUserModel*)upLoadModel
 {
     if (!_upLoadModel) {
@@ -54,6 +65,20 @@
         _upLoadModel.isShowJobYear = [zEducationRankTypeInfo shareInstance].userInfoModel.isShowJobYear;
         _upLoadModel.isShowEducation = [zEducationRankTypeInfo shareInstance].userInfoModel.isShowEducation;
         _upLoadModel.isShowBirth = [zEducationRankTypeInfo shareInstance].userInfoModel.isShowBirth;
+        _upLoadModel.userName = [zEducationRankTypeInfo shareInstance].userInfoModel.userName!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.userName:@"";
+        _upLoadModel.userName = [zEducationRankTypeInfo shareInstance].userInfoModel.userName!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.userName:@"";
+        _upLoadModel.sex = [zEducationRankTypeInfo shareInstance].userInfoModel.sex!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.sex:@"";
+        _upLoadModel.mobile =[zEducationRankTypeInfo shareInstance].userInfoModel.mobile!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.mobile:@"";
+        _upLoadModel.birth = [zEducationRankTypeInfo shareInstance].userInfoModel.birth!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.birth:@"";
+        _upLoadModel.email = [zEducationRankTypeInfo shareInstance].userInfoModel.email!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.email:@"";
+        _upLoadModel.nativePlace = [zEducationRankTypeInfo shareInstance].userInfoModel.nativePlace!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.nativePlace:@"";
+        _upLoadModel.education = [zEducationRankTypeInfo shareInstance].userInfoModel.education!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.education:@"";
+        _upLoadModel.jobYear = [zEducationRankTypeInfo shareInstance].userInfoModel.jobYear!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.jobYear:@"";
+        _upLoadModel.suoShuGsName = [zEducationRankTypeInfo shareInstance].userInfoModel.suoShuGsName!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.suoShuGsName:@"";
+        _upLoadModel.companyType = [zEducationRankTypeInfo shareInstance].userInfoModel.companyType!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.companyType:@"";
+        _upLoadModel.regLocation = [zEducationRankTypeInfo shareInstance].userInfoModel.regLocation!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.regLocation:@"";
+        _upLoadModel.buMen = [zEducationRankTypeInfo shareInstance].userInfoModel.buMen!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.buMen:@"";
+        _upLoadModel.post =[zEducationRankTypeInfo shareInstance].userInfoModel.post!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.post:@"";
     }
     return _upLoadModel;
 }
@@ -66,59 +91,59 @@
             citys = @[];
         }
         NSArray * persoanl = @[
-            @{
-                @"name":@"姓名（必填）",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.userName!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.userName:@""],
-                @"canShow":@(0)
-            },@{
-                @"name":@"性别（必填）",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.sex!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.sex:@""],
-                @"canShow":@(0)
-            },@{
-                @"name":@"手机号码",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.mobile!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.mobile:@""],
-                @"canShow":@(1)
-            },@{
-                @"name":@"出生日期",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.birth!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.birth:@""],
-                @"canShow":@(1)
-            },@{
-                @"name":@"E-mail",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.email!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.email:@""],
-                @"canShow":@(0)
-            },@{
-                @"name":@"籍贯",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.nativePlace!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.nativePlace:@""],
-                @"canShow":@(0)
-            },@{
-                @"name":@"学历",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.education!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.education:@""],
-                @"canShow":@(1)
-            },@{
-                @"name":@"工作年限",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.jobYear!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.jobYear:@""],
-                @"canShow":@(1)
-            },@{
-                @"name":@"公司名称",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.suoShuGsName!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.suoShuGsName:@""],
-                @"canShow":@(0)
-            },@{
-                @"name":@"公司类型",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.companyType!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.companyType:@""],
-                @"canShow":@(0)
-            },@{
-                @"name":@"公司所在省份（必选）",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.regLocation!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.regLocation:@""],
-                @"canShow":@(0)
-            },@{
-                @"name":@"部门（必填）",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.buMen!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.buMen:@""],
-                @"canShow":@(0)
-            },@{
-                @"name":@"职务",
-                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.post!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.post:@""],
-                @"canShow":@(0)
-            },
+//            @{
+//                @"name":@"姓名（必填）",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.userName!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.userName:@""],
+//                @"canShow":@(0)
+//            },@{
+//                @"name":@"性别（必填）",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.sex!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.sex:@""],
+//                @"canShow":@(0)
+//            },@{
+//                @"name":@"手机号码",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.mobile!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.mobile:@""],
+//                @"canShow":@(1)
+//            },@{
+//                @"name":@"出生日期",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.birth!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.birth:@""],
+//                @"canShow":@(1)
+//            },@{
+//                @"name":@"E-mail",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.email!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.email:@""],
+//                @"canShow":@(0)
+//            },@{
+//                @"name":@"籍贯",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.nativePlace!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.nativePlace:@""],
+//                @"canShow":@(0)
+//            },@{
+//                @"name":@"学历",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.education!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.education:@""],
+//                @"canShow":@(1)
+//            },@{
+//                @"name":@"工作年限",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.jobYear!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.jobYear:@""],
+//                @"canShow":@(1)
+//            },@{
+//                @"name":@"公司名称",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.suoShuGsName!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.suoShuGsName:@""],
+//                @"canShow":@(0)
+//            },@{
+//                @"name":@"公司类型",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.companyType!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.companyType:@""],
+//                @"canShow":@(0)
+//            },@{
+//                @"name":@"公司所在省份（必选）",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.regLocation!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.regLocation:@""],
+//                @"canShow":@(0)
+//            },@{
+//                @"name":@"部门（必填）",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.buMen!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.buMen:@""],
+//                @"canShow":@(0)
+//            },@{
+//                @"name":@"职务",
+//                @"content":[NSString stringWithFormat:@"%@",[zEducationRankTypeInfo shareInstance].userInfoModel.post!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.post:@""],
+//                @"canShow":@(0)
+//            },
             @{
                 @"name":@"管辖地",
                 @"content":@"请选择",
@@ -219,6 +244,33 @@
                     weakSelf.upLoadModel.portrait = weakSelf.portrait;
                 }
                 NSDictionary * dic = [weakSelf.upLoadModel mj_keyValues];
+                
+//                {
+//                    "birth": "1995-09-27",
+//                    "buMen": "1",
+//                    "chatNickName": "广东腾讯晚饭呢-销售部-总经理",
+//                    "district": "110000",
+//                    "education": "1",
+//                    "email": "1212@qq.com",
+//                    "isShowBirth": 0,
+//                    "isShowEducation": 0,
+//                    "isShowJobYear": 0,
+//                    "isShowMobile": 1,
+//                    "jobYear": "1",
+//                    "mobile": "15516562518",
+//                    "nativePlace": "110000",
+//                    "operationStatus": 2,
+//                    "portrait": "3379",
+//                    "post": "1",
+//                    "regLocation": "440000",
+//                    "sex": "0",
+//                    "shiFouGly": 0,
+//                    "suoShuGs": "682",
+//                    "suoShuGsName": "腾讯科技深圳有限公司",
+//                    "userDm": "1991",
+//                    "userId": "2050",
+//                    "userName": "晚饭呢"
+//                }
                 weakSelf.canEdit = NO;
                 NSMutableDictionary * tureDic = [[NSMutableDictionary alloc]initWithDictionary:dic];
                 if (weakSelf.companyId != nil) {
@@ -262,8 +314,16 @@
     }];
 }
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section==0) {
+        return 0;
+    }
     return self.persoanArray.count;
 }
 
@@ -286,12 +346,27 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    self.headerView.canEdit = self.canEdit;;
-    return self.headerView;
+    if (section==0) {
+        self.headerView.canEdit = self.canEdit;
+        return self.headerView;
+    }
+    self.personalHeader.upModel = self.upLoadModel;
+    self.personalHeader.canEdit = self.canEdit;
+    @weakify(self);
+    [RACObserve(self.personalHeader, refresh) subscribeNext:^(id x) {
+        @strongify(self);
+        if ([x boolValue]) {
+            self.upLoadModel = self.personalHeader.upModel;
+        }
+    }];
+    return self.personalHeader;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
+    if (section==0) {
+        return nil;
+    }
     self.footView.canEdit = self.canEdit;
     return self.footView;
 }
@@ -406,6 +481,7 @@
         if ([code integerValue] == 0) {
             //验证成功
 //            * 已认证的企业，公司名称、企业类型、所在部门、所属职务、管辖地不可修改
+            
         }
         NSLog(@"公司认证信息%@",dic);
     }
