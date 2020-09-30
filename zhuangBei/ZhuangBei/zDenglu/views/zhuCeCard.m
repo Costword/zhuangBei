@@ -127,7 +127,7 @@
     if (!_companyField) {
         _companyField = [[LoginTextField alloc]init];
         _companyField.icon = [UIImage imageNamed:@"blank"];
-        _companyField.keyboardType = UIKeyboardTypeASCIICapable;
+        _companyField.keyboardType = UIKeyboardTypeDefault;
         _companyField.myPlaceHolder = @"请输入所属公司";
     }
     return _companyField;

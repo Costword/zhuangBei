@@ -211,75 +211,54 @@
         __weak typeof(self)weakSelf = self;
         _footView = [[zCityEditFooter alloc]init];
         _footView.tapBack = ^(NSInteger type) {
-            if (type == 1) {
-                weakSelf.canEdit = YES;
-            }else if (type == 2)
-            {
-                weakSelf.canEdit = NO;
-            }else
-            {
-                if (weakSelf.upLoadModel.userName.length==0) {
-                    [[zHud shareInstance]showMessage:@"用户名必填"];
-                    return;
+            if ([zEducationRankTypeInfo shareInstance].typesModel.section.count >0) {
+                if (type == 1) {
+                    weakSelf.canEdit = YES;
+                }else if (type == 2)
+                {
+                    weakSelf.canEdit = NO;
+                }else
+                {
+                    if (weakSelf.upLoadModel.userName.length==0) {
+                        [[zHud shareInstance]showMessage:@"用户名必填"];
+                        return;
+                    }
+                    if (weakSelf.upLoadModel.sex.length==0) {
+                        [[zHud shareInstance]showMessage:@"性别必填"];
+                        return;
+                    }
+                    if (weakSelf.upLoadModel.regLocation.length==0) {
+                        [[zHud shareInstance]showMessage:@"公司所在地必填"];
+                        return;
+                    }
+                    if (weakSelf.upLoadModel.buMen.length==0) {
+                        [[zHud shareInstance]showMessage:@"部门必填"];
+                        return;
+                    }
+                    if (weakSelf.upLoadModel.post.length==0) {
+                        [[zHud shareInstance]showMessage:@"职务必填"];
+                        return;
+                    }
+                    if ([weakSelf.upLoadModel.email isEqualToString:@"(null)"]) {
+                        weakSelf.upLoadModel.email = @"";
+                    }
+                    if ([weakSelf.upLoadModel.birth isEqualToString:@"(null)"]) {
+                        weakSelf.upLoadModel.birth = @"";
+                    }
+                    if (weakSelf.portrait != nil) {
+                        weakSelf.upLoadModel.portrait = weakSelf.portrait;
+                    }
+                    NSDictionary * dic = [weakSelf.upLoadModel mj_keyValues];
+                    weakSelf.canEdit = NO;
+                    NSMutableDictionary * tureDic = [[NSMutableDictionary alloc]initWithDictionary:dic];
+                    if (weakSelf.companyId != nil) {
+                    [tureDic setObject:weakSelf.companyId forKey:@"suoShuGs"];
+                    }
+                    NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kupUserInfo];
+                    [weakSelf postDataWithUrl:url WithParam:tureDic];
                 }
-                if (weakSelf.upLoadModel.sex.length==0) {
-                    [[zHud shareInstance]showMessage:@"性别必填"];
-                    return;
-                }
-                if (weakSelf.upLoadModel.regLocation.length==0) {
-                    [[zHud shareInstance]showMessage:@"公司所在地必填"];
-                    return;
-                }
-                if (weakSelf.upLoadModel.buMen.length==0) {
-                    [[zHud shareInstance]showMessage:@"部门必填"];
-                    return;
-                }
-                if ([weakSelf.upLoadModel.email isEqualToString:@"(null)"]) {
-                    weakSelf.upLoadModel.email = @"";
-                }
-                if ([weakSelf.upLoadModel.birth isEqualToString:@"(null)"]) {
-                    weakSelf.upLoadModel.birth = @"";
-                }
-                if (weakSelf.portrait != nil) {
-                    weakSelf.upLoadModel.portrait = weakSelf.portrait;
-                }
-                NSDictionary * dic = [weakSelf.upLoadModel mj_keyValues];
-                
-//                {
-//                    "birth": "1995-09-27",
-//                    "buMen": "1",
-//                    "chatNickName": "广东腾讯晚饭呢-销售部-总经理",
-//                    "district": "110000",
-//                    "education": "1",
-//                    "email": "1212@qq.com",
-//                    "isShowBirth": 0,
-//                    "isShowEducation": 0,
-//                    "isShowJobYear": 0,
-//                    "isShowMobile": 1,
-//                    "jobYear": "1",
-//                    "mobile": "15516562518",
-//                    "nativePlace": "110000",
-//                    "operationStatus": 2,
-//                    "portrait": "3379",
-//                    "post": "1",
-//                    "regLocation": "440000",
-//                    "sex": "0",
-//                    "shiFouGly": 0,
-//                    "suoShuGs": "682",
-//                    "suoShuGsName": "腾讯科技深圳有限公司",
-//                    "userDm": "1991",
-//                    "userId": "2050",
-//                    "userName": "晚饭呢"
-//                }
-                weakSelf.canEdit = NO;
-                NSMutableDictionary * tureDic = [[NSMutableDictionary alloc]initWithDictionary:dic];
-                if (weakSelf.companyId != nil) {
-                [tureDic setObject:weakSelf.companyId forKey:@"suoShuGs"];
-                }
-                NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kupUserInfo];
-                [weakSelf postDataWithUrl:url WithParam:tureDic];
+                [weakSelf.persoanTableView reloadData];
             }
-            [weakSelf.persoanTableView reloadData];
         };
         
     }
@@ -295,6 +274,7 @@
     
     if ([zEducationRankTypeInfo shareInstance].typesModel.section.count > 0) {
         NSLog(@"类型：%@",[zEducationRankTypeInfo shareInstance].typesModel);
+        
     }else
     {
         [self postDataWithUrl:url WithParam:nil];
@@ -352,6 +332,8 @@
     }
     self.personalHeader.upModel = self.upLoadModel;
     self.personalHeader.canEdit = self.canEdit;
+    //耗性能写法，重制类型数组，后台接口太乱了，懒得整理了。
+    self.personalHeader.typesModel = nil;
     @weakify(self);
     [RACObserve(self.personalHeader, refresh) subscribeNext:^(id x) {
         @strongify(self);
@@ -378,6 +360,7 @@
         if (err.code == -1001) {
             [[zHud shareInstance] showMessage:@"无法连接服务器"];
         }
+        [[zHud shareInstance] showMessage:@"资源获取失败"];
     }
     if ([url containsString:kupUserInfo]) {
         if (err.code == -1001) {
@@ -393,9 +376,9 @@
 {
     if ([url containsString:kgetStudyRank]) {
         
+        
         NSDictionary * dic = data[@"data"];
         zTypesModel * model = [zTypesModel mj_objectWithKeyValues:dic];
-        
         //性别
         NSMutableArray * sexArr = [NSMutableArray array];
         [model.sex enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -481,7 +464,9 @@
         if ([code integerValue] == 0) {
             //验证成功
 //            * 已认证的企业，公司名称、企业类型、所在部门、所属职务、管辖地不可修改
-            
+            if ([zEducationRankTypeInfo shareInstance].userInfoModel.operationStatus==2) {
+                self.personalHeader.cantChange = YES;
+            }
         }
         NSLog(@"公司认证信息%@",dic);
     }

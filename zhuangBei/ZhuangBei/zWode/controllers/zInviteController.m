@@ -233,8 +233,10 @@
 -(void)shareWX{
 //    NSString *url = [[NSBundle mainBundle] URLForResource:@"storeIMage" withExtension:@"png"].absoluteString;
     
-//    https://www.110zhuangbei.com/app/index.html
-    [JShareApp shareWebURLWithPlatform:JSHAREPlatformWechatSession title:[NSString stringWithFormat:@"%@ 诚邀您加入警用行业联盟",[zEducationRankTypeInfo shareInstance].userInfoModel.userName] text:[NSString stringWithFormat:@"邀请码：【%@】，这里是警用行业人的大家庭，十分期待您的加入！点击下载APP",[zUserInfo shareInstance].userInfo.invatationCode] url:@"https://www.110zhuangbei.com/app/index.html" icon:@"" success:^(id  _Nonnull info) {
+//https://www.110zhuangbei.com/app/index.html
+    NSString * url = [NSString stringWithFormat:@"http://110zhuangbei.com/app/modules/frontend/user/reg.html?refereeId=%ld",[zEducationRankTypeInfo shareInstance].userInfoModel.userDm];
+    
+    [JShareApp shareWebURLWithPlatform:JSHAREPlatformWechatSession title:[NSString stringWithFormat:@"%@ 诚邀您加入警用行业联盟",[zEducationRankTypeInfo shareInstance].userInfoModel.userName] text:[NSString stringWithFormat:@"邀请码：【%@】，这里是警用行业人的大家庭，十分期待您的加入！点击下载APP",[zUserInfo shareInstance].userInfo.invatationCode] url:url icon:@"" success:^(id  _Nonnull info) {
         
     } fail:^(id  _Nonnull info) {
         

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "zUpLoadUserModel.h"
 #import "zPersonalModel.h"
+#import "zTypesModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^changeUpModelBack)(zUpLoadUserModel * upModel,zPersonalModel* perModel);
@@ -19,9 +20,13 @@ typedef void(^changeUpModelBack)(zUpLoadUserModel * upModel,zPersonalModel* perM
 
 @property(strong,nonatomic)zPersonalModel * persoamModel;
 
+@property(strong,nonatomic)zTypesModel * typesModel;
+
 @property(assign,nonatomic)BOOL canEdit;
 
 @property(assign,nonatomic)BOOL refresh;
+
+@property(assign,nonatomic)BOOL cantChange;
 
 @property(copy,nonatomic)changeUpModelBack changeModelBack;
 

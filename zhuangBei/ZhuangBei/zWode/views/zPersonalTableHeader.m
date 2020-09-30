@@ -415,6 +415,10 @@
         _gongsiInputTextFild.textAlignment = NSTextAlignmentRight;
         _gongsiInputTextFild.title = @"公司名称";
         _gongsiInputTextFild.tapBack = ^{
+            if (weakSelf.cantChange) {
+                [[zHud shareInstance]showMessage: @"已认证企业不可修改"];
+                return;
+            }
             [LEEAlert alert].config
             .LeeTitle(@"修改企业名称")
             .LeeAddTextField(^(UITextField * _Nonnull textField) {
@@ -422,15 +426,12 @@
             })
             .LeeCancelAction(@"取消",nil)
             .LeeAction(@"确认", ^{
-            })
-            .leeShouldActionClickClose(^(NSInteger index){
-                // 是否可以关闭回调, 当即将关闭时会被调用 根据返回值决定是否执行关闭处理
-                // 这里演示了与输入框非空校验结合的例子
+                if (weakSelf.textField.text.length>0) {
                     NSString * leixing =  weakSelf.textField.text;
                     weakSelf.upModel.suoShuGsName = leixing;
-                    weakSelf.refresh = YES;
                     weakSelf.gongsiInputTextFild.text = [NSString stringWithFormat:@"%@",leixing];
-                    return YES;
+                    weakSelf.refresh = YES;
+                }
             })
             .LeeShow();
         };
@@ -453,6 +454,10 @@
         _gongsiTypeInputTextFild.textAlignment = NSTextAlignmentRight;
         _gongsiTypeInputTextFild.title = @"公司类型";
         _gongsiTypeInputTextFild.tapBack = ^{
+            if (weakSelf.cantChange) {
+                [[zHud shareInstance]showMessage: @"已认证企业不可修改"];
+                return;
+            }
             [weakSelf showSingleListWithTitl:@"选择公司类型" AndArray:weakSelf.comArray AndeditTextField:weakSelf.gongsiTypeInputTextFild];
         };
         _gongsiTypeInputTextFild.eyesTapBack = ^(NSInteger show) {
@@ -465,7 +470,7 @@
 -(editTextField *)gongsiAddressInputTextFild
 {
     if (!_gongsiAddressInputTextFild) {
-        __weak typeof(self)weakSelf = self;
+//        __weak typeof(self)weakSelf = self;
         _gongsiAddressInputTextFild = [[editTextField alloc]init];
         _gongsiAddressInputTextFild.canTap = YES;
         _gongsiAddressInputTextFild.canShow = NO;
@@ -474,7 +479,11 @@
         _gongsiAddressInputTextFild.textAlignment = NSTextAlignmentRight;
         _gongsiAddressInputTextFild.title = @"公司所在省份（必选）";
         _gongsiAddressInputTextFild.tapBack = ^{
-            [weakSelf showSingleListWithTitl:@"选择公司所省份" AndArray:weakSelf.cityArray AndeditTextField:weakSelf.gongsiTypeInputTextFild];
+//            if (weakSelf.cantChange) {
+//                [[zHud shareInstance]showMessage: @"已认证企业不可修改"];
+//                return;
+//            }
+//            [weakSelf showSingleListWithTitl:@"选择公司所省份" AndArray:weakSelf.cityArray AndeditTextField:weakSelf.gongsiAddressInputTextFild];
         };
         _gongsiAddressInputTextFild.eyesTapBack = ^(NSInteger show) {
 //            [weakSelf showChange:show];
@@ -493,8 +502,12 @@
         _bumenInputTextFild.icon = [UIImage imageNamed:@"blank"];
         _bumenInputTextFild.keyboardType = UIKeyboardTypeDefault;
         _bumenInputTextFild.textAlignment = NSTextAlignmentRight;
-        _bumenInputTextFild.title = @"部门（必选）";
+        _bumenInputTextFild.title = @"部门（必填）";
         _bumenInputTextFild.tapBack = ^{
+            if (weakSelf.cantChange) {
+                [[zHud shareInstance]showMessage: @"已认证企业不可修改"];
+                return;
+            }
             [weakSelf showSingleListWithTitl:@"选择部门" AndArray:weakSelf.bumenArray AndeditTextField:weakSelf.bumenInputTextFild];
         };
         _bumenInputTextFild.eyesTapBack = ^(NSInteger show) {
@@ -514,8 +527,12 @@
         _zhiwuInputTextFild.icon = [UIImage imageNamed:@"blank"];
         _zhiwuInputTextFild.keyboardType = UIKeyboardTypeDefault;
         _zhiwuInputTextFild.textAlignment = NSTextAlignmentRight;
-        _zhiwuInputTextFild.title = @"职务";
+        _zhiwuInputTextFild.title = @"职务（必填）";
         _zhiwuInputTextFild.tapBack = ^{
+            if (weakSelf.cantChange) {
+                [[zHud shareInstance]showMessage: @"已认证企业不可修改"];
+                return;
+            }
             [weakSelf showSingleListWithTitl:@"选择职务" AndArray:weakSelf.zhiwuArray AndeditTextField:weakSelf.zhiwuInputTextFild];
         };
         _zhiwuInputTextFild.eyesTapBack = ^(NSInteger show) {
@@ -775,6 +792,18 @@
     _upModel = upModel;
 }
 
+-(void)setTypesModel:(zTypesModel *)typesModel
+{
+    self.sexArray = nil;
+    self.cityArray = nil;
+    self.eduArray = nil;
+    self.yearsArray = nil;
+    self.comArray = nil;
+    self.bumenArray = nil;
+    self.zhiwuArray = nil;
+    
+}
+
 -(void)showSingleListWithTitl:(NSString*)title AndArray:(NSArray*)array AndeditTextField:(editTextField*)myeditTextField
 {
     __weak typeof(self) weakSelf = self;
@@ -855,6 +884,11 @@
     {
         self.userInteractionEnabled = NO;
     }
+}
+
+-(void)setCantChange:(BOOL)cantChange
+{
+    _cantChange = cantChange;
 }
 
 @end

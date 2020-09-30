@@ -74,6 +74,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(copy,nonatomic)NSString * companyNameThird;
 @property(copy,nonatomic)NSString * regLocation;
 
+@property(assign,nonatomic)NSInteger operationStatus;
+
 @end
 
 NS_ASSUME_NONNULL_END
