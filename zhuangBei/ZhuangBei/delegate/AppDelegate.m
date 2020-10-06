@@ -14,6 +14,8 @@
 #import "IQKeyboardManager.h"
 #import "LSTabBarController.h"
 #import "JSHAREService.h"
+#import "AppDelegate+LWRemoveNotification.h"
+
 @interface AppDelegate ()
 
 @end
@@ -66,6 +68,8 @@
     [[LWClientManager share] installConfigure];
     
     [IQKeyboardManager sharedManager].enable = YES;
+    
+    [self configureJpushWithapplication:application didFinishLaunchingWithOptions:launchOptions];
     
     return YES;
 }

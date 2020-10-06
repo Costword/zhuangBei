@@ -21,5 +21,6 @@ target 'ZhuangBei' do
   pod 'SVGKit'
   pod 'WMZBanner'
   pod 'ReactiveObjC'
+  pod 'JPush'
 end   
 

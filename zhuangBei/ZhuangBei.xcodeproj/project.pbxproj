@@ -25,6 +25,7 @@
 		0026C4BA24741CCE00C6ACB6 /* zMyFriendsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0026C4B924741CCE00C6ACB6 /* zMyFriendsHeader.m */; };
 		0026C4BD24741E6900C6ACB6 /* zMyfriendDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0026C4BC24741E6900C6ACB6 /* zMyfriendDetailCell.m */; };
 		002A6180245B0199009A53AA /* cookiesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 002A617F245B0199009A53AA /* cookiesTool.m */; };
+		00302004252CCEC700F13AF2 /* AppDelegate+LWRemoveNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 00302003252CCEC700F13AF2 /* AppDelegate+LWRemoveNotification.m */; };
 		0036407224701B5500B93431 /* zUserInvitelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0036407124701B5500B93431 /* zUserInvitelController.m */; };
 		0036407524701B7600B93431 /* zUserGoodsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0036407424701B7500B93431 /* zUserGoodsController.m */; };
 		0036407824701B8600B93431 /* zBusinessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0036407724701B8600B93431 /* zBusinessController.m */; };
@@ -264,7 +265,6 @@
 		00FE9BAF2476B878002A1F86 /* MorePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B772476B878002A1F86 /* MorePanel.m */; };
 		00FE9BB02476B878002A1F86 /* ChatKeyBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B792476B878002A1F86 /* ChatKeyBoard.m */; };
 		1812157E25216EF60055FB32 /* zPersonalTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1812157D25216EF60055FB32 /* zPersonalTableHeader.m */; };
-		1834DEF925242CC9009EC855 /* LCVerticalBadgeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1834DEF825242CC8009EC855 /* LCVerticalBadgeBtn.m */; };
 		6BE41E3FCD0C213AB1550073 /* libPods-ZhuangBei.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */; };
 		890424802481E3120032B1C8 /* libbz2.1.0.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 890643E424694F570099508C /* libbz2.1.0.5.tbd */; };
 		890643C624690A030099508C /* LWThreeLevelTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 890643C524690A030099508C /* LWThreeLevelTableView.m */; };
@@ -388,6 +388,8 @@
 		0026C4BC24741E6900C6ACB6 /* zMyfriendDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zMyfriendDetailCell.m; sourceTree = "<group>"; };
 		002A617E245B0199009A53AA /* cookiesTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cookiesTool.h; sourceTree = "<group>"; };
 		002A617F245B0199009A53AA /* cookiesTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cookiesTool.m; sourceTree = "<group>"; };
+		00302002252CCEC700F13AF2 /* AppDelegate+LWRemoveNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+LWRemoveNotification.h"; sourceTree = "<group>"; };
+		00302003252CCEC700F13AF2 /* AppDelegate+LWRemoveNotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+LWRemoveNotification.m"; sourceTree = "<group>"; };
 		0036407024701B5500B93431 /* zUserInvitelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zUserInvitelController.h; sourceTree = "<group>"; };
 		0036407124701B5500B93431 /* zUserInvitelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zUserInvitelController.m; sourceTree = "<group>"; };
 		0036407324701B7500B93431 /* zUserGoodsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zUserGoodsController.h; sourceTree = "<group>"; };
@@ -888,8 +890,6 @@
 		00FE9B792476B878002A1F86 /* ChatKeyBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatKeyBoard.m; sourceTree = "<group>"; };
 		1812157C25216EF60055FB32 /* zPersonalTableHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zPersonalTableHeader.h; sourceTree = "<group>"; };
 		1812157D25216EF60055FB32 /* zPersonalTableHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zPersonalTableHeader.m; sourceTree = "<group>"; };
-		1834DEF725242CC8009EC855 /* LCVerticalBadgeBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCVerticalBadgeBtn.h; sourceTree = "<group>"; };
-		1834DEF825242CC8009EC855 /* LCVerticalBadgeBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCVerticalBadgeBtn.m; sourceTree = "<group>"; };
 		759737390EA2ABFD7BEC457D /* Pods-ZhuangBei.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhuangBei.debug.xcconfig"; path = "Target Support Files/Pods-ZhuangBei/Pods-ZhuangBei.debug.xcconfig"; sourceTree = "<group>"; };
 		890643C424690A030099508C /* LWThreeLevelTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWThreeLevelTableView.h; sourceTree = "<group>"; };
 		890643C524690A030099508C /* LWThreeLevelTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWThreeLevelTableView.m; sourceTree = "<group>"; };
@@ -1466,6 +1466,8 @@
 				009FB616244FE8C200133974 /* AppDelegate.m */,
 				009FB618244FE8C200133974 /* SceneDelegate.h */,
 				009FB615244FE8C200133974 /* SceneDelegate.m */,
+				00302002252CCEC700F13AF2 /* AppDelegate+LWRemoveNotification.h */,
+				00302003252CCEC700F13AF2 /* AppDelegate+LWRemoveNotification.m */,
 			);
 			path = delegate;
 			sourceTree = "<group>";
@@ -2253,15 +2255,6 @@
 			path = MorePanel;
 			sourceTree = "<group>";
 		};
-		1834DEF625242CC8009EC855 /* badgeButton */ = {
-			isa = PBXGroup;
-			children = (
-				1834DEF725242CC8009EC855 /* LCVerticalBadgeBtn.h */,
-				1834DEF825242CC8009EC855 /* LCVerticalBadgeBtn.m */,
-			);
-			path = badgeButton;
-			sourceTree = "<group>";
-		};
 		732C49DD66576D0DB40FA460 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2363,7 +2356,6 @@
 		89487BE724544E1500D4FA67 /* Thrid */ = {
 			isa = PBXGroup;
 			children = (
-				1834DEF625242CC8009EC855 /* badgeButton */,
 				007E2FD024D14F2E0058F960 /* CLPlayer */,
 				00E4F427247CEE0600F71D18 /* KNPhotoBrowser */,
 				00A0FE712477CAF4001943EF /* jshare */,
@@ -2779,6 +2771,7 @@
 				004D7A4024C584E100EFFA82 /* UIView+HHAddition.m in Sources */,
 				00FE9B9C2476B878002A1F86 /* PPTextBackedString.m in Sources */,
 				00FE9BA02476B878002A1F86 /* NSString+Emoji.m in Sources */,
+				00302004252CCEC700F13AF2 /* AppDelegate+LWRemoveNotification.m in Sources */,
 				004D7A4424C5851500EFFA82 /* zNoticeUpDownCell.m in Sources */,
 				00B0A5D1246500180041C234 /* zXieYiController.m in Sources */,
 				0091FCFA245EC1700046691F /* zPersonalHeader.m in Sources */,
@@ -2892,7 +2885,6 @@
 				009FB66F2450093A00133974 /* zJiaoliuController.m in Sources */,
 				009E218E246A763500AD1637 /* SelectedListView.m in Sources */,
 				00B0A5F024654FB20041C234 /* zCompanyDetailCell.m in Sources */,
-				1834DEF925242CC9009EC855 /* LCVerticalBadgeBtn.m in Sources */,
 				006AA42F247BF78000DBD559 /* TZPhotoPreviewCell.m in Sources */,
 				00CA47792455BAEB006A2885 /* AnswerCell.m in Sources */,
 				006AA427247BF78000DBD559 /* TZAssetModel.m in Sources */,
@@ -3156,7 +3148,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 28;
-				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+				DEVELOPMENT_TEAM = NXHWCY9QS4;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -3172,7 +3164,10 @@
 				);
 				MARKETING_VERSION = 1.1.18;
 				OTHER_CFLAGS = (
-					"-Xclang\n-fcompatibility-qualified-id-block-type-checking",
+					"-Xclang",
+					"-fcompatibility-qualified-id-block-type-checking",
+					"-Xclang",
+					"-fcompatibility-qualified-id-block-type-checking",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
@@ -3189,7 +3184,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 28;
-				DEVELOPMENT_TEAM = 2DP4AM8QYG;
+				DEVELOPMENT_TEAM = NXHWCY9QS4;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Other/PrefixHeader.pch";
@@ -3205,7 +3200,10 @@
 				);
 				MARKETING_VERSION = 1.1.18;
 				OTHER_CFLAGS = (
-					"-Xclang\n-fcompatibility-qualified-id-block-type-checking",
+					"-Xclang",
+					"-fcompatibility-qualified-id-block-type-checking",
+					"-Xclang",
+					"-fcompatibility-qualified-id-block-type-checking",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
