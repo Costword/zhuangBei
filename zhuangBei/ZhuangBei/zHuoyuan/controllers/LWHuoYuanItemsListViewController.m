@@ -10,10 +10,11 @@
 #import "LWHuoYuanItemListCollectionViewCell.h"
 #import "LWHuoYuanThreeLevelViewController.h"
 #import "LWHuoYuanDaTingModel.h"
-
+#import "LWUpdateVersionManager.h"
 @interface LWHuoYuanItemsListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView * collectView;
 @property (nonatomic, strong) NSMutableArray<LWHuoYuanDaTingModel *> * listDatasMutableArray;
+@property (nonatomic, strong) LWUpdateVersionManager *updateManager;
 
 @end
 
@@ -26,7 +27,7 @@
         [self.collectView.mj_header endRefreshing];
         [self.collectView.mj_footer endRefreshing];
         
-//        LWLog(@"-------------货源大厅二级列表:%@",response);
+        //        LWLog(@"-------------货源大厅二级列表:%@",response);
         if ([response[@"code"] integerValue] == 0) {
             NSDictionary *page = response[@"page"];
             self.currPage = [page[@"currPage"] integerValue];
@@ -35,6 +36,12 @@
             if (self.currPage == 1) {
                 [self.listDatasMutableArray removeAllObjects];
             }
+            
+            LWHuoYuanDaTingModel *model = [LWHuoYuanDaTingModel new];
+            model.name = [NSString stringWithFormat:@"%@爆款",[self.titleStr substringToIndex:2]];
+            model.isBaoKuan = 1;
+            [self.listDatasMutableArray addObject:model];
+            
             for (NSDictionary *dict in list) {
                 [self.listDatasMutableArray addObject: [LWHuoYuanDaTingModel modelWithDictionary:dict]];
             }
@@ -81,8 +88,12 @@
 {
     LWHuoYuanItemListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LWHuoYuanItemListCollectionViewCell" forIndexPath:indexPath];
     LWHuoYuanDaTingModel *model = self.listDatasMutableArray[indexPath.row];
+    if (model.isBaoKuan == 1) {
+        cell.bgImageView.image = [UIImage imageNamed:@"bg_banner_3"];
+    }else{
+        [cell.bgImageView z_imageWithImageId:model.imagesId];
+    }
     cell.descL.text = model.name;
-    [cell.bgImageView z_imageWithImageId:model.imagesId];
     return cell;
 }
 
@@ -93,11 +104,16 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    LWHuoYuanThreeLevelViewController *itemslist = [LWHuoYuanThreeLevelViewController new];
     LWHuoYuanDaTingModel *model = self.listDatasMutableArray[indexPath.row];
-    itemslist.titleStr = model.name;
-    itemslist.zbTypeId = model.customId;
-    [self.navigationController pushViewController:itemslist animated:YES];
+    if (model.isBaoKuan == 1) {
+        _updateManager =  [LWUpdateVersionManager new];
+        [_updateManager  checkUpdate];
+    }else{
+        LWHuoYuanThreeLevelViewController *itemslist = [LWHuoYuanThreeLevelViewController new];
+        itemslist.titleStr = model.name;
+        itemslist.zbTypeId = model.customId;
+        [self.navigationController pushViewController:itemslist animated:YES];
+    }
 }
 
 - (UICollectionView *)collectView
@@ -116,7 +132,7 @@
         _collectView.dataSource = self;
         [_collectView registerClass:[LWHuoYuanItemListCollectionViewCell class] forCellWithReuseIdentifier:@"LWHuoYuanItemListCollectionViewCell"];
         _collectView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
-//        _collectView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
+        //        _collectView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
         
     }
     return _collectView;
@@ -126,8 +142,6 @@
 {
     if (!_listDatasMutableArray) {
         _listDatasMutableArray = [[NSMutableArray alloc] init];
-#warning +++++++++++testdatas
-        //        [self.listDatasMutableArray addObjectsFromArray:@[@"智慧警保管理软件",@"公安专用奖励品",@"特种柜体",@"暖警装备",]];
     }
     return _listDatasMutableArray;
 }
