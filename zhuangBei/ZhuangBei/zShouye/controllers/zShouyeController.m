@@ -136,6 +136,7 @@
 }
 
 
+
 -(void)sliderNavMenuSelectIndex:(NSInteger)index
 {
     CGPoint offset = self.childScroContentView.contentOffset;
