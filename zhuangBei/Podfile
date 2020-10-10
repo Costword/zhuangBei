@@ -21,6 +21,9 @@ target 'ZhuangBei' do
   pod 'SVGKit'
   pod 'WMZBanner'
   pod 'ReactiveObjC'
-  pod 'JPush'
+  pod 'UMCCommon'
+  pod 'UMCPush'
+  pod 'UMCCommonLog'
+  pod 'UMCSecurityPlugins'
 end   
 

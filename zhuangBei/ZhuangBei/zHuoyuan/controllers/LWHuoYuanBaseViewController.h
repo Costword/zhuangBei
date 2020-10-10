@@ -11,11 +11,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LWHuoYuanBaseViewController : baseViewController
+@property (nonatomic, assign) NSInteger baokuanGroupRoomId;
+
 
 - (void)refreshData;
 - (void)requestDatas;
 - (void)loadMore;
-
+- (void)showBaoKuanAleartView;
 @end
 
 NS_ASSUME_NONNULL_END
