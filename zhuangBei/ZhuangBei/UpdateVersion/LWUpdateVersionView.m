@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UIButton *rightBtn;
 @property (nonatomic, strong) UIView *line3;
 @property (nonatomic, strong) UIView *line2;
+@property (nonatomic, copy) void(^callBlock)(NSString *);
+@property (nonatomic, assign) BOOL isCanClickBgViewBool;
 
 @end
 
@@ -25,6 +27,8 @@
 
 - (void)showAleartViewWithTitle:(NSString *)title content:(NSString *)content btns:(NSArray *)btns callBlock:(void(^)(NSString *))block
 {
+    _isCanClickBgViewBool = YES;
+    _callBlock = block;
     [self configureUI];
     _titleL.text = title;
     _contentL.text = content;
@@ -90,6 +94,10 @@
         make.height.mas_lessThanOrEqualTo(window.mas_height).multipliedBy(0.9);
         make.height.mas_greaterThanOrEqualTo(window.mas_height).multipliedBy(0.3);
     }];
+    
+    if (_isCanClickBgViewBool) {
+        [bgmarkView ex_addTapAction:self selector:@selector(dismiss)];
+    }
 }
 
 - (void)clickBtnLeft
@@ -108,9 +116,12 @@
     }else if ([btn.titleLabel.text isEqualToString:@"马上尝试"]) {
         [self clickBtnRight];
     }else {
-        
+        if (self.callBlock) {
+            self.callBlock(btn.titleLabel.text);
+        }
     }
 }
+
 - (void)dismiss
 {
     [_bgmarkView removeFromSuperview];
@@ -156,10 +167,10 @@
         }
         _contentL = contentL;
         
-        UIButton *btn1 = [LWButton lw_button:@"忽略" font:14 textColor:BASECOLOR_TEXTCOLOR backColor:UIColor.whiteColor target:self acction:@selector(clickBtnLeft)];
+        UIButton *btn1 = [LWButton lw_button:@"忽略" font:14 textColor:BASECOLOR_TEXTCOLOR backColor:UIColor.whiteColor target:self acction:@selector(clickBtnsEvents:)];
         _leftBtn = btn1;
         
-        UIButton *btn2 = [LWButton lw_button:@"马上尝试" font:14 textColor:BASECOLOR_TEXTCOLOR backColor:UIColor.whiteColor target:self acction:@selector(clickBtnRight)];
+        UIButton *btn2 = [LWButton lw_button:@"马上尝试" font:14 textColor:BASECOLOR_TEXTCOLOR backColor:UIColor.whiteColor target:self acction:@selector(clickBtnsEvents:)];
         _rightBtn = btn2;
         
         [_bgView addSubviews:@[titelL,line1,line2,line3,contentL,btn1,btn2]];

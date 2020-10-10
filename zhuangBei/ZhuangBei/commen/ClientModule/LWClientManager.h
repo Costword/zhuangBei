@@ -154,5 +154,9 @@ typedef void(^RequestFailure)(NSError *error);
 /// 播放消息声音
 + (void)soundBell;
 
+/// 根据roomid 过滤未读数
+/// @param roomId 聊天是id
+- (NSArray *)getUnReadMessageDataWithRoomId:(NSInteger)roomId;
+
 @end
 

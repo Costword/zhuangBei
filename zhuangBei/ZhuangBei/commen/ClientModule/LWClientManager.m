@@ -592,6 +592,19 @@ static NSString *const sendmsg_group_url  = @"app/appgroupmessage/save";
     return num;
 }
 
+/// 根据roomid 过滤未读数
+/// @param roomId 聊天是id
+- (NSArray *)getUnReadMessageDataWithRoomId:(NSInteger)roomId {
+    NSMutableArray *unreadArray = [[NSMutableArray alloc] init];
+    NSMutableArray *unreadmsg = [self getLocalUnReadMsg];
+    [unreadmsg enumerateObjectsUsingBlock:^(LWLocalChatRecordModel * obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.roomId integerValue] == roomId) {
+            [unreadArray addObject:obj];
+        }
+    }];
+    return [unreadArray copy];
+}
+
 - (NSMutableDictionary *)allGroupDatas
 {
     if (!_allGroupDatas) {

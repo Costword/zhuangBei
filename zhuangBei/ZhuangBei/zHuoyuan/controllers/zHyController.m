@@ -12,7 +12,6 @@
 #import "LWHuoYuanDaTingModel.h"
 #import "zNetWorkManger.h"
 
-
 @interface zHyController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView * collectView;
 @property (nonatomic, strong) NSMutableArray<LWHuoYuanDaTingModel *> * listDatasMutableArray;
@@ -42,6 +41,9 @@
             LWHuoYuanDaTingModel *model = [LWHuoYuanDaTingModel new];
             model.name = @"联盟爆款";
             model.isBaoKuan = 1;
+            NSString *imageurl = @"https://zhkj001.oss-cn-beijing.aliyuncs.com/联盟爆款.jpg";
+            imageurl = [imageurl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            model.imageUrl = imageurl;
             [self.listDatasMutableArray addObject:model];
             
             for (NSDictionary *dict in list) {
@@ -97,7 +99,8 @@
     LWHuoYuanDaTingModel *model = self.listDatasMutableArray[indexPath.row];
     cell.descL.text = model.name;
     if (model.isBaoKuan == 1) {
-        cell.bgImageView.image = [UIImage imageNamed:@"bg_banner_3"];
+        NSURL *url = [NSURL URLWithString:model.imageUrl];
+        [cell.bgImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholdericon.svg"]];
     }else{
         [cell.bgImageView z_imageWithImageId:model.imagesId];
     }
@@ -113,8 +116,7 @@
 {
     LWHuoYuanDaTingModel *model = self.listDatasMutableArray[indexPath.row];
     if (model.isBaoKuan == 1) {
-//        _updateManager =  [LWUpdateVersionManager new];
-//        [_updateManager  checkUpdate];
+        [self showBaoKuanAleartView];
     }else{
         LWHuoYuanItemsListViewController *itemslist = [LWHuoYuanItemsListViewController new];
         itemslist.titleStr = model.name;

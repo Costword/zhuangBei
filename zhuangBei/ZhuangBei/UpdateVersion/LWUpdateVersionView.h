@@ -14,6 +14,6 @@
 + (instancetype)showWithModel:(LWUpdateVersionModel *)model;
 
 - (void)showAleartViewWithTitle:(NSString *)title content:(NSString *)content btns:(NSArray *)btns callBlock:(void(^)(NSString *))block;
-
+- (void)dismiss;
 @end
 

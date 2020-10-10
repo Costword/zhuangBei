@@ -37,9 +37,13 @@
                 [self.listDatasMutableArray removeAllObjects];
             }
             
+            NSString *title_sub = [self.titleStr substringToIndex:2];
             LWHuoYuanDaTingModel *model = [LWHuoYuanDaTingModel new];
-            model.name = [NSString stringWithFormat:@"%@爆款",[self.titleStr substringToIndex:2]];
+            model.name = [NSString stringWithFormat:@"%@爆款",[title_sub isEqualToString:@"特巡"]?@"特警":title_sub];
             model.isBaoKuan = 1;
+            NSString *imageurl = [NSString stringWithFormat:@"https://zhkj001.oss-cn-beijing.aliyuncs.com/%@.jpg",[title_sub isEqualToString:@"特巡"]?@"特警":title_sub];
+            imageurl = [imageurl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            model.imageUrl = imageurl;
             [self.listDatasMutableArray addObject:model];
             
             for (NSDictionary *dict in list) {
@@ -89,7 +93,7 @@
     LWHuoYuanItemListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LWHuoYuanItemListCollectionViewCell" forIndexPath:indexPath];
     LWHuoYuanDaTingModel *model = self.listDatasMutableArray[indexPath.row];
     if (model.isBaoKuan == 1) {
-        cell.bgImageView.image = [UIImage imageNamed:@"bg_banner_3"];
+        [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
     }else{
         [cell.bgImageView z_imageWithImageId:model.imagesId];
     }
@@ -106,8 +110,7 @@
 {
     LWHuoYuanDaTingModel *model = self.listDatasMutableArray[indexPath.row];
     if (model.isBaoKuan == 1) {
-        _updateManager =  [LWUpdateVersionManager new];
-        [_updateManager  checkUpdate];
+        [self showBaoKuanAleartView];
     }else{
         LWHuoYuanThreeLevelViewController *itemslist = [LWHuoYuanThreeLevelViewController new];
         itemslist.titleStr = model.name;
