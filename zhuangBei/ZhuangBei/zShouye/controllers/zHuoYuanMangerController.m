@@ -17,6 +17,8 @@
 #import "LEEAlert.h"
 //#import "ChatRoomViewController.h"
 #import "MessageGroupViewController.h"
+#import "ServiceManager.h"
+#import "zShouyeTuiGuangCell.h"
 
 @interface zHuoYuanMangerController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -26,6 +28,12 @@
 @property(strong,nonatomic)NSArray * categoryArray;
 
 @property(strong,nonatomic)NSArray * notiArray;
+
+//签到状态
+@property(strong,nonatomic)NSDictionary * qiandaoDic;
+
+//推广
+@property(strong,nonatomic)NSArray * tuiguangArray;
 
 @end
 
@@ -122,6 +130,38 @@
     } failure:^(NSError * _Nonnull error) {
         
     }];
+    [self getQinadaoState];
+    [self getTuiguangData];
+}
+
+-(void)getTuiguangData
+{
+    [ServiceManager requestGetWithUrl:kTuiguang Parameters:nil success:^(id  _Nonnull response) {
+        NSArray * data = response[@"data"];
+        self.tuiguangArray = data;
+        [self.menuTableView reloadData];
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
+-(void)getQinadaoState{
+    [ServiceManager requestGetWithUrl:kQiandaoFindOne Parameters:nil success:^(id  _Nonnull response) {
+        NSDictionary * data = response[@"data"];
+        self.qiandaoDic = data;
+        [self.menuTableView reloadData];
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
+-(void)qiandaoRequest{
+    [self requestPostWithUrl:kQiandaoSignIn body:nil success:^(id  _Nonnull response) {
+        NSDictionary * data = response[@"data"];
+        [self getQinadaoState];
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 -(void)viewDidLayoutSubviews
@@ -136,7 +176,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,6 +185,10 @@
         
         zNoticeUpDownCell * cell = [zNoticeUpDownCell instanceWithTableView:tableView AndIndexPath:indexPath];
         cell.Array = self.notiArray;
+        cell.userStateDic =self.qiandaoDic;
+        [cell.qiandaoSignal subscribeNext:^(id  _Nullable x) {
+            [self qiandaoRequest];
+        }];
         return cell;
     }else if(indexPath.row == 1)
     {
@@ -181,10 +225,15 @@
             }
         };
         return categoryCell;
+    }else if (indexPath.row ==  2)
+    {
+        zShouyeTuiGuangCell  * tuiguangcell = [zShouyeTuiGuangCell instanceWithTableView:tableView AndIndexPath:indexPath];
+        tuiguangcell.sourceArray = self.tuiguangArray;
+        return tuiguangcell;
     }else
     {
         zBaoKuanCell * baoKuanCell = [zBaoKuanCell instanceWithTableView:tableView AndIndexPath:indexPath];
-        __weak typeof(self)weakSelf = self;
+//        __weak typeof(self)weakSelf = self;
         baoKuanCell.baokuanTapback = ^(NSDictionary * _Nonnull sourceDic) {
             NSString * content = @"爆款规则：\n1.有发明专利证书者\n2.功勋币换取爆款推荐\n3.本平台内搜索热度/被关注度最高者";
             [LEEAlert alert].config
@@ -247,6 +296,8 @@
 //    dlVC.title = @"登陆";
 //    [self.navigationController pushViewController:dlVC animated:YES];
 }
+
+
 
 
 @end

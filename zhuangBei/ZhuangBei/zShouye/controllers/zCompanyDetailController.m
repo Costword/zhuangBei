@@ -89,7 +89,7 @@
                 self.nothingView.alpha =0;
                 [self.goodsListArray removeAllObjects];
                 [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    NSDictionary * dic = list[idx];
+                    NSDictionary * dic =  list[idx];
                     zCompanyGoodsModel * model = [zCompanyGoodsModel mj_objectWithKeyValues:dic];
                     [self.goodsListArray addObject:model];
                 }];
@@ -142,6 +142,7 @@
         zCompanyDetailCell * cell = [zCompanyDetailCell instanceWithTableView:tableView AndIndexPath:indexPath];
         cell.typesArray = @[];
         cell.goosModel = _goosModel;
+        cell.goodsArray = self.goodsListArray;
         return cell;
     }else
     {

@@ -48,7 +48,7 @@ typedef void (^BannerClickBlock)(id anyID,NSInteger index);
 /*
  * 自定义pageControl
  */
-typedef void (^BannerPageControl)(UIPageControl* pageControl);
+typedef void (^BannerPageControl)(UIControl* pageControl);
 
 /*
  * 点击 ,可获取居中cell
@@ -61,12 +61,32 @@ typedef void (^BannerCenterClickBlock)(id anyID,NSInteger index,BOOL isCenter,UI
 typedef void (^BannerScrollEndBlock)(id anyID,NSInteger index,BOOL isCenter,UICollectionViewCell* cell);
 
 /*
+* 滚动
+*/
+typedef void (^BannerScrollBlock)(long contentoffet);
+
+/*
+ * 自定义下划线
+ */
+typedef void (^BannerSpecialLine)(UIView *line);
+
+/*
  *cell动画的位置
  */
 typedef enum :NSInteger{
     BannerCellPositionCenter      = 0,             //居中 默认
     BannerCellPositionBottom      = 1,             //置底
+    BannerCellPositionTop         = 2,             //顶部
 }BannerCellPosition;
+
+
+/*
+ *特殊样式
+ */
+typedef enum :NSInteger{
+    SpecialStyleLine      = 1,             //下划线
+    SpecialStyleFirstScale      = 2,       //首个变大效果
+}SpecialStyle;
 
 /*
  *pageControl的位置

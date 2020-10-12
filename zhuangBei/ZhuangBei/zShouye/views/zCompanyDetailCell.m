@@ -10,10 +10,14 @@
 #import "KKPaddingLabel.h"
 #import "zCityCollectionCell.h"
 #import "UICollectionViewLeftAlignedLayout.h"
+#import "zCompanyGoodsCollectionCell.h"
+#import "zCompanyCollectionHeaderView.h"
 
 @interface zCompanyDetailCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property(strong,nonatomic)UIView * BaseView;
+
+@property(strong,nonatomic)UIImageView * logoImageView;
 
 @property(strong,nonatomic)UILabel * companyName;//名称
 @property(strong,nonatomic)UILabel * companyType;//类型
@@ -41,6 +45,8 @@
 
 @property(strong,nonatomic)UICollectionView * cityCollectView;
 
+@property(strong,nonatomic)UICollectionView * goodsCollectView;
+
 @end
 
 @implementation zCompanyDetailCell
@@ -60,25 +66,56 @@
     return _BaseView;
 }
 
--(UICollectionView*)cityCollectView
+-(UIImageView*)logoImageView
 {
-    if (!_cityCollectView) {
+    if (!_logoImageView) {
+        _logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH*0.6, SCREEN_WIDTH*0.75*0.6)];
+        _logoImageView.image = [_logoImageView z_getPlaceholderImageWithSVG];
+    }
+    return _logoImageView;
+}
+
+//-(UICollectionView*)cityCollectView
+//{
+//    if (!_cityCollectView) {
+//        UICollectionViewLeftAlignedLayout * layout = [[UICollectionViewLeftAlignedLayout alloc]init];
+//        layout.sectionInset = UIEdgeInsetsMake(10,0, 10,0);
+//        layout.minimumLineSpacing = kWidthFlot(10);
+//        layout.minimumInteritemSpacing = kWidthFlot(10);
+//        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+//        _cityCollectView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+//        _cityCollectView.showsVerticalScrollIndicator = NO;
+//        _cityCollectView.backgroundColor = [UIColor clearColor];
+//        _cityCollectView.delegate = self;
+//        _cityCollectView.dataSource = self;
+//        _cityCollectView.scrollEnabled = NO;
+//        [_cityCollectView registerClass:[zCityCollectionCell class] forCellWithReuseIdentifier:@"zCityCollectionCell"];
+//        _cityCollectView.delegate = self;
+//        _cityCollectView.dataSource = self;
+//    }
+//    return _cityCollectView;
+//}
+
+-(UICollectionView *)goodsCollectView
+{
+    if (!_goodsCollectView) {
         UICollectionViewLeftAlignedLayout * layout = [[UICollectionViewLeftAlignedLayout alloc]init];
-        layout.sectionInset = UIEdgeInsetsMake(10,0, 10,0);
+        layout.sectionInset = UIEdgeInsetsMake(10,10, 10,10);
         layout.minimumLineSpacing = kWidthFlot(10);
         layout.minimumInteritemSpacing = kWidthFlot(10);
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _cityCollectView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-        _cityCollectView.showsVerticalScrollIndicator = NO;
-        _cityCollectView.backgroundColor = [UIColor clearColor];
-        _cityCollectView.delegate = self;
-        _cityCollectView.dataSource = self;
-        _cityCollectView.scrollEnabled = NO;
-        [_cityCollectView registerClass:[zCityCollectionCell class] forCellWithReuseIdentifier:@"zCityCollectionCell"];
-        _cityCollectView.delegate = self;
-        _cityCollectView.dataSource = self;
+        _goodsCollectView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        _goodsCollectView.showsVerticalScrollIndicator = NO;
+        _goodsCollectView.backgroundColor = [UIColor clearColor];
+        _goodsCollectView.delegate = self;
+        _goodsCollectView.dataSource = self;
+        _goodsCollectView.scrollEnabled = NO;
+        [_goodsCollectView registerClass:[zCompanyGoodsCollectionCell class] forCellWithReuseIdentifier:@"zCompanyGoodsCollectionCell"];
+        [_goodsCollectView registerClass:[zCompanyCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"zCompanyCollectionHeaderView"];
+        _goodsCollectView.delegate = self;
+        _goodsCollectView.dataSource = self;
     }
-    return _cityCollectView;
+    return _goodsCollectView;
 }
 
 
@@ -88,14 +125,15 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.BaseView];
-        self.companyName =           [self creatNameLabel];
-        self.companyName.text = @"公司名称*";
+//        self.companyName =           [self creatNameLabel];
+//        self.companyName.text = @"公司名称*";
+        [self.BaseView addSubview:self.logoImageView];
         self.companyType =           [self creatNameLabel];
-        self.companyType.text = @"公司类型*";
+        self.companyType.text = @"公司类型";
         self.companyFaren =          [self creatNameLabel];
-        self.companyFaren.text = @"公司法人*";
+        self.companyFaren.text = @"公司法人";
         self.companyAddress =        [self creatNameLabel];
-        self.companyAddress.text = @"公司所在地*";
+        self.companyAddress.text = @"公司所在省";
         self.companyDate =           [self creatNameLabel];
         self.companyDate.text = @"成立日期";
         self.companyBusiness=        [self creatNameLabel];
@@ -109,9 +147,9 @@
         self.companyCurrentAddress = [self creatNameLabel];
         self.companyCurrentAddress.text = @"办公地址";
         self.companyPolice =         [self creatNameLabel];
-        self.companyPolice.text = @"主营警种";
+        self.companyPolice.text = @"主营产品";
         
-        self.companyNameContent =           [self creatContentLabel];
+//        self.companyNameContent =           [self creatContentLabel];
         self.companyTypeContent =           [self creatContentLabel];
         self.companyFarenContent =          [self creatContentLabel];
         self.companyAddressContent =        [self creatContentLabel];
@@ -126,6 +164,7 @@
         self.companyPoliceContent =         [self creatContentLabel];
         
         [self.BaseView addSubview:self.cityCollectView];
+        [self.BaseView addSubview:self.goodsCollectView];
         [self updateConstraintsForView];
     }
     return self;
@@ -139,45 +178,49 @@
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     
-    CGFloat left = kWidthFlot(30);
+    CGFloat left = kWidthFlot(10);
     CGFloat top = kWidthFlot(10);
-    CGFloat width = kWidthFlot(100);
-    CGFloat right = kWidthFlot(40);
+    CGFloat width = kWidthFlot(80);
+    CGFloat right = kWidthFlot(150);
     
-    [self.companyName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(left);
-        make.top.mas_equalTo(top);
-        make.width.mas_equalTo(width);
-        make.height.mas_equalTo(height);
-    }];
-    [self.companyNameContent mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.companyName.mas_right).offset(top);
-        make.top.mas_equalTo(top);
-        make.right.mas_equalTo(-right);
-        make.height.mas_equalTo(height);
-    }];
+//    [self.companyName mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(left);
+//        make.top.mas_equalTo(top);
+//        make.width.mas_equalTo(width);
+//        make.height.mas_equalTo(height);
+//    }];
+//    [self.companyNameContent mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(self.companyName.mas_right).offset(top);
+//        make.top.mas_equalTo(top);
+//        make.right.mas_equalTo(-right);
+//        make.height.mas_equalTo(height);
+//    }];
     
+    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(top);
+        make.right.mas_equalTo(-5);
+        make.size.mas_equalTo(CGSizeMake(kWidthFlot(140),kWidthFlot(104)));
+    }];
     [self.companyType mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
-        make.top.mas_equalTo(self.companyName.mas_bottom).offset(top);
+        make.top.mas_equalTo(top);
         make.width.mas_equalTo(width);
         make.height.mas_equalTo(height);
     }];
     [self.companyTypeContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.companyType.mas_right).offset(top);
-        make.top.mas_equalTo(self.companyName.mas_bottom).offset(top);
+        make.top.mas_equalTo(top);
         make.right.mas_equalTo(-right);
         make.height.mas_equalTo(height);
     }];
-    
-    [self.companyFaren mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.companyDate mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyType.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
         make.height.mas_equalTo(height);
     }];
-    [self.companyFarenContent mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.companyFaren.mas_right).offset(top);
+    [self.companyDateContent mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.companyDate.mas_right).offset(top);
         make.top.mas_equalTo(self.companyType.mas_bottom).offset(top);
         make.right.mas_equalTo(-right);
         make.height.mas_equalTo(height);
@@ -185,39 +228,51 @@
     
     [self.companyAddress mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
-        make.top.mas_equalTo(self.companyFaren.mas_bottom).offset(top);
+        make.top.mas_equalTo(self.companyDate.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
         make.height.mas_equalTo(height);
     }];
     [self.companyAddressContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.companyAddress.mas_right).offset(top);
-        make.top.mas_equalTo(self.companyFaren.mas_bottom).offset(top);
+        make.top.mas_equalTo(self.companyDate.mas_bottom).offset(top);
         make.right.mas_equalTo(-right);
         make.height.mas_equalTo(height);
     }];
     
-    [self.companyDate mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.companyFaren mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyAddress.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
         make.height.mas_equalTo(height);
     }];
-    [self.companyDateContent mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.companyDate.mas_right).offset(top);
+    [self.companyFarenContent mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.companyFaren.mas_right).offset(top);
         make.top.mas_equalTo(self.companyAddress.mas_bottom).offset(top);
         make.right.mas_equalTo(-right);
         make.height.mas_equalTo(height);
     }];
     
+    [self.companyCurrentAddress mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(left);
+        make.top.mas_equalTo(self.companyFaren.mas_bottom).offset(top);
+        make.width.mas_equalTo(width);
+        make.height.mas_equalTo(height);
+    }];
+    [self.companyCurrentAddressContent mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.companyCurrentAddress.mas_right).offset(top);
+        make.top.mas_equalTo(self.companyFaren.mas_bottom).offset(top);
+        make.right.mas_equalTo(-right);
+    }];
+    
     [self.companyBusiness mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
-        make.top.mas_equalTo(self.companyDate.mas_bottom).offset(top);
+        make.top.mas_equalTo(self.companyCurrentAddress.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
         make.height.mas_equalTo(height);
     }];
     [self.companyBusinessContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.companyBusiness.mas_right).offset(top);
-        make.top.mas_equalTo(self.companyDate.mas_bottom).offset(top);
+        make.top.mas_equalTo(self.companyCurrentAddress.mas_bottom).offset(top);
         make.right.mas_equalTo(-right);
         make.height.mas_equalTo(height);
     }];
@@ -237,7 +292,7 @@
         make.height.mas_equalTo(height);
     }];
 
-    
+    //公司官网
     [self.companyWeb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyEmail.mas_bottom).offset(top);
@@ -251,9 +306,24 @@
         make.height.mas_equalTo(height);
     }];
     
-    [self.companyDesc mas_makeConstraints:^(MASConstraintMaker *make) {
+    //主营产品
+    [self.companyPolice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(left);
         make.top.mas_equalTo(self.companyWeb.mas_bottom).offset(top);
+        make.width.mas_equalTo(width);
+        make.height.mas_equalTo(height);
+    }];
+    [self.companyPoliceContent mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(left);
+        make.top.mas_equalTo(self.companyPolice.mas_bottom).offset(top);
+        make.right.mas_equalTo(-right);
+        make.height.mas_equalTo(height);
+    }];
+    
+    //公司简介
+    [self.companyDesc mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(left);
+        make.top.mas_equalTo(self.companyPoliceContent.mas_bottom).offset(top);
         make.width.mas_equalTo(width);
         make.height.mas_equalTo(height);
     }];
@@ -264,52 +334,50 @@
         make.height.mas_equalTo(height);
     }];
     
-    [self.companyCurrentAddress mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(left);
-        make.top.mas_equalTo(self.companyDescContent.mas_bottom).offset(top);
-        make.width.mas_equalTo(width);
-        make.height.mas_equalTo(height);
-    }];
-    [self.companyCurrentAddressContent mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(left);
-        make.top.mas_equalTo(self.companyCurrentAddress.mas_bottom).offset(top);
-        make.right.mas_equalTo(-right);
-    }];
-    
-    [self.companyPolice mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(left);
-        make.top.mas_equalTo(self.companyCurrentAddressContent.mas_bottom).offset(top);
-        make.width.mas_equalTo(width);
-        make.height.mas_equalTo(height);
-    }];
-    
-    [self.cityCollectView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.companyPolice.mas_bottom).offset(kWidthFlot(10));
-        make.left.mas_equalTo(left);
-        make.right.mas_equalTo(-right);
+    //已上架货源
+    [self.goodsCollectView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.companyDescContent.mas_bottom).offset(kWidthFlot(10));
+        make.left.mas_equalTo(0);
+        make.right.mas_equalTo(0);
         make.height.mas_equalTo(kWidthFlot(1)).priorityLow();
         make.bottom.mas_equalTo(-kWidthFlot(top));
     }];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 0;
+    if (collectionView == self.cityCollectView) {
+        return 0;
+    }else
+    {
+        return self.goodsArray.count;
+    }
+    
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    zCityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"zCityCollectionCell" forIndexPath:indexPath];
-    cell.backColor = [UIColor colorWithHexString:@"#EFEFEF"];
-    NSString * city = [NSString stringWithFormat:@"类型-%ld",(long)indexPath.item];
-    cell.souceString = city;
+    
+    zCompanyGoodsCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"zCompanyGoodsCollectionCell" forIndexPath:indexPath];
+    zCompanyGoodsModel * model = self.goodsArray[indexPath.row];
+    cell.goosModel = model;
     return cell;
+}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    zCompanyCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"zCompanyCollectionHeaderView" forIndexPath:indexPath];
+    return headerView;
 }
 
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString * city = [NSString stringWithFormat:@"类型-%ld",(long)indexPath.item];
-    return [self stringSize:city];
-//    return CGSizeMake(kWidthFlot(70), kWidthFlot(30));
+//    NSString * city = [NSString stringWithFormat:@"类型-%ld",(long)indexPath.item];
+//    return [self stringSize:city];
+    return CGSizeMake((SCREEN_WIDTH-20-kWidthFlot(20))/3, kWidthFlot(90));
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return CGSizeMake(SCREEN_WIDTH, kWidthFlot(50));
 }
 
 - (CGSize)stringSize:(NSString *)string {
@@ -333,6 +401,19 @@
     }];
 }
 
+-(void)setGoodsArray:(NSArray *)goodsArray
+{
+    _goodsArray = goodsArray;
+    [self.goodsCollectView reloadData];
+    [self.goodsCollectView layoutIfNeeded];
+    CGFloat height = self.goodsCollectView.collectionViewLayout.collectionViewContentSize.height;
+
+    [self.goodsCollectView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(height).priorityHigh();
+    }];
+    
+}
+
 -(UILabel*)creatNameLabel
 {
     UILabel *  nameLabel = [[UILabel alloc]init];
@@ -351,8 +432,8 @@
     CGFloat fitSize = kWidthFlot(14);
     contentLabel.font = kFont(fitSize);
     contentLabel.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
-    contentLabel.layer.borderWidth = 1;
-    contentLabel.layer.borderColor =[UIColor colorWithHexString:@"#9B9B9B"].CGColor;
+//    contentLabel.layer.borderWidth = 1;
+//    contentLabel.layer.borderColor =[UIColor colorWithHexString:@"#9B9B9B"].CGColor;
     contentLabel.numberOfLines = 0;
     contentLabel.padding = UIEdgeInsetsMake(10, 5, 10, 5);
     [self.BaseView addSubview:contentLabel];
@@ -376,23 +457,58 @@
 -(void)setGoosModel:(zGoodsContentModel *)goosModel
 {
     _goosModel = goosModel;
+    //公司名
     self.companyNameContent.text = goosModel.name;
+    //公司类型
     
-    self.companyTypeContent.text = goosModel.companyType;
+    NSInteger companytype  = [goosModel.companyType integerValue];
     
-    self.companyDateContent.text = goosModel.createDate;
+    switch (companytype) {
+        case 0:
+        {
+            //生产厂家
+            self.companyTypeContent.text =@"生产厂家";
+        }
+            break;
+        case 1:
+        {
+            //渠道经销商
+            self.companyTypeContent.text =@"渠道经销商";
+        }
+            break;
+        case 2:
+        {
+            //全国总代理
+            self.companyTypeContent.text =@"全国总代理";
+        }
+            break;
+            
+        default:
+            break;
+    }
+    NSString * dateStr =nil;
+    if (goosModel.createDate.length>0) {
+        dateStr = [goosModel.createDate substringToIndex:10];
+    }
     
-    self.companyFarenContent.text = goosModel.faRen;
+    //成立日期
+    self.companyDateContent.text = dateStr==nil?@"暂无":dateStr;
+    //公司 法人
+    self.companyFarenContent.text = goosModel.faRen.length==0?@"暂无":goosModel.faRen;
+    //商务联系
+    self.companyBusinessContent.text = goosModel.phone.length==0?@"暂无":goosModel.phone;;
+    //邮箱
+    self.companyEmailContent.text = goosModel.email.length==0?@"暂无":goosModel.email;
+    //公司官网
+    self.companyWebContent.text = goosModel.gongSiUrl.length==0?@"暂无":goosModel.gongSiUrl;
+    //公司简介
+    self.companyDescContent.text = goosModel.approveText.length==0?@"暂无":goosModel.approveText;
+    self.companyAddressContent.text =goosModel.regLocation.length==0?@"暂无":goosModel.regLocation;
+    self.companyCurrentAddressContent.text = goosModel.regLocation.length==0?@"暂无":goosModel.regLocation;
+    self.companyPoliceContent.text = goosModel.mainPoliceClassification.length==0?@"暂无":goosModel.mainPoliceClassification;
     
-    self.companyBusinessContent.text = goosModel.phone;
     
-    self.companyEmailContent.text = goosModel.email;
     
-    self.companyWebContent.text = goosModel.gongSiUrl;
-    
-    self.companyDescContent.text = goosModel.approveText;
-    
-    self.companyCurrentAddressContent.text = goosModel.regLocation;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

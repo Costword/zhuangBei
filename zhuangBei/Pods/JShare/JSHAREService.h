@@ -11,7 +11,7 @@
 
 
 
-#define JSHARE_VERSION_NUMBER 1.8.1
+#define JSHARE_VERSION_NUMBER 1.9.0
 
 #import <Foundation/Foundation.h>
 
@@ -146,6 +146,10 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  *  JChatPro Auth
  */
 @property (nonatomic, copy) NSString *JChatProAuth;
+/*
+*  应用的 Universal link
+*/
+@property (nonatomic, copy) NSString *universalLink;
 
 @end
 

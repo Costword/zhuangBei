@@ -19,9 +19,19 @@ const CGFloat kleftMargin = 20.f;
 
 @property (nonatomic, strong) MarqueeView *marqueeView;
 
+@property (nonatomic, strong) UIButton *qiandaoBtn;
+
 @end
 
 @implementation zNoticeUpDownCell
+
+- (RACSubject *)qiandaoSignal
+{
+    if (!_qiandaoSignal) {
+        _qiandaoSignal = [RACSubject subject];
+    }
+    return _qiandaoSignal;
+}
 
 +(zNoticeUpDownCell*)instanceWithTableView:(UITableView*)tableView AndIndexPath:(NSIndexPath*)indexPath
 {
@@ -35,9 +45,6 @@ const CGFloat kleftMargin = 20.f;
 {
     if (!_baseView) {
         _baseView = [[UIView alloc]init];
-//        _baseView.layer.borderColor = [UIColor colorWithHexString:@"#DDDDDD"].CGColor;
-//        _baseView.layer.borderWidth = 1;
-//        _baseView.layer.cornerRadius = kWidthFlot(8);
     }
     return _baseView;
 }
@@ -70,6 +77,32 @@ const CGFloat kleftMargin = 20.f;
 
 }
 
+-(UIButton *)qiandaoBtn
+{
+    if (!_qiandaoBtn) {
+        _qiandaoBtn = [[UIButton alloc]init];
+        _qiandaoBtn.layer.cornerRadius = 3;
+        _qiandaoBtn.titleLabel.font = [UIFont systemFontOfSize:kWidthFlot(12)];
+        [_qiandaoBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
+        [_qiandaoBtn setTitle:@"签到" forState:UIControlStateNormal];
+        [_qiandaoBtn setTitle:@"已签到" forState:UIControlStateSelected];
+        [_qiandaoBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_qiandaoBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        @weakify(self);
+        [[self.qiandaoBtn rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(__kindof UIControl * _Nullable x) {
+            @strongify(self);
+            if (x.selected) {
+                
+            }else
+            {
+                self.qiandaoBtn.selected = YES;
+                [self.qiandaoSignal sendNext:@"签到"];
+            }
+        }];
+    }
+    return _qiandaoBtn;
+}
+
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -78,6 +111,7 @@ const CGFloat kleftMargin = 20.f;
         [self.contentView addSubview:self.baseView];
         [self.baseView addSubview:self.noticImageView];
         [self.baseView addSubview:self.marqueeView];
+        [self.baseView addSubview:self.qiandaoBtn];
         [self updateConstraintsForView];
     }
     return self;
@@ -100,9 +134,15 @@ const CGFloat kleftMargin = 20.f;
     }];
     [self.marqueeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.noticImageView.mas_right).offset(kWidthFlot(5));
-        make.right.mas_equalTo(self.baseView.mas_right).offset(-kWidthFlot(5));
+        make.right.mas_equalTo(self.baseView.mas_right).offset(-kWidthFlot(70));
         make.centerY.mas_equalTo(self.baseView.mas_centerY);
         make.height.mas_equalTo(kWidthFlot(20));
+    }];
+    
+    [self.qiandaoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.baseView.mas_right).offset(0);
+        make.centerY.mas_equalTo(self.baseView.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(kWidthFlot(60), kWidthFlot(25)));
     }];
     
 }
@@ -120,6 +160,19 @@ const CGFloat kleftMargin = 20.f;
     }];
     self.marqueeView.titleArr = titlesArr;
     
+}
+
+-(void)setUserStateDic:(NSDictionary *)userStateDic
+{
+    NSString * isSign = userStateDic[@"isSign"];
+    if ([isSign integerValue]==0) {
+        self.qiandaoBtn.selected = NO;
+        self.qiandaoBtn.backgroundColor = [UIColor colorWithHexString:@"#fa8281"];
+    }else
+    {
+        self.qiandaoBtn.selected = YES;
+        self.qiandaoBtn.backgroundColor = [UIColor grayColor];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

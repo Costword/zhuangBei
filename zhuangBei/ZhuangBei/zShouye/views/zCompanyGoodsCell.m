@@ -10,6 +10,8 @@
 
 @interface zCompanyGoodsCell ()
 
+@property(strong,nonatomic)UIImageView * bgImageView;
+
 @property(strong,nonatomic)UILabel * NameLabel;
 
 @property(strong,nonatomic)UILabel * contentLabel;
@@ -26,6 +28,14 @@
     zCompanyGoodsCell * cell = [[zCompanyGoodsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+-(UIImageView *)bgImageView
+{
+    if (!_bgImageView) {
+        _bgImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"huoyuanBG"]];
+    }
+    return _bgImageView;
 }
 
 -(UILabel*)NameLabel
@@ -65,9 +75,10 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
-        [self.contentView addSubview:self.NameLabel];
-        [self.contentView addSubview:self.contentLabel];
-        [self.contentView addSubview:self.lineView];
+        [self.contentView addSubview:self.bgImageView];
+        [self.bgImageView addSubview:self.NameLabel];
+        [self.bgImageView addSubview:self.contentLabel];
+        [self.bgImageView addSubview:self.lineView];
         [self updateConstraintsForView];
     }
     return self;
@@ -76,6 +87,9 @@
 
 -(void)updateConstraintsForView
 {
+    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
     [self.NameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(kWidthFlot(20));
         make.height.mas_equalTo(kWidthFlot(30));

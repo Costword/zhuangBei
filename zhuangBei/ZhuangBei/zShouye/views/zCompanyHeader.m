@@ -37,8 +37,6 @@
 {
     if (!_logoImageView) {
         _logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH*0.6, SCREEN_WIDTH*0.75*0.6)];
-        _logoImageView.backgroundColor = [UIColor redColor];
-//        _logoImageView.contentMode = UIViewContentModeScaleAspectFit;
         _logoImageView.image = [_logoImageView z_getPlaceholderImageWithSVG];
     }
     return _logoImageView;
@@ -51,7 +49,6 @@
         _logoLabel.font = kFont(20);
         _logoLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         _logoLabel.numberOfLines = 0;
-        _logoLabel.text = @"公司LOGO";
     }
     return _logoLabel;
 }
@@ -135,12 +132,12 @@
         [self addSubview:self.baseView];
         
         [self.baseView addSubview:self.logoLabel];
-        [self.baseView addSubview:self.logoImageView];
-        [self.baseView addSubview:self.nameLabel];
-        [self.baseView addSubview:self.timeLabel];
-        [self.baseView addSubview:self.descNameLabel];
-        [self.baseView addSubview:self.descContentLabel];
-        [self.baseView addSubview:self.navigationSliderMenu];
+//        [self.baseView addSubview:self.logoImageView];
+//        [self.baseView addSubview:self.nameLabel];
+//        [self.baseView addSubview:self.timeLabel];
+//        [self.baseView addSubview:self.descNameLabel];
+//        [self.baseView addSubview:self.descContentLabel];
+//        [self.baseView addSubview:self.navigationSliderMenu];
         [self updateConstraintsForView];
     }
     return self;
@@ -155,48 +152,49 @@
     }];
     
     [self.logoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(10);
-        make.centerX.mas_equalTo(self.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(100,30));
-    }];
-    
-    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.logoLabel.mas_bottom).offset(5);
-        make.centerX.mas_equalTo(self.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH*0.6, SCREEN_WIDTH*0.75*0.6));
-    }];
-    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.logoImageView.mas_bottom).offset(10);
+        make.top.mas_equalTo(kWidthFlot(10));
         make.left.mas_equalTo(margin);
         make.right.mas_equalTo(-margin);
-        make.height.mas_equalTo(20);
-    }];
-    
-    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(5);
-        make.left.mas_equalTo(margin);
-        make.right.mas_equalTo(-margin);
-        make.height.mas_equalTo(20);
-    }];
-    [self.descNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.timeLabel.mas_bottom).offset(5);
-        make.left.mas_equalTo(margin);
-        make.width.mas_equalTo(SCREEN_WIDTH-margin*2);
-        make.height.mas_equalTo(20);
-    }];
-    [self.descContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.descNameLabel.mas_bottom).offset(5);
-        make.left.mas_equalTo(margin);
-        make.width.mas_equalTo(SCREEN_WIDTH-margin*2);
-    }];
-    
-    [self.navigationSliderMenu mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.descContentLabel.mas_bottom).offset(kWidthFlot(5));
-        make.left.mas_equalTo(0);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(44);
         make.bottom.mas_equalTo(-kWidthFlot(10));
     }];
+    
+//    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.logoLabel.mas_bottom).offset(5);
+//        make.centerX.mas_equalTo(self.mas_centerX);
+//        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH*0.6, SCREEN_WIDTH*0.75*0.6));
+//    }];
+//    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.logoImageView.mas_bottom).offset(10);
+//        make.left.mas_equalTo(margin);
+//        make.right.mas_equalTo(-margin);
+//        make.height.mas_equalTo(20);
+//    }];
+//
+//    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(5);
+//        make.left.mas_equalTo(margin);
+//        make.right.mas_equalTo(-margin);
+//        make.height.mas_equalTo(20);
+//    }];
+//    [self.descNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.timeLabel.mas_bottom).offset(5);
+//        make.left.mas_equalTo(margin);
+//        make.width.mas_equalTo(SCREEN_WIDTH-margin*2);
+//        make.height.mas_equalTo(20);
+//    }];
+//    [self.descContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.descNameLabel.mas_bottom).offset(5);
+//        make.left.mas_equalTo(margin);
+//        make.width.mas_equalTo(SCREEN_WIDTH-margin*2);
+//    }];
+//
+//    [self.navigationSliderMenu mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.descContentLabel.mas_bottom).offset(kWidthFlot(5));
+//        make.left.mas_equalTo(0);
+//        make.width.mas_equalTo(SCREEN_WIDTH);
+//        make.height.mas_equalTo(44);
+//        make.bottom.mas_equalTo(-kWidthFlot(10));
+//    }];
 }
 
 -(void)setType:(NSInteger)type
@@ -210,10 +208,10 @@
 -(void)setGoosModel:(zGoodsContentModel *)goosModel
 {
     _goosModel = goosModel;
-    self.nameLabel.text = _goosModel.name;
-    self.timeLabel.text = [NSString stringWithFormat:@"成立时间:%@",_goosModel.createDate];
-    self.descContentLabel.text = _goosModel.approveText;
-    [self.logoImageView z_imageWithImageId:_goosModel.imagesId];
+    self.logoLabel.text = _goosModel.name;
+//    self.timeLabel.text = [NSString stringWithFormat:@"成立时间:%@",_goosModel.createDate];
+//    self.descContentLabel.text = _goosModel.approveText;
+//    [self.logoImageView z_imageWithImageId:_goosModel.imagesId];
 }
 
 -(void)setCompanyType:(NSInteger)companyType

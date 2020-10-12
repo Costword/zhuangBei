@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(strong,nonatomic)zGoodsContentModel * goosModel;
 
+@property(copy,nonatomic)NSArray * goodsArray;
+
 
 
 @end

@@ -1,4 +1,4 @@
-# WMZBanner - 最好用的轻量级轮播图+卡片样式+自定义样式
+# WMZBanner - 最好用的轻量级轮播图+卡片样式+自定义样式（有问题加群937909825哈）
 
 演示
 ==============
@@ -169,7 +169,9 @@
     })
     .wFrameSet(CGRectMake(0, BannerHeight/4*3+10, BannerWitdh, BannerHeight/5))
     
-      
+##### 淡入淡出
+![fade.gif](https://upload-images.jianshu.io/upload_images/9163368-34cacbd143c0a0fe.gif?imageMogr2/auto-orient/strip)
+
 ##### 更新UI
 -(void)updateUI;
 改变.wDataSet(@[]),然后调用updateUI()实例方法即可
@@ -276,7 +278,7 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 ==============
 使用过程中如果有什么bug欢迎给我提issue 我看到就会解决
 [我的简书](https://www.jianshu.com/u/17b9dd398782)
-
+ios问题交流群 937909825(有问题加群哈)
 
 更新记录
 ==============
@@ -290,3 +292,6 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20191204 适配ipad   pod 更新到1.0.4
 - 20191219 新增卡片叠加样式 优化定时器 
 - 20200117 新年更新至1.1.0 修复bug 
+- 20200117 更新至1.1.2 修复bug
+- 20200618 更新至1.1.3 修复bug 新增特殊样式 下划线/淡入淡出
+- 20200625 更新至1.1.4 修复bug 

@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(strong,nonatomic)NSArray * Array;
 
+@property(strong,nonatomic)NSDictionary * userStateDic;
+
+@property (nonatomic,strong) RACSubject *qiandaoSignal;
+
 @end
 
 NS_ASSUME_NONNULL_END

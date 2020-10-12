@@ -12,8 +12,8 @@
  *  @brief  LEEAlert
  *
  *  @author LEE
- *  @copyright    Copyright © 2016 - 2019年 lee. All rights reserved.
- *  @version    V1.3.6
+ *  @copyright    Copyright © 2016 - 2020年 lee. All rights reserved.
+ *  @version    V1.4.1
  */
 
 #import "LEEAlert.h"
@@ -1219,7 +1219,7 @@ CGPathRef _Nullable LEECGPathCreateWithRoundedRect(CGRect bounds, CornerRadii co
         
         [selStringsArray enumerateObjectsUsingBlock:^(NSString *selString, NSUInteger idx, BOOL *stop) {
             
-            NSString *leeSelString = [@"lee_alert_" stringByAppendingString:selString];
+            NSString *leeSelString = [@"lee_alert_view_" stringByAppendingString:selString];
             
             Method originalMethod = class_getInstanceMethod(self, NSSelectorFromString(selString));
             
@@ -1245,11 +1245,11 @@ CGPathRef _Nullable LEECGPathCreateWithRoundedRect(CGRect bounds, CornerRadii co
 - (void)lee_alert_updateCornerRadii{
     
     if (!CornerRadiiEqualTo([self lee_alert_cornerRadii], CornerRadiiNull())) {
-        
+
         CAShapeLayer *lastLayer = (CAShapeLayer *)self.layer.mask;
-        CGPathRef lastPath = lastLayer.path ? lastLayer.path : CGPathCreateMutable();
+        CGPathRef lastPath = CGPathCreateCopy(lastLayer.path);
         CGPathRef path = LEECGPathCreateWithRoundedRect(self.bounds, [self lee_alert_cornerRadii]);
-        
+
         // 防止相同路径多次设置
         if (!CGPathEqualToPath(lastPath, path)) {
             // 移除原有路径动画
@@ -1269,16 +1269,19 @@ CGPathRef _Nullable LEECGPathCreateWithRoundedRect(CGRect bounds, CornerRadii co
                 animation.toValue = (__bridge id _Nullable)(path);
                 [maskLayer addAnimation:animation forKey:@"path"];
             }
-            
+
         }
         
+        CGPathRelease(lastPath);
+        
+        CGPathRelease(path);
     }
     
 }
 
-- (void)lee_alert_layoutSubviews{
+- (void)lee_alert_view_layoutSubviews{
     
-    [self lee_alert_layoutSubviews];
+    [self lee_alert_view_layoutSubviews];
     
     [self lee_alert_updateCornerRadii];
 }
@@ -1310,6 +1313,53 @@ CGPathRef _Nullable LEECGPathCreateWithRoundedRect(CGRect bounds, CornerRadii co
 
 @end
 
+@interface UIButton (LEEAlertExtension)
+
+@end
+
+@implementation UIButton (LEEAlertExtension)
+
++ (void)load{
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        NSArray *selStringsArray = @[@"layoutSubviews"];
+        
+        [selStringsArray enumerateObjectsUsingBlock:^(NSString *selString, NSUInteger idx, BOOL *stop) {
+            
+            NSString *leeSelString = [@"lee_alert_button_" stringByAppendingString:selString];
+            
+            Method originalMethod = class_getInstanceMethod(self, NSSelectorFromString(selString));
+            
+            Method leeMethod = class_getInstanceMethod(self, NSSelectorFromString(leeSelString));
+            
+            BOOL isAddedMethod = class_addMethod(self, NSSelectorFromString(selString), method_getImplementation(leeMethod), method_getTypeEncoding(leeMethod));
+            
+            if (isAddedMethod) {
+                
+                class_replaceMethod(self, NSSelectorFromString(leeSelString), method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+                
+            } else {
+                
+                method_exchangeImplementations(originalMethod, leeMethod);
+            }
+            
+        }];
+        
+    });
+    
+}
+
+- (void)lee_alert_button_layoutSubviews{
+    
+    [self lee_alert_button_layoutSubviews];
+    
+    [self lee_alert_updateCornerRadii];
+}
+
+@end
+
 @implementation LEEAlertWindow
 
 @end
@@ -1336,6 +1386,18 @@ CGPathRef _Nullable LEECGPathCreateWithRoundedRect(CGRect bounds, CornerRadii co
 @end
 
 @implementation LEEAction
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _numberOfLines = 1;
+        _textAlignment = NSTextAlignmentLeft;
+        _adjustsFontSizeToFitWidth = NO;
+        _lineBreakMode = NSLineBreakByTruncatingMiddle;
+    }
+    return self;
+}
 
 - (void)update{
     
@@ -1478,9 +1540,15 @@ CGPathRef _Nullable LEECGPathCreateWithRoundedRect(CGRect bounds, CornerRadii co
     
     if (action.attributedHighlight) [self setAttributedTitle:action.attributedHighlight forState:UIControlStateHighlighted];
     
-    if (action.numberOfLines) [self.titleLabel setNumberOfLines:action.numberOfLines];
+    [self.titleLabel setNumberOfLines:action.numberOfLines];
+    
+    [self.titleLabel setTextAlignment:action.textAlignment];
     
     if (action.font) [self.titleLabel setFont:action.font];
+    
+    [self.titleLabel setAdjustsFontSizeToFitWidth:action.adjustsFontSizeToFitWidth];
+    
+    [self.titleLabel setLineBreakMode:action.lineBreakMode];
     
     if (action.titleColor) [self setTitleColor:action.titleColor forState:UIControlStateNormal];
     
@@ -1821,6 +1889,30 @@ CGPathRef _Nullable LEECGPathCreateWithRoundedRect(CGRect bounds, CornerRadii co
         [self updateContainerFrame:view];
         
         [self.container addSubview:view];
+        
+        // 保证使用AutoLayout的自定义视图在容器视图内的位置正确
+        if (view.translatesAutoresizingMaskIntoConstraints == NO) {
+            {
+                NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:view
+                                                                              attribute:NSLayoutAttributeCenterX
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self.container
+                                                                              attribute:NSLayoutAttributeCenterX
+                                                                             multiplier:1
+                                                                               constant:0];
+                [self.container addConstraint: constraint];
+            }
+            {
+                NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:view
+                                                                              attribute:NSLayoutAttributeCenterY
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self.container
+                                                                              attribute:NSLayoutAttributeCenterY
+                                                                             multiplier:1
+                                                                               constant:0];
+                [self.container addConstraint: constraint];
+            }
+        }
     }
 }
 
@@ -2933,8 +3025,6 @@ CGPathRef _Nullable LEECGPathCreateWithRoundedRect(CGRect bounds, CornerRadii co
     
     actionSheetViewFrame.size.height = actionSheetViewHeight > actionSheetViewMaxHeight - cancelActionTotalHeight ? actionSheetViewMaxHeight - cancelActionTotalHeight : actionSheetViewHeight;
     
-    actionSheetViewFrame.origin.x = (viewWidth - actionSheetViewMaxWidth) * 0.5f;
-    
     self.actionSheetView.frame = actionSheetViewFrame;
     
     [self.actionSheetView layoutIfNeeded];
@@ -2966,11 +3056,11 @@ CGPathRef _Nullable LEECGPathCreateWithRoundedRect(CGRect bounds, CornerRadii co
     
     CGRect containerFrame = self.containerView.frame;
     
-    containerFrame.size.width = viewWidth;
+    containerFrame.size.width = actionSheetViewMaxWidth;
     
     containerFrame.size.height = actionSheetViewFrame.size.height + cancelActionTotalHeight + VIEWSAFEAREAINSETS(self.view).bottom + self.config.modelActionSheetBottomMargin;
     
-    containerFrame.origin.x = 0;
+    containerFrame.origin.x = (viewWidth - actionSheetViewMaxWidth) * 0.5f;
     
     if (isShowed) {
         
@@ -2988,21 +3078,31 @@ CGPathRef _Nullable LEECGPathCreateWithRoundedRect(CGRect bounds, CornerRadii co
     
     __weak typeof(self) weakSelf = self;
     
+    UIView *shadowView = [UIView new];
+    
+    shadowView.frame = self.view.bounds;
+    
+    shadowView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    shadowView.backgroundColor = [UIColor clearColor];
+    
+    shadowView.layer.shadowOffset = self.config.modelShadowOffset;
+    
+    shadowView.layer.shadowRadius = self.config.modelShadowRadius;
+    
+    shadowView.layer.shadowOpacity = self.config.modelShadowOpacity;
+    
+    shadowView.layer.shadowColor = self.config.modelShadowColor.CGColor;
+    
+    [self.view addSubview: shadowView];
+    
     _containerView = [UIView new];
     
-    [self.view addSubview: _containerView];
+    [shadowView addSubview: _containerView];
     
     [self.containerView addSubview: self.actionSheetView];
     
     self.containerView.backgroundColor = self.config.modelActionSheetBackgroundColor;
-    
-    self.containerView.layer.shadowOffset = self.config.modelShadowOffset;
-    
-    self.containerView.layer.shadowRadius = self.config.modelShadowRadius;
-    
-    self.containerView.layer.shadowOpacity = self.config.modelShadowOpacity;
-    
-    self.containerView.layer.shadowColor = self.config.modelShadowColor.CGColor;
     
     self.actionSheetView.scrollEnabled = self.config.modelIsScrollEnabled;
     

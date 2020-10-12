@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(assign,nonatomic)NSInteger response;
 @property(copy,nonatomic)NSString * mainProduct;
+@property(copy,nonatomic)NSString * mainPoliceClassification;
 @property(copy,nonatomic)NSString * zhuangbeiNames;
 @property(assign,nonatomic)NSInteger  jiBieBc;
 @property(assign,nonatomic)NSInteger  gysFuJianId;
@@ -31,7 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(copy,nonatomic)NSString * strLocationName;
 @property(copy,nonatomic)NSString * companyTypeStr;
 @property(copy,nonatomic)NSString * zhuangbeiIds;
-@property(copy,nonatomic)NSString * mainPoliceClassification;
 @property(copy,nonatomic)NSString * yingYeQx;
 @property(assign,nonatomic)NSInteger  creditCode;
 @property(copy,nonatomic)NSString * companyNameFirst;

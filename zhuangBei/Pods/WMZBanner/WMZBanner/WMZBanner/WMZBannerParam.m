@@ -13,6 +13,9 @@
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGRect,                        wFrame)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSArray*,                      wData)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wScaleFactor)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wCardOverMinAlpha)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCardOverAlphaOpen)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wFadeOpen)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wEffect)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wVertical)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wImageFill)
@@ -25,15 +28,15 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                        
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCardOverLap)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wZindex)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wClickCenter)
-WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wAddFastScrollAnina)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSInteger,                     wCardOverLapCount)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wActiveDistance)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wItemSize)
-WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wLineSpacing)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, int,                           wLineSpacing)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wEffectHeight)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wContentOffsetX)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wScreenScale)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerCellPosition,            wPosition)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, SpecialStyle,                  wSpecialStyle)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                     wPlaceholderImage)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSInteger,                     wSelectIndex)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                     wMyCellClassName)
@@ -41,6 +44,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerCellCallBlock,         
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerClickBlock,              wEventClick)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerScrollEndBlock,          wEventScrollEnd)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerCenterClickBlock,        wEventCenterClick)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerScrollBlock,             wEventDidScroll)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIColor*,                      wBannerControlColor)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIColor*,                      wBannerControlSelectColor)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                     wBannerControlImage)
@@ -56,8 +60,11 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, UIScrollViewDecelerationRate,
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerControlPosition,         wBannerControlPosition)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIColor*,                      wMarqueeTextColor)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerPageControl,             wCustomControl)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerSpecialLine,             wSpecialCustumLine)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wBannerControlSelectMargin)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wMarqueeRate)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wCustomImageRadio)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, id,                            wMyCellClassNames)
 WMZBannerParam * BannerParam(void){
     return  [WMZBannerParam new];
 }
@@ -89,6 +96,8 @@ WMZBannerParam * BannerParam(void){
         _wBannerControlSelectMargin = 3;
         _wMarqueeRate = 5.0f;
         _wCardOverLapCount = 4;
+        _wCardOverMinAlpha = 0.1;
+        _wCustomImageRadio = 5.0f;
     }
     return self;
 }
