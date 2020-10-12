@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * parentId;
 @property (nonatomic, strong) NSString * imagesId;
 @property (nonatomic, strong) NSString * orderNum;
+@property (nonatomic, assign) NSInteger isBaoKuan;//是否是爆款
+@property (nonatomic, copy) NSString *imageUrl;
 
 @end
 

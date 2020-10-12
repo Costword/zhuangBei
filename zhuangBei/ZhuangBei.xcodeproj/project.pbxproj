@@ -62,6 +62,7 @@
 		004D7A7824CACDB300EFFA82 /* zBijiVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 004D7A7724CACDB300EFFA82 /* zBijiVC.m */; };
 		004E435C2472B964000A4627 /* zGoodsContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 004E435B2472B964000A4627 /* zGoodsContentModel.m */; };
 		004E435F2472CC04000A4627 /* zCompanyGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 004E435E2472CC04000A4627 /* zCompanyGoodsCell.m */; };
+		005493F62531EA9E0050AD06 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005493F52531EA9E0050AD06 /* UserNotifications.framework */; };
 		00558BD42460FF4200550FBC /* sliderNavMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BD32460FF4200550FBC /* sliderNavMenu.m */; };
 		00558BD72460FFE000550FBC /* zGoodsMangerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BD62460FFE000550FBC /* zGoodsMangerController.m */; };
 		00558BDA2461000500550FBC /* zCompanyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BD92461000500550FBC /* zCompanyController.m */; };
@@ -467,6 +468,7 @@
 		004E435B2472B964000A4627 /* zGoodsContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = zGoodsContentModel.m; path = ZhuangBei/zShouye/views/zGoodsContentModel.m; sourceTree = SOURCE_ROOT; };
 		004E435D2472CC04000A4627 /* zCompanyGoodsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCompanyGoodsCell.h; sourceTree = "<group>"; };
 		004E435E2472CC04000A4627 /* zCompanyGoodsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zCompanyGoodsCell.m; sourceTree = "<group>"; };
+		005493F52531EA9E0050AD06 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		00558BD22460FF4200550FBC /* sliderNavMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sliderNavMenu.h; sourceTree = "<group>"; };
 		00558BD32460FF4200550FBC /* sliderNavMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sliderNavMenu.m; sourceTree = "<group>"; };
 		00558BD52460FFE000550FBC /* zGoodsMangerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zGoodsMangerController.h; sourceTree = "<group>"; };
@@ -683,6 +685,7 @@
 		00B26CEF24580A390099FFD5 /* zUserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zUserInfo.m; sourceTree = "<group>"; };
 		00B49B33246C2E61009D9ED0 /* zCityCollectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCityCollectionHeaderView.h; sourceTree = "<group>"; };
 		00B49B34246C2E61009D9ED0 /* zCityCollectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zCityCollectionHeaderView.m; sourceTree = "<group>"; };
+		00B635DD2531D15B00126B2E /* 警用行业联盟.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "警用行业联盟.entitlements"; sourceTree = "<group>"; };
 		00B784C02478C7A8000B0008 /* zBusinessLoactionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = zBusinessLoactionModel.h; path = ZhuangBei/Other/zBusinessLoactionModel.h; sourceTree = SOURCE_ROOT; };
 		00B784C12478C7A8000B0008 /* zBusinessLoactionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = zBusinessLoactionModel.m; path = ZhuangBei/Other/zBusinessLoactionModel.m; sourceTree = SOURCE_ROOT; };
 		00C9524A2469040A00C24472 /* KKPaddingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKPaddingLabel.m; sourceTree = "<group>"; };
@@ -1037,6 +1040,7 @@
 				890424802481E3120032B1C8 /* libbz2.1.0.5.tbd in Frameworks */,
 				890643E324694F030099508C /* libz.tbd in Frameworks */,
 				00FE9AF72476B832002A1F86 /* libstarRTC.a in Frameworks */,
+				005493F62531EA9E0050AD06 /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1442,6 +1446,7 @@
 		009FB5DC244E89C700133974 /* ZhuangBei */ = {
 			isa = PBXGroup;
 			children = (
+				00B635DD2531D15B00126B2E /* 警用行业联盟.entitlements */,
 				89B323B924C5A68000BD0722 /* soundSrource.mp3 */,
 				89BC879C24C68A3600AD0253 /* UpdateVersion */,
 				89A9382924542A06001C77A8 /* Other */,
@@ -2278,6 +2283,7 @@
 		732C49DD66576D0DB40FA460 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				005493F52531EA9E0050AD06 /* UserNotifications.framework */,
 				890643E824694F830099508C /* libiconv.tbd */,
 				890643E624694F780099508C /* VideoToolbox.framework */,
 				890643E424694F570099508C /* libbz2.1.0.5.tbd */,
@@ -3172,6 +3178,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 29;
+				CODE_SIGN_ENTITLEMENTS = "ZhuangBei/警用行业联盟.entitlements";
 				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
@@ -3195,7 +3202,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = dev10_10;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3208,6 +3215,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 29;
+				CODE_SIGN_ENTITLEMENTS = "ZhuangBei/警用行业联盟.entitlements";
 				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
@@ -3232,6 +3240,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jbzb;
 				PRODUCT_NAME = "警用行业联盟";
 				PROVISIONING_PROFILE_SPECIFIER = dis10_10;
+				PROVISIONING_PROFILE_SPECIFIER = dev10_10;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -3240,8 +3249,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NXHWCY9QS4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ZhuangBeiTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3251,6 +3262,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sliderView.ZhuangBeiTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZhuangBei.app/ZhuangBei";
 			};
@@ -3260,8 +3273,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NXHWCY9QS4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ZhuangBeiTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3271,6 +3286,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sliderView.ZhuangBeiTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZhuangBei.app/ZhuangBei";
 			};

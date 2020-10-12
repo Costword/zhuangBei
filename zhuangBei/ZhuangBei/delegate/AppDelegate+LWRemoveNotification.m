@@ -7,108 +7,80 @@
 //
 
 #import "AppDelegate+LWRemoveNotification.h"
-
-#define JPUSH_APP_KEY  @""
-
-//0（默认值）表示采用的是开发证书，1 表示采用生产证书发布应用。注：此字段的值要与 Build Settings的Code Signing 配置的证书环境一致。
-#ifdef DEBBUG
-#define JPUSH_ISPRODUCTION  0
-#define JPUSH_CHANNEL   @"Debug"
-#else
-#define JPUSH_ISPRODUCTION  1
-#define JPUSH_CHANNEL   @"App Store"
-#endif
+//#import "UMessage.h"
+/**
+应用名称：警用行业联盟
+平台：iPhone
+Appkey：5f81a7dd94846f78a96f5fed
+SDK下载地址：https://developer.umeng.com/sdk
+ */
 
 @implementation AppDelegate (LWRemoveNotification)
 
-// 配置Jpush
-- (void)configureJpushWithapplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+// 配置push
+- (void)configureJpushWithapplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+{
     
-    //添加初始化 APNs 代码
-    //Required
-    //notice: 3.0.0 及以后版本注册可以这样写，也可以继续用之前的注册方式
-    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
-    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound|JPAuthorizationOptionProvidesAppNotificationSettings;
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        // 可以添加自定义 categories
-        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
-        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
+    // Push组件基本功能配置
+    UMessageRegisterEntity * entity = [[UMessageRegisterEntity alloc] init];
+    //type是对推送的几个参数的选择，可以选择一个或者多个。默认是三个全部打开，即：声音，弹窗，角标
+    entity.types = UMessageAuthorizationOptionBadge|UMessageAuthorizationOptionSound|UMessageAuthorizationOptionAlert;
+    [UNUserNotificationCenter currentNotificationCenter].delegate=self;
+    [UMessage registerForRemoteNotificationsWithLaunchOptions:launchOptions Entity:entity     completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (granted) {
+            
+        }else{
+            
+        }
+    }];
+
+//    [UMessage addTags:@"110" response:^(id  _Nullable responseObject, NSInteger remain, NSError * _Nullable error) {
+//
+//    }];
+}
+//获取device_Token
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    [UMessage registerDeviceToken:deviceToken];
+}
+//iOS10以下使用这两个方法接收通知
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    [UMessage setAutoAlert:NO];
+    if([[[UIDevice currentDevice] systemVersion]intValue] < 10){
+        [UMessage didReceiveRemoteNotification:userInfo];
     }
-    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-    
-    //    添加初始化 JPush 代码
-    // Required
-    // init Push
-    // notice: 2.1.5 版本的 SDK 新增的注册方法，改成可上报 IDFA，如果没有使用 IDFA 直接传 nil
-    [JPUSHService setupWithOption:launchOptions appKey:JPUSH_APP_KEY
-                          channel:JPUSH_CHANNEL
-                 apsForProduction:JPUSH_ISPRODUCTION
-            advertisingIdentifier:nil];
+
+         //过滤掉Push的撤销功能，因为PushSDK内部已经调用的completionHandler(UIBackgroundFetchResultNewData)，
+    //防止两次调用completionHandler引起崩溃
+    if(![userInfo valueForKeyPath:@"aps.recall"])
+    {
+        completionHandler(UIBackgroundFetchResultNewData);
+    }
 }
 
-- (void)application:(UIApplication *)application
-didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-
-  /// Required - 注册 DeviceToken
-  [JPUSHService registerDeviceToken:deviceToken];
+//iOS10新增：处理前台收到通知的代理方法
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [UMessage setAutoAlert:NO];
+        //应用处于前台时的远程推送接受
+        //必须加这句代码
+        [UMessage didReceiveRemoteNotification:userInfo];
+    }else{
+        //应用处于前台时的本地推送接受
+    }
+    completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert);
 }
 
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-  //Optional
-  NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+//iOS10新增：处理后台点击通知的代理方法
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler{
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //应用处于后台时的远程推送接受
+        //必须加这句代码
+        [UMessage didReceiveRemoteNotification:userInfo];
+    }else{
+        //应用处于后台时的本地推送接受
+    }
 }
-
-
-#pragma mark- JPUSHRegisterDelegate
-
-// iOS 12 Support
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(UNNotification *)notification{
-  if (notification && [notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-    //从通知界面直接进入应用
-  }else{
-    //从通知设置界面进入应用
-  }
-}
-
-// iOS 10 Support
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
-  // Required
-  NSDictionary * userInfo = notification.request.content.userInfo;
-  if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-    [JPUSHService handleRemoteNotification:userInfo];
-  }
-  completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有 Badge、Sound、Alert 三种类型可以选择设置
-}
-
-// iOS 10 Support
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
-  // Required
-  NSDictionary * userInfo = response.notification.request.content.userInfo;
-  if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-    [JPUSHService handleRemoteNotification:userInfo];
-  }
-  completionHandler();  // 系统要求执行这个方法
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-
-  // Required, iOS 7 Support
-  [JPUSHService handleRemoteNotification:userInfo];
-  completionHandler(UIBackgroundFetchResultNewData);
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-
-  // Required, For systems with less than or equal to iOS 6
-  [JPUSHService handleRemoteNotification:userInfo];
-}
-
-
-
-- (void)jpushNotificationAuthorization:(JPAuthorizationStatus)status withInfo:(NSDictionary *)info {
-    
-}
-
-
-
 @end

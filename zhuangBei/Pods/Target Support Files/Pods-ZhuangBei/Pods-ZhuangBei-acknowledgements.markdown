@@ -71,10 +71,6 @@ SOFTWARE.
 
 Copyright jpush.cn
 
-## JPush
-
-Copyright jiguang.cn
-
 ## JShare
 
 Copyright jiguang.cn
@@ -328,6 +324,26 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+## UMCCommon
+
+Copyright 2011 - 2019 umeng.com. All rights reserved.
+
+
+## UMCCommonLog
+
+Copyright 2011 - 2018 umeng.com. All rights reserved.
+
+
+## UMCPush
+
+Copyright 2011 - 2018 umeng.com. All rights reserved.
+
+
+## UMCSecurityPlugins
+
+Copyright 2011 - 2018 umeng.com. All rights reserved.
 
 
 ## WMZBanner

@@ -12,7 +12,6 @@
 #import "LWHuoYuanDaTingModel.h"
 #import "zNetWorkManger.h"
 
-
 @interface zHyController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView * collectView;
 @property (nonatomic, strong) NSMutableArray<LWHuoYuanDaTingModel *> * listDatasMutableArray;
@@ -25,11 +24,11 @@
 - (void)requestDatas
 {
     [self requestPostWithUrl:@"app/appzhuangbeitype/list" paraString:@{@"parentId":@"1"} success:^(id  _Nonnull response) {
-//        [self.collectView.mj_footer setHidden:NO];
+        //        [self.collectView.mj_footer setHidden:NO];
         [self.collectView.mj_header endRefreshing];
-//        [self.collectView.mj_footer endRefreshing];
+        //        [self.collectView.mj_footer endRefreshing];
         
-//        LWLog(@"-------------货源大厅一级列表:%@",response);
+        //        LWLog(@"-------------货源大厅一级列表:%@",response);
         if ([response[@"code"] integerValue] == 0) {
             NSDictionary *page = response[@"page"];
             self.currPage = [page[@"currPage"] integerValue];
@@ -38,6 +37,15 @@
             if (self.currPage == 1) {
                 [self.listDatasMutableArray removeAllObjects];
             }
+            
+            LWHuoYuanDaTingModel *model = [LWHuoYuanDaTingModel new];
+            model.name = @"联盟爆款";
+            model.isBaoKuan = 1;
+            NSString *imageurl = @"https://zhkj001.oss-cn-beijing.aliyuncs.com/联盟爆款.jpg";
+            imageurl = [imageurl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            model.imageUrl = imageurl;
+            [self.listDatasMutableArray addObject:model];
+            
             for (NSDictionary *dict in list) {
                 [self.listDatasMutableArray addObject: [LWHuoYuanDaTingModel modelWithDictionary:dict]];
             }
@@ -63,10 +71,8 @@
             [self.collectView.mj_footer setHidden:YES];
         }
     }];
-
+    
 }
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -92,7 +98,12 @@
     LWHuoYuanListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LWHuoYuanListCollectionViewCell" forIndexPath:indexPath];
     LWHuoYuanDaTingModel *model = self.listDatasMutableArray[indexPath.row];
     cell.descL.text = model.name;
-    [cell.bgImageView z_imageWithImageId:model.imagesId];
+    if (model.isBaoKuan == 1) {
+        NSURL *url = [NSURL URLWithString:model.imageUrl];
+        [cell.bgImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholdericon.svg"]];
+    }else{
+        [cell.bgImageView z_imageWithImageId:model.imagesId];
+    }
     return cell;
 }
 
@@ -103,11 +114,15 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    LWHuoYuanItemsListViewController *itemslist = [LWHuoYuanItemsListViewController new];
     LWHuoYuanDaTingModel *model = self.listDatasMutableArray[indexPath.row];
-    itemslist.titleStr = model.name;
-    itemslist.parentId = model.customId;
-    [self.navigationController pushViewController:itemslist animated:YES];
+    if (model.isBaoKuan == 1) {
+        [self showBaoKuanAleartView];
+    }else{
+        LWHuoYuanItemsListViewController *itemslist = [LWHuoYuanItemsListViewController new];
+        itemslist.titleStr = model.name;
+        itemslist.parentId = model.customId;
+        [self.navigationController pushViewController:itemslist animated:YES];
+    }
 }
 
 - (UICollectionView *)collectView
@@ -126,8 +141,8 @@
         _collectView.dataSource = self;
         [_collectView registerClass:[LWHuoYuanListCollectionViewCell class] forCellWithReuseIdentifier:@"LWHuoYuanListCollectionViewCell"];
         _collectView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
-//        _collectView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
-
+        //        _collectView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
+        
     }
     return _collectView;
 }
