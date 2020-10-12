@@ -70,7 +70,6 @@
 - (void)setupImageView
 {
     UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.backgroundColor = UIColor.whiteColor;
     _imageView = imageView;
     [self.contentView addSubview:imageView];
 }

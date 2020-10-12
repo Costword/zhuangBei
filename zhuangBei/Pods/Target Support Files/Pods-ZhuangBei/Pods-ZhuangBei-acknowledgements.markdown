@@ -71,6 +71,10 @@ SOFTWARE.
 
 Copyright jpush.cn
 
+## JPush
+
+Copyright jiguang.cn
+
 ## JShare
 
 Copyright jiguang.cn
