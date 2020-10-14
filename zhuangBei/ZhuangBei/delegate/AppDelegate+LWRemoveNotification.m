@@ -20,7 +20,8 @@ SDK下载地址：https://developer.umeng.com/sdk
 // 配置push
 - (void)configureJpushWithapplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 {
-    
+    [UMConfigure setLogEnabled:YES];
+    [UMConfigure initWithAppkey:@"5f81a7dd94846f78a96f5fed" channel:@"App Store"];
     // Push组件基本功能配置
     UMessageRegisterEntity * entity = [[UMessageRegisterEntity alloc] init];
     //type是对推送的几个参数的选择，可以选择一个或者多个。默认是三个全部打开，即：声音，弹窗，角标
@@ -33,15 +34,18 @@ SDK下载地址：https://developer.umeng.com/sdk
             
         }
     }];
-
-//    [UMessage addTags:@"110" response:^(id  _Nullable responseObject, NSInteger remain, NSError * _Nullable error) {
-//
-//    }];
 }
 //获取device_Token
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     [UMessage registerDeviceToken:deviceToken];
+    NSMutableString* str = [NSMutableString stringWithCapacity:[deviceToken length] * 2];
+    const unsigned char* bytes = (const unsigned char*)[deviceToken bytes];
+    for (int i = 0; i < [deviceToken length]; i++) {
+        [str appendFormat:@"%02x", bytes[i]];
+    }
+    NSLog(@"++++++++deviceToken:%@",str);
 }
+
 //iOS10以下使用这两个方法接收通知
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
