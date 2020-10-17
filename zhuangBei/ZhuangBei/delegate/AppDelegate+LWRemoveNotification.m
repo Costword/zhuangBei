@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate+LWRemoveNotification.h"
+#import "LWRemoteNotificationManager.h"
+#import "LWClientHeader.h"
 //#import "UMessage.h"
 /**
 应用名称：警用行业联盟
@@ -34,6 +36,14 @@ SDK下载地址：https://developer.umeng.com/sdk
             
         }
     }];
+    
+    if(zUserInfo.shareInstance.userInfo.userId) {
+        [LWRemoteNotificationManager setAlias:zUserInfo.shareInstance.userInfo.userId response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+                    
+        }];
+    }
+    
+    
 }
 //获取device_Token
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
@@ -83,8 +93,15 @@ SDK下载地址：https://developer.umeng.com/sdk
         //应用处于后台时的远程推送接受
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
+        
+        [self handleRemoveNotification:userInfo[@"aps"]];
     }else{
         //应用处于后台时的本地推送接受
     }
 }
+
+- (void)handleRemoveNotification:(NSDictionary *)userInfor {
+    POST_NOTI(USER_CLICKREMOTENOTIFICATIONALEART, nil);
+}
+
 @end

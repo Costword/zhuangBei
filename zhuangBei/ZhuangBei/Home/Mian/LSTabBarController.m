@@ -35,6 +35,8 @@
               options:NSKeyValueObservingOptionNew
               context:nil];
     ADD_NOTI(unreadMsgNumberChange, LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY);
+    
+    ADD_NOTI(clickRemoteNotificationAleart,USER_CLICKREMOTENOTIFICATIONALEART);
 }
 
 - (void)unreadMsgNumberChange
@@ -44,6 +46,9 @@
     vc.navigationController.tabBarItem.badgeValue = (num == 0) ? nil: [NSString stringWithFormat:@"%ld",(long)num];
 }
 
+- (void)clickRemoteNotificationAleart {
+    self.tabbar.selectedIndex = 2;
+}
 
 - (void)dealloc
 {

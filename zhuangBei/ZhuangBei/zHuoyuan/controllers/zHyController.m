@@ -101,7 +101,9 @@
     if (model.isBaoKuan == 1) {
         NSURL *url = [NSURL URLWithString:model.imageUrl];
         [cell.bgImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholdericon.svg"]];
+        cell.bgImageView.contentMode = UIViewContentModeScaleAspectFill;
     }else{
+        cell.bgImageView.contentMode = UIViewContentModeScaleAspectFit;
         [cell.bgImageView z_imageWithImageId:model.imagesId];
     }
     return cell;

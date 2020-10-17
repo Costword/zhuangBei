@@ -8,6 +8,7 @@
 
 #import "zUserInfo.h"
 #import "LWClientManager.h"
+#import "LWRemoteNotificationManager.h"
 
 static NSString * UserDefaultRemmberAccount = @"UserDefaultRemmberAccount";
 static NSString * UserDefaultPassword = @"UserDefaultPassword";
@@ -60,6 +61,12 @@ static NSString * UserDefaultInfo = @"userInfo.archiver";
 }
 
 -(void)deleate{
+    
+    // 删除推送别名
+    [LWRemoteNotificationManager removeAlias:self.userInfo.userId response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+        NSLog(@"\n++++++++++++responseObject:%@ ++++++error:%@",responseObject,error);
+    }];
+    
     self.userInfo = [[zUserModel alloc]init];
     self.userInfo.remmberPassword = self.remmberAccount;
     if ([self.remmberAccount isEqualToString:@"1"]) {
@@ -97,6 +104,12 @@ static NSString * UserDefaultInfo = @"userInfo.archiver";
         [NSKeyedArchiver archiveRootObject:self.userInfo toFile:filePath];
         
         [[LWClientManager share] configureUserId];
+        
+        // 配置推送别名
+        [LWRemoteNotificationManager setAlias:self.userInfo.userId response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+            NSLog(@"\n++++++++++++responseObject:%@ ++++++error:%@",responseObject,error);
+        }];
+        
     }else
     {
         NSLog(@"账号或密码为空");
