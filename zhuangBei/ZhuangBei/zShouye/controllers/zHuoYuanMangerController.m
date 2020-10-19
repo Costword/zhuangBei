@@ -15,10 +15,10 @@
 #import "zInviteController.h"
 #import "zNotifacationController.h"
 #import "LEEAlert.h"
-//#import "ChatRoomViewController.h"
 #import "MessageGroupViewController.h"
 #import "ServiceManager.h"
 #import "zShouyeTuiGuangCell.h"
+#import "LWClientManager.h"
 
 @interface zHuoYuanMangerController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -73,57 +73,115 @@
     self.menuTableView.tableHeaderView = self.scrollHeader;
     [self.view addSubview:self.menuTableView];
     
-    [self loadData];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadData) name:LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY object:nil];
+    
+//    [self loadData];
 }
 
-
 -(void)loadData{
-    //获取分类
-    [self requestPostWithUrl:kFindListByID paraString:nil success:^(id  _Nonnull response) {
-        NSArray * data = response[@"data"][@"group"];
-        NSDictionary * dic = data[0];
-        NSArray * list = dic[@"list"];
-        
-        NSMutableArray * array = [NSMutableArray array];
-        [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSDictionary * dic = list[idx];
-            NSString * groupid = dic[@"id"];
-            if ([groupid integerValue] == 36 || [groupid integerValue] == 61) {
-                [array addObject:dic];
-            }
-        }];
-        
-        NSArray * buchangArr = @[
-            @{
-                @"status":@"2",
-                @"id":@"1",
-                @"groupname":@"邀请好友",
-                @"avatar":@"fenxiang",
-            },@{
-                @"status":@"2",
-                @"id":@"2",
-                @"groupname":@"通知公告",
-                @"avatar":@"gonggao",
-            },@{
-                @"status":@"2",
-                @"id":@"3",
-                @"groupname":@"即将推出",
-                @"avatar":@"baokuan",
-            },
-        ];
-        
-        [array addObjectsFromArray:buchangArr];
-        self.categoryArray = array;
-        [self.menuTableView reloadData];
-//        NSLog(@"通知结果:%@",imGroupList);
-    } failure:^(NSError * _Nonnull error) {
-        
-    }];
     
+    //线程 同步，处理未读数
+    dispatch_queue_t customQuue  = dispatch_queue_create("getcagegoryData", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_t custonGroup = dispatch_group_create();
+    
+    dispatch_group_async(custonGroup, customQuue, ^{
+        [self requsetCategoryWithGroup:custonGroup];
+    });
+
+    dispatch_group_notify(custonGroup,dispatch_get_main_queue(), ^{
+        NSLog(@"获取未读数完成");
+        [self getMessage];
+    });
+    //获取分类
+    [self getNoticeData];
+}
+-(void)requsetCategoryWithGroup:(dispatch_group_t)group{
+    dispatch_group_enter(group);
+    NSArray * buchangArr = @[
+        @{
+            @"status":@"2",
+            @"id":@"0",
+            @"groupname":@"联盟总群",
+            @"avatar":@"shiti",
+        },
+        @{
+            @"status":@"2",
+            @"id":@"1",
+            @"groupname":@"通知公告",
+            @"avatar":@"gonggao",
+        },
+        @{
+            @"status":@"2",
+            @"id":@"2",
+            @"groupname":@"邀请好友",
+            @"avatar":@"fenxiang",
+        },@{
+            @"status":@"2",
+            @"id":@"3",
+            @"groupname":@"爆款",
+            @"avatar":@"baokuan",
+        },@{
+            @"status":@"2",
+            @"id":@"4",
+            @"groupname":@"功勋币",
+            @"avatar":@"gongxun",
+        }
+    ];
+//    [array addObjectsFromArray:buchangArr];
+    self.categoryArray = buchangArr;
+    dispatch_group_leave(group);
+
+//    [self requestPostWithUrl:kFindListByID paraString:nil success:^(id  _Nonnull response) {
+//        NSArray * data = response[@"data"][@"group"];
+//        NSDictionary * dic = data[0];
+//        NSArray * list = dic[@"list"];
+//
+//        NSMutableArray * array = [NSMutableArray array];
+//        [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            NSDictionary * dic = list[idx];
+//            NSString * groupid = dic[@"id"];
+//            if ([groupid integerValue] == 36 || [groupid integerValue] == 61) {
+//                [array addObject:dic];
+//            }
+//        }];
+//            } failure:^(NSError * _Nonnull error) {
+//        [self.menuTableView reloadData];
+//    }];
+}
+
+-(void)getMessage
+{
+    //爆款
+    NSArray *  baokuan =  [[LWClientManager share] getUnReadMessageDataWithRoomId:62];
+    //联盟总群
+    NSArray *  lianmeng =  [[LWClientManager share] getUnReadMessageDataWithRoomId:36];
+    NSMutableArray  * mutArray = [NSMutableArray array];
+    [self.categoryArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary * dic = self.categoryArray[idx];
+        
+        NSMutableDictionary * mutdic = [[NSMutableDictionary alloc]initWithDictionary:dic];
+        NSString * name = mutdic[@"groupname"];
+        if ([name isEqualToString:@"联盟总群"]) {
+            [mutdic setObject:@(lianmeng.count) forKey:@"badge"];
+        }else if ([name isEqualToString:@"爆款"])
+        {
+            [mutdic setObject:@(baokuan.count) forKey:@"badge"];
+        }else
+        {
+            [mutdic setObject:@(10) forKey:@"badge"];
+        }
+        [mutArray addObject:mutdic];
+    }];
+    self.categoryArray = mutArray;
+    [self.menuTableView reloadData];
+}
+
+-(void)getNoticeData
+{
     //获取通知
     [self requestPostWithUrl:kAppnotice paraString:nil success:^(id  _Nonnull response) {
         
-//        NSLog(@"快捷结果:%@",response);
+        //        NSLog(@"快捷结果:%@",response);
         NSArray * data = response[@"data"];
         self.notiArray = data;
         [self.menuTableView reloadData];
@@ -200,9 +258,9 @@
             NSString * myid = dic[@"id"];
             if ([status integerValue] != 2) {
                 //进入聊天详情
-//                NSString * roomId = dic[@"id"];
+                //                NSString * roomId = dic[@"id"];
                 NSString* roomName = dic[@"groupname"];
-//                [self.navigationController pushViewController:[MessageGroupViewController chatRoomViewControllerWithRoomId:myid roomName:roomName roomType:(LWChatRoomTypeGroup) extend:nil] animated:YES];
+                //                [self.navigationController pushViewController:[MessageGroupViewController chatRoomViewControllerWithRoomId:myid roomName:roomName roomType:(LWChatRoomTypeGroup) extend:nil] animated:YES];
                 
                 [self.navigationController pushViewController:[MessageGroupViewController chatRoomViewControllerWithRoomId:myid roomName:roomName roomType:(LWChatRoomTypeGroup) extend:nil] animated:YES];
                 
@@ -233,12 +291,12 @@
     }else
     {
         zBaoKuanCell * baoKuanCell = [zBaoKuanCell instanceWithTableView:tableView AndIndexPath:indexPath];
-//        __weak typeof(self)weakSelf = self;
+        //        __weak typeof(self)weakSelf = self;
         baoKuanCell.baokuanTapback = ^(NSDictionary * _Nonnull sourceDic) {
             NSString * content = @"爆款规则：\n1.有发明专利证书者\n2.功勋币换取爆款推荐\n3.本平台内搜索热度/被关注度最高者";
             [LEEAlert alert].config
             .LeeTitle(@"温馨提示")
-//            .LeeContent(content)
+            //            .LeeContent(content)
             .LeeAddContent(^(UILabel * _Nonnull label) {
                 label.textAlignment = NSTextAlignmentLeft;
                 label.text = content;
@@ -292,9 +350,9 @@
     })
     .LeeShow();
     
-//    zDengluController * dlVC = [[zDengluController alloc]init];
-//    dlVC.title = @"登陆";
-//    [self.navigationController pushViewController:dlVC animated:YES];
+    //    zDengluController * dlVC = [[zDengluController alloc]init];
+    //    dlVC.title = @"登陆";
+    //    [self.navigationController pushViewController:dlVC animated:YES];
 }
 
 
