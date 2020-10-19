@@ -22,7 +22,7 @@
 
 //可以播放时间长度30秒以内的声音文件。
 @import AudioToolbox;
-
+#import "LWRemoteNotificationManager.h"
 
 @implementation LWUserinforIMModel
 -(NSString *)avatarID

@@ -63,6 +63,7 @@
 		004E435C2472B964000A4627 /* zGoodsContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 004E435B2472B964000A4627 /* zGoodsContentModel.m */; };
 		004E435F2472CC04000A4627 /* zCompanyGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 004E435E2472CC04000A4627 /* zCompanyGoodsCell.m */; };
 		005493F62531EA9E0050AD06 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005493F52531EA9E0050AD06 /* UserNotifications.framework */; };
+		005495C9253AE1B800E2B565 /* LWRemoteNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 005495C8253AE1B800E2B565 /* LWRemoteNotificationManager.m */; };
 		00558BD42460FF4200550FBC /* sliderNavMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BD32460FF4200550FBC /* sliderNavMenu.m */; };
 		00558BD72460FFE000550FBC /* zGoodsMangerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BD62460FFE000550FBC /* zGoodsMangerController.m */; };
 		00558BDA2461000500550FBC /* zCompanyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00558BD92461000500550FBC /* zCompanyController.m */; };
@@ -469,6 +470,8 @@
 		004E435D2472CC04000A4627 /* zCompanyGoodsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCompanyGoodsCell.h; sourceTree = "<group>"; };
 		004E435E2472CC04000A4627 /* zCompanyGoodsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zCompanyGoodsCell.m; sourceTree = "<group>"; };
 		005493F52531EA9E0050AD06 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		005495C7253AE1B800E2B565 /* LWRemoteNotificationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWRemoteNotificationManager.h; sourceTree = "<group>"; };
+		005495C8253AE1B800E2B565 /* LWRemoteNotificationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWRemoteNotificationManager.m; sourceTree = "<group>"; };
 		00558BD22460FF4200550FBC /* sliderNavMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sliderNavMenu.h; sourceTree = "<group>"; };
 		00558BD32460FF4200550FBC /* sliderNavMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sliderNavMenu.m; sourceTree = "<group>"; };
 		00558BD52460FFE000550FBC /* zGoodsMangerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zGoodsMangerController.h; sourceTree = "<group>"; };
@@ -2482,6 +2485,8 @@
 			children = (
 				89B323B624C5A4C200BD0722 /* LWSound.h */,
 				89B323B724C5A4C200BD0722 /* LWSound.m */,
+				005495C7253AE1B800E2B565 /* LWRemoteNotificationManager.h */,
+				005495C8253AE1B800E2B565 /* LWRemoteNotificationManager.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -2735,6 +2740,7 @@
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				004D7A5724C7D39600EFFA82 /* zNotifacationController.m in Sources */,
 				0026C4BD24741E6900C6ACB6 /* zMyfriendDetailCell.m in Sources */,
+				005495C9253AE1B800E2B565 /* LWRemoteNotificationManager.m in Sources */,
 				004E435F2472CC04000A4627 /* zCompanyGoodsCell.m in Sources */,
 				89216982245686E2007C6615 /* LWJiaoLiuGroupCollectionView.m in Sources */,
 				8921697B245670AE007C6615 /* LWSwitchBarView.m in Sources */,

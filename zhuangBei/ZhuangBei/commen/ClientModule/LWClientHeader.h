@@ -45,4 +45,8 @@ static NSString *const USER_ACCOUNT_IM_NICKNAME = @"USER_ACCOUNT_IM_NICKNAME";
 //用户的头像 IM
 static NSString *const USER_ACCOUNT_IM_AVATAR = @"USER_ACCOUNT_IM_AVATAR";
 
+// 当点击消息弹框时，切换tabbar.selectindex
+static NSString *const  USER_CLICKREMOTENOTIFICATIONALEART = @"USER_CLICKREMOTENOTIFICATIONALEART";
+
+
 #endif /* LWClientHeader_h */

@@ -179,6 +179,12 @@
     ADD_NOTI(requestDatas, @"refreshFriendListDataWhenDeleteFriend");
 //    未读消息数变化时
     ADD_NOTI(unreadMsgNumberChange, LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY);
+    
+    ADD_NOTI(clickRemoteNotificationAleart,USER_CLICKREMOTENOTIFICATIONALEART);
+}
+
+- (void)clickRemoteNotificationAleart {
+    self.switchBarView.selectIndex = 0;
 }
 
 //监听消息未读数

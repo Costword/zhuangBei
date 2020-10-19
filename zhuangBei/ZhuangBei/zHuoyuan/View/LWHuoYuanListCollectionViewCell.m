@@ -46,6 +46,7 @@
         }];
         
         [self.contentView setBoundWidth:1 cornerRadius:10 boardColor:BASECOLOR_BOARD];
+        [_bgImageView setBoundWidth:1 cornerRadius:10 boardColor:BASECOLOR_BOARD];
         _bgImageView.image = [_bgImageView z_getPlaceholderImageWithSVG];
     }
     return self;
