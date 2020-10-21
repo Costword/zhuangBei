@@ -8,10 +8,11 @@
 
 #import "SceneDelegate.h"
 #import "MainNavController.h"
-//#import "MainTabBarController.h"
 #import "LSTabBarController.h"
 #import "zDengluController.h"
 #import "ViewController.h"
+#import "ALaunchController.h"
+#import "launchManger.h"
 @interface SceneDelegate ()
 
 @end
@@ -36,15 +37,25 @@
             rootNav.navigationBar.hidden = YES;
             self.window.rootViewController = rootNav;
             [self.window makeKeyAndVisible];
-//            self.window.rootViewController = [ViewController new];
-//            [self.window makeKeyAndVisible];
+
         }else
         {
-            zDengluController * rootVC  = [[zDengluController alloc]init];
-            MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
-            rootNav.navigationBar.hidden = YES;
-            self.window.rootViewController = rootNav;
-            [self.window makeKeyAndVisible];
+            BOOL tag = [[launchManger shareInstance] getLaunchKey];
+            if (tag) {
+                ALaunchController * luanchVC =  [[ALaunchController alloc]init];
+                MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:luanchVC];
+                rootNav.navigationBar.hidden = YES;
+                self.window.rootViewController = rootNav;
+                [self.window makeKeyAndVisible];
+            }else
+            {
+                //未登录登录状态 登录
+                zDengluController * rootVC  = [[zDengluController alloc]init];
+                MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
+                rootNav.navigationBar.hidden = YES;
+                self.window.rootViewController = rootNav;
+                [self.window makeKeyAndVisible];
+            }
         }
         
     }

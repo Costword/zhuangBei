@@ -15,6 +15,8 @@
 #import "LSTabBarController.h"
 #import "JSHAREService.h"
 #import "AppDelegate+LWRemoveNotification.h"
+#import "launchManger.h"
+#import "ALaunchController.h"
 
 @interface AppDelegate ()
 
@@ -55,12 +57,24 @@
             
         }else
         {
-            //未登录登录状态 登录
-            zDengluController * rootVC  = [[zDengluController alloc]init];
-            MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
-            rootNav.navigationBar.hidden = YES;
-            self.window.rootViewController = rootNav;
-            [self.window makeKeyAndVisible];
+            
+            BOOL tag = [[launchManger shareInstance] getLaunchKey];
+            if (tag) {
+                ALaunchController * luanchVC =  [[ALaunchController alloc]init];
+                MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:luanchVC];
+                rootNav.navigationBar.hidden = YES;
+                self.window.rootViewController = rootNav;
+                [self.window makeKeyAndVisible];
+            }else
+            {
+                //未登录登录状态 登录
+                zDengluController * rootVC  = [[zDengluController alloc]init];
+                MainNavController * rootNav = [[MainNavController alloc]initWithRootViewController:rootVC];
+                rootNav.navigationBar.hidden = YES;
+                self.window.rootViewController = rootNav;
+                [self.window makeKeyAndVisible];
+            }
+            
         }
     }
     

@@ -266,9 +266,13 @@
 		00FE9BAE2476B878002A1F86 /* OfficialAccountToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B732476B878002A1F86 /* OfficialAccountToolbar.m */; };
 		00FE9BAF2476B878002A1F86 /* MorePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B772476B878002A1F86 /* MorePanel.m */; };
 		00FE9BB02476B878002A1F86 /* ChatKeyBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE9B792476B878002A1F86 /* ChatKeyBoard.m */; };
+		180488AC253EDDEA0099BE63 /* NSObject+lanunchObsive.m in Sources */ = {isa = PBXBuildFile; fileRef = 180488AB253EDDEA0099BE63 /* NSObject+lanunchObsive.m */; };
+		180488D0253EE0AD0099BE63 /* launchManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 180488CF253EE0AD0099BE63 /* launchManger.m */; };
 		1812157E25216EF60055FB32 /* zPersonalTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1812157D25216EF60055FB32 /* zPersonalTableHeader.m */; };
 		1899CA5F25318941004904CC /* zShouyeTuiGuangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1899CA5E25318941004904CC /* zShouyeTuiGuangCell.m */; };
 		1899CA6525318C77004904CC /* zShouyeTuiguangCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1899CA6425318C77004904CC /* zShouyeTuiguangCollectionCell.m */; };
+		18B7E183253D6A450089104B /* ALaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B7E182253D6A450089104B /* ALaunchController.m */; };
+		18B7E189253D6F870089104B /* ALauchCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B7E188253D6F870089104B /* ALauchCollectionViewCell.m */; };
 		18E0C0092530A515002AE303 /* zCompanyGoodsCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0C0082530A515002AE303 /* zCompanyGoodsCollectionCell.m */; };
 		18E0C00F2530B550002AE303 /* zCompanyCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0C00E2530B54F002AE303 /* zCompanyCollectionHeaderView.m */; };
 		6BE41E3FCD0C213AB1550073 /* libPods-ZhuangBei.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7977AA9958E9CD57558960F /* libPods-ZhuangBei.a */; };
@@ -898,12 +902,20 @@
 		00FE9B772476B878002A1F86 /* MorePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MorePanel.m; sourceTree = "<group>"; };
 		00FE9B782476B878002A1F86 /* MorePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MorePanel.h; sourceTree = "<group>"; };
 		00FE9B792476B878002A1F86 /* ChatKeyBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatKeyBoard.m; sourceTree = "<group>"; };
+		180488AA253EDDEA0099BE63 /* NSObject+lanunchObsive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+lanunchObsive.h"; sourceTree = "<group>"; };
+		180488AB253EDDEA0099BE63 /* NSObject+lanunchObsive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+lanunchObsive.m"; sourceTree = "<group>"; };
+		180488CE253EE0AD0099BE63 /* launchManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = launchManger.h; sourceTree = "<group>"; };
+		180488CF253EE0AD0099BE63 /* launchManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = launchManger.m; sourceTree = "<group>"; };
 		1812157C25216EF60055FB32 /* zPersonalTableHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zPersonalTableHeader.h; sourceTree = "<group>"; };
 		1812157D25216EF60055FB32 /* zPersonalTableHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zPersonalTableHeader.m; sourceTree = "<group>"; };
 		1899CA5D25318941004904CC /* zShouyeTuiGuangCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zShouyeTuiGuangCell.h; sourceTree = "<group>"; };
 		1899CA5E25318941004904CC /* zShouyeTuiGuangCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zShouyeTuiGuangCell.m; sourceTree = "<group>"; };
 		1899CA6325318C77004904CC /* zShouyeTuiguangCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zShouyeTuiguangCollectionCell.h; sourceTree = "<group>"; };
 		1899CA6425318C77004904CC /* zShouyeTuiguangCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zShouyeTuiguangCollectionCell.m; sourceTree = "<group>"; };
+		18B7E181253D6A450089104B /* ALaunchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALaunchController.h; sourceTree = "<group>"; };
+		18B7E182253D6A450089104B /* ALaunchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALaunchController.m; sourceTree = "<group>"; };
+		18B7E187253D6F870089104B /* ALauchCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALauchCollectionViewCell.h; sourceTree = "<group>"; };
+		18B7E188253D6F870089104B /* ALauchCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALauchCollectionViewCell.m; sourceTree = "<group>"; };
 		18E0C0072530A515002AE303 /* zCompanyGoodsCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCompanyGoodsCollectionCell.h; sourceTree = "<group>"; };
 		18E0C0082530A515002AE303 /* zCompanyGoodsCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zCompanyGoodsCollectionCell.m; sourceTree = "<group>"; };
 		18E0C00D2530B54F002AE303 /* zCompanyCollectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zCompanyCollectionHeaderView.h; sourceTree = "<group>"; };
@@ -1449,6 +1461,7 @@
 		009FB5DC244E89C700133974 /* ZhuangBei */ = {
 			isa = PBXGroup;
 			children = (
+				180488A9253EDDB40099BE63 /* lanuchManger */,
 				00B635DD2531D15B00126B2E /* 警用行业联盟.entitlements */,
 				89B323B924C5A68000BD0722 /* soundSrource.mp3 */,
 				89BC879C24C68A3600AD0253 /* UpdateVersion */,
@@ -1640,6 +1653,8 @@
 				004D7A5624C7D39600EFFA82 /* zNotifacationController.m */,
 				004D7A5824C7D3B600EFFA82 /* zNotifacationDetailController.h */,
 				004D7A5924C7D3B600EFFA82 /* zNotifacationDetailController.m */,
+				18B7E181253D6A450089104B /* ALaunchController.h */,
+				18B7E182253D6A450089104B /* ALaunchController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1682,6 +1697,8 @@
 				18E0C00E2530B54F002AE303 /* zCompanyCollectionHeaderView.m */,
 				18E0C0072530A515002AE303 /* zCompanyGoodsCollectionCell.h */,
 				18E0C0082530A515002AE303 /* zCompanyGoodsCollectionCell.m */,
+				18B7E187253D6F870089104B /* ALauchCollectionViewCell.h */,
+				18B7E188253D6F870089104B /* ALauchCollectionViewCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -2283,6 +2300,17 @@
 			path = MorePanel;
 			sourceTree = "<group>";
 		};
+		180488A9253EDDB40099BE63 /* lanuchManger */ = {
+			isa = PBXGroup;
+			children = (
+				180488AA253EDDEA0099BE63 /* NSObject+lanunchObsive.h */,
+				180488AB253EDDEA0099BE63 /* NSObject+lanunchObsive.m */,
+				180488CE253EE0AD0099BE63 /* launchManger.h */,
+				180488CF253EE0AD0099BE63 /* launchManger.m */,
+			);
+			path = lanuchManger;
+			sourceTree = "<group>";
+		};
 		732C49DD66576D0DB40FA460 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2736,6 +2764,7 @@
 				00B0A5F324654FC60041C234 /* zGoodsDetailCell.m in Sources */,
 				0091FCF7245EBD870046691F /* handWritingListLayout.m in Sources */,
 				0000B1BB247372AB00B2F419 /* zCompanyGoodsModel.m in Sources */,
+				180488D0253EE0AD0099BE63 /* launchManger.m in Sources */,
 				00FE9B852476B878002A1F86 /* IFChatCell.m in Sources */,
 				009FB65B244FF3A100133974 /* zDengluRequst.m in Sources */,
 				004D7A5724C7D39600EFFA82 /* zNotifacationController.m in Sources */,
@@ -2885,10 +2914,13 @@
 				00FE9B822476B878002A1F86 /* ShowMsgElem.m in Sources */,
 				00FE9B862476B878002A1F86 /* IFGroupMemberCell.m in Sources */,
 				00372B0C2456A54B00E51931 /* zCategoryCard.m in Sources */,
+				180488AC253EDDEA0099BE63 /* NSObject+lanunchObsive.m in Sources */,
 				009E2187246A4BAB00AD1637 /* zEducationRankTypeInfo.m in Sources */,
+				18B7E183253D6A450089104B /* ALaunchController.m in Sources */,
 				00CA477A2455BAEB006A2885 /* QuestionHeaderView.m in Sources */,
 				18E0C00F2530B550002AE303 /* zCompanyCollectionHeaderView.m in Sources */,
 				009FB5F0244E89CD00133974 /* main.m in Sources */,
+				18B7E189253D6F870089104B /* ALauchCollectionViewCell.m in Sources */,
 				004D7A5A24C7D3B600EFFA82 /* zNotifacationDetailController.m in Sources */,
 				009FB657244FECC500133974 /* baseViewController.m in Sources */,
 				00B0A5DF246500840041C234 /* WeakScriptMessageDelegate.m in Sources */,
