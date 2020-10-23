@@ -49,7 +49,7 @@
 {
     if (!_logoImage) {
         _logoImage = [[UIImageView alloc]init];
-        _logoImage.image = [UIImage imageNamed:@"LOGO"];
+        _logoImage.image = [UIImage imageNamed:@"launch_icon_s"];
         _logoImage.contentMode = UIViewContentModeScaleAspectFill;
         _logoImage.alpha = 0.3;
     }
@@ -60,7 +60,7 @@
 {
     if (!_smallLogoImage) {
         _smallLogoImage = [[UIImageView alloc]init];
-        _smallLogoImage.image = [UIImage imageNamed:@"LOGO"];
+        _smallLogoImage.image = [UIImage imageNamed:@"launch_icon_s"];
         _smallLogoImage.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _smallLogoImage;;

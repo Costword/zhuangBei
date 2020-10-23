@@ -75,8 +75,7 @@
     [self.view addSubview:self.menuTableView];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadData) name:LOCAL_UNREAD_MSG_LIST_CHANGE_NOTI_KEY object:nil];
-    
-//    [self loadData];
+    [self loadData];
 }
 
 -(void)loadData{
@@ -202,7 +201,7 @@
         self.qiandaoDic = data;
         [self.menuTableView reloadData];
     } failure:^(NSError * _Nonnull error) {
-        
+        [[zHud shareInstance] showMessage:@"签到失败"];
     }];
 }
 

@@ -42,7 +42,7 @@
 {
     if (!_companyTable) {
         _companyTable = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        _companyTable.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
+        _companyTable.backgroundColor = [UIColor colorWithHexString:@"#FAFAFA"];
         _companyTable.delegate = self;
         _companyTable.dataSource = self;
         _companyTable.estimatedRowHeight = 100;
@@ -59,7 +59,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.companyType = 0;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#FAFAFA"];
     [self.view addSubview:self.companyTable];
     [self getCompanyGoodsList];
     
@@ -143,6 +143,17 @@
         cell.typesArray = @[];
         cell.goosModel = _goosModel;
         cell.goodsArray = self.goodsListArray;
+        [cell.companySigal subscribeNext:^(id  _Nullable x) {
+            zCompanyGoodsModel * model = x;
+            LWHuoYuanDeatilViewController * goodsDetailVC = [[LWHuoYuanDeatilViewController alloc]init];
+            goodsDetailVC.title = @"货源详情";
+            goodsDetailVC.gongYingShangDm = [NSString stringWithFormat:@"%ld",model.gysId];
+            goodsDetailVC.zhuangBeiDm = [NSString stringWithFormat:@"%ld",model.zbId];
+            goodsDetailVC.zhuangBeiLx = [NSString stringWithFormat:@"%ld",model.zbType];
+           NSString * zbName =  [model.zbName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            goodsDetailVC.zhuangBeiName = zbName;
+            [self.navigationController pushViewController:goodsDetailVC animated:YES];
+        }];
         return cell;
     }else
     {
@@ -185,7 +196,6 @@
         zCompanyGoodsModel * model = self.goodsListArray[indexPath.row];
         LWHuoYuanDeatilViewController * goodsDetailVC = [[LWHuoYuanDeatilViewController alloc]init];
         goodsDetailVC.title = @"货源详情";
-//        goodsDetailVC.modelId = [NSString stringWithFormat:@"%ld",model.zbType];
         goodsDetailVC.gongYingShangDm = [NSString stringWithFormat:@"%ld",model.gysId];
         goodsDetailVC.zhuangBeiDm = [NSString stringWithFormat:@"%ld",model.zbId];
         goodsDetailVC.zhuangBeiLx = [NSString stringWithFormat:@"%ld",model.zbType];

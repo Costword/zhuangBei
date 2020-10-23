@@ -58,6 +58,15 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
+-(RACSubject *)companySigal
+{
+    if (!_companySigal) {
+        _companySigal = [RACSubject subject];
+    }
+    return _companySigal;
+}
+
 -(UIView*)BaseView
 {
     if (!_BaseView) {
@@ -367,11 +376,15 @@
     return headerView;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    zCompanyGoodsModel * model = self.goodsArray[indexPath.row];
+    
+    [self.companySigal sendNext:model];
+}
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSString * city = [NSString stringWithFormat:@"类型-%ld",(long)indexPath.item];
-//    return [self stringSize:city];
     return CGSizeMake((SCREEN_WIDTH-20-kWidthFlot(20))/3, kWidthFlot(90));
 }
 
