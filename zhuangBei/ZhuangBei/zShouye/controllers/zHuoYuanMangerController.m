@@ -20,6 +20,7 @@
 #import "zShouyeTuiGuangCell.h"
 #import "LWClientManager.h"
 #import "LWLocalChatRecordModel.h"
+#import <AFNetworking.h>
 
 @interface zHuoYuanMangerController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -198,6 +199,7 @@
 -(void)getQinadaoState{
     [ServiceManager requestGetWithUrl:kQiandaoFindOne Parameters:nil success:^(id  _Nonnull response) {
         NSDictionary * data = response[@"data"];
+//        NSString * msg = response[@"msg"]
         self.qiandaoDic = data;
         [self.menuTableView reloadData];
     } failure:^(NSError * _Nonnull error) {
@@ -206,12 +208,31 @@
 }
 
 -(void)qiandaoRequest{
-    [self requestPostWithUrl:kQiandaoSignIn body:nil success:^(id  _Nonnull response) {
-        NSDictionary * data = response[@"data"];
-        [self getQinadaoState];
-    } failure:^(NSError * _Nonnull error) {
-        
-    }];
+//    [self requestPostWithUrl:kQiandaoSignIn body:nil success:^(id  _Nonnull response) {
+//        NSDictionary * data = response[@"data"];
+//        [self getQinadaoState];
+//    } failure:^(NSError * _Nonnull error) {
+//
+//    }];
+//
+    NSString *requestUrl = [NSString stringWithFormat:@"%@%@", kApiPrefix, kQiandaoSignIn];
+
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json",@"text/javascript",@"text/json",@"text/plain", nil];
+        // 设置请求头
+        [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [manager PUT:requestUrl parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSString *errcode = [NSString stringWithFormat:@"%@",[responseObject objectForKey:@"code"]];
+            if ([errcode isEqualToString:@"0"]) {
+                [self getQinadaoState];
+            }else{
+                NSString *errmsg = [responseObject objectForKey:@"msg"];
+                [[zHud shareInstance]showMessage:errmsg];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
 }
 
 -(void)viewDidLayoutSubviews
