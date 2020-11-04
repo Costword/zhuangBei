@@ -219,6 +219,42 @@
     }];
 }
 
+/// GET  网络请求 内部拼接参数
+/// @param url 地址
+/// @param paraString 参数字典，内部转拼接参数
+/// @param success 成功
+/// @param failure 失败
+- (void)requestGetWithUrl:(NSString *)url paraString:(id)paraString success:(RequestSuccess)success failure:(RequestFailure)failure;
+{
+    [ServiceManager requestGetWithUrl:url Parameters:paraString success:^(id  _Nonnull response) {
+        if (self.noContentView.alpha == 1) {
+            self.noContentView.alpha = 0;
+            [self.view sendSubviewToBack:self.noContentView];
+        }
+        success(response);
+        [self removeFailRequest:url];
+    } failure:^(NSError * _Nonnull error) {
+        [self.view bringSubviewToFront:self.noContentView];
+        self.noContentView.alpha = 1;
+        [self addFialRequest:url param:paraString paramType:(RequestParamTypeString) success:success fail:failure];
+        failure(error);
+    }];
+    
+//    [ServiceManager requestPostWithUrl:url paraString:paraString success:^(id  _Nonnull response) {
+//        if (self.noContentView.alpha == 1) {
+//            self.noContentView.alpha = 0;
+//            [self.view sendSubviewToBack:self.noContentView];
+//        }
+//        success(response);
+//        [self removeFailRequest:url];
+//    } failure:^(NSError * _Nonnull error) {
+//        [self.view bringSubviewToFront:self.noContentView];
+//        self.noContentView.alpha = 1;
+//        [self addFialRequest:url param:paraString paramType:(RequestParamTypeString) success:success fail:failure];
+//        failure(error);
+//    }];
+}
+
 
 /**
  *  异步POST请求:以body方式,字符串、字典

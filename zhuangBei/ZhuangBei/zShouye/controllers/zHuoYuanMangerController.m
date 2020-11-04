@@ -20,6 +20,7 @@
 #import "zShouyeTuiGuangCell.h"
 #import "LWClientManager.h"
 #import "LWLocalChatRecordModel.h"
+#import "zGXListViewController.h"
 #import <AFNetworking.h>
 
 @interface zHuoYuanMangerController ()<UITableViewDelegate,UITableViewDataSource>
@@ -281,11 +282,11 @@
             }else
             {
                 //进入其他页面
-                if ([myid integerValue]==1) {
+                if ([myid integerValue]==2) {
                     //邀请好友
                     zInviteController * inviteVC = [[zInviteController alloc]init];
                     [self.navigationController pushViewController:inviteVC animated:YES];
-                }else if ([myid integerValue]==2)
+                }else if ([myid integerValue]==1)
                 {
                     //通知公告
                     zNotifacationController * notiVC = [[zNotifacationController alloc]init];
@@ -293,6 +294,9 @@
                 }else
                 {
                     //即将推出
+                    zGXListViewController *  zgxVC = [[zGXListViewController alloc]init];
+                    [self.navigationController pushViewController:zgxVC animated:YES];
+                    
                 }
             }
         };

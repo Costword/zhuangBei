@@ -232,12 +232,14 @@
                         return;
                     }
                     if (weakSelf.upLoadModel.buMen.length==0) {
-                        [[zHud shareInstance]showMessage:@"部门必填"];
-                        return;
+//                        [[zHud shareInstance]showMessage:@"部门必填"];
+//                        return;
+                        weakSelf.upLoadModel.buMen = @"";
                     }
                     if (weakSelf.upLoadModel.post.length==0) {
-                        [[zHud shareInstance]showMessage:@"职务必填"];
-                        return;
+//                        [[zHud shareInstance]showMessage:@"职务必填"];
+//                        return;
+                        weakSelf.upLoadModel.post = @"";
                     }
                     if ([weakSelf.upLoadModel.email isEqualToString:@"(null)"]) {
                         weakSelf.upLoadModel.email = @"";
@@ -375,8 +377,6 @@
 -(void)RequsetSuccessWithData:(id)data AndUrl:(NSString*)url
 {
     if ([url containsString:kgetStudyRank]) {
-        
-        
         NSDictionary * dic = data[@"data"];
         zTypesModel * model = [zTypesModel mj_objectWithKeyValues:dic];
         //性别
@@ -446,9 +446,10 @@
     if ([url containsString:kupUserInfo]) {
         NSDictionary * dic = data[@"data"];
          NSString * code = data[@"code"];
-        NSString * msg = data[@"code"];
+        NSString * msg = data[@"msg"];
         if ([code integerValue] == 500) {
             [[zHud shareInstance]showMessage:msg];
+            return;
         }
         NSLog(@"提交信息%@",dic);
         [LWClientManager.share requestAllGroupInforDatas];

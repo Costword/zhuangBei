@@ -32,9 +32,6 @@
         NSArray *keys = ((NSDictionary *)paraString).allKeys;
         NSMutableString *tem = [[NSMutableString alloc] initWithString:@""];
         for (NSString *key in keys) {
-//            if ([paraString[key] isKindOfClass:[NSString class]] && [paraString[key] isEqualToString:@""]) {
-//                continue;
-//            }
             [tem appendFormat:@"%@=%@&",key,paraString[key]];
         }
         if ([tem hasSuffix:@"&"]) {
@@ -54,7 +51,6 @@
 
 + (void)requestGetWithUrl:(NSString *)url Parameters:(id)parameters success:(RequestSuccess)success failure:(RequestFailure)failure{
     NSString *urlstring = [NSString stringWithFormat:@"%@%@",kApiPrefix,url];
-    //    [self requestWithURL:urlstring parameters:parameters success:success failure:failure];
     [zNetWorkManger  GETworkWithUrl:urlstring WithParamer:parameters Success:success Failure:failure];
 }
 

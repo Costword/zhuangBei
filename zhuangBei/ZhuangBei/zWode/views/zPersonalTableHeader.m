@@ -502,7 +502,8 @@
         _bumenInputTextFild.icon = [UIImage imageNamed:@"blank"];
         _bumenInputTextFild.keyboardType = UIKeyboardTypeDefault;
         _bumenInputTextFild.textAlignment = NSTextAlignmentRight;
-        _bumenInputTextFild.title = @"部门（必填）";
+//        （必填）
+        _bumenInputTextFild.title = @"部门";
         _bumenInputTextFild.tapBack = ^{
             if (weakSelf.cantChange) {
                 [[zHud shareInstance]showMessage: @"已认证企业不可修改"];
@@ -527,7 +528,8 @@
         _zhiwuInputTextFild.icon = [UIImage imageNamed:@"blank"];
         _zhiwuInputTextFild.keyboardType = UIKeyboardTypeDefault;
         _zhiwuInputTextFild.textAlignment = NSTextAlignmentRight;
-        _zhiwuInputTextFild.title = @"职务（必填）";
+//        （必填）
+        _zhiwuInputTextFild.title = @"职务";
         _zhiwuInputTextFild.tapBack = ^{
             if (weakSelf.cantChange) {
                 [[zHud shareInstance]showMessage: @"已认证企业不可修改"];
@@ -536,7 +538,6 @@
             [weakSelf showSingleListWithTitl:@"选择职务" AndArray:weakSelf.zhiwuArray AndeditTextField:weakSelf.zhiwuInputTextFild];
         };
         _zhiwuInputTextFild.eyesTapBack = ^(NSInteger show) {
-//            [weakSelf showChange:show];
         };
     }
     return _zhiwuInputTextFild;
@@ -545,7 +546,6 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        
         [self addSubview:self.baseView];
         [self.baseView addSubview:self.nameInputTextFild];
         [self.baseView addSubview:self.sexInputTextFild];
@@ -801,7 +801,7 @@
     self.comArray = nil;
     self.bumenArray = nil;
     self.zhiwuArray = nil;
-    
+    [self setdata];
 }
 
 -(void)showSingleListWithTitl:(NSString*)title AndArray:(NSArray*)array AndeditTextField:(editTextField*)myeditTextField

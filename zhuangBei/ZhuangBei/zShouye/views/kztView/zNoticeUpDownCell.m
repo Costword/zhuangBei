@@ -165,13 +165,13 @@ const CGFloat kleftMargin = 20.f;
 -(void)setUserStateDic:(NSDictionary *)userStateDic
 {
     NSString * isSign = userStateDic[@"isSign"];
-    if ([isSign integerValue]==0) {
-        self.qiandaoBtn.selected = NO;
-        self.qiandaoBtn.backgroundColor = [UIColor colorWithHexString:@"#fa8281"];
-    }else
-    {
+    if ([isSign integerValue]==1) {
         self.qiandaoBtn.selected = YES;
         self.qiandaoBtn.backgroundColor = [UIColor grayColor];
+    }else
+    {
+        self.qiandaoBtn.selected = NO;
+        self.qiandaoBtn.backgroundColor = [UIColor colorWithHexString:@"#fa8281"];
     }
 }
 

@@ -1070,3 +1070,56 @@ NSString *const kQiandaoSignIn = @"app/appusersign/signIn";
  */
 NSString *const kTuiguang = @"app/apppromotion/findPublish";
 
+NSString * const kGongxun =@"app/modules/app/appusermeritoriouscoin/appusermeritoriouscoinAppList.html";
+
+//分享：iOSShare
+//功勋币：iOSGXDetail
+
+/**
+ *功勋币收支情况
+ *URL      GET /app/app/appusermeritoriouscoinrecord/findMyselfRecordPage?limit=20&page=1 HTTP/1.1
+ *DATA  {
+ "code": 0,
+ "msg": "success",
+ "page": {
+     "totalCount": 4,
+     "pageSize": 20,
+     "totalPage": 1,
+     "currPage": 1,
+     "list": [{
+         "id": 61543,
+         "userMeritoriousCoinId": 21309,
+         "recordContent": "连续签到 1天",
+         "recordType": 1,
+         "recordTypeShow": "收入",
+         "meritoriousCoinNumber": 1,
+         "recordTime": "2020-10-26 00:57:08"
+     }, {
+         "id": 61512,
+         "userMeritoriousCoinId": 21309,
+         "recordContent": "首次签到",
+         "recordType": 1,
+         "recordTypeShow": "收入",
+         "meritoriousCoinNumber": 1,
+         "recordTime": "2020-10-10 05:52:07"
+     }, {
+         "id": 53758,
+         "userMeritoriousCoinId": 21309,
+         "recordContent": "账号注册成功",
+         "recordType": 1,
+         "recordTypeShow": "收入",
+         "meritoriousCoinNumber": 20,
+         "recordTime": "2020-04-30 00:00:00"
+     }, {
+         "id": 57793,
+         "userMeritoriousCoinId": 21309,
+         "recordContent": "完善个人信息",
+         "recordType": 1,
+         "recordTypeShow": "收入",
+         "meritoriousCoinNumber": 20,
+         "recordTime": "2020-04-30 00:00:00"
+     }]
+ }
+}
+ */
+NSString * const zGXBDetail = @"app/appusermeritoriouscoinrecord/findMyselfRecordPage";

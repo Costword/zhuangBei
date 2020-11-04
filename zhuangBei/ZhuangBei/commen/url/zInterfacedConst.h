@@ -131,5 +131,11 @@ UIKIT_EXTERN NSString *const kQiandaoSignIn;
 /**首页推广*/
 UIKIT_EXTERN NSString *const kTuiguang;
 
+/**功勋币*/
+UIKIT_EXTERN NSString *const kGongxun;
+
+/**功勋币收支详情*/
+UIKIT_EXTERN NSString *const zGXBDetail;
+
 
 NS_ASSUME_NONNULL_END

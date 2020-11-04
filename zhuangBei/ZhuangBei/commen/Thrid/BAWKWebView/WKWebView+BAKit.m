@@ -320,6 +320,12 @@
 #pragma mark - 在响应完成时，调用的方法。如果设置为不允许响应，web内 容就不会传过来
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler
 {
+    NSArray *cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies;
+    WKHTTPCookieStore *cookieStroe = webView.configuration.websiteDataStore.httpCookieStore;
+
+    for(NSHTTPCookie* cookie in cookies) {
+        [cookieStroe setCookie:cookie completionHandler:nil];
+    }
     decisionHandler(WKNavigationResponsePolicyAllow);
 }
 

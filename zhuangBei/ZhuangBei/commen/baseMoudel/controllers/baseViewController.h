@@ -79,6 +79,8 @@ typedef NS_ENUM(NSUInteger, LWRequestParamType) {
 /// @param failure 失败
 - (void)requestPostWithUrl:(NSString *)url para:(id)para paraType:(LWRequestParamType)paratype success:(RequestSuccess)success failure:(RequestFailure)failure;
 
+//GET
+- (void)requestGetWithUrl:(NSString *)url paraString:(id)paraString success:(RequestSuccess)success failure:(RequestFailure)failure;
 
 
 @end
