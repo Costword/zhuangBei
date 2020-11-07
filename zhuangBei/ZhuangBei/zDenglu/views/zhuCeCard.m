@@ -9,15 +9,17 @@
 #import "zhuCeCard.h"
 #import "LoginTextField.h"
 #import "phoneNumCheck.h"
+#import "ServiceManager.h"
+#import "searchCompanyCell.h"
 
-#define  heightMargin 35
+#define  heightMargin 20
 #define  leftMargin 25
 
 #define NUM @"0123456789"
 #define ALPHA @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 #define ALPHANUM @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
-@interface zhuCeCard ()<UITextFieldDelegate>
+@interface zhuCeCard ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property(strong,nonatomic)NSArray * labelTitleArray;
 
@@ -30,9 +32,20 @@
 @property(strong,nonatomic)LoginTextField * companyField;
 @property(strong,nonatomic)LoginTextField * inviteField;
 
+@property(strong,nonatomic)UILabel * nameLabel;//姓名
+@property(strong,nonatomic)UILabel * passwordLabel;//密码
+@property(strong,nonatomic)UILabel * yaoqingmaLabel;//邀请码
+
 @property(strong,nonatomic)UIButton * eyesButton;
 @property(strong,nonatomic)UIButton * getCheckNumButton;
 @property(strong,nonatomic)UIButton * loginBtn;
+
+@property(strong,nonatomic)UIButton * changjia;//厂家
+@property(strong,nonatomic)UIButton * jixiangshang;//经销商
+@property(strong,nonatomic)UIButton * zongdaili;//总代理
+@property(strong,nonatomic)UIButton * currentSelectBtn;//判空使用无其他意义
+
+@property(strong,nonatomic)UILabel * changjiaTypeDesc;//用户须知
 
 @property(strong,nonatomic)UIButton * aggreBtn;//同意
 @property(strong,nonatomic)UILabel * userKnow;//用户须知
@@ -41,9 +54,21 @@
 
 @property(strong,nonatomic)NSMutableDictionary * userDic;
 
+@property(strong,nonatomic)UITableView * companyTableView;
+
+@property(strong,nonatomic)NSArray * companyArray;
+
 @end
 
 @implementation zhuCeCard
+
+-(NSArray *)companyArray
+{
+    if (!_companyArray) {
+        _companyArray = [NSArray array];
+    }
+    return _companyArray;
+}
 
 
 -(NSMutableDictionary*)userDic
@@ -57,7 +82,7 @@
 -(NSArray*)labelTitleArray
 {
     if (!_labelTitleArray) {
-        _labelTitleArray = @[@"姓名：",@"手机号：",@"密码：",@"验证码：",@"公司名称：",@"邀请码："];
+        _labelTitleArray = @[@"手机号：",@"验证码：",@"公司名称："];
     }
     return _labelTitleArray;
 }
@@ -129,6 +154,11 @@
         _companyField.icon = [UIImage imageNamed:@"blank"];
         _companyField.keyboardType = UIKeyboardTypeDefault;
         _companyField.myPlaceHolder = @"请输入所属公司";
+        @weakify(self);
+        [[RACSignal merge:@[self.companyField.rac_textSignal, RACObserve(self.companyField, text)]] subscribeNext:^(NSString* text){
+            @strongify(self);
+            [self loadCompanySearchWithStr:text];
+        }];
     }
     return _companyField;
 }
@@ -182,6 +212,99 @@
         [_aggreBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _aggreBtn;
+}
+
+-(UIButton*)changjia
+{
+    if (!_changjia) {
+        _changjia = [[UIButton alloc]init];
+        _changjia.titleLabel.font = kFont(14);
+        [_changjia setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_changjia setImage:[UIImage imageNamed:@"zb_unselect"] forState:UIControlStateNormal];
+        [_changjia setImage:[UIImage imageNamed:@"zb_select"] forState:UIControlStateSelected];
+        _changjia.tag = 5;
+        [_changjia setTitle:@"生产厂家" forState:UIControlStateNormal];
+        [_changjia addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _changjia;
+}
+
+-(UIButton*)jixiangshang
+{
+    if (!_jixiangshang) {
+        _jixiangshang = [[UIButton alloc]init];
+        _jixiangshang.titleLabel.font = kFont(14);
+        [_jixiangshang setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_jixiangshang setImage:[UIImage imageNamed:@"zb_unselect"] forState:UIControlStateNormal];
+        [_jixiangshang setImage:[UIImage imageNamed:@"zb_select"] forState:UIControlStateSelected];
+        _jixiangshang.tag = 6;
+        [_jixiangshang setTitle:@"渠道经销商" forState:UIControlStateNormal];
+        [_jixiangshang addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _jixiangshang;
+}
+
+-(UIButton*)zongdaili
+{
+    if (!_zongdaili) {
+        _zongdaili = [[UIButton alloc]init];
+        _zongdaili.titleLabel.font = kFont(14);
+        [_zongdaili setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_zongdaili setImage:[UIImage imageNamed:@"zb_unselect"] forState:UIControlStateNormal];
+        [_zongdaili setImage:[UIImage imageNamed:@"zb_select"] forState:UIControlStateSelected];
+        _zongdaili.tag = 7;
+        [_zongdaili setTitle:@"全国总代理" forState:UIControlStateNormal];
+        [_zongdaili addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _zongdaili;
+}
+
+-(UILabel *)changjiaTypeDesc
+{
+    if (!_changjiaTypeDesc) {
+        _changjiaTypeDesc = [[UILabel alloc]init];
+        _changjiaTypeDesc.font = [UIFont systemFontOfSize:kWidthFlot(12)];
+        _changjiaTypeDesc.textColor = [UIColor blackColor];
+        _changjiaTypeDesc.text = @"说明：\n 1.生产厂家：可上传货源，平台将予以真实性考核；同时可按省份收藏经销商的权限；\n2.全国总代理：具有上传货源的权限，需提供授权函原件备查；同时可按省份收藏经销商的权限；3.经销商：没有上传货源的权限，有按类收藏货源的权限；\n进入平台后如有更改，可在 （企业大厅-企业认证）模块进行更改";
+        _changjiaTypeDesc.numberOfLines = 0;
+    }
+    return _changjiaTypeDesc;
+}
+
+-(UILabel *)nameLabel
+{
+    if (!_nameLabel) {
+        _nameLabel = [[UILabel alloc]init];
+        _nameLabel.textColor = [UIColor blackColor];
+        _nameLabel.font = kFont(18);
+        _nameLabel.text = @"姓名：";
+        _nameLabel.numberOfLines = 0;
+    }
+    return _nameLabel;
+}
+
+-(UILabel *)passwordLabel
+{
+    if (!_passwordLabel) {
+        _passwordLabel = [[UILabel alloc]init];
+        _passwordLabel.textColor = [UIColor blackColor];
+        _passwordLabel.font = kFont(18);
+        _passwordLabel.text = @"密码：";
+        _passwordLabel.numberOfLines = 0;
+    }
+    return _passwordLabel;
+}
+
+-(UILabel *)yaoqingmaLabel
+{
+    if (!_yaoqingmaLabel) {
+        _yaoqingmaLabel = [[UILabel alloc]init];
+        _yaoqingmaLabel.textColor = [UIColor blackColor];
+        _yaoqingmaLabel.font = kFont(18);
+        _yaoqingmaLabel.text = @"邀请码：";
+        _yaoqingmaLabel.numberOfLines = 0;
+    }
+    return _yaoqingmaLabel;
 }
 
 -(UIButton*)loginBtn
@@ -250,6 +373,24 @@
     return _gotoLoginLabel;
 }
 
+-(UITableView *)companyTableView
+{
+    if (!_companyTableView) {
+        _companyTableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _companyTableView.backgroundColor = [UIColor whiteColor];
+        _companyTableView.alpha = 0;
+        _companyTableView.delegate = self;
+        _companyTableView.dataSource = self;
+        _companyTableView.estimatedRowHeight = 100;
+        _companyTableView.showsVerticalScrollIndicator = NO;
+        _companyTableView.rowHeight = UITableViewAutomaticDimension;
+        _companyTableView.sectionHeaderHeight =UITableViewAutomaticDimension;
+        _companyTableView.estimatedSectionHeaderHeight = 2;
+        _companyTableView.estimatedSectionFooterHeight = 2;
+        _companyTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    return _companyTableView;
+}
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -265,13 +406,21 @@
             [self.labelArray addObject:nameLabel];
         }
         
-        [self addSubview:self.nameField];
         [self addSubview:self.accountField];
+        [self addSubview:self.inviteField];
+        [self addSubview:self.companyField];
+        
+        [self addSubview:self.changjia];
+        [self addSubview:self.jixiangshang];
+        [self addSubview:self.zongdaili];
+        [self addSubview:self.changjiaTypeDesc];
+        
+        [self addSubview:self.nameLabel];
+        [self addSubview:self.passwordLabel];
+        [self addSubview:self.yaoqingmaLabel];
+        [self addSubview:self.nameField];
         [self addSubview:self.passwordField];
         [self addSubview:self.checkField];
-        [self addSubview:self.companyField];
-        [self addSubview:self.inviteField];
-        
         [self addSubview:self.eyesButton];
         [self addSubview:self.getCheckNumButton];
         
@@ -280,6 +429,7 @@
         
         [self addSubview:self.loginBtn];
         [self addSubview:self.gotoLoginLabel];
+        [self addSubview:self.companyTableView];
         [self updateConstraintsForView];
     }
     return self;
@@ -287,6 +437,8 @@
 
 -(void)updateConstraintsForView
 {
+    
+    CGFloat rowHeight = 35;
     for (int i = 0; i<self.labelArray.count; i++) {
         UILabel * nameLabel = self.labelArray[i];
         
@@ -294,43 +446,24 @@
         [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(top);
             make.left.mas_equalTo(leftMargin);
-            make.height.mas_equalTo(40);
+            make.height.mas_equalTo(rowHeight);
         }];
     }
     
     CGFloat left = 80;
-    [self.nameField mas_makeConstraints:^(MASConstraintMaker *make) {
+    //手机号
+    [self.accountField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 0);
         make.left.mas_equalTo(left);
         make.right.mas_equalTo(-leftMargin);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(rowHeight);
     }];
-    [self.accountField mas_makeConstraints:^(MASConstraintMaker *make) {
+    //验证码
+    [self.checkField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 1);
         make.left.mas_equalTo(left);
-        make.right.mas_equalTo(-leftMargin);
-        make.height.mas_equalTo(40);
-    }];
-
-    [self.passwordField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 2);
-        make.left.mas_equalTo(left);
-        make.right.mas_equalTo(-(leftMargin + 40));
-        make.height.mas_equalTo(40);
-    }];
-    
-    [self.eyesButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.passwordField.mas_centerY);
-        make.right.mas_equalTo(-leftMargin);
-        make.width.mas_equalTo(40);
-        make.height.mas_equalTo(30);
-    }];
-
-    [self.checkField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 3);
-        make.left.mas_equalTo(left);
         make.right.mas_equalTo(-(leftMargin + 80));
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(rowHeight);
     }];
     
     [self.getCheckNumButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -339,45 +472,170 @@
         make.width.mas_equalTo(70);
         make.height.mas_equalTo(30);
     }];
-
+    //公司名称
     [self.companyField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 4);
+        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 2);
         make.left.mas_equalTo(left);
         make.right.mas_equalTo(-leftMargin);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(rowHeight);
     }];
-    [self.inviteField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 5);
+    [self.changjia mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.companyField.mas_bottom).offset(heightMargin);
+        make.left.mas_equalTo(left);
+        make.width.mas_equalTo((SCREEN_WIDTH-left-leftMargin)/3);
+        make.height.mas_equalTo(rowHeight);
+    }];
+    [self.jixiangshang mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.companyField.mas_bottom).offset(heightMargin);
+        make.left.mas_equalTo(self.changjia.mas_right);
+        make.width.mas_equalTo((SCREEN_WIDTH-left-leftMargin)/3);
+        make.height.mas_equalTo(rowHeight);
+    }];
+    [self.zongdaili mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.companyField.mas_bottom).offset(heightMargin);
+        make.left.mas_equalTo(self.jixiangshang.mas_right);
+        make.width.mas_equalTo((SCREEN_WIDTH-left-leftMargin)/3);
+        make.height.mas_equalTo(rowHeight);
+    }];
+    //厂家描述
+    [self.changjiaTypeDesc  mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.changjia.mas_bottom).offset(10);
+        make.left.mas_equalTo(leftMargin);
+        make.right.mas_equalTo(-leftMargin);
+    }];
+    
+    //姓名
+    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.changjiaTypeDesc.mas_bottom).offset(heightMargin);
+        make.left.mas_equalTo(leftMargin);
+        make.width.mas_equalTo(left);
+        make.height.mas_equalTo(rowHeight);
+    }];
+    
+    [self.nameField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.nameLabel.mas_top);
         make.left.mas_equalTo(left);
         make.right.mas_equalTo(-leftMargin);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(rowHeight);
+    }];
+    //密码
+    [self.passwordLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(heightMargin);
+        make.left.mas_equalTo(leftMargin);
+        make.width.mas_equalTo(left);
+        make.height.mas_equalTo(rowHeight);
+    }];
+    [self.passwordField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.passwordLabel.mas_top);
+        make.left.mas_equalTo(left);
+        make.right.mas_equalTo(-(leftMargin + 40));
+        make.height.mas_equalTo(rowHeight);
+    }];
+    
+    [self.eyesButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.passwordField.mas_centerY);
+        make.right.mas_equalTo(-leftMargin);
+        make.width.mas_equalTo(40);
+        make.height.mas_equalTo(30);
+    }];
+    //邀请码
+   
+    [self.yaoqingmaLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.passwordLabel.mas_bottom).offset(heightMargin);
+        make.left.mas_equalTo(leftMargin);
+        make.width.mas_equalTo(left);
+        make.height.mas_equalTo(rowHeight);
+    }];
+    
+    [self.inviteField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.yaoqingmaLabel.mas_top);
+        make.left.mas_equalTo(left);
+        make.right.mas_equalTo(-leftMargin);
+        make.height.mas_equalTo(rowHeight);
     }];
     
     [self.userKnow mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.inviteField.mas_bottom).offset(10);
+        make.top.mas_equalTo(self.yaoqingmaLabel.mas_bottom).offset(10);
         make.right.mas_equalTo(-leftMargin);
         make.height.mas_equalTo(kWidthFlot(30));
     }];
     [self.aggreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.inviteField.mas_bottom).offset(10);
+        make.top.mas_equalTo(self.userKnow.mas_top);
         make.right.mas_equalTo(self.userKnow.mas_left).offset(-1);
         make.height.mas_equalTo(kWidthFlot(30));
         make.width.mas_equalTo(kWidthFlot(30));
     }];
-    
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.aggreBtn.mas_bottom).offset(kWidthFlot(40));
+        make.top.mas_equalTo(self.aggreBtn.mas_bottom).offset(kWidthFlot(10));
         make.centerX.mas_equalTo(self.mas_centerX);
         make.width.mas_equalTo(kWidthFlot(285));
         make.height.mas_equalTo(45);
     }];
-    
     [self.gotoLoginLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(-kWidthFlot(20));
         make.left.mas_equalTo(kWidthFlot(0));
         make.right.mas_equalTo(-kWidthFlot(0));
-        make.height.mas_equalTo(kWidthFlot(40));
+        make.height.mas_equalTo(kWidthFlot(rowHeight));
     }];
+    
+    [self.companyTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.companyField.mas_bottom).offset(0);
+        make.left.mas_equalTo(left);
+        make.right.mas_equalTo(-leftMargin);
+        make.height.mas_equalTo(kWidthFlot(200));
+    }];
+}
+
+-(void)loadCompanySearchWithStr:(NSString*)str
+{
+    if (str.length >0) {
+            //获取是否有高亮
+            UITextRange *selectedRange = [self.companyField markedTextRange];
+            if (!selectedRange) {
+                
+                
+                if (self.companyField.isEditing) {
+//                    NSLog(@"调用接口");
+                    NSDictionary * dic = @{@"name":str};
+                    
+                    [ServiceManager requestGetWithUrl:zFindNameListByName Parameters:dic success:^(id  _Nonnull response) {
+                        NSArray * companyArr = response[@"data"];
+                        self.companyArray = companyArr;
+                        
+                        self.companyTableView.alpha = 1;
+                        [self.companyTableView reloadData];
+                        
+                    } failure:^(NSError * _Nonnull error) {
+                        
+                        NSLog(@"error%ld",error.code);
+                    }];
+                }else
+                {
+                    
+                }
+            }
+    }
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.companyArray.count;
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    searchCompanyCell * cell = [searchCompanyCell creatTableViewCellWithTableView:tableView AndIndexPath:indexPath];
+    cell.sourceDic = self.companyArray[indexPath.row];
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary * sourceDic = self.companyArray[indexPath.row];
+    [self.companyField resignFirstResponder];
+    self.companyField.text = sourceDic[@"name"];
+    self.companyTableView.alpha = 0;
+    
 }
 
 -(void)buttonClick:(UIButton*)button
@@ -428,7 +686,10 @@
             [[zHud shareInstance]showMessage:@"公司名称不可为空"];
             return;
         }
-        
+        if (self.currentSelectBtn == nil) {
+            [[zHud shareInstance]showMessage:@"请选择公司类型"];
+            return;
+        }
         NSString * password = self.passwordField.text;
         [self.userDic setObject:self.nameField.text forKey:@"nickName"];
         [self.userDic setObject:self.accountField.text forKey:@"username"];
@@ -436,6 +697,7 @@
         [self.userDic setObject:self.checkField.text forKey:@"verificationCode"];
         [self.userDic setObject:self.inviteField.text forKey:@"invatationCode"];
         [self.userDic setObject:self.companyField.text forKey:@"companyName"];
+        
         if (self.aggreBtn.selected) {
             if (self.zhuceBack) {
                 self.zhuceBack(self.userDic);
@@ -530,6 +792,31 @@
 {
     if (self.backLogin) {
         self.backLogin();
+    }
+}
+
+-(void)choseType:(UIButton*)button
+{
+    self.currentSelectBtn = button;
+    if (button.selected == NO) {
+        button.selected = !button.selected;
+    }
+    if ([button isEqual:self.changjia]) {
+        self.jixiangshang.selected = NO;
+        self.zongdaili.selected = NO;
+        [self.userDic setObject:@(0) forKey:@"companyType"];
+    }
+    
+    if ([button isEqual:self.jixiangshang]) {
+        self.changjia.selected = NO;
+        self.zongdaili.selected = NO;
+        [self.userDic setObject:@(1) forKey:@"companyType"];
+    }
+    
+    if ([button isEqual:self.zongdaili]) {
+        self.changjia.selected = NO;
+        self.jixiangshang.selected = NO;
+        [self.userDic setObject:@(2) forKey:@"companyType"];
     }
 }
 

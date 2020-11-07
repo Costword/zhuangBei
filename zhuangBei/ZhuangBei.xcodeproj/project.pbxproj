@@ -269,6 +269,7 @@
 		180488AC253EDDEA0099BE63 /* NSObject+lanunchObsive.m in Sources */ = {isa = PBXBuildFile; fileRef = 180488AB253EDDEA0099BE63 /* NSObject+lanunchObsive.m */; };
 		180488D0253EE0AD0099BE63 /* launchManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 180488CF253EE0AD0099BE63 /* launchManger.m */; };
 		1812157E25216EF60055FB32 /* zPersonalTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1812157D25216EF60055FB32 /* zPersonalTableHeader.m */; };
+		183C552625559FCF009149D3 /* searchCompanyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C552525559FCF009149D3 /* searchCompanyCell.m */; };
 		188C0130254BC5BC0058FAC6 /* zGXBCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188C012F254BC5BC0058FAC6 /* zGXBCell.m */; };
 		1899CA5F25318941004904CC /* zShouyeTuiGuangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1899CA5E25318941004904CC /* zShouyeTuiGuangCell.m */; };
 		1899CA6525318C77004904CC /* zShouyeTuiguangCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1899CA6425318C77004904CC /* zShouyeTuiguangCollectionCell.m */; };
@@ -912,6 +913,8 @@
 		180488CF253EE0AD0099BE63 /* launchManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = launchManger.m; sourceTree = "<group>"; };
 		1812157C25216EF60055FB32 /* zPersonalTableHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zPersonalTableHeader.h; sourceTree = "<group>"; };
 		1812157D25216EF60055FB32 /* zPersonalTableHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zPersonalTableHeader.m; sourceTree = "<group>"; };
+		183C552425559FCF009149D3 /* searchCompanyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = searchCompanyCell.h; sourceTree = "<group>"; };
+		183C552525559FCF009149D3 /* searchCompanyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = searchCompanyCell.m; sourceTree = "<group>"; };
 		188C012E254BC5BC0058FAC6 /* zGXBCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zGXBCell.h; sourceTree = "<group>"; };
 		188C012F254BC5BC0058FAC6 /* zGXBCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zGXBCell.m; sourceTree = "<group>"; };
 		1899CA5D25318941004904CC /* zShouyeTuiGuangCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zShouyeTuiGuangCell.h; sourceTree = "<group>"; };
@@ -1112,6 +1115,8 @@
 				0087184A2459585C003F8CD3 /* QuestionFootView.m */,
 				001ECA792454449000727379 /* zhuCeCard.h */,
 				001ECA7A2454449000727379 /* zhuCeCard.m */,
+				183C552425559FCF009149D3 /* searchCompanyCell.h */,
+				183C552525559FCF009149D3 /* searchCompanyCell.m */,
 				001ECA682453B6F300727379 /* zLoginCard.h */,
 				001ECA692453B6F300727379 /* zLoginCard.m */,
 				004D7A6424C913F000EFFA82 /* zFogetCard.h */,
@@ -2795,6 +2800,7 @@
 				8921697B245670AE007C6615 /* LWSwitchBarView.m in Sources */,
 				89C112E0246E93AA007EAABB /* LWAddFriendTableViewCell.m in Sources */,
 				00E4F451247CEE0600F71D18 /* KNPhotoDownloadMgr.m in Sources */,
+				183C552625559FCF009149D3 /* searchCompanyCell.m in Sources */,
 				89DF44D42470C66C002CAE83 /* LWAlearCustomManagerView.m in Sources */,
 				006AA400247BF65500DBD559 /* HeaderManager.m in Sources */,
 				895BD9C52462604600AA5947 /* ServiceManager.m in Sources */,

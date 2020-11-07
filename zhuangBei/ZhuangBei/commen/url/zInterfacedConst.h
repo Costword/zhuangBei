@@ -137,5 +137,9 @@ UIKIT_EXTERN NSString *const kGongxun;
 /**功勋币收支详情*/
 UIKIT_EXTERN NSString *const zGXBDetail;
 
+/**公司名称模糊搜索*/
+UIKIT_EXTERN NSString *const zFindNameListByName;
+
+
 
 NS_ASSUME_NONNULL_END
