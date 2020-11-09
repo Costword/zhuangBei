@@ -118,7 +118,7 @@
 {
     LWHuoYuanDaTingModel *model = self.listDatasMutableArray[indexPath.row];
     if (model.isBaoKuan == 1) {
-        [self showBaoKuanAleartView];
+        [self showBaoKuanAleartView:@"本订单为公司行为，支付10000个功勋币即可获得联盟爆款的推广，时间周期为1个月"];
     }else{
         LWHuoYuanItemsListViewController *itemslist = [LWHuoYuanItemsListViewController new];
         itemslist.titleStr = model.name;

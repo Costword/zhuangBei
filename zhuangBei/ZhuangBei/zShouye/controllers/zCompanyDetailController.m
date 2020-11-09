@@ -150,8 +150,8 @@
             goodsDetailVC.gongYingShangDm = [NSString stringWithFormat:@"%ld",model.gysId];
             goodsDetailVC.zhuangBeiDm = [NSString stringWithFormat:@"%ld",model.zbId];
             goodsDetailVC.zhuangBeiLx = [NSString stringWithFormat:@"%ld",model.zbType];
-           NSString * zbName =  [model.zbName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            goodsDetailVC.zhuangBeiName = zbName;
+//           NSString * zbName =  [model.zbName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            goodsDetailVC.zhuangBeiName = model.zbName;
             [self.navigationController pushViewController:goodsDetailVC animated:YES];
         }];
         return cell;
@@ -199,8 +199,8 @@
         goodsDetailVC.gongYingShangDm = [NSString stringWithFormat:@"%ld",model.gysId];
         goodsDetailVC.zhuangBeiDm = [NSString stringWithFormat:@"%ld",model.zbId];
         goodsDetailVC.zhuangBeiLx = [NSString stringWithFormat:@"%ld",model.zbType];
-       NSString * zbName =  [model.zbName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        goodsDetailVC.zhuangBeiName = zbName;
+//       NSString * zbName =  [model.zbName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        goodsDetailVC.zhuangBeiName = model.zbName;
         [self.navigationController pushViewController:goodsDetailVC animated:YES];
     }
 }
