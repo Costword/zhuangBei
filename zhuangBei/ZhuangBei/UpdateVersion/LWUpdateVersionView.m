@@ -31,7 +31,13 @@
     _callBlock = block;
     [self configureUI];
     _titleL.text = title;
-    _contentL.text = content;
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:content];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:8];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [content length])];
+    _contentL.attributedText = attributedString;
+    [_contentL sizeToFit];
     
     if (btns.count > 1) {
         [_leftBtn setTitle:btns[0] forState:UIControlStateNormal];

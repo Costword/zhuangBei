@@ -54,18 +54,37 @@
     
 }
 
-- (void)showBaoKuanAleartView {
-    WEAKSELF(self);
-    _aleartView = [[LWUpdateVersionView alloc] init];
-    [_aleartView showAleartViewWithTitle:@"温馨提示" content:@"爆款规则：\n\n1.有发明专利证书者\n\n2.功勋币换取爆款推荐\n\n3.本平台内搜索热度/被关注度最高者" btns:@[@"关闭",@"进群详聊"] callBlock:^(NSString *btnstr) {
-        if ([btnstr isEqualToString:@"关闭"]) {
-            [weakself.aleartView dismiss];
-        }else if ([btnstr isEqualToString:@"进群详聊"]){
-            [weakself.aleartView dismiss];
-            MessageGroupViewController *chatvc = [MessageGroupViewController chatRoomViewControllerWithRoomId:[NSString stringWithFormat:@"%d",62] roomName:@"爆款申请" roomType:(LWChatRoomTypeGroup) extend:nil];
-            [self.navigationController pushViewController:chatvc animated:YES];
-        }
-    }];
+- (void)showBaoKuanAleartView:(NSString *)msg {
+    
+    NSString * content = [NSString stringWithFormat:@"爆款规则：\n%@",msg];
+    [LEEAlert alert].config
+    .LeeTitle(@"温馨提示")
+    .LeeAddContent(^(UILabel * _Nonnull label) {
+        label.textAlignment = NSTextAlignmentLeft;
+        label.text = content;
+    })
+    .LeeCancelAction(@"取消", ^{
+        // 点击事件Block
+    })
+    .LeeAction(@"进入群聊", ^{
+        // 点击事件Block
+        [self.navigationController pushViewController:[MessageGroupViewController chatRoomViewControllerWithRoomId:@"62" roomName:@"爆款" roomType:(LWChatRoomTypeGroup) extend:nil] animated:YES];
+        
+    })
+    .LeeShow();
+    
+//    WEAKSELF(self);
+//    _aleartView = [[LWUpdateVersionView alloc] init];
+//    NSString *temMsg = [NSString stringWithFormat:@"爆款规则：\n\n       %@",msg];
+//    [_aleartView showAleartViewWithTitle:@"温馨提示" content:temMsg btns:@[@"关闭",@"进群详聊"] callBlock:^(NSString *btnstr) {
+//        if ([btnstr isEqualToString:@"关闭"]) {
+//            [weakself.aleartView dismiss];
+//        }else if ([btnstr isEqualToString:@"进群详聊"]){
+//            [weakself.aleartView dismiss];
+//            MessageGroupViewController *chatvc = [MessageGroupViewController chatRoomViewControllerWithRoomId:[NSString stringWithFormat:@"%d",62] roomName:@"爆款申请" roomType:(LWChatRoomTypeGroup) extend:nil];
+//            [self.navigationController pushViewController:chatvc animated:YES];
+//        }
+//    }];
 }
 
 @end

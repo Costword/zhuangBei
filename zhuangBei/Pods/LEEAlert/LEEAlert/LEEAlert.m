@@ -1,5 +1,4 @@
-
-/*!
+/*
  *  @header LEEAlert.m
  *
  *  ┌─┐      ┌───────┐ ┌───────┐ 帅™
@@ -13,7 +12,7 @@
  *
  *  @author LEE
  *  @copyright    Copyright © 2016 - 2020年 lee. All rights reserved.
- *  @version    V1.4.1
+ *  @version    V1.4.2
  */
 
 #import "LEEAlert.h"
@@ -1078,6 +1077,10 @@ typedef NS_ENUM(NSInteger, LEEBackgroundStyle) {
             
             completionBlock();
         }
+        
+    } else {
+        
+        completionBlock();
     }
 }
 
@@ -1088,8 +1091,11 @@ typedef NS_ENUM(NSInteger, LEEBackgroundStyle) {
         LEEBaseConfig *item = [LEEAlert shareManager].queueArray.lastObject;
         
         if ([item respondsToSelector:@selector(closeWithCompletionBlock:)]) [item performSelector:@selector(closeWithCompletionBlock:) withObject:completionBlock];
+        
+    } else {
+        
+        completionBlock();
     }
-    
 }
 
 #pragma mark LazyLoading

@@ -1,0 +1,128 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - CocoaLumberjack (3.7.0):
+    - CocoaLumberjack/Core (= 3.7.0)
+  - CocoaLumberjack/Core (3.7.0)
+  - IQKeyboardManager (6.5.6)
+  - JCore (2.4.0)
+  - JPush (3.3.6):
+    - JCore (< 3.0.0, >= 2.0.0)
+  - JShare (1.9.0):
+    - JCore (< 3.0.0, >= 1.2.0)
+  - LEEAlert (1.4.2)
+  - Masonry (1.1.0)
+  - MBProgressHUD (1.2.0)
+  - MJExtension (3.2.2)
+  - MJRefresh (3.5.0)
+  - ReactiveObjC (3.1.1)
+  - SDCycleScrollView (1.82):
+    - SDWebImage (>= 5.0.0)
+  - SDWebImage (5.9.4):
+    - SDWebImage/Core (= 5.9.4)
+  - SDWebImage/Core (5.9.4)
+  - SVGKit (2.1.1):
+    - CocoaLumberjack (~> 3.0)
+  - TYAttributedLabel (2.6.6)
+  - UITextView-WZB (1.1.1)
+  - UMCCommon (7.2.2)
+  - UMCCommonLog (2.0.0)
+  - UMCPush (3.3.1):
+    - UMCCommon
+  - UMCSecurityPlugins (1.0.6)
+  - WMZBanner (1.1.5):
+    - SDWebImage
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.0)
+  - IQKeyboardManager
+  - JPush
+  - JShare
+  - LEEAlert
+  - Masonry
+  - MBProgressHUD
+  - MJExtension
+  - MJRefresh
+  - ReactiveObjC
+  - SDCycleScrollView (>= 1.80)
+  - SDWebImage
+  - SVGKit
+  - TYAttributedLabel (~> 2.6.2)
+  - UITextView-WZB (= 1.1.1)
+  - UMCCommon
+  - UMCCommonLog
+  - UMCPush
+  - UMCSecurityPlugins
+  - WMZBanner
+  - YYKit
+
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - CocoaLumberjack
+    - IQKeyboardManager
+    - JCore
+    - JPush
+    - JShare
+    - LEEAlert
+    - Masonry
+    - MBProgressHUD
+    - MJExtension
+    - MJRefresh
+    - ReactiveObjC
+    - SDCycleScrollView
+    - SDWebImage
+    - SVGKit
+    - TYAttributedLabel
+    - UITextView-WZB
+    - UMCCommon
+    - UMCCommonLog
+    - UMCPush
+    - UMCSecurityPlugins
+    - WMZBanner
+    - YYKit
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
+  IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
+  JCore: a29e4b0ee54e1301446dc02d8e1c350404108b34
+  JPush: a401b946dcc76b37335422487201bc1ecc8dd296
+  JShare: b78807ef0739149695a5e17a208522f632936656
+  LEEAlert: 146489ee4f7fce413da4657ecd5625825d6e26b8
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MJExtension: d9b9c74cbdeb724c1e9ecbb157b318276e62e876
+  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+  SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
+  SDWebImage: b69257f4ab14e9b6a2ef53e910fdf914d8f757c1
+  SVGKit: 652cdf7bef8bec8564d04a8511d3ab50c7595fac
+  TYAttributedLabel: cb8fc910d97eb5224936d4f692a78e042af691b2
+  UITextView-WZB: aa7306ec35ad35d325f8e608366ecd5ac8c8eed9
+  UMCCommon: 15e5311b00c7ff6e6ffb1f5c965651373b6b2b3c
+  UMCCommonLog: 9b7ddde5d14a52fc1986ba5ac3121b8b2f433638
+  UMCPush: af977ec99bbf34558825e907c58f6b76f6c7f897
+  UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
+  WMZBanner: 515823975ddcc069a7238b6d058d90a3f7f60378
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
+
+PODFILE CHECKSUM: be9f0e3d50333758a8b5c49a0f72c6218764d6dd
+
+COCOAPODS: 1.9.3
