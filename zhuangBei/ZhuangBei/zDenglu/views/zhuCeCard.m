@@ -45,6 +45,8 @@
 @property(strong,nonatomic)UIButton * zongdaili;//总代理
 @property(strong,nonatomic)UIButton * currentSelectBtn;//判空使用无其他意义
 
+@property(nonatomic,strong)UIVisualEffectView  * blurEffectView;//毛玻璃效果遮盖
+
 @property(strong,nonatomic)UILabel * changjiaTypeDesc;//用户须知
 
 @property(strong,nonatomic)UIButton * aggreBtn;//同意
@@ -159,6 +161,14 @@
             @strongify(self);
             [self loadCompanySearchWithStr:text];
         }];
+        
+        
+//        [RACObserve(self.companyField, isEditing) subscribeNext:^(id x) {
+//            @strongify(self);
+//            if ([x boolValue]) {
+//                NSLog(@"停止编辑");
+//            }
+//        }];
     }
     return _companyField;
 }
@@ -257,6 +267,15 @@
         [_zongdaili addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _zongdaili;
+}
+
+-(UIVisualEffectView *)blurEffectView
+{
+    if (!_blurEffectView) {
+        UIBlurEffect  * blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        _blurEffectView =[[UIVisualEffectView alloc]initWithEffect:blurEffect];
+    }
+    return  _blurEffectView;
 }
 
 -(UILabel *)changjiaTypeDesc
@@ -406,6 +425,8 @@
             [self.labelArray addObject:nameLabel];
         }
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide)name:UIKeyboardWillHideNotification object:nil];
+        
         [self addSubview:self.accountField];
         [self addSubview:self.inviteField];
         [self addSubview:self.companyField];
@@ -413,6 +434,7 @@
         [self addSubview:self.changjia];
         [self addSubview:self.jixiangshang];
         [self addSubview:self.zongdaili];
+        [self addSubview:self.blurEffectView];
         [self addSubview:self.changjiaTypeDesc];
         
         [self addSubview:self.nameLabel];
@@ -497,12 +519,22 @@
         make.width.mas_equalTo((SCREEN_WIDTH-left-leftMargin)/3);
         make.height.mas_equalTo(rowHeight);
     }];
+        
     //厂家描述
     [self.changjiaTypeDesc  mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.changjia.mas_bottom).offset(10);
         make.left.mas_equalTo(leftMargin);
         make.right.mas_equalTo(-leftMargin);
+        
     }];
+    
+    [self.blurEffectView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.changjia.mas_bottom).offset(5);
+        make.left.mas_equalTo(leftMargin-5);
+        make.right.mas_equalTo(-leftMargin+5);
+        make.bottom.mas_equalTo(self.changjiaTypeDesc.mas_bottom).offset(5);
+    }];
+
     
     //姓名
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -601,7 +633,10 @@
                     [ServiceManager requestGetWithUrl:zFindNameListByName Parameters:dic success:^(id  _Nonnull response) {
                         NSArray * companyArr = response[@"data"];
                         self.companyArray = companyArr;
-                        
+                        if (companyArr.count==0) {
+                            self.companyTableView.alpha = 0;
+                            return;
+                        }
                         self.companyTableView.alpha = 1;
                         [self.companyTableView reloadData];
                         
@@ -825,6 +860,11 @@
     NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ALPHANUM] invertedSet];
     NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
     return [string isEqualToString:filtered];
+}
+
+-(void)keyboardWillHide
+{
+    self.companyTableView.alpha = 0;
 }
 
 @end

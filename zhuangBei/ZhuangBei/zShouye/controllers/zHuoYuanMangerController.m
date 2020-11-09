@@ -312,7 +312,7 @@ else
     {
         zBaoKuanCell * baoKuanCell = [zBaoKuanCell instanceWithTableView:tableView AndIndexPath:indexPath];
         baoKuanCell.baokuanTapback = ^(NSDictionary * _Nonnull sourceDic) {
-            NSString * content = @"爆款规则：\n1.有发明专利证书者\n2.功勋币换取爆款推荐\n3.本平台内搜索热度/被关注度最高者";
+            NSString * content = @"本订单为公司行为，支付10000个功勋币即可获得联盟爆款的推广，时间周期为1个月";
             [LEEAlert alert].config
             .LeeTitle(@"温馨提示")
             .LeeAddContent(^(UILabel * _Nonnull label) {

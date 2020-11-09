@@ -87,6 +87,7 @@
         _webConfig.preferences = [WKPreferences new];
         // The minimum font size in points default is 0;
 //        _webConfig.preferences.minimumFontSize = 40;
+        _webConfig.preferences.minimumFontSize = 1.0f;
         // 是否支持 JavaScript
         _webConfig.preferences.javaScriptEnabled = YES;
         // 不通过用户交互，是否可以打开窗口
