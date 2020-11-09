@@ -3246,7 +3246,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ZhuangBei/警用行业联盟.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
@@ -3261,7 +3261,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZhuangBei/commen/Thrid/IFYunSDK",
 				);
-				MARKETING_VERSION = 1.1.25;
+				MARKETING_VERSION = 1.1.26;
 				OTHER_CFLAGS = (
 					"-Xclang",
 					"-fcompatibility-qualified-id-block-type-checking",
@@ -3283,7 +3283,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ZhuangBei/警用行业联盟.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
@@ -3298,7 +3298,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZhuangBei/commen/Thrid/IFYunSDK",
 				);
-				MARKETING_VERSION = 1.1.25;
+				MARKETING_VERSION = 1.1.26;
 				OTHER_CFLAGS = (
 					"-Xclang",
 					"-fcompatibility-qualified-id-block-type-checking",
