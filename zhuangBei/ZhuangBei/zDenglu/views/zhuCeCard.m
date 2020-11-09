@@ -12,8 +12,8 @@
 #import "ServiceManager.h"
 #import "searchCompanyCell.h"
 
-#define  heightMargin 20
-#define  leftMargin 25
+#define  heightMargin 15
+#define  leftMargin 20
 
 #define NUM @"0123456789"
 #define ALPHA @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -460,11 +460,11 @@
 -(void)updateConstraintsForView
 {
     
-    CGFloat rowHeight = 35;
+    CGFloat rowHeight = 30;
     for (int i = 0; i<self.labelArray.count; i++) {
         UILabel * nameLabel = self.labelArray[i];
         
-        CGFloat top = leftMargin + (heightMargin + leftMargin)* i;
+        CGFloat top = leftMargin + (heightMargin + rowHeight)* i;
         [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(top);
             make.left.mas_equalTo(leftMargin);
@@ -475,14 +475,14 @@
     CGFloat left = 80;
     //手机号
     [self.accountField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 0);
+        make.top.mas_equalTo(leftMargin + (heightMargin + rowHeight) * 0);
         make.left.mas_equalTo(left);
         make.right.mas_equalTo(-leftMargin);
         make.height.mas_equalTo(rowHeight);
     }];
     //验证码
     [self.checkField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 1);
+        make.top.mas_equalTo(leftMargin + (heightMargin + rowHeight) * 1);
         make.left.mas_equalTo(left);
         make.right.mas_equalTo(-(leftMargin + 80));
         make.height.mas_equalTo(rowHeight);
@@ -496,7 +496,7 @@
     }];
     //公司名称
     [self.companyField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(leftMargin + (heightMargin + leftMargin) * 2);
+        make.top.mas_equalTo(leftMargin + (heightMargin + rowHeight) * 2);
         make.left.mas_equalTo(left);
         make.right.mas_equalTo(-leftMargin);
         make.height.mas_equalTo(rowHeight);

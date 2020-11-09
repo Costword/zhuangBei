@@ -56,7 +56,7 @@
 
 - (void)showBaoKuanAleartView:(NSString *)msg {
     
-    NSString * content = [NSString stringWithFormat:@"爆款规则：\n%@",msg];
+    NSString * content = [NSString stringWithFormat:@"%@",msg];
     [LEEAlert alert].config
     .LeeTitle(@"温馨提示")
     .LeeAddContent(^(UILabel * _Nonnull label) {
