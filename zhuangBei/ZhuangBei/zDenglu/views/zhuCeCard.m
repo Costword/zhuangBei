@@ -84,7 +84,7 @@
 -(NSArray*)labelTitleArray
 {
     if (!_labelTitleArray) {
-        _labelTitleArray = @[@"手机号：",@"验证码：",@"公司名称："];
+        _labelTitleArray = @[@"手机号：",@"验证码：",@"公司名称：",@"企业类型："];
     }
     return _labelTitleArray;
 }
@@ -228,12 +228,13 @@
 {
     if (!_changjia) {
         _changjia = [[UIButton alloc]init];
-        _changjia.titleLabel.font = kFont(14);
+        _changjia.titleLabel.font = kFont(12);
         [_changjia setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_changjia setImage:[UIImage imageNamed:@"zb_unselect"] forState:UIControlStateNormal];
         [_changjia setImage:[UIImage imageNamed:@"zb_select"] forState:UIControlStateSelected];
         _changjia.tag = 5;
         [_changjia setTitle:@"生产厂家" forState:UIControlStateNormal];
+        [_changjia setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_changjia addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _changjia;
@@ -243,12 +244,13 @@
 {
     if (!_jixiangshang) {
         _jixiangshang = [[UIButton alloc]init];
-        _jixiangshang.titleLabel.font = kFont(14);
+        _jixiangshang.titleLabel.font = kFont(12);
         [_jixiangshang setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_jixiangshang setImage:[UIImage imageNamed:@"zb_unselect"] forState:UIControlStateNormal];
         [_jixiangshang setImage:[UIImage imageNamed:@"zb_select"] forState:UIControlStateSelected];
         _jixiangshang.tag = 6;
         [_jixiangshang setTitle:@"渠道经销商" forState:UIControlStateNormal];
+        [_jixiangshang setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_jixiangshang addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _jixiangshang;
@@ -258,12 +260,13 @@
 {
     if (!_zongdaili) {
         _zongdaili = [[UIButton alloc]init];
-        _zongdaili.titleLabel.font = kFont(14);
+        _zongdaili.titleLabel.font = kFont(12);
         [_zongdaili setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_zongdaili setImage:[UIImage imageNamed:@"zb_unselect"] forState:UIControlStateNormal];
         [_zongdaili setImage:[UIImage imageNamed:@"zb_select"] forState:UIControlStateSelected];
         _zongdaili.tag = 7;
         [_zongdaili setTitle:@"全国总代理" forState:UIControlStateNormal];
+        [_zongdaili setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_zongdaili addTarget:self action:@selector(choseType:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _zongdaili;
@@ -283,7 +286,7 @@
     if (!_changjiaTypeDesc) {
         _changjiaTypeDesc = [[UILabel alloc]init];
         _changjiaTypeDesc.font = [UIFont systemFontOfSize:kWidthFlot(12)];
-        _changjiaTypeDesc.textColor = [UIColor blackColor];
+        _changjiaTypeDesc.textColor = [UIColor whiteColor];
         _changjiaTypeDesc.text = @"说明：\n 1.生产厂家：可上传货源，平台将予以真实性考核；同时可按省份收藏经销商的权限；\n2.全国总代理：具有上传货源的权限，需提供授权函原件备查；同时可按省份收藏经销商的权限；3.经销商：没有上传货源的权限，有按类收藏货源的权限；\n进入平台后如有更改，可在 （企业大厅-企业认证）模块进行更改";
         _changjiaTypeDesc.numberOfLines = 0;
     }
@@ -294,7 +297,7 @@
 {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc]init];
-        _nameLabel.textColor = [UIColor blackColor];
+        _nameLabel.textColor = [UIColor whiteColor];
         _nameLabel.font = kFont(18);
         _nameLabel.text = @"姓名：";
         _nameLabel.numberOfLines = 0;
@@ -306,7 +309,7 @@
 {
     if (!_passwordLabel) {
         _passwordLabel = [[UILabel alloc]init];
-        _passwordLabel.textColor = [UIColor blackColor];
+        _passwordLabel.textColor = [UIColor whiteColor];
         _passwordLabel.font = kFont(18);
         _passwordLabel.text = @"密码：";
         _passwordLabel.numberOfLines = 0;
@@ -318,7 +321,7 @@
 {
     if (!_yaoqingmaLabel) {
         _yaoqingmaLabel = [[UILabel alloc]init];
-        _yaoqingmaLabel.textColor = [UIColor blackColor];
+        _yaoqingmaLabel.textColor = [UIColor whiteColor];
         _yaoqingmaLabel.font = kFont(18);
         _yaoqingmaLabel.text = @"邀请码：";
         _yaoqingmaLabel.numberOfLines = 0;
@@ -357,13 +360,22 @@
         
         NSMutableAttributedString *attribut = [[NSMutableAttributedString alloc]initWithString:labelStr];
         //目的是想改变 ‘/’前面的字体的属性，所以找到目标的range
+        
+        
         NSRange range = [labelStr rangeOfString:@"《"];
+        NSRange range1 = NSMakeRange(0,range.location);
         NSRange pointRange = NSMakeRange(range.location,book.length);
+        NSMutableDictionary *dic1 = [NSMutableDictionary dictionary];
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        
+        dic1[NSForegroundColorAttributeName] = [kMainSingleton colorWithHexString:@"#FFFFFF" alpha:1];
+        
         dic[NSFontAttributeName] = kFont(12);
         dic[NSForegroundColorAttributeName] = [kMainSingleton colorWithHexString:@"#3F50B5" alpha:1];
         //赋值
         [attribut addAttributes:dic range:pointRange];
+        
+        [attribut addAttributes:dic1 range:range1];
         
         _userKnow.attributedText = attribut;
         _userKnow.numberOfLines = 0;
@@ -417,7 +429,7 @@
         
         for (int i=0; i<self.labelTitleArray.count; i++) {
             UILabel * nameLabel = [[UILabel alloc]init];
-            nameLabel.textColor = [UIColor blackColor];
+            nameLabel.textColor = [UIColor whiteColor];
             nameLabel.font = kFont(18);
             nameLabel.text = self.labelTitleArray[i];
             nameLabel.numberOfLines = 0;
@@ -473,6 +485,7 @@
     }
     
     CGFloat left = 80;
+    CGFloat btnwidth = (SCREEN_WIDTH-left-leftMargin-leftMargin)/3;
     //手机号
     [self.accountField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(leftMargin + (heightMargin + rowHeight) * 0);
@@ -501,24 +514,26 @@
         make.right.mas_equalTo(-leftMargin);
         make.height.mas_equalTo(rowHeight);
     }];
-    [self.changjia mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.zongdaili mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.companyField.mas_bottom).offset(heightMargin);
-        make.left.mas_equalTo(left);
-        make.width.mas_equalTo((SCREEN_WIDTH-left-leftMargin)/3);
+        make.right.mas_equalTo(-leftMargin);
+        make.width.mas_equalTo(btnwidth);
         make.height.mas_equalTo(rowHeight);
     }];
     [self.jixiangshang mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.companyField.mas_bottom).offset(heightMargin);
-        make.left.mas_equalTo(self.changjia.mas_right);
-        make.width.mas_equalTo((SCREEN_WIDTH-left-leftMargin)/3);
+        make.right.mas_equalTo(self.zongdaili.mas_left);
+        make.width.mas_equalTo(btnwidth);
         make.height.mas_equalTo(rowHeight);
     }];
-    [self.zongdaili mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    [self.changjia mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.companyField.mas_bottom).offset(heightMargin);
-        make.left.mas_equalTo(self.jixiangshang.mas_right);
-        make.width.mas_equalTo((SCREEN_WIDTH-left-leftMargin)/3);
+        make.right.mas_equalTo(self.jixiangshang.mas_left);
+        make.width.mas_equalTo(btnwidth);
         make.height.mas_equalTo(rowHeight);
     }];
+    
         
     //厂家描述
     [self.changjiaTypeDesc  mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -780,7 +795,7 @@
 {
     TYTextContainer *textContainer = [[TYTextContainer alloc]init];
 //    张九龄
-    NSString * string = [currentStr substringFromIndex:currentStr.length];
+    NSString * string = [total substringToIndex:(total.length- currentStr.length)];
     NSString * text = total;
     textContainer.text = text;
     
@@ -794,7 +809,7 @@
     //取出剩余的字
     TYTextStorage *textStorage = [[TYTextStorage alloc]init];
     textStorage.range = [text rangeOfString:string];
-    textStorage.textColor = [UIColor blackColor];
+    textStorage.textColor = [UIColor whiteColor];
 //    TamilSangamMN-Bold
     textStorage.font = [UIFont fontWithName:@"TamilSangamMN" size:kWidthFlot(16)];
     [textContainer addTextStorage:textStorage];
