@@ -101,6 +101,7 @@
 {
     if (!_nameField) {
         _nameField = [[LoginTextField alloc]init];
+        _nameField.textColor = [UIColor whiteColor];
         _nameField.icon = [UIImage imageNamed:@"blank"];
         _nameField.keyboardType = UIKeyboardTypeDefault;
         _nameField.maxLength = 11;
@@ -113,6 +114,7 @@
 {
     if (!_accountField) {
         _accountField = [[LoginTextField alloc]init];
+        _accountField.textColor = [UIColor whiteColor];
         _accountField.icon = [UIImage imageNamed:@"blank"];
         _accountField.keyboardType = UIKeyboardTypePhonePad;
         _accountField.maxLength = 11;
@@ -125,6 +127,7 @@
 {
     if (!_passwordField) {
         _passwordField = [[LoginTextField alloc]init];
+        _passwordField.textColor = [UIColor whiteColor];
         _passwordField.delegate = self;
         _passwordField.icon = [UIImage imageNamed:@"blank"];
         _passwordField.keyboardType = UIKeyboardTypeASCIICapable;
@@ -140,6 +143,7 @@
 {
     if (!_checkField) {
         _checkField = [[LoginTextField alloc]init];
+        _checkField.textColor = [UIColor whiteColor];
         _checkField.icon = [UIImage imageNamed:@"blank"];
         _checkField.keyboardType = UIKeyboardTypeASCIICapable;
         _checkField.maxLength = 11;
@@ -153,6 +157,7 @@
 {
     if (!_companyField) {
         _companyField = [[LoginTextField alloc]init];
+        _companyField.textColor = [UIColor whiteColor];
         _companyField.icon = [UIImage imageNamed:@"blank"];
         _companyField.keyboardType = UIKeyboardTypeDefault;
         _companyField.myPlaceHolder = @"请输入所属公司";
@@ -176,6 +181,7 @@
 {
     if (!_inviteField) {
         _inviteField = [[LoginTextField alloc]init];
+        _inviteField.textColor = [UIColor whiteColor];
         _inviteField.icon = [UIImage imageNamed:@"blank"];
         _inviteField.keyboardType = UIKeyboardTypeASCIICapable;
         _inviteField.maxLength = 11;

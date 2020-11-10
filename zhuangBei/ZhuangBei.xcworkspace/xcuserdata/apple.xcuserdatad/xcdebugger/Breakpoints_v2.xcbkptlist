@@ -238,8 +238,8 @@
             filePath = "ZhuangBei/zDenglu/views/zhuCeCard.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "645"
-            endingLineNumber = "645"
+            startingLineNumber = "651"
+            endingLineNumber = "651"
             landmarkName = "-loadCompanySearchWithStr:"
             landmarkType = "7">
          </BreakpointContent>
@@ -254,8 +254,8 @@
             filePath = "ZhuangBei/zDenglu/views/zhuCeCard.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "875"
-            endingLineNumber = "875"
+            startingLineNumber = "881"
+            endingLineNumber = "881"
             landmarkName = "-textField:shouldChangeCharactersInRange:replacementString:"
             landmarkType = "7">
          </BreakpointContent>
