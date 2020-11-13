@@ -688,6 +688,27 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary * sourceDic = self.companyArray[indexPath.row];
+    
+    NSString * companyType = sourceDic[@"companyType"];
+    
+    self.changjia.userInteractionEnabled = NO;
+    self.jixiangshang.userInteractionEnabled = NO;
+    self.zongdaili.userInteractionEnabled = NO;
+    if ([companyType integerValue]==0) {
+        self.changjia.selected = YES;
+        self.jixiangshang.selected = NO;
+        self.zongdaili.selected =NO;
+    };
+    if ([companyType integerValue]==1) {
+        self.changjia.selected = NO;
+        self.jixiangshang.selected = YES;
+        self.zongdaili.selected =NO;
+    };
+    if ([companyType integerValue]==2) {
+        self.changjia.selected = NO;
+        self.jixiangshang.selected = NO;
+        self.zongdaili.selected =YES;
+    };
     [self.companyField resignFirstResponder];
     self.companyField.text = sourceDic[@"name"];
     self.companyTableView.alpha = 0;

@@ -32,7 +32,7 @@
 
 @property(strong,nonatomic)editTextField * jiguanInputTextFild;//籍贯
 
-@property(strong,nonatomic)editTextField * xueliInputTextFild;//学历
+//@property(strong,nonatomic)editTextField * xueliInputTextFild;//学历
 
 @property(strong,nonatomic)editTextField * gongzuoInputTextFild;//工作年限
 
@@ -359,27 +359,27 @@
     return _jiguanInputTextFild;
 }
 
--(editTextField *)xueliInputTextFild
-{
-    if (!_xueliInputTextFild) {
-        __weak typeof(self)weakSelf = self;
-        _xueliInputTextFild = [[editTextField alloc]init];
-        _xueliInputTextFild.canTap = YES;
-        _xueliInputTextFild.canShow = YES;
-        _xueliInputTextFild.canEdit = NO;
-        _xueliInputTextFild.icon = [UIImage imageNamed:@"blank"];
-        _xueliInputTextFild.keyboardType = UIKeyboardTypeDefault;
-        _xueliInputTextFild.textAlignment = NSTextAlignmentRight;
-        _xueliInputTextFild.title = @"学历";
-        _xueliInputTextFild.tapBack = ^{
-            [weakSelf showSingleListWithTitl:@"选择学历" AndArray:weakSelf.eduArray AndeditTextField:weakSelf.xueliInputTextFild];
-        };
-        _xueliInputTextFild.eyesTapBack = ^(NSInteger show) {
-//            [weakSelf showChange:show];
-        };
-    }
-    return _xueliInputTextFild;
-}
+//-(editTextField *)xueliInputTextFild
+//{
+//    if (!_xueliInputTextFild) {
+//        __weak typeof(self)weakSelf = self;
+//        _xueliInputTextFild = [[editTextField alloc]init];
+//        _xueliInputTextFild.canTap = YES;
+//        _xueliInputTextFild.canShow = YES;
+//        _xueliInputTextFild.canEdit = NO;
+//        _xueliInputTextFild.icon = [UIImage imageNamed:@"blank"];
+//        _xueliInputTextFild.keyboardType = UIKeyboardTypeDefault;
+//        _xueliInputTextFild.textAlignment = NSTextAlignmentRight;
+//        _xueliInputTextFild.title = @"学历";
+//        _xueliInputTextFild.tapBack = ^{
+//            [weakSelf showSingleListWithTitl:@"选择学历" AndArray:weakSelf.eduArray AndeditTextField:weakSelf.xueliInputTextFild];
+//        };
+//        _xueliInputTextFild.eyesTapBack = ^(NSInteger show) {
+////            [weakSelf showChange:show];
+//        };
+//    }
+//    return _xueliInputTextFild;
+//}
 
 -(editTextField *)gongzuoInputTextFild
 {
@@ -554,7 +554,7 @@
         [self.baseView addSubview:self.emailInputTextFild];
         [self.baseView addSubview:self.jiguanInputTextFild];
         [self.baseView addSubview:self.jiguanInputTextFild];
-        [self.baseView addSubview:self.xueliInputTextFild];
+//        [self.baseView addSubview:self.xueliInputTextFild];
         [self.baseView addSubview:self.gongzuoInputTextFild];
         [self.baseView addSubview:self.gongsiInputTextFild];
         [self.baseView addSubview:self.gongsiTypeInputTextFild];
@@ -591,15 +591,15 @@
             self.jiguanInputTextFild.text = selModel.title;
         }
     }];
-    NSString * xueki = [zEducationRankTypeInfo shareInstance].userInfoModel.education!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.education:@"";
+//    NSString * xueki = [zEducationRankTypeInfo shareInstance].userInfoModel.education!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.education:@"";
     
-    [self.eduArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        SelectedListModel * selModel = self.eduArray[idx];
-        if ([xueki isEqualToString:selModel.sid]) {
-            //取出学历
-            self.xueliInputTextFild.text = selModel.title;
-        }
-    }];
+//    [self.eduArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        SelectedListModel * selModel = self.eduArray[idx];
+//        if ([xueki isEqualToString:selModel.sid]) {
+//            //取出学历
+//            self.xueliInputTextFild.text = selModel.title;
+//        }
+//    }];
     
     NSString * gongzuonianxian = [zEducationRankTypeInfo shareInstance].userInfoModel.jobYear!=nil?[zEducationRankTypeInfo shareInstance].userInfoModel.jobYear:@"";
     [self.yearsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -735,14 +735,14 @@
         make.right.mas_equalTo(right);
         make.height.mas_equalTo(height);
     }];
-    [self.xueliInputTextFild mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.jiguanInputTextFild.mas_bottom).offset(top);
-        make.left.mas_equalTo(left);
-        make.right.mas_equalTo(right);
-        make.height.mas_equalTo(height);
-    }];
+//    [self.xueliInputTextFild mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.jiguanInputTextFild.mas_bottom).offset(top);
+//        make.left.mas_equalTo(left);
+//        make.right.mas_equalTo(right);
+//        make.height.mas_equalTo(height);
+//    }];
     [self.gongzuoInputTextFild mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.xueliInputTextFild.mas_bottom).offset(top);
+        make.top.mas_equalTo(self.jiguanInputTextFild.mas_bottom).offset(top);
         make.left.mas_equalTo(left);
         make.right.mas_equalTo(right);
         make.height.mas_equalTo(height);
