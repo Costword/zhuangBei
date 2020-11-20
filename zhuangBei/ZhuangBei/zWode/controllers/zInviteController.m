@@ -140,8 +140,13 @@
     [self.view addSubview:self.WXShareBtn];
     NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,getShareImage];
     
+    if ([zEducationRankTypeInfo shareInstance].userInfoModel == nil) {
+        NSString * url = [NSString stringWithFormat:@"%@%@",kApiPrefix,kgetUserInfo];
+        [self postDataWithUrl:url WithParam:nil];
+    }
+    
     [self.inviteImageView sd_setImageWithURL:[NSURL URLWithString:url] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-//        NSLog(@"加载图片");
+        
     }];
 }
 
@@ -239,13 +244,8 @@
     [JShareApp shareWebURLWithPlatform:JSHAREPlatformWechatSession title:[NSString stringWithFormat:@"%@ 诚邀您加入警用行业联盟",[zEducationRankTypeInfo shareInstance].userInfoModel.userName] text:[NSString stringWithFormat:@"邀请码：【%@】，这里是警用行业人的大家庭，十分期待您的加入！点击下载APP",[zUserInfo shareInstance].userInfo.invatationCode] url:url icon:@"" success:^(id  _Nonnull info) {
         
     } fail:^(id  _Nonnull info) {
-        
+        NSLog(@"%@",info);
     }];
-//    [JShareApp shareImageWithPlatform:JSHAREPlatformWechatSession imageUrl:url OrImage:self.inviteImageView.image success:^(id  _Nonnull info) {
-//
-//    } fail:^(id  _Nonnull info) {
-//
-//    }];
 }
 
 -(void)RequsetFileWithUrl:(NSString*)url WithError:(NSError*)err
@@ -255,6 +255,12 @@
         if (err.code == -1001) {
             [[zHud shareInstance] showMessage:@"无法连接服务器"];
         }
+        return;
+    }
+    
+    if ([url containsString:kgetUserInfo]) {
+        [[zHud shareInstance]showMessage:@"获取用户信息失败"];
+        return;
     }
 
 }
@@ -270,6 +276,23 @@
             
         }
         NSLog(@"公司认证信息%@",dic);
+        return;
+    }
+    
+    if ([url containsString:kgetUserInfo]) {
+        NSDictionary * dic = data;
+        NSString * msg = dic[@"msg"];
+        NSString * code = dic[@"code"];
+        if ([code integerValue] == 0) {
+            //请求成功
+            NSDictionary * userInfoDic = dic[@"list"];
+            zUserCenterModel * userModel = [zUserCenterModel mj_objectWithKeyValues:userInfoDic];
+            [zEducationRankTypeInfo shareInstance].userInfoModel = userModel;
+        }else
+        {
+            [[zHud shareInstance]showMessage:msg];
+        }
+        return;
     }
 }
 

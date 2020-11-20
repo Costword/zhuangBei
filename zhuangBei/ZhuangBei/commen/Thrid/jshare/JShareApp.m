@@ -8,6 +8,9 @@
 
 #import "JShareApp.h"
 
+static NSUInteger JSHAREPlatformOpenSafari = 12;
+static NSUInteger JSHAREPlatformCopy = 13;
+
 @implementation JShareApp
 
 + (void)shareWebURLWithPlatform:(JSHAREPlatform)platform title:(NSString *)title text:(NSString *)text url:(NSString *)url icon:(NSString *)iconUrl success:(ShareHandle)successHandle fail:(ShareHandle)failHandle {
@@ -16,17 +19,20 @@
     message.url = url;
     message.text = text;
     message.title = title;
-    [message setPlatform:(platform)];
-    
+    if (platform == JSHAREPlatformCopy) {
+        [[UIPasteboard generalPasteboard] setString:url];
+        UIAlertView *Alert = [[UIAlertView alloc] initWithTitle:@"复制成功" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [Alert show];
+        return;
+    }
+    if (platform == JSHAREPlatformOpenSafari) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        return;
+    }
+    message.platform = platform;
     NSData *imageData;
     if (iconUrl.length == 0) {
-//        NSString *url = [[NSBundle mainBundle] URLForResource:@"storeIMage" withExtension:@"png"].absoluteString;
-//        NSString *url = [[NSBundle mainBundle] URLForResource:@"storeIMage" withExtension:@"png"].absoluteString;
-//
-//        imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-        
         imageData = UIImagePNGRepresentation([UIImage imageNamed:@"storeIMage"]);
-//        message.image = imgData;
     }else
     {
         imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:iconUrl]];

@@ -19,6 +19,8 @@ PODS:
   - CocoaLumberjack/Core (3.7.0)
   - IQKeyboardManager (6.5.6)
   - JCore (2.4.0)
+  - JMLink (1.2.4):
+    - JCore (< 3.0.0, >= 2.0.0)
   - JPush (3.3.6):
     - JCore (< 3.0.0, >= 2.0.0)
   - JShare (1.9.0):
@@ -52,6 +54,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - IQKeyboardManager
+  - JMLink
   - JPush
   - JShare
   - LEEAlert
@@ -78,6 +81,7 @@ SPEC REPOS:
     - CocoaLumberjack
     - IQKeyboardManager
     - JCore
+    - JMLink
     - JPush
     - JShare
     - LEEAlert
@@ -103,6 +107,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   JCore: a29e4b0ee54e1301446dc02d8e1c350404108b34
+  JMLink: d987a12c3648ddc2a56e1244437f67f2f111fc9a
   JPush: a401b946dcc76b37335422487201bc1ecc8dd296
   JShare: b78807ef0739149695a5e17a208522f632936656
   LEEAlert: 146489ee4f7fce413da4657ecd5625825d6e26b8
@@ -123,6 +128,6 @@ SPEC CHECKSUMS:
   WMZBanner: 515823975ddcc069a7238b6d058d90a3f7f60378
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: be9f0e3d50333758a8b5c49a0f72c6218764d6dd
+PODFILE CHECKSUM: e53880957547e826fbdd6555a2a284b7129d10b9
 
 COCOAPODS: 1.9.3

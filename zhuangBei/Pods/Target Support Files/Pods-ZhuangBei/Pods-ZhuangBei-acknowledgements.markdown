@@ -71,6 +71,10 @@ SOFTWARE.
 
 Copyright jpush.cn
 
+## JMLink
+
+Copyright jiguang.cn
+
 ## JPush
 
 Copyright jiguang.cn

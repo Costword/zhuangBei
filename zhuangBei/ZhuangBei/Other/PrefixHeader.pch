@@ -39,7 +39,9 @@
 #define kLoginUserInfo @"loginUserInfo"
 #define kUserDefaultsCookie @"kUserDefaultsCookie"
 
-#define JGAPPK  @"341a4b6b8631c852448e6f94"
+//e95fae01a0cf7c3004be5e3a
+//341a4b6b8631c852448e6f94
+#define JGAPPK  @"e95fae01a0cf7c3004be5e3a"
 // 真实wx96c1105f75be3361
 //wx51e3155d3e2276a7
 #define weXinAppId @"wx96c1105f75be3361"

@@ -365,7 +365,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
 @interface JSHAREService : NSObject
 
 /**
- 启动SDK,必要!
+ 启动SDK,必要!setDebugMode
  
  @param config SDK启动参数模型，不可为nil。
  */

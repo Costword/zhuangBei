@@ -15,11 +15,12 @@ target 'ZhuangBei' do
   pod 'SDCycleScrollView','>= 1.80'
   pod 'LEEAlert'
   pod "UITextView-WZB","1.1.1"
+  pod 'JPush'
+  pod 'JMLink'
   pod 'JShare'
   pod 'SVGKit'
   pod 'WMZBanner'
   pod 'ReactiveObjC'
-  pod 'JPush'
   pod 'TYAttributedLabel', '~> 2.6.2'
   pod 'UMCCommon'
   pod 'UMCPush'

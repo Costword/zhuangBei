@@ -234,10 +234,8 @@
 {
     if ([url containsString:kgetUserInfo]) {
         NSDictionary * dic = data;
-//        NSLog(@"验证码成功%@",dic);
         NSString * msg = dic[@"msg"];
         NSString * code = dic[@"code"];
-        
         if ([code integerValue] == 0) {
             //请求成功
             NSArray * citys = dic[@"provinceList"];

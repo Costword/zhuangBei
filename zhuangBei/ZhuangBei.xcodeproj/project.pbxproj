@@ -921,6 +921,7 @@
 		1899CA5E25318941004904CC /* zShouyeTuiGuangCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zShouyeTuiGuangCell.m; sourceTree = "<group>"; };
 		1899CA6325318C77004904CC /* zShouyeTuiguangCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zShouyeTuiguangCollectionCell.h; sourceTree = "<group>"; };
 		1899CA6425318C77004904CC /* zShouyeTuiguangCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zShouyeTuiguangCollectionCell.m; sourceTree = "<group>"; };
+		18A59F3C25626EE2005B81A7 /* 警用行业联盟Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "警用行业联盟Debug.entitlements"; sourceTree = "<group>"; };
 		18A65EE5254910FE005437C1 /* zGXListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zGXListViewController.h; sourceTree = "<group>"; };
 		18A65EE6254910FE005437C1 /* zGXListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zGXListViewController.m; sourceTree = "<group>"; };
 		18B7E181253D6A450089104B /* ALaunchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALaunchController.h; sourceTree = "<group>"; };
@@ -1478,6 +1479,7 @@
 		009FB5DC244E89C700133974 /* ZhuangBei */ = {
 			isa = PBXGroup;
 			children = (
+				18A59F3C25626EE2005B81A7 /* 警用行业联盟Debug.entitlements */,
 				180488A9253EDDB40099BE63 /* lanuchManger */,
 				00B635DD2531D15B00126B2E /* 警用行业联盟.entitlements */,
 				89B323B924C5A68000BD0722 /* soundSrource.mp3 */,
@@ -3243,10 +3245,10 @@
 			baseConfigurationReference = 759737390EA2ABFD7BEC457D /* Pods-ZhuangBei.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "ZhuangBei/警用行业联盟.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "ZhuangBei/警用行业联盟Debug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
@@ -3261,7 +3263,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZhuangBei/commen/Thrid/IFYunSDK",
 				);
-				MARKETING_VERSION = 1.1.29;
+				MARKETING_VERSION = 1.1.30;
 				OTHER_CFLAGS = (
 					"-Xclang",
 					"-fcompatibility-qualified-id-block-type-checking",
@@ -3283,7 +3285,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ZhuangBei/警用行业联盟.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = 2DP4AM8QYG;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
@@ -3298,7 +3300,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZhuangBei/commen/Thrid/IFYunSDK",
 				);
-				MARKETING_VERSION = 1.1.29;
+				MARKETING_VERSION = 1.1.30;
 				OTHER_CFLAGS = (
 					"-Xclang",
 					"-fcompatibility-qualified-id-block-type-checking",

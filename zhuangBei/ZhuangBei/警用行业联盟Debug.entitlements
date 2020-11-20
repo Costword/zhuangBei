@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aps-environment</key>
+	<string>development</string>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:srguys.jmlk.co</string>
+		<string>applinks:arguys.jmlk.co</string>
+		<string>applinks:bprjvu.jmlk.co</string>
+		<string>applinks:brguys.jgmlink.cn</string>
+		<string>applinks:help.wechat.com</string>
+		<string>applinks:bprjvu.jglinks.cn</string>
+	</array>
+</dict>
+</plist>

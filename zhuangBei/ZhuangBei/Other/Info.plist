@@ -40,13 +40,23 @@
 				<string>wx96c1105f75be3361</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>jbzb</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>zhuangbei110</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>wechat</string>
 		<string>weixin</string>
+		<string>weixinULAPI</string>
 		<string>mqqapi</string>
 		<string>mqq</string>
 		<string>mqqOpensdkSSoLogin</string>
